@@ -20,15 +20,32 @@ Application = {
 
 	// 	Setting view to location in views folder
 
-		var Home = require('views/example-view');
+		var Home = require('views/home-view');
+		var AddBook = require('views/addbook-view');
+		var BookDetail = require('views/bookdetail-view');
+		var BookList = require('views/booklist-view');
+		var CheckIn = require('views/checkin-view');
+		var CheckOut = require('views/checkout-view');
+		var EnterPassword = require('views/enterpassword-view');
+		var Login = require('views/login-view');
+		var Settings = require('views/settings-view');
+		var Signup = require('views/signup-view');
+		
 		var Router = require('lib/router');
-		var PullRefresh = require('views/pullRefresh-view');
-		var MultipleChoice = require('views/multipleChoice-view');
+
 
 		this.homeView = new Home();
+		this.addBookView = new AddBook();
+		this.bookDetailView = new BookDetail();
+		this.bookListView = new BookList();
+		this.checkInView = new CheckIn();
+		this.checkOutView = new CheckOut();
+		this.enterPasswordView = new EnterPassword();
+		this.loginView = new Login();
+		this.settingsView = new Settings();
+		this.signupView = new Signup();
+		
 		this.router = new Router();
-		this.pullRefreshView = new PullRefresh;
-		this.multipleChoiceView = new MultipleChoice;
 
 
 		if (typeof Object.freeze === 'function') Object.freeze(this);
