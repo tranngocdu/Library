@@ -4,7 +4,6 @@ var template = require('./templates/addBook');
 module.exports = View.extend({
 	id: 'addbook-view',
 	template: template,
-	//templateGroups: templateGroups,
 	events: {
 		"dataLoaded":"append",
 		'click #done':'addBook',
