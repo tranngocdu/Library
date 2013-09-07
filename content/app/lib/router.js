@@ -3,13 +3,19 @@ var application = require('application');
 module.exports = Backbone.Router.extend({
 
 	routes: {
-		//Setting routes
-
 		// If you want to save login state, send them to a prelogin function which checks for login state
-		//'':'preLogin',
+		'':'login',
 		'home':'home',
-		'pullRefresh':'pullRefresh',
-		'multipleChoice':'multipleChoice'
+		'addBook':'addBook',
+		'bookDetail':'bookDetail',
+		'bookList':'bookList',
+		'checkIn':'checkIn',
+		'checkOut':'checkOut',
+		'enterPassword':'enterPassword',
+		'login':'login',
+		'settings':'settings',
+		'signup':'signup'
+		
 	},
 
 	initialize:function () {

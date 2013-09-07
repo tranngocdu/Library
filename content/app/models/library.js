@@ -1,7 +1,7 @@
-var ModelName = require('./example_model');
+var Book = require('./book');
 
 module.exports = Backbone.Collection.extend({
-	model: ModelName,
+	model: Book,
 	url: function() {
 		return 'ServerCallurl.json';
 	},

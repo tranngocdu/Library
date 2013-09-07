@@ -164,13 +164,19 @@ window.require.register("lib/router", function(exports, require, module) {
   module.exports = Backbone.Router.extend({
 
   	routes: {
-  		//Setting routes
-
   		// If you want to save login state, send them to a prelogin function which checks for login state
-  		//'':'preLogin',
+  		'':'login',
   		'home':'home',
-  		'pullRefresh':'pullRefresh',
-  		'multipleChoice':'multipleChoice'
+  		'addBook':'addBook',
+  		'bookDetail':'bookDetail',
+  		'bookList':'bookList',
+  		'checkIn':'checkIn',
+  		'checkOut':'checkOut',
+  		'enterPassword':'enterPassword',
+  		'login':'login',
+  		'settings':'settings',
+  		'signup':'signup'
+  		
   	},
 
   	initialize:function () {
@@ -283,10 +289,10 @@ window.require.register("models/collection", function(exports, require, module) 
   
 });
 window.require.register("models/library", function(exports, require, module) {
-  var ModelName = require('./example_model');
+  var Book = require('./book');
 
   module.exports = Backbone.Collection.extend({
-  	model: ModelName,
+  	model: Book,
   	url: function() {
   		return 'ServerCallurl.json';
   	},
@@ -623,9 +629,9 @@ window.require.register("views/enterpassword-view", function(exports, require, m
   	
   	submit:function () {
   		var password = $('#password').val();
-  		var teacherId = //get from local storage;
+  		var teacherId = window.localStorage.getItem("userId", userId);
 
-  		if( password && teacherId)
+  		if(password && teacherId)
   		{
   			$.ajax({
   				data: {

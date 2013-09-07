@@ -18,9 +18,9 @@ module.exports = View.extend({
 	
 	submit:function () {
 		var password = $('#password').val();
-		var teacherId = //get from local storage;
+		var teacherId = window.localStorage.getItem("userId", userId);
 
-		if( password && teacherId)
+		if(password && teacherId)
 		{
 			$.ajax({
 				data: {
