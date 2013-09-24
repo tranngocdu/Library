@@ -52,8 +52,15 @@ module.exports = View.extend({
  				type: "GET",
  				success: function (data) {
  						alert("Success");
- 						Application.bookDetailView.bookInfo;
- 						Application.router.navigate("#bookDetail");
+ 						var dataString = JSON.stringify(data);
+						//dataString.replace(/d{13}/g, '');
+						var combinedString = dataString.substring(0,6) + dataString.substring(20);
+						var data=JSON.parse(combinedString);
+						alert(data);
+ 						Application.bookDetailView.bookInfo = data;
+ 						Application.router.navigate("#bookDetail", {
+ 								trigger: true 
+ 						});		
  				},
 				error: function (jqXHR,textStatus,errorThrown) {
  						alert("Error");

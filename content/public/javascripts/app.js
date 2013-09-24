@@ -802,8 +802,15 @@ module.exports = View.extend({
  				type: "GET",
  				success: function (data) {
  						alert("Success");
- 						Application.bookDetailView.bookInfo;
- 						Application.router.navigate("#bookDetail");
+ 						var dataString = JSON.stringify(data);
+						//dataString.replace(/d{13}/g, '');
+						var combinedString = dataString.substring(0,6) + dataString.substring(20);
+						var data=JSON.parse(combinedString);
+						alert(data);
+ 						Application.bookDetailView.bookInfo = data;
+ 						Application.router.navigate("#bookDetail", {
+ 								trigger: true 
+ 						});		
  				},
 				error: function (jqXHR,textStatus,errorThrown) {
  						alert("Error");
@@ -1018,16 +1025,42 @@ module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partial
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n";
+  buffer += "\n  ";
   foundHelper = helpers.name;
   stack1 = foundHelper || depth0.name;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\n";
+  buffer += escapeExpression(stack1) + "\n  ";
   return buffer;}
 
-  foundHelper = helpers.authors;
-  stack1 = foundHelper || depth0.authors;
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n<div style=\"height:100px; width:100px; background-image: url('";
+  foundHelper = helpers.ISBN;
+  stack1 = foundHelper || depth0.ISBN;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.cover);
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.medium);
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "ISBN.cover.medium", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "'); \"></div>\n  ";
+  return buffer;}
+
+function program5(depth0,data) {
+  
+  
+  return "\n<div style=\"padding-top:30px;\">No Cover Found</div>\n";}
+
+  buffer += "\n<div id=\"scanner\" style=\"padding-top:30px;\">Title: ";
+  foundHelper = helpers.ISBN;
+  stack1 = foundHelper || depth0.ISBN;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.title);
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "ISBN.title", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</div>\n\n<div id=\"scanner\" style=\"padding-top:30px;\">Author:   ";
+  foundHelper = helpers.ISBN;
+  stack1 = foundHelper || depth0.ISBN;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.authors);
   stack2 = helpers.each;
   tmp1 = self.program(1, program1, data);
   tmp1.hash = {};
@@ -1035,12 +1068,19 @@ function program1(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n";
-  foundHelper = helpers.title;
-  stack1 = foundHelper || depth0.title;
-  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "title", { hash: {} }); }
-  buffer += escapeExpression(stack1);
+  buffer += "\n  </div>\n  ";
+  foundHelper = helpers.ISBN;
+  stack1 = foundHelper || depth0.ISBN;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.cover);
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.medium);
+  stack2 = helpers['if'];
+  tmp1 = self.program(3, program3, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.program(5, program5, data);
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n\n\n";
   return buffer;});
 });
 

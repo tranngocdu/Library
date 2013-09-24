@@ -427,7 +427,10 @@ module.exports = View.extend({
 	render: function() {
 		this.bookDetail = new Book();
 		this.bookDetail.bookJSON ={};
+		this.$el.html(this.template(Application.bookDetailView.bookInfo));
+		/*
 		this.$el.html(this.template(this.bookDetail.bookJSON));
+
 		this.bookDetail.fetch({
 			processData:true,
 			xhrFields: {withCredentials: true},
@@ -437,7 +440,7 @@ module.exports = View.extend({
 				Application.bookDetailView.$el.trigger("dataLoaded");
 			}
 		});
-
+*/
 		return this;
 	},
 
@@ -799,7 +802,15 @@ module.exports = View.extend({
  				type: "GET",
  				success: function (data) {
  						alert("Success");
- 						Application.loginView.bookdata = data;
+ 						var dataString = JSON.stringify(data);
+						//dataString.replace(/d{13}/g, '');
+						var combinedString = dataString.substring(0,6) + dataString.substring(20);
+						var data=JSON.parse(combinedString);
+						alert(data);
+ 						Application.bookDetailView.bookInfo = data;
+ 						Application.router.navigate("#bookDetail", {
+ 								trigger: true 
+ 						});		
  				},
 				error: function (jqXHR,textStatus,errorThrown) {
  						alert("Error");
@@ -1009,10 +1020,68 @@ module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partial
 ;require.register("views/templates/bookDetail", function(exports, require, module) {
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
+  var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n  ";
+  foundHelper = helpers.name;
+  stack1 = foundHelper || depth0.name;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\n  ";
+  return buffer;}
 
-  return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";});
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n<div style=\"height:100px; width:100px; background-image: url('";
+  foundHelper = helpers.ISBN;
+  stack1 = foundHelper || depth0.ISBN;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.cover);
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.medium);
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "ISBN.cover.medium", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "'); \"></div>\n  ";
+  return buffer;}
+
+function program5(depth0,data) {
+  
+  
+  return "\n<div style=\"padding-top:30px;\">No Cover Found</div>\n";}
+
+  buffer += "\n<div id=\"scanner\" style=\"padding-top:30px;\">Title: ";
+  foundHelper = helpers.ISBN;
+  stack1 = foundHelper || depth0.ISBN;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.title);
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "ISBN.title", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</div>\n\n<div id=\"scanner\" style=\"padding-top:30px;\">Author:   ";
+  foundHelper = helpers.ISBN;
+  stack1 = foundHelper || depth0.ISBN;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.authors);
+  stack2 = helpers.each;
+  tmp1 = self.program(1, program1, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n  </div>\n  ";
+  foundHelper = helpers.ISBN;
+  stack1 = foundHelper || depth0.ISBN;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.cover);
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.medium);
+  stack2 = helpers['if'];
+  tmp1 = self.program(3, program3, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.program(5, program5, data);
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n\n\n";
+  return buffer;});
 });
 
 ;require.register("views/templates/bookList", function(exports, require, module) {

@@ -1,4 +1,15 @@
-{{#each authors}}
-{{name}}
-{{/each}}
-{{title}}
+
+<div id="scanner" style="padding-top:30px;">Title: {{ISBN.title}}</div>
+
+<div id="scanner" style="padding-top:30px;">Author:   {{#each ISBN.authors}}
+  {{name}}
+  {{/each}}
+  </div>
+  {{#if ISBN.cover.medium}}
+<div style="height:100px; width:100px; background-image: url('{{ISBN.cover.medium}}'); "></div>
+  {{else}}
+<div style="padding-top:30px;">No Cover Found</div>
+{{/if}}
+
+
+
