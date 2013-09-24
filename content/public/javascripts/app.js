@@ -427,7 +427,10 @@ module.exports = View.extend({
 	render: function() {
 		this.bookDetail = new Book();
 		this.bookDetail.bookJSON ={};
+		this.$el.html(this.template(Application.bookDetailView.bookInfo));
+		/*
 		this.$el.html(this.template(this.bookDetail.bookJSON));
+
 		this.bookDetail.fetch({
 			processData:true,
 			xhrFields: {withCredentials: true},
@@ -437,7 +440,7 @@ module.exports = View.extend({
 				Application.bookDetailView.$el.trigger("dataLoaded");
 			}
 		});
-
+*/
 		return this;
 	},
 
@@ -748,6 +751,9 @@ module.exports = View.extend({
 var View = require('./view');
 var template = require('./templates/login');
 
+
+
+
 module.exports = View.extend({
 	id: 'login-view',
 	template: template,
@@ -755,6 +761,8 @@ module.exports = View.extend({
 		"dataLoaded":"append",
 		'click #signup':'signUp',
 		'click #signin':'signIn',
+		'click #scanner':'scanner', 
+		'getbookinfo':'bookinfo'
 
 	},
 
@@ -766,6 +774,44 @@ module.exports = View.extend({
 		this.$el.html(this.template());
 		return this;
 	},
+
+	scanner: function ()  {
+	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+   scanner.scan(
+      function (result) {
+      	Application.loginView.ISBN = result.text;
+      	Application.loginView.$el.trigger("getbookinfo");
+
+      }, 
+      function (error) {
+          alert("Scanning failed: " + error);
+      }
+   );
+ },
+
+ 	bookinfo: function () {
+
+ 		$.ajax({
+ 				data: {
+ 						bibkeys: "ISBN:" + Application.loginView.ISBN,
+ 						jscmd: "data",
+ 						format: "json"
+ 				},
+ 				url: "http://openlibrary.org/api/books",
+ 				type: "GET",
+ 				success: function (data) {
+ 						alert("Success");
+ 						Application.bookDetailView.bookInfo;
+ 						Application.router.navigate("#bookDetail");
+ 				},
+				error: function (jqXHR,textStatus,errorThrown) {
+ 						alert("Error");
+ 				}
+
+ 		});
+
+ 	},
 
 	signUp: function () {
 		Application.router.navigate("#signUp", {
@@ -967,10 +1013,35 @@ module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partial
 ;require.register("views/templates/bookDetail", function(exports, require, module) {
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
+  var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n";
+  foundHelper = helpers.name;
+  stack1 = foundHelper || depth0.name;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\n";
+  return buffer;}
 
-  return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";});
+  foundHelper = helpers.authors;
+  stack1 = foundHelper || depth0.authors;
+  stack2 = helpers.each;
+  tmp1 = self.program(1, program1, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n";
+  foundHelper = helpers.title;
+  stack1 = foundHelper || depth0.title;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "title", { hash: {} }); }
+  buffer += escapeExpression(stack1);
+  return buffer;});
 });
 
 ;require.register("views/templates/bookList", function(exports, require, module) {
@@ -1024,7 +1095,7 @@ module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partial
   var foundHelper, self=this;
 
 
-  return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";});
+  return "<div id=\"scanner\" style=\"padding-top:30px;\">Test</div>";});
 });
 
 ;require.register("views/templates/settings", function(exports, require, module) {

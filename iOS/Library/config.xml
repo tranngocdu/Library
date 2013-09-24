@@ -110,8 +110,10 @@
     <feature name="LocalStorage">
         <param name="ios-package" value="CDVLocalStorage"/>
     </feature>
+    <feature name="BarcodeScanner">
+        <param name="ios-package" value="CDVBarcodeScanner" />
+    </feature>
+    
     <!-- Deprecated plugins element. REmove in 3.0 -->
-    <plugins>
-        <plugin name="BarcodeScanner" value="CDVBarcodeScanner"/>
-    </plugins>
+
 </widget>

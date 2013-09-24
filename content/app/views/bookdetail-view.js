@@ -16,7 +16,10 @@ module.exports = View.extend({
 	render: function() {
 		this.bookDetail = new Book();
 		this.bookDetail.bookJSON ={};
+		this.$el.html(this.template(Application.bookDetailView.bookInfo));
+		/*
 		this.$el.html(this.template(this.bookDetail.bookJSON));
+
 		this.bookDetail.fetch({
 			processData:true,
 			xhrFields: {withCredentials: true},
@@ -26,7 +29,7 @@ module.exports = View.extend({
 				Application.bookDetailView.$el.trigger("dataLoaded");
 			}
 		});
-
+*/
 		return this;
 	},
 

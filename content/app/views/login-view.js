@@ -1,6 +1,9 @@
 var View = require('./view');
 var template = require('./templates/login');
 
+
+
+
 module.exports = View.extend({
 	id: 'login-view',
 	template: template,
@@ -8,6 +11,8 @@ module.exports = View.extend({
 		"dataLoaded":"append",
 		'click #signup':'signUp',
 		'click #signin':'signIn',
+		'click #scanner':'scanner', 
+		'getbookinfo':'bookinfo'
 
 	},
 
@@ -19,6 +24,44 @@ module.exports = View.extend({
 		this.$el.html(this.template());
 		return this;
 	},
+
+	scanner: function ()  {
+	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+   scanner.scan(
+      function (result) {
+      	Application.loginView.ISBN = result.text;
+      	Application.loginView.$el.trigger("getbookinfo");
+
+      }, 
+      function (error) {
+          alert("Scanning failed: " + error);
+      }
+   );
+ },
+
+ 	bookinfo: function () {
+
+ 		$.ajax({
+ 				data: {
+ 						bibkeys: "ISBN:" + Application.loginView.ISBN,
+ 						jscmd: "data",
+ 						format: "json"
+ 				},
+ 				url: "http://openlibrary.org/api/books",
+ 				type: "GET",
+ 				success: function (data) {
+ 						alert("Success");
+ 						Application.bookDetailView.bookInfo;
+ 						Application.router.navigate("#bookDetail");
+ 				},
+				error: function (jqXHR,textStatus,errorThrown) {
+ 						alert("Error");
+ 				}
+
+ 		});
+
+ 	},
 
 	signUp: function () {
 		Application.router.navigate("#signUp", {

@@ -748,6 +748,9 @@ module.exports = View.extend({
 var View = require('./view');
 var template = require('./templates/login');
 
+
+
+
 module.exports = View.extend({
 	id: 'login-view',
 	template: template,
@@ -755,6 +758,8 @@ module.exports = View.extend({
 		"dataLoaded":"append",
 		'click #signup':'signUp',
 		'click #signin':'signIn',
+		'click #scanner':'scanner', 
+		'getbookinfo':'bookinfo'
 
 	},
 
@@ -766,6 +771,43 @@ module.exports = View.extend({
 		this.$el.html(this.template());
 		return this;
 	},
+
+	scanner: function ()  {
+	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+   scanner.scan(
+      function (result) {
+      	Application.loginView.ISBN = result.text;
+      	Application.loginView.$el.trigger("getbookinfo");
+
+      }, 
+      function (error) {
+          alert("Scanning failed: " + error);
+      }
+   );
+ },
+
+ 	bookinfo: function () {
+
+ 		$.ajax({
+ 				data: {
+ 						bibkeys: "ISBN:" + Application.loginView.ISBN,
+ 						jscmd: "data",
+ 						format: "json"
+ 				},
+ 				url: "http://openlibrary.org/api/books",
+ 				type: "GET",
+ 				success: function (data) {
+ 						alert("Success");
+ 						Application.loginView.bookdata = data;
+ 				},
+				error: function (jqXHR,textStatus,errorThrown) {
+ 						alert("Error");
+ 				}
+
+ 		});
+
+ 	},
 
 	signUp: function () {
 		Application.router.navigate("#signUp", {
@@ -1024,7 +1066,7 @@ module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partial
   var foundHelper, self=this;
 
 
-  return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";});
+  return "<div id=\"scanner\" style=\"padding-top:30px;\">Test</div>";});
 });
 
 ;require.register("views/templates/settings", function(exports, require, module) {
