@@ -8,12 +8,8 @@ module.exports = View.extend({
 	id: 'login-view',
 	template: template,
 	events: {
-		"dataLoaded":"append",
 		'click #signup':'signUp',
-		'click #signin':'signIn',
-		'click #scanner':'scanner', 
-		'getbookinfo':'bookinfo'
-
+		'click #signin':'signIn'
 	},
 
 	initialize: function() {
@@ -24,52 +20,7 @@ module.exports = View.extend({
 		this.$el.html(this.template());
 		return this;
 	},
-
-	scanner: function ()  {
-	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-
-   scanner.scan(
-      function (result) {
-      	Application.loginView.ISBN = result.text;
-      	Application.loginView.$el.trigger("getbookinfo");
-
-      }, 
-      function (error) {
-          alert("Scanning failed: " + error);
-      }
-   );
- },
-
- 	bookinfo: function () {
-
- 		$.ajax({
- 				data: {
- 						bibkeys: "ISBN:" + Application.loginView.ISBN,
- 						jscmd: "data",
- 						format: "json"
- 				},
- 				url: "http://openlibrary.org/api/books",
- 				type: "GET",
- 				success: function (data) {
- 						alert("Success");
- 						var dataString = JSON.stringify(data);
-						//dataString.replace(/d{13}/g, '');
-						var combinedString = dataString.substring(0,6) + dataString.substring(20);
-						var data=JSON.parse(combinedString);
-						alert(data);
- 						Application.bookDetailView.bookInfo = data;
- 						Application.router.navigate("#bookDetail", {
- 								trigger: true 
- 						});		
- 				},
-				error: function (jqXHR,textStatus,errorThrown) {
- 						alert("Error");
- 				}
-
- 		});
-
- 	},
-
+ 	
 	signUp: function () {
 		Application.router.navigate("#signUp", {
 			trigger: true

@@ -5,7 +5,8 @@ module.exports = View.extend({
 	id: 'checkin-view',
 	template: template,
 	events: {
-		'click #checkInButton':'checkIn',
+		'click #checkInButton':'checkIn'
+		
 	},
 
 	initialize: function() {
@@ -15,6 +16,7 @@ module.exports = View.extend({
 		this.$el.html(this.template());
 		return this;
 	},
+	
 	
 	checkIn:function () {
 		var ISBN = $('#ISBN').val();
