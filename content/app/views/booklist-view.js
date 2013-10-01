@@ -17,7 +17,7 @@ module.exports = View.extend({
 		this.bookList = new Library();
 		this.bookList.libraryJSON ={};
 		this.$el.html(this.template(this.bookList.libraryJSON));
-		this.bookDetail.fetch({
+		/*this.bookDetail.fetch({
 			processData:true,
 			xhrFields: {withCredentials: true},
 			add:true,
@@ -25,7 +25,7 @@ module.exports = View.extend({
 			success: function(data){
 				Application.bookListView.$el.trigger("dataLoaded");
 			}
-		});
+		}); */
 
 		return this;
 	},

@@ -6,6 +6,10 @@ Application = {
 
 	initialize: function() {
 
+	//For Parse
+	Parse.initialize("hc7wyBlPLbosKj26FTiu8CvOcsECdeDVOGcEADZH", "eJGnhcwE48DQPdpq7MA9S8lYI7XgEi7vINje0TQZ");
+
+
 	//## If setting something to happen on first launch of app
 	//	if ( window.localStorage.getItem("launchCount") == null){
 	//		window.localStorage.setItem("launchCount","1");

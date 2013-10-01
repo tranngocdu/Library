@@ -8,6 +8,7 @@ module.exports = View.extend({
 		"dataLoaded":"append",
 		'click #done':'addBook',
 		'click #quantity':'quantitySelector',
+		'click #scanner': 'scanner',
 
 	},
 
@@ -17,11 +18,27 @@ module.exports = View.extend({
 
 	render: function() {
 		this.$el.html(this.template());
-		this.username = window.localStorage.setItem("userId", userId);
+		//this.username = window.localStorage.setItem("userId", userId);
+		
 	
 		return this;
 	},
 	
+	scanner: function ()  {
+	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+   scanner.scan(
+      function (result) {
+      	Application.loginView.ISBN = result.text;
+      	Application.loginView.$el.trigger("getbookinfo");
+
+      }, 
+      function (error) {
+          alert("Scanning failed: " + error);
+      }
+   );
+ },
+
 	done: function() {
 		var ISBN = $('#ISBN').val();
 		var quantity = $('#studentName').val();

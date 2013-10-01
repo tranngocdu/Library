@@ -1,4 +1,4 @@
 // Base class for all collections.
-module.exports = Backbone.Collection.extend({
+module.exports = Parse.Collection.extend({
   
 });
