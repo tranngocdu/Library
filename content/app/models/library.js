@@ -1,10 +1,9 @@
 var Book = require('./book');
 
-module.exports = Backbone.Collection.extend({
-	model: Book,
-	url: function() {
-		return 'ServerCallurl.json';
-	},
+module.exports = Parse.Collection.extend({
+	model: Book, 
+		
+
 	handle: function(){
 
 		return {"DescriptiveName": this.toJSON()};

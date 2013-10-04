@@ -15,13 +15,31 @@ module.exports = View.extend({
 
 	render: function () {
 		this.$el.html(this.template());
+		
+
+
 		return this;
 	},
 
 	signUp: function () {
-		Application.router.navigate("#signUp", {
+				var user = new Parse.User();
+			user.set("username", "testuser");
+			user.set("password", "password");
+
+		user.signUp(null, {
+  success: function(user) {
+  	alert("Success!");
+  	Application.router.navigate("#signUp", {
 			trigger: true
 		});
+    // Hooray! Let them use the app now.
+  },
+  error: function(user, error) {
+    // Show the error message somewhere and let the user try again.
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+		
 
 	},
 

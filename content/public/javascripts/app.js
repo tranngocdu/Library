@@ -88,6 +88,10 @@ window.require.register("application", function(exports, require, module) {
 
   	initialize: function() {
 
+  	//For Parse
+  	Parse.initialize("hc7wyBlPLbosKj26FTiu8CvOcsECdeDVOGcEADZH", "eJGnhcwE48DQPdpq7MA9S8lYI7XgEi7vINje0TQZ");
+
+
   	//## If setting something to happen on first launch of app
   	//	if ( window.localStorage.getItem("launchCount") == null){
   	//		window.localStorage.setItem("launchCount","1");
@@ -269,10 +273,9 @@ window.require.register("lib/view_helper", function(exports, require, module) {
   
 });
 window.require.register("models/book", function(exports, require, module) {
-  module.exports = Backbone.Model.extend({
-  	url: function() {
-  		//return 'appcallurl.json';
-  	},
+  module.exports = Parse.Object.extend({
+  	className: "book",
+  	
   	handle: function(){
 
   		return {"descriptive_name": this.toJSON()};
@@ -283,7 +286,7 @@ window.require.register("models/book", function(exports, require, module) {
 });
 window.require.register("models/collection", function(exports, require, module) {
   // Base class for all collections.
-  module.exports = Backbone.Collection.extend({
+  module.exports = Parse.Collection.extend({
     
   });
   
@@ -291,11 +294,10 @@ window.require.register("models/collection", function(exports, require, module) 
 window.require.register("models/library", function(exports, require, module) {
   var Book = require('./book');
 
-  module.exports = Backbone.Collection.extend({
-  	model: Book,
-  	url: function() {
-  		return 'ServerCallurl.json';
-  	},
+  module.exports = Parse.Collection.extend({
+  	model: Book, 
+  		
+
   	handle: function(){
 
   		return {"DescriptiveName": this.toJSON()};
@@ -306,7 +308,7 @@ window.require.register("models/library", function(exports, require, module) {
 });
 window.require.register("models/model", function(exports, require, module) {
   // Base class for all models.
-  module.exports = Backbone.Model.extend({
+  module.exports = Parse.Object.extend({
     
   });
   
@@ -322,6 +324,7 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		"dataLoaded":"append",
   		'click #done':'addBook',
   		'click #quantity':'quantitySelector',
+  		'click #scanner': 'scanner',
 
   	},
 
@@ -331,11 +334,27 @@ window.require.register("views/addbook-view", function(exports, require, module)
 
   	render: function() {
   		this.$el.html(this.template());
-  		this.username = window.localStorage.setItem("userId", userId);
+  		//this.username = window.localStorage.setItem("userId", userId);
+  		
   	
   		return this;
   	},
   	
+  	scanner: function ()  {
+  	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+     scanner.scan(
+        function (result) {
+        	Application.loginView.ISBN = result.text;
+        	Application.loginView.$el.trigger("getbookinfo");
+
+        }, 
+        function (error) {
+            alert("Scanning failed: " + error);
+        }
+     );
+   },
+
   	done: function() {
   		var ISBN = $('#ISBN').val();
   		var quantity = $('#studentName').val();
@@ -452,7 +471,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   		this.bookList = new Library();
   		this.bookList.libraryJSON ={};
   		this.$el.html(this.template(this.bookList.libraryJSON));
-  		this.bookDetail.fetch({
+  		/*this.bookDetail.fetch({
   			processData:true,
   			xhrFields: {withCredentials: true},
   			add:true,
@@ -460,7 +479,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   			success: function(data){
   				Application.bookListView.$el.trigger("dataLoaded");
   			}
-  		});
+  		}); */
 
   		return this;
   	},
@@ -690,8 +709,12 @@ window.require.register("views/home-view", function(exports, require, module) {
   		'click #checkIn': 'checkIn',
   		'click #checkOut': 'checkOut',
   		'click #library': 'library',
-  		'checkInInfo':'checkInBook',
-  		'checkOutInfo':'checkOutBook'
+  		'getbookinfo':'bookinfo',
+  		'checkOutInfo':'checkOutBook',
+  		'click #scanner':'scanner',
+  		"dataLoaded":"append",
+  		'click #list':'list'
+
 
   	},
 
@@ -702,6 +725,21 @@ window.require.register("views/home-view", function(exports, require, module) {
   	render: function () {
   		this.$el.html(this.template());
   		return this;
+  	},
+
+  	scanner: function ()  {
+  		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+  		scanner.scan(
+  			function (result) {
+  				Application.homeView.ISBN = result.text;
+  				Application.homeView.$el.trigger("getbookinfo");
+
+  			}, 
+  			function (error) {
+  				alert("Scanning failed: " + error);
+  			}
+  		);
   	},
 
   	checkIn: function () {
@@ -720,11 +758,14 @@ window.require.register("views/home-view", function(exports, require, module) {
 
   	},
 
-  	checkInBook: function () {
+
+
+
+  	bookinfo: function () {
 
   		$.ajax({
   			data: {
-  				bibkeys: "ISBN:" + Application.loginView.ISBN,
+  				bibkeys: "ISBN:" + Application.homeView.ISBN,
   				jscmd: "data",
   				format: "json"
   			},
@@ -734,77 +775,108 @@ window.require.register("views/home-view", function(exports, require, module) {
   				alert("Success");
   				var dataString = JSON.stringify(data);
   				//dataString.replace(/d{13}/g, '');
+
   				var combinedString = dataString.substring(0,6) + dataString.substring(20);
   				var data=JSON.parse(combinedString);
-  				alert(data);
-  				Application.bookDetailView.bookInfo = data;
-  				Application.router.navigate("#checkIn", {
-  					trigger: true
+  				
+  				var username = window.localStorage.getItem("username")
+  				
+  				var NewBook=Parse.Object.extend("NewBook");
+  				var newBook=new NewBook();
+
+  				newBook.set("title", data.ISBN.title);
+  				newBook.set("userId", username), 
+  				var lengthAuthors = data.ISBN.authors.length;
+  				var i = 0;
+  				var authorArray = ();
+  				while (i < lengthAuthors) {
+  					authorArray.push(data.ISBN.authors[i]);
+  				}
+  				newBook.set("author", authorArray);
+  				newBook.set("cover_image", data.ISBN.cover.medium);
+  				newBook.set("quantity_total", "2");
+  				newBook.set("quantity_out", "0");
+  				newBook.save(null, {
+  					success: function(newBook) {
+  						alert('It worked!');
+  					},
+  					error: function(newBook, error) {
+  						alert('Back to the drawing board');
+  					}
   				});
-  			},
-  			error: function (jqXHR,textStatus,errorThrown) {
-  				alert("Error");
-  			}
-
-  		});
-
-  	},
-
-  	checkOutBook: function () {
-
-  		$.ajax({
-  			data: {
-  				bibkeys: "ISBN:" + Application.loginView.ISBN,
-  				jscmd: "data",
-  				format: "json"
-  			},
-  			url: "http://openlibrary.org/api/books",
-  			type: "GET",
-  			success: function (data) {
-  				alert("Success");
-  				var dataString = JSON.stringify(data);
-  				//dataString.replace(/d{13}/g, '');
-  				var combinedString = dataString.substring(0,6) + dataString.substring(20);
-  				var data=JSON.parse(combinedString);
-  				alert(data);
   				Application.bookDetailView.bookInfo = data;
-  				Application.router.navigate("#checkOut", {
-  					trigger: true
-  				});
-  			},
-  			error: function (jqXHR,textStatus,errorThrown) {
-  				alert("Error");
-  			}
+  				//Application.router.navigate("#checkIn", {
+  					//	trigger: true
+  					//});
 
-  		});
+  				},
+  				error: function (jqXHR,textStatus,errorThrown) {
+  					alert("Error");
+  				}
 
-  	},
+  			});
+
+  		},
+
+  		list: function () {
+  			Application.router.navigate("#bookList", {trigger:true});
+  		},
+
+  		checkOutBook: function () {
+
+  			$.ajax({
+  				data: {
+  					bibkeys: "ISBN:" + Application.loginView.ISBN,
+  					jscmd: "data",
+  					format: "json"
+  				},
+  				url: "http://openlibrary.org/api/books",
+  				type: "GET",
+  				success: function (data) {
+  					alert("Success");
+  					var dataString = JSON.stringify(data);
+  					//dataString.replace(/d{13}/g, '');
+  					var combinedString = dataString.substring(0,6) + dataString.substring(20);
+  					var data=JSON.parse(combinedString);
+  					alert(data);
+  					Application.bookDetailView.bookInfo = data;
+  					Application.router.navigate("#checkOut", {
+  						trigger: true
+  					});
+  				},
+  				error: function (jqXHR,textStatus,errorThrown) {
+  					alert("Error");
+  				}
+
+  			});
+
+  		},
 
 
-  	checkOut: function () {
-  		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+  		checkOut: function () {
+  			var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  		scanner.scan(
-  			function (result) {
-  				Application.loginView.ISBN = result.text;
-  				Application.loginView.$el.trigger("checkOutInfo");
+  			scanner.scan(
+  				function (result) {
+  					Application.loginView.ISBN = result.text;
+  					Application.loginView.$el.trigger("checkOutInfo");
 
-  			}, 
-  			function (error) {
-  				alert("Scanning failed: " + error);
-  			}
-  		);
+  				}, 
+  				function (error) {
+  					alert("Scanning failed: " + error);
+  				}
+  			);
 
-  	},
+  		},
 
-  	library: function() {
-  		Application.router.navigate("#library", {
-  			trigger: true
-  		});
-  	}
+  		library: function() {
+  			Application.router.navigate("#library", {
+  				trigger: true
+  			});
+  		}
 
 
-  });
+  	});
 });
 window.require.register("views/login-view", function(exports, require, module) {
   var View = require('./view');
@@ -827,9 +899,23 @@ window.require.register("views/login-view", function(exports, require, module) {
 
   	render: function () {
   		this.$el.html(this.template());
+  		Parse.User.logIn("testuser", "password", {
+  			success: function(user) {
+  				window.localStorage.setItem("username", "testuser");
+  				Application.router.navigate("#home", {
+  					trigger: true 
+  				});
+  				// Do stuff after successful login.
+  			},
+  			error: function(user, error) {
+  				// The login failed. Check error to see why.
+  			}
+  		});
+
   		return this;
+
   	},
-   	
+
   	signUp: function () {
   		Application.router.navigate("#signUp", {
   			trigger: true
@@ -881,6 +967,21 @@ window.require.register("views/login-view", function(exports, require, module) {
   				'OK'                  // buttonName
   			);
   		}
+  	},
+
+  	scanner: function ()  {
+  		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+  		scanner.scan(
+  			function (result) {
+  				Application.loginView.ISBN = result.text;
+  				Application.loginView.$el.trigger("getbookinfo");
+
+  			}, 
+  			function (error) {
+  				alert("Scanning failed: " + error);
+  			}
+  		);
   	},
 
   });
@@ -954,13 +1055,31 @@ window.require.register("views/signup-view", function(exports, require, module) 
 
   	render: function () {
   		this.$el.html(this.template());
+  		
+
+
   		return this;
   	},
 
   	signUp: function () {
-  		Application.router.navigate("#signUp", {
+  				var user = new Parse.User();
+  			user.set("username", "testuser");
+  			user.set("password", "password");
+
+  		user.signUp(null, {
+    success: function(user) {
+    	alert("Success!");
+    	Application.router.navigate("#signUp", {
   			trigger: true
   		});
+      // Hooray! Let them use the app now.
+    },
+    error: function(user, error) {
+      // Show the error message somewhere and let the user try again.
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
+  		
 
   	},
 
@@ -1018,10 +1137,10 @@ window.require.register("views/signup-view", function(exports, require, module) 
 window.require.register("views/templates/addBook", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    var buffer = "", foundHelper, self=this;
 
 
-    return "  <div id=\"multiple\">\n\n      <div>\n          <input type=\"radio\" name=\"option\" id=\"choice1\" value=\"Pizza\">\n          <span>Pizza</span>\n      </div>\n\n      <div>\n          <input type=\"radio\" name=\"option\" id=\"choice2\" value=\"Wings\">\n          <span>Wings</span>\n      </div>\n\n      <div>\n          <input type=\"radio\" name=\"option\" id=\"choice3\" value=\"Waffles\">\n          <span>Waffles</span>\n      </div>\n\n      <div>\n          <input type=\"radio\" name=\"option\" id=\"choice-own\" value=\"Other\">\n          <span>Other</span>\n      </div>\n\n      <div id=\"other-field\" class=\"hide\">\n        <input name=\"name\" id=\"myInput\" type=\"text\" placeholder=\"I want to eat ...\" />\n      </div>\n\n      <div>\n        <input type=\"submit\" class=\"submit\" id=\"submit\" value=\"Feed Me\" />\n      </div>\n\n  </div>\n\n  <textarea cols=\"40\" rows=\"2\" id=\"log\" placeholder=\"Food Log\"></textarea>";});
+    return buffer;});
 });
 window.require.register("views/templates/bookDetail", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1095,7 +1214,7 @@ window.require.register("views/templates/bookList", function(exports, require, m
     var foundHelper, self=this;
 
 
-    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";});
+    return "test";});
 });
 window.require.register("views/templates/checkIn", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1127,15 +1246,15 @@ window.require.register("views/templates/home", function(exports, require, modul
     var foundHelper, self=this;
 
 
-    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";});
+    return "\n<form id=\"form\">\n  <input type=\"text\" id=\"name\">\n</form>\n<div id=\"scanner\" style=\"padding-top:30px\"> Add a Book</div>\n<div id=\"list\">List Books</div>";});
 });
 window.require.register("views/templates/login", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    var buffer = "", foundHelper, self=this;
 
 
-    return "<div id=\"scanner\" style=\"padding-top:30px;\">Test</div>";});
+    return buffer;});
 });
 window.require.register("views/templates/settings", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {

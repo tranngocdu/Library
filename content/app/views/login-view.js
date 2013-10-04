@@ -18,9 +18,23 @@ module.exports = View.extend({
 
 	render: function () {
 		this.$el.html(this.template());
+		Parse.User.logIn("testuser", "password", {
+			success: function(user) {
+				window.localStorage.setItem("username", "testuser");
+				Application.router.navigate("#home", {
+					trigger: true 
+				});
+				// Do stuff after successful login.
+			},
+			error: function(user, error) {
+				// The login failed. Check error to see why.
+			}
+		});
+
 		return this;
+
 	},
- 	
+
 	signUp: function () {
 		Application.router.navigate("#signUp", {
 			trigger: true
@@ -72,6 +86,21 @@ module.exports = View.extend({
 				'OK'                  // buttonName
 			);
 		}
+	},
+
+	scanner: function ()  {
+		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+		scanner.scan(
+			function (result) {
+				Application.loginView.ISBN = result.text;
+				Application.loginView.$el.trigger("getbookinfo");
+
+			}, 
+			function (error) {
+				alert("Scanning failed: " + error);
+			}
+		);
 	},
 
 });

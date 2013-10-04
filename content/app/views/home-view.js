@@ -8,8 +8,12 @@ module.exports = View.extend({
 		'click #checkIn': 'checkIn',
 		'click #checkOut': 'checkOut',
 		'click #library': 'library',
-		'checkInInfo':'checkInBook',
-		'checkOutInfo':'checkOutBook'
+		'getbookinfo':'bookinfo',
+		'checkOutInfo':'checkOutBook',
+		'click #scanner':'scanner',
+		"dataLoaded":"append",
+		'click #list':'list'
+
 
 	},
 
@@ -20,6 +24,21 @@ module.exports = View.extend({
 	render: function () {
 		this.$el.html(this.template());
 		return this;
+	},
+
+	scanner: function ()  {
+		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+		scanner.scan(
+			function (result) {
+				Application.homeView.ISBN = result.text;
+				Application.homeView.$el.trigger("getbookinfo");
+
+			}, 
+			function (error) {
+				alert("Scanning failed: " + error);
+			}
+		);
 	},
 
 	checkIn: function () {
@@ -38,11 +57,14 @@ module.exports = View.extend({
 
 	},
 
-	checkInBook: function () {
+
+
+
+	bookinfo: function () {
 
 		$.ajax({
 			data: {
-				bibkeys: "ISBN:" + Application.loginView.ISBN,
+				bibkeys: "ISBN:" + Application.homeView.ISBN,
 				jscmd: "data",
 				format: "json"
 			},
@@ -52,74 +74,105 @@ module.exports = View.extend({
 				alert("Success");
 				var dataString = JSON.stringify(data);
 				//dataString.replace(/d{13}/g, '');
+
 				var combinedString = dataString.substring(0,6) + dataString.substring(20);
 				var data=JSON.parse(combinedString);
-				alert(data);
-				Application.bookDetailView.bookInfo = data;
-				Application.router.navigate("#checkIn", {
-					trigger: true
+				
+				var username = window.localStorage.getItem("username")
+				
+				var NewBook=Parse.Object.extend("NewBook");
+				var newBook=new NewBook();
+
+				newBook.set("title", data.ISBN.title);
+				newBook.set("userId", username), 
+				var lengthAuthors = data.ISBN.authors.length;
+				var i = 0;
+				var authorArray = ();
+				while (i < lengthAuthors) {
+					authorArray.push(data.ISBN.authors[i]);
+				}
+				newBook.set("author", authorArray);
+				newBook.set("cover_image", data.ISBN.cover.medium);
+				newBook.set("quantity_total", "2");
+				newBook.set("quantity_out", "0");
+				newBook.save(null, {
+					success: function(newBook) {
+						alert('It worked!');
+					},
+					error: function(newBook, error) {
+						alert('Back to the drawing board');
+					}
 				});
-			},
-			error: function (jqXHR,textStatus,errorThrown) {
-				alert("Error");
-			}
-
-		});
-
-	},
-
-	checkOutBook: function () {
-
-		$.ajax({
-			data: {
-				bibkeys: "ISBN:" + Application.loginView.ISBN,
-				jscmd: "data",
-				format: "json"
-			},
-			url: "http://openlibrary.org/api/books",
-			type: "GET",
-			success: function (data) {
-				alert("Success");
-				var dataString = JSON.stringify(data);
-				//dataString.replace(/d{13}/g, '');
-				var combinedString = dataString.substring(0,6) + dataString.substring(20);
-				var data=JSON.parse(combinedString);
-				alert(data);
 				Application.bookDetailView.bookInfo = data;
-				Application.router.navigate("#checkOut", {
-					trigger: true
-				});
-			},
-			error: function (jqXHR,textStatus,errorThrown) {
-				alert("Error");
-			}
+				//Application.router.navigate("#checkIn", {
+					//	trigger: true
+					//});
 
-		});
+				},
+				error: function (jqXHR,textStatus,errorThrown) {
+					alert("Error");
+				}
 
-	},
+			});
+
+		},
+
+		list: function () {
+			Application.router.navigate("#bookList", {trigger:true});
+		},
+
+		checkOutBook: function () {
+
+			$.ajax({
+				data: {
+					bibkeys: "ISBN:" + Application.loginView.ISBN,
+					jscmd: "data",
+					format: "json"
+				},
+				url: "http://openlibrary.org/api/books",
+				type: "GET",
+				success: function (data) {
+					alert("Success");
+					var dataString = JSON.stringify(data);
+					//dataString.replace(/d{13}/g, '');
+					var combinedString = dataString.substring(0,6) + dataString.substring(20);
+					var data=JSON.parse(combinedString);
+					alert(data);
+					Application.bookDetailView.bookInfo = data;
+					Application.router.navigate("#checkOut", {
+						trigger: true
+					});
+				},
+				error: function (jqXHR,textStatus,errorThrown) {
+					alert("Error");
+				}
+
+			});
+
+		},
 
 
-	checkOut: function () {
-		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+		checkOut: function () {
+			var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-		scanner.scan(
-			function (result) {
-				Application.loginView.ISBN = result.text;
-				Application.loginView.$el.trigger("checkOutInfo");
+			scanner.scan(
+				function (result) {
+					Application.loginView.ISBN = result.text;
+					Application.loginView.$el.trigger("checkOutInfo");
 
-			}, 
-			function (error) {
-				alert("Scanning failed: " + error);
-			}
-		);
+				}, 
+				function (error) {
+					alert("Scanning failed: " + error);
+				}
+			);
 
-	},
+		},
 
-	library: function() {
-		Application.router.navigate("#library", {
-			trigger: true
-		});
-	}
+		library: function() {
+			Application.router.navigate("#library", {
+				trigger: true
+			});
+		}
 
 
-});
+	});
