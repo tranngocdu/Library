@@ -84,13 +84,13 @@ module.exports = View.extend({
 				var newBook=new NewBook();
 
 				newBook.set("title", data.ISBN.title);
-				newBook.set("userId", username), 
+				newBook.set("userId", username);
 				var lengthAuthors = data.ISBN.authors.length;
 				var i = 0;
-				var authorArray = ();
-				while (i < lengthAuthors) {
-					authorArray.push(data.ISBN.authors[i]);
-				}
+				var authorArray = {};
+				//while (i < lengthAuthors) {
+				//	authorArray.push(data.ISBN.authors[i]);
+				//}
 				newBook.set("author", authorArray);
 				newBook.set("cover_image", data.ISBN.cover.medium);
 				newBook.set("quantity_total", "2");
