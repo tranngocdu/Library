@@ -1243,10 +1243,13 @@ window.require.register("views/templates/enterPassword", function(exports, requi
 window.require.register("views/templates/home", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    var buffer = "", foundHelper, self=this;
 
 
-    return "\n<form id=\"form\">\n  <input type=\"text\" id=\"name\">\n</form>\n<div id=\"scanner\" style=\"padding-top:30px\"> Add a Book</div>\n<div id=\"list\">List Books</div>";});
+    buffer += "<div id=\"header\">\n	<h1>Library</h1>\n</div>\n\n<div id=\"wrapper\">\n	<div id=\"scroller\" class=\"home\">\n		<div id=\"scanner\" class=\"check-out button primary-fill\">Check Out</div>\n		<div id=\"list\" class=\"check-in button secondary\">Check In</div>\n	</div> ";
+    buffer += "\n</div> ";
+    buffer += "\n\n<div id=\"footer\">\n	<ul> \n		<li class=\"active\">Home</li>\n		<li>Books</li>\n		<li>Students</li>\n		<li>Settings</li>\n	</ul>\n</div>";
+    return buffer;});
 });
 window.require.register("views/templates/login", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {

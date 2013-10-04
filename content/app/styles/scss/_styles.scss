@@ -6,6 +6,8 @@ html {
 }
 
 body {
+  font-family: $helvetica;
+  font-weight: 300;
   -webkit-user-select:none;
   -webkit-text-size-adjust:none;
 }
@@ -69,23 +71,115 @@ HELPER STYLES
 SCROLL
 ********************************/
 #wrapper {
-  position:absolute;
+  position: absolute;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  z-index:1;
-  top:45px;
-  bottom:44px;
-  left:0;
-  width:100%;
+  z-index:  1;
+  top:  65px;
+  bottom: 65px;
+  left: 0;
+  width:  100%;
 }
 
 #scroller {
   min-height: 100%;
   -webkit-transform: translateZ(0);
-  width:100%;
-  padding:0 0 25px 0;
+  width: 100%;
+  padding: 30px 0 25px 0;
 }
 
-.bottomless {
-  bottom: 0 !important;
+/********************************
+LAYOUT
+********************************/
+#header {
+  position: absolute;
+  z-index:9;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  height: 65px;
+  background-color: $ui;
+  border-bottom: 1px solid $border;
 }
+
+#footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  height: 65px;
+  background-color: $ui;
+  border-top: 1px solid $border;
+  ul {
+    list-style-type: none;
+    padding: 20px 0 0 0;
+    li {
+      display: inline-block;
+      width: 24%;
+      text-align: center;
+      color: $grey;
+      font-size: 14px;
+    }
+  }
+}
+
+/********************************
+TYPOGRAPHY
+********************************/
+h1 {
+  text-align: center;
+  color: $black;
+  font-size: 18px;
+  padding: 20px 0 0 0;
+}
+
+.active {
+  color: $red !important;
+}
+
+/********************************
+BUTTONS
+********************************/
+.button {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.primary-fill {
+  background-color: $primary;
+  color: $white;
+}
+
+.secondary-fill {
+  background-color: $red;
+  color: $white;
+}
+
+.primary {
+  color: $primary;
+  border: 1px solid $primary;
+}
+
+.secondary {
+  color: $red;
+  border: 1px solid $red;
+}
+
+/********************************
+HOME
+********************************/
+.home {
+  padding-top: 100px !important;
+}
+.check-out, .check-in {
+  width: 240px;
+  padding: 16px 0;
+  margin: 0 auto;
+  font-size: 18px;
+}
+
+.check-out {
+  margin-bottom: 25px;
+}
+
