@@ -1,34 +1,24 @@
-<div id="header">Pull Refresh</div>
-
-<div id="wrapper">
-  <div id="scroller">
-    <div id="pullDown">
-      <span class="pullDownIcon"></span><span class="pullDownLabel" style="color:white;">Pull down to refresh...</span>
-    </div>
-
-    <ul id="thelist">
-      <li>Message 1</li>
-      <li>Message 2</li>
-      <li>Message 3</li>
-      <li>Message 4</li>
-      <li>Message 5</li>
-      <li>Message 6</li>
-      <li>Message 7</li>
-      <li>Message 8</li>
-      <li>Message 9</li>
-      <li>Message 10</li>
-      <li>Message 11</li>
-      <li>Message 12</li>
-      <li>Message 13</li>
-      <li>Message 14</li>
-      <li>Message 15</li>
-      <li>Message 16</li>
-      <li>Message 17</li>
-      <li>Message 18</li>
-      <li>Message 19</li>
-      <li>Message 20</li>
-    </ul>
-  </div>
+<div id="header">
+  <div class="cancel">Cancel</div>
+  <h1>Sign Up</h1>
 </div>
 
-<div id="footer">Footer</div>
+<div id="wrapper" class="bottomless">
+  <div id="scroller" class="container">
+
+    <h2>This'll be quick.</h2>
+    <input id="sign-name" class="first-input" type="text" autocorrect="off" placeholder="Name" />
+    <input id="sign-email" type="email" autocomplete="off" placeholder="Email" />
+    <input id="sign-pass" type="password" placeholder="Password" />
+    <input id="sign-pass-confirm" type="password" placeholder="Confirm Password" />
+
+    <div id="create-account" class="button primary-fill">Create Account</div>
+    <div id="have-account" class="button primary">I have an Account</div>
+
+    <div id="disclaimer">
+      By creating an account you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+    </div>
+
+  </div> {{!-- /#scroller --}}
+</div> {{!-- /#wrapper --}}
+
