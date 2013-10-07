@@ -2,14 +2,12 @@ var View = require('./view');
 var template = require('./templates/login');
 
 
-
-
 module.exports = View.extend({
 	id: 'login-view',
 	template: template,
 	events: {
-		'click #signup':'signUp',
-		'click #signin':'signIn'
+		'click #login':'signIn',
+		'click #login-have-account':'signUp'
 	},
 
 	initialize: function() {
@@ -18,25 +16,12 @@ module.exports = View.extend({
 
 	render: function () {
 		this.$el.html(this.template());
-		Parse.User.logIn("testuser", "password", {
-			success: function(user) {
-				window.localStorage.setItem("username", "testuser");
-				Application.router.navigate("#home", {
-					trigger: true 
-				});
-				// Do stuff after successful login.
-			},
-			error: function(user, error) {
-				// The login failed. Check error to see why.
-			}
-		});
-
 		return this;
 
 	},
 
 	signUp: function () {
-		Application.router.navigate("#signUp", {
+		Application.router.navigate("#signup", {
 			trigger: true
 		});
 
@@ -44,38 +29,22 @@ module.exports = View.extend({
 
 	signIn: function () {
 		//do some signin magic
-		var username = $('#username').val();
-		var password =  $('#password').val();
+		var username = $('#login-email').val();
+		var password =  $('#login-pass').val();
+
 
 		if( username && password)
 		{
-			$.ajax({
-				data: {
-					"username":username,
-					"password":password,
-				},
-				url: Application.serverURL+"register",
-				type: "POST",
-				xhrFields: {
-					withCredentials: true
-				},
-				success: function (data) {
-					window.localStorage.setItem("userId", userId);
-					Application.router.navigate("#home", {
-						trigger: true
-					});
-
-				},
-				error: function (jqXHR, textStatus, errorThrown) {
-					{
-						navigator.notification.alert(
-							'Please try again.',  // message
-							function alertDismissed() {}, // callback
-							'Error',            // title
-							'OK'                  // buttonName
-						);
+			Parse.User.logIn(username,password, {
+					success: function(user) {
+						window.localStorage.setItem("username",username);
+						Application.router.navigate("#home", {
+								trigger: true
+						});
+					},
+					error: function(user, error) {
+							alert("Login Failed");
 					}
-				}
 			});
 		}
 		else{

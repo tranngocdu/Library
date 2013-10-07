@@ -6,7 +6,8 @@ module.exports = View.extend({
 	template: template,
 	events: {
 		"dataLoaded":"append",
-		'click #signup':'signUp',
+		'click #create-account':'signUp',
+		'click #have-account':'haveAccount'
 	},
 
 	initialize: function() {
@@ -15,18 +16,17 @@ module.exports = View.extend({
 
 	render: function () {
 		this.$el.html(this.template());
-		
-
-
 		return this;
 	},
 
 	signUp: function () {
 				var user = new Parse.User();
-			user.set("username", "testuser");
-			user.set("password", "password");
+				var username = $('#sign-email').val();
+				var password =  $('#sign-pass').val();
+					user.set("username", username);
+					user.set("password", password);
 
-		user.signUp(null, {
+			user.signUp(null, {
   success: function(user) {
   	alert("Success!");
   	Application.router.navigate("#signUp", {
@@ -41,6 +41,12 @@ module.exports = View.extend({
 });
 		
 
+	},
+
+	haveAccount: function() {
+		Application.router.navigate("#login", {
+			trigger:true
+		});
 	},
 
 	signIn: function () {

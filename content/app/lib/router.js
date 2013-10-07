@@ -5,7 +5,7 @@ module.exports = Backbone.Router.extend({
 	routes: {
 		// If you want to save login state, send them to a prelogin function which checks for login state
 		'':'login',
-		'home':'login',
+		'home':'home',
 		'addBook':'addBook',
 		'bookDetail':'bookDetail',
 		'bookList':'bookList',
@@ -20,7 +20,8 @@ module.exports = Backbone.Router.extend({
 
 	initialize:function () {
 		// Handle back button throughout the application or menu buttons
-		$('#back-button').on('vclick', function(e) {
+		$('#cancel').on('vclick', function(e) {
+			alert("v");
 			e.preventDefault();
 			$.mobile.activePage.back = true;
 			window.history.back();
