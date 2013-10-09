@@ -4,7 +4,7 @@ module.exports = Backbone.Router.extend({
 
 	routes: {
 		// If you want to save login state, send them to a prelogin function which checks for login state
-		'':'login',
+		'':'preLogin',
 		'home':'home',
 		'addBook':'addBook',
 		'bookDetail':'bookDetail',
@@ -14,7 +14,8 @@ module.exports = Backbone.Router.extend({
 		'enterPassword':'enterPassword',
 		'login':'login',
 		'settings':'settings',
-		'signup':'signup'
+		'signup':'signup',
+		'studentList':'studentList'
 		
 	},
 
@@ -39,6 +40,17 @@ module.exports = Backbone.Router.extend({
 		// First page logic
 		this.firstPage = true;
 
+	},
+
+	preLogin:function() {
+		var currentUser = Parse.User.current();
+		var that = this;
+			if (currentUser) {
+						that.changePage(Application.homeView);						
+			}
+			else {
+						that.changePage(Application.loginView);
+			}
 	},
 
 	//Functions for changing pages
@@ -73,6 +85,9 @@ module.exports = Backbone.Router.extend({
 	},
 	signup:function() {
 		this.changePage(Application.signupView);
+	},
+	studentList:function() {
+		this.changePage(Application.studentListView);
 	},
 
 	//Functions for page transitions
