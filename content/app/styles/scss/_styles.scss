@@ -58,8 +58,8 @@ h1, h2, h3, h4, h5, p {
 }
 
 ul li {
-  line-height: 0;
   padding: 0;
+  list-style-type: none;
 }
 
 /********************************
@@ -164,7 +164,7 @@ LAYOUT
 .back {
   color: $red;
   position: absolute;
-  top: 34px;
+  top: 36px;
   left: 10px;
   font-size: 17px;
 }
@@ -390,42 +390,72 @@ BOOK LIST
 }
 
 #booklist {
-  list-style-type: none;
-  width: 90%;
+  width: 92%;
   margin: 0 auto;
   padding-left: 0;
-    li {
-      border-bottom: 1px solid $border;
-      padding: 5px 0;
-      overflow: hidden;
-      img {
-        width: 50px;
-        float: left;
+  li {
+    border-bottom: 1px solid $border;
+    padding: 5px 0;
+    overflow: hidden;
+    img {
+      width: 50px;
+      float: left;
+    }
+    .book-meta {
+      float: left;
+      height: 75px;
+      margin-left: 20px;
+      width: 75%;
+      h2 {
+        font-size: 14px;
+        font-weight: 500;
       }
-      .book-meta {
-        float: left;
-        height: 75px;
-        margin-left: 20px;
-        width: 75%;
-        h2 {
-          font-size: 14px;
-          font-weight: 500;
-        }
-        h3 {
-          font-size: 12px;
-          font-weight: 300;
-          color: $light-grey;
-          padding-top: 4px;
-        }
-        p {
-          font-size: 12px;
-          font-weight: 500;
-          color: $primary;
-          padding-top: 4px;
-        }
-        .out {
-          color: $red;
-        }
+      h3 {
+        font-size: 12px;
+        font-weight: 300;
+        color: $light-grey;
+        padding-top: 4px;
+      }
+      p {
+        font-size: 12px;
+        font-weight: 500;
+        color: $primary;
+        padding-top: 4px;
+      }
+      .out {
+        color: $red;
       }
     }
+  }
 }
+
+.students {
+  padding: 0 !important;
+}
+#studentlist {
+  padding-left: 0;
+  margin: 0 auto;
+  width: 92%;
+  li {
+    border-bottom: 1px solid $border;
+    padding: 12px 0 14px 0;
+    overflow: hidden;
+    .first-name {
+      font-weight: 500;
+      margin-right: 5px;
+      float: left;
+    }
+    .last-name {
+      width: 70%;
+      float: left;
+    }
+    .delete-name {
+      color: $red;
+      text-align: right;
+      float: right;
+      font-size: 15px;
+      padding-top: 1px;
+    }
+  }
+}
+

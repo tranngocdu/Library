@@ -1420,10 +1420,12 @@ window.require.register("views/templates/signup", function(exports, require, mod
 window.require.register("views/templates/studentList", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    var buffer = "", foundHelper, self=this;
 
 
-    return "<div id=\"header\">\n	<h1>Student List</h1>\n</div>\ntest\n<div id=\"footer\">\n	<ul> \n		<li id=\"home\" class=\"active\">Home</li>\n		<li id=\"bookList\">Books</li>\n		<li id=\"studentList\">Students</li>\n		<li>Settings</li>\n	</ul>\n</div>";});
+    buffer += "<div id=\"header\">\n	<div class=\"back\">Home</div>\n	<h1>Student List</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  	</ul>\n\n  </div> ";
+    buffer += "\n</div> ";
+    return buffer;});
 });
 window.require.register("views/view", function(exports, require, module) {
   require('lib/view_helper');

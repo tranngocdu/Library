@@ -138,6 +138,50 @@ window.require.register("application", function(exports, require, module) {
 
   		if (typeof Object.freeze === 'function') Object.freeze(this);
   		// Initializing BackStack.StackNavigator for the #container div
+  		
+  		var homeTab = function() {
+  	    	if(window.tapReady){
+  	           // window.tapReady = false;
+  			      $('.tab').removeClass('active');
+  			      $('#home_tab').addClass('active');
+
+  			      Application.router.navigate("#home" , {trigger: true});
+  			  }
+  	      //activateTabs();
+  	    }
+
+  	    var bookListTab = function() {
+  		if(window.tapReady){
+  	           // window.tapReady = false;
+  		      Application.router.navigate("#bookList" , {trigger: true});
+  			  $('.tab').removeClass('active');
+  		      $('#bookList_tab').addClass('active');
+
+  		    }
+  	    }
+  	    var studentListTab = function() {
+  	      if(window.tapReady){
+  		      $('.tab').removeClass('active');
+  		      $('#studentList_tab').addClass('active');
+  		      Application.router.navigate("#studentList" , {trigger: true});
+
+  		    }
+  	    }
+  	    var settingsTab =  function() {
+  	      if(window.tapReady){
+  		      $('.tab').removeClass('active');
+  		      $('#settings_tab').addClass('active');
+  		      Application.router.navigate("#settings" , {trigger: true});
+
+  		    }
+  	    }
+
+
+  			$('#home_tab').bind('tap', homeTab);
+  			$('#bookList_tab').bind('click', bookListTab); 
+  			$('#studentList_tab').bind('tap', studentListTab); 
+  			$('#settings_tab').bind('tap', settingsTab);
+  		
   	},
 
   }
@@ -183,7 +227,7 @@ window.require.register("lib/router", function(exports, require, module) {
   		'settings':'settings',
   		'signup':'signup',
   		'studentList':'studentList'
-  		
+
   	},
 
   	initialize:function () {
@@ -206,84 +250,87 @@ window.require.register("lib/router", function(exports, require, module) {
 
   		// First page logic
   		this.firstPage = true;
+  		$('body').append('<div id="footer"" style="z-index:10000"><ul><li id="home_tab" class="active tab">Home</li><li id="bookList_tab" class="tab">Books</li><li id="studentList_tab" class="tab">Students</li><li id="settings_tab" class="tab">Settings</li></ul></div>');
 
-  	},
+  		},
 
-  	preLogin:function() {
-  		var currentUser = Parse.User.current();
-  		var that = this;
+
+
+  		preLogin:function() {
+  			var currentUser = Parse.User.current();
+  			var that = this;
   			if (currentUser) {
-  						that.changePage(Application.homeView);						
+  				that.changePage(Application.homeView);						
   			}
   			else {
-  						that.changePage(Application.loginView);
+  				that.changePage(Application.loginView);
   			}
-  	},
+  		},
 
-  	//Functions for changing pages
-  	home:function() {
-  		this.changePage(Application.homeView);
-  	},
+  		//Functions for changing pages
+  		home:function() {
+  			this.changePage(Application.homeView);
+  		},
 
-  	addBook:function() {
-  		this.changePage(Application.addBookView);
-  	},
+  		addBook:function() {
+  			this.changePage(Application.addBookView);
+  		},
 
-  	bookDetail:function() {
-  		this.changePage(Application.bookDetailView);
-  	},
-  	bookList:function() {
-  		this.changePage(Application.bookListView);
-  	},
-  	checkIn:function() {
-  		this.changePage(Application.checkInView);
-  	},
-  	checkOut:function() {
-  		this.changePage(Application.checkOutView);
-  	},
-  	enterPassword:function() {
-  		this.changePage(Application.enterPasswordView);
-  	},
-  	login:function() {
-  		this.changePage(Application.loginView);
-  	},
-  	settings:function() {
-  		this.changePage(Application.settingsView);
-  	},
-  	signup:function() {
-  		this.changePage(Application.signupView);
-  	},
-  	studentList:function() {
-  		this.changePage(Application.studentListView);
-  	},
+  		bookDetail:function() {
+  			this.changePage(Application.bookDetailView);
+  		},
+  		bookList:function() {
+  			this.changePage(Application.bookListView);
+  		},
+  		checkIn:function() {
+  			this.changePage(Application.checkInView);
+  		},
+  		checkOut:function() {
+  			this.changePage(Application.checkOutView);
+  		},
+  		enterPassword:function() {
+  			this.changePage(Application.enterPasswordView);
+  		},
+  		login:function() {
+  			this.changePage(Application.loginView);
+  		},
+  		settings:function() {
+  			this.changePage(Application.settingsView);
+  		},
+  		signup:function() {
+  			this.changePage(Application.signupView);
+  		},
+  		studentList:function() {
+  			this.changePage(Application.studentListView);
+  		},
 
-  	//Functions for page transitions
-  	changePage:function (page) {
-  		window.tapReady = false;
-  		$(page.el).attr('data-role', 'page');
-  		page.render();
-  		page.delegateEvents();
-  		$('body').append($(page.el));
-  		var transition = 'slide';
-  		var bPage = $.mobile.activePage.back;
+  		//Functions for page transitions
+  		changePage:function (page) {
+  			window.tapReady = false;
+  			$(page.el).attr('data-role', 'page');
+  			page.render();
+  			page.delegateEvents();
+  			$('body').append($(page.el));
+  			var transition = 'slide';
+  			var bPage = $.mobile.activePage.back;
 
-  		if (page.afterAppend) {
-  			page.afterAppend();
+  			if (page.afterAppend) {
+  				page.afterAppend();
+  			}
+  			// We don't want to slide the first page
+  			if (this.firstPage) {
+  				transition = 'fade';
+  				this.firstPage = false;
+  			}
+
+  			$.mobile.changePage($(page.el), {changeHash:false, transition: bPage ? 'slide' : transition, reverse: bPage});
+
+  			$(document).delegate(page.el, 'pageshow', function () {
+  				window.tapReady = true;
+  			});
   		}
-  		// We don't want to slide the first page
-  		if (this.firstPage) {
-  			transition = 'fade';
-  			this.firstPage = false;
-  		}
 
-  		$.mobile.changePage($(page.el), {changeHash:false, transition: bPage ? 'slide' : transition, reverse: bPage});
-
-  		$(document).delegate(page.el, 'pageshow', function () {
-  			window.tapReady = true;
-  		});
-  	}
-
-  });
+  	});
   
 });
 window.require.register("lib/view_helper", function(exports, require, module) {
@@ -495,37 +542,37 @@ window.require.register("views/booklist-view", function(exports, require, module
   		this.bookList = new Library();
   		this.bookList.libraryJSON ={};
   		this.$el.html(this.template(this.bookList.libraryJSON));
-  		
 
 
-  var currentUser = Parse.User.current();
-  var currentUserId = currentUser.id;
-  var query = new Parse.Query("NewBook");
-      query.equalTo("User", currentUserId);
-      query.find({
-        success: function(usersBooks) {
-        	console.log(usersBooks);
-          // userPosts contains all of the posts by the current user.
-          var length = usersBooks.length;
-          var i = 0;
-          while (i<length){
-          console.log(usersBooks[i].attributes.title);
-          title = usersBooks[i].attributes.title;
-          image = usersBooks[i].attributes.cover_image;
-          $('#bookList').append('<center><table width="85%"><tr><td><div id="book'+i+'"><p>Title:'+title+'.</br></p></div></td><td align="right"><div id="bookImage'+i+'"><img src="'+image+'"></div></td></tr></table></center>');
-          i++;
-        	}
-        }
-      });
+
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var query = new Parse.Query("NewBook");
+  		query.equalTo("User", currentUserId);
+  		query.find({
+  			success: function(usersBooks) {
+  				console.log(usersBooks);
+  				// userPosts contains all of the posts by the current user.
+  				var length = usersBooks.length;
+  				var i = 0;
+  				while (i<length){
+  					console.log(usersBooks[i].attributes.title);
+  					title = usersBooks[i].attributes.title;
+  					image = usersBooks[i].attributes.cover_image;
+  					$('#bookList').append('<center><table width="85%"><tr><td><div id="book'+i+'"><p>Title:'+title+'.</br></p></div></td><td align="right"><div id="bookImage'+i+'"><img src="'+image+'"></div></td></tr></table></center>');
+  					i++;
+  				}
+  			}
+  		});
 
   		/*this.bookDetail.fetch({
-  			processData:true,
-  			xhrFields: {withCredentials: true},
-  			add:true,
-  			data: {"teacherId":Application.bookDetailView.teacherId},
-  			success: function(data){
-  				Application.bookListView.$el.trigger("dataLoaded");
-  			}
+  		processData:true,
+  		xhrFields: {withCredentials: true},
+  		add:true,
+  		data: {"teacherId":Application.bookDetailView.teacherId},
+  		success: function(data){
+  		Application.bookListView.$el.trigger("dataLoaded");
+  		}
   		}); */
 
   		return this;
@@ -1225,7 +1272,7 @@ window.require.register("views/templates/addBook", function(exports, require, mo
 
     buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/140x190\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> ";
     buffer += "\n</div> ";
-    buffer += "\n\n<div id=\"footer\">\n  <ul> \n    <li class=\"active\">Home</li>\n    <li>Books</li>\n    <li>Students</li>\n    <li>Settings</li>\n  </ul>\n</div>\n";
+    buffer += "\n\n";
     return buffer;});
 });
 window.require.register("views/templates/bookDetail", function(exports, require, module) {
@@ -1302,7 +1349,7 @@ window.require.register("views/templates/bookList", function(exports, require, m
 
     buffer += "<div id=\"header\" class=\"extended-header\">\n  <div class=\"back\">Home</div>\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\">\n  	<ul id=\"booklist\">\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2 class=\"truncate-two\">Surprise Attack of Jabba the Puppet: An Origami Yoda Book Longer Title</h2>\n  				<h3 class=\"truncate\">Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p class=\"out\">Checked Out</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n  	</ul>\n\n  </div> ";
     buffer += "\n</div> ";
-    buffer += "\n\n<div id=\"footer\">\n  <ul> \n    <li class=\"active\">Home</li>\n    <li>Books</li>\n    <li>Students</li>\n    <li>Settings</li>\n  </ul>\n</div>\n";
+    buffer += "\n\n";
     return buffer;});
 });
 window.require.register("views/templates/checkIn", function(exports, require, module) {
@@ -1327,7 +1374,7 @@ window.require.register("views/templates/enterPassword", function(exports, requi
     var foundHelper, self=this;
 
 
-    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";});
+    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n";});
 });
 window.require.register("views/templates/home", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1337,7 +1384,6 @@ window.require.register("views/templates/home", function(exports, require, modul
 
     buffer += "<div id=\"header\">\n	<h1>Library</h1>\n</div>\n\n<div id=\"wrapper\">\n	<div id=\"scroller\" class=\"home\">\n		<div id=\"checkOut\" class=\"check-out button primary-fill\">Check Out</div>\n		<div id=\"checkIn\" class=\"check-in button secondary\">Check In</div>\n	</div> ";
     buffer += "\n</div> ";
-    buffer += "\n\n<div id=\"footer\">\n	<ul> \n		<li class=\"active\">Home</li>\n		<li id=\"bookList\">Books</li>\n		<li id=\"studentList\">Students</li>\n		<li>Settings</li>\n	</ul>\n</div>";
     return buffer;});
 });
 window.require.register("views/templates/login", function(exports, require, module) {
@@ -1374,10 +1420,12 @@ window.require.register("views/templates/signup", function(exports, require, mod
 window.require.register("views/templates/studentList", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    var buffer = "", foundHelper, self=this;
 
 
-    return "<div id=\"header\">\n	<h1>Student List</h1>\n</div>\ntest\n<div id=\"footer\">\n	<ul> \n		<li id=\"home\" class=\"active\">Home</li>\n		<li id=\"bookList\">Books</li>\n		<li id=\"studentList\">Students</li>\n		<li>Settings</li>\n	</ul>\n</div>";});
+    buffer += "<div id=\"header\">\n	<div class=\"back\">Home</div>\n	<h1>Student List</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n\n\n  	</ul>\n\n  </div> ";
+    buffer += "\n</div> ";
+    return buffer;});
 });
 window.require.register("views/view", function(exports, require, module) {
   require('lib/view_helper');
