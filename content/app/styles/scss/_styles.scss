@@ -229,7 +229,8 @@ SIGN UP & LOGIN
 ********************************/
 #signup-view,
 #login-view,
-#settings-view {
+#settings-view,
+#addstudent-view {
   h2 {
     text-align: center;
     color: $dark-grey;
@@ -257,6 +258,7 @@ SIGN UP & LOGIN
 #login,
 #login-have-account,
 #logout,
+#add-student,
 #help {
   width: 200px;
   padding: 10px 0 12px;
@@ -266,7 +268,8 @@ SIGN UP & LOGIN
 
 #create-account,
 #login,
-#logout {
+#logout,
+#add-student, {
   margin-top: 20px;
   margin-bottom: 10px;
 }

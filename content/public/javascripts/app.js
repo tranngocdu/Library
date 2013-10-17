@@ -1335,7 +1335,7 @@ window.require.register("views/templates/addStudent", function(exports, require,
     var buffer = "", foundHelper, self=this;
 
 
-    buffer += "<div id=\"header\">\n  <h1>Add Student</h1>\n    <div class=\"back\">Cancel</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"add-first\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"First Name\" />\n    <input id=\"add-last\" type=\"text\" autocorrect=\"off\" placeholder=\"Last Name\" />\n\n    <div id=\"logout\" class=\"button primary-fill\">Add Student</div>\n\n  </div> ";
+    buffer += "<div id=\"header\">\n  <h1>Add Student</h1>\n    <div class=\"back\">Cancel</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"add-first\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"First Name\" />\n    <input id=\"add-last\" type=\"text\" autocorrect=\"off\" placeholder=\"Last Name\" />\n\n    <div id=\"add-student\" class=\"button primary-fill\">Add Student</div>\n\n  </div> ";
     buffer += "\n</div> ";
     buffer += "\n";
     return buffer;});
