@@ -1,33 +1,18 @@
-  <div id="multiple">
+<div id="header">
+  <h1>Settings</h1>
+    <div class="done">Done</div>
+</div>
 
-      <div>
-          <input type="radio" name="option" id="choice1" value="Pizza">
-          <span>Pizza</span>
-      </div>
+<div id="wrapper" class="bottomless">
+  <div id="scroller" class="container">
 
-      <div>
-          <input type="radio" name="option" id="choice2" value="Wings">
-          <span>Wings</span>
-      </div>
+    <input id="set-name" class="first-input" type="text" autocorrect="off" placeholder="Name" />
+    <input id="set-email" type="email" autocomplete="off" placeholder="Email" />
+    <input id="set-current" type="password" placeholder="Current Password" />
+    <input id="set-new" type="password" placeholder="New Password" />
 
-      <div>
-          <input type="radio" name="option" id="choice3" value="Waffles">
-          <span>Waffles</span>
-      </div>
+    <div id="logout" class="button secondary-fill">Log Out</div>
+    <div id="help" class="button primary">Help Me</div>
 
-      <div>
-          <input type="radio" name="option" id="choice-own" value="Other">
-          <span>Other</span>
-      </div>
-
-      <div id="other-field" class="hide">
-        <input name="name" id="myInput" type="text" placeholder="I want to eat ..." />
-      </div>
-
-      <div>
-        <input type="submit" class="submit" id="submit" value="Feed Me" />
-      </div>
-
-  </div>
-
-  <textarea cols="40" rows="2" id="log" placeholder="Food Log"></textarea>
+  </div> {{!-- /#scroller --}}
+</div> {{!-- /#wrapper --}}

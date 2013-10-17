@@ -531,7 +531,10 @@ window.require.register("views/booklist-view", function(exports, require, module
   		'click #bookList':'bookList',
   		'click #studentList':'studentList',
   		'click #home':'home',
-  		"dataLoaded":"append"
+  		"dataLoaded":"append",
+  		'click #filt-all':'allSelected',
+  		'click #filt-available':'available',
+  		'click #filt-checked':'checkedOut'
   	},
 
   	initialize: function() {
@@ -565,16 +568,6 @@ window.require.register("views/booklist-view", function(exports, require, module
   			}
   		});
 
-  		/*this.bookDetail.fetch({
-  		processData:true,
-  		xhrFields: {withCredentials: true},
-  		add:true,
-  		data: {"teacherId":Application.bookDetailView.teacherId},
-  		success: function(data){
-  		Application.bookListView.$el.trigger("dataLoaded");
-  		}
-  		}); */
-
   		return this;
   	},
 
@@ -582,21 +575,25 @@ window.require.register("views/booklist-view", function(exports, require, module
   		this.bookList.libraryJSON = this.bookList.handle();
   		this.$el.html(this.template(this.bookList.libraryJSON));
   	},
-
-  	bookList: function () {
-  		Application.router.navigate("#bookList", {trigger:true});
+  	
+  	allSelected: function() {
+  		$('#filt-all').addClass("selected");
+  		$('#filt-available').removeClass("selected");
+  		$('#filt-checked').removeClass("selected");
   	},
-
-  	studentList: function () {
-  		Application.router.navigate("#studentList", {trigger:true});
+  	
+  	available: function() {
+  		$('#filt-all').removeClass("selected");
+  		$('#filt-available').addClass("selected");
+  		$('#filt-checked').removeClass("selected");
   	},
-
-  	home: function () {
-  		Application.router.navigate('', {trigger:true});
-  	},
-
-
-
+  	
+  	checkedOut: function() {
+  		$('#filt-all').removeClass("selected");
+  		$('#filt-available').removeClass("selected");
+  		$('#filt-checked').addClass("selected");
+  		
+  	}
 
   });
 
@@ -1347,7 +1344,7 @@ window.require.register("views/templates/bookList", function(exports, require, m
     var buffer = "", foundHelper, self=this;
 
 
-    buffer += "<div id=\"header\" class=\"extended-header\">\n  <div class=\"back\">Home</div>\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\">\n  	<ul id=\"booklist\">\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2 class=\"truncate-two\">Surprise Attack of Jabba the Puppet: An Origami Yoda Book Longer Title</h2>\n  				<h3 class=\"truncate\">Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p class=\"out\">Checked Out</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n  	</ul>\n\n  </div> ";
+    buffer += "<div id=\"header\" class=\"extended-header\">\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\">\n  	<ul id=\"booklist\">\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2 class=\"truncate-two\">Surprise Attack of Jabba the Puppet: An Origami Yoda Book Longer Title</h2>\n  				<h3 class=\"truncate\">Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p class=\"out\">Checked Out</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n  	</ul>\n\n  </div> ";
     buffer += "\n</div> ";
     buffer += "\n\n";
     return buffer;});
@@ -1400,10 +1397,13 @@ window.require.register("views/templates/login", function(exports, require, modu
 window.require.register("views/templates/settings", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    var buffer = "", foundHelper, self=this;
 
 
-    return "  <div id=\"multiple\">\n\n      <div>\n          <input type=\"radio\" name=\"option\" id=\"choice1\" value=\"Pizza\">\n          <span>Pizza</span>\n      </div>\n\n      <div>\n          <input type=\"radio\" name=\"option\" id=\"choice2\" value=\"Wings\">\n          <span>Wings</span>\n      </div>\n\n      <div>\n          <input type=\"radio\" name=\"option\" id=\"choice3\" value=\"Waffles\">\n          <span>Waffles</span>\n      </div>\n\n      <div>\n          <input type=\"radio\" name=\"option\" id=\"choice-own\" value=\"Other\">\n          <span>Other</span>\n      </div>\n\n      <div id=\"other-field\" class=\"hide\">\n        <input name=\"name\" id=\"myInput\" type=\"text\" placeholder=\"I want to eat ...\" />\n      </div>\n\n      <div>\n        <input type=\"submit\" class=\"submit\" id=\"submit\" value=\"Feed Me\" />\n      </div>\n\n  </div>\n\n  <textarea cols=\"40\" rows=\"2\" id=\"log\" placeholder=\"Food Log\"></textarea>";});
+    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n    <div class=\"done\">Done</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n\n    <div id=\"create-account\" class=\"button secondary-fill\">Log Out</div>\n    <div id=\"have-account\" class=\"button primary\">Help Me</div>\n\n    <div id=\"disclaimer\">\n      By creating an account you agree to our <a href=\"#\">Terms of Service</a> and <a href=\"#\">Privacy Policy</a>.\n    </div>\n\n  </div> ";
+    buffer += "\n</div> ";
+    buffer += "\n";
+    return buffer;});
 });
 window.require.register("views/templates/signup", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1423,7 +1423,7 @@ window.require.register("views/templates/studentList", function(exports, require
     var buffer = "", foundHelper, self=this;
 
 
-    buffer += "<div id=\"header\">\n	<div class=\"back\">Home</div>\n	<h1>Student List</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n\n\n  	</ul>\n\n  </div> ";
+    buffer += "<div id=\"header\">\n	<div class=\"back\">Home</div>\n	<h1>Student List</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  	</ul>\n\n  </div> ";
     buffer += "\n</div> ";
     return buffer;});
 });

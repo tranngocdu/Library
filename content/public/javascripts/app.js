@@ -1397,10 +1397,13 @@ window.require.register("views/templates/login", function(exports, require, modu
 window.require.register("views/templates/settings", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    var buffer = "", foundHelper, self=this;
 
 
-    return "  <div id=\"multiple\">\n\n      <div>\n          <input type=\"radio\" name=\"option\" id=\"choice1\" value=\"Pizza\">\n          <span>Pizza</span>\n      </div>\n\n      <div>\n          <input type=\"radio\" name=\"option\" id=\"choice2\" value=\"Wings\">\n          <span>Wings</span>\n      </div>\n\n      <div>\n          <input type=\"radio\" name=\"option\" id=\"choice3\" value=\"Waffles\">\n          <span>Waffles</span>\n      </div>\n\n      <div>\n          <input type=\"radio\" name=\"option\" id=\"choice-own\" value=\"Other\">\n          <span>Other</span>\n      </div>\n\n      <div id=\"other-field\" class=\"hide\">\n        <input name=\"name\" id=\"myInput\" type=\"text\" placeholder=\"I want to eat ...\" />\n      </div>\n\n      <div>\n        <input type=\"submit\" class=\"submit\" id=\"submit\" value=\"Feed Me\" />\n      </div>\n\n  </div>\n\n  <textarea cols=\"40\" rows=\"2\" id=\"log\" placeholder=\"Food Log\"></textarea>";});
+    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n    <div class=\"done\">Done</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n\n  </div> ";
+    buffer += "\n</div> ";
+    buffer += "\n";
+    return buffer;});
 });
 window.require.register("views/templates/signup", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {

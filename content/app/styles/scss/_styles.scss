@@ -161,13 +161,22 @@ LAYOUT
   }
 }
 
-.back {
+.back, 
+.done{
   color: $red;
   position: absolute;
   top: 36px;
-  left: 10px;
   font-size: 17px;
 }
+
+.back {
+  left: 10px;
+}
+
+.done {
+  right: 10px;
+}
+
 
 /********************************
 TYPOGRAPHY
@@ -219,7 +228,8 @@ BUTTONS
 SIGN UP & LOGIN
 ********************************/
 #signup-view,
-#login-view {
+#login-view,
+#settings-view {
   h2 {
     text-align: center;
     color: $dark-grey;
@@ -245,7 +255,9 @@ SIGN UP & LOGIN
 #create-account,
 #have-account,
 #login,
-#login-have-account {
+#login-have-account,
+#logout,
+#help {
   width: 200px;
   padding: 10px 0 12px;
   margin: 0 auto;
@@ -253,7 +265,8 @@ SIGN UP & LOGIN
 }
 
 #create-account,
-#login {
+#login,
+#logout {
   margin-top: 20px;
   margin-bottom: 10px;
 }
@@ -363,16 +376,14 @@ BOOK LIST
     color: $red;
   }
   #filt-available {
-    border: 1px solid $red;
     width: 30%;
     border-top: 1px solid $red;
     border-bottom: 1px solid $red;
-
   }
   #filt-checked {
-  border: 1px solid $red;
+    border: 1px solid $red;
     width: 40%;
-	-webkit-border-top-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;

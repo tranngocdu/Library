@@ -373,27 +373,35 @@ LAYOUT
       color: #929292;
       font-size: 14px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003164}}
-.back {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003165}}
+.back,
+.done {
   color: #fa1f4f;
   position: absolute;
   top: 36px;
-  left: 10px;
   font-size: 17px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003172}}
+.back {
+  left: 10px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003176}}
+.done {
+  right: 10px; }
 
 /********************************
 TYPOGRAPHY
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003175}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003184}}
 h1 {
   color: black;
   font-size: 18px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003180}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003189}}
 .active {
   color: #fa1f4f !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003184}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003193}}
 a {
   color: #0a5fff;
   text-decoration: none; }
@@ -401,28 +409,28 @@ a {
 /********************************
 BUTTONS
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003192}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003201}}
 .button {
   -webkit-border-radius: 5px;
   border-radius: 5px;
   text-align: center; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003198}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003207}}
 .primary-fill {
   background-color: #0a5fff;
   color: white; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003203}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003212}}
 .secondary-fill {
   background-color: #fa1f4f;
   color: white; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003208}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003217}}
 .primary {
   color: #0a5fff;
   border: 1px solid #0a5fff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003213}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003222}}
 .secondary {
   color: #fa1f4f;
   border: 1px solid #fa1f4f; }
@@ -430,44 +438,49 @@ BUTTONS
 /********************************
 SIGN UP & LOGIN
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003223}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003233}}
 #signup-view h2,
-#login-view h2 {
+#login-view h2,
+#settings-view h2 {
   text-align: center;
   color: #595959;
   margin-bottom: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003228}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003238}}
 #signup-view input,
-#login-view input {
+#login-view input,
+#settings-view input {
   height: 42px;
   width: 100%;
   font-size: 16px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003236}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003246}}
 #login-view h2 {
   margin-top: 20px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003241}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003251}}
 .first-input {
   border-top: 1px solid #CACACA; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003248}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003260}}
 #create-account,
 #have-account,
 #login,
-#login-have-account {
+#login-have-account,
+#logout,
+#help {
   width: 200px;
   padding: 10px 0 12px;
   margin: 0 auto;
   font-size: 16px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003256}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003269}}
 #create-account,
-#login {
+#login,
+#logout {
   margin-top: 20px;
   margin-bottom: 10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003261}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003274}}
 #disclaimer {
   color: gray;
   font-size: 12px;
@@ -479,7 +492,7 @@ SIGN UP & LOGIN
   bottom: 5%;
   line-height: 1.6; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003273}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003286}}
 #forgot {
   margin-top: 20px;
   text-align: center;
@@ -489,58 +502,58 @@ SIGN UP & LOGIN
 /********************************
 HOME
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003284}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003297}}
 .home {
   padding-top: 100px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003287}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003300}}
 .check-out, .check-in {
   width: 240px;
   padding: 16px 0;
   margin: 0 auto;
   font-size: 18px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003294}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003307}}
 .check-out {
   margin-bottom: 25px; }
 
 /********************************
 ADD BOOK
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003301}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003314}}
 .add-book {
   width: 90%;
   margin: 0 auto;
   text-align: center;
   padding: 10px 0 !important; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003306}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003319}}
   .add-book img {
     height: 190px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003309}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003322}}
   .add-book h2 {
     font-size: 16px;
     font-weight: 500;
     padding-top: 7px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003315}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003328}}
   .add-book h3 {
     font-size: 14px;
     font-weight: 300;
     color: gray;
     padding-top: 7px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003322}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003335}}
   .add-book h4 {
     font-weight: 300;
     color: gray;
     font-size: 13px;
     padding-top: 7px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003329}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003342}}
   .add-book p {
     font-size: 13px;
     font-weight: 500;
     color: #0a5fff;
     padding: 7px 0 15px 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003336}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003349}}
 .ab-btn {
   width: 140px;
   padding: 8px 0 10px 0;
@@ -550,35 +563,34 @@ ADD BOOK
 /********************************
 BOOK LIST
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003346}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003359}}
 .booklist-wrap {
   top: 90px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003349}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003362}}
 #filter-wrap {
   border-top: 1px solid #cccccc;
   margin-top: 10px;
   padding-top: 9px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003354}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003367}}
 .filter {
   overflow: hidden;
   width: 95%;
   margin: 0 auto;
   font-size: 14px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003359}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003372}}
   .filter span {
     float: left;
     padding: 5px 0 8px 0;
     text-align: center;
     color: #fa1f4f; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003365}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003378}}
   .filter #filt-available {
-    border: 1px solid #fa1f4f;
     width: 30%;
     border-top: 1px solid #fa1f4f;
     border-bottom: 1px solid #fa1f4f; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003372}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003383}}
   .filter #filt-checked {
     border: 1px solid #fa1f4f;
     width: 40%;
@@ -586,7 +598,7 @@ BOOK LIST
     -webkit-border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003381}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003392}}
   .filter #filt-all {
     border: 1px solid #fa1f4f;
     width: 30%;
@@ -594,75 +606,75 @@ BOOK LIST
     -webkit-border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003390}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003401}}
   .filter .selected {
     background-color: #fa1f4f;
     color: white; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003396}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003407}}
 #booklist {
   width: 92%;
   margin: 0 auto;
   padding-left: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003400}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003411}}
   #booklist li {
     border-bottom: 1px solid #cccccc;
     padding: 5px 0;
     overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003404}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003415}}
     #booklist li img {
       width: 50px;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003408}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003419}}
     #booklist li .book-meta {
       float: left;
       height: 75px;
       margin-left: 20px;
       width: 75%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003413}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003424}}
       #booklist li .book-meta h2 {
         font-size: 14px;
         font-weight: 500; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003417}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003428}}
       #booklist li .book-meta h3 {
         font-size: 12px;
         font-weight: 300;
         color: gray;
         padding-top: 4px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003423}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003434}}
       #booklist li .book-meta p {
         font-size: 12px;
         font-weight: 500;
         color: #0a5fff;
         padding-top: 4px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003429}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003440}}
       #booklist li .book-meta .out {
         color: #fa1f4f; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003436}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003447}}
 .students {
   padding: 0 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003439}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003450}}
 #studentlist {
   padding-left: 0;
   margin: 0 auto;
   width: 92%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003443}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003454}}
   #studentlist li {
     border-bottom: 1px solid #cccccc;
     padding: 12px 0 14px 0;
     overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003447}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003458}}
     #studentlist li .first-name {
       font-weight: 500;
       margin-right: 5px;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003452}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003463}}
     #studentlist li .last-name {
       width: 70%;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003456}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003467}}
     #studentlist li .delete-name {
       color: #fa1f4f;
       text-align: right;
