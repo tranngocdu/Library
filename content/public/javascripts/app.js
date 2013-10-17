@@ -108,6 +108,7 @@ window.require.register("application", function(exports, require, module) {
 
   		var Home = require('views/home-view');
   		var AddBook = require('views/addbook-view');
+  		var AddStudent = require('views/addstudent-view');
   		var BookDetail = require('views/bookdetail-view');
   		var BookList = require('views/booklist-view');
   		var CheckIn = require('views/checkin-view');
@@ -123,6 +124,7 @@ window.require.register("application", function(exports, require, module) {
 
   		this.homeView = new Home();
   		this.addBookView = new AddBook();
+  		this.addStudentView = new AddStudent();
   		this.bookDetailView = new BookDetail();
   		this.bookListView = new BookList();
   		this.checkInView = new CheckIn();
@@ -218,6 +220,7 @@ window.require.register("lib/router", function(exports, require, module) {
   		'':'preLogin',
   		'home':'home',
   		'addBook':'addBook',
+  		'addStudent':'addStudent',
   		'bookDetail':'bookDetail',
   		'bookList':'bookList',
   		'checkIn':'checkIn',
@@ -274,6 +277,10 @@ window.require.register("lib/router", function(exports, require, module) {
 
   		addBook:function() {
   			this.changePage(Application.addBookView);
+  		},
+
+  		addStudent:function() {
+  			this.changePage(Application.addStudentView);
   		},
 
   		bookDetail:function() {
@@ -471,6 +478,56 @@ window.require.register("views/addbook-view", function(exports, require, module)
 
   });
   
+});
+window.require.register("views/addstudent-view", function(exports, require, module) {
+  var View = require('./view');
+  var template = require('./templates/addStudent');
+
+  module.exports = View.extend({
+  	id: 'addstudent-view',
+  	template: template,
+  	events: {
+  		'click #done': 'done',
+  		'click #logout': 'logout',
+  		'click #addBook': 'addBook',
+  		'click #changeQuantity': 'changeQuantity'
+  	},
+
+  	initialize: function () {
+
+  	},
+
+  	render: function () {
+  		this.$el.html(this.template());
+  		return this;
+  	},
+
+  	done: function () {
+  		Application.router.navigate("#home", {
+  			trigger: true
+  		});
+  	},
+
+  	logout: function () {
+  		window.localStorage.removeItem("userId");
+  		Application.router.navigate("#login", {
+  			trigger: true
+  		});
+  	},
+
+  	addBook: function() {
+  		Application.router.navigate("#addBook", {
+  			trigger: true
+  		});
+  	},
+  	
+  	changeQuantity: function() {
+  		Application.router.navigate("#addBook", {
+  			trigger: true
+  		});
+  	}
+
+  });
 });
 window.require.register("views/bookdetail-view", function(exports, require, module) {
   var View = require('./view');
@@ -1272,6 +1329,17 @@ window.require.register("views/templates/addBook", function(exports, require, mo
     buffer += "\n\n";
     return buffer;});
 });
+window.require.register("views/templates/addStudent", function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var buffer = "", foundHelper, self=this;
+
+
+    buffer += "<div id=\"header\">\n  <h1>Add Student</h1>\n    <div class=\"back\">Cancel</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"add-first\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"First Name\" />\n    <input id=\"add-last\" type=\"text\" autocorrect=\"off\" placeholder=\"Last Name\" />\n\n    <div id=\"logout\" class=\"button primary-fill\">Add Student</div>\n\n  </div> ";
+    buffer += "\n</div> ";
+    buffer += "\n";
+    return buffer;});
+});
 window.require.register("views/templates/bookDetail", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
@@ -1400,7 +1468,7 @@ window.require.register("views/templates/settings", function(exports, require, m
     var buffer = "", foundHelper, self=this;
 
 
-    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n    <div class=\"done\">Done</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n\n  </div> ";
+    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n    <div class=\"right-btn\">Done</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n\n  </div> ";
     buffer += "\n</div> ";
     buffer += "\n";
     return buffer;});
@@ -1423,7 +1491,7 @@ window.require.register("views/templates/studentList", function(exports, require
     var buffer = "", foundHelper, self=this;
 
 
-    buffer += "<div id=\"header\">\n	<h1>Student List</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  	</ul>\n\n  </div> ";
+    buffer += "<div id=\"header\">\n	<h1>Student List</h1>\n	<div class=\"right-btn\">Add</div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  	</ul>\n\n  </div> ";
     buffer += "\n</div> ";
     return buffer;});
 });

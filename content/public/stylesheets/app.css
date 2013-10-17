@@ -375,7 +375,7 @@ LAYOUT
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003165}}
 .back,
-.done {
+.right-btn {
   color: #fa1f4f;
   position: absolute;
   top: 36px;
@@ -386,7 +386,7 @@ LAYOUT
   left: 10px; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003176}}
-.done {
+.right-btn {
   right: 10px; }
 
 /********************************

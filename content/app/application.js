@@ -26,6 +26,7 @@ Application = {
 
 		var Home = require('views/home-view');
 		var AddBook = require('views/addbook-view');
+		var AddStudent = require('views/addstudent-view');
 		var BookDetail = require('views/bookdetail-view');
 		var BookList = require('views/booklist-view');
 		var CheckIn = require('views/checkin-view');
@@ -41,6 +42,7 @@ Application = {
 
 		this.homeView = new Home();
 		this.addBookView = new AddBook();
+		this.addStudentView = new AddStudent();
 		this.bookDetailView = new BookDetail();
 		this.bookListView = new BookList();
 		this.checkInView = new CheckIn();

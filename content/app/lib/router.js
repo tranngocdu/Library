@@ -7,6 +7,7 @@ module.exports = Backbone.Router.extend({
 		'':'preLogin',
 		'home':'home',
 		'addBook':'addBook',
+		'addStudent':'addStudent',
 		'bookDetail':'bookDetail',
 		'bookList':'bookList',
 		'checkIn':'checkIn',
@@ -63,6 +64,10 @@ module.exports = Backbone.Router.extend({
 
 		addBook:function() {
 			this.changePage(Application.addBookView);
+		},
+
+		addStudent:function() {
+			this.changePage(Application.addStudentView);
 		},
 
 		bookDetail:function() {
