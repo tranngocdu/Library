@@ -12,8 +12,8 @@ module.exports = View.extend({
 		'checkOutInfo':'checkOutBook',
 		'click #scanner':'scanner',
 		"dataLoaded":"append",
-		'click #list':'list'
-
+		'click #bookList':'bookList',
+		'click #studentList':'studentList'
 
 	},
 
@@ -26,7 +26,7 @@ module.exports = View.extend({
 		return this;
 	},
 
-	scanner: function ()  {
+	checkOut: function ()  {
 		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
 		scanner.scan(
@@ -104,6 +104,7 @@ module.exports = View.extend({
 					}
 				});
 				Application.bookDetailView.bookInfo = data;
+
 				//Application.router.navigate("#checkIn", {
 					//	trigger: true
 					//});
@@ -117,8 +118,12 @@ module.exports = View.extend({
 
 		},
 
-		list: function () {
+		bookList: function () {
 			Application.router.navigate("#bookList", {trigger:true});
+		},
+
+		studentList: function () {
+			Application.router.navigate("#studentList", {trigger:true});
 		},
 
 		checkOutBook: function () {
@@ -132,7 +137,6 @@ module.exports = View.extend({
 				url: "http://openlibrary.org/api/books",
 				type: "GET",
 				success: function (data) {
-					alert("Success");
 					var dataString = JSON.stringify(data);
 					//dataString.replace(/d{13}/g, '');
 					var combinedString = dataString.substring(0,6) + dataString.substring(20);
@@ -152,21 +156,6 @@ module.exports = View.extend({
 		},
 
 
-		checkOut: function () {
-			var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-
-			scanner.scan(
-				function (result) {
-					Application.loginView.ISBN = result.text;
-					Application.loginView.$el.trigger("checkOutInfo");
-
-				}, 
-				function (error) {
-					alert("Scanning failed: " + error);
-				}
-			);
-
-		},
 
 		library: function() {
 			Application.router.navigate("#library", {

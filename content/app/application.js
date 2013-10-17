@@ -34,6 +34,7 @@ Application = {
 		var Login = require('views/login-view');
 		var Settings = require('views/settings-view');
 		var Signup = require('views/signup-view');
+		var StudentList = require('views/studentlist-view');
 		
 		var Router = require('lib/router');
 
@@ -48,6 +49,7 @@ Application = {
 		this.loginView = new Login();
 		this.settingsView = new Settings();
 		this.signupView = new Signup();
+		this.studentListView = new StudentList();
 		
 		this.router = new Router();
 
