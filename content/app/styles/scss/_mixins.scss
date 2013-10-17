@@ -7,8 +7,8 @@ $light-grey:	lighten($black, 50%);
 $grey: 			#929292;
 
 $ui: 			#F8F8F8;
-$border:		#B2B2B2;
+$border:		lighten($black, 80%);
 
-$helvetica: 	"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+$helvetica: 	"Helvetica Neue", Helvetica, Arial, sans-serif; 
 
 $placehold: 	#BBB;

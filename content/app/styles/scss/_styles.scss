@@ -19,7 +19,6 @@ body {
   font-weight: 300;
 }
 
-
 /********************************
 RESETS
 ********************************/
@@ -52,6 +51,17 @@ input {
     border-bottom: 1px solid #CACACA;
 }
 
+h1, h2, h3, h4, h5, p {
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+ul li {
+  line-height: 0;
+  padding: 0;
+}
+
 /********************************
 HELPER STYLES
 ********************************/
@@ -69,6 +79,14 @@ HELPER STYLES
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.truncate-two {
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 /********************************
@@ -114,7 +132,12 @@ LAYOUT
   border-bottom: 1px solid $border;
   h1 {
     text-align: center;
+    padding-top: 32px;
   }
+}
+
+.extended-header {
+  height: 110px !important;
 }
 
 #footer {
@@ -138,7 +161,7 @@ LAYOUT
   }
 }
 
-.cancel {
+.back {
   color: $red;
   position: absolute;
   top: 34px;
@@ -152,12 +175,6 @@ TYPOGRAPHY
 h1 {
   color: $black;
   font-size: 18px;
-  padding: 20px 0 0 0;
-}
-
-h2 {
-  margin: 0;
-  padding: 0;
 }
 
 .active {
@@ -235,8 +252,6 @@ SIGN UP & LOGIN
   font-size: 16px;
 }
 
-
-
 #create-account,
 #login {
   margin-top: 20px;
@@ -280,3 +295,137 @@ HOME
   margin-bottom: 25px;
 }
 
+/********************************
+ADD BOOK
+********************************/
+.add-book {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px 0 !important;
+  img {
+    height: 190px;
+  }
+  h2 {
+    font-size: 16px;
+    font-weight: 500;
+    padding-top: 7px;
+  }
+
+  h3 {
+    font-size: 14px;
+    font-weight: 300;
+    color: $light-grey;
+    padding-top: 7px;
+  }
+
+  h4 {
+    font-weight: 300;
+    color: $light-grey;
+    font-size: 13px;
+    padding-top: 7px;
+  }
+
+  p {
+    font-size: 13px;
+    font-weight: 500;
+    color: $primary;
+    padding: 7px 0 15px 0;
+  }
+}
+.ab-btn {
+  width: 140px;
+  padding: 8px 0 10px 0;
+  margin: 0 auto 10px auto;
+  font-size: 16px;
+}
+
+/********************************
+BOOK LIST
+********************************/
+.booklist-wrap {
+  top: 90px !important;
+}
+#filter-wrap {
+  border-top: 1px solid $border;
+  margin-top: 10px;
+  padding-top: 9px;
+}
+.filter {
+  overflow: hidden;
+  width: 95%;
+  margin: 0 auto;
+  font-size: 14px;
+  span {
+    float: left;
+    padding: 5px 0 8px 0;
+    text-align: center;
+    color: $red;
+  }
+  #filt-available {
+    border: 1px solid $red;
+    width: 30%;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  #filt-checked {
+    width: 40%;
+    border-top: 1px solid $red;
+    border-bottom: 1px solid $red;
+  }
+  #filt-all {
+    border: 1px solid $red;
+    width: 30%;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .selected {
+    background-color: $red;
+    color: $white;
+  }
+}
+
+#booklist {
+  list-style-type: none;
+  width: 90%;
+  margin: 0 auto;
+  padding-left: 0;
+    li {
+      border-bottom: 1px solid $border;
+      padding: 5px 0;
+      overflow: hidden;
+      img {
+        width: 50px;
+        float: left;
+      }
+      .book-meta {
+        float: left;
+        height: 75px;
+        margin-left: 20px;
+        width: 75%;
+        h2 {
+          font-size: 14px;
+          font-weight: 500;
+        }
+        h3 {
+          font-size: 12px;
+          font-weight: 300;
+          color: $light-grey;
+          padding-top: 4px;
+        }
+        p {
+          font-size: 12px;
+          font-weight: 500;
+          color: $primary;
+          padding-top: 4px;
+        }
+        .out {
+          color: $red;
+        }
+      }
+    }
+}

@@ -169,8 +169,8 @@ window.require.register("lib/router", function(exports, require, module) {
 
   	routes: {
   		// If you want to save login state, send them to a prelogin function which checks for login state
-  		'':'login',
-  		'home':'login',
+  		'':'bookList',
+  		'home':'home',
   		'addBook':'addBook',
   		'bookDetail':'bookDetail',
   		'bookList':'bookList',
@@ -185,7 +185,8 @@ window.require.register("lib/router", function(exports, require, module) {
 
   	initialize:function () {
   		// Handle back button throughout the application or menu buttons
-  		$('#back-button').on('vclick', function(e) {
+  		$('#cancel').on('vclick', function(e) {
+  			alert("v");
   			e.preventDefault();
   			$.mobile.activePage.back = true;
   			window.history.back();
@@ -883,14 +884,12 @@ window.require.register("views/login-view", function(exports, require, module) {
   var template = require('./templates/login');
 
 
-
-
   module.exports = View.extend({
   	id: 'login-view',
   	template: template,
   	events: {
-  		'click #signup':'signUp',
-  		'click #signin':'signIn'
+  		'click #login':'signIn',
+  		'click #login-have-account':'signUp'
   	},
 
   	initialize: function() {
@@ -899,25 +898,12 @@ window.require.register("views/login-view", function(exports, require, module) {
 
   	render: function () {
   		this.$el.html(this.template());
-  		Parse.User.logIn("testuser", "password", {
-  			success: function(user) {
-  				window.localStorage.setItem("username", "testuser");
-  				Application.router.navigate("#home", {
-  					trigger: true 
-  				});
-  				// Do stuff after successful login.
-  			},
-  			error: function(user, error) {
-  				// The login failed. Check error to see why.
-  			}
-  		});
-
   		return this;
 
   	},
 
   	signUp: function () {
-  		Application.router.navigate("#signUp", {
+  		Application.router.navigate("#signup", {
   			trigger: true
   		});
 
@@ -925,38 +911,22 @@ window.require.register("views/login-view", function(exports, require, module) {
 
   	signIn: function () {
   		//do some signin magic
-  		var username = $('#username').val();
-  		var password =  $('#password').val();
+  		var username = $('#login-email').val();
+  		var password =  $('#login-pass').val();
+
 
   		if( username && password)
   		{
-  			$.ajax({
-  				data: {
-  					"username":username,
-  					"password":password,
-  				},
-  				url: Application.serverURL+"register",
-  				type: "POST",
-  				xhrFields: {
-  					withCredentials: true
-  				},
-  				success: function (data) {
-  					window.localStorage.setItem("userId", userId);
-  					Application.router.navigate("#home", {
-  						trigger: true
-  					});
-
-  				},
-  				error: function (jqXHR, textStatus, errorThrown) {
-  					{
-  						navigator.notification.alert(
-  							'Please try again.',  // message
-  							function alertDismissed() {}, // callback
-  							'Error',            // title
-  							'OK'                  // buttonName
-  						);
+  			Parse.User.logIn(username,password, {
+  					success: function(user) {
+  						window.localStorage.setItem("username",username);
+  						Application.router.navigate("#home", {
+  								trigger: true
+  						});
+  					},
+  					error: function(user, error) {
+  							alert("Login Failed");
   					}
-  				}
   			});
   		}
   		else{
@@ -1046,7 +1016,8 @@ window.require.register("views/signup-view", function(exports, require, module) 
   	template: template,
   	events: {
   		"dataLoaded":"append",
-  		'click #signup':'signUp',
+  		'click #create-account':'signUp',
+  		'click #have-account':'haveAccount'
   	},
 
   	initialize: function() {
@@ -1055,18 +1026,17 @@ window.require.register("views/signup-view", function(exports, require, module) 
 
   	render: function () {
   		this.$el.html(this.template());
-  		
-
-
   		return this;
   	},
 
   	signUp: function () {
   				var user = new Parse.User();
-  			user.set("username", "testuser");
-  			user.set("password", "password");
+  				var username = $('#sign-email').val();
+  				var password =  $('#sign-pass').val();
+  					user.set("username", username);
+  					user.set("password", password);
 
-  		user.signUp(null, {
+  			user.signUp(null, {
     success: function(user) {
     	alert("Success!");
     	Application.router.navigate("#signUp", {
@@ -1081,6 +1051,12 @@ window.require.register("views/signup-view", function(exports, require, module) 
   });
   		
 
+  	},
+
+  	haveAccount: function() {
+  		Application.router.navigate("#login", {
+  			trigger:true
+  		});
   	},
 
   	signIn: function () {
@@ -1140,6 +1116,9 @@ window.require.register("views/templates/addBook", function(exports, require, mo
     var buffer = "", foundHelper, self=this;
 
 
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/140x190\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> ";
+    buffer += "\n</div> ";
+    buffer += "\n\n<div id=\"footer\">\n  <ul> \n    <li class=\"active\">Home</li>\n    <li>Books</li>\n    <li>Students</li>\n    <li>Settings</li>\n  </ul>\n</div>\n";
     return buffer;});
 });
 window.require.register("views/templates/bookDetail", function(exports, require, module) {
@@ -1211,10 +1190,13 @@ window.require.register("views/templates/bookDetail", function(exports, require,
 window.require.register("views/templates/bookList", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    var buffer = "", foundHelper, self=this;
 
 
-    return "test";});
+    buffer += "<div id=\"header\" class=\"extended-header\">\n  <div class=\"back\">Home</div>\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\">\n  	<ul id=\"booklist\">\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p class=\"out\">Checked Out</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2 class=\"truncate-two\">Surprise Attack of Jabba the Puppet: An Origami Yoda Book Longer Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p class=\"out\">Checked Out</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n  	</ul>\n\n  </div> ";
+    buffer += "\n</div> ";
+    buffer += "\n\n<div id=\"footer\">\n  <ul> \n    <li class=\"active\">Home</li>\n    <li>Books</li>\n    <li>Students</li>\n    <li>Settings</li>\n  </ul>\n</div>\n";
+    return buffer;});
 });
 window.require.register("views/templates/checkIn", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1257,7 +1239,7 @@ window.require.register("views/templates/login", function(exports, require, modu
     var buffer = "", foundHelper, self=this;
 
 
-    buffer += "<div id=\"header\">\n  <div class=\"cancel\">Cancel</div>\n  <h1>Login</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <h2>First things first.</h2>\n    <input id=\"login-email\" class=\"first-input\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"login-pass\" type=\"password\" placeholder=\"Password\" />\n\n    <div id=\"login\" class=\"button primary-fill\">Sign In</div>\n    <div id=\"login-have-account\" class=\"button primary\">Create an Account</div>\n    <div id=\"forgot\">Forgot your password?</div>\n\n    <div id=\"disclaimer\">\n      By creating an account you agree to our <a href=\"#\">Terms of Service</a> and <a href=\"#\">Privacy Policy</a>.\n    </div>\n\n  </div> ";
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Cancel</div>\n  <h1>Login</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <h2>First things first.</h2>\n    <input id=\"login-email\" class=\"first-input\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"login-pass\" type=\"password\" placeholder=\"Password\" />\n\n    <div id=\"login\" class=\"button primary-fill\">Sign In</div>\n    <div id=\"login-have-account\" class=\"button primary\">Create an Account</div>\n    <div id=\"forgot\">Forgot your password?</div>\n\n    <div id=\"disclaimer\">\n      By creating an account you agree to our <a href=\"#\">Terms of Service</a> and <a href=\"#\">Privacy Policy</a>.\n    </div>\n\n  </div> ";
     buffer += "\n</div> ";
     buffer += "\n\n";
     return buffer;});
@@ -1276,7 +1258,8 @@ window.require.register("views/templates/signup", function(exports, require, mod
     var buffer = "", foundHelper, self=this;
 
 
-    buffer += "<div id=\"header\">\n  <div class=\"cancel\">Cancel</div>\n  <h1>Sign Up</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <h2>This'll be quick.</h2>\n    <input id=\"sign-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n    <input id=\"sign-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"sign-pass\" type=\"password\" placeholder=\"Password\" />\n    <input id=\"sign-pass-confirm\" type=\"password\" placeholder=\"Confirm Password\" />\n\n    <div id=\"create-account\" class=\"button primary-fill\">Create Account</div>\n    <div id=\"have-account\" class=\"button primary\">I have an Account</div>\n\n    <div id=\"disclaimer\">\n      By creating an account you agree to our <a href=\"#\">Terms of Service</a> and <a href=\"#\">Privacy Policy</a>.\n    </div>\n\n  </div> ";
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Cancel</div>\n  <h1>Sign Up</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <h2>This'll be quick.</h2>\n    ";
+    buffer += "\n    <input id=\"sign-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"sign-pass\" type=\"password\" placeholder=\"Password\" />\n    <input id=\"sign-pass-confirm\" type=\"password\" placeholder=\"Confirm Password\" />\n\n    <div id=\"create-account\" class=\"button primary-fill\">Create Account</div>\n    <div id=\"have-account\" class=\"button primary\">I have an Account</div>\n\n    <div id=\"disclaimer\">\n      By creating an account you agree to our <a href=\"#\">Terms of Service</a> and <a href=\"#\">Privacy Policy</a>.\n    </div>\n\n  </div> ";
     buffer += "\n</div> ";
     buffer += "\n\n";
     return buffer;});
