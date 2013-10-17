@@ -12,7 +12,10 @@ module.exports = View.extend({
 		'click #bookList':'bookList',
 		'click #studentList':'studentList',
 		'click #home':'home',
-		"dataLoaded":"append"
+		"dataLoaded":"append",
+		'click #filt-all':'allSelected',
+		'click #filt-available':'available',
+		'click #filt-checked':'checkedOut'
 	},
 
 	initialize: function() {
@@ -46,16 +49,6 @@ module.exports = View.extend({
 			}
 		});
 
-		/*this.bookDetail.fetch({
-		processData:true,
-		xhrFields: {withCredentials: true},
-		add:true,
-		data: {"teacherId":Application.bookDetailView.teacherId},
-		success: function(data){
-		Application.bookListView.$el.trigger("dataLoaded");
-		}
-		}); */
-
 		return this;
 	},
 
@@ -63,21 +56,25 @@ module.exports = View.extend({
 		this.bookList.libraryJSON = this.bookList.handle();
 		this.$el.html(this.template(this.bookList.libraryJSON));
 	},
-
-	bookList: function () {
-		Application.router.navigate("#bookList", {trigger:true});
+	
+	allSelected: function() {
+		$('#filt-all').addClass("selected");
+		$('#filt-available').removeClass("selected");
+		$('#filt-checked').removeClass("selected");
 	},
-
-	studentList: function () {
-		Application.router.navigate("#studentList", {trigger:true});
+	
+	available: function() {
+		$('#filt-all').removeClass("selected");
+		$('#filt-available').addClass("selected");
+		$('#filt-checked').removeClass("selected");
 	},
-
-	home: function () {
-		Application.router.navigate('', {trigger:true});
-	},
-
-
-
+	
+	checkedOut: function() {
+		$('#filt-all').removeClass("selected");
+		$('#filt-available').removeClass("selected");
+		$('#filt-checked').addClass("selected");
+		
+	}
 
 });
 

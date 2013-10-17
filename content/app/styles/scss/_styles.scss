@@ -365,23 +365,27 @@ BOOK LIST
   #filt-available {
     border: 1px solid $red;
     width: 30%;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-  }
-  #filt-checked {
-    width: 40%;
     border-top: 1px solid $red;
     border-bottom: 1px solid $red;
+
+  }
+  #filt-checked {
+  border: 1px solid $red;
+    width: 40%;
+	-webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+
   }
   #filt-all {
     border: 1px solid $red;
     width: 30%;
-    -webkit-border-top-right-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    
   }
   .selected {
     background-color: $red;
