@@ -56,6 +56,50 @@ Application = {
 
 		if (typeof Object.freeze === 'function') Object.freeze(this);
 		// Initializing BackStack.StackNavigator for the #container div
+		
+		var homeTab = function() {
+	    	if(window.tapReady){
+	           // window.tapReady = false;
+			      $('.tab').removeClass('active');
+			      $('#home_tab').addClass('active');
+
+			      Application.router.navigate("#home" , {trigger: true});
+			  }
+	      //activateTabs();
+	    }
+
+	    var bookListTab = function() {
+		if(window.tapReady){
+	           // window.tapReady = false;
+		      Application.router.navigate("#bookList" , {trigger: true});
+			  $('.tab').removeClass('active');
+		      $('#bookList_tab').addClass('active');
+
+		    }
+	    }
+	    var studentListTab = function() {
+	      if(window.tapReady){
+		      $('.tab').removeClass('active');
+		      $('#studentList_tab').addClass('active');
+		      Application.router.navigate("#studentList" , {trigger: true});
+
+		    }
+	    }
+	    var settingsTab =  function() {
+	      if(window.tapReady){
+		      $('.tab').removeClass('active');
+		      $('#settings_tab').addClass('active');
+		      Application.router.navigate("#settings" , {trigger: true});
+
+		    }
+	    }
+
+
+			$('#home_tab').bind('tap', homeTab);
+			$('#bookList_tab').bind('click', bookListTab); 
+			$('#studentList_tab').bind('tap', studentListTab); 
+			$('#settings_tab').bind('tap', settingsTab);
+		
 	},
 
 }

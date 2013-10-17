@@ -16,7 +16,7 @@ module.exports = Backbone.Router.extend({
 		'settings':'settings',
 		'signup':'signup',
 		'studentList':'studentList'
-		
+
 	},
 
 	initialize:function () {
@@ -39,81 +39,84 @@ module.exports = Backbone.Router.extend({
 
 		// First page logic
 		this.firstPage = true;
+		$('body').append('<div id="footer"" style="z-index:10000"><ul><li id="home_tab" class="active tab">Home</li><li id="bookList_tab" class="tab">Books</li><li id="studentList_tab" class="tab">Students</li><li id="settings_tab" class="tab">Settings</li></ul></div>');
 
-	},
+		},
 
-	preLogin:function() {
-		var currentUser = Parse.User.current();
-		var that = this;
+
+
+		preLogin:function() {
+			var currentUser = Parse.User.current();
+			var that = this;
 			if (currentUser) {
-						that.changePage(Application.homeView);						
+				that.changePage(Application.homeView);						
 			}
 			else {
-						that.changePage(Application.loginView);
+				that.changePage(Application.loginView);
 			}
-	},
+		},
 
-	//Functions for changing pages
-	home:function() {
-		this.changePage(Application.homeView);
-	},
+		//Functions for changing pages
+		home:function() {
+			this.changePage(Application.homeView);
+		},
 
-	addBook:function() {
-		this.changePage(Application.addBookView);
-	},
+		addBook:function() {
+			this.changePage(Application.addBookView);
+		},
 
-	bookDetail:function() {
-		this.changePage(Application.bookDetailView);
-	},
-	bookList:function() {
-		this.changePage(Application.bookListView);
-	},
-	checkIn:function() {
-		this.changePage(Application.checkInView);
-	},
-	checkOut:function() {
-		this.changePage(Application.checkOutView);
-	},
-	enterPassword:function() {
-		this.changePage(Application.enterPasswordView);
-	},
-	login:function() {
-		this.changePage(Application.loginView);
-	},
-	settings:function() {
-		this.changePage(Application.settingsView);
-	},
-	signup:function() {
-		this.changePage(Application.signupView);
-	},
-	studentList:function() {
-		this.changePage(Application.studentListView);
-	},
+		bookDetail:function() {
+			this.changePage(Application.bookDetailView);
+		},
+		bookList:function() {
+			this.changePage(Application.bookListView);
+		},
+		checkIn:function() {
+			this.changePage(Application.checkInView);
+		},
+		checkOut:function() {
+			this.changePage(Application.checkOutView);
+		},
+		enterPassword:function() {
+			this.changePage(Application.enterPasswordView);
+		},
+		login:function() {
+			this.changePage(Application.loginView);
+		},
+		settings:function() {
+			this.changePage(Application.settingsView);
+		},
+		signup:function() {
+			this.changePage(Application.signupView);
+		},
+		studentList:function() {
+			this.changePage(Application.studentListView);
+		},
 
-	//Functions for page transitions
-	changePage:function (page) {
-		window.tapReady = false;
-		$(page.el).attr('data-role', 'page');
-		page.render();
-		page.delegateEvents();
-		$('body').append($(page.el));
-		var transition = 'slide';
-		var bPage = $.mobile.activePage.back;
+		//Functions for page transitions
+		changePage:function (page) {
+			window.tapReady = false;
+			$(page.el).attr('data-role', 'page');
+			page.render();
+			page.delegateEvents();
+			$('body').append($(page.el));
+			var transition = 'slide';
+			var bPage = $.mobile.activePage.back;
 
-		if (page.afterAppend) {
-			page.afterAppend();
+			if (page.afterAppend) {
+				page.afterAppend();
+			}
+			// We don't want to slide the first page
+			if (this.firstPage) {
+				transition = 'fade';
+				this.firstPage = false;
+			}
+
+			$.mobile.changePage($(page.el), {changeHash:false, transition: bPage ? 'slide' : transition, reverse: bPage});
+
+			$(document).delegate(page.el, 'pageshow', function () {
+				window.tapReady = true;
+			});
 		}
-		// We don't want to slide the first page
-		if (this.firstPage) {
-			transition = 'fade';
-			this.firstPage = false;
-		}
 
-		$.mobile.changePage($(page.el), {changeHash:false, transition: bPage ? 'slide' : transition, reverse: bPage});
-
-		$(document).delegate(page.el, 'pageshow', function () {
-			window.tapReady = true;
-		});
-	}
-
-});
+	});
