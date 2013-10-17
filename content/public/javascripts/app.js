@@ -531,7 +531,10 @@ window.require.register("views/booklist-view", function(exports, require, module
   		'click #bookList':'bookList',
   		'click #studentList':'studentList',
   		'click #home':'home',
-  		"dataLoaded":"append"
+  		"dataLoaded":"append",
+  		'click #filt-all':'allSelected',
+  		'click #filt-available':'available',
+  		'click #filt-checked':'checkedOut'
   	},
 
   	initialize: function() {
@@ -565,16 +568,6 @@ window.require.register("views/booklist-view", function(exports, require, module
   			}
   		});
 
-  		/*this.bookDetail.fetch({
-  		processData:true,
-  		xhrFields: {withCredentials: true},
-  		add:true,
-  		data: {"teacherId":Application.bookDetailView.teacherId},
-  		success: function(data){
-  		Application.bookListView.$el.trigger("dataLoaded");
-  		}
-  		}); */
-
   		return this;
   	},
 
@@ -582,21 +575,25 @@ window.require.register("views/booklist-view", function(exports, require, module
   		this.bookList.libraryJSON = this.bookList.handle();
   		this.$el.html(this.template(this.bookList.libraryJSON));
   	},
-
-  	bookList: function () {
-  		Application.router.navigate("#bookList", {trigger:true});
+  	
+  	allSelected: function() {
+  		$('#filt-all').addClass("selected");
+  		$('#filt-available').removeClass("selected");
+  		$('#filt-checked').removeClass("selected");
   	},
-
-  	studentList: function () {
-  		Application.router.navigate("#studentList", {trigger:true});
+  	
+  	available: function() {
+  		$('#filt-all').removeClass("selected");
+  		$('#filt-available').addClass("selected");
+  		$('#filt-checked').removeClass("selected");
   	},
-
-  	home: function () {
-  		Application.router.navigate('', {trigger:true});
-  	},
-
-
-
+  	
+  	checkedOut: function() {
+  		$('#filt-all').removeClass("selected");
+  		$('#filt-available').removeClass("selected");
+  		$('#filt-checked').addClass("selected");
+  		
+  	}
 
   });
 
@@ -1347,7 +1344,7 @@ window.require.register("views/templates/bookList", function(exports, require, m
     var buffer = "", foundHelper, self=this;
 
 
-    buffer += "<div id=\"header\" class=\"extended-header\">\n  <div class=\"back\">Home</div>\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\">\n  	<ul id=\"booklist\">\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2 class=\"truncate-two\">Surprise Attack of Jabba the Puppet: An Origami Yoda Book Longer Title</h2>\n  				<h3 class=\"truncate\">Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p class=\"out\">Checked Out</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n  	</ul>\n\n  </div> ";
+    buffer += "<div id=\"header\" class=\"extended-header\">\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\">\n  	<ul id=\"booklist\">\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2 class=\"truncate-two\">Surprise Attack of Jabba the Puppet: An Origami Yoda Book Longer Title</h2>\n  				<h3 class=\"truncate\">Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p class=\"out\">Checked Out</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n  	</ul>\n\n  </div> ";
     buffer += "\n</div> ";
     buffer += "\n\n";
     return buffer;});
