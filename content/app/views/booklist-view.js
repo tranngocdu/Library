@@ -9,13 +9,11 @@ module.exports = View.extend({
 	id: 'booklist-view',
 	template: template,
 	events: {
-		'click #bookList':'bookList',
-		'click #studentList':'studentList',
-		'click #home':'home',
-		"dataLoaded":"append",
 		'click #filt-all':'allSelected',
 		'click #filt-available':'available',
-		'click #filt-checked':'checkedOut'
+		'click #filt-checked':'checkedOut',
+		'click #add':'addBook',
+		"getbookinfo":"getBookInfo"
 	},
 
 	initialize: function() {
@@ -38,47 +36,71 @@ module.exports = View.extend({
 				var bookArray = JSON.parse(bookArray);
 				that.bookArray = bookArray;				
 				that.$el.html(that.template(bookArray));
-				// userPosts contains all of the posts by the current user.
-				//var length = usersBooks.length;
-				//var i = 0;
-				//while (i<length){
-				//	console.log(usersBooks[i].attributes.title);
-				//	title = usersBooks[i].attributes.title;
-				//	image = usersBooks[i].attributes.cover_image;
-					
-				//	i++;
-				//}
 			},
 			error: function(error) {
-		    alert("Error: " + error.code + " " + error.message);
-		  }
+				alert("Error: " + error.code + " " + error.message);
+			}
 		});
 
 		return this;
 	},
 
-	append: function(){
-		this.bookList.libraryJSON = this.bookList.handle();
-		this.$el.html(this.template(this.bookList.libraryJSON));
-	},
-	
 	allSelected: function() {
 		$('#filt-all').addClass("selected");
 		$('#filt-available').removeClass("selected");
 		$('#filt-checked').removeClass("selected");
 	},
-	
+
 	available: function() {
 		$('#filt-all').removeClass("selected");
 		$('#filt-available').addClass("selected");
 		$('#filt-checked').removeClass("selected");
 	},
-	
+
 	checkedOut: function() {
 		$('#filt-all').removeClass("selected");
 		$('#filt-available').removeClass("selected");
 		$('#filt-checked').addClass("selected");
-		
+
+	},
+
+	addBook: function() {
+		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+		scanner.scan(
+			function (result) {
+				Application.bookListView.ISBN = result.text;
+				Application.bookListView.$el.trigger("getbookinfo");
+
+			}, 
+			function (error) {
+				alert("Scanning failed: " + error);
+			}
+		);
+	},
+
+	getBookInfo: function() {
+		$.ajax({
+			data: {
+				bibkeys: "ISBN:" + Application.bookListView.ISBN,
+				jscmd: "data",
+				format: "json"
+			},
+			url: "http://openlibrary.org/api/books",
+			type: "GET",
+			success: function (data) {
+				alert(Application.bookListView.ISBN);
+				Application.addBookView.bookData = data;
+				Application.router.navigate("#addBook", {
+					trigger: true
+				});
+
+			},
+			error: function (jqXHR,textStatus,errorThrown) {
+				alert("Error");
+			}
+
+		});
 	}
 
 });

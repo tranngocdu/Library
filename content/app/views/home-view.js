@@ -57,9 +57,6 @@ module.exports = View.extend({
 
 	},
 
-
-
-
 	bookinfo: function () {
 
 		$.ajax({

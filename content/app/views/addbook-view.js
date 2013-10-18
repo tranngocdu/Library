@@ -8,8 +8,7 @@ module.exports = View.extend({
 		"dataLoaded":"append",
 		'click #done':'addBook',
 		'click #quantity':'quantitySelector',
-		'click #scanner': 'scanner',
-
+		'click #add-book':'addBook'
 	},
 
 	initialize: function() {
@@ -17,75 +16,42 @@ module.exports = View.extend({
 	},
 
 	render: function() {
-		this.$el.html(this.template());
-		//this.username = window.localStorage.setItem("userId", userId);
+		var data = Application.addBookView.bookData;
+		var dataString = JSON.stringify(data);
+		var combinedString = dataString.substring(0,6) + dataString.substring(20);
+		var data=JSON.parse(combinedString);
+		this.bookData = data;
+		this.$el.html(this.template(data));
 		
-	
 		return this;
 	},
 	
-	scanner: function ()  {
-	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+	addBook: function() {
+		var username = window.localStorage.getItem("username")
+		var NewBook=Parse.Object.extend("NewBook");
+		var newBook=new NewBook();
 
-   scanner.scan(
-      function (result) {
-      	Application.loginView.ISBN = result.text;
-      	Application.loginView.$el.trigger("getbookinfo");
-
-      }, 
-      function (error) {
-          alert("Scanning failed: " + error);
-      }
-   );
- },
-
-	done: function() {
-		var ISBN = $('#ISBN').val();
-		var quantity = $('#studentName').val();
-		var username = this.username;
-
-		if( ISBN && studentName)
-		{
-			$.ajax({
-				data: {
-					"username":username,
-					"ISBN":ISBN,
-					"quantity":quantity,
+		newBook.set("title", this.bookData.ISBN.title);
+		newBook.set("userId", username);
+		var lengthAuthors = this.bookData.ISBN.authors.length;
+		var i = 0;
+		var authorArray = {};
+		//while (i < lengthAuthors) {
+			//	authorArray.push(data.ISBN.authors[i]);
+			//}
+			newBook.set("author", authorArray);
+			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
+			newBook.set("quantity_total", "2");
+			newBook.set("quantity_out", "0");
+			newBook.save(null, {
+				success: function(newBook) {
+					alert('It worked!');
 				},
-				url: Application.serverURL+"register",
-				type: "POST",
-				xhrFields: {
-					withCredentials: true
-				},
-				success: function (data) {
-					navigator.notification.alert(
-						'Book Added',  // message
-						function alertDismissed() {}, // callback
-						'Success',            // title
-						'OK'                  // buttonName
-					);
-					
-				},
-				error: function (jqXHR, textStatus, errorThrown) {
-					{
-						navigator.notification.alert(
-							'Unable to add book at this time.',  // message
-							function alertDismissed() {}, // callback
-							'Error',            // title
-							'OK'                  // buttonName
-						);
-					}
+				error: function(newBook, error) {
+					alert('Back to the drawing board');
+					console.log(error);
 				}
 			});
-		}
-		else{
-			navigator.notification.alert(
-				'Please scan book and select quantity',  // message
-				function alertDismissed() {}, // callback
-				'All Fields Required',            // title
-				'OK'                  // buttonName
-			);
-		}
 	}
 
 });

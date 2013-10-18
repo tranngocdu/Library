@@ -180,6 +180,8 @@ window.require.register("application", function(exports, require, module) {
 
 
   			$('#home_tab').bind('tap', homeTab);
+  			$('#backButton').bind('tap', homeTab);
+  			
   			$('#bookList_tab').bind('click', bookListTab); 
   			$('#studentList_tab').bind('tap', studentListTab); 
   			$('#settings_tab').bind('tap', settingsTab);
@@ -235,7 +237,8 @@ window.require.register("lib/router", function(exports, require, module) {
 
   	initialize:function () {
   		// Handle back button throughout the application or menu buttons
-  		$('.back').on('vclick', function(e) {
+  		
+  		$(document).on('vclick', '#backButton', function(e) {
   			e.preventDefault();
   			$.mobile.activePage.back = true;
   			window.history.back();
@@ -249,7 +252,6 @@ window.require.register("lib/router", function(exports, require, module) {
   		$('body').append('<div id="footer"" style="z-index:10000"><ul><li id="home_tab" class="active tab">Home</li><li id="bookList_tab" class="tab">Books</li><li id="studentList_tab" class="tab">Students</li><li id="settings_tab" class="tab">Settings</li></ul></div>');
 
   		},
-
 
 
   		preLogin:function() {
@@ -401,8 +403,7 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		"dataLoaded":"append",
   		'click #done':'addBook',
   		'click #quantity':'quantitySelector',
-  		'click #scanner': 'scanner',
-
+  		'click #add-book':'addBook'
   	},
 
   	initialize: function() {
@@ -410,75 +411,45 @@ window.require.register("views/addbook-view", function(exports, require, module)
   	},
 
   	render: function() {
-  		this.$el.html(this.template());
-  		//this.username = window.localStorage.setItem("userId", userId);
+  		var data = Application.addBookView.bookData;
+  		var dataString = JSON.stringify(data);
+  		var combinedString = dataString.substring(0,6) + dataString.substring(20);
+  		var data=JSON.parse(combinedString);
+  		this.bookData = data;
+  		this.$el.html(this.template(data));
   		
-  	
   		return this;
   	},
   	
-  	scanner: function ()  {
-  	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+  	addBook: function() {
+  		var username = window.localStorage.getItem("username")
+  		var NewBook=Parse.Object.extend("NewBook");
+  		var newBook=new NewBook();
 
-     scanner.scan(
-        function (result) {
-        	Application.loginView.ISBN = result.text;
-        	Application.loginView.$el.trigger("getbookinfo");
-
-        }, 
-        function (error) {
-            alert("Scanning failed: " + error);
-        }
-     );
-   },
-
-  	done: function() {
-  		var ISBN = $('#ISBN').val();
-  		var quantity = $('#studentName').val();
-  		var username = this.username;
-
-  		if( ISBN && studentName)
-  		{
-  			$.ajax({
-  				data: {
-  					"username":username,
-  					"ISBN":ISBN,
-  					"quantity":quantity,
+  		newBook.set("title", this.bookData.ISBN.title);
+  		newBook.set("userId", username);
+  		alert(username);
+  		alert(this.bookData.ISBN.title);
+  		alert(this.bookData.ISBN.cover.medium);
+  		var lengthAuthors = this.bookData.ISBN.authors.length;
+  		var i = 0;
+  		var authorArray = {};
+  		//while (i < lengthAuthors) {
+  			//	authorArray.push(data.ISBN.authors[i]);
+  			//}
+  			newBook.set("author", authorArray);
+  			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
+  			newBook.set("quantity_total", "2");
+  			newBook.set("quantity_out", "0");
+  			newBook.save(null, {
+  				success: function(newBook) {
+  					alert('It worked!');
   				},
-  				url: Application.serverURL+"register",
-  				type: "POST",
-  				xhrFields: {
-  					withCredentials: true
-  				},
-  				success: function (data) {
-  					navigator.notification.alert(
-  						'Book Added',  // message
-  						function alertDismissed() {}, // callback
-  						'Success',            // title
-  						'OK'                  // buttonName
-  					);
-  					
-  				},
-  				error: function (jqXHR, textStatus, errorThrown) {
-  					{
-  						navigator.notification.alert(
-  							'Unable to add book at this time.',  // message
-  							function alertDismissed() {}, // callback
-  							'Error',            // title
-  							'OK'                  // buttonName
-  						);
-  					}
+  				error: function(newBook, error) {
+  					alert('Back to the drawing board');
+  					console.log(error);
   				}
   			});
-  		}
-  		else{
-  			navigator.notification.alert(
-  				'Please scan book and select quantity',  // message
-  				function alertDismissed() {}, // callback
-  				'All Fields Required',            // title
-  				'OK'                  // buttonName
-  			);
-  		}
   	}
 
   });
@@ -578,7 +549,9 @@ window.require.register("views/booklist-view", function(exports, require, module
   		"dataLoaded":"append",
   		'click #filt-all':'allSelected',
   		'click #filt-available':'available',
-  		'click #filt-checked':'checkedOut'
+  		'click #filt-checked':'checkedOut',
+  		'click #add':'addBook',
+  		"getbookinfo":"getBookInfo"
   	},
 
   	initialize: function() {
@@ -587,9 +560,9 @@ window.require.register("views/booklist-view", function(exports, require, module
 
   	render: function() {
   		this.bookList = new Library();
+  		var that = this;
   		this.bookList.libraryJSON ={};
   		this.$el.html(this.template(this.bookList.libraryJSON));
-
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("NewBook");
@@ -597,20 +570,14 @@ window.require.register("views/booklist-view", function(exports, require, module
   		query.find({
   			success: function(usersBooks) {
   				console.log(usersBooks);
-  				// userPosts contains all of the posts by the current user.
-  				var length = usersBooks.length;
-  				var i = 0;
-  				while (i<length){
-  					console.log(usersBooks[i].attributes.title);
-  					title = usersBooks[i].attributes.title;
-  					image = usersBooks[i].attributes.cover_image;
-  					
-  					i++;
-  				}
+  				var bookArray = JSON.stringify(usersBooks);
+  				var bookArray = JSON.parse(bookArray);
+  				that.bookArray = bookArray;				
+  				that.$el.html(that.template(bookArray));
   			},
   			error: function(error) {
-  		    alert("Error: " + error.code + " " + error.message);
-  		  }
+  				alert("Error: " + error.code + " " + error.message);
+  			}
   		});
 
   		return this;
@@ -620,24 +587,63 @@ window.require.register("views/booklist-view", function(exports, require, module
   		this.bookList.libraryJSON = this.bookList.handle();
   		this.$el.html(this.template(this.bookList.libraryJSON));
   	},
-  	
+
   	allSelected: function() {
   		$('#filt-all').addClass("selected");
   		$('#filt-available').removeClass("selected");
   		$('#filt-checked').removeClass("selected");
   	},
-  	
+
   	available: function() {
   		$('#filt-all').removeClass("selected");
   		$('#filt-available').addClass("selected");
   		$('#filt-checked').removeClass("selected");
   	},
-  	
+
   	checkedOut: function() {
   		$('#filt-all').removeClass("selected");
   		$('#filt-available').removeClass("selected");
   		$('#filt-checked').addClass("selected");
-  		
+
+  	},
+
+  	addBook: function() {
+  		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+  		scanner.scan(
+  			function (result) {
+  				Application.bookListView.ISBN = result.text;
+  				Application.bookListView.$el.trigger("getbookinfo");
+
+  			}, 
+  			function (error) {
+  				alert("Scanning failed: " + error);
+  			}
+  		);
+  	},
+
+  	getBookInfo: function() {
+  		$.ajax({
+  			data: {
+  				bibkeys: "ISBN:" + Application.bookListView.ISBN,
+  				jscmd: "data",
+  				format: "json"
+  			},
+  			url: "http://openlibrary.org/api/books",
+  			type: "GET",
+  			success: function (data) {
+  				alert(Application.bookListView.ISBN);
+  				Application.addBookView.bookData = data;
+  				Application.router.navigate("#addBook", {
+  					trigger: true
+  				});
+
+  			},
+  			error: function (jqXHR,textStatus,errorThrown) {
+  				alert("Error");
+  			}
+
+  		});
   	}
 
   });
@@ -910,9 +916,6 @@ window.require.register("views/home-view", function(exports, require, module) {
   		);
 
   	},
-
-
-
 
   	bookinfo: function () {
 
@@ -1270,6 +1273,7 @@ window.require.register("views/studentlist-view", function(exports, require, mod
   		this.$el.html(this.template());
   		var that = this;
   		var currentUser = Parse.User.current();
+  		console.log(currentUser);
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("Student");
   		query.equalTo("UserId", currentUserId);
@@ -1277,7 +1281,6 @@ window.require.register("views/studentlist-view", function(exports, require, mod
   			success: function(students) {
   				var studentArray = JSON.stringify(students);
   				var studentArray = JSON.parse(studentArray);
-  				that.studentArray = studentArray;				
   				that.$el.html(that.template(studentArray));
   			},
   			error: function(error) {
@@ -1298,13 +1301,14 @@ window.require.register("views/studentlist-view", function(exports, require, mod
 
   	deleteStudent: function(e) {
   		var studentId = $(e.currentTarget).data('id');
-  		$(e.currentTarget).remove();
   		var Student = Parse.Object.extend("Student");
   		var query = new Parse.Query(Student);
   		query.get(studentId, {
   		  success: function(myObj) {
   		    // The object was retrieved successfully.
   		    myObj.destroy({});
+  			$("#"+studentId).remove();
+  		
   		  },
   		  error: function(object, error) {
   		    alert("This was not retreived correctly.");
@@ -1343,10 +1347,27 @@ window.require.register("views/templates/addBook", function(exports, require, mo
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    var buffer = "";
+    var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
+  function program1(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n	  ";
+    if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\n	  ";
+    return buffer;
+    }
 
-    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/140x190\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n    <div class=\"title-art\">\n      <img src=\""
+      + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.cover)),stack1 == null || stack1 === false ? stack1 : stack1.medium)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+      + "\">\n      <h2>"
+      + escapeExpression(((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+      + "</h2>\n      <h3>";
+    stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    if(stack2 || stack2 === 0) { buffer += stack2; }
+    buffer += "</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
@@ -1359,7 +1380,7 @@ window.require.register("views/templates/addStudent", function(exports, require,
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n  <h1>Add Student</h1>\n    <div class=\"back\">Cancel</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"add-first\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n\n    <div id=\"add-student\" class=\"button primary-fill\">Add Student</div>\n\n  </div> "
+    buffer += "<div id=\"header\">\n  <h1>Add Student</h1>\n    <div id=\"backButton\" class=\"back\">Cancel</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"add-first\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n\n    <div id=\"add-student\" class=\"button primary-fill\">Add Student</div>\n\n  </div> "
       + "\n</div> "
       + "\n";
     return buffer;
@@ -1413,10 +1434,35 @@ window.require.register("views/templates/bookList", function(exports, require, m
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    var buffer = "";
+    var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
+  function program1(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n      <li id=\"";
+    if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\">\n        <table style=\"width:100%;\">\n        <tr>\n          <td style=\"width:50%;\">\n        <p class=\"Title\">";
+    if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</p> \n        <p class=\"Author\">";
+    if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</p>\n          </td>\n          <td style=\"width:50%;\">\n            <div style=\"float:right;\">\n        <img src=\"";
+    if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\">\n            </div>\n          </td>\n        </tr>\n        </table> \n      </li>\n  ";
+    return buffer;
+    }
 
-    buffer += "<div id=\"header\" class=\"extended-header\">\n	<div id=\"add\" class=\"right-btn\">Add</div>\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\">\n  	<ul id=\"booklist\">\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2 class=\"truncate-two\">Surprise Attack of Jabba the Puppet: An Origami Yoda Book Longer Title</h2>\n  				<h3 class=\"truncate\">Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  	</ul>\n\n  </div> "
+    buffer += "<div id=\"header\" class=\"extended-header\">\n	<div id=\"add\" class=\"right-btn\">Add</div>\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\" class=\"usersBooks\">\n  	   <ul id=\"booklist\">\n  ";
+    stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n\n    </ul>\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
@@ -1513,7 +1559,11 @@ window.require.register("views/templates/studentList", function(exports, require
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n  		<li>\n  			<p class=\"first-name\">";
+    buffer += "\n  		<li id=\"";
+    if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\">\n  			<p class=\"first-name\">";
     if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
