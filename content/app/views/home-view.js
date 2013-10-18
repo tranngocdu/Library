@@ -13,7 +13,9 @@ module.exports = View.extend({
 		'click #scanner':'scanner',
 		"dataLoaded":"append",
 		'click #bookList':'bookList',
-		'click #studentList':'studentList'
+		'click #studentList':'studentList',
+		'bookInfoCheckin':'bookInfoCheckin',
+		'bookInfoCheckout':'bookInfoCheckout'
 
 	},
 
@@ -32,7 +34,7 @@ module.exports = View.extend({
 		scanner.scan(
 			function (result) {
 				Application.homeView.ISBN = result.text;
-				Application.homeView.$el.trigger("getbookinfo");
+				Application.homeView.$el.trigger("bookInfoCheckout");
 
 			}, 
 			function (error) {
@@ -47,7 +49,7 @@ module.exports = View.extend({
 		scanner.scan(
 			function (result) {
 				Application.loginView.ISBN = result.text;
-				Application.loginView.$el.trigger("checkInInfo");
+				Application.loginView.$el.trigger("bookInfoCheckin");
 
 			}, 
 			function (error) {
@@ -57,111 +59,69 @@ module.exports = View.extend({
 
 	},
 
+	bookList: function () {
+		Application.router.navigate("#bookList", {trigger:true});
+	},
 
+	studentList: function () {
+		Application.router.navigate("#studentList", {trigger:true});
+	},
 
-
-	bookinfo: function () {
+	bookInfoCheckout: function () {
 
 		$.ajax({
 			data: {
-				bibkeys: "ISBN:" + Application.homeView.ISBN,
+				bibkeys: "ISBN:" + Application.loginView.ISBN,
 				jscmd: "data",
 				format: "json"
 			},
 			url: "http://openlibrary.org/api/books",
 			type: "GET",
 			success: function (data) {
-				alert("Success");
 				var dataString = JSON.stringify(data);
-				//dataString.replace(/d{13}/g, '');
-
 				var combinedString = dataString.substring(0,6) + dataString.substring(20);
-				var data=JSON.parse(combinedString);
-				
-				var username = window.localStorage.getItem("username")
-				
-				var NewBook=Parse.Object.extend("NewBook");
-				var newBook=new NewBook();
-
-				newBook.set("title", data.ISBN.title);
-				newBook.set("userId", username);
-				var lengthAuthors = data.ISBN.authors.length;
-				var i = 0;
-				var authorArray = {};
-				//while (i < lengthAuthors) {
-				//	authorArray.push(data.ISBN.authors[i]);
-				//}
-				newBook.set("author", authorArray);
-				newBook.set("cover_image", data.ISBN.cover.medium);
-				newBook.set("quantity_total", "2");
-				newBook.set("quantity_out", "0");
-				newBook.save(null, {
-					success: function(newBook) {
-						alert('It worked!');
-					},
-					error: function(newBook, error) {
-						alert('Back to the drawing board');
-					}
+				var data = JSON.parse(combinedString);
+				alert(data);
+				Application.checkOutView.bookInfo = data;
+				Application.router.navigate("#checkOut", {
+					trigger: true
 				});
-				Application.bookDetailView.bookInfo = data;
+			},
+			error: function (jqXHR,textStatus,errorThrown) {
+				alert("Error");
+			}
 
-				//Application.router.navigate("#checkIn", {
-					//	trigger: true
-					//});
+		});
 
-				},
-				error: function (jqXHR,textStatus,errorThrown) {
-					alert("Error");
-				}
+	},
+	
+	bookInfoCheckin: function () {
 
-			});
+		$.ajax({
+			data: {
+				bibkeys: "ISBN:" + Application.loginView.ISBN,
+				jscmd: "data",
+				format: "json"
+			},
+			url: "http://openlibrary.org/api/books",
+			type: "GET",
+			success: function (data) {
+				var dataString = JSON.stringify(data);
+				var combinedString = dataString.substring(0,6) + dataString.substring(20);
+				var data = JSON.parse(combinedString);
+				alert(data);
+				Application.checkInView.bookInfo = data;
+				Application.router.navigate("#checkIn", {
+					trigger: true
+				});
+			},
+			error: function (jqXHR,textStatus,errorThrown) {
+				alert("Error");
+			}
 
-		},
+		});
 
-		bookList: function () {
-			Application.router.navigate("#bookList", {trigger:true});
-		},
-
-		studentList: function () {
-			Application.router.navigate("#studentList", {trigger:true});
-		},
-
-		checkOutBook: function () {
-
-			$.ajax({
-				data: {
-					bibkeys: "ISBN:" + Application.loginView.ISBN,
-					jscmd: "data",
-					format: "json"
-				},
-				url: "http://openlibrary.org/api/books",
-				type: "GET",
-				success: function (data) {
-					var dataString = JSON.stringify(data);
-					//dataString.replace(/d{13}/g, '');
-					var combinedString = dataString.substring(0,6) + dataString.substring(20);
-					var data=JSON.parse(combinedString);
-					alert(data);
-					Application.bookDetailView.bookInfo = data;
-					Application.router.navigate("#checkOut", {
-						trigger: true
-					});
-				},
-				error: function (jqXHR,textStatus,errorThrown) {
-					alert("Error");
-				}
-
-			});
-
-		},
+	}
 
 
-
-		library: function() {
-			Application.router.navigate("#library", {
-				trigger: true
-			});
-		}
-
-
-	});
+});

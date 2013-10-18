@@ -403,8 +403,7 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		"dataLoaded":"append",
   		'click #done':'addBook',
   		'click #quantity':'quantitySelector',
-  		'click #scanner': 'scanner',
-
+  		'click #add-book':'addBook'
   	},
 
   	initialize: function() {
@@ -412,75 +411,45 @@ window.require.register("views/addbook-view", function(exports, require, module)
   	},
 
   	render: function() {
-  		this.$el.html(this.template());
-  		//this.username = window.localStorage.setItem("userId", userId);
+  		var data = Application.addBookView.bookData;
+  		var dataString = JSON.stringify(data);
+  		var combinedString = dataString.substring(0,6) + dataString.substring(20);
+  		var data=JSON.parse(combinedString);
+  		this.bookData = data;
+  		this.$el.html(this.template(data));
   		
-  	
   		return this;
   	},
   	
-  	scanner: function ()  {
-  	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+  	addBook: function() {
+  		var username = window.localStorage.getItem("username")
+  		var NewBook=Parse.Object.extend("NewBook");
+  		var newBook=new NewBook();
 
-     scanner.scan(
-        function (result) {
-        	Application.loginView.ISBN = result.text;
-        	Application.loginView.$el.trigger("getbookinfo");
-
-        }, 
-        function (error) {
-            alert("Scanning failed: " + error);
-        }
-     );
-   },
-
-  	done: function() {
-  		var ISBN = $('#ISBN').val();
-  		var quantity = $('#studentName').val();
-  		var username = this.username;
-
-  		if( ISBN && studentName)
-  		{
-  			$.ajax({
-  				data: {
-  					"username":username,
-  					"ISBN":ISBN,
-  					"quantity":quantity,
+  		newBook.set("title", this.bookData.ISBN.title);
+  		newBook.set("userId", username);
+  		alert(username);
+  		alert(this.bookData.ISBN.title);
+  		alert(this.bookData.ISBN.cover.medium);
+  		var lengthAuthors = this.bookData.ISBN.authors.length;
+  		var i = 0;
+  		var authorArray = {};
+  		//while (i < lengthAuthors) {
+  			//	authorArray.push(data.ISBN.authors[i]);
+  			//}
+  			newBook.set("author", authorArray);
+  			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
+  			newBook.set("quantity_total", "2");
+  			newBook.set("quantity_out", "0");
+  			newBook.save(null, {
+  				success: function(newBook) {
+  					alert('It worked!');
   				},
-  				url: Application.serverURL+"register",
-  				type: "POST",
-  				xhrFields: {
-  					withCredentials: true
-  				},
-  				success: function (data) {
-  					navigator.notification.alert(
-  						'Book Added',  // message
-  						function alertDismissed() {}, // callback
-  						'Success',            // title
-  						'OK'                  // buttonName
-  					);
-  					
-  				},
-  				error: function (jqXHR, textStatus, errorThrown) {
-  					{
-  						navigator.notification.alert(
-  							'Unable to add book at this time.',  // message
-  							function alertDismissed() {}, // callback
-  							'Error',            // title
-  							'OK'                  // buttonName
-  						);
-  					}
+  				error: function(newBook, error) {
+  					alert('Back to the drawing board');
+  					console.log(error);
   				}
   			});
-  		}
-  		else{
-  			navigator.notification.alert(
-  				'Please scan book and select quantity',  // message
-  				function alertDismissed() {}, // callback
-  				'All Fields Required',            // title
-  				'OK'                  // buttonName
-  			);
-  		}
   	}
 
   });
@@ -580,7 +549,9 @@ window.require.register("views/booklist-view", function(exports, require, module
   		"dataLoaded":"append",
   		'click #filt-all':'allSelected',
   		'click #filt-available':'available',
-  		'click #filt-checked':'checkedOut'
+  		'click #filt-checked':'checkedOut',
+  		'click #add':'addBook',
+  		"getbookinfo":"getBookInfo"
   	},
 
   	initialize: function() {
@@ -603,6 +574,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   				var bookArray = JSON.parse(bookArray);
   				that.bookArray = bookArray;				
   				that.$el.html(that.template(bookArray));
+<<<<<<< HEAD
   				// userPosts contains all of the posts by the current user.
   				//var length = usersBooks.length;
   				//var i = 0;
@@ -613,10 +585,12 @@ window.require.register("views/booklist-view", function(exports, require, module
   					
   				//	i++;
   				//}
+=======
+>>>>>>> 1930782150ec697a83da358d7af0a812cf4d750f
   			},
   			error: function(error) {
-  		    alert("Error: " + error.code + " " + error.message);
-  		  }
+  				alert("Error: " + error.code + " " + error.message);
+  			}
   		});
 
   		return this;
@@ -626,24 +600,63 @@ window.require.register("views/booklist-view", function(exports, require, module
   		this.bookList.libraryJSON = this.bookList.handle();
   		this.$el.html(this.template(this.bookList.libraryJSON));
   	},
-  	
+
   	allSelected: function() {
   		$('#filt-all').addClass("selected");
   		$('#filt-available').removeClass("selected");
   		$('#filt-checked').removeClass("selected");
   	},
-  	
+
   	available: function() {
   		$('#filt-all').removeClass("selected");
   		$('#filt-available').addClass("selected");
   		$('#filt-checked').removeClass("selected");
   	},
-  	
+
   	checkedOut: function() {
   		$('#filt-all').removeClass("selected");
   		$('#filt-available').removeClass("selected");
   		$('#filt-checked').addClass("selected");
-  		
+
+  	},
+
+  	addBook: function() {
+  		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+  		scanner.scan(
+  			function (result) {
+  				Application.bookListView.ISBN = result.text;
+  				Application.bookListView.$el.trigger("getbookinfo");
+
+  			}, 
+  			function (error) {
+  				alert("Scanning failed: " + error);
+  			}
+  		);
+  	},
+
+  	getBookInfo: function() {
+  		$.ajax({
+  			data: {
+  				bibkeys: "ISBN:" + Application.bookListView.ISBN,
+  				jscmd: "data",
+  				format: "json"
+  			},
+  			url: "http://openlibrary.org/api/books",
+  			type: "GET",
+  			success: function (data) {
+  				alert(Application.bookListView.ISBN);
+  				Application.addBookView.bookData = data;
+  				Application.router.navigate("#addBook", {
+  					trigger: true
+  				});
+
+  			},
+  			error: function (jqXHR,textStatus,errorThrown) {
+  				alert("Error");
+  			}
+
+  		});
   	}
 
   });
@@ -916,9 +929,6 @@ window.require.register("views/home-view", function(exports, require, module) {
   		);
 
   	},
-
-
-
 
   	bookinfo: function () {
 
@@ -1350,10 +1360,27 @@ window.require.register("views/templates/addBook", function(exports, require, mo
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    var buffer = "";
+    var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
+  function program1(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n	  ";
+    if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\n	  ";
+    return buffer;
+    }
 
-    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/140x190\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n    <div class=\"title-art\">\n      <img src=\""
+      + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.cover)),stack1 == null || stack1 === false ? stack1 : stack1.medium)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+      + "\">\n      <h2>"
+      + escapeExpression(((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+      + "</h2>\n      <h3>";
+    stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    if(stack2 || stack2 === 0) { buffer += stack2; }
+    buffer += "</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;

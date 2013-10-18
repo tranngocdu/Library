@@ -7,9 +7,11 @@
   <div id="scroller" class="add-book">
 
     <div class="title-art">
-      <img src="http://placehold.it/140x190">
-      <h2>Title</h2>
-      <h3>Author</h3>
+      <img src="{{ISBN.cover.medium}}">
+      <h2>{{ISBN.title}}</h2>
+      <h3>{{#each ISBN.authors}}
+	  {{name}}
+	  {{/each}}</h3>
       <h4>ISBN Number</h4>
       <p>Number Available</p>
     </div>
