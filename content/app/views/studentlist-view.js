@@ -45,13 +45,14 @@ module.exports = View.extend({
 
 	deleteStudent: function(e) {
 		var studentId = $(e.currentTarget).data('id');
-		$(e.currentTarget).remove();
 		var Student = Parse.Object.extend("Student");
 		var query = new Parse.Query(Student);
 		query.get(studentId, {
 		  success: function(myObj) {
 		    // The object was retrieved successfully.
 		    myObj.destroy({});
+			$("#"+studentId).remove();
+		
 		  },
 		  error: function(object, error) {
 		    alert("This was not retreived correctly.");

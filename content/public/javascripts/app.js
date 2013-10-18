@@ -1298,13 +1298,14 @@ window.require.register("views/studentlist-view", function(exports, require, mod
 
   	deleteStudent: function(e) {
   		var studentId = $(e.currentTarget).data('id');
-  		$(e.currentTarget).remove();
   		var Student = Parse.Object.extend("Student");
   		var query = new Parse.Query(Student);
   		query.get(studentId, {
   		  success: function(myObj) {
   		    // The object was retrieved successfully.
   		    myObj.destroy({});
+  			$("#"+studentId).remove();
+  		
   		  },
   		  error: function(object, error) {
   		    alert("This was not retreived correctly.");
@@ -1513,7 +1514,11 @@ window.require.register("views/templates/studentList", function(exports, require
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n  		<li>\n  			<p class=\"first-name\">";
+    buffer += "\n  		<li id=\"";
+    if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\">\n  			<p class=\"first-name\">";
     if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
