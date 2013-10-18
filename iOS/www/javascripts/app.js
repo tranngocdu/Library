@@ -127,6 +127,7 @@ Application = {
 		var Login = require('views/login-view');
 		var Settings = require('views/settings-view');
 		var Signup = require('views/signup-view');
+		var StudentList = require('views/studentlist-view');
 		
 		var Router = require('lib/router');
 
@@ -141,6 +142,7 @@ Application = {
 		this.loginView = new Login();
 		this.settingsView = new Settings();
 		this.signupView = new Signup();
+		this.studentListView = new StudentList();
 		
 		this.router = new Router();
 
@@ -182,7 +184,7 @@ module.exports = Backbone.Router.extend({
 
 	routes: {
 		// If you want to save login state, send them to a prelogin function which checks for login state
-		'':'login',
+		'':'preLogin',
 		'home':'home',
 		'addBook':'addBook',
 		'bookDetail':'bookDetail',
@@ -192,7 +194,8 @@ module.exports = Backbone.Router.extend({
 		'enterPassword':'enterPassword',
 		'login':'login',
 		'settings':'settings',
-		'signup':'signup'
+		'signup':'signup',
+		'studentList':'studentList'
 		
 	},
 
@@ -217,6 +220,17 @@ module.exports = Backbone.Router.extend({
 		// First page logic
 		this.firstPage = true;
 
+	},
+
+	preLogin:function() {
+		var currentUser = Parse.User.current();
+		var that = this;
+			if (currentUser) {
+						that.changePage(Application.homeView);						
+			}
+			else {
+						that.changePage(Application.loginView);
+			}
 	},
 
 	//Functions for changing pages
@@ -251,6 +265,9 @@ module.exports = Backbone.Router.extend({
 	},
 	signup:function() {
 		this.changePage(Application.signupView);
+	},
+	studentList:function() {
+		this.changePage(Application.studentListView);
 	},
 
 	//Functions for page transitions
@@ -477,11 +494,17 @@ module.exports = View.extend({
 var View = require('./view');
 var template = require('./templates/bookList');
 var Library = require('../models/library');
+var Book = require('../models/book');
+
+
 
 module.exports = View.extend({
 	id: 'booklist-view',
 	template: template,
 	events: {
+		'click #bookList':'bookList',
+		'click #studentList':'studentList',
+		'click #home':'home',
 		"dataLoaded":"append"
 	},
 
@@ -493,6 +516,29 @@ module.exports = View.extend({
 		this.bookList = new Library();
 		this.bookList.libraryJSON ={};
 		this.$el.html(this.template(this.bookList.libraryJSON));
+		
+
+
+var currentUser = Parse.User.current();
+var currentUserId = currentUser.id;
+var query = new Parse.Query("NewBook");
+    query.equalTo("User", currentUserId);
+    query.find({
+      success: function(usersBooks) {
+      	console.log(usersBooks);
+        // userPosts contains all of the posts by the current user.
+        var length = usersBooks.length;
+        var i = 0;
+        while (i<length){
+        console.log(usersBooks[i].attributes.title);
+        title = usersBooks[i].attributes.title;
+        image = usersBooks[i].attributes.cover_image;
+        $('#bookList').append('<center><table width="85%"><tr><td><div id="book'+i+'"><p>Title:'+title+'.</br></p></div></td><td align="right"><div id="bookImage'+i+'"><img src="'+image+'"></div></td></tr></table></center>');
+        i++;
+      	}
+      }
+    });
+
 		/*this.bookDetail.fetch({
 			processData:true,
 			xhrFields: {withCredentials: true},
@@ -509,9 +555,26 @@ module.exports = View.extend({
 	append: function(){
 		this.bookList.libraryJSON = this.bookList.handle();
 		this.$el.html(this.template(this.bookList.libraryJSON));
-	}
+	},
+
+	bookList: function () {
+		Application.router.navigate("", {trigger:true});
+	},
+
+	studentList: function () {
+		Application.router.navigate("#studentList", {trigger:true});
+	},
+
+	home: function () {
+		Application.router.navigate('', {trigger:true});
+	},
+
+
+
 
 });
+
+
 
 });
 
@@ -739,8 +802,8 @@ module.exports = View.extend({
 		'checkOutInfo':'checkOutBook',
 		'click #scanner':'scanner',
 		"dataLoaded":"append",
-		'click #list':'list'
-
+		'click #bookList':'bookList',
+		'click #studentList':'studentList'
 
 	},
 
@@ -831,6 +894,7 @@ module.exports = View.extend({
 					}
 				});
 				Application.bookDetailView.bookInfo = data;
+
 				//Application.router.navigate("#checkIn", {
 					//	trigger: true
 					//});
@@ -844,8 +908,12 @@ module.exports = View.extend({
 
 		},
 
-		list: function () {
+		bookList: function () {
 			Application.router.navigate("#bookList", {trigger:true});
+		},
+
+		studentList: function () {
+			Application.router.navigate("#studentList", {trigger:true});
 		},
 
 		checkOutBook: function () {
@@ -859,7 +927,6 @@ module.exports = View.extend({
 				url: "http://openlibrary.org/api/books",
 				type: "GET",
 				success: function (data) {
-					alert("Success");
 					var dataString = JSON.stringify(data);
 					//dataString.replace(/d{13}/g, '');
 					var combinedString = dataString.substring(0,6) + dataString.substring(20);
@@ -1124,6 +1191,84 @@ module.exports = View.extend({
 
 });
 
+;require.register("views/studentlist-view", function(exports, require, module) {
+var View = require('./view');
+var template = require('./templates/studentList');
+var Library = require('../models/library');
+
+
+module.exports = View.extend({
+	id: 'studentlist-view',
+	template: template,
+	events: {
+		'click #bookList':'bookList',
+		'click #studentList':'studentList',
+		'click #home':'home',
+		'click #createStudent':'createStudent'
+	},
+
+	initialize: function() {
+
+	},
+
+
+
+	render: function() {
+				this.studentList = new Library();
+		this.studentList.libraryJSON ={};
+		this.$el.html(this.template(this.studentList.libraryJSON));
+
+			var currentUser = Parse.User.current();
+var currentUserId = currentUser.id;
+var query = new Parse.Query("Student");
+    query.equalTo("UserId", currentUserId);
+    query.find({
+      success: function(results) {
+      	console.log(results);
+				var length = results.length;
+        var i = 0;
+        while (i<length){
+        console.log(results[i].attributes.Name);
+        var name = results[i].attributes.Name;
+        $('#studentList').append('<center><table width="85%"><tr><td><div id="name'+i+'"><p>'+name+'</br></p></div></td></tr></table></center>');
+        i++;
+      	}
+			}
+      
+    });
+
+
+		return this;
+	},
+
+	append: function(){
+
+	},
+
+
+	createStudent: function(){
+		var studentName;
+
+},
+ 
+
+
+	bookList: function () {
+	Application.router.navigate("#bookList", {trigger:true});
+},
+
+	studentList: function () {
+	Application.router.navigate("", {trigger:true});
+},
+
+	home: function () {
+		Application.router.navigate('', {trigger:true});
+	},
+
+});
+
+});
+
 ;require.register("views/templates/addBook", function(exports, require, module) {
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
@@ -1206,7 +1351,7 @@ module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partial
   var foundHelper, self=this;
 
 
-  return "test";});
+  return "<div id=\"header\">\n	<h1>Book List</h1>\n</div>\n<div id=\"bookList\" style=\"width:100%;height:80;padding-top:65px;\">\n</div>\n\n\n<div id=\"footer\">\n	<ul> \n		<li id=\"home\" class=\"active\">Home</li>\n		<li id=\"bookList\">Books</li>\n		<li id=\"studentList\">Students</li>\n		<li>Settings</li>\n	</ul>\n</div>";});
 });
 
 ;require.register("views/templates/checkIn", function(exports, require, module) {
@@ -1244,7 +1389,7 @@ module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partial
 
   buffer += "<div id=\"header\">\n	<h1>Library</h1>\n</div>\n\n<div id=\"wrapper\">\n	<div id=\"scroller\" class=\"home\">\n		<div id=\"checkOut\" class=\"check-out button primary-fill\">Check Out</div>\n		<div id=\"checkIn\" class=\"check-in button secondary\">Check In</div>\n	</div> ";
   buffer += "\n</div> ";
-  buffer += "\n\n<div id=\"footer\">\n	<ul> \n		<li class=\"active\">Home</li>\n		<li>Books</li>\n		<li>Students</li>\n		<li>Settings</li>\n	</ul>\n</div>";
+  buffer += "\n\n<div id=\"footer\">\n	<ul> \n		<li class=\"active\">Home</li>\n		<li id=\"bookList\">Books</li>\n		<li id=\"studentList\">Students</li>\n		<li>Settings</li>\n	</ul>\n</div>";
   return buffer;});
 });
 
@@ -1280,6 +1425,15 @@ module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partial
   buffer += "\n</div> ";
   buffer += "\n\n";
   return buffer;});
+});
+
+;require.register("views/templates/studentList", function(exports, require, module) {
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var foundHelper, self=this;
+
+
+  return "<div id=\"header\">\n	<h1>Student List</h1>\n</div>\n\n<div style=\"margin-top:130px\">\n		    <input id=\"createStudent\" class=\"first-input\" placeholder=\"Student Name\" style=\"width:80%; margin: 0 auto;\" />\n</div>\n<div id=\"studentList\" style=\"width:100%;height:80;padding-top:65px;\">\n\n\n\n<div id=\"footer\">\n	<ul> \n		<li id=\"home\" class=\"active\">Home</li>\n		<li id=\"bookList\">Books</li>\n		<li id=\"studentList\">Students</li>\n		<li>Settings</li>\n	</ul>\n</div>";});
 });
 
 ;require.register("views/view", function(exports, require, module) {

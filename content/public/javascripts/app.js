@@ -558,7 +558,7 @@ var query = new Parse.Query("NewBook");
 	},
 
 	bookList: function () {
-		Application.router.navigate("#bookList", {trigger:true});
+		Application.router.navigate("", {trigger:true});
 	},
 
 	studentList: function () {
@@ -1196,33 +1196,48 @@ var View = require('./view');
 var template = require('./templates/studentList');
 var Library = require('../models/library');
 
+
 module.exports = View.extend({
 	id: 'studentlist-view',
 	template: template,
 	events: {
 		'click #bookList':'bookList',
 		'click #studentList':'studentList',
-		'click #home':'home'
+		'click #home':'home',
+		'click #createStudent':'createStudent'
 	},
 
 	initialize: function() {
 
 	},
 
+
+
+
 	render: function() {
+				this.studentList = new Library();
+		this.studentList.libraryJSON ={};
+		this.$el.html(this.template(this.studentList.libraryJSON));
 
-		this.$el.html(this.template());
-		return this;
-
-		/*this.bookDetail.fetch({
-			processData:true,
-			xhrFields: {withCredentials: true},
-			add:true,
-			data: {"teacherId":Application.bookDetailView.teacherId},
-			success: function(data){
-				Application.bookListView.$el.trigger("dataLoaded");
+			var currentUser = Parse.User.current();
+var currentUserId = currentUser.id;
+var query = new Parse.Query("Student");
+    query.equalTo("UserId", currentUserId);
+    query.find({
+      success: function(results) {
+      	console.log(results);
+				var length = results.length;
+        var i = 0;
+        while (i<length){
+        console.log(results[i].attributes.Name);
+        var name = results[i].attributes.Name;
+        $('#studentList').append('<center><table width="85%"><tr><td><div id="name'+i+'"><p>'+name+'</br></p></div></td></tr></table></center>');
+        i++;
+      	}
 			}
-		}); */
+      
+    });
+
 
 		return this;
 	},
@@ -1231,12 +1246,20 @@ module.exports = View.extend({
 
 	},
 
+
+	createStudent: function(){
+		var studentName;
+
+},
+ 
+
+
 	bookList: function () {
 	Application.router.navigate("#bookList", {trigger:true});
 },
 
 	studentList: function () {
-	Application.router.navigate("#studentList", {trigger:true});
+	Application.router.navigate("", {trigger:true});
 },
 
 	home: function () {
@@ -1411,7 +1434,7 @@ module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partial
   var foundHelper, self=this;
 
 
-  return "<div id=\"header\">\n	<h1>Student List</h1>\n</div>\ntest\n<div id=\"footer\">\n	<ul> \n		<li id=\"home\" class=\"active\">Home</li>\n		<li id=\"bookList\">Books</li>\n		<li id=\"studentList\">Students</li>\n		<li>Settings</li>\n	</ul>\n</div>";});
+  return "<div id=\"header\">\n	<h1>Student List</h1>\n</div>\n\n<div style=\"margin-top:130px\">\n		    <input id=\"createStudent\" class=\"first-input\" placeholder=\"Student Name\" style=\"width:80%; margin: 0 auto;\" />\n</div>\n<div id=\"studentList\" style=\"width:100%;height:80;padding-top:65px;\"></div>\n\n\n\n<div id=\"footer\">\n	<ul> \n		<li id=\"home\" class=\"active\">Home</li>\n		<li id=\"bookList\">Books</li>\n		<li id=\"studentList\">Students</li>\n		<li>Settings</li>\n	</ul>\n</div>";});
 });
 
 ;require.register("views/view", function(exports, require, module) {

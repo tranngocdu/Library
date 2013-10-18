@@ -65,7 +65,7 @@ var query = new Parse.Query("NewBook");
 	},
 
 	bookList: function () {
-		Application.router.navigate("#bookList", {trigger:true});
+		Application.router.navigate("", {trigger:true});
 	},
 
 	studentList: function () {
