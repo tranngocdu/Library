@@ -14,7 +14,7 @@ module.exports = View.extend({
 	},
 
 	render: function() {
-
+		this.$el.html(this.template());
 		var that = this;
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
@@ -22,13 +22,9 @@ module.exports = View.extend({
 		query.equalTo("UserId", currentUserId);
 		query.find({
 			success: function(students) {
-				that.studentJSON = JSON.stringify(students);
-				var array = ("{\"student\":"+that.studentJSON+"}");
-				console.log(array);
-				//array = JSON.stringify(array);
-				//that.$el.html(that.template('{"student": [{"Name": "Steven"},{"Name": "Philip"}]}'));
-				that.$el.html(that.template(array));
-
+				var studentArray = JSON.stringify(students);
+				var studentArray = JSON.parse(studentArray);				
+				that.$el.html(that.template(studentArray));
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
