@@ -219,7 +219,7 @@ window.require.register("lib/router", function(exports, require, module) {
 
   	routes: {
   		// If you want to save login state, send them to a prelogin function which checks for login state
-  		'':'preLogin',
+  		'':'checkIn',
   		'home':'home',
   		'addBook':'addBook',
   		'addStudent':'addStudent',
@@ -589,9 +589,9 @@ window.require.register("views/booklist-view", function(exports, require, module
 
   	render: function() {
   		this.bookList = new Library();
+  		var that = this;
   		this.bookList.libraryJSON ={};
   		this.$el.html(this.template(this.bookList.libraryJSON));
-
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("NewBook");
@@ -599,16 +599,20 @@ window.require.register("views/booklist-view", function(exports, require, module
   		query.find({
   			success: function(usersBooks) {
   				console.log(usersBooks);
+  				var bookArray = JSON.stringify(usersBooks);
+  				var bookArray = JSON.parse(bookArray);
+  				that.bookArray = bookArray;				
+  				that.$el.html(that.template(bookArray));
   				// userPosts contains all of the posts by the current user.
-  				var length = usersBooks.length;
-  				var i = 0;
-  				while (i<length){
-  					console.log(usersBooks[i].attributes.title);
-  					title = usersBooks[i].attributes.title;
-  					image = usersBooks[i].attributes.cover_image;
+  				//var length = usersBooks.length;
+  				//var i = 0;
+  				//while (i<length){
+  				//	console.log(usersBooks[i].attributes.title);
+  				//	title = usersBooks[i].attributes.title;
+  				//	image = usersBooks[i].attributes.cover_image;
   					
-  					i++;
-  				}
+  				//	i++;
+  				//}
   			},
   			error: function(error) {
   		    alert("Error: " + error.code + " " + error.message);
@@ -1272,6 +1276,7 @@ window.require.register("views/studentlist-view", function(exports, require, mod
   		this.$el.html(this.template());
   		var that = this;
   		var currentUser = Parse.User.current();
+  		console.log(currentUser);
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("Student");
   		query.equalTo("UserId", currentUserId);
@@ -1415,10 +1420,35 @@ window.require.register("views/templates/bookList", function(exports, require, m
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    var buffer = "";
+    var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
+  function program1(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n      <li id=\"";
+    if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\">\n        <table style=\"width:100%;\">\n        <tr>\n          <td style=\"width:50%;\">\n        <p class=\"Title\">";
+    if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</p> \n        <p class=\"Author\">";
+    if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</p>\n          </td>\n          <td style=\"width:50%;\">\n            <div style=\"float:right;\">\n        <img src=\"";
+    if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\">\n            </div>\n          </td>\n        </tr>\n        </table> \n      </li>\n  ";
+    return buffer;
+    }
 
-    buffer += "<div id=\"header\" class=\"extended-header\">\n	<div id=\"add\" class=\"right-btn\">Add</div>\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\">\n  	<ul id=\"booklist\">\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2 class=\"truncate-two\">Surprise Attack of Jabba the Puppet: An Origami Yoda Book Longer Title</h2>\n  				<h3 class=\"truncate\">Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  	</ul>\n\n  </div> "
+    buffer += "<div id=\"header\" class=\"extended-header\">\n	<div id=\"add\" class=\"right-btn\">Add</div>\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\" class=\"usersBooks\">\n  	   <ul id=\"booklist\">\n  ";
+    stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n\n    </ul>\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
@@ -1428,10 +1458,15 @@ window.require.register("views/templates/checkIn", function(exports, require, mo
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    
+    var buffer = "";
 
 
-    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n\n<div class=\"checkin\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/118x160\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div class=\"check-btn button disabled\">Check In</div> "
+      + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n  <div id=\"wrapper\" class=\"check-wrap\">\n     <div id=\"scroller\" class=\"check-scroller\">\n     	"
+      + "\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n  </div> "
+      + "\n</div> "
+      + "\n\n";
+    return buffer;
     });
 });
 window.require.register("views/templates/checkOut", function(exports, require, module) {
