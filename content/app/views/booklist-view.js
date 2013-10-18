@@ -24,9 +24,9 @@ module.exports = View.extend({
 
 	render: function() {
 		this.bookList = new Library();
+		var that = this;
 		this.bookList.libraryJSON ={};
 		this.$el.html(this.template(this.bookList.libraryJSON));
-
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
@@ -34,16 +34,20 @@ module.exports = View.extend({
 		query.find({
 			success: function(usersBooks) {
 				console.log(usersBooks);
+				var bookArray = JSON.stringify(usersBooks);
+				var bookArray = JSON.parse(bookArray);
+				that.bookArray = bookArray;				
+				that.$el.html(that.template(bookArray));
 				// userPosts contains all of the posts by the current user.
-				var length = usersBooks.length;
-				var i = 0;
-				while (i<length){
-					console.log(usersBooks[i].attributes.title);
-					title = usersBooks[i].attributes.title;
-					image = usersBooks[i].attributes.cover_image;
+				//var length = usersBooks.length;
+				//var i = 0;
+				//while (i<length){
+				//	console.log(usersBooks[i].attributes.title);
+				//	title = usersBooks[i].attributes.title;
+				//	image = usersBooks[i].attributes.cover_image;
 					
-					i++;
-				}
+				//	i++;
+				//}
 			},
 			error: function(error) {
 		    alert("Error: " + error.code + " " + error.message);

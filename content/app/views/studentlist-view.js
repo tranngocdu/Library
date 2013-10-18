@@ -17,6 +17,7 @@ module.exports = View.extend({
 		this.$el.html(this.template());
 		var that = this;
 		var currentUser = Parse.User.current();
+		console.log(currentUser);
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("Student");
 		query.equalTo("UserId", currentUserId);
