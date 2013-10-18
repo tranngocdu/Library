@@ -27,8 +27,6 @@ module.exports = View.extend({
 		this.bookList.libraryJSON ={};
 		this.$el.html(this.template(this.bookList.libraryJSON));
 
-
-
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
@@ -43,10 +41,13 @@ module.exports = View.extend({
 					console.log(usersBooks[i].attributes.title);
 					title = usersBooks[i].attributes.title;
 					image = usersBooks[i].attributes.cover_image;
-					$('#bookList').append('<center><table width="85%"><tr><td><div id="book'+i+'"><p>Title:'+title+'.</br></p></div></td><td align="right"><div id="bookImage'+i+'"><img src="'+image+'"></div></td></tr></table></center>');
+					
 					i++;
 				}
-			}
+			},
+			error: function(error) {
+		    alert("Error: " + error.code + " " + error.message);
+		  }
 		});
 
 		return this;

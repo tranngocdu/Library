@@ -20,26 +20,25 @@ module.exports = View.extend({
 	},
 
 	signUp: function () {
-				var user = new Parse.User();
-				var username = $('#sign-email').val();
-				var password =  $('#sign-pass').val();
-					user.set("username", username);
-					user.set("password", password);
+		var user = new Parse.User();
+		var username = $('#sign-email').val();
+		var password =  $('#sign-pass').val();
+		user.set("username", username);
+		user.set("password", password);
 
-			user.signUp(null, {
-  success: function(user) {
-  	alert("Success!");
-  	Application.router.navigate("#signUp", {
-			trigger: true
+		user.signUp(null, {
+			success: function(user) {
+				alert("Success!");
+				Application.router.navigate("#home", {
+					trigger: true
+				});
+			},
+			error: function(user, error) {
+				// Show the error message somewhere and let the user try again.
+				alert("Error: " + error.code + " " + error.message);
+			}
 		});
-    // Hooray! Let them use the app now.
-  },
-  error: function(user, error) {
-    // Show the error message somewhere and let the user try again.
-    alert("Error: " + error.code + " " + error.message);
-  }
-});
-		
+
 
 	},
 

@@ -235,7 +235,7 @@ window.require.register("lib/router", function(exports, require, module) {
 
   	initialize:function () {
   		// Handle back button throughout the application or menu buttons
-  		$('#cancel').on('vclick', function(e) {
+  		$('.back').on('vclick', function(e) {
   			alert("v");
   			e.preventDefault();
   			$.mobile.activePage.back = true;
@@ -385,6 +385,18 @@ window.require.register("models/model", function(exports, require, module) {
   });
   
 });
+window.require.register("models/student", function(exports, require, module) {
+  module.exports = Parse.Object.extend({
+  	className: "student",
+  	
+  	handle: function(){
+
+  		return {"descriptive_name": this.toJSON()};
+
+  	}
+
+  });
+});
 window.require.register("views/addbook-view", function(exports, require, module) {
   var View = require('./view');
   var template = require('./templates/addBook');
@@ -487,10 +499,7 @@ window.require.register("views/addstudent-view", function(exports, require, modu
   	id: 'addstudent-view',
   	template: template,
   	events: {
-  		'click #done': 'done',
-  		'click #logout': 'logout',
-  		'click #addBook': 'addBook',
-  		'click #changeQuantity': 'changeQuantity'
+  		'click #add-student': 'addStudent'
   	},
 
   	initialize: function () {
@@ -502,29 +511,26 @@ window.require.register("views/addstudent-view", function(exports, require, modu
   		return this;
   	},
 
-  	done: function () {
-  		Application.router.navigate("#home", {
-  			trigger: true
-  		});
-  	},
+  	addStudent: function () {
+  		var name = $('#add-first').val();
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var NewStudent=Parse.Object.extend("Student");
+  		var newStudent=new NewStudent();
 
-  	logout: function () {
-  		window.localStorage.removeItem("userId");
-  		Application.router.navigate("#login", {
-  			trigger: true
-  		});
-  	},
+  		newStudent.set("Name", name);
+  		newStudent.set("UserId", currentUserId);
 
-  	addBook: function() {
-  		Application.router.navigate("#addBook", {
-  			trigger: true
+  		newStudent.save(null, {
+  			success: function(newStudent) {
+  				$('#add-first').val("");
+  				alert('It worked!');
+  			},
+  			error: function(newBook, error) {
+  				alert('Back to the drawing board');
+  			}
   		});
-  	},
-  	
-  	changeQuantity: function() {
-  		Application.router.navigate("#addBook", {
-  			trigger: true
-  		});
+
   	}
 
   });
@@ -603,8 +609,6 @@ window.require.register("views/booklist-view", function(exports, require, module
   		this.bookList.libraryJSON ={};
   		this.$el.html(this.template(this.bookList.libraryJSON));
 
-
-
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("NewBook");
@@ -619,10 +623,13 @@ window.require.register("views/booklist-view", function(exports, require, module
   					console.log(usersBooks[i].attributes.title);
   					title = usersBooks[i].attributes.title;
   					image = usersBooks[i].attributes.cover_image;
-  					$('#bookList').append('<center><table width="85%"><tr><td><div id="book'+i+'"><p>Title:'+title+'.</br></p></div></td><td align="right"><div id="bookImage'+i+'"><img src="'+image+'"></div></td></tr></table></center>');
+  					
   					i++;
   				}
-  			}
+  			},
+  			error: function(error) {
+  		    alert("Error: " + error.code + " " + error.message);
+  		  }
   		});
 
   		return this;
@@ -1141,6 +1148,7 @@ window.require.register("views/settings-view", function(exports, require, module
 
   	logout: function () {
   		window.localStorage.removeItem("userId");
+  		Parse.User.logOut();
   		Application.router.navigate("#login", {
   			trigger: true
   		});
@@ -1183,26 +1191,25 @@ window.require.register("views/signup-view", function(exports, require, module) 
   	},
 
   	signUp: function () {
-  				var user = new Parse.User();
-  				var username = $('#sign-email').val();
-  				var password =  $('#sign-pass').val();
-  					user.set("username", username);
-  					user.set("password", password);
+  		var user = new Parse.User();
+  		var username = $('#sign-email').val();
+  		var password =  $('#sign-pass').val();
+  		user.set("username", username);
+  		user.set("password", password);
 
-  			user.signUp(null, {
-    success: function(user) {
-    	alert("Success!");
-    	Application.router.navigate("#signUp", {
-  			trigger: true
+  		user.signUp(null, {
+  			success: function(user) {
+  				alert("Success!");
+  				Application.router.navigate("#home", {
+  					trigger: true
+  				});
+  			},
+  			error: function(user, error) {
+  				// Show the error message somewhere and let the user try again.
+  				alert("Error: " + error.code + " " + error.message);
+  			}
   		});
-      // Hooray! Let them use the app now.
-    },
-    error: function(user, error) {
-      // Show the error message somewhere and let the user try again.
-      alert("Error: " + error.code + " " + error.message);
-    }
-  });
-  		
+
 
   	},
 
@@ -1272,9 +1279,8 @@ window.require.register("views/studentlist-view", function(exports, require, mod
   	id: 'studentlist-view',
   	template: template,
   	events: {
-  		'click #bookList':'bookList',
-  		'click #studentList':'studentList',
-  		'click #home':'home'
+  		'click #add':'addStudent',
+  		'click #delete':'deleteStudent'
   	},
 
   	initialize: function() {
@@ -1284,17 +1290,20 @@ window.require.register("views/studentlist-view", function(exports, require, mod
   	render: function() {
 
   		this.$el.html(this.template());
-  		return this;
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var query = new Parse.Query("Student");
+  		query.equalTo("UserId", currentUserId);
+  		query.find({
+  			success: function(students) {
+  				console.log(students);
+  				// userPosts contains all of the posts by the current user.
 
-  		/*this.bookDetail.fetch({
-  			processData:true,
-  			xhrFields: {withCredentials: true},
-  			add:true,
-  			data: {"teacherId":Application.bookDetailView.teacherId},
-  			success: function(data){
-  				Application.bookListView.$el.trigger("dataLoaded");
+  			},
+  			error: function(error) {
+  				alert("Error: " + error.code + " " + error.message);
   			}
-  		}); */
+  		});
 
   		return this;
   	},
@@ -1303,17 +1312,13 @@ window.require.register("views/studentlist-view", function(exports, require, mod
 
   	},
 
-  	bookList: function () {
-  	Application.router.navigate("#bookList", {trigger:true});
-  },
-
-  	studentList: function () {
-  	Application.router.navigate("#studentList", {trigger:true});
-  },
-
-  	home: function () {
-  		Application.router.navigate('', {trigger:true});
+  	addStudent: function () {
+  		Application.router.navigate("#addStudent", {trigger:true});
   	},
+
+  	deleteStudent: function() {
+
+  	}
 
   });
   
@@ -1335,7 +1340,7 @@ window.require.register("views/templates/addStudent", function(exports, require,
     var buffer = "", foundHelper, self=this;
 
 
-    buffer += "<div id=\"header\">\n  <h1>Add Student</h1>\n    <div class=\"back\">Cancel</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"add-first\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"First Name\" />\n    <input id=\"add-last\" type=\"text\" autocorrect=\"off\" placeholder=\"Last Name\" />\n\n    <div id=\"add-student\" class=\"button primary-fill\">Add Student</div>\n\n  </div> ";
+    buffer += "<div id=\"header\">\n  <h1>Add Student</h1>\n    <div class=\"back\">Cancel</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"add-first\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n\n    <div id=\"add-student\" class=\"button primary-fill\">Add Student</div>\n\n  </div> ";
     buffer += "\n</div> ";
     buffer += "\n";
     return buffer;});
@@ -1412,7 +1417,7 @@ window.require.register("views/templates/bookList", function(exports, require, m
     var buffer = "", foundHelper, self=this;
 
 
-    buffer += "<div id=\"header\" class=\"extended-header\">\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\">\n  	<ul id=\"booklist\">\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2 class=\"truncate-two\">Surprise Attack of Jabba the Puppet: An Origami Yoda Book Longer Title</h2>\n  				<h3 class=\"truncate\">Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p class=\"out\">Checked Out</p>\n  			</div>\n  		</li>\n\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2>Title</h2>\n  				<h3>Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n  	</ul>\n\n  </div> ";
+    buffer += "<div id=\"header\" class=\"extended-header\">\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\">\n  	<ul id=\"booklist\">\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2 class=\"truncate-two\">Surprise Attack of Jabba the Puppet: An Origami Yoda Book Longer Title</h2>\n  				<h3 class=\"truncate\">Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  	</ul>\n\n  </div> ";
     buffer += "\n</div> ";
     buffer += "\n\n";
     return buffer;});
@@ -1468,7 +1473,7 @@ window.require.register("views/templates/settings", function(exports, require, m
     var buffer = "", foundHelper, self=this;
 
 
-    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n    <div class=\"right-btn\">Done</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n\n  </div> ";
+    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n\n    <div id=\"save\" class=\"button primary\">Update Profile</div>\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n\n  </div> ";
     buffer += "\n</div> ";
     buffer += "\n";
     return buffer;});
@@ -1491,7 +1496,7 @@ window.require.register("views/templates/studentList", function(exports, require
     var buffer = "", foundHelper, self=this;
 
 
-    buffer += "<div id=\"header\">\n	<h1>Student List</h1>\n	<div class=\"right-btn\">Add</div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  	</ul>\n\n  </div> ";
+    buffer += "<div id=\"header\">\n	<h1>Student List</h1>\n	<div id=\"add\" class=\"right-btn\">Add</div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  	</ul>\n\n  </div> ";
     buffer += "\n</div> ";
     return buffer;});
 });

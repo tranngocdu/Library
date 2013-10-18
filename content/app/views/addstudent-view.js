@@ -5,10 +5,7 @@ module.exports = View.extend({
 	id: 'addstudent-view',
 	template: template,
 	events: {
-		'click #done': 'done',
-		'click #logout': 'logout',
-		'click #addBook': 'addBook',
-		'click #changeQuantity': 'changeQuantity'
+		'click #add-student': 'addStudent'
 	},
 
 	initialize: function () {
@@ -20,29 +17,26 @@ module.exports = View.extend({
 		return this;
 	},
 
-	done: function () {
-		Application.router.navigate("#home", {
-			trigger: true
-		});
-	},
+	addStudent: function () {
+		var name = $('#add-first').val();
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var NewStudent=Parse.Object.extend("Student");
+		var newStudent=new NewStudent();
 
-	logout: function () {
-		window.localStorage.removeItem("userId");
-		Application.router.navigate("#login", {
-			trigger: true
-		});
-	},
+		newStudent.set("Name", name);
+		newStudent.set("UserId", currentUserId);
 
-	addBook: function() {
-		Application.router.navigate("#addBook", {
-			trigger: true
+		newStudent.save(null, {
+			success: function(newStudent) {
+				$('#add-first').val("");
+				alert('It worked!');
+			},
+			error: function(newBook, error) {
+				alert('Back to the drawing board');
+			}
 		});
-	},
-	
-	changeQuantity: function() {
-		Application.router.navigate("#addBook", {
-			trigger: true
-		});
+
 	}
 
 });

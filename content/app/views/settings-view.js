@@ -28,6 +28,7 @@ module.exports = View.extend({
 
 	logout: function () {
 		window.localStorage.removeItem("userId");
+		Parse.User.logOut();
 		Application.router.navigate("#login", {
 			trigger: true
 		});

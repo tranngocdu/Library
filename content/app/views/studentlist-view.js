@@ -6,9 +6,8 @@ module.exports = View.extend({
 	id: 'studentlist-view',
 	template: template,
 	events: {
-		'click #bookList':'bookList',
-		'click #studentList':'studentList',
-		'click #home':'home'
+		'click #add':'addStudent',
+		'click #delete':'deleteStudent'
 	},
 
 	initialize: function() {
@@ -18,17 +17,20 @@ module.exports = View.extend({
 	render: function() {
 
 		this.$el.html(this.template());
-		return this;
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("Student");
+		query.equalTo("UserId", currentUserId);
+		query.find({
+			success: function(students) {
+				console.log(students);
+				// userPosts contains all of the posts by the current user.
 
-		/*this.bookDetail.fetch({
-			processData:true,
-			xhrFields: {withCredentials: true},
-			add:true,
-			data: {"teacherId":Application.bookDetailView.teacherId},
-			success: function(data){
-				Application.bookListView.$el.trigger("dataLoaded");
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
 			}
-		}); */
+		});
 
 		return this;
 	},
@@ -37,16 +39,12 @@ module.exports = View.extend({
 
 	},
 
-	bookList: function () {
-	Application.router.navigate("#bookList", {trigger:true});
-},
-
-	studentList: function () {
-	Application.router.navigate("#studentList", {trigger:true});
-},
-
-	home: function () {
-		Application.router.navigate('', {trigger:true});
+	addStudent: function () {
+		Application.router.navigate("#addStudent", {trigger:true});
 	},
+
+	deleteStudent: function() {
+
+	}
 
 });
