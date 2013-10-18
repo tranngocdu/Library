@@ -5,72 +5,14 @@
 
 <div id="wrapper">
   <div id="scroller" class="students">
-  	<ul id="studentlist">
+  	<ul id="studentlist">	
+	{{this}}
+	{{#each this}}
+	whyyyyy
   		<li>
-  			<p class="first-name">First</p> 
-  			<p class="last-name truncate">Last</p>
-  			<p class="delete-name">Delete</p>
+  			<p class="first-name">{{Name}}</p> 
   		</li>
-
-  		<li>
-  			<p class="first-name">First</p> 
-  			<p class="last-name truncate">Last</p>
-  			<p class="delete-name">Delete</p>
-  		</li>
-
-  		<li>
-  			<p class="first-name">First</p> 
-  			<p class="last-name truncate">Last</p>
-  			<p class="delete-name">Delete</p>
-  		</li>
-
-  		<li>
-  			<p class="first-name">First</p> 
-  			<p class="last-name truncate">Last</p>
-  			<p class="delete-name">Delete</p>
-  		</li>
-
-  		<li>
-  			<p class="first-name">First</p> 
-  			<p class="last-name truncate">Last</p>
-  			<p class="delete-name">Delete</p>
-  		</li>
-
-  		<li>
-  			<p class="first-name">First</p> 
-  			<p class="last-name truncate">Last</p>
-  			<p class="delete-name">Delete</p>
-  		</li>
-
-  		<li>
-  			<p class="first-name">First</p> 
-  			<p class="last-name truncate">Last</p>
-  			<p class="delete-name">Delete</p>
-  		</li>
-
-  		<li>
-  			<p class="first-name">First</p> 
-  			<p class="last-name truncate">Last</p>
-  			<p class="delete-name">Delete</p>
-  		</li>
-
-  		<li>
-  			<p class="first-name">First</p> 
-  			<p class="last-name truncate">Last</p>
-  			<p class="delete-name">Delete</p>
-  		</li>
-
-  		<li>
-  			<p class="first-name">First</p> 
-  			<p class="last-name truncate">Last</p>
-  			<p class="delete-name">Delete</p>
-  		</li>
-
-  		<li>
-  			<p class="first-name">First</p> 
-  			<p class="last-name truncate">Last</p>
-  			<p class="delete-name">Delete</p>
-  		</li>
+	{{/each}}
 
   	</ul>
 

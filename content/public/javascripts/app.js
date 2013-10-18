@@ -242,12 +242,6 @@ window.require.register("lib/router", function(exports, require, module) {
   			window.history.back();
   		});
 
-  		$('.navbar-close').on('vclick', function(e) {
-  			e.preventDefault();
-  			$.mobile.activePage.back = true;
-  			window.history.back();
-  		});
-
   		// Loading spinner
   		//$('body').append('<div id="theSpinner" class="spinnerModal" style="display:none"><div class="spinnerContainer"><div class="spinnerWrapper"><div class="spinner"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div><div class="bar4"></div><div class="bar5"></div><div class="bar6"></div><div class="bar7"></div><div class="bar8"></div><div class="bar9"></div><div class="bar10"></div><div class="bar11"></div><div class="bar12"></div></div></div><div class="description">Pencils Ready!</div></div></div>');
 
@@ -555,19 +549,7 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   		this.bookDetail = new Book();
   		this.bookDetail.bookJSON ={};
   		this.$el.html(this.template(Application.bookDetailView.bookInfo));
-  		/*
-  		this.$el.html(this.template(this.bookDetail.bookJSON));
 
-  		this.bookDetail.fetch({
-  			processData:true,
-  			xhrFields: {withCredentials: true},
-  			add:true,
-  			data: {"bookId":Application.bookDetailView.bookId},
-  			success: function(data){
-  				Application.bookDetailView.$el.trigger("dataLoaded");
-  			}
-  		});
-  */
   		return this;
   	},
 
@@ -1273,7 +1255,6 @@ window.require.register("views/signup-view", function(exports, require, module) 
 window.require.register("views/studentlist-view", function(exports, require, module) {
   var View = require('./view');
   var template = require('./templates/studentList');
-  var Library = require('../models/library');
 
   module.exports = View.extend({
   	id: 'studentlist-view',
@@ -1289,15 +1270,19 @@ window.require.register("views/studentlist-view", function(exports, require, mod
 
   	render: function() {
 
-  		this.$el.html(this.template());
+  		var that = this;
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("Student");
   		query.equalTo("UserId", currentUserId);
   		query.find({
   			success: function(students) {
-  				console.log(students);
-  				// userPosts contains all of the posts by the current user.
+  				that.studentJSON = JSON.stringify(students);
+  				var array = ("{\"student\":"+that.studentJSON+"}");
+  				console.log(array);
+  				//array = JSON.stringify(array);
+  				//that.$el.html(that.template('{"student": [{"Name": "Steven"},{"Name": "Philip"}]}'));
+  				that.$el.html(that.template(array));
 
   			},
   			error: function(error) {
@@ -1325,180 +1310,195 @@ window.require.register("views/studentlist-view", function(exports, require, mod
 });
 window.require.register("views/templates/addBook", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    var buffer = "", foundHelper, self=this;
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/140x190\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> ";
-    buffer += "\n</div> ";
-    buffer += "\n\n";
-    return buffer;});
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/140x190\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
+      + "\n</div> "
+      + "\n\n";
+    return buffer;
+    });
 });
 window.require.register("views/templates/addStudent", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    var buffer = "", foundHelper, self=this;
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n  <h1>Add Student</h1>\n    <div class=\"back\">Cancel</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"add-first\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n\n    <div id=\"add-student\" class=\"button primary-fill\">Add Student</div>\n\n  </div> ";
-    buffer += "\n</div> ";
-    buffer += "\n";
-    return buffer;});
+    buffer += "<div id=\"header\">\n  <h1>Add Student</h1>\n    <div class=\"back\">Cancel</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"add-first\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n\n    <div id=\"add-student\" class=\"button primary-fill\">Add Student</div>\n\n  </div> "
+      + "\n</div> "
+      + "\n";
+    return buffer;
+    });
 });
 window.require.register("views/templates/bookDetail", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
   function program1(depth0,data) {
     
     var buffer = "", stack1;
     buffer += "\n  ";
-    foundHelper = helpers.name;
-    stack1 = foundHelper || depth0.name;
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "\n  ";
-    return buffer;}
+    if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\n  ";
+    return buffer;
+    }
 
   function program3(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n<div style=\"height:100px; width:100px; background-image: url('";
-    foundHelper = helpers.ISBN;
-    stack1 = foundHelper || depth0.ISBN;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.cover);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.medium);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "ISBN.cover.medium", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "'); \"></div>\n  ";
-    return buffer;}
+    buffer += "\n<div style=\"height:100px; width:100px; background-image: url('"
+      + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.cover)),stack1 == null || stack1 === false ? stack1 : stack1.medium)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+      + "'); \"></div>\n  ";
+    return buffer;
+    }
 
   function program5(depth0,data) {
     
     
-    return "\n<div style=\"padding-top:30px;\">No Cover Found</div>\n";}
+    return "\n<div style=\"padding-top:30px;\">No Cover Found</div>\n";
+    }
 
-    buffer += "\n<div id=\"scanner\" style=\"padding-top:30px;\">Title: ";
-    foundHelper = helpers.ISBN;
-    stack1 = foundHelper || depth0.ISBN;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.title);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "ISBN.title", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div>\n\n<div id=\"scanner\" style=\"padding-top:30px;\">Author:   ";
-    foundHelper = helpers.ISBN;
-    stack1 = foundHelper || depth0.ISBN;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.authors);
-    stack2 = helpers.each;
-    tmp1 = self.program(1, program1, data);
-    tmp1.hash = {};
-    tmp1.fn = tmp1;
-    tmp1.inverse = self.noop;
-    stack1 = stack2.call(depth0, stack1, tmp1);
-    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n<div id=\"scanner\" style=\"padding-top:30px;\">Title: "
+      + escapeExpression(((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+      + "</div>\n\n<div id=\"scanner\" style=\"padding-top:30px;\">Author:   ";
+    stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    if(stack2 || stack2 === 0) { buffer += stack2; }
     buffer += "\n  </div>\n  ";
-    foundHelper = helpers.ISBN;
-    stack1 = foundHelper || depth0.ISBN;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.cover);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.medium);
-    stack2 = helpers['if'];
-    tmp1 = self.program(3, program3, data);
-    tmp1.hash = {};
-    tmp1.fn = tmp1;
-    tmp1.inverse = self.program(5, program5, data);
-    stack1 = stack2.call(depth0, stack1, tmp1);
-    if(stack1 || stack1 === 0) { buffer += stack1; }
+    stack2 = helpers['if'].call(depth0, ((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.cover)),stack1 == null || stack1 === false ? stack1 : stack1.medium), {hash:{},inverse:self.program(5, program5, data),fn:self.program(3, program3, data),data:data});
+    if(stack2 || stack2 === 0) { buffer += stack2; }
     buffer += "\n\n\n\n";
-    return buffer;});
+    return buffer;
+    });
 });
 window.require.register("views/templates/bookList", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    var buffer = "", foundHelper, self=this;
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    var buffer = "";
 
 
-    buffer += "<div id=\"header\" class=\"extended-header\">\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\">\n  	<ul id=\"booklist\">\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2 class=\"truncate-two\">Surprise Attack of Jabba the Puppet: An Origami Yoda Book Longer Title</h2>\n  				<h3 class=\"truncate\">Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  	</ul>\n\n  </div> ";
-    buffer += "\n</div> ";
-    buffer += "\n\n";
-    return buffer;});
+    buffer += "<div id=\"header\" class=\"extended-header\">\n	<div id=\"add\" class=\"right-btn\">Add</div>\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\">\n  	<ul id=\"booklist\">\n  		<li>\n  			<img src=\"http://placehold.it/50x75\">\n  			<div class=\"book-meta\">\n  				<h2 class=\"truncate-two\">Surprise Attack of Jabba the Puppet: An Origami Yoda Book Longer Title</h2>\n  				<h3 class=\"truncate\">Author</h3>\n  				<p>Number Available</p>\n  			</div>\n  		</li>\n\n  	</ul>\n\n  </div> "
+      + "\n</div> "
+      + "\n\n";
+    return buffer;
+    });
 });
 window.require.register("views/templates/checkIn", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    
 
 
-    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";});
+    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";
+    });
 });
 window.require.register("views/templates/checkOut", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    
 
 
-    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";});
+    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";
+    });
 });
 window.require.register("views/templates/enterPassword", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    
 
 
-    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n";});
+    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n";
+    });
 });
 window.require.register("views/templates/home", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    var buffer = "", foundHelper, self=this;
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n	<h1>Library</h1>\n</div>\n\n<div id=\"wrapper\">\n	<div id=\"scroller\" class=\"home\">\n		<div id=\"checkOut\" class=\"check-out button primary-fill\">Check Out</div>\n		<div id=\"checkIn\" class=\"check-in button secondary\">Check In</div>\n	</div> ";
-    buffer += "\n</div> ";
-    return buffer;});
+    buffer += "<div id=\"header\">\n	<h1>Library</h1>\n</div>\n\n<div id=\"wrapper\">\n	<div id=\"scroller\" class=\"home\">\n		<div id=\"checkOut\" class=\"check-out button primary-fill\">Check Out</div>\n		<div id=\"checkIn\" class=\"check-in button secondary\">Check In</div>\n	</div> "
+      + "\n</div> ";
+    return buffer;
+    });
 });
 window.require.register("views/templates/login", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    var buffer = "", foundHelper, self=this;
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n  <div class=\"back\">Cancel</div>\n  <h1>Login</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <h2>First things first.</h2>\n    <input id=\"login-email\" class=\"first-input\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"login-pass\" type=\"password\" placeholder=\"Password\" />\n\n    <div id=\"login\" class=\"button primary-fill\">Sign In</div>\n    <div id=\"login-have-account\" class=\"button primary\">Create an Account</div>\n    <div id=\"forgot\">Forgot your password?</div>\n\n    <div id=\"disclaimer\">\n      By creating an account you agree to our <a href=\"#\">Terms of Service</a> and <a href=\"#\">Privacy Policy</a>.\n    </div>\n\n  </div> ";
-    buffer += "\n</div> ";
-    buffer += "\n\n";
-    return buffer;});
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Cancel</div>\n  <h1>Login</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <h2>First things first.</h2>\n    <input id=\"login-email\" class=\"first-input\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"login-pass\" type=\"password\" placeholder=\"Password\" />\n\n    <div id=\"login\" class=\"button primary-fill\">Sign In</div>\n    <div id=\"login-have-account\" class=\"button primary\">Create an Account</div>\n    <div id=\"forgot\">Forgot your password?</div>\n\n    <div id=\"disclaimer\">\n      By creating an account you agree to our <a href=\"#\">Terms of Service</a> and <a href=\"#\">Privacy Policy</a>.\n    </div>\n\n  </div> "
+      + "\n</div> "
+      + "\n\n";
+    return buffer;
+    });
 });
 window.require.register("views/templates/settings", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    var buffer = "", foundHelper, self=this;
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n\n    <div id=\"save\" class=\"button primary\">Update Profile</div>\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n\n  </div> ";
-    buffer += "\n</div> ";
-    buffer += "\n";
-    return buffer;});
+    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n\n    <div id=\"save\" class=\"button primary\">Update Profile</div>\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n\n  </div> "
+      + "\n</div> "
+      + "\n";
+    return buffer;
+    });
 });
 window.require.register("views/templates/signup", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    var buffer = "", foundHelper, self=this;
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n  <div class=\"back\">Cancel</div>\n  <h1>Sign Up</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <h2>This'll be quick.</h2>\n    ";
-    buffer += "\n    <input id=\"sign-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"sign-pass\" type=\"password\" placeholder=\"Password\" />\n    <input id=\"sign-pass-confirm\" type=\"password\" placeholder=\"Confirm Password\" />\n\n    <div id=\"create-account\" class=\"button primary-fill\">Create Account</div>\n    <div id=\"have-account\" class=\"button primary\">I have an Account</div>\n\n    <div id=\"disclaimer\">\n      By creating an account you agree to our <a href=\"#\">Terms of Service</a> and <a href=\"#\">Privacy Policy</a>.\n    </div>\n\n  </div> ";
-    buffer += "\n</div> ";
-    buffer += "\n\n";
-    return buffer;});
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Cancel</div>\n  <h1>Sign Up</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <h2>This'll be quick.</h2>\n    "
+      + "\n    <input id=\"sign-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"sign-pass\" type=\"password\" placeholder=\"Password\" />\n    <input id=\"sign-pass-confirm\" type=\"password\" placeholder=\"Confirm Password\" />\n\n    <div id=\"create-account\" class=\"button primary-fill\">Create Account</div>\n    <div id=\"have-account\" class=\"button primary\">I have an Account</div>\n\n    <div id=\"disclaimer\">\n      By creating an account you agree to our <a href=\"#\">Terms of Service</a> and <a href=\"#\">Privacy Policy</a>.\n    </div>\n\n  </div> "
+      + "\n</div> "
+      + "\n\n";
+    return buffer;
+    });
 });
 window.require.register("views/templates/studentList", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    var buffer = "", foundHelper, self=this;
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
+  function program1(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n	whyyyyy\n  		<li>\n  			<p class=\"first-name\">";
+    if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</p> \n  		</li>\n	";
+    return buffer;
+    }
 
-    buffer += "<div id=\"header\">\n	<h1>Student List</h1>\n	<div id=\"add\" class=\"right-btn\">Add</div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  		<li>\n  			<p class=\"first-name\">First</p> \n  			<p class=\"last-name truncate\">Last</p>\n  			<p class=\"delete-name\">Delete</p>\n  		</li>\n\n  	</ul>\n\n  </div> ";
-    buffer += "\n</div> ";
-    return buffer;});
+    buffer += "<div id=\"header\">\n	<h1>Student List</h1>\n	<div id=\"add\" class=\"right-btn\">Add</div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">	\n	"
+      + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+      + "\n	";
+    stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n\n  	</ul>\n\n  </div> "
+      + "\n</div> ";
+    return buffer;
+    });
 });
 window.require.register("views/view", function(exports, require, module) {
   require('lib/view_helper');

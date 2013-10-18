@@ -1,6 +1,5 @@
 var View = require('./view');
 var template = require('./templates/studentList');
-var Library = require('../models/library');
 
 module.exports = View.extend({
 	id: 'studentlist-view',
@@ -16,15 +15,19 @@ module.exports = View.extend({
 
 	render: function() {
 
-		this.$el.html(this.template());
+		var that = this;
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("Student");
 		query.equalTo("UserId", currentUserId);
 		query.find({
 			success: function(students) {
-				console.log(students);
-				// userPosts contains all of the posts by the current user.
+				that.studentJSON = JSON.stringify(students);
+				var array = ("{\"student\":"+that.studentJSON+"}");
+				console.log(array);
+				//array = JSON.stringify(array);
+				//that.$el.html(that.template('{"student": [{"Name": "Steven"},{"Name": "Philip"}]}'));
+				that.$el.html(that.template(array));
 
 			},
 			error: function(error) {

@@ -17,19 +17,7 @@ module.exports = View.extend({
 		this.bookDetail = new Book();
 		this.bookDetail.bookJSON ={};
 		this.$el.html(this.template(Application.bookDetailView.bookInfo));
-		/*
-		this.$el.html(this.template(this.bookDetail.bookJSON));
 
-		this.bookDetail.fetch({
-			processData:true,
-			xhrFields: {withCredentials: true},
-			add:true,
-			data: {"bookId":Application.bookDetailView.bookId},
-			success: function(data){
-				Application.bookDetailView.$el.trigger("dataLoaded");
-			}
-		});
-*/
 		return this;
 	},
 
