@@ -4,7 +4,7 @@ module.exports = Backbone.Router.extend({
 
 	routes: {
 		// If you want to save login state, send them to a prelogin function which checks for login state
-		'':'checkIn',
+		'':'preLogin',
 		'home':'home',
 		'addBook':'addBook',
 		'addStudent':'addStudent',

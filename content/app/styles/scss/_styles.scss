@@ -320,7 +320,7 @@ HOME
 ADD BOOK
 ********************************/
 .add-book,
-.checkin {
+.check {
   width: 90%;
   margin: 0 auto;
   text-align: center;
@@ -363,9 +363,9 @@ ADD BOOK
 }
 
 /********************************
-CHECK IN
+CHECK IN / CHECK OUT
 ********************************/
-.checkin {
+.check{
   width: 100%;
   margin: 0 auto;
   padding: 75px 5% 10px 5% !important;

@@ -219,7 +219,7 @@ window.require.register("lib/router", function(exports, require, module) {
 
   	routes: {
   		// If you want to save login state, send them to a prelogin function which checks for login state
-  		'':'checkIn',
+  		'':'preLogin',
   		'home':'home',
   		'addBook':'addBook',
   		'addStudent':'addStudent',
@@ -1335,7 +1335,7 @@ window.require.register("views/templates/checkIn", function(exports, require, mo
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n\n<div class=\"checkin\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/118x160\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div class=\"check-btn button disabled\">Check In</div> "
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/118x160\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div class=\"check-btn button disabled\">Check In</div> "
       + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n  <div id=\"wrapper\" class=\"check-wrap\">\n     <div id=\"scroller\" class=\"check-scroller\">\n     	"
       + "\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n  </div> "
       + "\n</div> "
@@ -1347,10 +1347,15 @@ window.require.register("views/templates/checkOut", function(exports, require, m
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    
+    var buffer = "";
 
 
-    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check Out</h1>\n</div>\n\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/118x160\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div class=\"check-btn button disabled\">Check Out</div> "
+      + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n  <div id=\"wrapper\" class=\"check-wrap\">\n     <div id=\"scroller\" class=\"check-scroller\">\n      "
+      + "\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n  </div> "
+      + "\n</div> "
+      + "\n\n";
+    return buffer;
     });
 });
 window.require.register("views/templates/enterPassword", function(exports, require, module) {
