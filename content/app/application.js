@@ -98,6 +98,8 @@ Application = {
 
 
 			$('#home_tab').bind('tap', homeTab);
+			$('#backButton').bind('tap', homeTab);
+			
 			$('#bookList_tab').bind('click', bookListTab); 
 			$('#studentList_tab').bind('tap', studentListTab); 
 			$('#settings_tab').bind('tap', settingsTab);

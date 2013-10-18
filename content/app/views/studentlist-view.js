@@ -24,7 +24,6 @@ module.exports = View.extend({
 			success: function(students) {
 				var studentArray = JSON.stringify(students);
 				var studentArray = JSON.parse(studentArray);
-				that.studentArray = studentArray;				
 				that.$el.html(that.template(studentArray));
 			},
 			error: function(error) {
