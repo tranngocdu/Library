@@ -6,7 +6,7 @@ module.exports = View.extend({
 	template: template,
 	events: {
 		'click #add':'addStudent',
-		'click #delete':'deleteStudent'
+		'click .delete-name':'deleteStudent'
 	},
 
 	initialize: function() {
@@ -23,7 +23,8 @@ module.exports = View.extend({
 		query.find({
 			success: function(students) {
 				var studentArray = JSON.stringify(students);
-				var studentArray = JSON.parse(studentArray);				
+				var studentArray = JSON.parse(studentArray);
+				that.studentArray = studentArray;				
 				that.$el.html(that.template(studentArray));
 			},
 			error: function(error) {
@@ -42,8 +43,44 @@ module.exports = View.extend({
 		Application.router.navigate("#addStudent", {trigger:true});
 	},
 
-	deleteStudent: function() {
-
+	deleteStudent: function(e) {
+		var studentId = $(e.currentTarget).data('id');
+		$(e.currentTarget).remove();
+		var Student = Parse.Object.extend("Student");
+		var query = new Parse.Query(Student);
+		query.get(studentId, {
+		  success: function(myObj) {
+		    // The object was retrieved successfully.
+		    myObj.destroy({});
+		  },
+		  error: function(object, error) {
+		    alert("This was not retreived correctly.");
+		  }
+		});
+		
+		/*navigator.notification.confirm(
+			'Are you sure you want to delete this student?',  // message
+			function(buttonIndex){
+				if (buttonIndex == 2)
+				{
+					var Student = Parse.Object.extend("Student");
+					var query = new Parse.Query(Student);
+					query.get(studentId, {
+					  success: function(myObj) {
+					    // The object was retrieved successfully.
+					    myObj.destroy({});
+					  },
+					  error: function(object, error) {
+					    alert("This was not retreived correctly.");
+					  }
+					});
+				}
+			},         // callback
+			'Delete',            // title
+			'Cancel, OK'                  // buttonName
+		);
+		//send call to delete student
+		*/
 	}
 
 });

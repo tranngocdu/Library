@@ -5,7 +5,6 @@ module.exports = View.extend({
 	id: 'signup-view',
 	template: template,
 	events: {
-		"dataLoaded":"append",
 		'click #create-account':'signUp',
 		'click #have-account':'haveAccount'
 	},

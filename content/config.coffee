@@ -19,7 +19,8 @@ exports.config =
           'vendor/scripts/backbone/json2.js',
           'vendor/scripts/backbone/backbone1.0-min.js',
           'vendor/scripts/backbone/backstack.js',
-          'vendor/scripts/parse-1.2.12.min.js',
+          'vendor/scripts/jquery.touchToClick.js',
+          'vendor/parse-1.2.12.min.js',
           'vendor/scripts/bg-options.js'
         ]
 

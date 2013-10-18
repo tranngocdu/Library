@@ -236,7 +236,6 @@ window.require.register("lib/router", function(exports, require, module) {
   	initialize:function () {
   		// Handle back button throughout the application or menu buttons
   		$('.back').on('vclick', function(e) {
-  			alert("v");
   			e.preventDefault();
   			$.mobile.activePage.back = true;
   			window.history.back();
@@ -1158,7 +1157,6 @@ window.require.register("views/signup-view", function(exports, require, module) 
   	id: 'signup-view',
   	template: template,
   	events: {
-  		"dataLoaded":"append",
   		'click #create-account':'signUp',
   		'click #have-account':'haveAccount'
   	},
@@ -1261,7 +1259,7 @@ window.require.register("views/studentlist-view", function(exports, require, mod
   	template: template,
   	events: {
   		'click #add':'addStudent',
-  		'click #delete':'deleteStudent'
+  		'click .delete-name':'deleteStudent'
   	},
 
   	initialize: function() {
@@ -1278,7 +1276,8 @@ window.require.register("views/studentlist-view", function(exports, require, mod
   		query.find({
   			success: function(students) {
   				var studentArray = JSON.stringify(students);
-  				var studentArray = JSON.parse(studentArray);				
+  				var studentArray = JSON.parse(studentArray);
+  				that.studentArray = studentArray;				
   				that.$el.html(that.template(studentArray));
   			},
   			error: function(error) {
@@ -1297,8 +1296,44 @@ window.require.register("views/studentlist-view", function(exports, require, mod
   		Application.router.navigate("#addStudent", {trigger:true});
   	},
 
-  	deleteStudent: function() {
-
+  	deleteStudent: function(e) {
+  		var studentId = $(e.currentTarget).data('id');
+  		$(e.currentTarget).remove();
+  		var Student = Parse.Object.extend("Student");
+  		var query = new Parse.Query(Student);
+  		query.get(studentId, {
+  		  success: function(myObj) {
+  		    // The object was retrieved successfully.
+  		    myObj.destroy({});
+  		  },
+  		  error: function(object, error) {
+  		    alert("This was not retreived correctly.");
+  		  }
+  		});
+  		
+  		/*navigator.notification.confirm(
+  			'Are you sure you want to delete this student?',  // message
+  			function(buttonIndex){
+  				if (buttonIndex == 2)
+  				{
+  					var Student = Parse.Object.extend("Student");
+  					var query = new Parse.Query(Student);
+  					query.get(studentId, {
+  					  success: function(myObj) {
+  					    // The object was retrieved successfully.
+  					    myObj.destroy({});
+  					  },
+  					  error: function(object, error) {
+  					    alert("This was not retreived correctly.");
+  					  }
+  					});
+  				}
+  			},         // callback
+  			'Delete',            // title
+  			'Cancel, OK'                  // buttonName
+  		);
+  		//send call to delete student
+  		*/
   	}
 
   });
@@ -1436,7 +1471,7 @@ window.require.register("views/templates/login", function(exports, require, modu
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n  <div class=\"back\">Cancel</div>\n  <h1>Login</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <h2>First things first.</h2>\n    <input id=\"login-email\" class=\"first-input\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"login-pass\" type=\"password\" placeholder=\"Password\" />\n\n    <div id=\"login\" class=\"button primary-fill\">Sign In</div>\n    <div id=\"login-have-account\" class=\"button primary\">Create an Account</div>\n    <div id=\"forgot\">Forgot your password?</div>\n\n    <div id=\"disclaimer\">\n      By creating an account you agree to our <a href=\"#\">Terms of Service</a> and <a href=\"#\">Privacy Policy</a>.\n    </div>\n\n  </div> "
+    buffer += "<div id=\"header\">\n  <h1>Login</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <h2>First things first.</h2>\n    <input id=\"login-email\" class=\"first-input\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"login-pass\" type=\"password\" placeholder=\"Password\" />\n\n    <div id=\"login\" class=\"button primary-fill\">Sign In</div>\n    <div id=\"login-have-account\" class=\"button primary\">Create an Account</div>\n    <div id=\"forgot\">Forgot your password?</div>\n\n    <div id=\"disclaimer\">\n      By creating an account you agree to our <a href=\"#\">Terms of Service</a> and <a href=\"#\">Privacy Policy</a>.\n    </div>\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
@@ -1482,7 +1517,11 @@ window.require.register("views/templates/studentList", function(exports, require
     if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</p> \n  		</li>\n	";
+      + "</p> \n			<p data-id=\"";
+    if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\" class=\"delete-name\">Delete</p>\n  		</li>\n	";
     return buffer;
     }
 
