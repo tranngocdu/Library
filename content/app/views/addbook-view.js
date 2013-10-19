@@ -36,9 +36,11 @@ module.exports = View.extend({
 		var lengthAuthors = this.bookData.ISBN.authors.length;
 		var i = 0;
 		var authorArray = {};
-		//while (i < lengthAuthors) {
-			//	authorArray.push(data.ISBN.authors[i]);
-			//}
+		while (i < lengthAuthors) {
+				authorArray.push(data.ISBN.authors[i]);
+				i++;
+			}
+			alert(authorArray);
 			newBook.set("author", authorArray);
 			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
 			newBook.set("quantity_total", "2");

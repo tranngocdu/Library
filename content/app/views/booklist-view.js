@@ -1,5 +1,6 @@
 var View = require('./view');
 var template = require('./templates/bookList');
+var templateBooks = require('./templates/bookListBooks');
 var Library = require('../models/library');
 var Book = require('../models/book');
 
@@ -8,6 +9,7 @@ var Book = require('../models/book');
 module.exports = View.extend({
 	id: 'booklist-view',
 	template: template,
+	templateBooks:templateBooks,
 	events: {
 		'click #filt-all':'allSelected',
 		'click #filt-available':'available',
@@ -21,21 +23,18 @@ module.exports = View.extend({
 	},
 
 	render: function() {
-		this.bookList = new Library();
 		var that = this;
-		this.bookList.libraryJSON ={};
-		this.$el.html(this.template(this.bookList.libraryJSON));
+		this.$el.html(this.template());
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
-		query.equalTo("User", currentUserId);
+		query.equalTo("UserId", currentUserId);
 		query.find({
 			success: function(usersBooks) {
-				console.log(usersBooks);
 				var bookArray = JSON.stringify(usersBooks);
 				var bookArray = JSON.parse(bookArray);
 				that.bookArray = bookArray;				
-				that.$el.html(that.template(bookArray));
+				$('#wrapper').html(that.templateBooks(bookArray));
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);

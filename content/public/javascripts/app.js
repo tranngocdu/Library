@@ -431,9 +431,11 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		var lengthAuthors = this.bookData.ISBN.authors.length;
   		var i = 0;
   		var authorArray = {};
-  		//while (i < lengthAuthors) {
-  			//	authorArray.push(data.ISBN.authors[i]);
-  			//}
+  		while (i < lengthAuthors) {
+  				authorArray.push(data.ISBN.authors[i]);
+  				i++;
+  			}
+  			alert(authorArray);
   			newBook.set("author", authorArray);
   			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
   			newBook.set("quantity_total", "2");
@@ -531,6 +533,7 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
 window.require.register("views/booklist-view", function(exports, require, module) {
   var View = require('./view');
   var template = require('./templates/bookList');
+  var templateBooks = require('./templates/bookListBooks');
   var Library = require('../models/library');
   var Book = require('../models/book');
 
@@ -539,6 +542,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   module.exports = View.extend({
   	id: 'booklist-view',
   	template: template,
+  	templateBooks:templateBooks,
   	events: {
   		'click #filt-all':'allSelected',
   		'click #filt-available':'available',
@@ -552,21 +556,18 @@ window.require.register("views/booklist-view", function(exports, require, module
   	},
 
   	render: function() {
-  		this.bookList = new Library();
   		var that = this;
-  		this.bookList.libraryJSON ={};
-  		this.$el.html(this.template(this.bookList.libraryJSON));
+  		this.$el.html(this.template());
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("NewBook");
-  		query.equalTo("User", currentUserId);
+  		query.equalTo("UserId", currentUserId);
   		query.find({
   			success: function(usersBooks) {
-  				console.log(usersBooks);
   				var bookArray = JSON.stringify(usersBooks);
   				var bookArray = JSON.parse(bookArray);
   				that.bookArray = bookArray;				
-  				that.$el.html(that.template(bookArray));
+  				$('#wrapper').html(that.templateBooks(bookArray));
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
@@ -1294,6 +1295,18 @@ window.require.register("views/templates/bookList", function(exports, require, m
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    var buffer = "";
+
+
+    buffer += "<div id=\"header\" class=\"extended-header\">\n	<div id=\"add\" class=\"right-btn\">Add</div>\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n\n</div> "
+      + "\n\n";
+    return buffer;
+    });
+});
+window.require.register("views/templates/bookListBooks", function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
   function program1(depth0,data) {
@@ -1319,12 +1332,11 @@ window.require.register("views/templates/bookList", function(exports, require, m
     return buffer;
     }
 
-    buffer += "<div id=\"header\" class=\"extended-header\">\n	<div id=\"add\" class=\"right-btn\">Add</div>\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n  <div id=\"scroller\" class=\"usersBooks\">\n  	   <ul id=\"booklist\">\n  ";
+    buffer += "\n  <div id=\"scroller\" class=\"usersBooks\">\n  	   <ul id=\"booklist\">\n  ";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n\n    </ul>\n\n  </div> "
-      + "\n</div> "
-      + "\n\n";
+      + "\n";
     return buffer;
     });
 });
