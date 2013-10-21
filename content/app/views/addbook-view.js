@@ -30,15 +30,18 @@ module.exports = View.extend({
 		var username = window.localStorage.getItem("username")
 		var NewBook=Parse.Object.extend("NewBook");
 		var newBook=new NewBook();
+		var that = this;
 
-		newBook.set("title", this.bookData.ISBN.title);
+		newBook.set("title", that.bookData.ISBN.title);
 		newBook.set("userId", username);
-		var lengthAuthors = this.bookData.ISBN.authors.length;
+		var lengthAuthors = that.bookData.ISBN.authors.length;
 		var i = 0;
-		var authorArray = {};
-		//while (i < lengthAuthors) {
-			//	authorArray.push(data.ISBN.authors[i]);
-			//}
+		var authorArray = new Array ();
+		while (i < lengthAuthors) {
+				authorArray.push(that.bookData.ISBN.authors[i].name);
+				i++;
+			}
+			alert(authorArray);
 			newBook.set("author", authorArray);
 			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
 			newBook.set("quantity_total", "2");

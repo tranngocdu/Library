@@ -1,0 +1,24 @@
+
+  <div id="scroller" class="usersBooks">
+  	   <ul id="booklist">
+  {{#each this}}
+      <li id="{{objectId}}">
+        <table style="width:100%;">
+        <tr>
+          <td style="width:50%;">
+        <p class="Title">{{title}}</p> 
+        <p class="Author">{{author}}</p>
+          </td>
+          <td style="width:50%;">
+            <div style="float:right;">
+        <img src="{{cover_image}}">
+            </div>
+          </td>
+        </tr>
+        </table> 
+      </li>
+  {{/each}}
+
+    </ul>
+
+  </div> {{!-- /#scroller --}}
