@@ -219,7 +219,7 @@ window.require.register("lib/router", function(exports, require, module) {
 
   	routes: {
   		// If you want to save login state, send them to a prelogin function which checks for login state
-  		'':'checkIn',
+  		'':'preLogin',
   		'home':'home',
   		'addBook':'addBook',
   		'addStudent':'addStudent',
@@ -428,9 +428,6 @@ window.require.register("views/addbook-view", function(exports, require, module)
 
   		newBook.set("title", this.bookData.ISBN.title);
   		newBook.set("userId", username);
-  		alert(username);
-  		alert(this.bookData.ISBN.title);
-  		alert(this.bookData.ISBN.cover.medium);
   		var lengthAuthors = this.bookData.ISBN.authors.length;
   		var i = 0;
   		var authorArray = {};
@@ -543,10 +540,6 @@ window.require.register("views/booklist-view", function(exports, require, module
   	id: 'booklist-view',
   	template: template,
   	events: {
-  		'click #bookList':'bookList',
-  		'click #studentList':'studentList',
-  		'click #home':'home',
-  		"dataLoaded":"append",
   		'click #filt-all':'allSelected',
   		'click #filt-available':'available',
   		'click #filt-checked':'checkedOut',
@@ -574,19 +567,6 @@ window.require.register("views/booklist-view", function(exports, require, module
   				var bookArray = JSON.parse(bookArray);
   				that.bookArray = bookArray;				
   				that.$el.html(that.template(bookArray));
-<<<<<<< HEAD
-  				// userPosts contains all of the posts by the current user.
-  				//var length = usersBooks.length;
-  				//var i = 0;
-  				//while (i<length){
-  				//	console.log(usersBooks[i].attributes.title);
-  				//	title = usersBooks[i].attributes.title;
-  				//	image = usersBooks[i].attributes.cover_image;
-  					
-  				//	i++;
-  				//}
-=======
->>>>>>> 1930782150ec697a83da358d7af0a812cf4d750f
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
@@ -594,11 +574,6 @@ window.require.register("views/booklist-view", function(exports, require, module
   		});
 
   		return this;
-  	},
-
-  	append: function(){
-  		this.bookList.libraryJSON = this.bookList.handle();
-  		this.$el.html(this.template(this.bookList.libraryJSON));
   	},
 
   	allSelected: function() {
@@ -680,56 +655,10 @@ window.require.register("views/checkin-view", function(exports, require, module)
   	},
 
   	render: function() {
-  		this.$el.html(this.template());
+  		var data = Application.checkInView.bookData;
+  		this.bookData = data;
+  		this.$el.html(this.template(data));
   		return this;
-  	},
-  	
-  	
-  	checkIn:function () {
-  		var ISBN = $('#ISBN').val();
-  		var studentName = $('#studentName').val();
-
-  		if( ISBN && studentName)
-  		{
-  			$.ajax({
-  				data: {
-  					"studentName":studentName,
-  					"ISBN":ISBN,
-  				},
-  				url: Application.serverURL+"register",
-  				type: "POST",
-  				xhrFields: {
-  					withCredentials: true
-  				},
-  				success: function (data) {
-  					navigator.notification.alert(
-  						'Thank you for returning your book',  // message
-  						function alertDismissed() {}, // callback
-  						'Success',            // title
-  						'OK'                  // buttonName
-  					);
-  					
-  				},
-  				error: function (jqXHR, textStatus, errorThrown) {
-  					{
-  						navigator.notification.alert(
-  							'Unable to return book at this time.',  // message
-  							function alertDismissed() {}, // callback
-  							'Error',            // title
-  							'OK'                  // buttonName
-  						);
-  					}
-  				}
-  			});
-  		}
-  		else{
-  			navigator.notification.alert(
-  				'Please scan book and select name',  // message
-  				function alertDismissed() {}, // callback
-  				'All Fields Required',            // title
-  				'OK'                  // buttonName
-  			);
-  		}
   	}
 
   });
@@ -750,55 +679,10 @@ window.require.register("views/checkout-view", function(exports, require, module
   	},
 
   	render: function() {
-  		this.$el.html(this.template());
+  		var data = Application.checkOutView.bookData;
+  		this.bookData = data;
+  		this.$el.html(this.template(data));
   		return this;
-  	},
-  	
-  	checkOut:function () {
-  		var ISBN = $('#ISBN').val();
-  		var studentName = $('#studentName').val();
-
-  		if( ISBN && studentName)
-  		{
-  			$.ajax({
-  				data: {
-  					"studentName":studentName,
-  					"ISBN":ISBN,
-  				},
-  				url: Application.serverURL+"register",
-  				type: "POST",
-  				xhrFields: {
-  					withCredentials: true
-  				},
-  				success: function (data) {
-  					navigator.notification.alert(
-  						'Enjoy Your Book!',  // message
-  						function alertDismissed() {}, // callback
-  						'Success',            // title
-  						'OK'                  // buttonName
-  					);
-  					
-  				},
-  				error: function (jqXHR, textStatus, errorThrown) {
-  					{
-  						navigator.notification.alert(
-  							'Unable to checkout book at this time.',  // message
-  							function alertDismissed() {}, // callback
-  							'Error',            // title
-  							'OK'                  // buttonName
-  						);
-  					}
-  				}
-  			});
-  		}
-  		else{
-  			navigator.notification.alert(
-  				'Please scan book and select name',  // message
-  				function alertDismissed() {}, // callback
-  				'All Fields Required',            // title
-  				'OK'                  // buttonName
-  			);
-  		}
   	}
 
   });
@@ -886,7 +770,9 @@ window.require.register("views/home-view", function(exports, require, module) {
   		'click #scanner':'scanner',
   		"dataLoaded":"append",
   		'click #bookList':'bookList',
-  		'click #studentList':'studentList'
+  		'click #studentList':'studentList',
+  		'bookInfoCheckin':'bookInfoCheckin',
+  		'bookInfoCheckout':'bookInfoCheckout'
 
   	},
 
@@ -905,7 +791,7 @@ window.require.register("views/home-view", function(exports, require, module) {
   		scanner.scan(
   			function (result) {
   				Application.homeView.ISBN = result.text;
-  				Application.homeView.$el.trigger("getbookinfo");
+  				Application.homeView.$el.trigger("bookInfoCheckout");
 
   			}, 
   			function (error) {
@@ -920,7 +806,7 @@ window.require.register("views/home-view", function(exports, require, module) {
   		scanner.scan(
   			function (result) {
   				Application.loginView.ISBN = result.text;
-  				Application.loginView.$el.trigger("checkInInfo");
+  				Application.loginView.$el.trigger("bookInfoCheckin");
 
   			}, 
   			function (error) {
@@ -930,111 +816,72 @@ window.require.register("views/home-view", function(exports, require, module) {
 
   	},
 
-  	bookinfo: function () {
+  	bookList: function () {
+  		Application.router.navigate("#bookList", {trigger:true});
+  	},
+
+  	studentList: function () {
+  		Application.router.navigate("#studentList", {trigger:true});
+  	},
+
+  	bookInfoCheckout: function () {
 
   		$.ajax({
   			data: {
-  				bibkeys: "ISBN:" + Application.homeView.ISBN,
+  				bibkeys: "ISBN:" + Application.loginView.ISBN,
   				jscmd: "data",
   				format: "json"
   			},
   			url: "http://openlibrary.org/api/books",
   			type: "GET",
   			success: function (data) {
-  				alert("Success");
   				var dataString = JSON.stringify(data);
-  				//dataString.replace(/d{13}/g, '');
-
   				var combinedString = dataString.substring(0,6) + dataString.substring(20);
-  				var data=JSON.parse(combinedString);
-  				
-  				var username = window.localStorage.getItem("username")
-  				
-  				var NewBook=Parse.Object.extend("NewBook");
-  				var newBook=new NewBook();
-
-  				newBook.set("title", data.ISBN.title);
-  				newBook.set("userId", username);
-  				var lengthAuthors = data.ISBN.authors.length;
-  				var i = 0;
-  				var authorArray = {};
-  				//while (i < lengthAuthors) {
-  				//	authorArray.push(data.ISBN.authors[i]);
-  				//}
-  				newBook.set("author", authorArray);
-  				newBook.set("cover_image", data.ISBN.cover.medium);
-  				newBook.set("quantity_total", "2");
-  				newBook.set("quantity_out", "0");
-  				newBook.save(null, {
-  					success: function(newBook) {
-  						alert('It worked!');
-  					},
-  					error: function(newBook, error) {
-  						alert('Back to the drawing board');
-  					}
+  				var data = JSON.parse(combinedString);
+  				alert(data);
+  				Application.checkOutView.bookInfo = data;
+  				Application.router.navigate("#checkOut", {
+  					trigger: true
   				});
-  				Application.bookDetailView.bookInfo = data;
+  			},
+  			error: function (jqXHR,textStatus,errorThrown) {
+  				alert("Error");
+  			}
 
-  				//Application.router.navigate("#checkIn", {
-  					//	trigger: true
-  					//});
+  		});
 
-  				},
-  				error: function (jqXHR,textStatus,errorThrown) {
-  					alert("Error");
-  				}
+  	},
+  	
+  	bookInfoCheckin: function () {
 
-  			});
+  		$.ajax({
+  			data: {
+  				bibkeys: "ISBN:" + Application.loginView.ISBN,
+  				jscmd: "data",
+  				format: "json"
+  			},
+  			url: "http://openlibrary.org/api/books",
+  			type: "GET",
+  			success: function (data) {
+  				var dataString = JSON.stringify(data);
+  				var combinedString = dataString.substring(0,6) + dataString.substring(20);
+  				var data = JSON.parse(combinedString);
+  				alert(data);
+  				Application.checkInView.bookInfo = data;
+  				Application.router.navigate("#checkIn", {
+  					trigger: true
+  				});
+  			},
+  			error: function (jqXHR,textStatus,errorThrown) {
+  				alert("Error");
+  			}
 
-  		},
+  		});
 
-  		bookList: function () {
-  			Application.router.navigate("#bookList", {trigger:true});
-  		},
-
-  		studentList: function () {
-  			Application.router.navigate("#studentList", {trigger:true});
-  		},
-
-  		checkOutBook: function () {
-
-  			$.ajax({
-  				data: {
-  					bibkeys: "ISBN:" + Application.loginView.ISBN,
-  					jscmd: "data",
-  					format: "json"
-  				},
-  				url: "http://openlibrary.org/api/books",
-  				type: "GET",
-  				success: function (data) {
-  					var dataString = JSON.stringify(data);
-  					//dataString.replace(/d{13}/g, '');
-  					var combinedString = dataString.substring(0,6) + dataString.substring(20);
-  					var data=JSON.parse(combinedString);
-  					alert(data);
-  					Application.bookDetailView.bookInfo = data;
-  					Application.router.navigate("#checkOut", {
-  						trigger: true
-  					});
-  				},
-  				error: function (jqXHR,textStatus,errorThrown) {
-  					alert("Error");
-  				}
-
-  			});
-
-  		},
+  	}
 
 
-
-  		library: function() {
-  			Application.router.navigate("#library", {
-  				trigger: true
-  			});
-  		}
-
-
-  	});
+  });
 });
 window.require.register("views/login-view", function(exports, require, module) {
   var View = require('./view');
@@ -1488,8 +1335,9 @@ window.require.register("views/templates/checkIn", function(exports, require, mo
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n\n<div class=\"checkin\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/140x190\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div class=\"check-btn button disabled\">Check In</div>\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n  <div id=\"wrapper\" class=\"check-wrap\">\n     <div id=\"scroller\">\n     	"
-      + "\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n  </div> "
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/118x160\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div class=\"check-btn button disabled\">Check In</div> "
+      + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n  <div id=\"wrapper\" class=\"check-wrap\">\n     <div id=\"scroller\" class=\"check-scroller\">\n     	"
+      + "\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
@@ -1499,10 +1347,15 @@ window.require.register("views/templates/checkOut", function(exports, require, m
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    
+    var buffer = "";
 
 
-    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n\n<div id=\"footer\">Footer</div>";
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check Out</h1>\n</div>\n\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/118x160\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div class=\"check-btn button disabled\">Check Out</div> "
+      + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n  <div id=\"wrapper\" class=\"check-wrap\">\n     <div id=\"scroller\" class=\"check-scroller\">\n      "
+      + "\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n      names go here <br>\n  </div> "
+      + "\n</div> "
+      + "\n\n";
+    return buffer;
     });
 });
 window.require.register("views/templates/enterPassword", function(exports, require, module) {

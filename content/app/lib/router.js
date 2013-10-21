@@ -34,7 +34,7 @@ module.exports = Backbone.Router.extend({
 
 		// First page logic
 		this.firstPage = true;
-		$('body').append('<div id="footer"" style="z-index:10000"><ul><li id="home_tab" class="active tab">Home</li><li id="bookList_tab" class="tab">Books</li><li id="studentList_tab" class="tab">Students</li><li id="settings_tab" class="tab">Settings</li></ul></div>');
+		$('body').append('<div id="footer" style="z-index:10000"><ul><li id="home_tab" class="active tab">Home</li><li id="bookList_tab" class="tab">Books</li><li id="studentList_tab" class="tab">Students</li><li id="settings_tab" class="tab">Settings</li></ul></div>');
 
 		},
 
