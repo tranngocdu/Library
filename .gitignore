@@ -16,3 +16,8 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+
+/iOS/www/javascripts/app.js.map
+/iOS/www/javascripts/app.js
+/content/public/javascripts/app.js.map
+/content/public/javascripts/app.js
