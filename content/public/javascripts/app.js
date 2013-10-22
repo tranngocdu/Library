@@ -705,23 +705,44 @@ window.require.register("views/booklist-view", function(exports, require, module
 window.require.register("views/checkin-view", function(exports, require, module) {
   var View = require('./view');
   var template = require('./templates/checkIn');
+  var templateStudents = require('./templates/studentListCheck');
 
   module.exports = View.extend({
   	id: 'checkin-view',
   	template: template,
+  	templateStudents:templateStudents,
   	events: {
-  		'click #checkInButton':'checkIn'
-  		
+  		'click #checkIn':'checkIn'
   	},
 
   	initialize: function() {
   	},
 
   	render: function() {
-  		var data = Application.checkInView.bookData;
-  		this.bookData = data;
+  		var data = Application.checkInView.bookInfo;
   		this.$el.html(this.template(data));
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var query = new Parse.Query("Student");
+  		query.equalTo("UserId", currentUserId);
+  		//GARRETT!!!
+  		//See if we can find only students who have the book checked out?
+  		query.find({
+  			success: function(students) {
+  				var studentArray = JSON.stringify(students);
+  				var studentArray = JSON.parse(studentArray);
+  				$('#wrapper').html(that.templateStudents(studentArray));
+  			},
+  			error: function(error) {
+  				alert("Error: " + error.code + " " + error.message);
+  			}
+  		});
+
   		return this;
+  	},
+  	
+  	checkIn: function() {
+  		
   	}
 
   });
@@ -730,12 +751,15 @@ window.require.register("views/checkin-view", function(exports, require, module)
 window.require.register("views/checkout-view", function(exports, require, module) {
   var View = require('./view');
   var template = require('./templates/checkOut');
+  var templateStudents = require('./templates/studentListCheck');
+
 
   module.exports = View.extend({
   	id: 'checkout-view',
   	template: template,
+  	templateStudents:templateStudents,
   	events: {
-  		'click #checkOutButton':'checkOut',
+  		'click #checkOut':'checkOut',
   	},
 
   	initialize: function() {
@@ -743,10 +767,8 @@ window.require.register("views/checkout-view", function(exports, require, module
 
   	render: function() {
   		var data = Application.checkOutView.bookInfo;
-  		this.bookData = data;
   		this.$el.html(this.template(data));
   		var currentUser = Parse.User.current();
-  		console.log(currentUser);
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("Student");
   		query.equalTo("UserId", currentUserId);
@@ -754,7 +776,7 @@ window.require.register("views/checkout-view", function(exports, require, module
   			success: function(students) {
   				var studentArray = JSON.stringify(students);
   				var studentArray = JSON.parse(studentArray);
-  				that.$el.html(that.template(studentArray));
+  				$('#wrapper').html(that.templateStudents(studentArray));
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
@@ -762,6 +784,10 @@ window.require.register("views/checkout-view", function(exports, require, module
   		});
 
   		return this;
+  	},
+  	
+  	checkOut: function() {
+  		
   	}
 
   });
@@ -1426,10 +1452,8 @@ window.require.register("views/templates/checkIn", function(exports, require, mo
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/118x160\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div class=\"check-btn button disabled\">Check In</div> "
-      + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n  <div id=\"wrapper\" class=\"check-wrap\">\n     <div id=\"scroller\" class=\"check-scroller\">\n     	"
-      + "\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n     	names go here <br>\n  </div> "
-      + "\n</div> "
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/118x160\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div id=\"checkIn\" class=\"check-btn button disabled\">Check In</div> "
+      + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n  <div id=\"wrapper\" class=\"check-wrap\">\n     \n</div> "
       + "\n\n";
     return buffer;
     });
@@ -1451,25 +1475,6 @@ window.require.register("views/templates/checkOut", function(exports, require, m
     return buffer;
     }
 
-  function program3(depth0,data) {
-    
-    var buffer = "", stack1;
-    buffer += "\n      <li id=\"";
-    if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-    else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-    buffer += escapeExpression(stack1)
-      + "\">\n        <p class=\"first-name\">";
-    if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-    else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-    buffer += escapeExpression(stack1)
-      + "</p> \n      <p data-id=\"";
-    if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-    else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-    buffer += escapeExpression(stack1)
-      + "\" class=\"delete-name\">Delete</p>\n      </li>\n  ";
-    return buffer;
-    }
-
     buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check Out</h1>\n</div>\n\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\""
       + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.cover)),stack1 == null || stack1 === false ? stack1 : stack1.medium)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
       + "\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>"
@@ -1477,12 +1482,8 @@ window.require.register("views/templates/checkOut", function(exports, require, m
       + "</h2>\n      <h3>\n          ";
     stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack2 || stack2 === 0) { buffer += stack2; }
-    buffer += "\n      </h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div class=\"check-btn button disabled\">Check Out</div> "
-      + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n  <div id=\"wrapper\" class=\"check-wrap\">\n       <div id=\"scroller\" class=\"students\">\n    <ul id=\"studentlist\">\n  ";
-    stack2 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
-    if(stack2 || stack2 === 0) { buffer += stack2; }
-    buffer += "\n\n    </ul>\n\n  </div> "
-      + "\n</div> "
+    buffer += "\n      </h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div id=\"checkOut\" class=\"check-btn button disabled\">Check Out</div> "
+      + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n  <div id=\"wrapper\" class=\"check-wrap\">\n\n</div> "
       + "\n\n";
     return buffer;
     });
@@ -1579,6 +1580,38 @@ window.require.register("views/templates/studentList", function(exports, require
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n\n  	</ul>\n\n  </div> "
       + "\n</div> ";
+    return buffer;
+    });
+});
+window.require.register("views/templates/studentListCheck", function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+  function program1(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n    <li id=\"";
+    if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\">\n      <p data-id=\"";
+    if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\" class=\"first-name\">";
+    if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</p> \n    </li>\n";
+    return buffer;
+    }
+
+    buffer += " <div id=\"scroller\" class=\"students\">\n  <ul id=\"studentlist\">\n";
+    stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n\n  </ul>\n\n</div> ";
     return buffer;
     });
 });

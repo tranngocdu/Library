@@ -1,11 +1,14 @@
 var View = require('./view');
 var template = require('./templates/checkOut');
+var templateStudents = require('./templates/studentListCheck');
+
 
 module.exports = View.extend({
 	id: 'checkout-view',
 	template: template,
+	templateStudents:templateStudents,
 	events: {
-		'click #checkOutButton':'checkOut',
+		'click #checkOut':'checkOut',
 	},
 
 	initialize: function() {
@@ -13,10 +16,8 @@ module.exports = View.extend({
 
 	render: function() {
 		var data = Application.checkOutView.bookInfo;
-		this.bookData = data;
 		this.$el.html(this.template(data));
 		var currentUser = Parse.User.current();
-		console.log(currentUser);
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("Student");
 		query.equalTo("UserId", currentUserId);
@@ -24,7 +25,7 @@ module.exports = View.extend({
 			success: function(students) {
 				var studentArray = JSON.stringify(students);
 				var studentArray = JSON.parse(studentArray);
-				that.$el.html(that.template(studentArray));
+				$('#wrapper').html(that.templateStudents(studentArray));
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
@@ -32,6 +33,10 @@ module.exports = View.extend({
 		});
 
 		return this;
+	},
+	
+	checkOut: function() {
+		
 	}
 
 });
