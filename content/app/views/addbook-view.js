@@ -27,28 +27,32 @@ module.exports = View.extend({
 	},
 	
 	addBook: function() {
-		var username = window.localStorage.getItem("username")
+
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
 		var NewBook=Parse.Object.extend("NewBook");
 		var newBook=new NewBook();
-		var that = this;
-
-		newBook.set("title", that.bookData.ISBN.title);
-		newBook.set("userId", username);
-		var lengthAuthors = that.bookData.ISBN.authors.length;
+		newBook.set("title", this.bookData.ISBN.title);
+		//newBook.set("User", currentUserId);
+		console.log(currentUser);
+		var lengthAuthors = this.bookData.ISBN.authors.length;
 		var i = 0;
 		var authorArray = new Array ();
 		while (i < lengthAuthors) {
-				authorArray.push(that.bookData.ISBN.authors[i].name);
+				authorArray.push(this.bookData.ISBN.authors[i].name);
 				i++;
 			}
-			alert(authorArray);
+			authorArray = authorArray.toString();
 			newBook.set("author", authorArray);
+			if (typeof this.bookData.ISBN.cover!='undefined'){
 			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
+		};
 			newBook.set("quantity_total", "2");
 			newBook.set("quantity_out", "0");
+			newBook.set("UserId", "currentUserId");
 			newBook.save(null, {
 				success: function(newBook) {
-					alert('It worked!');
+						Application.router.navigate("#bookList" , {trigger: true});
 				},
 				error: function(newBook, error) {
 					alert('Back to the drawing board');

@@ -71,7 +71,7 @@ module.exports = View.extend({
 
 		$.ajax({
 			data: {
-				bibkeys: "ISBN:" + Application.loginView.ISBN,
+				bibkeys: "ISBN:" + Application.homeView.ISBN,
 				jscmd: "data",
 				format: "json"
 			},
@@ -83,6 +83,7 @@ module.exports = View.extend({
 				var data = JSON.parse(combinedString);
 				alert(data);
 				Application.checkOutView.bookInfo = data;
+				console.log(Application.checkOutView.bookInfo);
 				Application.router.navigate("#checkOut", {
 					trigger: true
 				});
