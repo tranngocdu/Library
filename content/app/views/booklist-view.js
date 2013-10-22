@@ -28,7 +28,7 @@ module.exports = View.extend({
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
-		query.equalTo("UserId", currentUserId);
+		query.equalTo("User", currentUserId);
 		query.find({
 			success: function(usersBooks) {
 				var bookArray = JSON.stringify(usersBooks);
@@ -48,18 +48,75 @@ module.exports = View.extend({
 		$('#filt-all').addClass("selected");
 		$('#filt-available').removeClass("selected");
 		$('#filt-checked').removeClass("selected");
+		var that = this;
+		this.$el.html(this.template());
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("User", currentUserId);
+		query.find({
+			success: function(usersBooks) {
+				var bookArray = JSON.stringify(usersBooks);
+				var bookArray = JSON.parse(bookArray);
+				that.bookArray = bookArray;				
+				$('#wrapper').html(that.templateBooks(bookArray));
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+
 	},
 
 	available: function() {
 		$('#filt-all').removeClass("selected");
 		$('#filt-available').addClass("selected");
 		$('#filt-checked').removeClass("selected");
+		var that = this;
+		this.$el.html(this.template());
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("User", currentUserId);
+		query.notEqualTo("quantity_available","0");
+		query.find({
+			success: function(usersBooks) {
+
+				var bookArray = JSON.stringify(usersBooks);
+				var bookArray = JSON.parse(bookArray);
+				that.bookArray = bookArray;				
+				$('#wrapper').html(that.templateBooks(bookArray));
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+
 	},
 
 	checkedOut: function() {
 		$('#filt-all').removeClass("selected");
 		$('#filt-available').removeClass("selected");
 		$('#filt-checked').addClass("selected");
+			var that = this;
+		this.$el.html(this.template());
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("User", currentUserId);
+		query.equalTo("quantity_out","0");
+		query.find({
+			success: function(usersBooks) {
+
+				var bookArray = JSON.stringify(usersBooks);
+				var bookArray = JSON.parse(bookArray);
+				that.bookArray = bookArray;				
+				$('#wrapper').html(that.templateBooks(bookArray));
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
 
 	},
 
