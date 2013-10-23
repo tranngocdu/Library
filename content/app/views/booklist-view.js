@@ -73,7 +73,6 @@ module.exports = View.extend({
 		$('#filt-available').addClass("selected");
 		$('#filt-checked').removeClass("selected");
 		var that = this;
-		this.$el.html(this.template());
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
@@ -98,8 +97,9 @@ module.exports = View.extend({
 		$('#filt-all').removeClass("selected");
 		$('#filt-available').removeClass("selected");
 		$('#filt-checked').addClass("selected");
-			var that = this;
-		this.$el.html(this.template());
+		alert("and here");
+		
+		var that = this;
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
