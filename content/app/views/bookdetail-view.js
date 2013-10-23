@@ -14,16 +14,14 @@ module.exports = View.extend({
 	},
 
 	render: function() {
-		this.bookDetail = new Book();
-		this.bookDetail.bookJSON ={};
-		this.$el.html(this.template(Application.bookDetailView.bookInfo));
+		
+		//Application.bookDetailView.bookId
+		
+		
+		
+		this.$el.html(this.template());
 
 		return this;
-	},
-
-	append: function(){
-		this.bookDetail.bookJSON = this.bookDetail.handle();
-		this.$el.html(this.template(this.bookDetail.bookJSON));
 	}
 
 });

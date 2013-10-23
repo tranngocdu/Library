@@ -520,16 +520,14 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   	},
 
   	render: function() {
-  		this.bookDetail = new Book();
-  		this.bookDetail.bookJSON ={};
-  		this.$el.html(this.template(Application.bookDetailView.bookInfo));
+  		
+  		//Application.bookDetailView.bookId
+  		
+  		
+  		
+  		this.$el.html(this.template());
 
   		return this;
-  	},
-
-  	append: function(){
-  		this.bookDetail.bookJSON = this.bookDetail.handle();
-  		this.$el.html(this.template(this.bookDetail.bookJSON));
   	}
 
   });
@@ -553,7 +551,8 @@ window.require.register("views/booklist-view", function(exports, require, module
   		'click #filt-available':'available',
   		'click #filt-checked':'checkedOut',
   		'click #add':'addBook',
-  		"getbookinfo":"getBookInfo"
+  		"getbookinfo":"getBookInfo",
+  		'click .bookItem':'bookDetail'
   	},
 
   	initialize: function() {
@@ -671,6 +670,12 @@ window.require.register("views/booklist-view", function(exports, require, module
   				alert("Scanning failed: " + error);
   			}
   		);
+  	},
+  	
+  	bookDetail: function(e) {
+  		Application.bookDetailView.bookId = $(e.currentTarget).data('id');
+  		Application.router.navigate("#bookDetail", {trigger:true});
+  		
   	},
 
   	getBookInfo: function() {
@@ -1417,11 +1422,11 @@ window.require.register("views/templates/bookListBooks", function(exports, requi
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n      <li id=\"";
+    buffer += "\n      <li data-id=\"";
     if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "\">\n        <table style=\"width:100%;\">\n        <tr>\n          <td style=\"width:50%;\">\n        <p class=\"Title\">";
+      + "\" class=\"bookItem\">\n        <table style=\"width:100%;\">\n        <tr>\n          <td style=\"width:50%;\">\n        <p class=\"Title\">";
     if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)

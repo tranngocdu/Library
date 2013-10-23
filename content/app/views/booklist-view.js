@@ -15,7 +15,8 @@ module.exports = View.extend({
 		'click #filt-available':'available',
 		'click #filt-checked':'checkedOut',
 		'click #add':'addBook',
-		"getbookinfo":"getBookInfo"
+		"getbookinfo":"getBookInfo",
+		'click .bookItem':'bookDetail'
 	},
 
 	initialize: function() {
@@ -133,6 +134,12 @@ module.exports = View.extend({
 				alert("Scanning failed: " + error);
 			}
 		);
+	},
+	
+	bookDetail: function(e) {
+		Application.bookDetailView.bookId = $(e.currentTarget).data('id');
+		Application.router.navigate("#bookDetail", {trigger:true});
+		
 	},
 
 	getBookInfo: function() {
