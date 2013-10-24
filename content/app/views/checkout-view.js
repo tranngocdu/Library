@@ -1,6 +1,9 @@
 var View = require('./view');
 var template = require('./templates/checkOut');
 var templateStudents = require('./templates/studentListCheck');
+var studentName = null;
+var studentId = null;
+var data =null;
 
 
 module.exports = View.extend({
@@ -9,7 +12,8 @@ module.exports = View.extend({
 	templateStudents:templateStudents,
 	events: {
 
-		'click .studentCheck':'pickName'
+		'click .studentCheck':'pickName',
+		'click #checkOut':'checkOut'
 
 	},
 
@@ -18,7 +22,7 @@ module.exports = View.extend({
 
 	render: function() {
 		var that=this;
-		var data = Application.checkOutView.bookInfo;
+		data = Application.checkOutView.bookInfo;
 		this.$el.html(this.template(data));
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
@@ -38,31 +42,41 @@ module.exports = View.extend({
 		return this;
 	},
 	
+
 	pickName: function(e) {
-		var studentName = $(e.currentTarget).data('name');
-		var studentId = $(e.currentTarget).data('id');
+		studentName = $(e.currentTarget).data('name');
+		studentId = $(e.currentTarget).data('id');
 		console.log(studentId);
 		console.log(studentName);
-
-		// Checks if the tap was on a previously selected name, if so removes the selection
+	
+	
+		//Checks if the tap was on a previously selected name, if so removes the selection from tapped name
 		if($(e.currentTarget).hasClass("selected")){
 				$(e.currentTarget).removeClass("selected");
 				$(e.currentTarget).addClass("deselected");
 		}
-		// Added because without names cannot be reselected
+		//Here because without this the names cannot be reselected
 		else if($(e.currentTarget).hasClass("deselected")){
-				$(e.currentTarget).removeClass("deselected");
+				$(".studentCheck").removeClass("deselected");
+				$(".studentCheck").removeClass("selected");
+				$(".studentCheck").addClass("deselected");
+				$(e.currentTarget).removeClass("deselected");				
 				$(e.currentTarget).addClass("selected");
+
 				$("#checkOut").removeClass("disabled");
 				$("#checkOut").addClass("primary-fill");
 		}
-		//Just highlite the damn thing 
+		//Just highlite the damn thing already
 		else {
+		$(".studentCheck").removeClass("deselected");
+		$(".studentCheck").removeClass("selected");
+		$(".studentCheck").addClass("deselected");
+		$(e.currentTarget).removeClass("deselected");
 		$(e.currentTarget).addClass("selected");
 		$("#checkOut").removeClass("disabled");
 		$("#checkOut").addClass("primary-fill");
 		};
-		//if no name is selected make sure the Check Out button isn't
+		//If a name isn't selected make sure the Check Out button isn't highlited
 		if (!$(".studentCheck").hasClass("selected")){
 				$("#checkOut").addClass("disabled");
 				$("#checkOut").removeClass("primary-fill");
@@ -71,8 +85,18 @@ module.exports = View.extend({
 
 	},
 
-	checkOut: function() {
+	checkOut: function(e) {
+		//Create the Array
+		var array =[];
+		array.push({name:studentName,id:studentId});
+		console.log(array);
+		//Push it to Parse
 		
-	}
+		console.log(data.ISBN.title);
+		
+
+  },
+
+
 
 });
