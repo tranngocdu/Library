@@ -14,13 +14,26 @@ module.exports = View.extend({
 	},
 
 	render: function() {
-		
-		//Application.bookDetailView.bookId
-		
-		
-		
-		this.$el.html(this.template());
+		var that=this;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("objectId", Application.bookDetailView.bookId);
+		query.find({
+			
+			success: function(bookdetail) {
 
+				var bookdetailArray = JSON.stringify(bookdetail);
+				var bookdetailArray = JSON.parse(bookdetailArray);
+
+				console.log(bookdetailArray);				
+				that.$el.html(that.template(bookdetailArray));
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+
+
+		
 		return this;
 	}
 
