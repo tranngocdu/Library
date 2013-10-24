@@ -26,7 +26,18 @@
 
 <div class="name-header">Pick your name</div>
 
-  <div id="wrapper" class="check-wrap">
+<div id="wrapper" class="check-wrap">
+<div id="scroller" class="students">
+    <ul id="studentlist">
+  {{#each this}}
+      <li id="{{objectId}}">
+        <p class="first-name">{{Name}}</p> 
+      <p data-id="{{objectId}}" class="delete-name">Delete</p>
+      </li>
+  {{/each}}
 
+    </ul>
+
+  </div> {{!-- /#scroller --}}
 </div> {{!-- /#wrapper --}}
 

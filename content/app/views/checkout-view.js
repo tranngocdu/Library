@@ -1,5 +1,5 @@
 var View = require('./view');
-var template = require('./templates/checkOut');
+	var template = require('./templates/checkOut');
 var templateStudents = require('./templates/studentListCheck');
 
 
@@ -15,6 +15,7 @@ module.exports = View.extend({
 	},
 
 	render: function() {
+		var that=this;
 		var data = Application.checkOutView.bookInfo;
 		this.$el.html(this.template(data));
 		var currentUser = Parse.User.current();
