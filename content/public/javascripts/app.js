@@ -837,9 +837,31 @@ module.exports = View.extend({
 		var studentId = $(e.currentTarget).data('id');
 		console.log(studentId);
 		console.log(studentName);
+
+		// Checks if the tap was on a previously selected name, if so removes the selection
+		if($(e.currentTarget).hasClass("selected")){
+				$(e.currentTarget).removeClass("selected");
+				$(e.currentTarget).addClass("deselected");
+		}
+		// Added because without names cannot be reselected
+		else if($(e.currentTarget).hasClass("deselected")){
+				$(e.currentTarget).removeClass("deselected");
+				$(e.currentTarget).addClass("selected");
+				$("#checkOut").removeClass("disabled");
+				$("#checkOut").addClass("primary-fill");
+		}
+		//Just highlite the damn thing 
+		else {
 		$(e.currentTarget).addClass("selected");
 		$("#checkOut").removeClass("disabled");
 		$("#checkOut").addClass("primary-fill");
+		};
+		//if no name is selected make sure the Check Out button isn't
+		if (!$(".studentCheck").hasClass("selected")){
+				$("#checkOut").addClass("disabled");
+				$("#checkOut").removeClass("primary-fill");
+		};
+		
 
 	},
 
@@ -1560,7 +1582,7 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check Out</h1>\n</div>\n<style type=\"text/css\">\n.selected {\n  background-color:#0a5fff;\n  color: white;\n  -webkit-border-radius: 5px;\n  border-radius: 5px;\n  padding-left:10px;\n}\n</style>\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\""
+  buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check Out</h1>\n</div>\n<style type=\"text/css\">\n.selected {\n  background-color:#0a5fff;\n  color: white;\n  -webkit-border-radius: 5px;\n  border-radius: 5px;\n  padding-left:10px;\n}\n.deselected {\n  background-color:white!important;\n  color:black!important;\n}\n</style>\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\""
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.cover)),stack1 == null || stack1 === false ? stack1 : stack1.medium)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>"
     + escapeExpression(((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
