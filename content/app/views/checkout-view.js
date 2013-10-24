@@ -1,5 +1,5 @@
 var View = require('./view');
-	var template = require('./templates/checkOut');
+var template = require('./templates/checkOut');
 var templateStudents = require('./templates/studentListCheck');
 
 
@@ -8,7 +8,9 @@ module.exports = View.extend({
 	template: template,
 	templateStudents:templateStudents,
 	events: {
-		'click #checkOut':'checkOut',
+
+		'click .studentCheck':'pickName'
+
 	},
 
 	initialize: function() {
@@ -36,6 +38,17 @@ module.exports = View.extend({
 		return this;
 	},
 	
+	pickName: function(e) {
+		var studentName = $(e.currentTarget).data('name');
+		var studentId = $(e.currentTarget).data('id');
+		console.log(studentId);
+		console.log(studentName);
+		$(e.currentTarget).addClass("selected");
+		$("#checkOut").removeClass("disabled");
+		$("#checkOut").addClass("primary-fill");
+
+	},
+
 	checkOut: function() {
 		
 	}
