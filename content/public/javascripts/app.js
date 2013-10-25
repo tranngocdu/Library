@@ -415,6 +415,8 @@ module.exports = Parse.Object.extend({
 ;require.register("views/addbook-view", function(exports, require, module) {
 var View = require('./view');
 var template = require('./templates/addBook');
+var passData=null;
+var totalAmount = "";
 
 module.exports = View.extend({
 	id: 'addbook-view',
@@ -422,7 +424,7 @@ module.exports = View.extend({
 	events: {
 		"dataLoaded":"append",
 		'click #done':'addBook',
-		'click #quantity':'quantitySelector',
+		'click #edit-quantity':'quantity',
 		'click #add-book':'addBook'
 	},
 
@@ -432,6 +434,8 @@ module.exports = View.extend({
 
 	render: function() {
 		var data = Application.addBookView.bookData;
+		var passData = data;
+		console.log(passData);
 		var dataString = JSON.stringify(data);
 		var combinedString = dataString.substring(0,6) + dataString.substring(20);
 		var data=JSON.parse(combinedString);
@@ -474,7 +478,24 @@ module.exports = View.extend({
 					console.log(error);
 				}
 			});
-	}
+	},
+
+	quantity: function() {
+		var data = Application.addBookView.bookData;
+		var quantityPrompt = {
+			state0: { 
+				title: "Edit Quantity",
+				buttons: { "Cancel": false, "Submit": true },
+				html:'<input type="number" name="amount" value="" style="font-size:18px;width:100%;text-align:center;">',
+				submit: function(e,v,m,f){
+					console.log(f.amount);
+					totalAmount=f.amount;
+				$("#numberAvailable").html("Number Available: "+totalAmount+"");
+				}
+			}
+		};
+		$.prompt(quantityPrompt);
+	},
 
 });
 
@@ -1443,7 +1464,7 @@ function program1(depth0,data) {
     + "</h2>\n      <h3>";
   stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
+  buffer += "</h3>\n      <h4>ISBN Number</h4>\n      <p id=\"numberAvailable\"></p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-quantity\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
     + "\n</div> "
     + "\n\n";
   return buffer;

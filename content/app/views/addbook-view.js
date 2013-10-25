@@ -1,5 +1,7 @@
 var View = require('./view');
 var template = require('./templates/addBook');
+var passData=null;
+var totalAmount = "";
 
 module.exports = View.extend({
 	id: 'addbook-view',
@@ -7,7 +9,7 @@ module.exports = View.extend({
 	events: {
 		"dataLoaded":"append",
 		'click #done':'addBook',
-		'click #quantity':'quantitySelector',
+		'click #edit-quantity':'quantity',
 		'click #add-book':'addBook'
 	},
 
@@ -17,6 +19,8 @@ module.exports = View.extend({
 
 	render: function() {
 		var data = Application.addBookView.bookData;
+		var passData = data;
+		console.log(passData);
 		var dataString = JSON.stringify(data);
 		var combinedString = dataString.substring(0,6) + dataString.substring(20);
 		var data=JSON.parse(combinedString);
@@ -59,6 +63,23 @@ module.exports = View.extend({
 					console.log(error);
 				}
 			});
-	}
+	},
+
+	quantity: function() {
+		var data = Application.addBookView.bookData;
+		var quantityPrompt = {
+			state0: { 
+				title: "Edit Quantity",
+				buttons: { "Cancel": false, "Submit": true },
+				html:'<input type="number" name="amount" value="" style="font-size:18px;width:100%;text-align:center;">',
+				submit: function(e,v,m,f){
+					console.log(f.amount);
+					totalAmount=f.amount;
+				$("#numberAvailable").html("Number Available: "+totalAmount+"");
+				}
+			}
+		};
+		$.prompt(quantityPrompt);
+	},
 
 });
