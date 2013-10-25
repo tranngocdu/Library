@@ -5,6 +5,8 @@ module.exports = View.extend({
 	id: 'settings-view',
 	template: template,
 	events: {
+		'click #edit': 'edit',
+		'click #change-pass': 'changePass',
 		'click #done': 'done',
 		'click #logout': 'logout',
 		'click #addBook': 'addBook',
@@ -19,6 +21,20 @@ module.exports = View.extend({
 		this.$el.html(this.template());
 		return this;
 	},
+
+	edit: function () {
+		$('#edit').toggle(function (){
+		            $(this).text("Save").addClass("save");
+		            $('input.hide-hard').addClass("block");
+		        }, function(){
+		            $(this).text("Edit").removeClass("save");
+		            $('input.hide-hard').removeClass("block");
+		        });
+	},
+
+	// changePass: function () {
+	// $('input.hide-hard').addClass("block");
+	// },
 
 	done: function () {
 		Application.router.navigate("#home", {
