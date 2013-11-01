@@ -48,8 +48,8 @@ module.exports = View.extend({
 
 		scanner.scan(
 			function (result) {
-				Application.loginView.ISBN = result.text;
-				Application.loginView.$el.trigger("bookInfoCheckin");
+				Application.homeView.ISBN = result.text;
+				Application.homeView.$el.trigger("bookInfoCheckin");
 
 			}, 
 			function (error) {
@@ -100,7 +100,7 @@ module.exports = View.extend({
 
 		$.ajax({
 			data: {
-				bibkeys: "ISBN:" + Application.loginView.ISBN,
+				bibkeys: "ISBN:" + Application.homeView.ISBN,
 				jscmd: "data",
 				format: "json"
 			},

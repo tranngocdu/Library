@@ -54,6 +54,7 @@ module.exports = View.extend({
 			newBook.set("quantity_total", "2");
 			newBook.set("quantity_out", "0");
 			newBook.set("User", currentUserId);
+			newBook.set("studentList",[{}]);
 			newBook.save(null, {
 				success: function(newBook) {
 						Application.router.navigate("#bookList" , {trigger: true});

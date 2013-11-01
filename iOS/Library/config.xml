@@ -113,6 +113,6 @@
         <param name="ios-package" value="CDVBarcodeScanner" />
     </feature>
 
-    <!-- Deprecated plugins element. REmove in 3.0 -->
+<!-- Deprecated plugins element. REmove in 3.0 -->
 
 </widget>

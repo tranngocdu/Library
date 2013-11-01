@@ -6,15 +6,19 @@
 <div class="check">
 
     <div class="title-art">
-      <img src="http://placehold.it/118x160">
+      <img src="{{ISBN.cover.medium}}">
     </div>
 
     <div class="title-info">
-      <h2>Title</h2>
-      <h3>Author</h3>
+      <h2>{{ISBN.title}}</h2>
+      <h3>
+          {{#each ISBN.authors}}
+          {{name}}
+          {{/each}}
+      </h3>
       <h4>ISBN Number</h4>
       <p>Number Available</p>
-      <div id="checkIn" class="check-btn button disabled">Check In</div> {{!-- on name select remove .disabled and add .primary-fill --}}
+      <div id="checkOut" class="check-btn button disabled">Check Out</div> {{!-- on name select remove .disabled and add .primary-fill --}}
     </div>
 
     <div class="clearfix"></div>
@@ -22,7 +26,10 @@
 
 <div class="name-header">Pick your name</div>
 
-  <div id="wrapper" class="check-wrap">
-     
+<div id="wrapper" class="check-wrap">
+<div id="scroller" class="students">
+    
+    
+  </div> {{!-- /#scroller --}}
 </div> {{!-- /#wrapper --}}
 

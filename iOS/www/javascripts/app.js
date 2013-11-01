@@ -469,6 +469,7 @@ module.exports = View.extend({
 			newBook.set("quantity_total", "2");
 			newBook.set("quantity_out", "0");
 			newBook.set("User", currentUserId);
+			newBook.set("studentList",[{}]);
 			newBook.save(null, {
 				success: function(newBook) {
 						Application.router.navigate("#bookList" , {trigger: true});
@@ -782,8 +783,12 @@ module.exports = View.extend({
 	},
 
 	render: function() {
-		var data = Application.checkInView.bookInfo;
-		this.$el.html(this.template(data));
+		var that = this;
+		alert(Application.checkInView.bookInfo);
+		var bookData = Application.checkInView.bookInfo;
+				console.log(bookData);
+
+		this.$el.html(this.template(bookData));
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("Student");
@@ -794,7 +799,7 @@ module.exports = View.extend({
 			success: function(students) {
 				var studentArray = JSON.stringify(students);
 				var studentArray = JSON.parse(studentArray);
-				$('#wrapper').html(that.templateStudents(studentArray));
+				$('.students').html(that.templateStudents(studentArray));
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
@@ -805,6 +810,48 @@ module.exports = View.extend({
 	},
 	
 	checkIn: function() {
+		//Get the Array
+		var that = this;
+		that.studentArray = null;
+		var query = new Parse.Query("NewBook");
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		query.equalTo("User", currentUserId);
+		query.equalTo("title", data.ISBN.title);
+		query.first({
+			success: function(usersBooks) {
+
+				that.studentArray = usersBooks.attributes.studentList;
+				that.studentArray.push({name:that.studentName,id:that.studentId});
+				var length = that.studentArray.length;
+				var cutItem = undefined;
+				var i;
+				for (i = 0; i < length; i++) {
+				var element = that.studentArray[i];
+				var id = element.id;
+				if (id == "") {
+				cutItem = i;
+				}
+				}
+				that.studentArray.splice(cutItem,1);
+				console.log(that.studentArray);
+
+				usersBooks.set("studentList",that.studentArray);
+				usersBooks.save(null, {
+				success: function(newBook) {
+						Application.router.navigate("#home" , {trigger: true});
+				},
+				error: function(newBook, error) {
+					alert('Back to the drawing board');
+					console.log(error);
+				}
+			});
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			},
+		});
+
 		
 	}
 
@@ -816,8 +863,6 @@ module.exports = View.extend({
 var View = require('./view');
 var template = require('./templates/checkOut');
 var templateStudents = require('./templates/studentListCheck');
-var studentName = null;
-var studentId = null;
 var data =null;
 
 
@@ -829,7 +874,6 @@ module.exports = View.extend({
 
 		'click .studentCheck':'pickName',
 		'click #checkOut':'checkOut'
-
 	},
 
 	initialize: function() {
@@ -847,7 +891,7 @@ module.exports = View.extend({
 			success: function(students) {
 				var studentArray = JSON.stringify(students);
 				var studentArray = JSON.parse(studentArray);
-				$('#wrapper').html(that.templateStudents(studentArray));
+				$('.students').html(that.templateStudents(studentArray));
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
@@ -859,11 +903,8 @@ module.exports = View.extend({
 	
 
 	pickName: function(e) {
-		studentName = $(e.currentTarget).data('name');
-		studentId = $(e.currentTarget).data('id');
-		console.log(studentId);
-		console.log(studentName);
-	
+		this.studentName = $(e.currentTarget).data('name');
+		this.studentId = $(e.currentTarget).data('id');
 	
 		//Checks if the tap was on a previously selected name, if so removes the selection from tapped name
 		if($(e.currentTarget).hasClass("selected")){
@@ -901,16 +942,49 @@ module.exports = View.extend({
 	},
 
 	checkOut: function(e) {
-		//Create the Array
-		var array =[];
-		array.push({name:studentName,id:studentId});
-		console.log(array);
-		//Push it to Parse
-		
-		console.log(data.ISBN.title);
-		
+		//Get the Array
+		var that = this;
+		that.studentArray = null;
+		var query = new Parse.Query("NewBook");
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		query.equalTo("User", currentUserId);
+		query.equalTo("title", data.ISBN.title);
+		query.first({
+			success: function(usersBooks) {
 
-  },
+				that.studentArray = usersBooks.attributes.studentList;
+				that.studentArray.push({name:that.studentName,id:that.studentId});
+				var length = that.studentArray.length;
+				var cutItem = undefined;
+				var i;
+				for (i = 0; i < length; i++) {
+				var element = that.studentArray[i];
+				var id = element.id;
+				if (id == "") {
+				cutItem = i;
+				}
+				}
+				that.studentArray.splice(cutItem,1);
+				console.log(that.studentArray);
+
+				usersBooks.set("studentList",that.studentArray);
+				usersBooks.save(null, {
+				success: function(newBook) {
+						Application.router.navigate("#home" , {trigger: true});
+				},
+				error: function(newBook, error) {
+					alert('Back to the drawing board');
+					console.log(error);
+				}
+			});
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			},
+		});
+	
+	}
 
 
 
@@ -1036,8 +1110,8 @@ module.exports = View.extend({
 
 		scanner.scan(
 			function (result) {
-				Application.loginView.ISBN = result.text;
-				Application.loginView.$el.trigger("bookInfoCheckin");
+				Application.homeView.ISBN = result.text;
+				Application.homeView.$el.trigger("bookInfoCheckin");
 
 			}, 
 			function (error) {
@@ -1088,7 +1162,7 @@ module.exports = View.extend({
 
 		$.ajax({
 			data: {
-				bibkeys: "ISBN:" + Application.loginView.ISBN,
+				bibkeys: "ISBN:" + Application.homeView.ISBN,
 				jscmd: "data",
 				format: "json"
 			},
@@ -1600,11 +1674,29 @@ function program1(depth0,data) {
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "";
+  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n          ";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\n          ";
+  return buffer;
+  }
 
-  buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\"http://placehold.it/118x160\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>Title</h2>\n      <h3>Author</h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div id=\"checkIn\" class=\"check-btn button disabled\">Check In</div> "
-    + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n  <div id=\"wrapper\" class=\"check-wrap\">\n     \n</div> "
+  buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\""
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.cover)),stack1 == null || stack1 === false ? stack1 : stack1.medium)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>"
+    + escapeExpression(((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</h2>\n      <h3>\n          ";
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n      </h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div id=\"checkOut\" class=\"check-btn button disabled\">Check Out</div> "
+    + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n<div id=\"wrapper\" class=\"check-wrap\">\n<div id=\"scroller\" class=\"students\">\n    \n    \n  </div> "
+    + "\n</div> "
     + "\n\n";
   return buffer;
   });
