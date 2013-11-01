@@ -1,12 +1,41 @@
 
-<div id="scanner" style="padding-top:30px;">Title: {{#each this}}{{title}}{{/each}}</div>
+{{!-- {{#each this}}
+	{{#if cover_image}}
+		<img src="{{cover_image}}">
+	{{else}}
+		<div>No Cover Found</div>
+	{{/if}}
+{{/each}}
+ --}}
 
-<div id="scanner" style="padding-top:30px;">Author: {{#each this}}{{author}}{{/each}}</div>
-  {{#each this}}{{#if cover_image}}
-<div style="height:100px; width:100px; background-image: url('{{cover_image}}'); "></div>
-  {{else}}
-<div style="padding-top:30px;">No Cover Found</div>
-{{/if}}{{/each}}
 
+<div id="header">
+  <div class="back">Books</div>
+  <h1>Book Detail</h1>
+</div>
 
+<div id="wrapper">
+  <div id="scroller" class="add-book">
 
+  	{{#each this}}
+	    <div class="title-art">
+	    	
+	    	{{#if cover_image}}
+	      	<img src="{{cover_image}}">
+	      {{else}}
+	      		<span>No Cover Found</span>
+	      {{/if}}
+
+	      <h2>{{title}}</h2>
+	      <h3>{{author}}</h3>
+	      <h4>ISBN Number</h4>
+	      <p>Number Available</p>
+	    </div>
+
+	    <div id="checkout-book" class="ab-btn button primary-fill">Check Out</div>
+	    <div id="edit-book" class="ab-btn button primary">Edit Quantity</div>
+	    <div id="remove-book" class="ab-btn button secondary">Remove Book</div>
+    {{/each}}
+
+  </div> {{!-- /#scroller --}}
+</div> {{!-- /#wrapper --}}
