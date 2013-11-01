@@ -24,10 +24,11 @@ module.exports = View.extend({
 		var password =  $('#sign-pass').val();
 		user.set("username", username);
 		user.set("password", password);
+		user.set("email", username);
 
 		user.signUp(null, {
 			success: function(user) {
-				alert("Success!");
+				alert("Welcome to Class Library!");
 				Application.router.navigate("#home", {
 					trigger: true
 				});

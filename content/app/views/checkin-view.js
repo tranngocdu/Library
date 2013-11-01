@@ -98,14 +98,10 @@ module.exports = View.extend({
 				for (i = 0; i < length; i++) {
 					var element = that.studentArray[i];
 					var id = element.objectId;
-					alert(i);
-					alert(id);
 					if (id == that.studentId) {
 						cutItem = i;
-						alert(i);
 					}
 				}
-				alert(cutItem);
 				if (cutItem != undefined) {
 					that.studentArray.splice(cutItem,1);
 					console.log(that.studentArray);
