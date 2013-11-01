@@ -98,7 +98,6 @@ module.exports = View.extend({
 		$('#filt-all').removeClass("selected");
 		$('#filt-available').removeClass("selected");
 		$('#filt-checked').addClass("selected");
-		alert("and here");
 		
 		var that = this;
 		var currentUser = Parse.User.current();

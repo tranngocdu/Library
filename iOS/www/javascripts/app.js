@@ -565,8 +565,6 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   				alert("Error: " + error.code + " " + error.message);
   			}
   		});
-
-
   		
   		return this;
   	}
@@ -675,7 +673,6 @@ window.require.register("views/booklist-view", function(exports, require, module
   		$('#filt-all').removeClass("selected");
   		$('#filt-available').removeClass("selected");
   		$('#filt-checked').addClass("selected");
-  		alert("and here");
   		
   		var that = this;
   		var currentUser = Parse.User.current();
@@ -769,24 +766,10 @@ window.require.register("views/checkin-view", function(exports, require, module)
   		var that = this;
   		var bookData = Application.checkInView.bookInfo;
   		this.$el.html(this.template(bookData));
-  		var currentUser = Parse.User.current();
-  		var currentUserId = currentUser.id;
-  		var query = new Parse.Query("NewBook");
-  		that.ISBN = Application.checkInView.bookInfo.ISBN.identifiers.isbn_13[0];
-  		query.equalTo("User", currentUserId);
-  		query.equalTo("ISBN", Application.checkInView.bookInfo.ISBN.identifiers.isbn_13[0]);
-
-  		query.first({
-  			success: function(bookData) {
-  				console.log(bookData);
-  				var studentBookList = bookData.attributes.studentList;
-  				console.log(studentBookList);
-  				$('.students').html(that.templateStudents(studentBookList));
-  			},
-  			error: function(error) {
-  				alert("Error: " + error.code + " " + error.message);
-  			}
-  		});
+  		console.log(bookData);
+  		var studentBookList = bookData.studentList;
+  		console.log(studentBookList);
+  		$('.students').html(that.templateStudents(studentBookList));
 
   		return this;
   	},
@@ -903,6 +886,7 @@ window.require.register("views/checkout-view", function(exports, require, module
   	render: function() {
   		var that=this;
   		data = Application.checkOutView.bookInfo;
+  		console.log(Application.checkOutView.bookInfo);		
   		this.$el.html(this.template(data));
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
@@ -912,7 +896,6 @@ window.require.register("views/checkout-view", function(exports, require, module
   			success: function(students) {
   				var studentArray = JSON.stringify(students);
   				var studentArray = JSON.parse(studentArray);
-  				console.log(studentArray);
   				$('.students').html(that.templateStudents(studentArray));
   			},
   			error: function(error) {
@@ -1152,57 +1135,49 @@ window.require.register("views/home-view", function(exports, require, module) {
 
   	bookInfoCheckout: function () {
 
-  		$.ajax({
-  			data: {
-  				bibkeys: "ISBN:" + Application.homeView.ISBN,
-  				jscmd: "data",
-  				format: "json"
-  			},
-  			url: "http://openlibrary.org/api/books",
-  			type: "GET",
-  			success: function (data) {
-  				var dataString = JSON.stringify(data);
-  				var combinedString = dataString.substring(0,6) + dataString.substring(20);
-  				var data = JSON.parse(combinedString);
-  				alert(data);
-  				Application.checkOutView.bookInfo = data;
-  				console.log(Application.checkOutView.bookInfo);
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var query = new Parse.Query("NewBook");
+  		query.equalTo("ISBN", Application.homeView.ISBN);
+  		query.equalTo("User", currentUserId);
+  		query.find({
+
+  			success: function(bookdetail) {
+  				var bookdetailArray = JSON.stringify(bookdetail);
+  				bookdetailArray = JSON.parse(bookdetailArray);
+  				Application.checkOutView.bookInfo = bookdetailArray;
   				Application.router.navigate("#checkOut", {
   					trigger: true
   				});
   			},
-  			error: function (jqXHR,textStatus,errorThrown) {
-  				alert("Error");
+  			error: function(error) {
+  				alert("Error: " + error.code + " " + error.message);
   			}
-
   		});
 
   	},
-  	
+
   	bookInfoCheckin: function () {
 
-  		$.ajax({
-  			data: {
-  				bibkeys: "ISBN:" + Application.homeView.ISBN,
-  				jscmd: "data",
-  				format: "json"
-  			},
-  			url: "http://openlibrary.org/api/books",
-  			type: "GET",
-  			success: function (data) {
-  				var dataString = JSON.stringify(data);
-  				var combinedString = dataString.substring(0,6) + dataString.substring(20);
-  				var data = JSON.parse(combinedString);
-  				Application.checkInView.bookInfo = data;
-  				Application.router.navigate("#checkIn", {
-  					trigger: true
-  				});
-  			},
-  			error: function (jqXHR,textStatus,errorThrown) {
-  				alert("Error");
-  			}
+  			var currentUser = Parse.User.current();
+  			var currentUserId = currentUser.id;
+  			var query = new Parse.Query("NewBook");
+  			query.equalTo("ISBN", Application.homeView.ISBN);
+  			query.equalTo("User", currentUserId);
+  			query.find({
 
-  		});
+  				success: function(bookdetail) {
+  					var bookdetailArray = JSON.stringify(bookdetail);
+  					bookdetailArray = JSON.parse(bookdetailArray);
+  					Application.checkInView.bookInfo = bookdetailArray;
+  					Application.router.navigate("#checkIn", {
+  						trigger: true
+  					});
+  				},
+  				error: function(error) {
+  					alert("Error: " + error.code + " " + error.message);
+  				}
+  			});
 
   	}
 
@@ -1295,10 +1270,9 @@ window.require.register("views/settings-view", function(exports, require, module
   	id: 'settings-view',
   	template: template,
   	events: {
-  		'click #edit': 'edit',
-  		'click #change-pass': 'changePass',
   		'click #done': 'done',
   		'click #logout': 'logout',
+  		'click #save': 'save',
   		'click #addBook': 'addBook',
   		'click #changeQuantity': 'changeQuantity'
   	},
@@ -1309,10 +1283,11 @@ window.require.register("views/settings-view", function(exports, require, module
 
   	render: function () {
   		var that = this;
-  		this.$el.html(this.template());
+  		//this.$el.html(this.template());
   		var query = new Parse.Query("User");
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
+  		that.username = $('#set-email').val();
   		query.equalTo("objectId", currentUserId);
   		query.first({
   			success: function(userData) {
@@ -1320,7 +1295,7 @@ window.require.register("views/settings-view", function(exports, require, module
   				var userArray = JSON.parse(userInfo);
   				console.log(userArray);
   				that.$el.html(that.template(userArray));
-
+  				that.username = $('#set-email').val();
   			},
   			error: function(newBook, error) {
   				alert('Back to the drawing board');
@@ -1328,32 +1303,71 @@ window.require.register("views/settings-view", function(exports, require, module
   			}
   		});
   	},
-  	
+
   	// changePass: function () {
-  	// $('input.hide-hard').addClass("block");
-  	// },
+  		// $('input.hide-hard').addClass("block");
+  		// },
 
-  	logout: function () {
-  		window.localStorage.removeItem("userId");
-  		Parse.User.logOut();
-  		Application.router.navigate("#login", {
-  			trigger: true
-  		});
-  	},
+  		save: function() {
+  			var that = this;
+  			var username = $('#set-email').val();
+  			var oldPassword = $('#set-current').val();
+  			var password =  $('#set-new').val();
+  			var confirmPassword =  $('#set-new-confirm').val();
 
-  	addBook: function() {
-  		Application.router.navigate("#addBook", {
-  			trigger: true
-  		});
-  	},
+  			if (password == confirmPassword) {
+  				var user = Parse.User.logIn(that.username, oldPassword, {
+  					success: function(user) {
+  						user.set("username", username);  // attempt to change username
+  						user.set("password", password);
+  						user.save(null, {
+  							success: function(user) {
+  								alert("Settings have been changed");
+  								Application.router.navigate("#home", {
+  									trigger: true
+  								});
 
-  	changeQuantity: function() {
-  		Application.router.navigate("#addBook", {
-  			trigger: true
-  		});
-  	}
+  							},
+  							error: function(error) {
+  								alert("Unable to change info right now");
+  							}
+  						});
+  					},
+  					error: function(error) {
+  						alert("Incorrect password");
+  						var oldPassword = $('#set-current').val("");
+  						var password =  $('#set-new').val("");
+  						var confirmPassword =  $('#set-new-confirm').val("");
+  					}
+  				});
+  			}
+  			else {
+  				alert("Passwords need to match");
+  			}
 
-  });
+  		},
+
+  		logout: function () {
+  			window.localStorage.removeItem("userId");
+  			Parse.User.logOut();
+  			Application.router.navigate("#login", {
+  				trigger: true
+  			});
+  		},
+
+  		addBook: function() {
+  			Application.router.navigate("#addBook", {
+  				trigger: true
+  			});
+  		},
+
+  		changeQuantity: function() {
+  			Application.router.navigate("#addBook", {
+  				trigger: true
+  			});
+  		}
+
+  	});
 });
 window.require.register("views/signup-view", function(exports, require, module) {
   var View = require('./view');
@@ -1382,10 +1396,11 @@ window.require.register("views/signup-view", function(exports, require, module) 
   		var password =  $('#sign-pass').val();
   		user.set("username", username);
   		user.set("password", password);
+  		user.set("email", username);
 
   		user.signUp(null, {
   			success: function(user) {
-  				alert("Success!");
+  				alert("Welcome to Class Library!");
   				Application.router.navigate("#home", {
   					trigger: true
   				});
@@ -1609,8 +1624,15 @@ window.require.register("views/templates/bookDetail", function(exports, require,
     if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h3>\n	      "
-      + "\n	      <p>Number Available</p>\n	    </div>\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n    ";
+      + "</h3>\n		<h4>ISBN: ";
+    if (stack1 = helpers.ISBN) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.ISBN; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</h4>\n		<p>";
+    if (stack1 = helpers.quantity_available) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.quantity_available; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + " Available</p>\n	    </div>\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n    ";
     return buffer;
     }
   function program2(depth0,data) {
@@ -1659,30 +1681,39 @@ window.require.register("views/templates/bookListBooks", function(exports, requi
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n      <li data-id=\"";
+    buffer += "\n		<li data-id=\"";
     if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "\" class=\"bookItem\">\n        <img src=\"";
-    if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-    else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-    buffer += escapeExpression(stack1)
-      + "\">\n        <div class=\"book-meta\">\n          <h2 class=\"truncate-two\">";
+      + "\" class=\"bookItem\">\n			";
+    stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(2, program2, data),fn:self.program(2, program2, data),data:data});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n			<div class=\"book-meta\">\n				<h2 class=\"truncate-two\">";
     if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h2>\n          <h3 class=\"truncate\">";
+      + "</h2>\n				<h3 class=\"truncate\">";
     if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h3>\n          <p>Number Available</p>\n        </div>\n      </li>\n    ";
+      + "</h3>\n				<p>Number Available</p>\n			</div>\n		</li>\n		";
+    return buffer;
+    }
+  function program2(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n			<img src=\"";
+    if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\">\n			";
     return buffer;
     }
 
-    buffer += "\n  <div id=\"scroller\" class=\"usersBooks\">\n    <ul id=\"booklist\">\n    ";
+    buffer += "\n<div id=\"scroller\" class=\"usersBooks\">\n	<ul id=\"booklist\">\n		";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n    </ul>\n  </div> ";
+    buffer += "\n	</ul>\n</div> ";
     return buffer;
     });
 });
@@ -1690,28 +1721,55 @@ window.require.register("views/templates/checkIn", function(exports, require, mo
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+    var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n          ";
-    if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-    else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += "\n	";
+    stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n\n	<div class=\"title-info\">\n		<h2>";
+    if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "\n          ";
+      + "</h2>\n		<h3>";
+    if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</h3>\n\n		<h4>ISBN: ";
+    if (stack1 = helpers.ISBN) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.ISBN; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</h4>\n		<p>";
+    if (stack1 = helpers.quantity_available) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.quantity_available; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + " Available</p>\n		<div id=\"checkIn\" class=\"check-btn button disabled\">Check In</div> "
+      + "\n	</div>\n	";
+    return buffer;
+    }
+  function program2(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n\n	<div class=\"title-art\">\n		<img src=\"";
+    if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\">\n	</div>\n	";
     return buffer;
     }
 
-    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n<style type=\"text/css\">\n.selected {\n  background-color:#0a5fff;\n  color: white;\n  -webkit-border-radius: 5px;\n  border-radius: 5px;\n  padding-left:10px;\n}\n.deselected {\n  background-color:white!important;\n  color:black!important;\n}\n</style>\n\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\""
-      + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.cover)),stack1 == null || stack1 === false ? stack1 : stack1.medium)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-      + "\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>"
-      + escapeExpression(((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-      + "</h2>\n      <h3>\n          ";
-    stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-    if(stack2 || stack2 === 0) { buffer += stack2; }
-    buffer += "\n      </h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div id=\"checkIn\" class=\"check-btn button disabled\">Check In</div> "
-      + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n<div id=\"wrapper\" class=\"check-wrap\">\n<div id=\"scroller\" class=\"students\">\n    \n    \n  </div> "
+  function program4(depth0,data) {
+    
+    
+    return "\n	<span>No Cover Found</span>\n	";
+    }
+
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n<style type=\"text/css\">\n.selected {\n  background-color:#0a5fff;\n  color: white;\n  -webkit-border-radius: 5px;\n  border-radius: 5px;\n  padding-left:10px;\n}\n.deselected {\n  background-color:white!important;\n  color:black!important;\n}\n</style>\n\n<div class=\"check\">\n	\n	";
+    stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n	\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n<div id=\"wrapper\" class=\"check-wrap\">\n<div id=\"scroller\" class=\"students\">\n    \n    \n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
@@ -1721,28 +1779,55 @@ window.require.register("views/templates/checkOut", function(exports, require, m
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+    var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n          ";
-    if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-    else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += "\n";
+    stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n\n<div class=\"title-info\">\n	<h2>";
+    if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "\n          ";
+      + "</h2>\n	<h3>";
+    if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</h3>\n\n	<h4>ISBN: ";
+    if (stack1 = helpers.ISBN) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.ISBN; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</h4>\n	<p>";
+    if (stack1 = helpers.quantity_available) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.quantity_available; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + " Available</p>\n	<div id=\"checkOut\" class=\"check-btn button disabled\">Check Out</div> "
+      + "\n</div>\n";
+    return buffer;
+    }
+  function program2(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n\n<div class=\"title-art\">\n	<img src=\"";
+    if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\">\n</div>\n";
     return buffer;
     }
 
-    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check Out</h1>\n</div>\n<style type=\"text/css\">\n.selected {\n  background-color:#0a5fff;\n  color: white;\n  -webkit-border-radius: 5px;\n  border-radius: 5px;\n  padding-left:10px;\n}\n.deselected {\n  background-color:white!important;\n  color:black!important;\n}\n</style>\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\""
-      + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.cover)),stack1 == null || stack1 === false ? stack1 : stack1.medium)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-      + "\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>"
-      + escapeExpression(((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-      + "</h2>\n      <h3>\n          ";
-    stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-    if(stack2 || stack2 === 0) { buffer += stack2; }
-    buffer += "\n      </h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div id=\"checkOut\" class=\"check-btn button disabled\">Check Out</div> "
-      + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n<div id=\"wrapper\" class=\"check-wrap\">\n<div id=\"scroller\" class=\"students\">\n    \n    \n  </div> "
+  function program4(depth0,data) {
+    
+    
+    return "\n<span>No Cover Found</span>\n";
+    }
+
+    buffer += "<div id=\"header\">\n	<div class=\"back\">Books</div>\n	<h1>Check Out</h1>\n</div>\n<style type=\"text/css\">\n.selected {\n	background-color:#0a5fff;\n	color: white;\n	-webkit-border-radius: 5px;\n	border-radius: 5px;\n	padding-left:10px;\n}\n.deselected {\n	background-color:white!important;\n	color:black!important;\n}\n</style>\n<div class=\"check\">\n\n";
+    stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n\n<div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n<div id=\"wrapper\" class=\"check-wrap\">\n	<div id=\"scroller\" class=\"students\">\n\n\n	</div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
@@ -1787,12 +1872,15 @@ window.require.register("views/templates/settings", function(exports, require, m
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    var buffer = "";
+    var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n  <div id=\"edit\" class=\"right-btn\">Edit</div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" value=\"Dimitar Karaytchev\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" value=\"dimitar.k@me.com\"/>\n    <input id=\"set-current\" class=\"hide-hard\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" class=\"hide-hard\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new-confirm\" class=\"hide-hard\" type=\"password\" placeholder=\"Confirm New Password\" />\n\n    "
-      + "\n    "
-      + "\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n\n  </div> "
+    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container\">\n\n    "
+      + "\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" value=\"";
+    if (stack1 = helpers.username) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.username; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\"/>\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new-confirm\" type=\"password\" placeholder=\"Confirm New Password\" />\n\n    <div id=\"save\" class=\"button primary\">Update Account</div>\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n\n  </div> "
       + "\n</div> "
       + "\n";
     return buffer;

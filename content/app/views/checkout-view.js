@@ -20,6 +20,7 @@ module.exports = View.extend({
 	render: function() {
 		var that=this;
 		data = Application.checkOutView.bookInfo;
+		console.log(Application.checkOutView.bookInfo);		
 		this.$el.html(this.template(data));
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
@@ -29,7 +30,6 @@ module.exports = View.extend({
 			success: function(students) {
 				var studentArray = JSON.stringify(students);
 				var studentArray = JSON.parse(studentArray);
-				console.log(studentArray);
 				$('.students').html(that.templateStudents(studentArray));
 			},
 			error: function(error) {

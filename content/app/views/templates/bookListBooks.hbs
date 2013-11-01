@@ -1,15 +1,19 @@
 
-  <div id="scroller" class="usersBooks">
-    <ul id="booklist">
-    {{#each this}}
-      <li data-id="{{objectId}}" class="bookItem">
-        <img src="{{cover_image}}">
-        <div class="book-meta">
-          <h2 class="truncate-two">{{title}}</h2>
-          <h3 class="truncate">{{author}}</h3>
-          <p>Number Available</p>
-        </div>
-      </li>
-    {{/each}}
-    </ul>
-  </div> {{!-- /#scroller --}}
+<div id="scroller" class="usersBooks">
+	<ul id="booklist">
+		{{#each this}}
+		<li data-id="{{objectId}}" class="bookItem">
+			{{#if cover_image}}
+			<img src="{{cover_image}}">
+			{{else}}
+			<img src="{{cover_image}}">
+			{{/if}}
+			<div class="book-meta">
+				<h2 class="truncate-two">{{title}}</h2>
+				<h3 class="truncate">{{author}}</h3>
+				<p>Number Available</p>
+			</div>
+		</li>
+		{{/each}}
+	</ul>
+</div> {{!-- /#scroller --}}

@@ -18,24 +18,10 @@ module.exports = View.extend({
 		var that = this;
 		var bookData = Application.checkInView.bookInfo;
 		this.$el.html(this.template(bookData));
-		var currentUser = Parse.User.current();
-		var currentUserId = currentUser.id;
-		var query = new Parse.Query("NewBook");
-		that.ISBN = Application.checkInView.bookInfo.ISBN.identifiers.isbn_13[0];
-		query.equalTo("User", currentUserId);
-		query.equalTo("ISBN", Application.checkInView.bookInfo.ISBN.identifiers.isbn_13[0]);
-
-		query.first({
-			success: function(bookData) {
-				console.log(bookData);
-				var studentBookList = bookData.attributes.studentList;
-				console.log(studentBookList);
-				$('.students').html(that.templateStudents(studentBookList));
-			},
-			error: function(error) {
-				alert("Error: " + error.code + " " + error.message);
-			}
-		});
+		console.log(bookData);
+		var studentBookList = bookData.studentList;
+		console.log(studentBookList);
+		$('.students').html(that.templateStudents(studentBookList));
 
 		return this;
 	},
