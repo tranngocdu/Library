@@ -369,7 +369,96 @@ window.require.register("models/library", function(exports, require, module) {
 
   		return {"DescriptiveName": this.toJSON()};
 
+<<<<<<< HEAD
+;require.register("views/addbook-view", function(exports, require, module) {
+var View = require('./view');
+var template = require('./templates/addBook');
+var passData=null;
+var totalAmount = "";
+
+module.exports = View.extend({
+	id: 'addbook-view',
+	template: template,
+	events: {
+		"dataLoaded":"append",
+		'click #done':'addBook',
+		'click #edit-quantity':'quantity',
+		'click #add-book':'addBook'
+	},
+
+	initialize: function() {
+
+	},
+
+	render: function() {
+		var data = Application.addBookView.bookData;
+		var passData = data;
+		console.log(passData);
+		var dataString = JSON.stringify(data);
+		var combinedString = dataString.substring(0,6) + dataString.substring(20);
+		var data=JSON.parse(combinedString);
+		this.bookData = data;
+		this.$el.html(this.template(data));
+		
+		return this;
+	},
+	
+	addBook: function() {
+
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var NewBook=Parse.Object.extend("NewBook");
+		var newBook=new NewBook();
+		newBook.set("title", this.bookData.ISBN.title);
+		//newBook.set("User", currentUserId);
+		console.log(currentUser);
+		var lengthAuthors = this.bookData.ISBN.authors.length;
+		var i = 0;
+		var authorArray = new Array ();
+		while (i < lengthAuthors) {
+				authorArray.push(this.bookData.ISBN.authors[i].name);
+				i++;
+			}
+			authorArray = authorArray.toString();
+			newBook.set("author", authorArray);
+			if (typeof this.bookData.ISBN.cover!='undefined'){
+			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
+		};
+			newBook.set("quantity_total", "2");
+			newBook.set("quantity_out", "0");
+			newBook.set("User", currentUserId);
+			newBook.set("studentList",[{}]);
+			newBook.set("ISBN", this.bookData.ISBN.identifiers.isbn_13[0]);
+			newBook.save(null, {
+				success: function(newBook) {
+						Application.router.navigate("#bookList" , {trigger: true});
+				},
+				error: function(newBook, error) {
+					alert('Back to the drawing board');
+					console.log(error);
+				}
+			});
+	},
+
+	quantity: function() {
+		var data = Application.addBookView.bookData;
+		var quantityPrompt = {
+			state0: { 
+				title: "Edit Quantity",
+				buttons: { "Cancel": false, "Submit": true },
+				html:'<input type="number" name="amount" value="" style="font-size:18px;width:100%;text-align:center;">',
+				submit: function(e,v,m,f){
+					console.log(f.amount);
+					totalAmount=f.amount;
+				$("#numberAvailable").html("Number Available: "+totalAmount+"");
+				}
+			}
+		};
+		$.prompt(quantityPrompt);
+	},
+=======
   	}
+>>>>>>> 17164ea565ede05a10a0a01d795d01a45f83366a
 
   });
 });
@@ -565,8 +654,180 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   		return this;
   	}
 
+<<<<<<< HEAD
+;require.register("views/booklist-view", function(exports, require, module) {
+var View = require('./view');
+var template = require('./templates/bookList');
+var templateBooks = require('./templates/bookListBooks');
+var Library = require('../models/library');
+var Book = require('../models/book');
+
+
+
+module.exports = View.extend({
+	id: 'booklist-view',
+	template: template,
+	templateBooks:templateBooks,
+	events: {
+		'click #filt-all':'allSelected',
+		'click #filt-available':'available',
+		'click #filt-checked':'checkedOut',
+		'click #add':'addBook',
+		"getbookinfo":"getBookInfo",
+		'click .bookItem':'bookDetail'
+	},
+
+	initialize: function() {
+
+	},
+
+	render: function() {
+		var that = this;
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("User", currentUserId);
+		query.find({
+			success: function(usersBooks) {
+				var bookArray = JSON.stringify(usersBooks);
+				var bookArray = JSON.parse(bookArray);
+				that.bookArray = bookArray;	
+				that.$el.html(that.template());
+				$('.booklist-wrap').html(that.templateBooks(bookArray));				
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+
+		return this;
+	},
+
+	allSelected: function() {
+		$('#filt-all').addClass("selected");
+		$('#filt-available').removeClass("selected");
+		$('#filt-checked').removeClass("selected");
+		var that = this;
+		this.$el.html(this.template());
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("User", currentUserId);
+		query.find({
+			success: function(usersBooks) {
+				var bookArray = JSON.stringify(usersBooks);
+				var bookArray = JSON.parse(bookArray);
+				that.bookArray = bookArray;				
+				$('#wrapper').html(that.templateBooks(bookArray));
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	},
+
+	available: function() {
+		$('#filt-all').removeClass("selected");
+		$('#filt-available').addClass("selected");
+		$('#filt-checked').removeClass("selected");
+		var that = this;
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("User", currentUserId);
+		query.notEqualTo("quantity_available","0");
+		query.find({
+			success: function(usersBooks) {
+
+				var bookArray = JSON.stringify(usersBooks);
+				var bookArray = JSON.parse(bookArray);
+				that.bookArray = bookArray;				
+				$('#wrapper').html(that.templateBooks(bookArray));
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	},
+
+	checkedOut: function() {
+		$('#filt-all').removeClass("selected");
+		$('#filt-available').removeClass("selected");
+		$('#filt-checked').addClass("selected");
+		alert("and here");
+		
+		var that = this;
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("User", currentUserId);
+		query.equalTo("quantity_out","0");
+		query.find({
+			success: function(usersBooks) {
+
+				var bookArray = JSON.stringify(usersBooks);
+				var bookArray = JSON.parse(bookArray);
+				that.bookArray = bookArray;				
+				$('#wrapper').html(that.templateBooks(bookArray));
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	},
+
+	addBook: function() {
+		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+		scanner.scan(
+			function (result) {
+				Application.bookListView.ISBN = result.text;
+				Application.bookListView.$el.trigger("getbookinfo");
+
+			}, 
+			function (error) {
+				alert("Scanning failed: " + error);
+			}
+		);
+	},
+	
+	bookDetail: function(e) {
+		Application.bookDetailView.bookId = $(e.currentTarget).data('id');
+		Application.router.navigate("#bookDetail", {trigger:true});
+		
+	},
+
+	getBookInfo: function() {
+		$.ajax({
+			data: {
+				bibkeys: "ISBN:" + Application.bookListView.ISBN,
+				jscmd: "data",
+				format: "json"
+			},
+			url: "http://openlibrary.org/api/books",
+			type: "GET",
+			success: function (data) {
+				alert(Application.bookListView.ISBN);
+				Application.addBookView.bookData = data;
+				Application.router.navigate("#addBook", {
+					trigger: true
+				});
+
+			},
+			error: function (jqXHR,textStatus,errorThrown) {
+				alert("Error");
+			}
+
+		});
+	}
+
+=======
   });
   
+>>>>>>> 17164ea565ede05a10a0a01d795d01a45f83366a
 });
 window.require.register("views/booklist-view", function(exports, require, module) {
   var View = require('./view');
@@ -831,6 +1092,228 @@ window.require.register("views/checkin-view", function(exports, require, module)
   		
   	}
 
+<<<<<<< HEAD
+;require.register("views/checkin-view", function(exports, require, module) {
+var View = require('./view');
+var template = require('./templates/checkIn');
+var templateStudents = require('./templates/studentListCheck');
+
+module.exports = View.extend({
+	id: 'checkin-view',
+	template: template,
+	templateStudents:templateStudents,
+	events: {
+		'click #checkIn':'checkIn'
+	},
+
+	initialize: function() {
+	},
+
+	render: function() {
+		var that = this;
+		var bookData = Application.checkInView.bookInfo;
+		this.$el.html(this.template(bookData));
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("User", currentUserId);
+		query.equalTo("ISBN", Application.checkInView.bookInfo.ISBN.identifiers.isbn_13[0]);
+		alert(currentUserId);
+		alert(Application.checkInView.bookInfo.ISBN.title);
+
+		query.first({
+			success: function(bookData) {
+				console.log(bookData);
+				var studentBookList = bookData.attributes.studentList;
+				console.log(studentBookList);
+				$('.students').html(that.templateStudents(studentBookList));
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+
+		return this;
+	},
+	
+	checkIn: function() {
+		//Get the Array
+		var that = this;
+		that.studentArray = null;
+		var query = new Parse.Query("NewBook");
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		query.equalTo("User", currentUserId);
+		query.equalTo("title", data.ISBN.title);
+		query.first({
+			success: function(usersBooks) {
+
+				that.studentArray = usersBooks.attributes.studentList;
+				that.studentArray.push({name:that.studentName,id:that.studentId});
+				var length = that.studentArray.length;
+				var cutItem = undefined;
+				var i;
+				for (i = 0; i < length; i++) {
+				var element = that.studentArray[i];
+				var id = element.id;
+				if (id == "") {
+				cutItem = i;
+				}
+				}
+				that.studentArray.splice(cutItem,1);
+				console.log(that.studentArray);
+
+				usersBooks.set("studentList",that.studentArray);
+				usersBooks.save(null, {
+				success: function(newBook) {
+						Application.router.navigate("#home" , {trigger: true});
+				},
+				error: function(newBook, error) {
+					alert('Back to the drawing board');
+					console.log(error);
+				}
+			});
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			},
+		});
+
+		
+	}
+
+});
+
+});
+
+;require.register("views/checkout-view", function(exports, require, module) {
+var View = require('./view');
+var template = require('./templates/checkOut');
+var templateStudents = require('./templates/studentListCheck');
+var data =null;
+
+
+module.exports = View.extend({
+	id: 'checkout-view',
+	template: template,
+	templateStudents:templateStudents,
+	events: {
+
+		'click .studentCheck':'pickName',
+		'click #checkOut':'checkOut'
+	},
+
+	initialize: function() {
+	},
+
+	render: function() {
+		var that=this;
+		data = Application.checkOutView.bookInfo;
+		this.$el.html(this.template(data));
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("Student");
+		query.equalTo("UserId", currentUserId);
+		query.find({
+			success: function(students) {
+				var studentArray = JSON.stringify(students);
+				var studentArray = JSON.parse(studentArray);
+				console.log(studentArray);
+				$('.students').html(that.templateStudents(studentArray));
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+
+		return this;
+	},
+	
+
+	pickName: function(e) {
+		this.studentName = $(e.currentTarget).data('name');
+		this.studentId = $(e.currentTarget).data('id');
+	
+		//Checks if the tap was on a previously selected name, if so removes the selection from tapped name
+		if($(e.currentTarget).hasClass("selected")){
+				$(e.currentTarget).removeClass("selected");
+				$(e.currentTarget).addClass("deselected");
+		}
+		//Here because without this the names cannot be reselected
+		else if($(e.currentTarget).hasClass("deselected")){
+				$(".studentCheck").removeClass("deselected");
+				$(".studentCheck").removeClass("selected");
+				$(".studentCheck").addClass("deselected");
+				$(e.currentTarget).removeClass("deselected");				
+				$(e.currentTarget).addClass("selected");
+
+				$("#checkOut").removeClass("disabled");
+				$("#checkOut").addClass("primary-fill");
+		}
+		//Just highlite the damn thing already
+		else {
+		$(".studentCheck").removeClass("deselected");
+		$(".studentCheck").removeClass("selected");
+		$(".studentCheck").addClass("deselected");
+		$(e.currentTarget).removeClass("deselected");
+		$(e.currentTarget).addClass("selected");
+		$("#checkOut").removeClass("disabled");
+		$("#checkOut").addClass("primary-fill");
+		};
+		//If a name isn't selected make sure the Check Out button isn't highlited
+		if (!$(".studentCheck").hasClass("selected")){
+				$("#checkOut").addClass("disabled");
+				$("#checkOut").removeClass("primary-fill");
+		};
+		
+
+	},
+
+	checkOut: function(e) {
+		//Get the Array
+		var that = this;
+		var query = new Parse.Query("NewBook");
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		query.equalTo("User", currentUserId);
+		query.equalTo("title", data.ISBN.title);
+		query.first({
+			success: function(usersBooks) {
+
+				var studentsCheck = usersBooks.attributes.studentList;
+				console.log(studentsCheck);
+				studentsCheck.push({"Name":that.studentName,"objectId":that.studentId});
+				var length = studentsCheck.length;
+				var cutItem = undefined;
+				var i;
+				for (i = 0; i < length; i++) {
+				var element = studentsCheck[i];
+				var id = element.id;
+				if (id == "") {
+					alert("cutting");
+				cutItem = i;
+				studentsCheck.splice(cutItem,1);
+				}
+				}
+
+				usersBooks.set("studentList",studentsCheck);
+				usersBooks.save(null, {
+				success: function(newBook) {
+						Application.router.navigate("#home" , {trigger: true});
+				},
+				error: function(newBook, error) {
+					alert('Back to the drawing board');
+					console.log(error);
+				}
+			});
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			},
+		});
+	
+	}
+=======
   });
   
 });
@@ -960,6 +1443,7 @@ window.require.register("views/checkout-view", function(exports, require, module
   		});
   	
   	}
+>>>>>>> 17164ea565ede05a10a0a01d795d01a45f83366a
 
 
 
@@ -1515,6 +1999,73 @@ window.require.register("views/templates/addBook", function(exports, require, mo
     return buffer;
     }
 
+<<<<<<< HEAD
+;require.register("views/settings-view", function(exports, require, module) {
+var View = require('./view');
+var template = require('./templates/settings');
+
+module.exports = View.extend({
+	id: 'settings-view',
+	template: template,
+	events: {
+		'click #edit': 'edit',
+		'click #change-pass': 'changePass',
+		'click #done': 'done',
+		'click #logout': 'logout',
+		'click #addBook': 'addBook',
+		'click #changeQuantity': 'changeQuantity'
+	},
+
+	initialize: function () {
+
+	},
+
+	render: function () {
+		this.$el.html(this.template());
+		return this;
+	},
+
+	edit: function () {
+		$('#edit').toggle(function (){
+		            $(this).text("Save").addClass("save");
+		            $('input.hide-hard').addClass("block");
+		        }, function(){
+		            $(this).text("Edit").removeClass("save");
+		            $('input.hide-hard').removeClass("block");
+		        });
+	},
+
+	// changePass: function () {
+	// $('input.hide-hard').addClass("block");
+	// },
+
+	done: function () {
+		Application.router.navigate("#home", {
+			trigger: true
+		});
+	},
+
+	logout: function () {
+		window.localStorage.removeItem("userId");
+		Parse.User.logOut();
+		Application.router.navigate("#login", {
+			trigger: true
+		});
+	},
+
+	addBook: function() {
+		Application.router.navigate("#addBook", {
+			trigger: true
+		});
+	},
+	
+	changeQuantity: function() {
+		Application.router.navigate("#addBook", {
+			trigger: true
+		});
+	}
+
+=======
     buffer += "<div id=\"header\">\n  <div class=\"back\">Cancel</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n    <div class=\"title-art\">\n      <img src=\""
       + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.cover)),stack1 == null || stack1 === false ? stack1 : stack1.medium)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
       + "\">\n      <h2>"
@@ -1527,6 +2078,7 @@ window.require.register("views/templates/addBook", function(exports, require, mo
       + "\n\n";
     return buffer;
     });
+>>>>>>> 17164ea565ede05a10a0a01d795d01a45f83366a
 });
 window.require.register("views/templates/addStudent", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1826,12 +2378,29 @@ window.require.register("views/templates/studentListCheck", function(exports, re
     return buffer;
     }
 
+<<<<<<< HEAD
+;require.register("views/templates/settings", function(exports, require, module) {
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "";
+
+
+  buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n  <div id=\"edit\" class=\"right-btn\">Edit</div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" value=\"Dimitar Karaytchev\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" value=\"dimitar.k@me.com\"/>\n    <input id=\"set-current\" class=\"hide-hard\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" class=\"hide-hard\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new-confirm\" class=\"hide-hard\" type=\"password\" placeholder=\"Confirm New Password\" />\n\n    "
+    + "\n    "
+    + "\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n\n  </div> "
+    + "\n</div> "
+    + "\n";
+  return buffer;
+  });
+=======
     buffer += " <div id=\"scroller\" class=\"students\">\n  <ul id=\"studentlist\">\n";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n\n  </ul>\n\n</div> ";
     return buffer;
     });
+>>>>>>> 17164ea565ede05a10a0a01d795d01a45f83366a
 });
 window.require.register("views/view", function(exports, require, module) {
   require('lib/view_helper');

@@ -8060,6 +8060,7 @@ cordova.define("cordova/plugin/BarcodeScanner",
                 //  LOCATION_TYPE: "LOCATION_TYPE" // TODO:  not implemented, requires passing a Bundle class from Javascript to Java
             };
         };
+<<<<<<< HEAD
 
         /**
          * Read code from scanner.
@@ -8112,6 +8113,60 @@ cordova.define("cordova/plugin/BarcodeScanner",
             ]);
         };
 
+=======
+
+        /**
+         * Read code from scanner.
+         *
+         * @param {Function} successCallback This function will recieve a result object: {
+         *        text : '12345-mock',    // The code that was scanned.
+         *        format : 'FORMAT_NAME', // Code format.
+         *        cancelled : true/false, // Was canceled.
+         *    }
+         * @param {Function} errorCallback
+         */
+        BarcodeScanner.prototype.scan = function (successCallback, errorCallback) {
+            if (errorCallback == null) {
+                errorCallback = function () {
+                };
+            }
+
+            if (typeof errorCallback != "function") {
+                console.log("BarcodeScanner.scan failure: failure parameter not a function");
+                return;
+            }
+
+            if (typeof successCallback != "function") {
+                console.log("BarcodeScanner.scan failure: success callback parameter must be a function");
+                return;
+            }
+
+            exec(successCallback, errorCallback, 'BarcodeScanner', 'scan', []);
+        };
+
+        //-------------------------------------------------------------------
+        BarcodeScanner.prototype.encode = function (type, data, successCallback, errorCallback, options) {
+            if (errorCallback == null) {
+                errorCallback = function () {
+                };
+            }
+
+            if (typeof errorCallback != "function") {
+                console.log("BarcodeScanner.encode failure: failure parameter not a function");
+                return;
+            }
+
+            if (typeof successCallback != "function") {
+                console.log("BarcodeScanner.encode failure: success callback parameter must be a function");
+                return;
+            }
+
+            exec(successCallback, errorCallback, 'BarcodeScanner', 'encode', [
+                {"type": type, "data": data, "options": options}
+            ]);
+        };
+
+>>>>>>> 17164ea565ede05a10a0a01d795d01a45f83366a
         var barcodeScanner = new BarcodeScanner();
         module.exports = barcodeScanner;
     });
@@ -9684,6 +9739,8 @@ $(document).bind("mobileinit", function () {
         $(event.currentTarget).remove();
     });
 });;
+<<<<<<< HEAD
+=======
 /*
  * jQuery Impromptu
  * By: Trent Richardson [http://trentrichardson.com]
@@ -10340,6 +10397,7 @@ $(document).bind("mobileinit", function () {
 	
 })(jQuery);
 ;
+>>>>>>> 17164ea565ede05a10a0a01d795d01a45f83366a
 /*!
  * jQuery Migrate - v1.1.1 - 2013-02-16
  * https://github.com/jquery/jquery-migrate

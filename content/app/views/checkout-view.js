@@ -29,6 +29,7 @@ module.exports = View.extend({
 			success: function(students) {
 				var studentArray = JSON.stringify(students);
 				var studentArray = JSON.parse(studentArray);
+				console.log(studentArray);
 				$('.students').html(that.templateStudents(studentArray));
 			},
 			error: function(error) {
@@ -82,7 +83,6 @@ module.exports = View.extend({
 	checkOut: function(e) {
 		//Get the Array
 		var that = this;
-		that.studentArray = null;
 		var query = new Parse.Query("NewBook");
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
@@ -91,22 +91,23 @@ module.exports = View.extend({
 		query.first({
 			success: function(usersBooks) {
 
-				that.studentArray = usersBooks.attributes.studentList;
-				that.studentArray.push({name:that.studentName,id:that.studentId});
-				var length = that.studentArray.length;
+				var studentsCheck = usersBooks.attributes.studentList;
+				console.log(studentsCheck);
+				studentsCheck.push({"Name":that.studentName,"objectId":that.studentId});
+				var length = studentsCheck.length;
 				var cutItem = undefined;
 				var i;
 				for (i = 0; i < length; i++) {
-				var element = that.studentArray[i];
+				var element = studentsCheck[i];
 				var id = element.id;
 				if (id == "") {
+					alert("cutting");
 				cutItem = i;
+				studentsCheck.splice(cutItem,1);
 				}
 				}
-				that.studentArray.splice(cutItem,1);
-				console.log(that.studentArray);
 
-				usersBooks.set("studentList",that.studentArray);
+				usersBooks.set("studentList",studentsCheck);
 				usersBooks.save(null, {
 				success: function(newBook) {
 						Application.router.navigate("#home" , {trigger: true});
