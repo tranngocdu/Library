@@ -25,7 +25,6 @@ module.exports = View.extend({
 
 	render: function() {
 		var that = this;
-		this.$el.html(this.template());
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
@@ -34,8 +33,9 @@ module.exports = View.extend({
 			success: function(usersBooks) {
 				var bookArray = JSON.stringify(usersBooks);
 				var bookArray = JSON.parse(bookArray);
-				that.bookArray = bookArray;				
-				$('#wrapper').html(that.templateBooks(bookArray));
+				that.bookArray = bookArray;	
+				that.$el.html(that.template());
+				$('.booklist-wrap').html(that.templateBooks(bookArray));				
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
