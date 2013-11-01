@@ -1549,54 +1549,44 @@ window.require.register("views/templates/bookDetail", function(exports, require,
 
   function program1(depth0,data) {
     
-    var stack1;
+    var buffer = "", stack1;
+    buffer += "\n	    <div class=\"title-art\">\n	    	\n	    	";
+    stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n\n	      <h2>";
     if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-    return escapeExpression(stack1);
-    }
-
-  function program3(depth0,data) {
-    
-    var stack1;
+    buffer += escapeExpression(stack1)
+      + "</h2>\n	      <h3>";
     if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-    return escapeExpression(stack1);
+    buffer += escapeExpression(stack1)
+      + "</h3>\n	      <h4>ISBN Number</h4>\n	      <p>Number Available</p>\n	    </div>\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n    ";
+    return buffer;
     }
-
-  function program5(depth0,data) {
-    
-    var stack1;
-    stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(8, program8, data),fn:self.program(6, program6, data),data:data});
-    if(stack1 || stack1 === 0) { return stack1; }
-    else { return ''; }
-    }
-  function program6(depth0,data) {
+  function program2(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n<div style=\"height:100px; width:100px; background-image: url('";
+    buffer += "\n	      	<img src=\"";
     if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "'); \"></div>\n  ";
+      + "\">\n	      ";
     return buffer;
     }
 
-  function program8(depth0,data) {
+  function program4(depth0,data) {
     
     
-    return "\n<div style=\"padding-top:30px;\">No Cover Found</div>\n";
+    return "\n	      		<span>No Cover Found</span>\n	      ";
     }
 
-    buffer += "\n<div id=\"scanner\" style=\"padding-top:30px;\">Title: ";
+    buffer += "\n"
+      + "\n\n\n<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Book Detail</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n  	";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "</div>\n\n<div id=\"scanner\" style=\"padding-top:30px;\">Author: ";
-    stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
-    if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "</div>\n  ";
-    stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
-    if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n\n\n\n";
+    buffer += "\n\n  </div> "
+      + "\n</div> ";
     return buffer;
     });
 });
@@ -1625,27 +1615,26 @@ window.require.register("views/templates/bookListBooks", function(exports, requi
     if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "\" class=\"bookItem\">\n        <table style=\"width:100%;\">\n        <tr>\n          <td style=\"width:50%;\">\n        <p class=\"Title\">";
-    if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-    else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-    buffer += escapeExpression(stack1)
-      + "</p> \n        <p class=\"Author\">";
-    if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-    else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-    buffer += escapeExpression(stack1)
-      + "</p>\n          </td>\n          <td style=\"width:50%;\">\n            <div style=\"float:right;\">\n        <img src=\"";
+      + "\" class=\"bookItem\">\n        <img src=\"";
     if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "\">\n            </div>\n          </td>\n        </tr>\n        </table> \n      </li>\n  ";
+      + "\">\n        <div class=\"book-meta\">\n          <h2 class=\"truncate-two\">";
+    if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</h2>\n          <h3 class=\"truncate\">";
+    if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</h3>\n          <p>Number Available</p>\n        </div>\n      </li>\n    ";
     return buffer;
     }
 
-    buffer += "\n  <div id=\"scroller\" class=\"usersBooks\">\n  	   <ul id=\"booklist\">\n  ";
+    buffer += "\n  <div id=\"scroller\" class=\"usersBooks\">\n    <ul id=\"booklist\">\n    ";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n\n    </ul>\n\n  </div> "
-      + "\n";
+    buffer += "\n    </ul>\n  </div> ";
     return buffer;
     });
 });

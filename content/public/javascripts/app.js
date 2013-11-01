@@ -1550,7 +1550,7 @@ window.require.register("views/templates/bookDetail", function(exports, require,
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n	    <div class=\"title-art\">\n	    	\n	    	";
+    buffer += "\n	    <div class=\"title-art\">\n\n	    	";
     stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n\n	      <h2>";
@@ -1561,7 +1561,8 @@ window.require.register("views/templates/bookDetail", function(exports, require,
     if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h3>\n	      <h4>ISBN Number</h4>\n	      <p>Number Available</p>\n	    </div>\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n    ";
+      + "</h3>\n	      "
+      + "\n	      <p>Number Available</p>\n	    </div>\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n    ";
     return buffer;
     }
   function program2(depth0,data) {
@@ -1581,8 +1582,7 @@ window.require.register("views/templates/bookDetail", function(exports, require,
     return "\n	      		<span>No Cover Found</span>\n	      ";
     }
 
-    buffer += "\n"
-      + "\n\n\n<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Book Detail</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n  	";
+    buffer += "\n<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Book Detail</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n  	";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n\n  </div> "
