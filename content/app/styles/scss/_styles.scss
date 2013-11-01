@@ -75,6 +75,18 @@ HELPER STYLES
   display: none;
 }
 
+.hide-hard {
+  display: none !important;
+}
+
+.block {
+  display: block !important;
+}
+
+.save {
+  font-weight: 500;
+}
+
 .truncate {
   white-space: nowrap;
   overflow: hidden;
@@ -87,6 +99,10 @@ HELPER STYLES
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+}
+
+.inactive {
+  border-bottom: 0 none;
 }
 
 /********************************
@@ -205,11 +221,13 @@ BUTTONS
 }
 
 .primary-fill {
+  border: 1px solid $primary;
   background-color: $primary;
   color: $white;
 }
 
 .secondary-fill {
+  border: 1px solid $red;
   background-color: $red;
   color: $white;
 }
@@ -264,7 +282,9 @@ SIGN UP & LOGIN
 #login-have-account,
 #logout,
 #add-student,
-#help, #save {
+#help, 
+#save,
+#change-pass {
   width: 200px;
   padding: 10px 0 12px;
   margin: 0 auto;
@@ -273,11 +293,17 @@ SIGN UP & LOGIN
 
 #create-account,
 #login,
-#logout,
-#add-student, {
+#add-student,
+#change-pass,
+#help {
   margin-top: 20px;
   margin-bottom: 10px;
 }
+
+#help {
+  margin-bottom: 10px;
+}
+
 
 #disclaimer {
   color: $light-grey;

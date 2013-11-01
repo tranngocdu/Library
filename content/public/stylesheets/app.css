@@ -421,12 +421,24 @@ HELPER STYLES
   display: none; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000378}}
+.hide-hard {
+  display: none !important; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000382}}
+.block {
+  display: block !important; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000386}}
+.save {
+  font-weight: 500; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000390}}
 .truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000384}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000396}}
 .truncate-two {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -434,10 +446,14 @@ HELPER STYLES
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003104}}
+.inactive {
+  border-bottom: 0 none; }
+
 /********************************
 SCROLL
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000395}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003111}}
 #wrapper {
   position: absolute;
   overflow-y: auto;
@@ -448,25 +464,25 @@ SCROLL
   left: 0;
   width: 100%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003106}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003122}}
 #scroller {
   min-height: 100%;
   -webkit-transform: translateZ(0);
   padding: 20px 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003112}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003128}}
 .bottomless {
   bottom: 0 !important; }
 
 /********************************
 LAYOUT
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003119}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003135}}
 .container {
   width: 94%;
   margin: 0 auto; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003124}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003140}}
 #header {
   position: absolute;
   z-index: 9;
@@ -476,16 +492,16 @@ LAYOUT
   height: 65px;
   background-color: #f8f8f8;
   border-bottom: 1px solid #cccccc; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003133}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003149}}
   #header h1 {
     text-align: center;
     padding-top: 32px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003139}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003155}}
 .extended-header {
   height: 110px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003143}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003159}}
 #footer {
   position: absolute;
   width: 100%;
@@ -494,11 +510,11 @@ LAYOUT
   height: 65px;
   background-color: #f8f8f8;
   border-top: 1px solid #cccccc; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003151}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003167}}
   #footer ul {
     list-style-type: none;
     padding: 20px 0 0 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003154}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003170}}
     #footer ul li {
       display: inline-block;
       width: 24%;
@@ -506,7 +522,7 @@ LAYOUT
       color: gray;
       font-size: 14px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003165}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003181}}
 .back,
 .right-btn {
   color: #fa1f4f;
@@ -514,27 +530,27 @@ LAYOUT
   top: 36px;
   font-size: 17px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003172}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003188}}
 .back {
   left: 10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003176}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003192}}
 .right-btn {
   right: 10px; }
 
 /********************************
 TYPOGRAPHY
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003184}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003200}}
 h1 {
   color: black;
   font-size: 18px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003189}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003205}}
 .active {
   color: #fa1f4f !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003193}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003209}}
 a {
   color: #0a5fff;
   text-decoration: none; }
@@ -542,33 +558,35 @@ a {
 /********************************
 BUTTONS
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003201}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003217}}
 .button {
   -webkit-border-radius: 5px;
   border-radius: 5px;
   text-align: center; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003207}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003223}}
 .primary-fill {
+  border: 1px solid #0a5fff;
   background-color: #0a5fff;
   color: white; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003212}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003229}}
 .secondary-fill {
+  border: 1px solid #fa1f4f;
   background-color: #fa1f4f;
   color: white; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003217}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003235}}
 .primary {
   color: #0a5fff;
   border: 1px solid #0a5fff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003222}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003240}}
 .secondary {
   color: #fa1f4f;
   border: 1px solid #fa1f4f; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003227}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003245}}
 .disabled {
   color: gray;
   border: 1px solid gray; }
@@ -576,7 +594,7 @@ BUTTONS
 /********************************
 SIGN UP & LOGIN
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003239}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003257}}
 #signup-view h2,
 #login-view h2,
 #settings-view h2,
@@ -584,7 +602,7 @@ SIGN UP & LOGIN
   text-align: center;
   color: #595959;
   margin-bottom: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003244}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003262}}
 #signup-view input,
 #login-view input,
 #settings-view input,
@@ -593,36 +611,43 @@ SIGN UP & LOGIN
   width: 100%;
   font-size: 16px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003252}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003270}}
 #login-view h2 {
   margin-top: 20px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003257}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003275}}
 .first-input {
   border-top: 1px solid #CACACA; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003267}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003287}}
 #create-account,
 #have-account,
 #login,
 #login-have-account,
 #logout,
 #add-student,
-#help, #save {
+#help,
+#save,
+#change-pass {
   width: 200px;
   padding: 10px 0 12px;
   margin: 0 auto;
   font-size: 16px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003277}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003298}}
 #create-account,
 #login,
-#logout,
-#add-student {
+#add-student,
+#change-pass,
+#help {
   margin-top: 20px;
   margin-bottom: 10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003282}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003303}}
+#help {
+  margin-bottom: 10px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003308}}
 #disclaimer {
   color: gray;
   font-size: 12px;
@@ -634,7 +659,7 @@ SIGN UP & LOGIN
   bottom: 5%;
   line-height: 1.6; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003294}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003320}}
 #forgot {
   margin-top: 20px;
   text-align: center;
@@ -644,56 +669,56 @@ SIGN UP & LOGIN
 /********************************
 HOME
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003305}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003331}}
 .home {
   padding-top: 100px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003308}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003334}}
 .check-out, .check-in {
   width: 240px;
   padding: 16px 0;
   margin: 0 auto;
   font-size: 18px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003315}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003341}}
 .check-out {
   margin-bottom: 25px; }
 
 /********************************
 ADD BOOK
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003323}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003349}}
 .add-book,
 .check {
   width: 90%;
   margin: 0 auto;
   text-align: center;
   padding: 10px !important; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003328}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003354}}
   .add-book img,
   .check img {
     height: 190px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003331}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003357}}
   .add-book h2,
   .check h2 {
     font-size: 16px;
     font-weight: 500;
     padding-top: 7px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003337}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003363}}
   .add-book h3,
   .check h3 {
     font-size: 14px;
     font-weight: 300;
     color: gray;
     padding-top: 7px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003344}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003370}}
   .add-book h4,
   .check h4 {
     font-weight: 300;
     color: gray;
     font-size: 13px;
     padding-top: 7px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003351}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003377}}
   .add-book p,
   .check p {
     font-size: 13px;
@@ -701,7 +726,7 @@ ADD BOOK
     color: #0a5fff;
     padding: 7px 0 15px 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003358}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003384}}
 .ab-btn {
   width: 140px;
   padding: 8px 0 10px 0;
@@ -711,7 +736,7 @@ ADD BOOK
 /********************************
 CHECK IN / CHECK OUT
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003368}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003394}}
 .check {
   width: 100%;
   margin: 0 auto;
@@ -719,23 +744,23 @@ CHECK IN / CHECK OUT
   text-align: left;
   background-color: #f8f8f8;
   border-bottom: 1px solid #cccccc; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003375}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003401}}
   .check img {
     height: 160px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003378}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003404}}
   .check .title-art {
     float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003381}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003407}}
   .check .title-info {
     float: left;
     margin-left: 15px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003385}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003411}}
   .check .check-btn {
     width: 120px;
     padding: 8px 0 10px 0;
     font-size: 16px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003392}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003418}}
 .name-header {
   width: 90%;
   margin: 0 auto;
@@ -745,45 +770,45 @@ CHECK IN / CHECK OUT
   padding: 10px 0 12px 0;
   border-bottom: 1px solid #cccccc; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003401}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003427}}
 .check-wrap {
   top: 284px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003404}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003430}}
 .check-scroller {
   padding: 0 !important; }
 
 /********************************
 BOOK LIST
 ********************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003410}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003436}}
 .booklist-wrap {
   top: 90px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003413}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003439}}
 #filter-wrap {
   border-top: 1px solid #cccccc;
   margin-top: 10px;
   padding-top: 9px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003418}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003444}}
 .filter {
   overflow: hidden;
   width: 95%;
   margin: 0 auto;
   font-size: 14px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003423}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003449}}
   .filter span {
     float: left;
     padding: 5px 0 8px 0;
     text-align: center;
     color: #fa1f4f; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003429}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003455}}
   .filter #filt-available {
     width: 30%;
     border-top: 1px solid #fa1f4f;
     border-bottom: 1px solid #fa1f4f; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003434}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003460}}
   .filter #filt-checked {
     border: 1px solid #fa1f4f;
     width: 40%;
@@ -791,7 +816,7 @@ BOOK LIST
     -webkit-border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003443}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003469}}
   .filter #filt-all {
     border: 1px solid #fa1f4f;
     width: 30%;
@@ -799,75 +824,75 @@ BOOK LIST
     -webkit-border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003452}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003478}}
   .filter .selected {
     background-color: #fa1f4f;
     color: white; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003458}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003484}}
 #booklist {
   width: 92%;
   margin: 0 auto;
   padding-left: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003462}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003488}}
   #booklist li {
     border-bottom: 1px solid #cccccc;
     padding: 5px 0;
     overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003466}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003492}}
     #booklist li img {
       width: 50px;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003470}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003496}}
     #booklist li .book-meta {
       float: left;
       height: 75px;
       margin-left: 20px;
       width: 75%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003475}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003501}}
       #booklist li .book-meta h2 {
         font-size: 14px;
         font-weight: 500; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003479}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003505}}
       #booklist li .book-meta h3 {
         font-size: 12px;
         font-weight: 300;
         color: gray;
         padding-top: 4px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003485}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003511}}
       #booklist li .book-meta p {
         font-size: 12px;
         font-weight: 500;
         color: #0a5fff;
         padding-top: 4px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003491}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003517}}
       #booklist li .book-meta .out {
         color: #fa1f4f; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003498}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003524}}
 .students {
   padding: 0 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003501}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003527}}
 #studentlist {
   padding-left: 0;
   margin: 0 auto;
   width: 92%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003505}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003531}}
   #studentlist li {
     border-bottom: 1px solid #cccccc;
     padding: 12px 0 14px 0;
     overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003509}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003535}}
     #studentlist li .first-name {
       font-weight: 500;
       margin-right: 5px;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003514}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003540}}
     #studentlist li .last-name {
       width: 70%;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003518}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003544}}
     #studentlist li .delete-name {
       color: #fa1f4f;
       text-align: right;
