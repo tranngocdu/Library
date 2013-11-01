@@ -166,15 +166,31 @@ LAYOUT
   border-top: 1px solid $border;
   ul {
     list-style-type: none;
-    padding: 20px 0 0 0;
+    margin: 0;
+    padding: 0;
     li {
       display: inline-block;
       width: 24%;
       text-align: center;
       color: $light-grey;
       font-size: 14px;
+      span {
+      }
     }
   }
+}
+
+
+.footer-icon {
+  background-color: red;
+  margin: 10px auto 5px auto;
+}
+
+#icon-student {
+  width: 20px;
+  height: 21px;
+  background: url(../images/student.png);
+  background-size: 20px 21px;
 }
 
 .back, 
