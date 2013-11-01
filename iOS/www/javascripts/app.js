@@ -470,6 +470,7 @@ module.exports = View.extend({
 			newBook.set("quantity_out", "0");
 			newBook.set("User", currentUserId);
 			newBook.set("studentList",[{}]);
+			newBook.set("ISBN", this.bookData.ISBN.identifiers.isbn_13[0]);
 			newBook.save(null, {
 				success: function(newBook) {
 						Application.router.navigate("#bookList" , {trigger: true});
@@ -619,7 +620,6 @@ module.exports = View.extend({
 
 	render: function() {
 		var that = this;
-		this.$el.html(this.template());
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
@@ -628,8 +628,9 @@ module.exports = View.extend({
 			success: function(usersBooks) {
 				var bookArray = JSON.stringify(usersBooks);
 				var bookArray = JSON.parse(bookArray);
-				that.bookArray = bookArray;				
-				$('#wrapper').html(that.templateBooks(bookArray));
+				that.bookArray = bookArray;	
+				that.$el.html(that.template());
+				$('.booklist-wrap').html(that.templateBooks(bookArray));				
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
@@ -784,22 +785,22 @@ module.exports = View.extend({
 
 	render: function() {
 		var that = this;
-		alert(Application.checkInView.bookInfo);
 		var bookData = Application.checkInView.bookInfo;
-				console.log(bookData);
-
 		this.$el.html(this.template(bookData));
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
-		var query = new Parse.Query("Student");
-		query.equalTo("UserId", currentUserId);
-		//GARRETT!!!
-		//See if we can find only students who have the book checked out?
-		query.find({
-			success: function(students) {
-				var studentArray = JSON.stringify(students);
-				var studentArray = JSON.parse(studentArray);
-				$('.students').html(that.templateStudents(studentArray));
+		var query = new Parse.Query("NewBook");
+		query.equalTo("User", currentUserId);
+		query.equalTo("ISBN", Application.checkInView.bookInfo.ISBN.identifiers.isbn_13[0]);
+		alert(currentUserId);
+		alert(Application.checkInView.bookInfo.ISBN.title);
+
+		query.first({
+			success: function(bookData) {
+				console.log(bookData);
+				var studentBookList = bookData.attributes.studentList;
+				console.log(studentBookList);
+				$('.students').html(that.templateStudents(studentBookList));
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
@@ -891,6 +892,7 @@ module.exports = View.extend({
 			success: function(students) {
 				var studentArray = JSON.stringify(students);
 				var studentArray = JSON.parse(studentArray);
+				console.log(studentArray);
 				$('.students').html(that.templateStudents(studentArray));
 			},
 			error: function(error) {
@@ -944,7 +946,6 @@ module.exports = View.extend({
 	checkOut: function(e) {
 		//Get the Array
 		var that = this;
-		that.studentArray = null;
 		var query = new Parse.Query("NewBook");
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
@@ -953,22 +954,23 @@ module.exports = View.extend({
 		query.first({
 			success: function(usersBooks) {
 
-				that.studentArray = usersBooks.attributes.studentList;
-				that.studentArray.push({name:that.studentName,id:that.studentId});
-				var length = that.studentArray.length;
+				var studentsCheck = usersBooks.attributes.studentList;
+				console.log(studentsCheck);
+				studentsCheck.push({"Name":that.studentName,"objectId":that.studentId});
+				var length = studentsCheck.length;
 				var cutItem = undefined;
 				var i;
 				for (i = 0; i < length; i++) {
-				var element = that.studentArray[i];
+				var element = studentsCheck[i];
 				var id = element.id;
 				if (id == "") {
+					alert("cutting");
 				cutItem = i;
+				studentsCheck.splice(cutItem,1);
 				}
 				}
-				that.studentArray.splice(cutItem,1);
-				console.log(that.studentArray);
 
-				usersBooks.set("studentList",that.studentArray);
+				usersBooks.set("studentList",studentsCheck);
 				usersBooks.save(null, {
 				success: function(newBook) {
 						Application.router.navigate("#home" , {trigger: true});
@@ -1277,6 +1279,8 @@ module.exports = View.extend({
 	id: 'settings-view',
 	template: template,
 	events: {
+		'click #edit': 'edit',
+		'click #change-pass': 'changePass',
 		'click #done': 'done',
 		'click #logout': 'logout',
 		'click #addBook': 'addBook',
@@ -1291,6 +1295,20 @@ module.exports = View.extend({
 		this.$el.html(this.template());
 		return this;
 	},
+
+	edit: function () {
+		$('#edit').toggle(function (){
+		            $(this).text("Save").addClass("save");
+		            $('input.hide-hard').addClass("block");
+		        }, function(){
+		            $(this).text("Edit").removeClass("save");
+		            $('input.hide-hard').removeClass("block");
+		        });
+	},
+
+	// changePass: function () {
+	// $('input.hide-hard').addClass("block");
+	// },
 
 	done: function () {
 		Application.router.navigate("#home", {
@@ -1779,7 +1797,9 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "";
 
 
-  buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n\n    <div id=\"save\" class=\"button primary\">Update Profile</div>\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n\n  </div> "
+  buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n  <div id=\"edit\" class=\"right-btn\">Edit</div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" value=\"Dimitar Karaytchev\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" value=\"dimitar.k@me.com\"/>\n    <input id=\"set-current\" class=\"hide-hard\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" class=\"hide-hard\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new-confirm\" class=\"hide-hard\" type=\"password\" placeholder=\"Confirm New Password\" />\n\n    "
+    + "\n    "
+    + "\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n\n  </div> "
     + "\n</div> "
     + "\n";
   return buffer;

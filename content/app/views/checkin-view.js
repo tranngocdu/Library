@@ -15,22 +15,22 @@ module.exports = View.extend({
 
 	render: function() {
 		var that = this;
-		alert(Application.checkInView.bookInfo);
 		var bookData = Application.checkInView.bookInfo;
-				console.log(bookData);
-
 		this.$el.html(this.template(bookData));
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
-		var query = new Parse.Query("Student");
-		query.equalTo("UserId", currentUserId);
-		//GARRETT!!!
-		//See if we can find only students who have the book checked out?
-		query.find({
-			success: function(students) {
-				var studentArray = JSON.stringify(students);
-				var studentArray = JSON.parse(studentArray);
-				$('.students').html(that.templateStudents(studentArray));
+		var query = new Parse.Query("NewBook");
+		query.equalTo("User", currentUserId);
+		query.equalTo("ISBN", Application.checkInView.bookInfo.ISBN.identifiers.isbn_13[0]);
+		alert(currentUserId);
+		alert(Application.checkInView.bookInfo.ISBN.title);
+
+		query.first({
+			success: function(bookData) {
+				console.log(bookData);
+				var studentBookList = bookData.attributes.studentList;
+				console.log(studentBookList);
+				$('.students').html(that.templateStudents(studentBookList));
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
