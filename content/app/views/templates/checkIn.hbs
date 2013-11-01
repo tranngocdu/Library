@@ -2,6 +2,19 @@
   <div class="back">Books</div>
   <h1>Check In</h1>
 </div>
+<style type="text/css">
+.selected {
+  background-color:#0a5fff;
+  color: white;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding-left:10px;
+}
+.deselected {
+  background-color:white!important;
+  color:black!important;
+}
+</style>
 
 <div class="check">
 
@@ -18,7 +31,7 @@
       </h3>
       <h4>ISBN Number</h4>
       <p>Number Available</p>
-      <div id="checkOut" class="check-btn button disabled">Check Out</div> {{!-- on name select remove .disabled and add .primary-fill --}}
+      <div id="checkIn" class="check-btn button disabled">Check In</div> {{!-- on name select remove .disabled and add .primary-fill --}}
     </div>
 
     <div class="clearfix"></div>
