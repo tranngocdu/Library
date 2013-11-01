@@ -846,53 +846,52 @@ BOOK LIST
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003496}}
     #booklist li .book-meta {
       float: left;
-      height: 75px;
       margin-left: 20px;
       width: 75%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003501}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003500}}
       #booklist li .book-meta h2 {
         font-size: 14px;
         font-weight: 500; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003505}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003504}}
       #booklist li .book-meta h3 {
         font-size: 12px;
         font-weight: 300;
         color: gray;
         padding-top: 4px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003511}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003510}}
       #booklist li .book-meta p {
         font-size: 12px;
         font-weight: 500;
         color: #0a5fff;
         padding-top: 4px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003517}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003516}}
       #booklist li .book-meta .out {
         color: #fa1f4f; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003524}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003523}}
 .students {
   padding: 0 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003527}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003526}}
 #studentlist {
   padding-left: 0;
   margin: 0 auto;
   width: 92%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003531}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003530}}
   #studentlist li {
     border-bottom: 1px solid #cccccc;
     padding: 12px 0 14px 0;
     overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003535}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003534}}
     #studentlist li .first-name {
       font-weight: 500;
       margin-right: 5px;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003540}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003539}}
     #studentlist li .last-name {
       width: 70%;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003544}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003543}}
     #studentlist li .delete-name {
       color: #fa1f4f;
       text-align: right;
