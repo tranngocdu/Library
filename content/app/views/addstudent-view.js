@@ -30,7 +30,6 @@ module.exports = View.extend({
 		newStudent.save(null, {
 			success: function(newStudent) {
 				$('#add-first').val("");
-				alert('It worked!');
 			},
 			error: function(newBook, error) {
 				alert('Back to the drawing board');

@@ -39,44 +39,44 @@ module.exports = View.extend({
 
 		return this;
 	},
-	
+
 
 	pickName: function(e) {
 		this.studentName = $(e.currentTarget).data('name');
 		this.studentId = $(e.currentTarget).data('id');
-	
+
 		//Checks if the tap was on a previously selected name, if so removes the selection from tapped name
 		if($(e.currentTarget).hasClass("selected")){
-				$(e.currentTarget).removeClass("selected");
-				$(e.currentTarget).addClass("deselected");
+			$(e.currentTarget).removeClass("selected");
+			$(e.currentTarget).addClass("deselected");
 		}
 		//Here because without this the names cannot be reselected
 		else if($(e.currentTarget).hasClass("deselected")){
-				$(".studentCheck").removeClass("deselected");
-				$(".studentCheck").removeClass("selected");
-				$(".studentCheck").addClass("deselected");
-				$(e.currentTarget).removeClass("deselected");				
-				$(e.currentTarget).addClass("selected");
+			$(".studentCheck").removeClass("deselected");
+			$(".studentCheck").removeClass("selected");
+			$(".studentCheck").addClass("deselected");
+			$(e.currentTarget).removeClass("deselected");				
+			$(e.currentTarget).addClass("selected");
 
-				$("#checkOut").removeClass("disabled");
-				$("#checkOut").addClass("primary-fill");
+			$("#checkOut").removeClass("disabled");
+			$("#checkOut").addClass("primary-fill");
 		}
 		//Just highlite the damn thing already
 		else {
-		$(".studentCheck").removeClass("deselected");
-		$(".studentCheck").removeClass("selected");
-		$(".studentCheck").addClass("deselected");
-		$(e.currentTarget).removeClass("deselected");
-		$(e.currentTarget).addClass("selected");
-		$("#checkOut").removeClass("disabled");
-		$("#checkOut").addClass("primary-fill");
+			$(".studentCheck").removeClass("deselected");
+			$(".studentCheck").removeClass("selected");
+			$(".studentCheck").addClass("deselected");
+			$(e.currentTarget).removeClass("deselected");
+			$(e.currentTarget).addClass("selected");
+			$("#checkOut").removeClass("disabled");
+			$("#checkOut").addClass("primary-fill");
 		};
 		//If a name isn't selected make sure the Check Out button isn't highlited
 		if (!$(".studentCheck").hasClass("selected")){
-				$("#checkOut").addClass("disabled");
-				$("#checkOut").removeClass("primary-fill");
+			$("#checkOut").addClass("disabled");
+			$("#checkOut").removeClass("primary-fill");
 		};
-		
+
 
 	},
 
@@ -98,31 +98,32 @@ module.exports = View.extend({
 				var cutItem = undefined;
 				var i;
 				for (i = 0; i < length; i++) {
-				var element = studentsCheck[i];
-				var id = element.id;
-				if (id == "") {
-					alert("cutting");
-				cutItem = i;
-				studentsCheck.splice(cutItem,1);
+					var element = studentsCheck[i];
+					var id = element.id;
+					if (id == undefined) {
+						cutItem = i;
+					}
 				}
+				if (cutItem != undefined){
+					studentsCheck.splice(cutItem,1);
 				}
 
 				usersBooks.set("studentList",studentsCheck);
 				usersBooks.save(null, {
-				success: function(newBook) {
+					success: function(newBook) {
 						Application.router.navigate("#home" , {trigger: true});
-				},
-				error: function(newBook, error) {
-					alert('Back to the drawing board');
-					console.log(error);
-				}
-			});
+					},
+					error: function(newBook, error) {
+						alert('Back to the drawing board');
+						console.log(error);
+					}
+				});
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
 			},
 		});
-	
+
 	}
 
 

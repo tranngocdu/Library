@@ -391,7 +391,6 @@ parentViewController:(UIViewController*)parentViewController
         DecodeHints decodeHints;
         decodeHints.addFormat(BarcodeFormat_QR_CODE);
         decodeHints.addFormat(BarcodeFormat_DATA_MATRIX);
-        decodeHints.addFormat(BarcodeFormat_UPC_E);
         decodeHints.addFormat(BarcodeFormat_UPC_A);
         decodeHints.addFormat(BarcodeFormat_EAN_8);
         decodeHints.addFormat(BarcodeFormat_EAN_13);
@@ -445,7 +444,6 @@ parentViewController:(UIViewController*)parentViewController
 - (NSString*)formatStringFrom:(zxing::BarcodeFormat)format {
     if (format == zxing::BarcodeFormat_QR_CODE)      return @"QR_CODE";
     if (format == zxing::BarcodeFormat_DATA_MATRIX)  return @"DATA_MATRIX";
-    if (format == zxing::BarcodeFormat_UPC_E)        return @"UPC_E";
     if (format == zxing::BarcodeFormat_UPC_A)        return @"UPC_A";
     if (format == zxing::BarcodeFormat_EAN_8)        return @"EAN_8";
     if (format == zxing::BarcodeFormat_EAN_13)       return @"EAN_13";

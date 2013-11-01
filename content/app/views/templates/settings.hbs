@@ -1,19 +1,17 @@
 <div id="header">
   <h1>Settings</h1>
-  <div id="edit" class="right-btn">Edit</div>
 </div>
 
 <div id="wrapper">
   <div id="scroller" class="container">
 
-    <input id="set-name" class="first-input" type="text" autocorrect="off" placeholder="Name" value="Dimitar Karaytchev" />
-    <input id="set-email" type="email" autocomplete="off" placeholder="Email" value="dimitar.k@me.com"/>
-    <input id="set-current" class="hide-hard" type="password" placeholder="Current Password" />
-    <input id="set-new" class="hide-hard" type="password" placeholder="New Password" />
-    <input id="set-new-confirm" class="hide-hard" type="password" placeholder="Confirm New Password" />
+    {{!-- <input id="set-name" class="first-input" type="text" autocorrect="off" placeholder="Name" value="Dimitar Karaytchev" />--}}
+    <input id="set-email" type="email" autocomplete="off" placeholder="Email" value="{{username}}"/>
+    <input id="set-current" type="password" placeholder="Current Password" />
+    <input id="set-new" type="password" placeholder="New Password" />
+    <input id="set-new-confirm" type="password" placeholder="Confirm New Password" />
 
-    {{!-- <div id="save" class="button primary">Update Profile</div> --}}
-    {{!-- <div id="change-pass" class="button primary">Change Password</div> --}}
+    <div id="save" class="button primary">Update Account</div>
     <div id="help" class="button primary">Help Me</div>
     <div id="logout" class="button secondary-fill">Log Out</div>
 

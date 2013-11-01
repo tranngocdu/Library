@@ -243,6 +243,12 @@ window.require.register("lib/router", function(exports, require, module) {
   			$.mobile.activePage.back = true;
   			window.history.back();
   		});
+  		
+  		$(document).on('vclick', '.back', function(e) {
+  			e.preventDefault();
+  			$.mobile.activePage.back = true;
+  			window.history.back();
+  		});
 
   		// Loading spinner
   		//$('body').append('<div id="theSpinner" class="spinnerModal" style="display:none"><div class="spinnerContainer"><div class="spinnerWrapper"><div class="spinner"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div><div class="bar4"></div><div class="bar5"></div><div class="bar6"></div><div class="bar7"></div><div class="bar8"></div><div class="bar9"></div><div class="bar10"></div><div class="bar11"></div><div class="bar12"></div></div></div><div class="description">Pencils Ready!</div></div></div>');
@@ -515,7 +521,6 @@ window.require.register("views/addstudent-view", function(exports, require, modu
   		newStudent.save(null, {
   			success: function(newStudent) {
   				$('#add-first').val("");
-  				alert('It worked!');
   			},
   			error: function(newBook, error) {
   				alert('Back to the drawing board');
@@ -597,6 +602,7 @@ window.require.register("views/booklist-view", function(exports, require, module
 
   	render: function() {
   		var that = this;
+  		that.$el.html(that.template());
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("NewBook");
@@ -606,7 +612,6 @@ window.require.register("views/booklist-view", function(exports, require, module
   				var bookArray = JSON.stringify(usersBooks);
   				var bookArray = JSON.parse(bookArray);
   				that.bookArray = bookArray;	
-  				that.$el.html(that.template());
   				$('.booklist-wrap').html(that.templateBooks(bookArray));				
   			},
   			error: function(error) {
@@ -753,7 +758,8 @@ window.require.register("views/checkin-view", function(exports, require, module)
   	template: template,
   	templateStudents:templateStudents,
   	events: {
-  		'click #checkIn':'checkIn'
+  		'click #checkIn':'checkIn',
+  		'click .studentCheck':'pickName',
   	},
 
   	initialize: function() {
@@ -766,10 +772,9 @@ window.require.register("views/checkin-view", function(exports, require, module)
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("NewBook");
+  		that.ISBN = Application.checkInView.bookInfo.ISBN.identifiers.isbn_13[0];
   		query.equalTo("User", currentUserId);
   		query.equalTo("ISBN", Application.checkInView.bookInfo.ISBN.identifiers.isbn_13[0]);
-  		alert(currentUserId);
-  		alert(Application.checkInView.bookInfo.ISBN.title);
 
   		query.first({
   			success: function(bookData) {
@@ -785,8 +790,47 @@ window.require.register("views/checkin-view", function(exports, require, module)
 
   		return this;
   	},
-  	
-  	checkIn: function() {
+
+  	pickName: function(e) {
+  		this.studentName = $(e.currentTarget).data('name');
+  		this.studentId = $(e.currentTarget).data('id');
+
+  		//Checks if the tap was on a previously selected name, if so removes the selection from tapped name
+  		if($(e.currentTarget).hasClass("selected")){
+  			$(e.currentTarget).removeClass("selected");
+  			$(e.currentTarget).addClass("deselected");
+  		}
+  		//Here because without this the names cannot be reselected
+  		else if($(e.currentTarget).hasClass("deselected")){
+  			$(".studentCheck").removeClass("deselected");
+  			$(".studentCheck").removeClass("selected");
+  			$(".studentCheck").addClass("deselected");
+  			$(e.currentTarget).removeClass("deselected");				
+  			$(e.currentTarget).addClass("selected");
+
+  			$("#checkIn").removeClass("disabled");
+  			$("#checkIn").addClass("primary-fill");
+  		}
+  		//Just highlite the damn thing already
+  		else {
+  			$(".studentCheck").removeClass("deselected");
+  			$(".studentCheck").removeClass("selected");
+  			$(".studentCheck").addClass("deselected");
+  			$(e.currentTarget).removeClass("deselected");
+  			$(e.currentTarget).addClass("selected");
+  			$("#checkIn").removeClass("disabled");
+  			$("#checkIn").addClass("primary-fill");
+  		};
+  		//If a name isn't selected make sure the Check Out button isn't highlited
+  		if (!$(".studentCheck").hasClass("selected")){
+  			$("#checkIn").addClass("disabled");
+  			$("#checkIn").removeClass("primary-fill");
+  		};
+
+
+  	},
+
+  	checkIn: function(e) {
   		//Get the Array
   		var that = this;
   		that.studentArray = null;
@@ -794,42 +838,43 @@ window.require.register("views/checkin-view", function(exports, require, module)
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
   		query.equalTo("User", currentUserId);
-  		query.equalTo("title", data.ISBN.title);
+  		query.equalTo("ISBN", that.ISBN);
   		query.first({
   			success: function(usersBooks) {
 
   				that.studentArray = usersBooks.attributes.studentList;
-  				that.studentArray.push({name:that.studentName,id:that.studentId});
   				var length = that.studentArray.length;
   				var cutItem = undefined;
   				var i;
   				for (i = 0; i < length; i++) {
-  				var element = that.studentArray[i];
-  				var id = element.id;
-  				if (id == "") {
-  				cutItem = i;
+  					var element = that.studentArray[i];
+  					var id = element.objectId;
+  					if (id == that.studentId) {
+  						cutItem = i;
+  					}
   				}
+  				if (cutItem != undefined) {
+  					that.studentArray.splice(cutItem,1);
+  					console.log(that.studentArray);
   				}
-  				that.studentArray.splice(cutItem,1);
-  				console.log(that.studentArray);
 
   				usersBooks.set("studentList",that.studentArray);
   				usersBooks.save(null, {
-  				success: function(newBook) {
+  					success: function(newBook) {
   						Application.router.navigate("#home" , {trigger: true});
-  				},
-  				error: function(newBook, error) {
-  					alert('Back to the drawing board');
-  					console.log(error);
-  				}
-  			});
+  					},
+  					error: function(newBook, error) {
+  						alert('Back to the drawing board');
+  						console.log(error);
+  					}
+  				});
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
   			},
   		});
 
-  		
+
   	}
 
   });
@@ -877,44 +922,44 @@ window.require.register("views/checkout-view", function(exports, require, module
 
   		return this;
   	},
-  	
+
 
   	pickName: function(e) {
   		this.studentName = $(e.currentTarget).data('name');
   		this.studentId = $(e.currentTarget).data('id');
-  	
+
   		//Checks if the tap was on a previously selected name, if so removes the selection from tapped name
   		if($(e.currentTarget).hasClass("selected")){
-  				$(e.currentTarget).removeClass("selected");
-  				$(e.currentTarget).addClass("deselected");
+  			$(e.currentTarget).removeClass("selected");
+  			$(e.currentTarget).addClass("deselected");
   		}
   		//Here because without this the names cannot be reselected
   		else if($(e.currentTarget).hasClass("deselected")){
-  				$(".studentCheck").removeClass("deselected");
-  				$(".studentCheck").removeClass("selected");
-  				$(".studentCheck").addClass("deselected");
-  				$(e.currentTarget).removeClass("deselected");				
-  				$(e.currentTarget).addClass("selected");
+  			$(".studentCheck").removeClass("deselected");
+  			$(".studentCheck").removeClass("selected");
+  			$(".studentCheck").addClass("deselected");
+  			$(e.currentTarget).removeClass("deselected");				
+  			$(e.currentTarget).addClass("selected");
 
-  				$("#checkOut").removeClass("disabled");
-  				$("#checkOut").addClass("primary-fill");
+  			$("#checkOut").removeClass("disabled");
+  			$("#checkOut").addClass("primary-fill");
   		}
   		//Just highlite the damn thing already
   		else {
-  		$(".studentCheck").removeClass("deselected");
-  		$(".studentCheck").removeClass("selected");
-  		$(".studentCheck").addClass("deselected");
-  		$(e.currentTarget).removeClass("deselected");
-  		$(e.currentTarget).addClass("selected");
-  		$("#checkOut").removeClass("disabled");
-  		$("#checkOut").addClass("primary-fill");
+  			$(".studentCheck").removeClass("deselected");
+  			$(".studentCheck").removeClass("selected");
+  			$(".studentCheck").addClass("deselected");
+  			$(e.currentTarget).removeClass("deselected");
+  			$(e.currentTarget).addClass("selected");
+  			$("#checkOut").removeClass("disabled");
+  			$("#checkOut").addClass("primary-fill");
   		};
   		//If a name isn't selected make sure the Check Out button isn't highlited
   		if (!$(".studentCheck").hasClass("selected")){
-  				$("#checkOut").addClass("disabled");
-  				$("#checkOut").removeClass("primary-fill");
+  			$("#checkOut").addClass("disabled");
+  			$("#checkOut").removeClass("primary-fill");
   		};
-  		
+
 
   	},
 
@@ -936,31 +981,32 @@ window.require.register("views/checkout-view", function(exports, require, module
   				var cutItem = undefined;
   				var i;
   				for (i = 0; i < length; i++) {
-  				var element = studentsCheck[i];
-  				var id = element.id;
-  				if (id == "") {
-  					alert("cutting");
-  				cutItem = i;
-  				studentsCheck.splice(cutItem,1);
+  					var element = studentsCheck[i];
+  					var id = element.id;
+  					if (id == undefined) {
+  						cutItem = i;
+  					}
   				}
+  				if (cutItem != undefined){
+  					studentsCheck.splice(cutItem,1);
   				}
 
   				usersBooks.set("studentList",studentsCheck);
   				usersBooks.save(null, {
-  				success: function(newBook) {
+  					success: function(newBook) {
   						Application.router.navigate("#home" , {trigger: true});
-  				},
-  				error: function(newBook, error) {
-  					alert('Back to the drawing board');
-  					console.log(error);
-  				}
-  			});
+  					},
+  					error: function(newBook, error) {
+  						alert('Back to the drawing board');
+  						console.log(error);
+  					}
+  				});
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
   			},
   		});
-  	
+
   	}
 
 
@@ -1147,7 +1193,6 @@ window.require.register("views/home-view", function(exports, require, module) {
   				var dataString = JSON.stringify(data);
   				var combinedString = dataString.substring(0,6) + dataString.substring(20);
   				var data = JSON.parse(combinedString);
-  				alert(data);
   				Application.checkInView.bookInfo = data;
   				Application.router.navigate("#checkIn", {
   					trigger: true
@@ -1250,10 +1295,9 @@ window.require.register("views/settings-view", function(exports, require, module
   	id: 'settings-view',
   	template: template,
   	events: {
-  		'click #edit': 'edit',
-  		'click #change-pass': 'changePass',
   		'click #done': 'done',
   		'click #logout': 'logout',
+  		'click #save': 'save',
   		'click #addBook': 'addBook',
   		'click #changeQuantity': 'changeQuantity'
   	},
@@ -1263,51 +1307,92 @@ window.require.register("views/settings-view", function(exports, require, module
   	},
 
   	render: function () {
-  		this.$el.html(this.template());
-  		return this;
-  	},
-
-  	edit: function () {
-  		$('#edit').toggle(function (){
-  		            $(this).text("Save").addClass("save");
-  		            $('input.hide-hard').addClass("block");
-  		        }, function(){
-  		            $(this).text("Edit").removeClass("save");
-  		            $('input.hide-hard').removeClass("block");
-  		        });
+  		var that = this;
+  		//this.$el.html(this.template());
+  		var query = new Parse.Query("User");
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		that.username = $('#set-email').val();
+  		query.equalTo("objectId", currentUserId);
+  		query.first({
+  			success: function(userData) {
+  				var userInfo = JSON.stringify(userData);
+  				var userArray = JSON.parse(userInfo);
+  				console.log(userArray);
+  				that.$el.html(that.template(userArray));
+  				that.username = $('#set-email').val();
+  			},
+  			error: function(newBook, error) {
+  				alert('Back to the drawing board');
+  				console.log(error);
+  			}
+  		});
   	},
 
   	// changePass: function () {
-  	// $('input.hide-hard').addClass("block");
-  	// },
+  		// $('input.hide-hard').addClass("block");
+  		// },
 
-  	done: function () {
-  		Application.router.navigate("#home", {
-  			trigger: true
-  		});
-  	},
+  		save: function() {
+  			var that = this;
+  			var username = $('#set-email').val();
+  			var oldPassword = $('#set-current').val();
+  			var password =  $('#set-new').val();
+  			var confirmPassword =  $('#set-new-confirm').val();
 
-  	logout: function () {
-  		window.localStorage.removeItem("userId");
-  		Parse.User.logOut();
-  		Application.router.navigate("#login", {
-  			trigger: true
-  		});
-  	},
+  			if (password == confirmPassword) {
+  				var user = Parse.User.logIn(that.username, oldPassword, {
+  					success: function(user) {
+  						user.set("username", username);  // attempt to change username
+  						user.set("password", password);
+  						user.save(null, {
+  							success: function(user) {
+  								alert("Settings have been changed");
+  								Application.router.navigate("#home", {
+  									trigger: true
+  								});
 
-  	addBook: function() {
-  		Application.router.navigate("#addBook", {
-  			trigger: true
-  		});
-  	},
-  	
-  	changeQuantity: function() {
-  		Application.router.navigate("#addBook", {
-  			trigger: true
-  		});
-  	}
+  							},
+  							error: function(error) {
+  								alert("Unable to change info right now");
+  							}
+  						});
+  					},
+  					error: function(error) {
+  						alert("Incorrect password");
+  						var oldPassword = $('#set-current').val("");
+  						var password =  $('#set-new').val("");
+  						var confirmPassword =  $('#set-new-confirm').val("");
+  					}
+  				});
+  			}
+  			else {
+  				alert("Passwords need to match");
+  			}
 
-  });
+  		},
+
+  		logout: function () {
+  			window.localStorage.removeItem("userId");
+  			Parse.User.logOut();
+  			Application.router.navigate("#login", {
+  				trigger: true
+  			});
+  		},
+
+  		addBook: function() {
+  			Application.router.navigate("#addBook", {
+  				trigger: true
+  			});
+  		},
+
+  		changeQuantity: function() {
+  			Application.router.navigate("#addBook", {
+  				trigger: true
+  			});
+  		}
+
+  	});
 });
 window.require.register("views/signup-view", function(exports, require, module) {
   var View = require('./view');
@@ -1336,10 +1421,11 @@ window.require.register("views/signup-view", function(exports, require, module) 
   		var password =  $('#sign-pass').val();
   		user.set("username", username);
   		user.set("password", password);
+  		user.set("email", username);
 
   		user.signUp(null, {
   			success: function(user) {
-  				alert("Success!");
+  				alert("Welcome to Class Library!");
   				Application.router.navigate("#home", {
   					trigger: true
   				});
@@ -1657,14 +1743,14 @@ window.require.register("views/templates/checkIn", function(exports, require, mo
     return buffer;
     }
 
-    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\""
+    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n<style type=\"text/css\">\n.selected {\n  background-color:#0a5fff;\n  color: white;\n  -webkit-border-radius: 5px;\n  border-radius: 5px;\n  padding-left:10px;\n}\n.deselected {\n  background-color:white!important;\n  color:black!important;\n}\n</style>\n\n<div class=\"check\">\n\n    <div class=\"title-art\">\n      <img src=\""
       + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.cover)),stack1 == null || stack1 === false ? stack1 : stack1.medium)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
       + "\">\n    </div>\n\n    <div class=\"title-info\">\n      <h2>"
       + escapeExpression(((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
       + "</h2>\n      <h3>\n          ";
     stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack2 || stack2 === 0) { buffer += stack2; }
-    buffer += "\n      </h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div id=\"checkOut\" class=\"check-btn button disabled\">Check Out</div> "
+    buffer += "\n      </h3>\n      <h4>ISBN Number</h4>\n      <p>Number Available</p>\n      <div id=\"checkIn\" class=\"check-btn button disabled\">Check In</div> "
       + "\n    </div>\n\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n<div id=\"wrapper\" class=\"check-wrap\">\n<div id=\"scroller\" class=\"students\">\n    \n    \n  </div> "
       + "\n</div> "
       + "\n\n";
@@ -1741,12 +1827,15 @@ window.require.register("views/templates/settings", function(exports, require, m
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    var buffer = "";
+    var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n  <div id=\"edit\" class=\"right-btn\">Edit</div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" value=\"Dimitar Karaytchev\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" value=\"dimitar.k@me.com\"/>\n    <input id=\"set-current\" class=\"hide-hard\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" class=\"hide-hard\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new-confirm\" class=\"hide-hard\" type=\"password\" placeholder=\"Confirm New Password\" />\n\n    "
-      + "\n    "
-      + "\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n\n  </div> "
+    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container\">\n\n    "
+      + "\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" value=\"";
+    if (stack1 = helpers.username) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.username; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\"/>\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new-confirm\" type=\"password\" placeholder=\"Confirm New Password\" />\n\n    <div id=\"save\" class=\"button primary\">Update Account</div>\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n\n  </div> "
       + "\n</div> "
       + "\n";
     return buffer;

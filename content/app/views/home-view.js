@@ -110,7 +110,6 @@ module.exports = View.extend({
 				var dataString = JSON.stringify(data);
 				var combinedString = dataString.substring(0,6) + dataString.substring(20);
 				var data = JSON.parse(combinedString);
-				alert(data);
 				Application.checkInView.bookInfo = data;
 				Application.router.navigate("#checkIn", {
 					trigger: true
