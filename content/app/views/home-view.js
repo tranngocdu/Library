@@ -69,57 +69,49 @@ module.exports = View.extend({
 
 	bookInfoCheckout: function () {
 
-		$.ajax({
-			data: {
-				bibkeys: "ISBN:" + Application.homeView.ISBN,
-				jscmd: "data",
-				format: "json"
-			},
-			url: "http://openlibrary.org/api/books",
-			type: "GET",
-			success: function (data) {
-				var dataString = JSON.stringify(data);
-				var combinedString = dataString.substring(0,6) + dataString.substring(20);
-				var data = JSON.parse(combinedString);
-				alert(data);
-				Application.checkOutView.bookInfo = data;
-				console.log(Application.checkOutView.bookInfo);
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("ISBN", Application.homeView.ISBN);
+		query.equalTo("User", currentUserId);
+		query.find({
+
+			success: function(bookdetail) {
+				var bookdetailArray = JSON.stringify(bookdetail);
+				bookdetailArray = JSON.parse(bookdetailArray);
+				Application.checkOutView.bookInfo = bookdetailArray;
 				Application.router.navigate("#checkOut", {
 					trigger: true
 				});
 			},
-			error: function (jqXHR,textStatus,errorThrown) {
-				alert("Error");
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
 			}
-
 		});
 
 	},
-	
+
 	bookInfoCheckin: function () {
 
-		$.ajax({
-			data: {
-				bibkeys: "ISBN:" + Application.homeView.ISBN,
-				jscmd: "data",
-				format: "json"
-			},
-			url: "http://openlibrary.org/api/books",
-			type: "GET",
-			success: function (data) {
-				var dataString = JSON.stringify(data);
-				var combinedString = dataString.substring(0,6) + dataString.substring(20);
-				var data = JSON.parse(combinedString);
-				Application.checkInView.bookInfo = data;
-				Application.router.navigate("#checkIn", {
-					trigger: true
-				});
-			},
-			error: function (jqXHR,textStatus,errorThrown) {
-				alert("Error");
-			}
+			var currentUser = Parse.User.current();
+			var currentUserId = currentUser.id;
+			var query = new Parse.Query("NewBook");
+			query.equalTo("ISBN", Application.homeView.ISBN);
+			query.equalTo("User", currentUserId);
+			query.find({
 
-		});
+				success: function(bookdetail) {
+					var bookdetailArray = JSON.stringify(bookdetail);
+					bookdetailArray = JSON.parse(bookdetailArray);
+					Application.checkInView.bookInfo = bookdetailArray;
+					Application.router.navigate("#checkIn", {
+						trigger: true
+					});
+				},
+				error: function(error) {
+					alert("Error: " + error.code + " " + error.message);
+				}
+			});
 
 	}
 

@@ -31,8 +31,6 @@ module.exports = View.extend({
 				alert("Error: " + error.code + " " + error.message);
 			}
 		});
-
-
 		
 		return this;
 	}

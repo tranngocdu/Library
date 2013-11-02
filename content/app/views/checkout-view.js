@@ -20,6 +20,8 @@ module.exports = View.extend({
 	render: function() {
 		var that=this;
 		data = Application.checkOutView.bookInfo;
+		that.ISBN = Application.checkOutView.bookInfo[0].ISBN;
+		console.log(Application.checkOutView.bookInfo);		
 		this.$el.html(this.template(data));
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
@@ -29,7 +31,6 @@ module.exports = View.extend({
 			success: function(students) {
 				var studentArray = JSON.stringify(students);
 				var studentArray = JSON.parse(studentArray);
-				console.log(studentArray);
 				$('.students').html(that.templateStudents(studentArray));
 			},
 			error: function(error) {
@@ -87,12 +88,13 @@ module.exports = View.extend({
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		query.equalTo("User", currentUserId);
-		query.equalTo("title", data.ISBN.title);
+		query.equalTo("ISBN", that.ISBN);
 		query.first({
 			success: function(usersBooks) {
-
+				console.log(usersBooks);
 				var studentsCheck = usersBooks.attributes.studentList;
-				console.log(studentsCheck);
+				var quantityAvailable = usersBooks.attributes.quantity_available;
+				quantityAvailable = quantityAvailable - 1;
 				studentsCheck.push({"Name":that.studentName,"objectId":that.studentId});
 				var length = studentsCheck.length;
 				var cutItem = undefined;
@@ -109,6 +111,8 @@ module.exports = View.extend({
 				}
 
 				usersBooks.set("studentList",studentsCheck);
+				usersBooks.set("quantity_available",quantityAvailable);
+				
 				usersBooks.save(null, {
 					success: function(newBook) {
 						Application.router.navigate("#home" , {trigger: true});
