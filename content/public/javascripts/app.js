@@ -965,13 +965,10 @@ window.require.register("views/checkin-view", function(exports, require, module)
   	render: function() {
   		var that = this;
   		var bookData = Application.checkInView.bookInfo;
-  		that.ISBN = Application.checkInView.bookInfo[0].ISBN;
   		this.$el.html(this.template(bookData));
+  		that.ISBN = Application.checkInView.bookInfo[0].ISBN;
   		var studentBookList = Application.checkInView.bookInfo[0].studentList;
-  		var studentArray = JSON.stringify(studentBookList);
-  		studentArray = JSON.parse(studentArray);
-  		console.log(studentArray);
-  		$('.students').html(that.templateStudents(studentArray));
+  		setTimeout(function(){$('.students').html(that.templateStudents(studentBookList));},500)
 
   		return this;
   	},
