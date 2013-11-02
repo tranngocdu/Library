@@ -94,7 +94,12 @@ module.exports = View.extend({
 				console.log(usersBooks);
 				var studentsCheck = usersBooks.attributes.studentList;
 				var quantityAvailable = usersBooks.attributes.quantity_available;
+				var quantityTotal = usersBooks.attributes.quantity_total;
+				
+				//Modifications to numbers
 				quantityAvailable = quantityAvailable - 1;
+				var quantityOut = quantityTotal - quantityAvailable;
+				
 				studentsCheck.push({"Name":that.studentName,"objectId":that.studentId});
 				var length = studentsCheck.length;
 				var cutItem = undefined;
@@ -112,6 +117,7 @@ module.exports = View.extend({
 
 				usersBooks.set("studentList",studentsCheck);
 				usersBooks.set("quantity_available",quantityAvailable);
+				usersBooks.set("quantity_out",quantityOut);
 				
 				usersBooks.save(null, {
 					success: function(newBook) {

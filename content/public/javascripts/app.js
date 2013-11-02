@@ -88,109 +88,125 @@ window.require.register("application", function(exports, require, module) {
 
   	initialize: function() {
 
-  	//For Parse
-  	Parse.initialize("hc7wyBlPLbosKj26FTiu8CvOcsECdeDVOGcEADZH", "eJGnhcwE48DQPdpq7MA9S8lYI7XgEi7vINje0TQZ");
+  		//For Parse
+  		Parse.initialize("hc7wyBlPLbosKj26FTiu8CvOcsECdeDVOGcEADZH", "eJGnhcwE48DQPdpq7MA9S8lYI7XgEi7vINje0TQZ");
 
 
-  	//## If setting something to happen on first launch of app
-  	//	if ( window.localStorage.getItem("launchCount") == null){
-  	//		window.localStorage.setItem("launchCount","1");
-  	//	}
+  		//## If setting something to happen on first launch of app
+  		//	if ( window.localStorage.getItem("launchCount") == null){
+  			//		window.localStorage.setItem("launchCount","1");
+  			//	}
 
 
-  	//	Set production and development servers
-  	//	this.serverURL = this.useProductionEnv ? 'http://productionurl.com' : 'http://devurl.com';
+  			//	Set production and development servers
+  			//	this.serverURL = this.useProductionEnv ? 'http://productionurl.com' : 'http://devurl.com';
 
-  	//	Keeps app from jumping
-  		$.mobile.defaultHomeScroll = 0;
+  			//	Keeps app from jumping
+  			$.mobile.defaultHomeScroll = 0;
 
-  	// 	Setting view to location in views folder
+  			// 	Setting view to location in views folder
 
-  		var Home = require('views/home-view');
-  		var AddBook = require('views/addbook-view');
-  		var AddStudent = require('views/addstudent-view');
-  		var BookDetail = require('views/bookdetail-view');
-  		var BookList = require('views/booklist-view');
-  		var CheckIn = require('views/checkin-view');
-  		var CheckOut = require('views/checkout-view');
-  		var EnterPassword = require('views/enterpassword-view');
-  		var Login = require('views/login-view');
-  		var Settings = require('views/settings-view');
-  		var Signup = require('views/signup-view');
-  		var StudentList = require('views/studentlist-view');
-  		
-  		var Router = require('lib/router');
+  			var Home = require('views/home-view');
+  			var AddBook = require('views/addbook-view');
+  			var AddStudent = require('views/addstudent-view');
+  			var BookDetail = require('views/bookdetail-view');
+  			var BookList = require('views/booklist-view');
+  			var CheckIn = require('views/checkin-view');
+  			var CheckOut = require('views/checkout-view');
+  			var EnterPassword = require('views/enterpassword-view');
+  			var Login = require('views/login-view');
+  			var Settings = require('views/settings-view');
+  			var Signup = require('views/signup-view');
+  			var StudentList = require('views/studentlist-view');
 
-
-  		this.homeView = new Home();
-  		this.addBookView = new AddBook();
-  		this.addStudentView = new AddStudent();
-  		this.bookDetailView = new BookDetail();
-  		this.bookListView = new BookList();
-  		this.checkInView = new CheckIn();
-  		this.checkOutView = new CheckOut();
-  		this.enterPasswordView = new EnterPassword();
-  		this.loginView = new Login();
-  		this.settingsView = new Settings();
-  		this.signupView = new Signup();
-  		this.studentListView = new StudentList();
-  		
-  		this.router = new Router();
+  			var Router = require('lib/router');
 
 
-  		if (typeof Object.freeze === 'function') Object.freeze(this);
-  		// Initializing BackStack.StackNavigator for the #container div
-  		
-  		var homeTab = function() {
-  	    	if(window.tapReady){
-  	           // window.tapReady = false;
-  			      $('.tab').removeClass('active');
-  			      $('#home_tab').addClass('active');
+  			this.homeView = new Home();
+  			this.addBookView = new AddBook();
+  			this.addStudentView = new AddStudent();
+  			this.bookDetailView = new BookDetail();
+  			this.bookListView = new BookList();
+  			this.checkInView = new CheckIn();
+  			this.checkOutView = new CheckOut();
+  			this.enterPasswordView = new EnterPassword();
+  			this.loginView = new Login();
+  			this.settingsView = new Settings();
+  			this.signupView = new Signup();
+  			this.studentListView = new StudentList();
 
-  			      Application.router.navigate("#home" , {trigger: true});
-  			  }
-  	      //activateTabs();
-  	    }
+  			this.router = new Router();
 
-  	    var bookListTab = function() {
-  		if(window.tapReady){
-  	           // window.tapReady = false;
-  		      Application.router.navigate("#bookList" , {trigger: true});
-  			  $('.tab').removeClass('active');
-  		      $('#bookList_tab').addClass('active');
 
-  		    }
-  	    }
-  	    var studentListTab = function() {
-  	      if(window.tapReady){
-  		      $('.tab').removeClass('active');
-  		      $('#studentList_tab').addClass('active');
-  		      Application.router.navigate("#studentList" , {trigger: true});
+  			if (typeof Object.freeze === 'function') Object.freeze(this);
+  			// Initializing BackStack.StackNavigator for the #container div
 
-  		    }
-  	    }
-  	    var settingsTab =  function() {
-  	      if(window.tapReady){
-  		      $('.tab').removeClass('active');
-  		      $('#settings_tab').addClass('active');
-  		      Application.router.navigate("#settings" , {trigger: true});
+  			var homeTab = function() {
+  				if(window.tapReady){
+  					$('#icon-settings').removeClass('settings-active');
+  					$('#icon-home').addClass('home-active');
+  					$('#icon-books').removeClass('books-active');
+  					$('#icon-students').removeClass('students-active');
+  					$('.tab').removeClass('active');
+  					$('#home_tab').addClass('active');
 
-  		    }
-  	    }
+  					Application.router.navigate("#home" , {trigger: true});
+  				}
+  				//activateTabs();
+  			}
+
+  			var bookListTab = function() {
+  				if(window.tapReady){
+  					$('.tab').removeClass('active');
+  					$('#bookList_tab').addClass('active');
+  					$('#icon-settings').removeClass('settings-active');
+  					$('#icon-home').removeClass('home-active');
+  					$('#icon-books').addClass('books-active');
+  					$('#icon-students').removeClass('students-active');
+  					Application.router.navigate("#bookList" , {trigger: true});
+
+  				}
+  			}
+  			var studentListTab = function() {
+  				if(window.tapReady){
+  					$('.tab').removeClass('active');
+  					$('#studentList_tab').addClass('active');
+  					$('#icon-settings').removeClass('settings-active');
+  					$('#icon-home').removeClass('home-active');
+  					$('#icon-books').removeClass('books-active');
+  					$('#icon-students').addClass('students-active');
+  					Application.router.navigate("#studentList" , {trigger: true});
+
+  				}
+  			}
+  			var settingsTab =  function() {
+  				if(window.tapReady){
+  					$('.tab').removeClass('active');
+  					$('#settings_tab').addClass('active');
+  					$('#icon-settings').addClass('settings-active');
+  					$('#icon-home').removeClass('home-active');
+  					$('#icon-books').removeClass('books-active');
+  					$('#icon-students').removeClass('students-active');
+  					Application.router.navigate("#settings" , {trigger: true});
+
+
+  				}
+  			}
+
 
 
   			$('#home_tab').bind('tap', homeTab);
   			$('#backButton').bind('tap', homeTab);
-  			
+
   			$('#bookList_tab').bind('click', bookListTab); 
   			$('#studentList_tab').bind('tap', studentListTab); 
   			$('#settings_tab').bind('tap', settingsTab);
-  		
-  	},
 
-  }
+  		},
 
-  module.exports = Application;
+  	}
+
+  	module.exports = Application;
 });
 window.require.register("initialize", function(exports, require, module) {
   var application = require('application');
@@ -541,7 +557,9 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   	id: 'bookdetail-view',
   	template: template,
   	events: {
-  		"dataLoaded":"append"
+  		"dataLoaded":"append",
+  		"click #checkout-book":"checkoutBook",
+  		"click #remove-book":"removeBook"
   	},
 
   	initialize: function() {
@@ -553,21 +571,60 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   		var query = new Parse.Query("NewBook");
   		query.equalTo("objectId", Application.bookDetailView.bookId);
   		query.find({
-  			
+
   			success: function(bookdetail) {
 
   				var bookdetailArray = JSON.stringify(bookdetail);
-  				var bookdetailArray = JSON.parse(bookdetailArray);
-
-  				console.log(bookdetailArray);				
+  				bookdetailArray = JSON.parse(bookdetailArray);
+  				that.ISBN = bookdetailArray[0].ISBN;
+  				console.log(bookdetailArray);			
   				that.$el.html(that.template(bookdetailArray));
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
   			}
   		});
-  		
+
   		return this;
+  	},
+
+  	checkoutBook: function() {
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var query = new Parse.Query("NewBook");
+  		query.equalTo("ISBN", Application.bookDetailView.ISBN);
+  		query.equalTo("User", currentUserId);
+  		query.find({
+
+  			success: function(bookdetail) {
+  				var bookdetailArray = JSON.stringify(bookdetail);
+  				bookdetailArray = JSON.parse(bookdetailArray);
+  				Application.checkOutView.bookInfo = bookdetailArray;
+  				Application.router.navigate("#checkOut", {
+  					trigger: true
+  				});
+  			},
+  			error: function(error) {
+  				alert("Error: " + error.code + " " + error.message);
+  			}
+  		});
+  	},
+
+  	removeBook: function() {
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var query = new Parse.Query("NewBook");
+  		query.equalTo("ISBN", Application.bookDetailView.ISBN);
+  		query.equalTo("User", currentUserId);
+  		query.find({
+
+  			success: function(bookdetail) {
+  			//then remove book
+  			},
+  			error: function(error) {
+  				alert("Error: " + error.code + " " + error.message);
+  			}
+  		});
   	}
 
   });
@@ -654,7 +711,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("NewBook");
   		query.equalTo("User", currentUserId);
-  		query.notEqualTo("quantity_available","0");
+  		query.notEqualTo("quantity_available", 0);
   		query.find({
   			success: function(usersBooks) {
 
@@ -680,7 +737,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("NewBook");
   		query.equalTo("User", currentUserId);
-  		query.equalTo("quantity_out","0");
+  		query.notEqualTo("quantity_out", 0);
   		query.find({
   			success: function(usersBooks) {
 
@@ -828,6 +885,13 @@ window.require.register("views/checkin-view", function(exports, require, module)
   			success: function(usersBooks) {
 
   				that.studentArray = usersBooks.attributes.studentList;
+  				var quantityAvailable = usersBooks.attributes.quantity_available;
+  				var quantityTotal = usersBooks.attributes.quantity_total;
+  				
+  				//Modifications to numbers
+  				quantityAvailable = quantityAvailable + 1;
+  				var quantityOut = quantityTotal - quantityAvailable;
+  				
   				var length = that.studentArray.length;
   				var cutItem = undefined;
   				var i;
@@ -844,6 +908,9 @@ window.require.register("views/checkin-view", function(exports, require, module)
   				}
 
   				usersBooks.set("studentList",that.studentArray);
+  				usersBooks.set("quantity_available",quantityAvailable);
+  				usersBooks.set("quantity_out",quantityOut);
+  				
   				usersBooks.save(null, {
   					success: function(newBook) {
   						Application.router.navigate("#home" , {trigger: true});
@@ -962,7 +1029,12 @@ window.require.register("views/checkout-view", function(exports, require, module
   				console.log(usersBooks);
   				var studentsCheck = usersBooks.attributes.studentList;
   				var quantityAvailable = usersBooks.attributes.quantity_available;
+  				var quantityTotal = usersBooks.attributes.quantity_total;
+  				
+  				//Modifications to numbers
   				quantityAvailable = quantityAvailable - 1;
+  				var quantityOut = quantityTotal - quantityAvailable;
+  				
   				studentsCheck.push({"Name":that.studentName,"objectId":that.studentId});
   				var length = studentsCheck.length;
   				var cutItem = undefined;
@@ -980,6 +1052,7 @@ window.require.register("views/checkout-view", function(exports, require, module
 
   				usersBooks.set("studentList",studentsCheck);
   				usersBooks.set("quantity_available",quantityAvailable);
+  				usersBooks.set("quantity_out",quantityOut);
   				
   				usersBooks.save(null, {
   					success: function(newBook) {
@@ -1635,10 +1708,17 @@ window.require.register("views/templates/bookDetail", function(exports, require,
     else { stack1 = depth0.ISBN; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
       + "</h4>\n				<p>";
+    if (stack1 = helpers.quantity_total) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.quantity_total; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + " Total Books</p>\n				<p>";
     if (stack1 = helpers.quantity_available) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.quantity_available; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + " Available</p>\n	    </div>\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n    ";
+      + " Available</p>\n				\n	    </div>\n		  <ul id=\"studentlist\">\n			  <p class=\"first-name\">Students with Books Checked Out</p> \n		    ";
+    stack1 = helpers.each.call(depth0, depth0.studentList, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n		    </li>	\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n    ";
     return buffer;
     }
   function program2(depth0,data) {
@@ -1658,11 +1738,23 @@ window.require.register("views/templates/bookDetail", function(exports, require,
     return "\n	      		<div class=\"no-art\">\n	      			<div class=\"no-icon\"></div>\n	      		</div>\n	      ";
     }
 
+  function program6(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n		      <p class=\"first-name\">";
+    if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</p> \n			";
+    return buffer;
+    }
+
     buffer += "\n<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Book Detail</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n  	";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n\n  </div> "
-      + "\n</div> ";
+      + "\n\n\n</div> "
+      + "\n\n</div> ";
     return buffer;
     });
 });

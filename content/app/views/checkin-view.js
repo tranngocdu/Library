@@ -79,6 +79,13 @@ module.exports = View.extend({
 			success: function(usersBooks) {
 
 				that.studentArray = usersBooks.attributes.studentList;
+				var quantityAvailable = usersBooks.attributes.quantity_available;
+				var quantityTotal = usersBooks.attributes.quantity_total;
+				
+				//Modifications to numbers
+				quantityAvailable = quantityAvailable + 1;
+				var quantityOut = quantityTotal - quantityAvailable;
+				
 				var length = that.studentArray.length;
 				var cutItem = undefined;
 				var i;
@@ -95,6 +102,9 @@ module.exports = View.extend({
 				}
 
 				usersBooks.set("studentList",that.studentArray);
+				usersBooks.set("quantity_available",quantityAvailable);
+				usersBooks.set("quantity_out",quantityOut);
+				
 				usersBooks.save(null, {
 					success: function(newBook) {
 						Application.router.navigate("#home" , {trigger: true});

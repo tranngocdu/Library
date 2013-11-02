@@ -21,8 +21,16 @@
 	      <h2>{{title}}</h2>
 	      <h3>{{author}}</h3>
 				<h4>ISBN: {{ISBN}}</h4>
+				<p>{{quantity_total}} Total Books</p>
 				<p>{{quantity_available}} Available</p>
+				
 	    </div>
+		  <ul id="studentlist">
+			  <p class="first-name">Students with Books Checked Out</p> 
+		    {{#each studentList}}
+		      <p class="first-name">{{Name}}</p> 
+			{{/each}}
+		    </li>	
 
 	    <div id="checkout-book" class="ab-btn button primary-fill">Check Out</div>
 	    <div id="edit-book" class="ab-btn button primary">Edit Quantity</div>
@@ -30,4 +38,8 @@
     {{/each}}
 
   </div> {{!-- /#scroller --}}
+
+
+</div> {{!-- /#scroller --}}
+
 </div> {{!-- /#wrapper --}}
