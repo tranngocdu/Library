@@ -487,7 +487,7 @@ LAYOUT
   top: 0px;
   left: 0px;
   height: 65px;
-  background-color: #f5f0e7;
+  background-color: #f9f7eb;
   border-bottom: 1px solid #cccccc; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003150}}
   #header h1 {
@@ -505,7 +505,7 @@ LAYOUT
   bottom: 0px;
   left: 0px;
   height: 65px;
-  background-color: #f5f0e7;
+  background-color: #f9f7eb;
   border-top: 1px solid #cccccc;
   z-index: 99999999; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003169}}
@@ -566,7 +566,7 @@ LAYOUT
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003209}}
 .back,
 .right-btn {
-  color: #ef6b50;
+  color: #f26657;
   position: absolute;
   top: 36px;
   font-size: 17px; }
@@ -595,11 +595,11 @@ h1 {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003239}}
 .active {
-  color: #ef6b50 !important; }
+  color: #f26657 !important; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003243}}
 a {
-  color: #62c2a1;
+  color: #1fbdbe;
   text-decoration: none; }
 
 /********************************
@@ -613,25 +613,25 @@ BUTTONS
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003257}}
 .primary-fill {
-  border: 1px solid #62c2a1;
-  background-color: #62c2a1;
+  border: 1px solid #1fbdbe;
+  background-color: #1fbdbe;
   color: white; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003263}}
 .secondary-fill {
-  border: 1px solid #ef6b50;
-  background-color: #ef6b50;
+  border: 1px solid #f26657;
+  background-color: #f26657;
   color: white; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003269}}
 .primary {
-  color: #62c2a1;
-  border: 1px solid #62c2a1; }
+  color: #1fbdbe;
+  border: 1px solid #1fbdbe; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003274}}
 .secondary {
-  color: #ef6b50;
-  border: 1px solid #ef6b50; }
+  color: #f26657;
+  border: 1px solid #f26657; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003279}}
 .disabled {
@@ -711,7 +711,7 @@ SIGN UP & LOGIN
   margin-top: 20px;
   text-align: center;
   font-size: 12px;
-  color: #62c2a1; }
+  color: #1fbdbe; }
 
 /********************************
 HOME
@@ -770,7 +770,7 @@ ADD BOOK
   .check p {
     font-size: 13px;
     font-weight: 500;
-    color: #62c2a1;
+    color: #1fbdbe;
     padding: 7px 0 15px 0; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003417}}
@@ -789,7 +789,7 @@ CHECK IN / CHECK OUT
   margin: 0 auto;
   padding: 75px 5% 10px 5% !important;
   text-align: left;
-  background-color: #f5f0e7;
+  background-color: #f9f7eb;
   border-bottom: 1px solid #cccccc; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003434}}
   .check img {
@@ -811,7 +811,7 @@ CHECK IN / CHECK OUT
 .name-header {
   width: 90%;
   margin: 0 auto;
-  color: #ef6b50;
+  color: #f26657;
   font-weight: 500;
   text-align: center;
   padding: 10px 0 12px 0;
@@ -866,15 +866,15 @@ BOOK LIST
     float: left;
     padding: 5px 0 8px 0;
     text-align: center;
-    color: #ef6b50; }
+    color: #f26657; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003507}}
   .filter #filt-available {
     width: 30%;
-    border-top: 1px solid #ef6b50;
-    border-bottom: 1px solid #ef6b50; }
+    border-top: 1px solid #f26657;
+    border-bottom: 1px solid #f26657; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003512}}
   .filter #filt-checked {
-    border: 1px solid #ef6b50;
+    border: 1px solid #f26657;
     width: 40%;
     -webkit-border-top-right-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
@@ -882,7 +882,7 @@ BOOK LIST
     border-bottom-right-radius: 5px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003521}}
   .filter #filt-all {
-    border: 1px solid #ef6b50;
+    border: 1px solid #f26657;
     width: 30%;
     -webkit-border-top-left-radius: 5px;
     -webkit-border-bottom-left-radius: 5px;
@@ -890,7 +890,7 @@ BOOK LIST
     border-bottom-left-radius: 5px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003530}}
   .filter .selected {
-    background-color: #ef6b50;
+    background-color: #f26657;
     color: white; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003536}}
@@ -926,11 +926,11 @@ BOOK LIST
       #booklist li .book-meta p {
         font-size: 12px;
         font-weight: 500;
-        color: #62c2a1;
+        color: #1fbdbe;
         padding-top: 4px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003568}}
       #booklist li .book-meta .out {
-        color: #ef6b50; }
+        color: #f26657; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003575}}
 .students {
@@ -957,7 +957,7 @@ BOOK LIST
       float: left; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003595}}
     #studentlist li .delete-name {
-      color: #ef6b50;
+      color: #f26657;
       text-align: right;
       float: right;
       font-size: 15px;
