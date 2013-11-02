@@ -614,7 +614,8 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   	events: {
   		"dataLoaded":"append",
   		"click #checkout-book":"checkoutBook",
-  		"click #remove-book":"removeBook"
+  		"click #remove-book":"removeBook",
+  		"click #edit-book":"editQuantity"
   	},
 
   	initialize: function() {
@@ -674,12 +675,64 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   		query.find({
 
   			success: function(bookdetail) {
-  			//then remove book
+  				//then remove book
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
   			}
   		});
+  	},
+
+  	editQuantity: function() {
+
+  		var data = Application.addBookView.bookData;
+  		var quantityPrompt = {
+  			state0: { 
+  				title: "Edit Quantity",
+  				buttons: { "Cancel": false, "Submit": true },
+  				html:'<input type="number" name="amount" value="" style="font-size:18px;width:100%;text-align:center;">',
+  				submit: function(e,v,m,f){
+  					console.log(f.amount);
+  					var totalAmount=f.amount;
+  					
+  					//Update UI
+  					$("#totalBooks").html("<p>"+totalAmount+" Total Books</p>");
+  					
+  					//Update Server
+  					totalAmount = parseInt(totalAmount);
+  					var currentUser = Parse.User.current();
+  					var currentUserId = currentUser.id;
+  					var query = new Parse.Query("NewBook");
+  					query.equalTo("ISBN", Application.bookDetailView.ISBN);
+  					query.equalTo("User", currentUserId);
+
+  					query.first({
+  						success: function(usersBooks) {
+  							console.log(usersBooks);
+  							var quantityAvailable = usersBooks.attributes.quantity_available;
+  							quantityAvailable = quantityAvailable + 1;
+  							
+  							usersBooks.set("quantity_available",quantityAvailable);
+  							usersBooks.set("quantity_total",totalAmount);
+
+  							usersBooks.save(null, {
+  								success: function(newBook) {
+  								},
+  								error: function(error) {
+  									alert("Error save: " + error.code + " " + error.message);
+  								}
+  							});
+  						},
+  						error: function(error) {
+  							alert("Error first: " + error.code + " " + error.message);
+  						},
+  					});
+
+
+  				}
+  			}
+  		};
+  		$.prompt(quantityPrompt);
   	}
 
   });
@@ -1715,11 +1768,11 @@ window.require.register("views/templates/bookDetail", function(exports, require,
     if (stack1 = helpers.ISBN) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.ISBN; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h4>\n				<p>";
+      + "</h4>\n				<div id=\"totalBooks\"><p>";
     if (stack1 = helpers.quantity_total) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.quantity_total; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + " Total Books</p>\n				<p>";
+      + " Total Books</p></div>\n				<p>";
     if (stack1 = helpers.quantity_available) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.quantity_available; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)

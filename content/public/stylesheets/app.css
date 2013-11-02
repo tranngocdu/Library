@@ -871,13 +871,13 @@ BOOK LIST
     color: #f26657; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003509}}
   .filter #filt-available {
-    width: 30%;
+    width: 40%;
     border-top: 1px solid #f26657;
     border-bottom: 1px solid #f26657; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003514}}
   .filter #filt-checked {
+    width: 30%;
     border: 1px solid #f26657;
-    width: 40%;
     -webkit-border-top-right-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;

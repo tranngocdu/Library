@@ -8,7 +8,8 @@ module.exports = View.extend({
 	events: {
 		"dataLoaded":"append",
 		"click #checkout-book":"checkoutBook",
-		"click #remove-book":"removeBook"
+		"click #remove-book":"removeBook",
+		"click #edit-book":"editQuantity"
 	},
 
 	initialize: function() {
@@ -68,12 +69,64 @@ module.exports = View.extend({
 		query.find({
 
 			success: function(bookdetail) {
-			//then remove book
+				//then remove book
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
 			}
 		});
+	},
+
+	editQuantity: function() {
+
+		var data = Application.addBookView.bookData;
+		var quantityPrompt = {
+			state0: { 
+				title: "Edit Quantity",
+				buttons: { "Cancel": false, "Submit": true },
+				html:'<input type="number" name="amount" value="" style="font-size:18px;width:100%;text-align:center;">',
+				submit: function(e,v,m,f){
+					console.log(f.amount);
+					var totalAmount=f.amount;
+					
+					//Update UI
+					$("#totalBooks").html("<p>"+totalAmount+" Total Books</p>");
+					
+					//Update Server
+					totalAmount = parseInt(totalAmount);
+					var currentUser = Parse.User.current();
+					var currentUserId = currentUser.id;
+					var query = new Parse.Query("NewBook");
+					query.equalTo("ISBN", Application.bookDetailView.ISBN);
+					query.equalTo("User", currentUserId);
+
+					query.first({
+						success: function(usersBooks) {
+							console.log(usersBooks);
+							var quantityAvailable = usersBooks.attributes.quantity_available;
+							quantityAvailable = quantityAvailable + 1;
+							
+							usersBooks.set("quantity_available",quantityAvailable);
+							usersBooks.set("quantity_total",totalAmount);
+
+							usersBooks.save(null, {
+								success: function(newBook) {
+								},
+								error: function(error) {
+									alert("Error save: " + error.code + " " + error.message);
+								}
+							});
+						},
+						error: function(error) {
+							alert("Error first: " + error.code + " " + error.message);
+						},
+					});
+
+
+				}
+			}
+		};
+		$.prompt(quantityPrompt);
 	}
 
 });
