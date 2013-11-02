@@ -463,6 +463,25 @@ CHECK IN / CHECK OUT
 .check-scroller {
   padding: 0 !important; 
 }
+
+/********************************
+BOOK DETAILS
+********************************/
+.no-art {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  .no-icon {
+    width: 90px;
+    height: 87px;
+    background-image: url(../images/no-art.png);
+    background-size: 90px 87px;
+    margin: 0 auto;
+    opacity: 0.1;
+  }
+}
+
+
 /********************************
 BOOK LIST
 ********************************/

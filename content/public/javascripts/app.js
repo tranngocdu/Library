@@ -1655,7 +1655,7 @@ window.require.register("views/templates/bookDetail", function(exports, require,
   function program4(depth0,data) {
     
     
-    return "\n	      		<span>No Cover Found</span>\n	      ";
+    return "\n	      		<div class=\"no-art\">\n	      			<div class=\"no-icon\"></div>\n	      		</div>\n	      ";
     }
 
     buffer += "\n<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Book Detail</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n  	";
