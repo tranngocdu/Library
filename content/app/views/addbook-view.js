@@ -51,9 +51,9 @@ module.exports = View.extend({
 			if (typeof this.bookData.ISBN.cover!='undefined'){
 			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
 		};
-			newBook.set("quantity_total", "2");
-			newBook.set("quantity_out", "0");
-			newBook.set("quantity_available", "2");
+			newBook.set("quantity_total", 2);
+			newBook.set("quantity_out", 0);
+			newBook.set("quantity_available", 2);
 			newBook.set("User", currentUserId);
 			newBook.set("studentList",[{}]);
 			newBook.set("ISBN", this.bookData.ISBN.identifiers.isbn_13[0]);

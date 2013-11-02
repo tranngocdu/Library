@@ -113,7 +113,7 @@ window.require.register("application", function(exports, require, module) {
   			var BookList = require('views/booklist-view');
   			var CheckIn = require('views/checkin-view');
   			var CheckOut = require('views/checkout-view');
-  			var EnterPassword = require('views/enterpassword-view');
+  			var AddBookManually = require('views/addbookmanually-view');
   			var Login = require('views/login-view');
   			var Settings = require('views/settings-view');
   			var Signup = require('views/signup-view');
@@ -129,7 +129,7 @@ window.require.register("application", function(exports, require, module) {
   			this.bookListView = new BookList();
   			this.checkInView = new CheckIn();
   			this.checkOutView = new CheckOut();
-  			this.enterPasswordView = new EnterPassword();
+  			this.addBookManuallyView = new AddBookManually();
   			this.loginView = new Login();
   			this.settingsView = new Settings();
   			this.signupView = new Signup();
@@ -243,7 +243,7 @@ window.require.register("lib/router", function(exports, require, module) {
   		'bookList':'bookList',
   		'checkIn':'checkIn',
   		'checkOut':'checkOut',
-  		'enterPassword':'enterPassword',
+  		'addBookManually':'addBookManually',
   		'login':'login',
   		'settings':'settings',
   		'signup':'signup',
@@ -312,8 +312,8 @@ window.require.register("lib/router", function(exports, require, module) {
   		checkOut:function() {
   			this.changePage(Application.checkOutView);
   		},
-  		enterPassword:function() {
-  			this.changePage(Application.enterPasswordView);
+  		addBookManually:function() {
+  			this.changePage(Application.addBookManuallyView);
   		},
   		login:function() {
   			this.changePage(Application.loginView);
@@ -468,9 +468,9 @@ window.require.register("views/addbook-view", function(exports, require, module)
   			if (typeof this.bookData.ISBN.cover!='undefined'){
   			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
   		};
-  			newBook.set("quantity_total", "2");
-  			newBook.set("quantity_out", "0");
-  			newBook.set("quantity_available", "2");
+  			newBook.set("quantity_total", 2);
+  			newBook.set("quantity_out", 0);
+  			newBook.set("quantity_available", 2);
   			newBook.set("User", currentUserId);
   			newBook.set("studentList",[{}]);
   			newBook.set("ISBN", this.bookData.ISBN.identifiers.isbn_13[0]);
@@ -501,6 +501,61 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		};
   		$.prompt(quantityPrompt);
   	},
+
+  });
+  
+});
+window.require.register("views/addbookmanually-view", function(exports, require, module) {
+  var View = require('./view');
+  var template = require('./templates/addBookManually');
+
+  module.exports = View.extend({
+  	id: 'addBookManually-view',
+  	template: template,
+  	events: {
+  		'click #addBook':'addBook',
+  	},
+
+  	initialize: function() {
+  	},
+
+  	render: function() {
+  		this.$el.html(this.template());
+  		return this;
+  	},
+
+  	addBook:function () {
+  		
+  		var title = $("#title").val();
+  		var author = $("#author").val();
+  		var numberAvailable = $("#numberAvailable").val();
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var date = new Date();
+  		date = date.getTime();
+
+  		var NewBook=Parse.Object.extend("NewBook");
+  		var newBook=new NewBook();
+  		newBook.set("title", title);
+  		newBook.set("author", author);
+  		//newBook.set("cover_image", "http://google.com");
+  		newBook.set("quantity_total", numberAvailable);
+  		newBook.set("quantity_out", 0);
+  		newBook.set("quantity_available", numberAvailable);
+  		newBook.set("User", currentUserId);
+  		newBook.set("studentList",[{}]);
+  		newBook.set("ISBN", currentUserId+date);
+  		newBook.save(null, {
+  			success: function(newBook) {
+  				Application.router.navigate("#bookList" , {trigger: true});
+  			},
+  			error: function(newBook, error) {
+  				alert('Back to the drawing board');
+  				console.log(error);
+  			}
+  		});
+
+  	}
 
   });
   
@@ -731,7 +786,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   		$('#filt-all').removeClass("selected");
   		$('#filt-available').removeClass("selected");
   		$('#filt-checked').addClass("selected");
-  		
+
   		var that = this;
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
@@ -767,11 +822,11 @@ window.require.register("views/booklist-view", function(exports, require, module
   			}
   		);
   	},
-  	
+
   	bookDetail: function(e) {
   		Application.bookDetailView.bookId = $(e.currentTarget).data('id');
   		Application.router.navigate("#bookDetail", {trigger:true});
-  		
+
   	},
 
   	getBookInfo: function() {
@@ -784,12 +839,18 @@ window.require.register("views/booklist-view", function(exports, require, module
   			url: "http://openlibrary.org/api/books",
   			type: "GET",
   			success: function (data) {
-  				alert(Application.bookListView.ISBN);
-  				Application.addBookView.bookData = data;
-  				Application.router.navigate("#addBook", {
-  					trigger: true
-  				});
-
+  				//Catch if data is blank, ISBN is not found
+  				if(data == "") {
+  					Application.router.navigate("#addBookManually", {
+  						trigger: true
+  					});
+  				}
+  				else {
+  					Application.addBookView.bookData = data;
+  					Application.router.navigate("#addBook", {
+  						trigger: true
+  					});
+  				}
   			},
   			error: function (jqXHR,textStatus,errorThrown) {
   				alert("Error");
@@ -1072,72 +1133,6 @@ window.require.register("views/checkout-view", function(exports, require, module
   	}
 
 
-
-  });
-  
-});
-window.require.register("views/enterpassword-view", function(exports, require, module) {
-  var View = require('./view');
-  var template = require('./templates/enterPassword');
-
-  module.exports = View.extend({
-  	id: 'enterPassword-view',
-  	template: template,
-  	events: {
-  		'click #submitPassword':'submit',
-  	},
-
-  	initialize: function() {
-  	},
-
-  	render: function() {
-  		this.$el.html(this.template());
-  		return this;
-  	},
-  	
-  	submit:function () {
-  		var password = $('#password').val();
-  		var teacherId = window.localStorage.getItem("userId", userId);
-
-  		if(password && teacherId)
-  		{
-  			$.ajax({
-  				data: {
-  					"password":password,
-  					"teacherId":teacherId,
-  				},
-  				url: Application.serverURL+"register",
-  				type: "POST",
-  				xhrFields: {
-  					withCredentials: true
-  				},
-  				success: function (data) {
-  					Application.router.navigate("#settings", {
-  						trigger: true
-  					});
-  					
-  				},
-  				error: function (jqXHR, textStatus, errorThrown) {
-  					{
-  						navigator.notification.alert(
-  							'Incorrect Password.',  // message
-  							function alertDismissed() {}, // callback
-  							'Error',            // title
-  							'OK'                  // buttonName
-  						);
-  					}
-  				}
-  			});
-  		}
-  		else{
-  			navigator.notification.alert(
-  				'Please enter password',  // message
-  				function alertDismissed() {}, // callback
-  				'All Fields Required',            // title
-  				'OK'                  // buttonName
-  			);
-  		}
-  	}
 
   });
   
@@ -1670,6 +1665,19 @@ window.require.register("views/templates/addBook", function(exports, require, mo
     return buffer;
     });
 });
+window.require.register("views/templates/addBookManually", function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    var buffer = "";
+
+
+    buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  \n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container\">\n	\n		<div class=\"no-art\">\n			<div class=\"no-icon\"></div>\n		</div>\n	\n	<div id=\"addPhoto\" class=\"button primary\">Add Photo</div>\n    \n    <input id=\"title\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <input id=\"numberAvailable\" type=\"text\" placeholder=\"Quantity Available\" />\n\n    <div id=\"addBook\" class=\"button primary\">Add Book</div>\n\n\n  </div> "
+      + "\n</div> "
+      + "\n";
+    return buffer;
+    });
+});
 window.require.register("views/templates/addStudent", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
@@ -1933,16 +1941,6 @@ window.require.register("views/templates/checkOut", function(exports, require, m
       + "\n</div> "
       + "\n\n";
     return buffer;
-    });
-});
-window.require.register("views/templates/enterPassword", function(exports, require, module) {
-  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    this.compilerInfo = [4,'>= 1.0.0'];
-  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    
-
-
-    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n";
     });
 });
 window.require.register("views/templates/home", function(exports, require, module) {

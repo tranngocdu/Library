@@ -98,7 +98,7 @@ module.exports = View.extend({
 		$('#filt-all').removeClass("selected");
 		$('#filt-available').removeClass("selected");
 		$('#filt-checked').addClass("selected");
-		
+
 		var that = this;
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
@@ -134,11 +134,11 @@ module.exports = View.extend({
 			}
 		);
 	},
-	
+
 	bookDetail: function(e) {
 		Application.bookDetailView.bookId = $(e.currentTarget).data('id');
 		Application.router.navigate("#bookDetail", {trigger:true});
-		
+
 	},
 
 	getBookInfo: function() {
@@ -151,12 +151,18 @@ module.exports = View.extend({
 			url: "http://openlibrary.org/api/books",
 			type: "GET",
 			success: function (data) {
-				alert(Application.bookListView.ISBN);
-				Application.addBookView.bookData = data;
-				Application.router.navigate("#addBook", {
-					trigger: true
-				});
-
+				//Catch if data is blank, ISBN is not found
+				if(data == "") {
+					Application.router.navigate("#addBookManually", {
+						trigger: true
+					});
+				}
+				else {
+					Application.addBookView.bookData = data;
+					Application.router.navigate("#addBook", {
+						trigger: true
+					});
+				}
 			},
 			error: function (jqXHR,textStatus,errorThrown) {
 				alert("Error");

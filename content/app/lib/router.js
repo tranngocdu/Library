@@ -12,7 +12,7 @@ module.exports = Backbone.Router.extend({
 		'bookList':'bookList',
 		'checkIn':'checkIn',
 		'checkOut':'checkOut',
-		'enterPassword':'enterPassword',
+		'addBookManually':'addBookManually',
 		'login':'login',
 		'settings':'settings',
 		'signup':'signup',
@@ -81,8 +81,8 @@ module.exports = Backbone.Router.extend({
 		checkOut:function() {
 			this.changePage(Application.checkOutView);
 		},
-		enterPassword:function() {
-			this.changePage(Application.enterPasswordView);
+		addBookManually:function() {
+			this.changePage(Application.addBookManuallyView);
 		},
 		login:function() {
 			this.changePage(Application.loginView);
