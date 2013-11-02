@@ -19,10 +19,11 @@ module.exports = View.extend({
 		var bookData = Application.checkInView.bookInfo;
 		that.ISBN = Application.checkInView.bookInfo[0].ISBN;
 		this.$el.html(this.template(bookData));
-		console.log(bookData);
-		var studentBookList = bookData.studentList;
-		console.log(studentBookList);
-		$('.students').html(that.templateStudents(studentBookList));
+		var studentBookList = Application.checkInView.bookInfo[0].studentList;
+		var studentArray = JSON.stringify(studentBookList);
+		studentArray = JSON.parse(studentArray);
+		console.log(studentArray);
+		$('.students').html(that.templateStudents(studentArray));
 
 		return this;
 	},

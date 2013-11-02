@@ -26,11 +26,13 @@ module.exports = View.extend({
 		var data=JSON.parse(combinedString);
 		this.bookData = data;
 		this.$el.html(this.template(data));
-		
+
 		return this;
 	},
-	
+
 	addBook: function() {
+
+		alert("need to write check to see if all values exist first");
 
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
@@ -43,32 +45,33 @@ module.exports = View.extend({
 		var i = 0;
 		var authorArray = new Array ();
 		while (i < lengthAuthors) {
-				authorArray.push(this.bookData.ISBN.authors[i].name);
-				i++;
-			}
-			authorArray = authorArray.toString();
-			newBook.set("author", authorArray);
-			if (typeof this.bookData.ISBN.cover!='undefined'){
+			authorArray.push(this.bookData.ISBN.authors[i].name);
+			i++;
+		}
+		authorArray = authorArray.toString();
+		newBook.set("author", authorArray);
+		if (typeof this.bookData.ISBN.cover!='undefined'){
 			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
 		};
-			newBook.set("quantity_total", 2);
-			newBook.set("quantity_out", 0);
-			newBook.set("quantity_available", 2);
-			newBook.set("User", currentUserId);
-			newBook.set("studentList",[{}]);
-			newBook.set("ISBN", this.bookData.ISBN.identifiers.isbn_13[0]);
-			newBook.save(null, {
-				success: function(newBook) {
-						Application.router.navigate("#bookList" , {trigger: true});
-				},
-				error: function(newBook, error) {
-					alert('Back to the drawing board');
-					console.log(error);
-				}
-			});
+		newBook.set("quantity_total", that.totalAmount);
+		newBook.set("quantity_out", 0);
+		newBook.set("quantity_available", that.totalAmount);
+		newBook.set("User", currentUserId);
+		newBook.set("studentList",[{}]);
+		newBook.set("ISBN", this.bookData.ISBN.identifiers.isbn_13[0]);
+		newBook.save(null, {
+			success: function(newBook) {
+				Application.router.navigate("#bookList" , {trigger: true});
+			},
+			error: function(newBook, error) {
+				alert('Back to the drawing board');
+				console.log(error);
+			}
+		});
 	},
 
 	quantity: function() {
+		var that = this;
 		var data = Application.addBookView.bookData;
 		var quantityPrompt = {
 			state0: { 
@@ -77,8 +80,10 @@ module.exports = View.extend({
 				html:'<input type="number" name="amount" value="" style="font-size:18px;width:100%;text-align:center;">',
 				submit: function(e,v,m,f){
 					console.log(f.amount);
-					totalAmount=f.amount;
-				$("#numberAvailable").html("Number Available: "+totalAmount+"");
+					that.totalAmount=f.amount;
+					$("#numberAvailable").html("Number Available: "+that.totalAmount+"");
+					that.totalAmount = parseInt(totalAmount);
+					
 				}
 			}
 		};

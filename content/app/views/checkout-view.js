@@ -21,7 +21,6 @@ module.exports = View.extend({
 		var that=this;
 		data = Application.checkOutView.bookInfo;
 		that.ISBN = Application.checkOutView.bookInfo[0].ISBN;
-		console.log(Application.checkOutView.bookInfo);		
 		this.$el.html(this.template(data));
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
@@ -30,7 +29,7 @@ module.exports = View.extend({
 		query.find({
 			success: function(students) {
 				var studentArray = JSON.stringify(students);
-				var studentArray = JSON.parse(studentArray);
+				studentArray = JSON.parse(studentArray);
 				$('.students').html(that.templateStudents(studentArray));
 			},
 			error: function(error) {
@@ -95,18 +94,22 @@ module.exports = View.extend({
 				var studentsCheck = usersBooks.attributes.studentList;
 				var quantityAvailable = usersBooks.attributes.quantity_available;
 				var quantityTotal = usersBooks.attributes.quantity_total;
-				
+				console.log(studentsCheck);
 				//Modifications to numbers
 				quantityAvailable = quantityAvailable - 1;
 				var quantityOut = quantityTotal - quantityAvailable;
 				
 				studentsCheck.push({"Name":that.studentName,"objectId":that.studentId});
+				console.log("thisshouldhave" + studentsCheck);
+				console.log(studentsCheck);
+				
+				
 				var length = studentsCheck.length;
 				var cutItem = undefined;
 				var i;
 				for (i = 0; i < length; i++) {
 					var element = studentsCheck[i];
-					var id = element.id;
+					var id = element.objectId;
 					if (id == undefined) {
 						cutItem = i;
 					}
@@ -114,7 +117,8 @@ module.exports = View.extend({
 				if (cutItem != undefined){
 					studentsCheck.splice(cutItem,1);
 				}
-
+				console.log(studentsCheck);
+				
 				usersBooks.set("studentList",studentsCheck);
 				usersBooks.set("quantity_available",quantityAvailable);
 				usersBooks.set("quantity_out",quantityOut);

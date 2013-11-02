@@ -443,11 +443,13 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		var data=JSON.parse(combinedString);
   		this.bookData = data;
   		this.$el.html(this.template(data));
-  		
+
   		return this;
   	},
-  	
+
   	addBook: function() {
+
+  		alert("need to write check to see if all values exist first");
 
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
@@ -460,32 +462,33 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		var i = 0;
   		var authorArray = new Array ();
   		while (i < lengthAuthors) {
-  				authorArray.push(this.bookData.ISBN.authors[i].name);
-  				i++;
-  			}
-  			authorArray = authorArray.toString();
-  			newBook.set("author", authorArray);
-  			if (typeof this.bookData.ISBN.cover!='undefined'){
+  			authorArray.push(this.bookData.ISBN.authors[i].name);
+  			i++;
+  		}
+  		authorArray = authorArray.toString();
+  		newBook.set("author", authorArray);
+  		if (typeof this.bookData.ISBN.cover!='undefined'){
   			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
   		};
-  			newBook.set("quantity_total", 2);
-  			newBook.set("quantity_out", 0);
-  			newBook.set("quantity_available", 2);
-  			newBook.set("User", currentUserId);
-  			newBook.set("studentList",[{}]);
-  			newBook.set("ISBN", this.bookData.ISBN.identifiers.isbn_13[0]);
-  			newBook.save(null, {
-  				success: function(newBook) {
-  						Application.router.navigate("#bookList" , {trigger: true});
-  				},
-  				error: function(newBook, error) {
-  					alert('Back to the drawing board');
-  					console.log(error);
-  				}
-  			});
+  		newBook.set("quantity_total", that.totalAmount);
+  		newBook.set("quantity_out", 0);
+  		newBook.set("quantity_available", that.totalAmount);
+  		newBook.set("User", currentUserId);
+  		newBook.set("studentList",[{}]);
+  		newBook.set("ISBN", this.bookData.ISBN.identifiers.isbn_13[0]);
+  		newBook.save(null, {
+  			success: function(newBook) {
+  				Application.router.navigate("#bookList" , {trigger: true});
+  			},
+  			error: function(newBook, error) {
+  				alert('Back to the drawing board');
+  				console.log(error);
+  			}
+  		});
   	},
 
   	quantity: function() {
+  		var that = this;
   		var data = Application.addBookView.bookData;
   		var quantityPrompt = {
   			state0: { 
@@ -494,8 +497,10 @@ window.require.register("views/addbook-view", function(exports, require, module)
   				html:'<input type="number" name="amount" value="" style="font-size:18px;width:100%;text-align:center;">',
   				submit: function(e,v,m,f){
   					console.log(f.amount);
-  					totalAmount=f.amount;
-  				$("#numberAvailable").html("Number Available: "+totalAmount+"");
+  					that.totalAmount=f.amount;
+  					$("#numberAvailable").html("Number Available: "+that.totalAmount+"");
+  					that.totalAmount = parseInt(totalAmount);
+  					
   				}
   			}
   		};
@@ -614,6 +619,7 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   	events: {
   		"dataLoaded":"append",
   		"click #checkout-book":"checkoutBook",
+  		"click #checkin-book":"checkinBook",
   		"click #remove-book":"removeBook",
   		"click #edit-book":"editQuantity"
   	},
@@ -657,6 +663,28 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   				bookdetailArray = JSON.parse(bookdetailArray);
   				Application.checkOutView.bookInfo = bookdetailArray;
   				Application.router.navigate("#checkOut", {
+  					trigger: true
+  				});
+  			},
+  			error: function(error) {
+  				alert("Error: " + error.code + " " + error.message);
+  			}
+  		});
+  	},
+  	
+  	checkinBook: function() {
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var query = new Parse.Query("NewBook");
+  		query.equalTo("ISBN", Application.bookDetailView.ISBN);
+  		query.equalTo("User", currentUserId);
+  		query.find({
+
+  			success: function(bookdetail) {
+  				var bookdetailArray = JSON.stringify(bookdetail);
+  				bookdetailArray = JSON.parse(bookdetailArray);
+  				Application.checkInView.bookInfo = bookdetailArray;
+  				Application.router.navigate("#checkIn", {
   					trigger: true
   				});
   			},
@@ -939,10 +967,11 @@ window.require.register("views/checkin-view", function(exports, require, module)
   		var bookData = Application.checkInView.bookInfo;
   		that.ISBN = Application.checkInView.bookInfo[0].ISBN;
   		this.$el.html(this.template(bookData));
-  		console.log(bookData);
-  		var studentBookList = bookData.studentList;
-  		console.log(studentBookList);
-  		$('.students').html(that.templateStudents(studentBookList));
+  		var studentBookList = Application.checkInView.bookInfo[0].studentList;
+  		var studentArray = JSON.stringify(studentBookList);
+  		studentArray = JSON.parse(studentArray);
+  		console.log(studentArray);
+  		$('.students').html(that.templateStudents(studentArray));
 
   		return this;
   	},
@@ -1070,7 +1099,6 @@ window.require.register("views/checkout-view", function(exports, require, module
   		var that=this;
   		data = Application.checkOutView.bookInfo;
   		that.ISBN = Application.checkOutView.bookInfo[0].ISBN;
-  		console.log(Application.checkOutView.bookInfo);		
   		this.$el.html(this.template(data));
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
@@ -1079,7 +1107,7 @@ window.require.register("views/checkout-view", function(exports, require, module
   		query.find({
   			success: function(students) {
   				var studentArray = JSON.stringify(students);
-  				var studentArray = JSON.parse(studentArray);
+  				studentArray = JSON.parse(studentArray);
   				$('.students').html(that.templateStudents(studentArray));
   			},
   			error: function(error) {
@@ -1144,18 +1172,22 @@ window.require.register("views/checkout-view", function(exports, require, module
   				var studentsCheck = usersBooks.attributes.studentList;
   				var quantityAvailable = usersBooks.attributes.quantity_available;
   				var quantityTotal = usersBooks.attributes.quantity_total;
-  				
+  				console.log(studentsCheck);
   				//Modifications to numbers
   				quantityAvailable = quantityAvailable - 1;
   				var quantityOut = quantityTotal - quantityAvailable;
   				
   				studentsCheck.push({"Name":that.studentName,"objectId":that.studentId});
+  				console.log("thisshouldhave" + studentsCheck);
+  				console.log(studentsCheck);
+  				
+  				
   				var length = studentsCheck.length;
   				var cutItem = undefined;
   				var i;
   				for (i = 0; i < length; i++) {
   					var element = studentsCheck[i];
-  					var id = element.id;
+  					var id = element.objectId;
   					if (id == undefined) {
   						cutItem = i;
   					}
@@ -1163,7 +1195,8 @@ window.require.register("views/checkout-view", function(exports, require, module
   				if (cutItem != undefined){
   					studentsCheck.splice(cutItem,1);
   				}
-
+  				console.log(studentsCheck);
+  				
   				usersBooks.set("studentList",studentsCheck);
   				usersBooks.set("quantity_available",quantityAvailable);
   				usersBooks.set("quantity_out",quantityOut);
@@ -1222,42 +1255,73 @@ window.require.register("views/home-view", function(exports, require, module) {
   	},
 
   	checkOut: function ()  {
-  		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+  		var quantityPrompt = {
+  			state0: { 
+  				title: "CheckOut",
+  				buttons: { "Scan": false, "List": true },
+  				submit: function(e,v,m,f){
+  					if (v == true) {
+  						Application.router.navigate("#bookList", {trigger:true});
+  					}
+  					else {
+  						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  		scanner.scan(
-  			function (result) {
-  				Application.homeView.ISBN = result.text;
-  				Application.homeView.$el.trigger("bookInfoCheckout");
+  						scanner.scan(
+  							function (result) {
+  								Application.homeView.ISBN = result.text;
+  								Application.homeView.$el.trigger("bookInfoCheckout");
 
-  			}, 
-  			function (error) {
-  				alert("Scanning failed: " + error);
+  							}, 
+  							function (error) {
+  								alert("Scanning failed: " + error);
+  							}
+  						);
+  					}
+
+  				},
+  				cancel: function(){
+  					alert("cancel");
+  				}
   			}
-  		);
+  		};
+  		$.prompt(quantityPrompt);
   	},
 
   	checkIn: function () {
-  		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  		scanner.scan(
-  			function (result) {
-  				Application.homeView.ISBN = result.text;
-  				Application.homeView.$el.trigger("bookInfoCheckin");
+  		var quantityPrompt = {
+  			state0: { 
+  				title: "CheckOut",
+  				buttons: { "Scan": false, "List": true },
+  				submit: function(e,v,m,f){
+  					if (v == true) {
+  						Application.router.navigate("#bookList", {trigger:true});
+  					}
+  					else {
+  						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  			}, 
-  			function (error) {
-  				alert("Scanning failed: " + error);
+  						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+  						scanner.scan(
+  							function (result) {
+  								Application.homeView.ISBN = result.text;
+  								Application.homeView.$el.trigger("bookInfoCheckin");
+
+  							}, 
+  							function (error) {
+  								alert("Scanning failed: " + error);
+  							}
+  						);
+  					}
+
+  				},
+  				cancel: function(){
+  					alert("cancel");
+  				}
   			}
-  		);
+  		};
+  		$.prompt(quantityPrompt);
 
-  	},
-
-  	bookList: function () {
-  		Application.router.navigate("#bookList", {trigger:true});
-  	},
-
-  	studentList: function () {
-  		Application.router.navigate("#studentList", {trigger:true});
   	},
 
   	bookInfoCheckout: function () {
@@ -1286,25 +1350,25 @@ window.require.register("views/home-view", function(exports, require, module) {
 
   	bookInfoCheckin: function () {
 
-  			var currentUser = Parse.User.current();
-  			var currentUserId = currentUser.id;
-  			var query = new Parse.Query("NewBook");
-  			query.equalTo("ISBN", Application.homeView.ISBN);
-  			query.equalTo("User", currentUserId);
-  			query.find({
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var query = new Parse.Query("NewBook");
+  		query.equalTo("ISBN", Application.homeView.ISBN);
+  		query.equalTo("User", currentUserId);
+  		query.find({
 
-  				success: function(bookdetail) {
-  					var bookdetailArray = JSON.stringify(bookdetail);
-  					bookdetailArray = JSON.parse(bookdetailArray);
-  					Application.checkInView.bookInfo = bookdetailArray;
-  					Application.router.navigate("#checkIn", {
-  						trigger: true
-  					});
-  				},
-  				error: function(error) {
-  					alert("Error: " + error.code + " " + error.message);
-  				}
-  			});
+  			success: function(bookdetail) {
+  				var bookdetailArray = JSON.stringify(bookdetail);
+  				bookdetailArray = JSON.parse(bookdetailArray);
+  				Application.checkInView.bookInfo = bookdetailArray;
+  				Application.router.navigate("#checkIn", {
+  					trigger: true
+  				});
+  			},
+  			error: function(error) {
+  				alert("Error: " + error.code + " " + error.message);
+  			}
+  		});
 
   	}
 
@@ -1779,7 +1843,7 @@ window.require.register("views/templates/bookDetail", function(exports, require,
       + " Available</p>\n				\n	    </div>\n		  <ul id=\"studentlist\">\n			  <p class=\"first-name\">Students with Books Checked Out</p> \n		    ";
     stack1 = helpers.each.call(depth0, depth0.studentList, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n		    </li>	\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n    ";
+    buffer += "\n		    </li>	\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"checkin-book\" class=\"ab-btn button primary-fill\">Check In</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n    ";
     return buffer;
     }
   function program2(depth0,data) {

@@ -29,42 +29,73 @@ module.exports = View.extend({
 	},
 
 	checkOut: function ()  {
-		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+		var quantityPrompt = {
+			state0: { 
+				title: "CheckOut",
+				buttons: { "Scan": false, "List": true },
+				submit: function(e,v,m,f){
+					if (v == true) {
+						Application.router.navigate("#bookList", {trigger:true});
+					}
+					else {
+						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-		scanner.scan(
-			function (result) {
-				Application.homeView.ISBN = result.text;
-				Application.homeView.$el.trigger("bookInfoCheckout");
+						scanner.scan(
+							function (result) {
+								Application.homeView.ISBN = result.text;
+								Application.homeView.$el.trigger("bookInfoCheckout");
 
-			}, 
-			function (error) {
-				alert("Scanning failed: " + error);
+							}, 
+							function (error) {
+								alert("Scanning failed: " + error);
+							}
+						);
+					}
+
+				},
+				cancel: function(){
+					alert("cancel");
+				}
 			}
-		);
+		};
+		$.prompt(quantityPrompt);
 	},
 
 	checkIn: function () {
-		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-		scanner.scan(
-			function (result) {
-				Application.homeView.ISBN = result.text;
-				Application.homeView.$el.trigger("bookInfoCheckin");
+		var quantityPrompt = {
+			state0: { 
+				title: "CheckOut",
+				buttons: { "Scan": false, "List": true },
+				submit: function(e,v,m,f){
+					if (v == true) {
+						Application.router.navigate("#bookList", {trigger:true});
+					}
+					else {
+						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-			}, 
-			function (error) {
-				alert("Scanning failed: " + error);
+						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+						scanner.scan(
+							function (result) {
+								Application.homeView.ISBN = result.text;
+								Application.homeView.$el.trigger("bookInfoCheckin");
+
+							}, 
+							function (error) {
+								alert("Scanning failed: " + error);
+							}
+						);
+					}
+
+				},
+				cancel: function(){
+					alert("cancel");
+				}
 			}
-		);
+		};
+		$.prompt(quantityPrompt);
 
-	},
-
-	bookList: function () {
-		Application.router.navigate("#bookList", {trigger:true});
-	},
-
-	studentList: function () {
-		Application.router.navigate("#studentList", {trigger:true});
 	},
 
 	bookInfoCheckout: function () {
@@ -93,25 +124,25 @@ module.exports = View.extend({
 
 	bookInfoCheckin: function () {
 
-			var currentUser = Parse.User.current();
-			var currentUserId = currentUser.id;
-			var query = new Parse.Query("NewBook");
-			query.equalTo("ISBN", Application.homeView.ISBN);
-			query.equalTo("User", currentUserId);
-			query.find({
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("ISBN", Application.homeView.ISBN);
+		query.equalTo("User", currentUserId);
+		query.find({
 
-				success: function(bookdetail) {
-					var bookdetailArray = JSON.stringify(bookdetail);
-					bookdetailArray = JSON.parse(bookdetailArray);
-					Application.checkInView.bookInfo = bookdetailArray;
-					Application.router.navigate("#checkIn", {
-						trigger: true
-					});
-				},
-				error: function(error) {
-					alert("Error: " + error.code + " " + error.message);
-				}
-			});
+			success: function(bookdetail) {
+				var bookdetailArray = JSON.stringify(bookdetail);
+				bookdetailArray = JSON.parse(bookdetailArray);
+				Application.checkInView.bookInfo = bookdetailArray;
+				Application.router.navigate("#checkIn", {
+					trigger: true
+				});
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
 
 	}
 

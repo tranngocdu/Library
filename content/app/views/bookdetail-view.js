@@ -8,6 +8,7 @@ module.exports = View.extend({
 	events: {
 		"dataLoaded":"append",
 		"click #checkout-book":"checkoutBook",
+		"click #checkin-book":"checkinBook",
 		"click #remove-book":"removeBook",
 		"click #edit-book":"editQuantity"
 	},
@@ -51,6 +52,28 @@ module.exports = View.extend({
 				bookdetailArray = JSON.parse(bookdetailArray);
 				Application.checkOutView.bookInfo = bookdetailArray;
 				Application.router.navigate("#checkOut", {
+					trigger: true
+				});
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+	},
+	
+	checkinBook: function() {
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("ISBN", Application.bookDetailView.ISBN);
+		query.equalTo("User", currentUserId);
+		query.find({
+
+			success: function(bookdetail) {
+				var bookdetailArray = JSON.stringify(bookdetail);
+				bookdetailArray = JSON.parse(bookdetailArray);
+				Application.checkInView.bookInfo = bookdetailArray;
+				Application.router.navigate("#checkIn", {
 					trigger: true
 				});
 			},
