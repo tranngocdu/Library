@@ -1630,11 +1630,11 @@ window.require.register("views/templates/bookDetail", function(exports, require,
     if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h3>\n		<h4>ISBN: ";
+      + "</h3>\n				<h4>ISBN: ";
     if (stack1 = helpers.ISBN) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.ISBN; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h4>\n		<p>";
+      + "</h4>\n				<p>";
     if (stack1 = helpers.quantity_available) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.quantity_available; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
@@ -1890,7 +1890,7 @@ window.require.register("views/templates/settings", function(exports, require, m
     if (stack1 = helpers.username) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.username; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "\"/>\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new-confirm\" type=\"password\" placeholder=\"Confirm New Password\" />\n\n    <div id=\"save\" class=\"button primary\">Update Account</div>\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n\n  </div> "
+      + "\"/>\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new-confirm\" type=\"password\" placeholder=\"Confirm New Password\" />\n\n    <div id=\"save\" class=\"button primary\">Update Account</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n\n  </div> "
       + "\n</div> "
       + "\n";
     return buffer;
@@ -1935,7 +1935,7 @@ window.require.register("views/templates/studentList", function(exports, require
     return buffer;
     }
 
-    buffer += "<div id=\"header\">\n	<h1>Student List</h1>\n	<div id=\"add\" class=\"right-btn\">Add</div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n	";
+    buffer += "<div id=\"header\">\n	<h1>Students</h1>\n	<div id=\"add\" class=\"right-btn\">Add</div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n	";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n\n  	</ul>\n\n  </div> "

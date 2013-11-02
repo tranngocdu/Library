@@ -11,6 +11,7 @@ body {
   -webkit-user-select:none;
   -webkit-text-size-adjust:none;
   line-height: 1;
+  background-color: $bg;
 }
 
 ::-webkit-input-placeholder {
@@ -157,20 +158,21 @@ LAYOUT
 }
 
 #footer {
-  position: fixed;
+  position: absolute;
   width: 100%;
   bottom: 0px;
   left: 0px;
   height: 65px;
   background-color: $ui;
   border-top: 1px solid $border;
+  z-index: 99999999;
   ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     li {
       display: inline-block;
-      width: 24%;
+      width: 24.5%;
       text-align: center;
       color: $light-grey;
       font-size: 14px;
@@ -184,7 +186,7 @@ LAYOUT
 .footer-icon {
   background-color: red;
   margin: 7px auto 5px auto;
-  background: url(../images/footer-icons.png);
+  background: url(../images/toolbar-icons.png);
   background-size: 145px 62px;
   background-repeat: no-repeat;
   width: 32px;
@@ -327,15 +329,14 @@ SIGN UP & LOGIN
 #login,
 #add-student,
 #change-pass,
-#help {
+#save {
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
-#help {
+#logout {
   margin-bottom: 10px;
 }
-
 
 #disclaimer {
   color: $light-grey;
@@ -396,7 +397,7 @@ ADD BOOK
     font-size: 14px;
     font-weight: 300;
     color: $light-grey;
-    padding-top: 7px;
+    padding-top: 5px;
   }
 
   h4 {
