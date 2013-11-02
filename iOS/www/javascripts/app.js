@@ -255,7 +255,7 @@ window.require.register("lib/router", function(exports, require, module) {
 
   		// First page logic
   		this.firstPage = true;
-  		$('body').append('<div id="footer" style="z-index:10000"><ul><li id="home_tab" class="active tab">Home</li><li id="bookList_tab" class="tab">Books</li><li id="studentList_tab" class="tab"><div id="icon-student" class="footer-icon"></div><span>Students</span></li><li id="settings_tab" class="tab">Settings</li></ul></div>');
+  		$('body').append('<div id="footer"><ul><li id="home_tab" class="active tab"><div id="icon-home" class="footer-icon"></div>Home</li><li id="bookList_tab" class="tab"><div id="icon-books" class="footer-icon"></div>Books</li><li id="studentList_tab" class="tab"><div id="icon-student" class="footer-icon"></div>Students</li><li id="settings_tab" class="tab"><div id="icon-settings" class="footer-icon"></div>Settings</li></ul></div>');
 
   		},
 
@@ -1295,10 +1295,9 @@ window.require.register("views/settings-view", function(exports, require, module
   	id: 'settings-view',
   	template: template,
   	events: {
-  		'click #edit': 'edit',
-  		'click #change-pass': 'changePass',
   		'click #done': 'done',
   		'click #logout': 'logout',
+  		'click #save': 'save',
   		'click #addBook': 'addBook',
   		'click #changeQuantity': 'changeQuantity'
   	},
@@ -1309,10 +1308,11 @@ window.require.register("views/settings-view", function(exports, require, module
 
   	render: function () {
   		var that = this;
-  		this.$el.html(this.template());
+  		//this.$el.html(this.template());
   		var query = new Parse.Query("User");
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
+  		that.username = $('#set-email').val();
   		query.equalTo("objectId", currentUserId);
   		query.first({
   			success: function(userData) {
@@ -1320,7 +1320,7 @@ window.require.register("views/settings-view", function(exports, require, module
   				var userArray = JSON.parse(userInfo);
   				console.log(userArray);
   				that.$el.html(that.template(userArray));
-
+  				that.username = $('#set-email').val();
   			},
   			error: function(newBook, error) {
   				alert('Back to the drawing board');
@@ -1328,32 +1328,71 @@ window.require.register("views/settings-view", function(exports, require, module
   			}
   		});
   	},
-  	
+
   	// changePass: function () {
-  	// $('input.hide-hard').addClass("block");
-  	// },
+  		// $('input.hide-hard').addClass("block");
+  		// },
 
-  	logout: function () {
-  		window.localStorage.removeItem("userId");
-  		Parse.User.logOut();
-  		Application.router.navigate("#login", {
-  			trigger: true
-  		});
-  	},
+  		save: function() {
+  			var that = this;
+  			var username = $('#set-email').val();
+  			var oldPassword = $('#set-current').val();
+  			var password =  $('#set-new').val();
+  			var confirmPassword =  $('#set-new-confirm').val();
 
-  	addBook: function() {
-  		Application.router.navigate("#addBook", {
-  			trigger: true
-  		});
-  	},
+  			if (password == confirmPassword) {
+  				var user = Parse.User.logIn(that.username, oldPassword, {
+  					success: function(user) {
+  						user.set("username", username);  // attempt to change username
+  						user.set("password", password);
+  						user.save(null, {
+  							success: function(user) {
+  								alert("Settings have been changed");
+  								Application.router.navigate("#home", {
+  									trigger: true
+  								});
 
-  	changeQuantity: function() {
-  		Application.router.navigate("#addBook", {
-  			trigger: true
-  		});
-  	}
+  							},
+  							error: function(error) {
+  								alert("Unable to change info right now");
+  							}
+  						});
+  					},
+  					error: function(error) {
+  						alert("Incorrect password");
+  						var oldPassword = $('#set-current').val("");
+  						var password =  $('#set-new').val("");
+  						var confirmPassword =  $('#set-new-confirm').val("");
+  					}
+  				});
+  			}
+  			else {
+  				alert("Passwords need to match");
+  			}
 
-  });
+  		},
+
+  		logout: function () {
+  			window.localStorage.removeItem("userId");
+  			Parse.User.logOut();
+  			Application.router.navigate("#login", {
+  				trigger: true
+  			});
+  		},
+
+  		addBook: function() {
+  			Application.router.navigate("#addBook", {
+  				trigger: true
+  			});
+  		},
+
+  		changeQuantity: function() {
+  			Application.router.navigate("#addBook", {
+  				trigger: true
+  			});
+  		}
+
+  	});
 });
 window.require.register("views/signup-view", function(exports, require, module) {
   var View = require('./view');
@@ -1382,10 +1421,11 @@ window.require.register("views/signup-view", function(exports, require, module) 
   		var password =  $('#sign-pass').val();
   		user.set("username", username);
   		user.set("password", password);
+  		user.set("email", username);
 
   		user.signUp(null, {
   			success: function(user) {
-  				alert("Success!");
+  				alert("Welcome to Class Library!");
   				Application.router.navigate("#home", {
   					trigger: true
   				});
@@ -1787,12 +1827,15 @@ window.require.register("views/templates/settings", function(exports, require, m
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    var buffer = "";
+    var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n  <div id=\"edit\" class=\"right-btn\">Edit</div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"set-name\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" value=\"Dimitar Karaytchev\" />\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" value=\"dimitar.k@me.com\"/>\n    <input id=\"set-current\" class=\"hide-hard\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" class=\"hide-hard\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new-confirm\" class=\"hide-hard\" type=\"password\" placeholder=\"Confirm New Password\" />\n\n    "
-      + "\n    "
-      + "\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n\n  </div> "
+    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container\">\n\n    "
+      + "\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" value=\"";
+    if (stack1 = helpers.username) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.username; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "\"/>\n    <input id=\"set-current\" type=\"password\" placeholder=\"Current Password\" />\n    <input id=\"set-new\" type=\"password\" placeholder=\"New Password\" />\n    <input id=\"set-new-confirm\" type=\"password\" placeholder=\"Confirm New Password\" />\n\n    <div id=\"save\" class=\"button primary\">Update Account</div>\n    <div id=\"help\" class=\"button primary\">Help Me</div>\n    <div id=\"logout\" class=\"button secondary-fill\">Log Out</div>\n\n  </div> "
       + "\n</div> "
       + "\n";
     return buffer;

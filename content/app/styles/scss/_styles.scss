@@ -157,7 +157,7 @@ LAYOUT
 }
 
 #footer {
-  position: absolute;
+  position: fixed;
   width: 100%;
   bottom: 0px;
   left: 0px;
@@ -183,15 +183,25 @@ LAYOUT
 
 .footer-icon {
   background-color: red;
-  margin: 10px auto 5px auto;
+  margin: 7px auto 5px auto;
+  background: url(../images/footer-icons.png);
+  background-size: 145px 62px;
+  background-repeat: no-repeat;
+  width: 32px;
+  height: 30px;
 }
 
-#icon-student {
-  width: 20px;
-  height: 21px;
-  background: url(../images/student.png);
-  background-size: 20px 21px;
-}
+#icon-home { background-position: 2px 0; }
+.home-active { background-position: 2px -32px !important;}
+
+#icon-books { background-position: -38px 0; }
+.books-active { background-position: -38px -32px !important }
+
+#icon-students { background-position: -76px 0; }
+.students-active {background-position: -76px -32px !important; }
+
+#icon-settings { background-position: -118px 1px; }
+.settings-active { background-position: -118px -32px !important; }
 
 .back, 
 .right-btn{
