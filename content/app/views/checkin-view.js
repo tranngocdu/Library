@@ -17,6 +17,7 @@ module.exports = View.extend({
 	render: function() {
 		var that = this;
 		var bookData = Application.checkInView.bookInfo;
+		that.ISBN = Application.checkInView.bookInfo[0].ISBN;
 		this.$el.html(this.template(bookData));
 		console.log(bookData);
 		var studentBookList = bookData.studentList;

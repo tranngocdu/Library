@@ -454,6 +454,7 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		};
   			newBook.set("quantity_total", "2");
   			newBook.set("quantity_out", "0");
+  			newBook.set("quantity_available", "2");
   			newBook.set("User", currentUserId);
   			newBook.set("studentList",[{}]);
   			newBook.set("ISBN", this.bookData.ISBN.identifiers.isbn_13[0]);
@@ -765,6 +766,7 @@ window.require.register("views/checkin-view", function(exports, require, module)
   	render: function() {
   		var that = this;
   		var bookData = Application.checkInView.bookInfo;
+  		that.ISBN = Application.checkInView.bookInfo[0].ISBN;
   		this.$el.html(this.template(bookData));
   		console.log(bookData);
   		var studentBookList = bookData.studentList;
@@ -886,6 +888,7 @@ window.require.register("views/checkout-view", function(exports, require, module
   	render: function() {
   		var that=this;
   		data = Application.checkOutView.bookInfo;
+  		that.ISBN = Application.checkOutView.bookInfo[0].ISBN;
   		console.log(Application.checkOutView.bookInfo);		
   		this.$el.html(this.template(data));
   		var currentUser = Parse.User.current();
@@ -952,13 +955,15 @@ window.require.register("views/checkout-view", function(exports, require, module
   		var query = new Parse.Query("NewBook");
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
+  		alert(that.ISBN);
   		query.equalTo("User", currentUserId);
-  		query.equalTo("title", data.ISBN.title);
+  		query.equalTo("ISBN", that.ISBN);
   		query.first({
   			success: function(usersBooks) {
-
+  				console.log(usersBooks);
   				var studentsCheck = usersBooks.attributes.studentList;
-  				console.log(studentsCheck);
+  				var quantityAvailable = usersBooks.attributes.quantity_available;
+  				quantityAvailable = quantityAvailable - 1;
   				studentsCheck.push({"Name":that.studentName,"objectId":that.studentId});
   				var length = studentsCheck.length;
   				var cutItem = undefined;
@@ -975,6 +980,8 @@ window.require.register("views/checkout-view", function(exports, require, module
   				}
 
   				usersBooks.set("studentList",studentsCheck);
+  				usersBooks.set("quantity_available",quantityAvailable);
+  				
   				usersBooks.save(null, {
   					success: function(newBook) {
   						Application.router.navigate("#home" , {trigger: true});
@@ -1696,7 +1703,11 @@ window.require.register("views/templates/bookListBooks", function(exports, requi
     if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h3>\n				<p>Number Available</p>\n			</div>\n		</li>\n		";
+      + "</h3>\n				<p>";
+    if (stack1 = helpers.quantity_available) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.quantity_available; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + " Available</p>\n			</div>\n		</li>\n		";
     return buffer;
     }
   function program2(depth0,data) {
