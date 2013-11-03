@@ -88,109 +88,125 @@ window.require.register("application", function(exports, require, module) {
 
   	initialize: function() {
 
-  	//For Parse
-  	Parse.initialize("hc7wyBlPLbosKj26FTiu8CvOcsECdeDVOGcEADZH", "eJGnhcwE48DQPdpq7MA9S8lYI7XgEi7vINje0TQZ");
+  		//For Parse
+  		Parse.initialize("hc7wyBlPLbosKj26FTiu8CvOcsECdeDVOGcEADZH", "eJGnhcwE48DQPdpq7MA9S8lYI7XgEi7vINje0TQZ");
 
 
-  	//## If setting something to happen on first launch of app
-  	//	if ( window.localStorage.getItem("launchCount") == null){
-  	//		window.localStorage.setItem("launchCount","1");
-  	//	}
+  		//## If setting something to happen on first launch of app
+  		//	if ( window.localStorage.getItem("launchCount") == null){
+  			//		window.localStorage.setItem("launchCount","1");
+  			//	}
 
 
-  	//	Set production and development servers
-  	//	this.serverURL = this.useProductionEnv ? 'http://productionurl.com' : 'http://devurl.com';
+  			//	Set production and development servers
+  			//	this.serverURL = this.useProductionEnv ? 'http://productionurl.com' : 'http://devurl.com';
 
-  	//	Keeps app from jumping
-  		$.mobile.defaultHomeScroll = 0;
+  			//	Keeps app from jumping
+  			$.mobile.defaultHomeScroll = 0;
 
-  	// 	Setting view to location in views folder
+  			// 	Setting view to location in views folder
 
-  		var Home = require('views/home-view');
-  		var AddBook = require('views/addbook-view');
-  		var AddStudent = require('views/addstudent-view');
-  		var BookDetail = require('views/bookdetail-view');
-  		var BookList = require('views/booklist-view');
-  		var CheckIn = require('views/checkin-view');
-  		var CheckOut = require('views/checkout-view');
-  		var EnterPassword = require('views/enterpassword-view');
-  		var Login = require('views/login-view');
-  		var Settings = require('views/settings-view');
-  		var Signup = require('views/signup-view');
-  		var StudentList = require('views/studentlist-view');
-  		
-  		var Router = require('lib/router');
+  			var Home = require('views/home-view');
+  			var AddBook = require('views/addbook-view');
+  			var AddStudent = require('views/addstudent-view');
+  			var BookDetail = require('views/bookdetail-view');
+  			var BookList = require('views/booklist-view');
+  			var CheckIn = require('views/checkin-view');
+  			var CheckOut = require('views/checkout-view');
+  			var AddBookManually = require('views/addbookmanually-view');
+  			var Login = require('views/login-view');
+  			var Settings = require('views/settings-view');
+  			var Signup = require('views/signup-view');
+  			var StudentList = require('views/studentlist-view');
 
-
-  		this.homeView = new Home();
-  		this.addBookView = new AddBook();
-  		this.addStudentView = new AddStudent();
-  		this.bookDetailView = new BookDetail();
-  		this.bookListView = new BookList();
-  		this.checkInView = new CheckIn();
-  		this.checkOutView = new CheckOut();
-  		this.enterPasswordView = new EnterPassword();
-  		this.loginView = new Login();
-  		this.settingsView = new Settings();
-  		this.signupView = new Signup();
-  		this.studentListView = new StudentList();
-  		
-  		this.router = new Router();
+  			var Router = require('lib/router');
 
 
-  		if (typeof Object.freeze === 'function') Object.freeze(this);
-  		// Initializing BackStack.StackNavigator for the #container div
-  		
-  		var homeTab = function() {
-  	    	if(window.tapReady){
-  	           // window.tapReady = false;
-  			      $('.tab').removeClass('active');
-  			      $('#home_tab').addClass('active');
+  			this.homeView = new Home();
+  			this.addBookView = new AddBook();
+  			this.addStudentView = new AddStudent();
+  			this.bookDetailView = new BookDetail();
+  			this.bookListView = new BookList();
+  			this.checkInView = new CheckIn();
+  			this.checkOutView = new CheckOut();
+  			this.addBookManuallyView = new AddBookManually();
+  			this.loginView = new Login();
+  			this.settingsView = new Settings();
+  			this.signupView = new Signup();
+  			this.studentListView = new StudentList();
 
-  			      Application.router.navigate("#home" , {trigger: true});
-  			  }
-  	      //activateTabs();
-  	    }
+  			this.router = new Router();
 
-  	    var bookListTab = function() {
-  		if(window.tapReady){
-  	           // window.tapReady = false;
-  		      Application.router.navigate("#bookList" , {trigger: true});
-  			  $('.tab').removeClass('active');
-  		      $('#bookList_tab').addClass('active');
 
-  		    }
-  	    }
-  	    var studentListTab = function() {
-  	      if(window.tapReady){
-  		      $('.tab').removeClass('active');
-  		      $('#studentList_tab').addClass('active');
-  		      Application.router.navigate("#studentList" , {trigger: true});
+  			if (typeof Object.freeze === 'function') Object.freeze(this);
+  			// Initializing BackStack.StackNavigator for the #container div
 
-  		    }
-  	    }
-  	    var settingsTab =  function() {
-  	      if(window.tapReady){
-  		      $('.tab').removeClass('active');
-  		      $('#settings_tab').addClass('active');
-  		      Application.router.navigate("#settings" , {trigger: true});
+  			var homeTab = function() {
+  				if(window.tapReady){
+  					$('#icon-settings').removeClass('settings-active');
+  					$('#icon-home').addClass('home-active');
+  					$('#icon-books').removeClass('books-active');
+  					$('#icon-students').removeClass('students-active');
+  					$('.tab').removeClass('active');
+  					$('#home_tab').addClass('active');
 
-  		    }
-  	    }
+  					Application.router.navigate("#home" , {trigger: true});
+  				}
+  				//activateTabs();
+  			}
+
+  			var bookListTab = function() {
+  				if(window.tapReady){
+  					$('.tab').removeClass('active');
+  					$('#bookList_tab').addClass('active');
+  					$('#icon-settings').removeClass('settings-active');
+  					$('#icon-home').removeClass('home-active');
+  					$('#icon-books').addClass('books-active');
+  					$('#icon-students').removeClass('students-active');
+  					Application.router.navigate("#bookList" , {trigger: true});
+
+  				}
+  			}
+  			var studentListTab = function() {
+  				if(window.tapReady){
+  					$('.tab').removeClass('active');
+  					$('#studentList_tab').addClass('active');
+  					$('#icon-settings').removeClass('settings-active');
+  					$('#icon-home').removeClass('home-active');
+  					$('#icon-books').removeClass('books-active');
+  					$('#icon-students').addClass('students-active');
+  					Application.router.navigate("#studentList" , {trigger: true});
+
+  				}
+  			}
+  			var settingsTab =  function() {
+  				if(window.tapReady){
+  					$('.tab').removeClass('active');
+  					$('#settings_tab').addClass('active');
+  					$('#icon-settings').addClass('settings-active');
+  					$('#icon-home').removeClass('home-active');
+  					$('#icon-books').removeClass('books-active');
+  					$('#icon-students').removeClass('students-active');
+  					Application.router.navigate("#settings" , {trigger: true});
+
+
+  				}
+  			}
+
 
 
   			$('#home_tab').bind('tap', homeTab);
   			$('#backButton').bind('tap', homeTab);
-  			
+
   			$('#bookList_tab').bind('click', bookListTab); 
   			$('#studentList_tab').bind('tap', studentListTab); 
   			$('#settings_tab').bind('tap', settingsTab);
-  		
-  	},
 
-  }
+  		},
 
-  module.exports = Application;
+  	}
+
+  	module.exports = Application;
 });
 window.require.register("initialize", function(exports, require, module) {
   var application = require('application');
@@ -227,7 +243,7 @@ window.require.register("lib/router", function(exports, require, module) {
   		'bookList':'bookList',
   		'checkIn':'checkIn',
   		'checkOut':'checkOut',
-  		'enterPassword':'enterPassword',
+  		'addBookManually':'addBookManually',
   		'login':'login',
   		'settings':'settings',
   		'signup':'signup',
@@ -296,8 +312,8 @@ window.require.register("lib/router", function(exports, require, module) {
   		checkOut:function() {
   			this.changePage(Application.checkOutView);
   		},
-  		enterPassword:function() {
-  			this.changePage(Application.enterPasswordView);
+  		addBookManually:function() {
+  			this.changePage(Application.addBookManuallyView);
   		},
   		login:function() {
   			this.changePage(Application.loginView);
@@ -427,11 +443,13 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		var data=JSON.parse(combinedString);
   		this.bookData = data;
   		this.$el.html(this.template(data));
-  		
+
   		return this;
   	},
-  	
+
   	addBook: function() {
+
+  		alert("need to write check to see if all values exist first");
 
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
@@ -444,32 +462,33 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		var i = 0;
   		var authorArray = new Array ();
   		while (i < lengthAuthors) {
-  				authorArray.push(this.bookData.ISBN.authors[i].name);
-  				i++;
-  			}
-  			authorArray = authorArray.toString();
-  			newBook.set("author", authorArray);
-  			if (typeof this.bookData.ISBN.cover!='undefined'){
+  			authorArray.push(this.bookData.ISBN.authors[i].name);
+  			i++;
+  		}
+  		authorArray = authorArray.toString();
+  		newBook.set("author", authorArray);
+  		if (typeof this.bookData.ISBN.cover!='undefined'){
   			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
   		};
-  			newBook.set("quantity_total", "2");
-  			newBook.set("quantity_out", "0");
-  			newBook.set("quantity_available", "2");
-  			newBook.set("User", currentUserId);
-  			newBook.set("studentList",[{}]);
-  			newBook.set("ISBN", this.bookData.ISBN.identifiers.isbn_13[0]);
-  			newBook.save(null, {
-  				success: function(newBook) {
-  						Application.router.navigate("#bookList" , {trigger: true});
-  				},
-  				error: function(newBook, error) {
-  					alert('Back to the drawing board');
-  					console.log(error);
-  				}
-  			});
+  		newBook.set("quantity_total", that.totalAmount);
+  		newBook.set("quantity_out", 0);
+  		newBook.set("quantity_available", that.totalAmount);
+  		newBook.set("User", currentUserId);
+  		newBook.set("studentList",[{}]);
+  		newBook.set("ISBN", this.bookData.ISBN.identifiers.isbn_13[0]);
+  		newBook.save(null, {
+  			success: function(newBook) {
+  				Application.router.navigate("#bookList" , {trigger: true});
+  			},
+  			error: function(newBook, error) {
+  				alert('Back to the drawing board');
+  				console.log(error);
+  			}
+  		});
   	},
 
   	quantity: function() {
+  		var that = this;
   		var data = Application.addBookView.bookData;
   		var quantityPrompt = {
   			state0: { 
@@ -478,13 +497,70 @@ window.require.register("views/addbook-view", function(exports, require, module)
   				html:'<input type="number" name="amount" value="" style="font-size:18px;width:100%;text-align:center;">',
   				submit: function(e,v,m,f){
   					console.log(f.amount);
-  					totalAmount=f.amount;
-  				$("#numberAvailable").html("Number Available: "+totalAmount+"");
+  					that.totalAmount=f.amount;
+  					$("#numberAvailable").html("Number Available: "+that.totalAmount+"");
+  					that.totalAmount = parseInt(totalAmount);
+  					
   				}
   			}
   		};
   		$.prompt(quantityPrompt);
   	},
+
+  });
+  
+});
+window.require.register("views/addbookmanually-view", function(exports, require, module) {
+  var View = require('./view');
+  var template = require('./templates/addBookManually');
+
+  module.exports = View.extend({
+  	id: 'addBookManually-view',
+  	template: template,
+  	events: {
+  		'click #addBook':'addBook',
+  	},
+
+  	initialize: function() {
+  	},
+
+  	render: function() {
+  		this.$el.html(this.template());
+  		return this;
+  	},
+
+  	addBook:function () {
+  		
+  		var title = $("#title").val();
+  		var author = $("#author").val();
+  		var numberAvailable = $("#numberAvailable").val();
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var date = new Date();
+  		date = date.getTime();
+
+  		var NewBook=Parse.Object.extend("NewBook");
+  		var newBook=new NewBook();
+  		newBook.set("title", title);
+  		newBook.set("author", author);
+  		//newBook.set("cover_image", "http://google.com");
+  		newBook.set("quantity_total", numberAvailable);
+  		newBook.set("quantity_out", 0);
+  		newBook.set("quantity_available", numberAvailable);
+  		newBook.set("User", currentUserId);
+  		newBook.set("studentList",[{}]);
+  		newBook.set("ISBN", currentUserId+date);
+  		newBook.save(null, {
+  			success: function(newBook) {
+  				Application.router.navigate("#bookList" , {trigger: true});
+  			},
+  			error: function(newBook, error) {
+  				alert('Back to the drawing board');
+  				console.log(error);
+  			}
+  		});
+
+  	}
 
   });
   
@@ -541,7 +617,11 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   	id: 'bookdetail-view',
   	template: template,
   	events: {
-  		"dataLoaded":"append"
+  		"dataLoaded":"append",
+  		"click #checkout-book":"checkoutBook",
+  		"click #checkin-book":"checkinBook",
+  		"click #remove-book":"removeBook",
+  		"click #edit-book":"editQuantity"
   	},
 
   	initialize: function() {
@@ -553,21 +633,134 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   		var query = new Parse.Query("NewBook");
   		query.equalTo("objectId", Application.bookDetailView.bookId);
   		query.find({
-  			
+
   			success: function(bookdetail) {
 
   				var bookdetailArray = JSON.stringify(bookdetail);
-  				var bookdetailArray = JSON.parse(bookdetailArray);
-
-  				console.log(bookdetailArray);				
+  				bookdetailArray = JSON.parse(bookdetailArray);
+  				that.ISBN = bookdetailArray[0].ISBN;
+  				console.log(bookdetailArray);			
   				that.$el.html(that.template(bookdetailArray));
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
   			}
   		});
-  		
+
   		return this;
+  	},
+
+  	checkoutBook: function() {
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var query = new Parse.Query("NewBook");
+  		query.equalTo("ISBN", Application.bookDetailView.ISBN);
+  		query.equalTo("User", currentUserId);
+  		query.find({
+
+  			success: function(bookdetail) {
+  				var bookdetailArray = JSON.stringify(bookdetail);
+  				bookdetailArray = JSON.parse(bookdetailArray);
+  				Application.checkOutView.bookInfo = bookdetailArray;
+  				Application.router.navigate("#checkOut", {
+  					trigger: true
+  				});
+  			},
+  			error: function(error) {
+  				alert("Error: " + error.code + " " + error.message);
+  			}
+  		});
+  	},
+  	
+  	checkinBook: function() {
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var query = new Parse.Query("NewBook");
+  		query.equalTo("ISBN", Application.bookDetailView.ISBN);
+  		query.equalTo("User", currentUserId);
+  		query.find({
+
+  			success: function(bookdetail) {
+  				var bookdetailArray = JSON.stringify(bookdetail);
+  				bookdetailArray = JSON.parse(bookdetailArray);
+  				Application.checkInView.bookInfo = bookdetailArray;
+  				Application.router.navigate("#checkIn", {
+  					trigger: true
+  				});
+  			},
+  			error: function(error) {
+  				alert("Error: " + error.code + " " + error.message);
+  			}
+  		});
+  	},
+
+  	removeBook: function() {
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var query = new Parse.Query("NewBook");
+  		query.equalTo("ISBN", Application.bookDetailView.ISBN);
+  		query.equalTo("User", currentUserId);
+  		query.find({
+
+  			success: function(bookdetail) {
+  				//then remove book
+  			},
+  			error: function(error) {
+  				alert("Error: " + error.code + " " + error.message);
+  			}
+  		});
+  	},
+
+  	editQuantity: function() {
+
+  		var data = Application.addBookView.bookData;
+  		var quantityPrompt = {
+  			state0: { 
+  				title: "Edit Quantity",
+  				buttons: { "Cancel": false, "Submit": true },
+  				html:'<input type="number" name="amount" value="" style="font-size:18px;width:100%;text-align:center;">',
+  				submit: function(e,v,m,f){
+  					console.log(f.amount);
+  					var totalAmount=f.amount;
+  					
+  					//Update UI
+  					$("#totalBooks").html("<p>"+totalAmount+" Total Books</p>");
+  					
+  					//Update Server
+  					totalAmount = parseInt(totalAmount);
+  					var currentUser = Parse.User.current();
+  					var currentUserId = currentUser.id;
+  					var query = new Parse.Query("NewBook");
+  					query.equalTo("ISBN", Application.bookDetailView.ISBN);
+  					query.equalTo("User", currentUserId);
+
+  					query.first({
+  						success: function(usersBooks) {
+  							console.log(usersBooks);
+  							var quantityAvailable = usersBooks.attributes.quantity_available;
+  							quantityAvailable = quantityAvailable + 1;
+  							
+  							usersBooks.set("quantity_available",quantityAvailable);
+  							usersBooks.set("quantity_total",totalAmount);
+
+  							usersBooks.save(null, {
+  								success: function(newBook) {
+  								},
+  								error: function(error) {
+  									alert("Error save: " + error.code + " " + error.message);
+  								}
+  							});
+  						},
+  						error: function(error) {
+  							alert("Error first: " + error.code + " " + error.message);
+  						},
+  					});
+
+
+  				}
+  			}
+  		};
+  		$.prompt(quantityPrompt);
   	}
 
   });
@@ -654,7 +847,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("NewBook");
   		query.equalTo("User", currentUserId);
-  		query.notEqualTo("quantity_available","0");
+  		query.notEqualTo("quantity_available", 0);
   		query.find({
   			success: function(usersBooks) {
 
@@ -674,13 +867,13 @@ window.require.register("views/booklist-view", function(exports, require, module
   		$('#filt-all').removeClass("selected");
   		$('#filt-available').removeClass("selected");
   		$('#filt-checked').addClass("selected");
-  		
+
   		var that = this;
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("NewBook");
   		query.equalTo("User", currentUserId);
-  		query.equalTo("quantity_out","0");
+  		query.notEqualTo("quantity_out", 0);
   		query.find({
   			success: function(usersBooks) {
 
@@ -697,24 +890,43 @@ window.require.register("views/booklist-view", function(exports, require, module
   	},
 
   	addBook: function() {
-  		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  		scanner.scan(
-  			function (result) {
-  				Application.bookListView.ISBN = result.text;
-  				Application.bookListView.$el.trigger("getbookinfo");
+  		var quantityPrompt = {
+  			state0: { 
+  				title: "CheckOut",
+  				buttons: { "Scan": false, "List": true },
+  				submit: function(e,v,m,f){
+  					if (v == true) {
+  						Application.router.navigate("#bookList", {trigger:true});
+  					}
+  					else {
+  						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  			}, 
-  			function (error) {
-  				alert("Scanning failed: " + error);
+  						scanner.scan(
+  							function (result) {
+  								Application.bookListView.ISBN = result.text;
+  								Application.bookListView.$el.trigger("getbookinfo");
+
+  							}, 
+  							function (error) {
+  								alert("Scanning failed: " + error);
+  							}
+  						);
+  					}
+
+  				},
+  				cancel: function(){
+  					alert("cancel");
+  				}
   			}
-  		);
+  		};
+  		$.prompt(quantityPrompt);
   	},
-  	
+
   	bookDetail: function(e) {
   		Application.bookDetailView.bookId = $(e.currentTarget).data('id');
   		Application.router.navigate("#bookDetail", {trigger:true});
-  		
+
   	},
 
   	getBookInfo: function() {
@@ -727,12 +939,18 @@ window.require.register("views/booklist-view", function(exports, require, module
   			url: "http://openlibrary.org/api/books",
   			type: "GET",
   			success: function (data) {
-  				alert(Application.bookListView.ISBN);
-  				Application.addBookView.bookData = data;
-  				Application.router.navigate("#addBook", {
-  					trigger: true
-  				});
-
+  				//Catch if data is blank, ISBN is not found
+  				if(data == "") {
+  					Application.router.navigate("#addBookManually", {
+  						trigger: true
+  					});
+  				}
+  				else {
+  					Application.addBookView.bookData = data;
+  					Application.router.navigate("#addBook", {
+  						trigger: true
+  					});
+  				}
   			},
   			error: function (jqXHR,textStatus,errorThrown) {
   				alert("Error");
@@ -766,12 +984,10 @@ window.require.register("views/checkin-view", function(exports, require, module)
   	render: function() {
   		var that = this;
   		var bookData = Application.checkInView.bookInfo;
-  		that.ISBN = Application.checkInView.bookInfo[0].ISBN;
   		this.$el.html(this.template(bookData));
-  		console.log(bookData);
-  		var studentBookList = bookData.studentList;
-  		console.log(studentBookList);
-  		$('.students').html(that.templateStudents(studentBookList));
+  		that.ISBN = Application.checkInView.bookInfo[0].ISBN;
+  		var studentBookList = Application.checkInView.bookInfo[0].studentList;
+  		setTimeout(function(){$('.students').html(that.templateStudents(studentBookList));},500)
 
   		return this;
   	},
@@ -828,6 +1044,13 @@ window.require.register("views/checkin-view", function(exports, require, module)
   			success: function(usersBooks) {
 
   				that.studentArray = usersBooks.attributes.studentList;
+  				var quantityAvailable = usersBooks.attributes.quantity_available;
+  				var quantityTotal = usersBooks.attributes.quantity_total;
+  				
+  				//Modifications to numbers
+  				quantityAvailable = quantityAvailable + 1;
+  				var quantityOut = quantityTotal - quantityAvailable;
+  				
   				var length = that.studentArray.length;
   				var cutItem = undefined;
   				var i;
@@ -844,6 +1067,9 @@ window.require.register("views/checkin-view", function(exports, require, module)
   				}
 
   				usersBooks.set("studentList",that.studentArray);
+  				usersBooks.set("quantity_available",quantityAvailable);
+  				usersBooks.set("quantity_out",quantityOut);
+  				
   				usersBooks.save(null, {
   					success: function(newBook) {
   						Application.router.navigate("#home" , {trigger: true});
@@ -889,7 +1115,6 @@ window.require.register("views/checkout-view", function(exports, require, module
   		var that=this;
   		data = Application.checkOutView.bookInfo;
   		that.ISBN = Application.checkOutView.bookInfo[0].ISBN;
-  		console.log(Application.checkOutView.bookInfo);		
   		this.$el.html(this.template(data));
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
@@ -898,7 +1123,7 @@ window.require.register("views/checkout-view", function(exports, require, module
   		query.find({
   			success: function(students) {
   				var studentArray = JSON.stringify(students);
-  				var studentArray = JSON.parse(studentArray);
+  				studentArray = JSON.parse(studentArray);
   				$('.students').html(that.templateStudents(studentArray));
   			},
   			error: function(error) {
@@ -962,14 +1187,23 @@ window.require.register("views/checkout-view", function(exports, require, module
   				console.log(usersBooks);
   				var studentsCheck = usersBooks.attributes.studentList;
   				var quantityAvailable = usersBooks.attributes.quantity_available;
+  				var quantityTotal = usersBooks.attributes.quantity_total;
+  				console.log(studentsCheck);
+  				//Modifications to numbers
   				quantityAvailable = quantityAvailable - 1;
+  				var quantityOut = quantityTotal - quantityAvailable;
+  				
   				studentsCheck.push({"Name":that.studentName,"objectId":that.studentId});
+  				console.log("thisshouldhave" + studentsCheck);
+  				console.log(studentsCheck);
+  				
+  				
   				var length = studentsCheck.length;
   				var cutItem = undefined;
   				var i;
   				for (i = 0; i < length; i++) {
   					var element = studentsCheck[i];
-  					var id = element.id;
+  					var id = element.objectId;
   					if (id == undefined) {
   						cutItem = i;
   					}
@@ -977,9 +1211,11 @@ window.require.register("views/checkout-view", function(exports, require, module
   				if (cutItem != undefined){
   					studentsCheck.splice(cutItem,1);
   				}
-
+  				console.log(studentsCheck);
+  				
   				usersBooks.set("studentList",studentsCheck);
   				usersBooks.set("quantity_available",quantityAvailable);
+  				usersBooks.set("quantity_out",quantityOut);
   				
   				usersBooks.save(null, {
   					success: function(newBook) {
@@ -999,72 +1235,6 @@ window.require.register("views/checkout-view", function(exports, require, module
   	}
 
 
-
-  });
-  
-});
-window.require.register("views/enterpassword-view", function(exports, require, module) {
-  var View = require('./view');
-  var template = require('./templates/enterPassword');
-
-  module.exports = View.extend({
-  	id: 'enterPassword-view',
-  	template: template,
-  	events: {
-  		'click #submitPassword':'submit',
-  	},
-
-  	initialize: function() {
-  	},
-
-  	render: function() {
-  		this.$el.html(this.template());
-  		return this;
-  	},
-  	
-  	submit:function () {
-  		var password = $('#password').val();
-  		var teacherId = window.localStorage.getItem("userId", userId);
-
-  		if(password && teacherId)
-  		{
-  			$.ajax({
-  				data: {
-  					"password":password,
-  					"teacherId":teacherId,
-  				},
-  				url: Application.serverURL+"register",
-  				type: "POST",
-  				xhrFields: {
-  					withCredentials: true
-  				},
-  				success: function (data) {
-  					Application.router.navigate("#settings", {
-  						trigger: true
-  					});
-  					
-  				},
-  				error: function (jqXHR, textStatus, errorThrown) {
-  					{
-  						navigator.notification.alert(
-  							'Incorrect Password.',  // message
-  							function alertDismissed() {}, // callback
-  							'Error',            // title
-  							'OK'                  // buttonName
-  						);
-  					}
-  				}
-  			});
-  		}
-  		else{
-  			navigator.notification.alert(
-  				'Please enter password',  // message
-  				function alertDismissed() {}, // callback
-  				'All Fields Required',            // title
-  				'OK'                  // buttonName
-  			);
-  		}
-  	}
 
   });
   
@@ -1101,42 +1271,73 @@ window.require.register("views/home-view", function(exports, require, module) {
   	},
 
   	checkOut: function ()  {
-  		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+  		var quantityPrompt = {
+  			state0: { 
+  				title: "CheckOut",
+  				buttons: { "Scan": false, "List": true },
+  				submit: function(e,v,m,f){
+  					if (v == true) {
+  						Application.router.navigate("#bookList", {trigger:true});
+  					}
+  					else {
+  						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  		scanner.scan(
-  			function (result) {
-  				Application.homeView.ISBN = result.text;
-  				Application.homeView.$el.trigger("bookInfoCheckout");
+  						scanner.scan(
+  							function (result) {
+  								Application.homeView.ISBN = result.text;
+  								Application.homeView.$el.trigger("bookInfoCheckout");
 
-  			}, 
-  			function (error) {
-  				alert("Scanning failed: " + error);
+  							}, 
+  							function (error) {
+  								alert("Scanning failed: " + error);
+  							}
+  						);
+  					}
+
+  				},
+  				cancel: function(){
+  					alert("cancel");
+  				}
   			}
-  		);
+  		};
+  		$.prompt(quantityPrompt);
   	},
 
   	checkIn: function () {
-  		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  		scanner.scan(
-  			function (result) {
-  				Application.homeView.ISBN = result.text;
-  				Application.homeView.$el.trigger("bookInfoCheckin");
+  		var quantityPrompt = {
+  			state0: { 
+  				title: "CheckOut",
+  				buttons: { "Scan": false, "List": true },
+  				submit: function(e,v,m,f){
+  					if (v == true) {
+  						Application.router.navigate("#bookList", {trigger:true});
+  					}
+  					else {
+  						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  			}, 
-  			function (error) {
-  				alert("Scanning failed: " + error);
+  						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+  						scanner.scan(
+  							function (result) {
+  								Application.homeView.ISBN = result.text;
+  								Application.homeView.$el.trigger("bookInfoCheckin");
+
+  							}, 
+  							function (error) {
+  								alert("Scanning failed: " + error);
+  							}
+  						);
+  					}
+
+  				},
+  				cancel: function(){
+  					alert("cancel");
+  				}
   			}
-  		);
+  		};
+  		$.prompt(quantityPrompt);
 
-  	},
-
-  	bookList: function () {
-  		Application.router.navigate("#bookList", {trigger:true});
-  	},
-
-  	studentList: function () {
-  		Application.router.navigate("#studentList", {trigger:true});
   	},
 
   	bookInfoCheckout: function () {
@@ -1165,25 +1366,25 @@ window.require.register("views/home-view", function(exports, require, module) {
 
   	bookInfoCheckin: function () {
 
-  			var currentUser = Parse.User.current();
-  			var currentUserId = currentUser.id;
-  			var query = new Parse.Query("NewBook");
-  			query.equalTo("ISBN", Application.homeView.ISBN);
-  			query.equalTo("User", currentUserId);
-  			query.find({
+  		var currentUser = Parse.User.current();
+  		var currentUserId = currentUser.id;
+  		var query = new Parse.Query("NewBook");
+  		query.equalTo("ISBN", Application.homeView.ISBN);
+  		query.equalTo("User", currentUserId);
+  		query.find({
 
-  				success: function(bookdetail) {
-  					var bookdetailArray = JSON.stringify(bookdetail);
-  					bookdetailArray = JSON.parse(bookdetailArray);
-  					Application.checkInView.bookInfo = bookdetailArray;
-  					Application.router.navigate("#checkIn", {
-  						trigger: true
-  					});
-  				},
-  				error: function(error) {
-  					alert("Error: " + error.code + " " + error.message);
-  				}
-  			});
+  			success: function(bookdetail) {
+  				var bookdetailArray = JSON.stringify(bookdetail);
+  				bookdetailArray = JSON.parse(bookdetailArray);
+  				Application.checkInView.bookInfo = bookdetailArray;
+  				Application.router.navigate("#checkIn", {
+  					trigger: true
+  				});
+  			},
+  			error: function(error) {
+  				alert("Error: " + error.code + " " + error.message);
+  			}
+  		});
 
   	}
 
@@ -1597,6 +1798,19 @@ window.require.register("views/templates/addBook", function(exports, require, mo
     return buffer;
     });
 });
+window.require.register("views/templates/addBookManually", function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    this.compilerInfo = [4,'>= 1.0.0'];
+  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+    var buffer = "";
+
+
+    buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  \n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container\">\n	\n		<div class=\"no-art\">\n			<div class=\"no-icon\"></div>\n		</div>\n	\n	<div id=\"addPhoto\" class=\"button primary\">Add Photo</div>\n    \n    <input id=\"title\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <input id=\"numberAvailable\" type=\"text\" placeholder=\"Quantity Available\" />\n\n    <div id=\"addBook\" class=\"button primary\">Add Book</div>\n\n\n  </div> "
+      + "\n</div> "
+      + "\n";
+    return buffer;
+    });
+});
 window.require.register("views/templates/addStudent", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
@@ -1634,11 +1848,18 @@ window.require.register("views/templates/bookDetail", function(exports, require,
     if (stack1 = helpers.ISBN) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.ISBN; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h4>\n				<p>";
+      + "</h4>\n				<div id=\"totalBooks\"><p>";
+    if (stack1 = helpers.quantity_total) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.quantity_total; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + " Total Books</p></div>\n				<p>";
     if (stack1 = helpers.quantity_available) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.quantity_available; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + " Available</p>\n	    </div>\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n    ";
+      + " Available</p>\n				\n	    </div>\n		  <ul id=\"studentlist\">\n			  <p class=\"first-name\">Students with Books Checked Out</p> \n		    ";
+    stack1 = helpers.each.call(depth0, depth0.studentList, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n		    </li>	\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"checkin-book\" class=\"ab-btn button primary-fill\">Check In</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n    ";
     return buffer;
     }
   function program2(depth0,data) {
@@ -1658,11 +1879,23 @@ window.require.register("views/templates/bookDetail", function(exports, require,
     return "\n	      		<div class=\"no-art\">\n	      			<div class=\"no-icon\"></div>\n	      		</div>\n	      ";
     }
 
+  function program6(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n		      <p class=\"first-name\">";
+    if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</p> \n			";
+    return buffer;
+    }
+
     buffer += "\n<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Book Detail</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n  	";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n\n  </div> "
-      + "\n</div> ";
+      + "\n\n\n</div> "
+      + "\n\n</div> ";
     return buffer;
     });
 });
@@ -1841,16 +2074,6 @@ window.require.register("views/templates/checkOut", function(exports, require, m
       + "\n</div> "
       + "\n\n";
     return buffer;
-    });
-});
-window.require.register("views/templates/enterPassword", function(exports, require, module) {
-  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    this.compilerInfo = [4,'>= 1.0.0'];
-  helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-    
-
-
-    return "<div id=\"header\">Pull Refresh</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\">\n    <div id=\"pullDown\">\n      <span class=\"pullDownIcon\"></span><span class=\"pullDownLabel\" style=\"color:white;\">Pull down to refresh...</span>\n    </div>\n\n    <ul id=\"thelist\">\n      <li>Message 1</li>\n      <li>Message 2</li>\n      <li>Message 3</li>\n      <li>Message 4</li>\n      <li>Message 5</li>\n      <li>Message 6</li>\n      <li>Message 7</li>\n      <li>Message 8</li>\n      <li>Message 9</li>\n      <li>Message 10</li>\n      <li>Message 11</li>\n      <li>Message 12</li>\n      <li>Message 13</li>\n      <li>Message 14</li>\n      <li>Message 15</li>\n      <li>Message 16</li>\n      <li>Message 17</li>\n      <li>Message 18</li>\n      <li>Message 19</li>\n      <li>Message 20</li>\n    </ul>\n  </div>\n</div>\n";
     });
 });
 window.require.register("views/templates/home", function(exports, require, module) {

@@ -1,6 +1,5 @@
 var View = require('./view');
 var template = require('./templates/addBook');
-var passData=null;
 var totalAmount = "";
 
 module.exports = View.extend({

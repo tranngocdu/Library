@@ -417,7 +417,6 @@ window.require.register("models/student", function(exports, require, module) {
 window.require.register("views/addbook-view", function(exports, require, module) {
   var View = require('./view');
   var template = require('./templates/addBook');
-  var passData=null;
   var totalAmount = "";
 
   module.exports = View.extend({
@@ -890,18 +889,37 @@ window.require.register("views/booklist-view", function(exports, require, module
   	},
 
   	addBook: function() {
-  		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  		scanner.scan(
-  			function (result) {
-  				Application.bookListView.ISBN = result.text;
-  				Application.bookListView.$el.trigger("getbookinfo");
+  		var quantityPrompt = {
+  			state0: { 
+  				title: "CheckOut",
+  				buttons: { "Scan": false, "List": true },
+  				submit: function(e,v,m,f){
+  					if (v == true) {
+  						Application.router.navigate("#bookList", {trigger:true});
+  					}
+  					else {
+  						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  			}, 
-  			function (error) {
-  				alert("Scanning failed: " + error);
+  						scanner.scan(
+  							function (result) {
+  								Application.bookListView.ISBN = result.text;
+  								Application.bookListView.$el.trigger("getbookinfo");
+
+  							}, 
+  							function (error) {
+  								alert("Scanning failed: " + error);
+  							}
+  						);
+  					}
+
+  				},
+  				cancel: function(){
+  					alert("cancel");
+  				}
   			}
-  		);
+  		};
+  		$.prompt(quantityPrompt);
   	},
 
   	bookDetail: function(e) {
