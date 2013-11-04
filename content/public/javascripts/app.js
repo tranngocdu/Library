@@ -417,7 +417,6 @@ window.require.register("models/student", function(exports, require, module) {
 window.require.register("views/addbook-view", function(exports, require, module) {
   var View = require('./view');
   var template = require('./templates/addBook');
-  var totalAmount = "";
 
   module.exports = View.extend({
   	id: 'addbook-view',
@@ -447,7 +446,7 @@ window.require.register("views/addbook-view", function(exports, require, module)
   	},
 
   	addBook: function() {
-
+  		var that = this;
   		alert("need to write check to see if all values exist first");
 
   		var currentUser = Parse.User.current();
@@ -469,12 +468,13 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		if (typeof this.bookData.ISBN.cover!='undefined'){
   			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
   		};
+  		console.log(this.bookData);
   		newBook.set("quantity_total", that.totalAmount);
   		newBook.set("quantity_out", 0);
   		newBook.set("quantity_available", that.totalAmount);
   		newBook.set("User", currentUserId);
   		newBook.set("studentList",[{}]);
-  		newBook.set("ISBN", this.bookData.ISBN.identifiers.isbn_13[0]);
+  		newBook.set("ISBN", that.ISBN);
   		newBook.save(null, {
   			success: function(newBook) {
   				Application.router.navigate("#bookList" , {trigger: true});
@@ -498,7 +498,7 @@ window.require.register("views/addbook-view", function(exports, require, module)
   					console.log(f.amount);
   					that.totalAmount=f.amount;
   					$("#numberAvailable").html("Number Available: "+that.totalAmount+"");
-  					that.totalAmount = parseInt(totalAmount);
+  					that.totalAmount = parseInt(that.totalAmount);
   					
   				}
   			}
@@ -892,20 +892,22 @@ window.require.register("views/booklist-view", function(exports, require, module
 
   		var quantityPrompt = {
   			state0: { 
-  				title: "CheckOut",
-  				buttons: { "Scan": false, "List": true },
+  				title: "Add Book",
+  				buttons: { "Scan": "scan", "Manual": true, "Cancel":false},
   				submit: function(e,v,m,f){
   					if (v == true) {
-  						Application.router.navigate("#bookList", {trigger:true});
+  						Application.router.navigate("#addBookManually", {trigger:true});
   					}
-  					else {
+  					else if(v === "scan") {
   						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
   						scanner.scan(
   							function (result) {
+  								if(result.text){
   								Application.bookListView.ISBN = result.text;
+  								Application.addBookView.ISBN = result.text;
   								Application.bookListView.$el.trigger("getbookinfo");
-
+  								}
   							}, 
   							function (error) {
   								alert("Scanning failed: " + error);
@@ -1189,9 +1191,9 @@ window.require.register("views/checkout-view", function(exports, require, module
   				var quantityTotal = usersBooks.attributes.quantity_total;
   				console.log(studentsCheck);
   				//Modifications to numbers
+  				if ((quantityAvailable - 1)>=0){
   				quantityAvailable = quantityAvailable - 1;
   				var quantityOut = quantityTotal - quantityAvailable;
-  				
   				studentsCheck.push({"Name":that.studentName,"objectId":that.studentId});
   				console.log("thisshouldhave" + studentsCheck);
   				console.log(studentsCheck);
@@ -1225,6 +1227,10 @@ window.require.register("views/checkout-view", function(exports, require, module
   						console.log(error);
   					}
   				});
+  				} else {
+  					alert("You don't have any books to check out!")
+  					Application.router.navigate("#home" , {trigger: true});
+  				};
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
@@ -1273,19 +1279,20 @@ window.require.register("views/home-view", function(exports, require, module) {
   		var quantityPrompt = {
   			state0: { 
   				title: "CheckOut",
-  				buttons: { "Scan": false, "List": true },
+  				buttons: { "Scan": "scan", "List": true, "Cancel": false },
   				submit: function(e,v,m,f){
   					if (v == true) {
   						Application.router.navigate("#bookList", {trigger:true});
   					}
-  					else {
+  					else if (v === "scan"){
   						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
   						scanner.scan(
   							function (result) {
+  								if (result.text){
   								Application.homeView.ISBN = result.text;
   								Application.homeView.$el.trigger("bookInfoCheckout");
-
+  								}
   							}, 
   							function (error) {
   								alert("Scanning failed: " + error);
@@ -1319,9 +1326,11 @@ window.require.register("views/home-view", function(exports, require, module) {
 
   						scanner.scan(
   							function (result) {
+  								if (result.text){
+  								alert("success");
   								Application.homeView.ISBN = result.text;
   								Application.homeView.$el.trigger("bookInfoCheckin");
-
+  								}
   							}, 
   							function (error) {
   								alert("Scanning failed: " + error);
@@ -1400,7 +1409,8 @@ window.require.register("views/login-view", function(exports, require, module) {
   	template: template,
   	events: {
   		'click #login':'signIn',
-  		'click #login-have-account':'signUp'
+  		'click #login-have-account':'signUp',
+  		'click #forgot':'forgotPassword'
   	},
 
   	initialize: function() {
@@ -1450,6 +1460,22 @@ window.require.register("views/login-view", function(exports, require, module) {
   		}
   	},
 
+  	forgotPassword: function() {
+  		if($("#login-email").text){
+  			Parse.User.requestPasswordReset($("#login-email").val(), {
+  			  success: function() {
+  			  	alert("A link was sent to "+$("#login-email").val()+" to reset your password.")
+  			  },
+  			  error: function(error) {
+  			    // Show the error message somewhere
+  			    alert("Error: " + error.code + " " + error.message);
+  			  }
+  			});
+  		} else {
+  			alert("Please enter an email address and then tap 'Forgot your password'");
+  		}	
+  	},
+
   	scanner: function ()  {
   		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
@@ -1480,7 +1506,8 @@ window.require.register("views/settings-view", function(exports, require, module
   		'click #logout': 'logout',
   		'click #save': 'save',
   		'click #addBook': 'addBook',
-  		'click #changeQuantity': 'changeQuantity'
+  		'click #changeQuantity': 'changeQuantity',
+  		'click #help':'sendHelp'
   	},
 
   	initialize: function () {
@@ -1571,7 +1598,30 @@ window.require.register("views/settings-view", function(exports, require, module
   			Application.router.navigate("#addBook", {
   				trigger: true
   			});
-  		}
+  		},
+
+  		sendHelp: function() {
+  			var that = this;
+  			var helpPrompt = {
+  				state0: { 
+  					title: "Help Me",
+  					buttons: { "Cancel": false, "Submit": true },
+  					html:'</br>Email <input type="text" name="email" value="'+that.username+'" style="font-size:18px;width:100%;text-align:center;"></br></br>'+
+  							 'Message <input type="text" name="message" value="" style="font-size:18px;width:100%;text-align:left;"></br>',
+  					submit: function(e,v,m,f){
+  						$.ajax({
+  								data: {
+  									body: f.message,
+  									replyto: f.email 
+  								},
+  								url: "http://bohemian.webscript.io/classLibraryContact",
+  								type: "POST",
+  							});
+  					}
+  				}
+  			};	
+  			$.prompt(helpPrompt);
+  		},
 
   	});
 });

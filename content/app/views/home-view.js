@@ -32,19 +32,20 @@ module.exports = View.extend({
 		var quantityPrompt = {
 			state0: { 
 				title: "CheckOut",
-				buttons: { "Scan": false, "List": true },
+				buttons: { "Scan": "scan", "List": true, "Cancel": false },
 				submit: function(e,v,m,f){
 					if (v == true) {
 						Application.router.navigate("#bookList", {trigger:true});
 					}
-					else {
+					else if (v === "scan"){
 						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
 						scanner.scan(
 							function (result) {
+								if (result.text){
 								Application.homeView.ISBN = result.text;
 								Application.homeView.$el.trigger("bookInfoCheckout");
-
+								}
 							}, 
 							function (error) {
 								alert("Scanning failed: " + error);
@@ -78,9 +79,11 @@ module.exports = View.extend({
 
 						scanner.scan(
 							function (result) {
+								if (result.text){
+								alert("success");
 								Application.homeView.ISBN = result.text;
 								Application.homeView.$el.trigger("bookInfoCheckin");
-
+								}
 							}, 
 							function (error) {
 								alert("Scanning failed: " + error);

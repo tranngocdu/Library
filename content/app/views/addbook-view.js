@@ -1,6 +1,5 @@
 var View = require('./view');
 var template = require('./templates/addBook');
-var totalAmount = "";
 
 module.exports = View.extend({
 	id: 'addbook-view',
@@ -30,7 +29,7 @@ module.exports = View.extend({
 	},
 
 	addBook: function() {
-
+		var that = this;
 		alert("need to write check to see if all values exist first");
 
 		var currentUser = Parse.User.current();
@@ -52,12 +51,13 @@ module.exports = View.extend({
 		if (typeof this.bookData.ISBN.cover!='undefined'){
 			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
 		};
+		console.log(this.bookData);
 		newBook.set("quantity_total", that.totalAmount);
 		newBook.set("quantity_out", 0);
 		newBook.set("quantity_available", that.totalAmount);
 		newBook.set("User", currentUserId);
 		newBook.set("studentList",[{}]);
-		newBook.set("ISBN", this.bookData.ISBN.identifiers.isbn_13[0]);
+		newBook.set("ISBN", that.ISBN);
 		newBook.save(null, {
 			success: function(newBook) {
 				Application.router.navigate("#bookList" , {trigger: true});
@@ -81,7 +81,7 @@ module.exports = View.extend({
 					console.log(f.amount);
 					that.totalAmount=f.amount;
 					$("#numberAvailable").html("Number Available: "+that.totalAmount+"");
-					that.totalAmount = parseInt(totalAmount);
+					that.totalAmount = parseInt(that.totalAmount);
 					
 				}
 			}
