@@ -1635,10 +1635,17 @@ module.exports = View.extend({
 				state0: { 
 					title: "Help Me",
 					buttons: { "Cancel": false, "Submit": true },
-					html:'</br>Email <input type="text" name="help" value="'+that.username+'" style="font-size:18px;width:100%;text-align:center;"></br></br>'+
-							 'Message <input type="text" name="help" value="" style="font-size:18px;width:100%;text-align:left;"></br>',
+					html:'</br>Email <input type="text" name="email" value="'+that.username+'" style="font-size:18px;width:100%;text-align:center;"></br></br>'+
+							 'Message <input type="text" name="message" value="" style="font-size:18px;width:100%;text-align:left;"></br>',
 					submit: function(e,v,m,f){
-
+						$.ajax({
+								data: {
+									body: f.message,
+									replyto: f.email 
+								},
+								url: "http://bohemian.webscript.io/classLibraryContact",
+								type: "POST",
+							});
 					}
 				}
 			};	
