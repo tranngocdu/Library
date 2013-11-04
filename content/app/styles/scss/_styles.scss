@@ -186,7 +186,7 @@ LAYOUT
 .footer-icon {
   background-color: red;
   margin: 7px auto 5px auto;
-  background: url(../images/toolbar-icons.png);
+  background: url(../images/footer-icons.png);
   background-size: 145px 62px;
   background-repeat: no-repeat;
   width: 32px;
@@ -194,13 +194,13 @@ LAYOUT
 }
 
 #icon-home { background-position: 2px 0; }
-.home-active { background-position: 2px -32px !important;}
+.home-active { background-position: 2px -33px !important;}
 
 #icon-books { background-position: -38px 0; }
-.books-active { background-position: -38px -32px !important }
+.books-active { background-position: -38px -33px !important }
 
 #icon-students { background-position: -76px 0; }
-.students-active {background-position: -76px -32px !important; }
+.students-active {background-position: -76px -33px !important; }
 
 #icon-settings { background-position: -118px 1px; }
 .settings-active { background-position: -118px -32px !important; }
