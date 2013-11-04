@@ -568,18 +568,18 @@ LAYOUT
 .right-btn {
   color: #f26657;
   position: absolute;
-  top: 36px;
+  top: 35px;
   font-size: 17px; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003216}}
 .back {
   left: 10px;
-  width: 14px;
-  height: 20px;
-  background-image: url(../images/back.png);
-  background-size: 14px 20px;
+  width: 12px;
+  height: 19px;
+  background-image: url(../images/back-arrow.png);
+  background-size: 12px 19px;
   background-repeat: no-repeat;
-  padding: 1px 0 0 20px; }
+  padding: 0 0 0 20px; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003226}}
 .right-btn {

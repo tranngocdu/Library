@@ -1856,7 +1856,7 @@ window.require.register("views/templates/addBookManually", function(exports, req
 
     buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  \n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container\">\n	\n		<div class=\"no-art\">\n			<div class=\"no-icon\"></div>\n		</div>\n	\n	<div id=\"addPhoto\" class=\"button primary\">Add Photo</div>\n    \n    <input id=\"title\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <input id=\"numberAvailable\" type=\"text\" placeholder=\"Quantity Available\" />\n\n    <div id=\"addBook\" class=\"button primary\">Add Book</div>\n\n\n  </div> "
       + "\n</div> "
-      + "\n";
+      + "\n\n";
     return buffer;
     });
 });
@@ -1869,7 +1869,7 @@ window.require.register("views/templates/addStudent", function(exports, require,
 
     buffer += "<div id=\"header\">\n  <h1>Add Student</h1>\n    <div id=\"backButton\" class=\"back\">Cancel</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"add-first\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n\n    <div id=\"add-student\" class=\"button primary-fill\">Add Student</div>\n\n  </div> "
       + "\n</div> "
-      + "\n";
+      + "\n\n";
     return buffer;
     });
 });
@@ -1943,8 +1943,8 @@ window.require.register("views/templates/bookDetail", function(exports, require,
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n\n  </div> "
-      + "\n\n\n</div> "
-      + "\n\n</div> ";
+      + "\n\n</div> "
+      + "\n\n";
     return buffer;
     });
 });
