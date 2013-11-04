@@ -1927,9 +1927,12 @@ window.require.register("views/templates/bookDetail", function(exports, require,
 
   function program6(depth0,data) {
     
-    var buffer = "";
-    buffer += "\n		    		"
-      + "\n		    		<li class=\"first-name\">Berkley</li>\n		    		<li class=\"first-name\">Berkley</li>\n		    		<li class=\"first-name\">Berkley</li>\n		    		<li class=\"first-name\">Berkley</li>\n					";
+    var buffer = "", stack1;
+    buffer += "\n		    		<li class=\"first-name\">";
+    if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</li>\n					";
     return buffer;
     }
 

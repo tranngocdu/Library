@@ -423,17 +423,27 @@ ADD BOOK
   font-size: 16px;
 }
 
-#totalBooks {
-	font-size: 13px;
-	font-weight: 300;
-	color: $black;
-	padding: 7px 0;
-}
-#availableBooks {
-	font-size: 13px;
-	font-weight: 500;
-	color: $primary;
-	margin-bottom: 10px;
+.availables {
+	overflow: hidden;
+	margin-top: 5px;
+	#totalBooks {
+		font-size: 13px;
+		font-weight: 500;
+		color: $black;
+		display: inline-block;
+
+	}
+	#availableBooks {
+		font-size: 13px;
+		font-weight: 500;
+		color: $primary;
+		display: inline-block;
+	}
+	em {
+		font-style: normal;
+		display: inline-block;
+		color: $light-grey;
+	}
 }
 
 /********************************

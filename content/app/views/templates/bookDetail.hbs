@@ -21,9 +21,12 @@
 	      <h2>{{title}}</h2>
 	      <h3>{{author}}</h3>
 				{{!-- <h4>ISBN: {{ISBN}}</h4> --}}
-				<div id="totalBooks">{{quantity_total}} Books Total</div>
-				<div id="availableBooks">{{quantity_available}} Available</div>
-				
+				<div class="availables">
+					<span id="totalBooks">{{quantity_total}} Total</span>
+					<em>/</em>
+					<span id="availableBooks">{{quantity_available}} Available</span>
+				</div>
+				<div class="clearfix"></div>
 	    </div>
 
 	    <div id="checkout-list">
