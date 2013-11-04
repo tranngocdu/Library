@@ -124,20 +124,22 @@ module.exports = View.extend({
 
 		var quantityPrompt = {
 			state0: { 
-				title: "CheckOut",
-				buttons: { "Scan": false, "List": true },
+				title: "Add Book",
+				buttons: { "Scan": "scan", "Manual": true, "Cancel":false},
 				submit: function(e,v,m,f){
 					if (v == true) {
-						Application.router.navigate("#bookList", {trigger:true});
+						Application.router.navigate("#addBookManually", {trigger:true});
 					}
-					else {
+					else if(v === "scan") {
 						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
 						scanner.scan(
 							function (result) {
+								if(result.text){
 								Application.bookListView.ISBN = result.text;
+								Application.addBookView.ISBN = result.text;
 								Application.bookListView.$el.trigger("getbookinfo");
-
+								}
 							}, 
 							function (error) {
 								alert("Scanning failed: " + error);

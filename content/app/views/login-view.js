@@ -7,7 +7,8 @@ module.exports = View.extend({
 	template: template,
 	events: {
 		'click #login':'signIn',
-		'click #login-have-account':'signUp'
+		'click #login-have-account':'signUp',
+		'click #forgot':'forgotPassword'
 	},
 
 	initialize: function() {
@@ -55,6 +56,22 @@ module.exports = View.extend({
 				'OK'                  // buttonName
 			);
 		}
+	},
+
+	forgotPassword: function() {
+		if($("#login-email").text){
+			Parse.User.requestPasswordReset($("#login-email").val(), {
+			  success: function() {
+			  	alert("A link was sent to "+$("#login-email").val()+" to reset your password.")
+			  },
+			  error: function(error) {
+			    // Show the error message somewhere
+			    alert("Error: " + error.code + " " + error.message);
+			  }
+			});
+		} else {
+			alert("Please enter an email address and then tap 'Forgot your password'");
+		}	
 	},
 
 	scanner: function ()  {

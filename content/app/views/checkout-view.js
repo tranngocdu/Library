@@ -96,9 +96,9 @@ module.exports = View.extend({
 				var quantityTotal = usersBooks.attributes.quantity_total;
 				console.log(studentsCheck);
 				//Modifications to numbers
+				if ((quantityAvailable - 1)>=0){
 				quantityAvailable = quantityAvailable - 1;
 				var quantityOut = quantityTotal - quantityAvailable;
-				
 				studentsCheck.push({"Name":that.studentName,"objectId":that.studentId});
 				console.log("thisshouldhave" + studentsCheck);
 				console.log(studentsCheck);
@@ -132,6 +132,10 @@ module.exports = View.extend({
 						console.log(error);
 					}
 				});
+				} else {
+					alert("You don't have any books to check out!")
+					Application.router.navigate("#home" , {trigger: true});
+				};
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);

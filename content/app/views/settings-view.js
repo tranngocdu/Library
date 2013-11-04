@@ -9,7 +9,8 @@ module.exports = View.extend({
 		'click #logout': 'logout',
 		'click #save': 'save',
 		'click #addBook': 'addBook',
-		'click #changeQuantity': 'changeQuantity'
+		'click #changeQuantity': 'changeQuantity',
+		'click #help':'sendHelp'
 	},
 
 	initialize: function () {
@@ -100,6 +101,22 @@ module.exports = View.extend({
 			Application.router.navigate("#addBook", {
 				trigger: true
 			});
-		}
+		},
+
+		sendHelp: function() {
+			var that = this;
+			var helpPrompt = {
+				state0: { 
+					title: "Help Me",
+					buttons: { "Cancel": false, "Submit": true },
+					html:'</br>Email <input type="text" name="help" value="'+that.username+'" style="font-size:18px;width:100%;text-align:center;"></br></br>'+
+							 'Message <input type="text" name="help" value="" style="font-size:18px;width:100%;text-align:left;"></br>',
+					submit: function(e,v,m,f){
+
+					}
+				}
+			};	
+			$.prompt(helpPrompt);
+		},
 
 	});
