@@ -399,7 +399,7 @@ ADD BOOK
     font-size: 14px;
     font-weight: 300;
     color: $light-grey;
-    padding-top: 5px;
+    padding-top: 4px;
   }
 
   h4 {
@@ -421,6 +421,19 @@ ADD BOOK
   padding: 8px 0 10px 0;
   margin: 0 auto 10px auto;
   font-size: 16px;
+}
+
+#totalBooks {
+	font-size: 13px;
+	font-weight: 300;
+	color: $black;
+	padding: 7px 0;
+}
+#availableBooks {
+	font-size: 13px;
+	font-weight: 500;
+	color: $primary;
+	margin-bottom: 10px;
 }
 
 /********************************
@@ -577,6 +590,30 @@ BOOK LIST
 .students {
   padding: 0 !important;
 }
+
+#checkout-list {
+	width: 100%;
+	margin: 15px auto;
+	h5 {
+		color: $red;
+		font-weight: 500;
+		font-size: 16px;
+		border-bottom: 1px solid $border;
+		padding-bottom: 10px;
+	}
+	ul {
+		margin: 0;
+		padding: 0;
+		text-align: left;
+		li {
+			border-bottom: 1px solid $border;
+			padding: 8px 0 10px 0;
+			font-weight: 500;
+			font-size: 14px;
+		}
+	}
+}
+
 #studentlist {
   padding-left: 0;
   margin: 0 auto;

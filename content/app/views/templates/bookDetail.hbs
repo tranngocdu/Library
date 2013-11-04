@@ -20,22 +20,25 @@
 
 	      <h2>{{title}}</h2>
 	      <h3>{{author}}</h3>
-				<h4>ISBN: {{ISBN}}</h4>
-				<div id="totalBooks"><p>{{quantity_total}} Total Books</p></div>
-				<p>{{quantity_available}} Available</p>
+				{{!-- <h4>ISBN: {{ISBN}}</h4> --}}
+				<div id="totalBooks">{{quantity_total}} Books Total</div>
+				<div id="availableBooks">{{quantity_available}} Available</div>
 				
 	    </div>
-		  <ul id="studentlist">
-			  <p class="first-name">Students with Books Checked Out</p> 
-		    {{#each studentList}}
-		      <p class="first-name">{{Name}}</p> 
-			{{/each}}
-		    </li>	
+
+	    <div id="checkout-list">
+				<h5>Copies loaned to:</h5>
+		  	<ul>
+		    	{{#each studentList}}
+		    		<li class="first-name">{{Name}}</li>
+					{{/each}}
+		  	</ul>
+			</div>
 
 	    <div id="checkout-book" class="ab-btn button primary-fill">Check Out</div>
-	    <div id="checkin-book" class="ab-btn button primary-fill">Check In</div>
+	    <div id="checkin-book" class="ab-btn button secondary">Check In</div>
 	    <div id="edit-book" class="ab-btn button primary">Edit Quantity</div>
-	    <div id="remove-book" class="ab-btn button secondary">Remove Book</div>
+	    <div id="remove-book" class="ab-btn button secondary-fill">Remove Book</div>
     {{/each}}
 
   </div> {{!-- /#scroller --}}
