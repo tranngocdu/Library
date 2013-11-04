@@ -785,7 +785,7 @@ ADD BOOK
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003426}}
 .availables {
   overflow: hidden;
-  margin-top: 5px; }
+  margin: 5px 0 15px 0; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003429}}
   .availables #totalBooks {
     font-size: 13px;
@@ -963,7 +963,7 @@ BOOK LIST
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003604}}
 #checkout-list {
   width: 100%;
-  margin: 15px auto; }
+  margin: 0 auto 15px auto; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003607}}
   #checkout-list h5 {
     color: #f26657;

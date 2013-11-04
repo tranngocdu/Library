@@ -638,8 +638,10 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   				var bookdetailArray = JSON.stringify(bookdetail);
   				bookdetailArray = JSON.parse(bookdetailArray);
   				that.ISBN = bookdetailArray[0].ISBN;
-  				console.log(bookdetailArray);			
   				that.$el.html(that.template(bookdetailArray));
+  				if (bookdetailArray[0].studentList.length == 1) {
+  					$("#checkout-list").hide();
+  				}		
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
@@ -1894,15 +1896,15 @@ window.require.register("views/templates/bookDetail", function(exports, require,
     else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
       + "</h3>\n				"
-      + "\n				<div id=\"totalBooks\">";
+      + "\n				<div class=\"availables\">\n					<span id=\"totalBooks\">";
     if (stack1 = helpers.quantity_total) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.quantity_total; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + " Books Total</div>\n				<div id=\"availableBooks\">";
+      + " Total</span>\n					<em>/</em>\n					<span id=\"availableBooks\">";
     if (stack1 = helpers.quantity_available) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.quantity_available; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + " Available</div>\n				\n	    </div>\n\n	    <div id=\"checkout-list\">\n				<h5>Copies loaned to:</h5>\n		  	<ul>\n		    	";
+      + " Available</span>\n				</div>\n				<div class=\"clearfix\"></div>\n	    </div>\n	    <div id=\"checkout-list\">\n				<h5>Copies loaned to:</h5>\n		  	<ul>\n		    	";
     stack1 = helpers.each.call(depth0, depth0.studentList, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n		  	</ul>\n			</div>\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"checkin-book\" class=\"ab-btn button secondary\">Check In</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book\" class=\"ab-btn button secondary-fill\">Remove Book</div>\n    ";

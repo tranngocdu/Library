@@ -425,7 +425,7 @@ ADD BOOK
 
 .availables {
 	overflow: hidden;
-	margin-top: 5px;
+	margin: 5px 0 15px 0;
 	#totalBooks {
 		font-size: 13px;
 		font-weight: 500;
@@ -603,7 +603,7 @@ BOOK LIST
 
 #checkout-list {
 	width: 100%;
-	margin: 15px auto;
+	margin: 0 auto 15px auto;
 	h5 {
 		color: $red;
 		font-weight: 500;
