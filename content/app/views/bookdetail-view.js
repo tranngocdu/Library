@@ -28,8 +28,10 @@ module.exports = View.extend({
 				var bookdetailArray = JSON.stringify(bookdetail);
 				bookdetailArray = JSON.parse(bookdetailArray);
 				that.ISBN = bookdetailArray[0].ISBN;
-				console.log(bookdetailArray);			
 				that.$el.html(that.template(bookdetailArray));
+				if (bookdetailArray[0].studentList.length == 1) {
+					$("#checkout-list").hide();
+				}		
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
