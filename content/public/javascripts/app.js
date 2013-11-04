@@ -1884,7 +1884,7 @@ window.require.register("views/templates/bookDetail", function(exports, require,
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n	    <div class=\"title-art\">\n\n	    	";
+    buffer += "\n	    <div class=\"title-art\">\n	    	";
     stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n\n	      <h2>";
@@ -1895,8 +1895,11 @@ window.require.register("views/templates/bookDetail", function(exports, require,
     if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h3>\n				"
-      + "\n				<div class=\"availables\">\n					<span id=\"totalBooks\">";
+      + "</h3>\n				<h4>ISBN: ";
+    if (stack1 = helpers.ISBN) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.ISBN; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</h4>\n				<div class=\"availables\">\n					<span id=\"totalBooks\">";
     if (stack1 = helpers.quantity_total) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.quantity_total; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
@@ -1924,7 +1927,7 @@ window.require.register("views/templates/bookDetail", function(exports, require,
   function program4(depth0,data) {
     
     
-    return "\n	      		<div class=\"no-art\">\n	      			<div class=\"no-icon\"></div>\n	      		</div>\n	      ";
+    return "\n	      	<div class=\"no-icon\"></div>\n	      ";
     }
 
   function program6(depth0,data) {
@@ -2075,18 +2078,18 @@ window.require.register("views/templates/checkOut", function(exports, require, m
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n";
+    buffer += "\n	";
     stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n\n<div class=\"title-info\">\n	<h2>";
+    buffer += "\n\n<div class=\"title-info\">\n	<h2 class=\"truncate-three\">";
     if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h2>\n	<h3>";
+      + "</h2>\n	<h3 class=\"truncate\">";
     if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h3>\n\n	"
+      + "</h3>\n	"
       + "\n	<p>";
     if (stack1 = helpers.quantity_available) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.quantity_available; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
@@ -2098,24 +2101,24 @@ window.require.register("views/templates/checkOut", function(exports, require, m
   function program2(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n\n<div class=\"title-art\">\n	<img src=\"";
+    buffer += "\n		<div class=\"title-art\">\n			<img src=\"";
     if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "\">\n</div>\n\n";
+      + "\">\n		</div>\n\n	";
     return buffer;
     }
 
   function program4(depth0,data) {
     
     
-    return "\n<span>No Cover Found</span>\n";
+    return "\n	\n		<div class=\"no-art\">\n			<div class=\"no-icon\"></div>\n		</div>\n\n";
     }
 
-    buffer += "<div id=\"header\">\n	<div class=\"back\">Books</div>\n	<h1>Check Out</h1>\n</div>\n<style type=\"text/css\">\n.selected {\n	background-color:#0a5fff;\n	color: white;\n	-webkit-border-radius: 5px;\n	border-radius: 5px;\n	padding-left:10px;\n}\n.deselected {\n	background-color:white!important;\n	color:black!important;\n}\n</style>\n<div class=\"check\">\n\n";
+    buffer += "<div id=\"header\">\n	<div class=\"back\">Books</div>\n	<h1>Check Out</h1>\n</div>\n\n<div class=\"check\">\n\n";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n\n<div class=\"clearfix\"></div>\n\n<div class=\"name-header\">Pick your name</div>\n\n<div id=\"wrapper\" class=\"check-wrap\">\n	<div id=\"scroller\" class=\"students\">\n\n\n	</div> "
+    buffer += "\n\n<div class=\"clearfix\"></div>\n\n<div id=\"wrapper\" class=\"check-wrap\">\n	<div class=\"name-header\">Pick your name</div>\n	<div id=\"scroller\" class=\"students\">\n	</div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
@@ -2153,7 +2156,7 @@ window.require.register("views/templates/settings", function(exports, require, m
     var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container\">\n\n    "
+    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container settings-scroll\">\n\n    "
       + "\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" value=\"";
     if (stack1 = helpers.username) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.username; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
@@ -2228,22 +2231,18 @@ window.require.register("views/templates/studentListCheck", function(exports, re
     if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "\" class=\"studentCheck\" style=\"padding-left:10px!important;\">\n      <p data-id=\"";
-    if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-    else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-    buffer += escapeExpression(stack1)
-      + "\" class=\"first-name\">";
+      + "\" class=\"studentCheck\">";
     if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</p> \n    </li>\n";
+      + "</li>\n";
     return buffer;
     }
 
-    buffer += " <div id=\"scroller\" class=\"students\">\n  <ul id=\"studentlist\">\n";
+    buffer += "  <ul id=\"studentlist\">\n";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n\n  </ul>\n\n</div> ";
+    buffer += "\n\n  </ul>\n\n";
     return buffer;
     });
 });

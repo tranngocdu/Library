@@ -9,18 +9,15 @@
 
   	{{#each this}}
 	    <div class="title-art">
-
 	    	{{#if cover_image}}
 	      	<img src="{{cover_image}}">
 	      {{else}}
-	      		<div class="no-art">
-	      			<div class="no-icon"></div>
-	      		</div>
+	      	<div class="no-icon"></div>
 	      {{/if}}
 
 	      <h2>{{title}}</h2>
 	      <h3>{{author}}</h3>
-				{{!-- <h4>ISBN: {{ISBN}}</h4> --}}
+				<h4>ISBN: {{ISBN}}</h4>
 				<div class="availables">
 					<span id="totalBooks">{{quantity_total}} Total</span>
 					<em>/</em>

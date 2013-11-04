@@ -1,11 +1,7 @@
- <div id="scroller" class="students">
   <ul id="studentlist">
 {{#each this}}
-    <li data-id="{{objectId}}" data-name="{{Name}}" class="studentCheck" style="padding-left:10px!important;">
-      <p data-id="{{objectId}}" class="first-name">{{Name}}</p> 
-    </li>
+    <li data-id="{{objectId}}" data-name="{{Name}}" class="studentCheck">{{Name}}</li>
 {{/each}}
 
   </ul>
 
-</div> {{!-- /#scroller --}}

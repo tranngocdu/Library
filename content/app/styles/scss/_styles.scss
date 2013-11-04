@@ -102,6 +102,14 @@ HELPER STYLES
   -webkit-box-orient: vertical;
 }
 
+.truncate-three {
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
 .inactive {
   border-bottom: 0 none;
 }
@@ -451,8 +459,9 @@ CHECK IN / CHECK OUT
 ********************************/
 .check{
   width: 100%;
+  height: 250px;
   margin: 0 auto;
-  padding: 75px 5% 10px 5% !important;
+  padding: 75px 5% 0 5% !important;
   text-align: left;
   background-color: $ui;
   border-bottom: 1px solid $border;
@@ -463,6 +472,7 @@ CHECK IN / CHECK OUT
     float: left;
   }
   .title-info {
+  	width: 58%;
     float: left;
     margin-left: 15px;
   }
@@ -474,7 +484,7 @@ CHECK IN / CHECK OUT
 }
 
 .name-header {
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   color: $red;
   font-weight: 500;
@@ -483,19 +493,38 @@ CHECK IN / CHECK OUT
   border-bottom: 1px solid $border;
 }
 .check-wrap {
-  top: 284px !important;
+  top: 250px !important;
 }
 .check-scroller {
   padding: 0 !important; 
 }
 
+#checkout-view {
+  .no-art {
+    width: 100px;
+    height: 100px;
+    margin: 10px auto 0 auto;
+    float: left;
+  }
+  .no-icon {
+    width: 70px;
+    height: 68px;
+    background-image: url(../images/no-art.png);
+    background-size: 70px 68px;
+    margin: 0 auto;
+    opacity: 0.1;
+  }
+}
+
 /********************************
 BOOK DETAILS
 ********************************/
-.no-art {
-  width: 120px;
-  height: 120px;
-  margin: 0 auto;
+#bookdetail-view {
+  .no-art {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+  }
   .no-icon {
     width: 90px;
     height: 87px;
@@ -505,7 +534,6 @@ BOOK DETAILS
     opacity: 0.1;
   }
 }
-
 
 /********************************
 BOOK LIST
@@ -627,11 +655,12 @@ BOOK LIST
 #studentlist {
   padding-left: 0;
   margin: 0 auto;
-  width: 92%;
+  width: 100%;
   li {
     border-bottom: 1px solid $border;
-    padding: 12px 0 14px 0;
+    padding: 12px 0 14px 5%;
     overflow: hidden;
+    font-weight: 500;
     .first-name {
       font-weight: 500;
       margin-right: 5px;
@@ -646,8 +675,24 @@ BOOK LIST
       text-align: right;
       float: right;
       font-size: 15px;
-      padding-top: 1px;
+      padding: 1px 10px 0 0;
+      font-weight: 300;
     }
   }
+  .selected {
+    background-color: $red;
+    color: $white;
+  }
+  .deselected {
+    color: $black;
+  }
+}
+
+
+/********************************
+SETTINGS
+********************************/
+.settings-scroll {
+  padding: 5px 0 15px 0 !important;
 }
 

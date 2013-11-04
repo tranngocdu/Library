@@ -2,36 +2,26 @@
 	<div class="back">Books</div>
 	<h1>Check Out</h1>
 </div>
-<style type="text/css">
-.selected {
-	background-color:#0a5fff;
-	color: white;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	padding-left:10px;
-}
-.deselected {
-	background-color:white!important;
-	color:black!important;
-}
-</style>
+
 <div class="check">
 
 {{#each this}}
-{{#if cover_image}}
+	{{#if cover_image}}
+		<div class="title-art">
+			<img src="{{cover_image}}">
+		</div>
 
-<div class="title-art">
-	<img src="{{cover_image}}">
-</div>
+	{{else}}
+	
+		<div class="no-art">
+			<div class="no-icon"></div>
+		</div>
 
-{{else}}
-<span>No Cover Found</span>
 {{/if}}
 
 <div class="title-info">
-	<h2>{{title}}</h2>
-	<h3>{{author}}</h3>
-
+	<h2 class="truncate-three">{{title}}</h2>
+	<h3 class="truncate">{{author}}</h3>
 	{{!-- <h4>ISBN: {{ISBN}}</h4> --}}
 	<p>{{quantity_available}} Available</p>
 	<div id="checkOut" class="check-btn button disabled">Check Out</div> {{!-- on name select remove .disabled and add .primary-fill --}}
@@ -40,12 +30,9 @@
 
 <div class="clearfix"></div>
 
-<div class="name-header">Pick your name</div>
-
 <div id="wrapper" class="check-wrap">
+	<div class="name-header">Pick your name</div>
 	<div id="scroller" class="students">
-
-
 	</div> {{!-- /#scroller --}}
 </div> {{!-- /#wrapper --}}
 
