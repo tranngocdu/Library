@@ -512,8 +512,8 @@ module.exports = View.extend({
 		var quantityPrompt = {
 			state0: { 
 				title: "Edit Quantity",
-				buttons: { "Cancel": false, "Submit": true },
-				html:'<input type="number" name="amount" value="" style="font-size:18px;width:100%;text-align:center;">',
+				buttons: { "Submit": true, "Cancel": false },
+				html:'<select id="qty-input" name="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>',
 				submit: function(e,v,m,f){
 					console.log(f.amount);
 					that.totalAmount=f.amount;
@@ -551,6 +551,7 @@ module.exports = View.extend({
 	},
 
 	addBook:function () {
+		var that = this;
 
 		var title = $("#title").val();
 		var author = $("#author").val();

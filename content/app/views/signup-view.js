@@ -28,10 +28,23 @@ module.exports = View.extend({
 
 		user.signUp(null, {
 			success: function(user) {
-				alert("Welcome to Class Library!");
-				Application.router.navigate("#home", {
-					trigger: true
-				});
+				//alert("Welcome to Class Library!");
+		var quantityPrompt = {
+			state0: { 
+				title: "Success!",
+				buttons: { "Continue": true, },
+				position: { container: '', width: 270},
+				submit: function(e,v,m,f){
+					if (v == true) {
+						Application.router.navigate("#home", {trigger: true});					
+					}
+				}	
+					
+
+			},
+		};
+		$.prompt(quantityPrompt);
+				
 			},
 			error: function(user, error) {
 				// Show the error message somewhere and let the user try again.
