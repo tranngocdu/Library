@@ -2014,18 +2014,18 @@ function program1(depth0,data) {
   if (stack1 = helpers.ISBN) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.ISBN; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</h4>\n				<div id=\"totalBooks\"><p>";
+    + "</h4>\n				<div class=\"availables\">\n					<span id=\"totalBooks\">";
   if (stack1 = helpers.quantity_total) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.quantity_total; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " Total Books</p></div>\n				<p>";
+    + " Total</span>\n					<em>/</em>\n					<span id=\"availableBooks\">";
   if (stack1 = helpers.quantity_available) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.quantity_available; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " Available</p>\n				\n	    </div>\n		  <ul id=\"studentlist\">\n			  <p class=\"first-name\">Students with Books Checked Out</p> \n		    ";
+    + " Available</span>\n				</div>\n				<div class=\"clearfix\"></div>\n				\n	    </div>\n	<div id=\"checkout-list\">\n		<h5>Copies loaned to:</h5>\n		  <ul id=\"studentlist\">\n		    ";
   stack1 = helpers.each.call(depth0, depth0.studentList, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n		    </li>	\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"checkin-book\" class=\"ab-btn button primary-fill\">Check In</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book-prompt\" data-id=\"";
+  buffer += "\n		    </ul>	\n		</div>\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"checkin-book\" class=\"ab-btn button primary-fill\">Check In</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book-prompt\" data-id=\"";
   if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -2050,17 +2050,17 @@ function program2(depth0,data) {
 function program4(depth0,data) {
   
   
-  return "\n	      		<div class=\"no-art\">\n	      			<div class=\"no-icon\"></div>\n	      		</div>\n	      ";
+  return "\n	      	<div class=\"no-icon\"></div>\n	      ";
   }
 
 function program6(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n		      <p class=\"first-name\">";
+  buffer += "\n		      <li class=\"first-name\">";
   if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</p> \n			";
+    + "</li> \n			";
   return buffer;
   }
 
