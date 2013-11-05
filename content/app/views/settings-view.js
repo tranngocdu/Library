@@ -86,6 +86,8 @@ module.exports = View.extend({
 		logout: function () {
 			window.localStorage.removeItem("userId");
 			Parse.User.logOut();
+			$("#footer").removeClass("visible");
+			$("#footer").addClass("hidden");
 			Application.router.navigate("#login", {
 				trigger: true
 			});

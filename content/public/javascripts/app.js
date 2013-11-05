@@ -1360,6 +1360,13 @@ module.exports = View.extend({
 
 	render: function () {
 		this.$el.html(this.template());
+		var current = Parse.User.current();
+		if(current===null){
+			$("#footer").addClass("hidden");
+		}else if(current!=null){
+			$("#footer").removeClass("hidden");
+			$("#footer").addClass("visible");
+		};
 		return this;
 	},
 
@@ -1511,6 +1518,9 @@ module.exports = View.extend({
 		var current = Parse.User.current();
 		if(current===null){
 			$("#footer").addClass("hidden");
+		}else if(current!=null){
+			$("#footer").removeClass("hidden");
+			$("#footer").addClass("visible");
 		};
 		return this;
 
@@ -1677,6 +1687,8 @@ module.exports = View.extend({
 		logout: function () {
 			window.localStorage.removeItem("userId");
 			Parse.User.logOut();
+			$("#footer").removeClass("visible");
+			$("#footer").addClass("hidden");
 			Application.router.navigate("#login", {
 				trigger: true
 			});

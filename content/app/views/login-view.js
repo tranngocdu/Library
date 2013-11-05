@@ -20,6 +20,9 @@ module.exports = View.extend({
 		var current = Parse.User.current();
 		if(current===null){
 			$("#footer").addClass("hidden");
+		}else if(current!=null){
+			$("#footer").removeClass("hidden");
+			$("#footer").addClass("visible");
 		};
 		return this;
 
