@@ -518,6 +518,7 @@ window.require.register("views/addbookmanually-view", function(exports, require,
   	template: template,
   	events: {
   		'click #addBook':'addBook',
+  		'click #addPhoto':'addPhoto'
   	},
 
   	initialize: function() {
@@ -529,7 +530,7 @@ window.require.register("views/addbookmanually-view", function(exports, require,
   	},
 
   	addBook:function () {
-  		
+
   		var title = $("#title").val();
   		var author = $("#author").val();
   		var numberAvailable = $("#numberAvailable").val();
@@ -542,7 +543,9 @@ window.require.register("views/addbookmanually-view", function(exports, require,
   		var newBook=new NewBook();
   		newBook.set("title", title);
   		newBook.set("author", author);
-  		//newBook.set("cover_image", "http://google.com");
+  		if (that.thumbnail_url) {
+  			newBook.set("cover_image", that.thumbnail_url);
+  		}
   		newBook.set("quantity_total", numberAvailable);
   		newBook.set("quantity_out", 0);
   		newBook.set("quantity_available", numberAvailable);
@@ -559,6 +562,36 @@ window.require.register("views/addbookmanually-view", function(exports, require,
   			}
   		});
 
+  	},
+
+  	addPhoto: function() {
+  		var that = this;
+  		if (!window.plugins.filepicker) {
+  			alert("clicked");
+  			
+  			return;
+  		}
+
+  		var uploadSuccess = function(args) {
+  			if (args.result == 'didFinishPickingMediaWithInfo') {
+  				that.thumbnail_url = args.FPPickerControllerRemoteURL + '/convert?w=150&h=150';
+  				//$('#picker').removeClass('background-image');
+  				//$('#picker').css('background-image', 'url(' + that.thumbnail_url + ')');
+  			}
+  		};
+
+  		var uploadError = function(args) {
+  			console.log('Error during Filepicker upload');
+  		};
+
+  		window.plugins.filepicker.pick(
+  			{
+  				dataTypes: ['image/*'],
+  				sourceNames: ['FPSourceCamera', 'FPSourceCameraRoll', 'FPSourceDropbox', 'FPSourceGoogleDrive', 'FPSourceGmail', 'FPSourceFacebook', 'FPSourceInstagram', 'FPSourceImagesearch']
+  			},
+  			uploadSuccess,
+  			uploadError
+  		);
   	}
 
   });
@@ -1978,7 +2011,7 @@ window.require.register("views/templates/bookListBooks", function(exports, requi
     else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
       + "\" class=\"bookItem\">\n			";
-    stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(2, program2, data),fn:self.program(2, program2, data),data:data});
+    stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n			<div class=\"book-meta\">\n				<h2 class=\"truncate-two\">";
     if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
@@ -2004,6 +2037,12 @@ window.require.register("views/templates/bookListBooks", function(exports, requi
     buffer += escapeExpression(stack1)
       + "\">\n			";
     return buffer;
+    }
+
+  function program4(depth0,data) {
+    
+    
+    return "\n			<div class=\"no-art\">\n				<div class=\"no-icon\"></div>\n			</div>\n			";
     }
 
     buffer += "\n<div id=\"scroller\" class=\"usersBooks\">\n	<ul id=\"booklist\">\n		";

@@ -10,7 +10,7 @@ exports.config =
         'javascripts/vendor.js': /^vendor/
       order:
         before: [
-          'vendor/scripts/cordova/cordova-2.4.0.js',
+          'vendor/scripts/cordova/cordova-2.9.0.js',
           'vendor/scripts/cordova/plugins/ChildBrowser.js',
           'vendor/scripts/cordova/plugins/Filepicker.js',
           'vendor/scripts/jquery-1.9.1.min.js',

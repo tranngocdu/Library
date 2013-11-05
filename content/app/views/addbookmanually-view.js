@@ -6,6 +6,7 @@ module.exports = View.extend({
 	template: template,
 	events: {
 		'click #addBook':'addBook',
+		'click #addPhoto':'addPhoto'
 	},
 
 	initialize: function() {
@@ -17,7 +18,7 @@ module.exports = View.extend({
 	},
 
 	addBook:function () {
-		
+
 		var title = $("#title").val();
 		var author = $("#author").val();
 		var numberAvailable = $("#numberAvailable").val();
@@ -30,7 +31,9 @@ module.exports = View.extend({
 		var newBook=new NewBook();
 		newBook.set("title", title);
 		newBook.set("author", author);
-		//newBook.set("cover_image", "http://google.com");
+		if (that.thumbnail_url) {
+			newBook.set("cover_image", that.thumbnail_url);
+		}
 		newBook.set("quantity_total", numberAvailable);
 		newBook.set("quantity_out", 0);
 		newBook.set("quantity_available", numberAvailable);
@@ -47,6 +50,36 @@ module.exports = View.extend({
 			}
 		});
 
+	},
+
+	addPhoto: function() {
+		var that = this;
+		if (!window.plugins.filepicker) {
+			alert("clicked");
+			
+			return;
+		}
+
+		var uploadSuccess = function(args) {
+			if (args.result == 'didFinishPickingMediaWithInfo') {
+				that.thumbnail_url = args.FPPickerControllerRemoteURL + '/convert?w=150&h=150';
+				//$('#picker').removeClass('background-image');
+				//$('#picker').css('background-image', 'url(' + that.thumbnail_url + ')');
+			}
+		};
+
+		var uploadError = function(args) {
+			console.log('Error during Filepicker upload');
+		};
+
+		window.plugins.filepicker.pick(
+			{
+				dataTypes: ['image/*'],
+				sourceNames: ['FPSourceCamera', 'FPSourceCameraRoll', 'FPSourceDropbox', 'FPSourceGoogleDrive', 'FPSourceGmail', 'FPSourceFacebook', 'FPSourceInstagram', 'FPSourceImagesearch']
+			},
+			uploadSuccess,
+			uploadError
+		);
 	}
 
 });

@@ -45,6 +45,10 @@
 		5AA0E66F1729F460000DC89A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AA0E66E1729F460000DC89A /* ImageIO.framework */; };
 		5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE5B34173C68D80009041E /* CoreLocation.framework */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
+		9E716DBC18293875008157C1 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E716DBB18293875008157C1 /* CoreFoundation.framework */; };
+		9E716DC318293F15008157C1 /* CDVFilepicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E716DC018293F15008157C1 /* CDVFilepicker.m */; };
+		9E716DC418293F15008157C1 /* FPPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9E716DC118293F15008157C1 /* FPPicker.bundle */; };
+		9E716DC518293F15008157C1 /* FPPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E716DC218293F15008157C1 /* FPPicker.framework */; };
 		9EACFB0017DADBA70098075B /* CDVBarcodeScanner.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9EACFAFC17DADBA70098075B /* CDVBarcodeScanner.mm */; };
 		9EACFB0117DADBA70098075B /* scannerOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EACFAFD17DADBA70098075B /* scannerOverlay.xib */; };
 		9EACFB0217DADBA70098075B /* zxing-all-in-one.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EACFAFE17DADBA70098075B /* zxing-all-in-one.cpp */; };
@@ -116,6 +120,11 @@
 		5AEE5B34173C68D80009041E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Library-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Library-Info.plist"; path = "../Library-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		9E716DBB18293875008157C1 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		9E716DBF18293F15008157C1 /* CDVFilepicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVFilepicker.h; sourceTree = "<group>"; };
+		9E716DC018293F15008157C1 /* CDVFilepicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVFilepicker.m; sourceTree = "<group>"; };
+		9E716DC118293F15008157C1 /* FPPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FPPicker.bundle; sourceTree = "<group>"; };
+		9E716DC218293F15008157C1 /* FPPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FPPicker.framework; sourceTree = "<group>"; };
 		9EACFAFC17DADBA70098075B /* CDVBarcodeScanner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDVBarcodeScanner.mm; sourceTree = "<group>"; };
 		9EACFAFD17DADBA70098075B /* scannerOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = scannerOverlay.xib; sourceTree = "<group>"; };
 		9EACFAFE17DADBA70098075B /* zxing-all-in-one.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "zxing-all-in-one.cpp"; sourceTree = "<group>"; };
@@ -131,6 +140,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+				9E716DBC18293875008157C1 /* CoreFoundation.framework in Frameworks */,
 				9EACFB0717DADDEB0098075B /* CoreVideo.framework in Frameworks */,
 				301BF5BB109A6A2B0062928A /* AVFoundation.framework in Frameworks */,
 				9EACFB0517DADDCE0098075B /* libiconv.dylib in Frameworks */,
@@ -141,7 +152,6 @@
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				301BF5B5109A6A2B0062928A /* AddressBook.framework in Frameworks */,
 				301BF5B7109A6A2B0062928A /* AddressBookUI.framework in Frameworks */,
 				301BF5B9109A6A2B0062928A /* AudioToolbox.framework in Frameworks */,
@@ -149,6 +159,7 @@
 				301BF5C1109A6A2B0062928A /* MediaPlayer.framework in Frameworks */,
 				301BF5C3109A6A2B0062928A /* QuartzCore.framework in Frameworks */,
 				301BF5C5109A6A2B0062928A /* SystemConfiguration.framework in Frameworks */,
+				9E716DC518293F15008157C1 /* FPPicker.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				30E5649213A7FCAF007403D8 /* CoreMedia.framework in Frameworks */,
 				5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */,
@@ -240,6 +251,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9E716DBB18293875008157C1 /* CoreFoundation.framework */,
 				9EACFB0617DADDEB0098075B /* CoreVideo.framework */,
 				9EACFB0417DADDCE0098075B /* libiconv.dylib */,
 				5AEE5B34173C68D80009041E /* CoreLocation.framework */,
@@ -275,6 +287,7 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				9E716DBE18293F15008157C1 /* Filepicker */,
 				9EACFAFB17DADBA70098075B /* BarcodeScanner */,
 			);
 			name = Plugins;
@@ -320,6 +333,17 @@
 				30A0434614DC770100060A13 /* Localizable.strings */,
 			);
 			path = se.lproj;
+			sourceTree = "<group>";
+		};
+		9E716DBE18293F15008157C1 /* Filepicker */ = {
+			isa = PBXGroup;
+			children = (
+				9E716DBF18293F15008157C1 /* CDVFilepicker.h */,
+				9E716DC018293F15008157C1 /* CDVFilepicker.m */,
+				9E716DC118293F15008157C1 /* FPPicker.bundle */,
+				9E716DC218293F15008157C1 /* FPPicker.framework */,
+			);
+			path = Filepicker;
 			sourceTree = "<group>";
 		};
 		9EACFAFB17DADBA70098075B /* BarcodeScanner */ = {
@@ -424,6 +448,7 @@
 				30A0434814DC770100060A13 /* Localizable.strings in Resources */,
 				30A0434914DC770100060A13 /* Localizable.strings in Resources */,
 				3088BBBD154F3926009F9C59 /* Default-Landscape@2x~ipad.png in Resources */,
+				9E716DC418293F15008157C1 /* FPPicker.bundle in Resources */,
 				3088BBBE154F3926009F9C59 /* Default-Landscape~ipad.png in Resources */,
 				3088BBBF154F3926009F9C59 /* Default-Portrait@2x~ipad.png in Resources */,
 				3088BBC0154F3926009F9C59 /* Default-Portrait~ipad.png in Resources */,
@@ -473,6 +498,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				9E716DC318293F15008157C1 /* CDVFilepicker.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				9EACFB0017DADBA70098075B /* CDVBarcodeScanner.mm in Sources */,
@@ -534,6 +560,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/aswantner/Desktop/library/iOS/Library/Plugins/Filepicker,
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -556,6 +586,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/aswantner/Desktop/library/iOS/Library/Plugins/Filepicker,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Library/Library-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;

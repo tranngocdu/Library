@@ -48,7 +48,7 @@
     <preference name="KeyboardDisplayRequiresUserAction" value="true" />
     <preference name="KeyboardShrinksView" value="false" />
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
-    <preference name="ShowSplashScreenSpinner" value="true" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="SuppressesIncrementalRendering" value="false" />
     <preference name="TopActivityIndicator" value="gray" />
 
@@ -111,6 +111,9 @@
     </feature>
     <feature name="BarcodeScanner">
         <param name="ios-package" value="CDVBarcodeScanner" />
+    </feature>
+    <feature name="Filepicker">
+        <param name="ios-package" value="CDVFilepicker" />
     </feature>
 
 <!-- Deprecated plugins element. REmove in 3.0 -->
