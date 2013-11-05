@@ -18,6 +18,7 @@ module.exports = View.extend({
 	},
 
 	addBook:function () {
+		var that = this;
 
 		var title = $("#title").val();
 		var author = $("#author").val();

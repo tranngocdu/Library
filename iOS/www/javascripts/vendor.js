@@ -10400,8 +10400,8 @@ $(document).bind("mobileinit", function () {
 	 	statechanging: function(e, from, to){},
 	 	statechanged: function(e, to){},
 		opacity: 0.6,
-	 	zIndex: 999,
-	  	overlayspeed: 'slow',
+	 	zIndex: 1000,
+	  	overlayspeed: 'fast',
 	   	promptspeed: 'fast',
    		show: 'fadeIn',
 	   	focus: 0,
@@ -10527,7 +10527,7 @@ $(document).bind("mobileinit", function () {
 					width: (pos.width !== undefined)? pos.width : null
 				});
 				top = (offset.top + pos.y) - ($.prompt.options.top.toString().indexOf('%') >= 0? (windowHeight*(parseInt($.prompt.options.top,10)/100)) : parseInt($.prompt.options.top,10));
-				$('html,body').animate({ scrollTop: top }, 'slow', 'swing', function(){});
+				$('html,body').animate({ scrollTop: top }, 'fast', 'swing', function(){});
 			}
 		}
 		// custom state width animation
@@ -10672,7 +10672,7 @@ $(document).bind("mobileinit", function () {
 			}
 		}
 		else{
-			$state.slideUp('slow', rm);
+			$state.slideUp('fast', rm);
 		}
 
 		return true;
