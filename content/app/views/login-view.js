@@ -17,6 +17,9 @@ module.exports = View.extend({
 
 	render: function () {
 		this.$el.html(this.template());
+		/*if(Parse.User.current()=null){
+			("#footer")addClass("hidden");
+		};*/
 		return this;
 
 	},

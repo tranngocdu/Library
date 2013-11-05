@@ -9,8 +9,9 @@ module.exports = View.extend({
 		"dataLoaded":"append",
 		"click #checkout-book":"checkoutBook",
 		"click #checkin-book":"checkinBook",
-		"click #remove-book":"removeBook",
-		"click #edit-book":"editQuantity"
+		"click #remove-book-prompt":"removebookPrompt",
+		"click #edit-book":"editQuantity",
+		"removeBook":"removeBook"
 	},
 
 	initialize: function() {
@@ -83,21 +84,44 @@ module.exports = View.extend({
 		});
 	},
 
-	removeBook: function() {
-		var currentUser = Parse.User.current();
-		var currentUserId = currentUser.id;
-		var query = new Parse.Query("NewBook");
-		query.equalTo("ISBN", Application.bookDetailView.ISBN);
-		query.equalTo("User", currentUserId);
-		query.find({
+	removebookPrompt: function(e){
+		var bookTitle = $(e.currentTarget).data('title');
+		var that = this;
+		that.book_id = $(e.currentTarget).data('id');
+			var removePrompt = {
+				state0: { 
+					title: "Confirmation",
+					buttons: { "No": false, "Yes": true },
+					html:'</br>Are you sure you wish to remove "'+bookTitle+'" from your collection?',
+					submit: function(e,v,m,f){
+						if(v){
+							Application.bookDetailView.$el.trigger("removeBook");
+						}
+					}
+				}
+			};
+		$.prompt(removePrompt);
+	},
 
-			success: function(bookdetail) {
-				//then remove book
-			},
-			error: function(error) {
-				alert("Error: " + error.code + " " + error.message);
-			}
+	removeBook: function(e) {
+		var that = this;
+		var book_id = that.book_id;
+		var book = Parse.Object.extend("NewBook");
+		var query = new Parse.Query(book);
+		query.get(book_id, {
+		  success: function(myObj) {
+		    // The object was retrieved successfully.
+		    myObj.destroy({});
+			$(book_id).remove();
+			Application.router.navigate("#bookList", {
+					trigger: true
+				});
+		  },
+		  error: function(object, error) {
+		    alert("This was not retreived correctly.");
+		  }
 		});
+		
 	},
 
 	editQuantity: function() {
