@@ -13,24 +13,28 @@
 	    	{{#if cover_image}}
 	      	<img src="{{cover_image}}">
 	      {{else}}
-	      		<div class="no-art">
-	      			<div class="no-icon"></div>
-	      		</div>
+	      	<div class="no-icon"></div>
 	      {{/if}}
 
 	      <h2>{{title}}</h2>
 	      <h3>{{author}}</h3>
 				<h4>ISBN: {{ISBN}}</h4>
-				<div id="totalBooks"><p>{{quantity_total}} Total Books</p></div>
-				<p>{{quantity_available}} Available</p>
+				<div class="availables">
+					<span id="totalBooks">{{quantity_total}} Total</span>
+					<em>/</em>
+					<span id="availableBooks">{{quantity_available}} Available</span>
+				</div>
+				<div class="clearfix"></div>
 				
 	    </div>
+	<div id="checkout-list">
+		<h5>Copies loaned to:</h5>
 		  <ul id="studentlist">
-			  <p class="first-name">Students with Books Checked Out</p> 
 		    {{#each studentList}}
-		      <p class="first-name">{{Name}}</p> 
+		      <li class="first-name">{{Name}}</li> 
 			{{/each}}
-		    </li>	
+		    </ul>	
+		</div>
 
 	    <div id="checkout-book" class="ab-btn button primary-fill">Check Out</div>
 	    <div id="checkin-book" class="ab-btn button primary-fill">Check In</div>
