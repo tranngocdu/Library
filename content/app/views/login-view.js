@@ -17,9 +17,10 @@ module.exports = View.extend({
 
 	render: function () {
 		this.$el.html(this.template());
-		/*if(Parse.User.current()=null){
-			("#footer")addClass("hidden");
-		};*/
+		var current = Parse.User.current();
+		if(current===null){
+			$("#footer").addClass("hidden");
+		};
 		return this;
 
 	},
