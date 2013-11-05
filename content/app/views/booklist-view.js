@@ -126,6 +126,8 @@ module.exports = View.extend({
 			state0: { 
 				title: "Add Book",
 				buttons: { "Scan": "scan", "Manual": true, "Cancel":false},
+				// html: 'How do you want to add a book?',
+				position: { container: '', width: 270},
 				submit: function(e,v,m,f){
 					if (v == true) {
 						Application.router.navigate("#addBookManually", {trigger:true});

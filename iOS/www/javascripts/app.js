@@ -718,14 +718,14 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   		var quantityPrompt = {
   			state0: { 
   				title: "Edit Quantity",
-  				buttons: { "Cancel": false, "Submit": true },
-  				html:'<input type="number" name="amount" value="" style="font-size:18px;width:100%;text-align:center;">',
+  				buttons: { "Submit": true, "Cancel": false },
+  				html:'<select id="qty-input" name="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>',
   				submit: function(e,v,m,f){
   					console.log(f.amount);
   					var totalAmount=f.amount;
   					
   					//Update UI
-  					$("#totalBooks").html("<p>"+totalAmount+" Total Books</p>");
+  					$("#totalBooks").html("<span>"+totalAmount+" Total</span>");
   					
   					//Update Server
   					totalAmount = parseInt(totalAmount);
@@ -896,6 +896,8 @@ window.require.register("views/booklist-view", function(exports, require, module
   			state0: { 
   				title: "Add Book",
   				buttons: { "Scan": "scan", "Manual": true, "Cancel":false},
+  				// html: 'How do you want to add a book?',
+  				position: { container: '', width: 270},
   				submit: function(e,v,m,f){
   					if (v == true) {
   						Application.router.navigate("#addBookManually", {trigger:true});
@@ -1280,7 +1282,7 @@ window.require.register("views/home-view", function(exports, require, module) {
   	checkOut: function ()  {
   		var quantityPrompt = {
   			state0: { 
-  				title: "CheckOut",
+  				title: "Check Out",
   				buttons: { "Scan": "scan", "List": true, "Cancel": false },
   				submit: function(e,v,m,f){
   					if (v == true) {
@@ -1315,8 +1317,8 @@ window.require.register("views/home-view", function(exports, require, module) {
 
   		var quantityPrompt = {
   			state0: { 
-  				title: "CheckOut",
-  				buttons: { "Scan": false, "List": true },
+  				title: "Check In",
+  				buttons: { "Scan": "scan", "List": true, "Cancel": false },
   				submit: function(e,v,m,f){
   					if (v == true) {
   						Application.router.navigate("#bookList", {trigger:true});
@@ -1869,7 +1871,7 @@ window.require.register("views/templates/addStudent", function(exports, require,
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n  <h1>Add Student</h1>\n    <div id=\"backButton\" class=\"back\">Cancel</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"add-first\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n\n    <div id=\"add-student\" class=\"button primary-fill\">Add Student</div>\n\n  </div> "
+    buffer += "<div id=\"header\">\n  <h1>Add Student</h1>\n    <div id=\"backButton\" class=\"back\">Back</div>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <input id=\"add-first\" class=\"first-input\" type=\"text\" autocorrect=\"off\" placeholder=\"Name\" />\n\n    <div id=\"add-student\" class=\"button primary-fill\">Add Student</div>\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
@@ -1884,7 +1886,7 @@ window.require.register("views/templates/bookDetail", function(exports, require,
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n	    <div class=\"title-art\">\n\n	    	";
+    buffer += "\n	    <div class=\"title-art\">\n	    	";
     stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n\n	      <h2>";
@@ -1927,7 +1929,7 @@ window.require.register("views/templates/bookDetail", function(exports, require,
   function program4(depth0,data) {
     
     
-    return "\n	      		<div class=\"no-art\">\n	      			<div class=\"no-icon\"></div>\n	      		</div>\n	      ";
+    return "\n	      	<div class=\"no-icon\"></div>\n	      ";
     }
 
   function program6(depth0,data) {
@@ -2078,7 +2080,7 @@ window.require.register("views/templates/checkOut", function(exports, require, m
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n";
+    buffer += "\n	";
     stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n\n<div class=\"title-info\">\n	<h2 class=\"truncate-three\">";
@@ -2101,18 +2103,18 @@ window.require.register("views/templates/checkOut", function(exports, require, m
   function program2(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n\n<div class=\"title-art\">\n	<img src=\"";
+    buffer += "\n		<div class=\"title-art\">\n			<img src=\"";
     if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "\">\n</div>\n\n";
+      + "\">\n		</div>\n\n	";
     return buffer;
     }
 
   function program4(depth0,data) {
     
     
-    return "\n<span>No Cover Found</span>\n";
+    return "\n	\n		<div class=\"no-art\">\n			<div class=\"no-icon\"></div>\n		</div>\n\n";
     }
 
     buffer += "<div id=\"header\">\n	<div class=\"back\">Books</div>\n	<h1>Check Out</h1>\n</div>\n\n<div class=\"check\">\n\n";

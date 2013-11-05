@@ -31,7 +31,7 @@ module.exports = View.extend({
 	checkOut: function ()  {
 		var quantityPrompt = {
 			state0: { 
-				title: "CheckOut",
+				title: "Check Out",
 				buttons: { "Scan": "scan", "List": true, "Cancel": false },
 				submit: function(e,v,m,f){
 					if (v == true) {
@@ -66,8 +66,8 @@ module.exports = View.extend({
 
 		var quantityPrompt = {
 			state0: { 
-				title: "CheckOut",
-				buttons: { "Scan": false, "List": true },
+				title: "Check In",
+				buttons: { "Scan": "scan", "List": true, "Cancel": false },
 				submit: function(e,v,m,f){
 					if (v == true) {
 						Application.router.navigate("#bookList", {trigger:true});
