@@ -30,8 +30,6 @@ module.exports = View.extend({
 
 	addBook: function() {
 		var that = this;
-		alert("need to write check to see if all values exist first");
-
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var NewBook=Parse.Object.extend("NewBook");
@@ -58,15 +56,17 @@ module.exports = View.extend({
 		newBook.set("User", currentUserId);
 		newBook.set("studentList",[{}]);
 		newBook.set("ISBN", that.ISBN);
-		newBook.save(null, {
-			success: function(newBook) {
-				Application.router.navigate("#bookList" , {trigger: true});
-			},
-			error: function(newBook, error) {
-				alert('Back to the drawing board');
-				console.log(error);
-			}
-		});
+		if(that.totalAmount){
+			newBook.save(null, {
+				success: function(newBook) {
+					Application.router.navigate("#bookList" , {trigger: true});
+				},
+				error: function(newBook, error) {
+					alert('Back to the drawing board');
+					console.log(error);
+				}
+			});
+		}else {alert("You need to add a quantity")};
 	},
 
 	quantity: function() {

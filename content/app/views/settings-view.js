@@ -112,14 +112,19 @@ module.exports = View.extend({
 					html:'</br>Email <input type="text" name="email" value="'+that.username+'" style="font-size:18px;width:100%;text-align:center;"></br></br>'+
 							 'Message <input type="text" name="message" value="" style="font-size:18px;width:100%;text-align:left;"></br>',
 					submit: function(e,v,m,f){
-						$.ajax({
-								data: {
-									body: f.message,
-									replyto: f.email 
-								},
-								url: "http://bohemian.webscript.io/classLibraryContact",
-								type: "POST",
-							});
+						if(v){
+							console.log(v);
+							$.ajax({
+									data: {
+										body: f.message,
+										replyto: f.email 
+									},
+									url: "http://bohemian.webscript.io/classLibraryContact",
+									type: "POST",
+								});
+						}else {alert("This email was cancelled");
+									console.log(v);
+									}
 					}
 				}
 			};	

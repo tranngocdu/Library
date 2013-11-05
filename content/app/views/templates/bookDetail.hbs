@@ -9,38 +9,38 @@
 
   	{{#each this}}
 	    <div class="title-art">
+
 	    	{{#if cover_image}}
 	      	<img src="{{cover_image}}">
 	      {{else}}
-	      	<div class="no-icon"></div>
+	      		<div class="no-art">
+	      			<div class="no-icon"></div>
+	      		</div>
 	      {{/if}}
 
 	      <h2>{{title}}</h2>
 	      <h3>{{author}}</h3>
 				<h4>ISBN: {{ISBN}}</h4>
-				<div class="availables">
-					<span id="totalBooks">{{quantity_total}} Total</span>
-					<em>/</em>
-					<span id="availableBooks">{{quantity_available}} Available</span>
-				</div>
-				<div class="clearfix"></div>
+				<div id="totalBooks"><p>{{quantity_total}} Total Books</p></div>
+				<p>{{quantity_available}} Available</p>
+				
 	    </div>
-	    <div id="checkout-list">
-				<h5>Copies loaned to:</h5>
-		  	<ul>
-		    	{{#each studentList}}
-		    		<li class="first-name">{{Name}}</li>
-					{{/each}}
-		  	</ul>
-			</div>
+		  <ul id="studentlist">
+			  <p class="first-name">Students with Books Checked Out</p> 
+		    {{#each studentList}}
+		      <p class="first-name">{{Name}}</p> 
+			{{/each}}
+		    </li>	
 
 	    <div id="checkout-book" class="ab-btn button primary-fill">Check Out</div>
-	    <div id="checkin-book" class="ab-btn button secondary">Check In</div>
+	    <div id="checkin-book" class="ab-btn button primary-fill">Check In</div>
 	    <div id="edit-book" class="ab-btn button primary">Edit Quantity</div>
-	    <div id="remove-book" class="ab-btn button secondary-fill">Remove Book</div>
+	    <div id="remove-book-prompt" data-id="{{objectId}}" data-title="{{title}}" class="ab-btn button secondary">Remove Book</div>
     {{/each}}
 
   </div> {{!-- /#scroller --}}
 
-</div> {{!-- /#wrapper --}}
 
+</div> {{!-- /#scroller --}}
+
+</div> {{!-- /#wrapper --}}
