@@ -251,7 +251,7 @@ form {
   background-image: url(../images/back-arrow.png);
   background-size: 12px 19px;
   background-repeat: no-repeat;
-  padding: 0 0 0 20px;
+  padding: 0 0 0 18px;
 }
 
 .right-btn {
@@ -504,9 +504,10 @@ a {
   }
   .title-art {
     float: left;
+    max-width: 120px;
   }
   .title-info {
-  	width: 58%;
+  	width: 54%;
     float: left;
     margin-left: 15px;
   }
@@ -699,6 +700,7 @@ a {
     padding: 12px 0 14px 4%;
     overflow: hidden;
     font-weight: 500;
+    position: relative;
     .first-name {
       font-weight: 500;
       margin-right: 5px;
@@ -726,6 +728,15 @@ a {
   }
 }
 
+.student-check {
+  width: 20px;
+  height: 17px;
+  background: url(../images/check.png);
+  background-size: 20px 17px;
+  position: absolute;
+  right: 20px;
+  top: 12px;
+}
 
 /*
 ------------------------------

@@ -1,7 +1,5 @@
-  <ul id="studentlist">
-{{#each this}}
-    <li data-id="{{objectId}}" data-name="{{Name}}" class="studentCheck">{{Name}}</li>
-{{/each}}
-
-  </ul>
-
+<ul id="studentlist">
+	{{#each this}}
+		<li data-id="{{objectId}}" data-name="{{Name}}" class="studentCheck">{{Name}}<div class="student-check"></div></li>
+	{{/each}}
+</ul>
