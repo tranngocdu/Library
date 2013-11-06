@@ -475,7 +475,7 @@ form {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003247}}
 .back {
-  left: 5%;
+  left: 15px;
   width: 12px;
   height: 19px;
   background-image: url(../images/back-arrow.png);
@@ -485,7 +485,7 @@ form {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003257}}
 .right-btn {
-  right: 5%; }
+  right: 15px; }
 
 /*
 ------------------------------
@@ -926,7 +926,7 @@ a {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003697}}
   #studentlist li {
     border-bottom: 1px solid #dbdbdb;
-    padding: 12px 0 14px 5%;
+    padding: 12px 0 14px 4%;
     overflow: hidden;
     font-weight: 500; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003702}}
@@ -944,7 +944,7 @@ a {
       text-align: right;
       float: right;
       font-size: 15px;
-      padding: 1px 5% 0 0;
+      padding: 1px 4% 0 0;
       font-weight: 300; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003720}}
   #studentlist .selected {
@@ -1031,7 +1031,7 @@ div.jqi .jqistate {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003803}}
 div.jqi .jqititle {
-  padding: 5px 10px;
+  padding: 5px 0 0 0;
   font-size: 21px;
   font-weight: 500; }
 
