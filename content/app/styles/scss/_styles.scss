@@ -245,7 +245,7 @@ form {
 }
 
 .back {
-  left: 15px;
+  left: 10px;
   width: 12px;
   height: 19px;
   background-image: url(../images/back-arrow.png);
@@ -255,7 +255,7 @@ form {
 }
 
 .right-btn {
-  right: 15px;
+  right: 10px;
 }
 
 
@@ -446,14 +446,14 @@ a {
     font-weight: 300;
     color: $light-grey;
     font-size: 14px;
-    padding-top: 7px;
+    padding-top: 5px;
   }
 
   p {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     color: $primary;
-    padding: 7px 0 15px 0;
+    padding: 5px 0 15px 0;
   }
 }
 .ab-btn {
@@ -674,13 +674,13 @@ a {
     padding: 5px 0;
     overflow: hidden;
     img {
-      width: 50px;
+      width: 52px;
       float: left;
+      margin-right: 15px;
     }
     .book-meta {
       float: left;
-      margin-left: 20px;
-      width: 75%;
+      width: 76%;
       h2 {
         font-size: 16px;
         font-weight: 500;
@@ -689,10 +689,10 @@ a {
         font-size: 14px;
         font-weight: 300;
         color: $light-grey;
-        padding-top: 4px;
+        padding-top: 3px;
       }
       p {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
         color: $primary;
         padding-top: 4px;

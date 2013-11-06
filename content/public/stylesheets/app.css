@@ -475,7 +475,7 @@ form {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003247}}
 .back {
-  left: 15px;
+  left: 10px;
   width: 12px;
   height: 19px;
   background-image: url(../images/back-arrow.png);
@@ -485,7 +485,7 @@ form {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003257}}
 .right-btn {
-  right: 15px; }
+  right: 10px; }
 
 /*
 ------------------------------
@@ -678,14 +678,14 @@ a {
     font-weight: 300;
     color: #a8a8a8;
     font-size: 14px;
-    padding-top: 7px; }
+    padding-top: 5px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003452}}
   .add-book p,
   .check p {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     color: #1fbdbe;
-    padding: 7px 0 15px 0; }
+    padding: 5px 0 15px 0; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003459}}
 .ab-btn {
@@ -904,13 +904,13 @@ a {
     overflow: hidden; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003676}}
     #booklist li img {
-      width: 50px;
-      float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003680}}
+      width: 52px;
+      float: left;
+      margin-right: 15px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003681}}
     #booklist li .book-meta {
       float: left;
-      margin-left: 20px;
-      width: 75%; }
+      width: 76%; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003684}}
       #booklist li .book-meta h2 {
         font-size: 16px;
@@ -920,10 +920,10 @@ a {
         font-size: 14px;
         font-weight: 300;
         color: #a8a8a8;
-        padding-top: 4px; }
+        padding-top: 3px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003694}}
       #booklist li .book-meta p {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
         color: #1fbdbe;
         padding-top: 4px; }
