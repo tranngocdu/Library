@@ -677,12 +677,12 @@ a {
   .check h4 {
     font-weight: 300;
     color: #a8a8a8;
-    font-size: 13px;
+    font-size: 14px;
     padding-top: 7px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003452}}
   .add-book p,
   .check p {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     color: #1fbdbe;
     padding: 7px 0 15px 0; }
@@ -913,17 +913,17 @@ a {
       width: 75%; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003684}}
       #booklist li .book-meta h2 {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 500; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003688}}
       #booklist li .book-meta h3 {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 300;
         color: #a8a8a8;
         padding-top: 4px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003694}}
       #booklist li .book-meta p {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 500;
         color: #1fbdbe;
         padding-top: 4px; }
