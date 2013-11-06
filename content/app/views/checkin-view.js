@@ -20,7 +20,11 @@ module.exports = View.extend({
 		this.$el.html(this.template(bookData));
 		that.ISBN = Application.checkInView.bookInfo[0].ISBN;
 		var studentBookList = Application.checkInView.bookInfo[0].studentList;
-		setTimeout(function(){$('.students').html(that.templateStudents(studentBookList));},500)
+		if (studentBookList.length == 0) {
+			setTimeout(function(){$(".name-header").hide();},200);
+
+		}
+		setTimeout(function(){$('.students').html(that.templateStudents(studentBookList));},500);
 
 		return this;
 	},
@@ -79,11 +83,11 @@ module.exports = View.extend({
 				that.studentArray = usersBooks.attributes.studentList;
 				var quantityAvailable = usersBooks.attributes.quantity_available;
 				var quantityTotal = usersBooks.attributes.quantity_total;
-				
+
 				//Modifications to numbers
 				quantityAvailable = quantityAvailable + 1;
 				var quantityOut = quantityTotal - quantityAvailable;
-				
+
 				var length = that.studentArray.length;
 				var cutItem = undefined;
 				var i;
@@ -102,7 +106,7 @@ module.exports = View.extend({
 				usersBooks.set("studentList",that.studentArray);
 				usersBooks.set("quantity_available",quantityAvailable);
 				usersBooks.set("quantity_out",quantityOut);
-				
+
 				usersBooks.save(null, {
 					success: function(newBook) {
 						Application.router.navigate("#home" , {trigger: true});
