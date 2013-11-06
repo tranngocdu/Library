@@ -486,6 +486,47 @@ a {
 	}
 }
 
+#addBookManually-view {
+  .no-art {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+  .no-icon {
+    width: 70px;
+    height: 68px;
+    background-image: url(../images/no-art.png);
+    background-size: 70px 68px;
+    margin: 10px auto;
+    opacity: 0.1;
+  }
+}
+
+.add-scroll {
+  padding: 0 !important;
+}
+
+.sm-btn {
+  width: 120px !important;
+}
+
+#addPhoto {
+  margin: 10px auto 20px auto;
+}
+
+#addBook {
+  margin: 20px auto;
+}
+
+#custom-art {
+  margin: 10px 0;
+  text-align: center;
+  display: none;
+  img {
+    height: 160px;
+  }
+}
+
 /*
 ------------------------------
   Check In / Check Out

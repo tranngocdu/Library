@@ -1950,7 +1950,7 @@ window.require.register("views/templates/addBookManually", function(exports, req
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  \n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container\">\n	\n		<div class=\"no-art\">\n			<div class=\"no-icon\"></div>\n		</div>\n	\n	<div id=\"addPhoto\" class=\"button primary\">Add Photo</div>\n    \n    <input id=\"title\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <input id=\"numberAvailable\" type=\"text\" placeholder=\"Quantity Available\" />\n\n    <div id=\"addBook\" class=\"button primary\">Add Book</div>\n\n\n  </div> "
+    buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  \n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll\">\n    <div id=\"custom-art\"><img src=\"\"></div>\n		<div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Add Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <input id=\"numberAvailable\" type=\"text\" placeholder=\"Quantity Available\" />\n\n    <div id=\"addBook\" class=\"button primary-fill\">Add Book</div>\n\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
