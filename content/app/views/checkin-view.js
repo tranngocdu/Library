@@ -43,7 +43,7 @@ module.exports = View.extend({
 			$(e.currentTarget).addClass("selected");
 
 			$("#checkIn").removeClass("disabled");
-			$("#checkIn").addClass("primary-fill");
+			$("#checkIn").addClass("secondary");
 		}
 		//Just highlite the damn thing already
 		else {
@@ -53,12 +53,12 @@ module.exports = View.extend({
 			$(e.currentTarget).removeClass("deselected");
 			$(e.currentTarget).addClass("selected");
 			$("#checkIn").removeClass("disabled");
-			$("#checkIn").addClass("primary-fill");
+			$("#checkIn").addClass("secondary");
 		};
 		//If a name isn't selected make sure the Check Out button isn't highlited
 		if (!$(".studentCheck").hasClass("selected")){
 			$("#checkIn").addClass("disabled");
-			$("#checkIn").removeClass("primary-fill");
+			$("#checkIn").removeClass("secondary");
 		};
 
 

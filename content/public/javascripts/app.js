@@ -1073,7 +1073,7 @@ window.require.register("views/checkin-view", function(exports, require, module)
   			$(e.currentTarget).addClass("selected");
 
   			$("#checkIn").removeClass("disabled");
-  			$("#checkIn").addClass("primary-fill");
+  			$("#checkIn").addClass("secondary");
   		}
   		//Just highlite the damn thing already
   		else {
@@ -1083,12 +1083,12 @@ window.require.register("views/checkin-view", function(exports, require, module)
   			$(e.currentTarget).removeClass("deselected");
   			$(e.currentTarget).addClass("selected");
   			$("#checkIn").removeClass("disabled");
-  			$("#checkIn").addClass("primary-fill");
+  			$("#checkIn").addClass("secondary");
   		};
   		//If a name isn't selected make sure the Check Out button isn't highlited
   		if (!$(".studentCheck").hasClass("selected")){
   			$("#checkIn").addClass("disabled");
-  			$("#checkIn").removeClass("primary-fill");
+  			$("#checkIn").removeClass("secondary");
   		};
 
 
@@ -2128,22 +2128,19 @@ window.require.register("views/templates/checkIn", function(exports, require, mo
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n	";
+    buffer += "\n		";
     stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n\n	<div class=\"title-info\">\n		<h2>";
+    buffer += "\n\n	<div class=\"title-info\">\n		<h2 class=\"truncate-three\">";
     if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h2>\n		<h3>";
+      + "</h2>\n		<h3 class=\"truncate\">";
     if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h3>\n\n		<h4>ISBN: ";
-    if (stack1 = helpers.ISBN) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-    else { stack1 = depth0.ISBN; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-    buffer += escapeExpression(stack1)
-      + "</h4>\n		<p>";
+      + "</h3>\n		"
+      + "\n		<p>";
     if (stack1 = helpers.quantity_available) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.quantity_available; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
@@ -2154,26 +2151,26 @@ window.require.register("views/templates/checkIn", function(exports, require, mo
   function program2(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n\n	<div class=\"title-art\">\n		<img src=\"";
+    buffer += "\n			<div class=\"title-art\">\n				<img src=\"";
     if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "\">\n	</div>\n	";
+      + "\">\n			</div>\n		";
     return buffer;
     }
 
   function program4(depth0,data) {
     
     
-    return "\n	<span>No Cover Found</span>\n	";
+    return "\n			<div class=\"no-art\">\n				<div class=\"no-icon\"></div>\n			</div>\n	";
     }
 
-    buffer += "<div id=\"header\">\n  <div class=\"back\">Books</div>\n  <h1>Check In</h1>\n</div>\n<style type=\"text/css\">\n.selected {\n  background-color:#0a5fff;\n  color: white;\n  -webkit-border-radius: 5px;\n  border-radius: 5px;\n  padding-left:10px;\n}\n.deselected {\n  background-color:white!important;\n  color:black!important;\n}\n</style>\n\n<div class=\"check\">\n	\n	";
+    buffer += "<div id=\"header\">\n	<div class=\"back\">Books</div>\n	<h1>Check In</h1>\n</div>\n\n<div class=\"check\">\n	";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n	\n    <div class=\"clearfix\"></div>\n</div>\n\n<div class=\"name-header\">Pick your name</div>\n\n<div id=\"wrapper\" class=\"check-wrap\">\n<div id=\"scroller\" class=\"students\">\n    \n    \n  </div> "
-      + "\n</div> "
-      + "\n\n";
+    buffer += "\n\n</div> "
+      + "\n<div class=\"clearfix\"></div>\n\n<div class=\"name-header\">Pick your name</div>\n\n<div id=\"wrapper\" class=\"check-wrap\">\n	<div id=\"scroller\" class=\"students\">\n	</div> "
+      + "\n</div> ";
     return buffer;
     });
 });
@@ -2186,49 +2183,49 @@ window.require.register("views/templates/checkOut", function(exports, require, m
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n	";
+    buffer += "\n		";
     stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n\n<div class=\"title-info\">\n	<h2 class=\"truncate-three\">";
+    buffer += "\n\n	<div class=\"title-info\">\n		<h2 class=\"truncate-three\">";
     if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h2>\n	<h3 class=\"truncate\">";
+      + "</h2>\n		<h3 class=\"truncate\">";
     if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "</h3>\n	"
-      + "\n	<p>";
+      + "</h3>\n		"
+      + "\n		<p>";
     if (stack1 = helpers.quantity_available) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.quantity_available; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + " Available</p>\n	<div id=\"checkOut\" class=\"check-btn button disabled\">Check Out</div> "
-      + "\n</div>\n";
+      + " Available</p>\n		<div id=\"checkOut\" class=\"check-btn button disabled\">Check Out</div> "
+      + "\n	</div>\n	";
     return buffer;
     }
   function program2(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n		<div class=\"title-art\">\n			<img src=\"";
+    buffer += "\n			<div class=\"title-art\">\n				<img src=\"";
     if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
     buffer += escapeExpression(stack1)
-      + "\">\n		</div>\n\n	";
+      + "\">\n			</div>\n		";
     return buffer;
     }
 
   function program4(depth0,data) {
     
     
-    return "\n	\n		<div class=\"no-art\">\n			<div class=\"no-icon\"></div>\n		</div>\n\n";
+    return "\n			<div class=\"no-art\">\n				<div class=\"no-icon\"></div>\n			</div>\n	";
     }
 
-    buffer += "<div id=\"header\">\n	<div class=\"back\">Books</div>\n	<h1>Check Out</h1>\n</div>\n\n<div class=\"check\">\n\n";
+    buffer += "<div id=\"header\">\n	<div class=\"back\">Books</div>\n	<h1>Check Out</h1>\n</div>\n\n<div class=\"check\">\n	";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n\n<div class=\"clearfix\"></div>\n\n<div id=\"wrapper\" class=\"check-wrap\">\n	<div class=\"name-header\">Pick your name</div>\n	<div id=\"scroller\" class=\"students\">\n	</div> "
-      + "\n</div> "
-      + "\n\n";
+    buffer += "\n\n</div> "
+      + "\n<div class=\"clearfix\"></div>\n\n<div class=\"name-header\">Pick your name</div>\n\n<div id=\"wrapper\" class=\"check-wrap\">\n	<div id=\"scroller\" class=\"students\">\n	</div> "
+      + "\n</div> ";
     return buffer;
     });
 });
