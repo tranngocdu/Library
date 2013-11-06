@@ -575,7 +575,11 @@ window.require.register("views/addbookmanually-view", function(exports, require,
 
   		var uploadSuccess = function(args) {
   			if (args.result == 'didFinishPickingMediaWithInfo') {
-  				that.thumbnail_url = args.FPPickerControllerRemoteURL + '/convert?w=150&h=150';
+  				that.thumbnail_url = args.FPPickerControllerRemoteURL + '/convert?w=150';
+  				$(".no-icon").hide();
+  				$("#custom-art").show();
+  				$("#custom-art").html('<img src='+that.thumbnail_url+'></img>')
+  				
   				//$('#picker').removeClass('background-image');
   				//$('#picker').css('background-image', 'url(' + that.thumbnail_url + ')');
   			}
@@ -672,9 +676,10 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
 
   				var bookdetailArray = JSON.stringify(bookdetail);
   				bookdetailArray = JSON.parse(bookdetailArray);
+  				that.bookinfoknow = bookdetailArray[0];
   				that.ISBN = bookdetailArray[0].ISBN;
   				that.$el.html(that.template(bookdetailArray));
-  				if (bookdetailArray[0].studentList.length == 1) {
+  				if (bookdetailArray[0].studentList.length == 0) {
   					$("#checkout-list").hide();
   				}		
   			},
@@ -707,7 +712,7 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   			}
   		});
   	},
-  	
+
   	checkinBook: function() {
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
@@ -734,18 +739,18 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   		var bookTitle = $(e.currentTarget).data('title');
   		var that = this;
   		that.book_id = $(e.currentTarget).data('id');
-  			var removePrompt = {
-  				state0: { 
-  					title: "Confirmation",
-  					buttons: { "No": false, "Yes": true },
-  					html:'Are you sure you wish to remove <strong><em>'+bookTitle+'</em></strong> from your collection?',
-  					submit: function(e,v,m,f){
-  						if(v){
-  							Application.bookDetailView.$el.trigger("removeBook");
-  						}
+  		var removePrompt = {
+  			state0: { 
+  				title: "Confirmation",
+  				buttons: { "No": false, "Yes": true },
+  				html:'Are you sure you wish to remove <strong><em>'+bookTitle+'</em></strong> from your collection?',
+  				submit: function(e,v,m,f){
+  					if(v){
+  						Application.bookDetailView.$el.trigger("removeBook");
   					}
   				}
-  			};
+  			}
+  		};
   		$.prompt(removePrompt);
   	},
 
@@ -755,19 +760,19 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   		var book = Parse.Object.extend("NewBook");
   		var query = new Parse.Query(book);
   		query.get(book_id, {
-  		  success: function(myObj) {
-  		    // The object was retrieved successfully.
-  		    myObj.destroy({});
-  			$(book_id).remove();
-  			Application.router.navigate("#bookList", {
+  			success: function(myObj) {
+  				// The object was retrieved successfully.
+  				myObj.destroy({});
+  				$(book_id).remove();
+  				Application.router.navigate("#bookList", {
   					trigger: true
   				});
-  		  },
-  		  error: function(object, error) {
-  		    alert("This was not retreived correctly.");
-  		  }
+  			},
+  			error: function(object, error) {
+  				alert("This was not retreived correctly.");
+  			}
   		});
-  		
+
   	},
 
   	editQuantity: function() {
@@ -781,10 +786,10 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   				submit: function(e,v,m,f){
   					console.log(f.amount);
   					var totalAmount=f.amount;
-  					
+
   					//Update UI
   					$("#totalBooks").html("<span>"+totalAmount+" Total</span>");
-  					
+
   					//Update Server
   					totalAmount = parseInt(totalAmount);
   					var currentUser = Parse.User.current();
@@ -798,7 +803,7 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   							console.log(usersBooks);
   							var quantityAvailable = usersBooks.attributes.quantity_available;
   							quantityAvailable = quantityAvailable + 1;
-  							
+
   							usersBooks.set("quantity_available",quantityAvailable);
   							usersBooks.set("quantity_total",totalAmount);
 
@@ -1050,7 +1055,11 @@ window.require.register("views/checkin-view", function(exports, require, module)
   		this.$el.html(this.template(bookData));
   		that.ISBN = Application.checkInView.bookInfo[0].ISBN;
   		var studentBookList = Application.checkInView.bookInfo[0].studentList;
-  		setTimeout(function(){$('.students').html(that.templateStudents(studentBookList));},500)
+  		if (studentBookList.length == 0) {
+  			setTimeout(function(){$(".name-header").hide();},200);
+
+  		}
+  		setTimeout(function(){$('.students').html(that.templateStudents(studentBookList));},500);
 
   		return this;
   	},
@@ -1109,11 +1118,11 @@ window.require.register("views/checkin-view", function(exports, require, module)
   				that.studentArray = usersBooks.attributes.studentList;
   				var quantityAvailable = usersBooks.attributes.quantity_available;
   				var quantityTotal = usersBooks.attributes.quantity_total;
-  				
+
   				//Modifications to numbers
   				quantityAvailable = quantityAvailable + 1;
   				var quantityOut = quantityTotal - quantityAvailable;
-  				
+
   				var length = that.studentArray.length;
   				var cutItem = undefined;
   				var i;
@@ -1132,7 +1141,7 @@ window.require.register("views/checkin-view", function(exports, require, module)
   				usersBooks.set("studentList",that.studentArray);
   				usersBooks.set("quantity_available",quantityAvailable);
   				usersBooks.set("quantity_out",quantityOut);
-  				
+
   				usersBooks.save(null, {
   					success: function(newBook) {
   						Application.router.navigate("#home" , {trigger: true});
@@ -2059,7 +2068,7 @@ window.require.register("views/templates/bookList", function(exports, require, m
     var buffer = "";
 
 
-    buffer += "<div id=\"header\" class=\"extended-header\">\n	<div id=\"add\" class=\"right-btn\">Add</div>\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n\n</div> "
+    buffer += "<div id=\"header\" class=\"extended-header\">\n	<div id=\"add\" class=\"plus-btn\">\n		<span>Add</span>\n		<div class=\"plus\"></div>\n	</div>\n  <h1>Books</h1>\n  <div id=\"filter-wrap\">\n  	<div class=\"filter\">\n		<span id=\"filt-all\" class=\"selected\">All Books</span>\n  		<span id=\"filt-available\">Available</span>\n  		<span id=\"filt-checked\">Checked Out</span>\n  	</div>\n	</div>\n</div>\n\n<div id=\"wrapper\" class=\"booklist-wrap\">\n\n</div> "
       + "\n\n";
     return buffer;
     });
@@ -2236,7 +2245,7 @@ window.require.register("views/templates/home", function(exports, require, modul
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n	<h1>Library</h1>\n</div>\n\n<div id=\"wrapper\">\n	<div id=\"scroller\" class=\"home\">\n		<div id=\"checkOut\" class=\"check-out button primary-fill\">Check Out</div>\n		<div id=\"checkIn\" class=\"check-in button secondary\">Check In</div>\n	</div> "
+    buffer += "<div id=\"header\">\n	<h1>Class Library</h1>\n</div>\n\n<div id=\"wrapper\">\n	<div id=\"scroller\" class=\"home\">\n		<div id=\"checkOut\" class=\"check-out button primary-fill\">Check Out</div>\n		<div id=\"checkIn\" class=\"check-in button secondary\">Check In</div>\n	</div> "
       + "\n</div> ";
     return buffer;
     });
@@ -2311,7 +2320,7 @@ window.require.register("views/templates/studentList", function(exports, require
     return buffer;
     }
 
-    buffer += "<div id=\"header\">\n	<h1>Students</h1>\n	<div id=\"add\" class=\"right-btn\">Add</div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n	";
+    buffer += "<div id=\"header\">\n	<h1>Students</h1>\n  <div id=\"add\" class=\"plus-btn\">\n    <span>Add</span>\n    <div class=\"plus\"></div>\n  </div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n	";
     stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n\n  	</ul>\n\n  </div> "

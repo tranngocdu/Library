@@ -10,6 +10,7 @@ html {
 body {
   font-family: $helvetica;
   font-weight: 300;
+  color: $black;
   -webkit-user-select:none;
   -webkit-text-size-adjust:none;
   line-height: 1;
@@ -157,7 +158,7 @@ form {
 ------------------------------
 */
 .container {
-  width: 94%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -168,11 +169,12 @@ form {
   top: 0px;
   left: 0px;
   height: 65px;
-  background-color: $ui;
-  border-bottom: 1px solid $border;
+  background-color: $header;
+  border-bottom: 1px solid $filter;
   h1 {
     text-align: center;
     padding-top: 32px;
+    color: $white;
   }
 }
 
@@ -194,7 +196,7 @@ form {
   bottom: 0px;
   left: 0px;
   height: 65px;
-  background-color: $ui;
+  background-color: $footer;
   border-top: 1px solid $border;
   z-index: 998;
   ul {
@@ -217,7 +219,7 @@ form {
 .footer-icon {
   background-color: red;
   margin: 7px auto 5px auto;
-  background: url(../images/footer-icons.png);
+  background: url(../images/toolbar-icons.png);
   background-size: 145px 62px;
   background-repeat: no-repeat;
   width: 32px;
@@ -238,24 +240,69 @@ form {
 
 .back, 
 .right-btn {
-  color: $red;
+  color: $white;
   position: absolute;
-  top: 35px;
   font-size: 17px;
 }
 
 .back {
+  top: 35px;
   left: 10px;
-  width: 12px;
-  height: 19px;
-  background-image: url(../images/back-arrow.png);
-  background-size: 12px 19px;
+  width: 10px;
+  height: 20px;
+  background-image: url(../images/lib-sprites.png);
+  background-size: 66px 46px;
+  background-position: 1px -1px;
   background-repeat: no-repeat;
   padding: 0 0 0 18px;
+  &:active {
+    color: $filter;
+    background-position: 1px -26px;
+  }
+}
+
+.plus-btn {
+  position: absolute;
+  color: $white;
+  font-size: 17px;
+  width: 58px;
+  height: 30px;
+  top: 33px;
+  right: 15px;
+  span {
+    position: absolute;
+    left: 0;
+    top: 2px;
+  }
+  &:active {
+    color: $filter;
+    >.plus  {
+      background-position: -17px -25px;
+    }
+  }
+}
+
+.plus {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 21px;
+  height: 21px;
+  background-image: url(../images/lib-sprites.png);
+  background-size: 66px 46px;
+  background-position: -17px 0;
+  background-repeat: no-repeat;
+  &:active {
+    background-position: -17px -25px;
+  }
 }
 
 .right-btn {
+  top: 35px;
   right: 10px;
+  &:active {
+    color: $filter;
+  }
 }
 
 
@@ -293,22 +340,38 @@ a {
   border: 1px solid $primary;
   background-color: $primary;
   color: $white;
+  &:active {
+    border: 1px solid $primary-active;
+    background-color: $primary-active;
+  }
+}
+
+.primary {
+  color: $primary;
+  border: 1px solid $primary;
+  &:active {
+    border: 1px solid $primary-active;
+    color: $primary-active;
+  }
+}
+
+.secondary {
+  color: $red;
+  border: 1px solid $red;
+  &:active {
+    border: 1px solid $red-active;
+    color: $red-active;
+  }
 }
 
 .secondary-fill {
   border: 1px solid $red;
   background-color: $red;
   color: $white;
-}
-
-.primary {
-  color: $primary;
-  border: 1px solid $primary;
-}
-
-.secondary {
-  color: $red;
-  border: 1px solid $red;
+  &:active {
+    background-color: $red-active;
+    border: 1px solid $red-active;
+  }
 }
 
 .disabled {
@@ -404,7 +467,8 @@ a {
 .home {
   padding-top: 100px !important;
 }
-.check-out, .check-in {
+.check-out, 
+.check-in {
   width: 240px;
   padding: 16px 0 18px 0;
   margin: 0 auto;
@@ -538,7 +602,7 @@ a {
   margin: 0 auto;
   padding: 75px 5% 0 5% !important;
   text-align: left;
-  background-color: $ui;
+  background-color: #fff;
   border-bottom: 1px solid $border;
   img {
     height: 160px;
@@ -621,7 +685,7 @@ a {
   top: 90px !important;
 }
 #filter-wrap {
-  border-top: 1px solid $border;
+  border-top: 1px solid $filter;
   margin-top: 10px;
   padding-top: 9px;
 }
@@ -634,16 +698,16 @@ a {
     float: left;
     padding: 5px 0 8px 0;
     text-align: center;
-    color: $red;
+    color: $white;
   }
   #filt-available {
     width: 30%;
-    border-top: 1px solid $red;
-    border-bottom: 1px solid $red;
+    border-top: 1px solid $filter;
+    border-bottom: 1px solid $filter;
   }
   #filt-checked {
     width: 40%;
-    border: 1px solid $red;
+    border: 1px solid $filter;
     -webkit-border-top-right-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
@@ -651,7 +715,7 @@ a {
 
   }
   #filt-all {
-    border: 1px solid $red;
+    border: 1px solid $filter;
     width: 30%;
     -webkit-border-top-left-radius: 5px;
     -webkit-border-bottom-left-radius: 5px;
@@ -660,7 +724,7 @@ a {
     
   }
   .selected {
-    background-color: $red;
+    background-color: $filter;
     color: $white;
   }
 }
@@ -684,6 +748,9 @@ a {
       h2 {
         font-size: 16px;
         font-weight: 500;
+        &:active {
+          color: $dark-grey;
+        }
       }
       h3 {
         font-size: 14px;
@@ -757,26 +824,29 @@ a {
       font-size: 15px;
       padding: 1px 4% 0 0;
       font-weight: 300;
+      &:active {
+        color: $red-active;
+      }
     }
   }
   .selected {
-    background-color: $red;
-    color: $white;
+    background-color: $select;
   }
   .deselected {
     color: $black;
   }
 }
 
-.student-check {
-  width: 20px;
-  height: 17px;
-  background: url(../images/check.png);
-  background-size: 20px 17px;
-  position: absolute;
-  right: 20px;
-  top: 12px;
-}
+// .student-check {
+//   width: 24px;
+//   height: 20px;
+//   background-image: url(../images/lib-sprites.png);
+//   background-size: 66px 46px;
+//   background-position: 24px 0;
+//   position: absolute;
+//   right: 24px;
+//   top: 9px;
+// }
 
 /*
 ------------------------------
