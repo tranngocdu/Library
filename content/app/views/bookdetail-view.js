@@ -28,9 +28,10 @@ module.exports = View.extend({
 
 				var bookdetailArray = JSON.stringify(bookdetail);
 				bookdetailArray = JSON.parse(bookdetailArray);
+				that.bookinfoknow = bookdetailArray[0];
 				that.ISBN = bookdetailArray[0].ISBN;
 				that.$el.html(that.template(bookdetailArray));
-				if (bookdetailArray[0].studentList.length == 1) {
+				if (bookdetailArray[0].studentList.length == 0) {
 					$("#checkout-list").hide();
 				}		
 			},
@@ -63,7 +64,7 @@ module.exports = View.extend({
 			}
 		});
 	},
-	
+
 	checkinBook: function() {
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
@@ -90,18 +91,18 @@ module.exports = View.extend({
 		var bookTitle = $(e.currentTarget).data('title');
 		var that = this;
 		that.book_id = $(e.currentTarget).data('id');
-			var removePrompt = {
-				state0: { 
-					title: "Confirmation",
-					buttons: { "No": false, "Yes": true },
-					html:'Are you sure you wish to remove <strong><em>'+bookTitle+'</em></strong> from your collection?',
-					submit: function(e,v,m,f){
-						if(v){
-							Application.bookDetailView.$el.trigger("removeBook");
-						}
+		var removePrompt = {
+			state0: { 
+				title: "Confirmation",
+				buttons: { "No": false, "Yes": true },
+				html:'Are you sure you wish to remove <strong><em>'+bookTitle+'</em></strong> from your collection?',
+				submit: function(e,v,m,f){
+					if(v){
+						Application.bookDetailView.$el.trigger("removeBook");
 					}
 				}
-			};
+			}
+		};
 		$.prompt(removePrompt);
 	},
 
@@ -111,19 +112,19 @@ module.exports = View.extend({
 		var book = Parse.Object.extend("NewBook");
 		var query = new Parse.Query(book);
 		query.get(book_id, {
-		  success: function(myObj) {
-		    // The object was retrieved successfully.
-		    myObj.destroy({});
-			$(book_id).remove();
-			Application.router.navigate("#bookList", {
+			success: function(myObj) {
+				// The object was retrieved successfully.
+				myObj.destroy({});
+				$(book_id).remove();
+				Application.router.navigate("#bookList", {
 					trigger: true
 				});
-		  },
-		  error: function(object, error) {
-		    alert("This was not retreived correctly.");
-		  }
+			},
+			error: function(object, error) {
+				alert("This was not retreived correctly.");
+			}
 		});
-		
+
 	},
 
 	editQuantity: function() {
@@ -137,10 +138,10 @@ module.exports = View.extend({
 				submit: function(e,v,m,f){
 					console.log(f.amount);
 					var totalAmount=f.amount;
-					
+
 					//Update UI
 					$("#totalBooks").html("<span>"+totalAmount+" Total</span>");
-					
+
 					//Update Server
 					totalAmount = parseInt(totalAmount);
 					var currentUser = Parse.User.current();
@@ -154,7 +155,7 @@ module.exports = View.extend({
 							console.log(usersBooks);
 							var quantityAvailable = usersBooks.attributes.quantity_available;
 							quantityAvailable = quantityAvailable + 1;
-							
+
 							usersBooks.set("quantity_available",quantityAvailable);
 							usersBooks.set("quantity_total",totalAmount);
 
