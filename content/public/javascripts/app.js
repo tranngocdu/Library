@@ -738,7 +738,7 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   				state0: { 
   					title: "Confirmation",
   					buttons: { "No": false, "Yes": true },
-  					html:'</br>Are you sure you wish to remove "'+bookTitle+'" from your collection?',
+  					html:'Are you sure you wish to remove <strong><em>'+bookTitle+'</em></strong> from your collection?',
   					submit: function(e,v,m,f){
   						if(v){
   							Application.bookDetailView.$el.trigger("removeBook");

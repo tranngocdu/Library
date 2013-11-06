@@ -742,7 +742,6 @@ a {
   Impromptu
 ------------------------------
 */
-
 select#qty-input {
   width: 50%;
   border-top: 1px solid $border;
@@ -754,7 +753,8 @@ select#qty-input {
 }
 
 #jqi_state0_buttonScan,
-#jqi_state0_buttonSubmit {
+#jqi_state0_buttonSubmit,
+#jqi_state0_buttonNo {
   border-left: 0 none;
 }
 
@@ -763,7 +763,8 @@ select#qty-input {
   border-right: 0 none;
 }
 
-#jqi_state0_buttonCancel {
+#jqi_state0_buttonCancel,
+#jqi_state0_buttonYes {
   color: $red;
   border-right: 0 none;
 }
@@ -805,10 +806,11 @@ div.jqi .jqititle{
   font-weight: 500;
 }
 div.jqi .jqimessage{ 
-  padding: 5px; 
-  line-height: 20px; 
-  color: #444444;
+  padding: 5px 0 15px 0; 
+  font-size: 16px;
+  color: $black;
   font-weight: 300; 
+  line-height: 1.4;
 }
 div.jqi .jqibuttons{ 
   text-align: center; 
