@@ -63,7 +63,11 @@ module.exports = View.extend({
 
 		var uploadSuccess = function(args) {
 			if (args.result == 'didFinishPickingMediaWithInfo') {
-				that.thumbnail_url = args.FPPickerControllerRemoteURL + '/convert?w=150&h=150';
+				that.thumbnail_url = args.FPPickerControllerRemoteURL + '/convert?w=150';
+				$(".no-icon").hide();
+				$("#custom-art").show();
+				$("#custom-art").html('<img src='+that.thumbnail_url+'></img>')
+				
 				//$('#picker').removeClass('background-image');
 				//$('#picker').css('background-image', 'url(' + that.thumbnail_url + ')');
 			}
