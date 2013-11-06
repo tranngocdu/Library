@@ -433,12 +433,28 @@ window.require.register("views/addbook-view", function(exports, require, module)
   	},
 
   	render: function() {
+  		var that = this;
   		var data = Application.addBookView.bookData;
   		var passData = data;
   		console.log(passData);
   		var dataString = JSON.stringify(data);
   		var combinedString = dataString.substring(0,6) + dataString.substring(20);
   		var data=JSON.parse(combinedString);
+
+  		$.ajax({
+  			data: {
+  				url: Application.addBookView.bookData.ISBN.cover.medium
+  			},
+  			url: "https://www.filepicker.io/api/store/S3?key=A8GpOnfHhQxiznYCtXZ9Uz",
+  			type: "POST",
+  			success: function (data) {
+  				that.imageUrl = data.url;
+
+  			},
+  			error: function (jqXHR,textStatus,errorThrown) {
+  			}
+  		});
+  		
   		this.bookData = data;
   		this.$el.html(this.template(data));
 
@@ -464,7 +480,7 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		authorArray = authorArray.toString();
   		newBook.set("author", authorArray);
   		if (typeof this.bookData.ISBN.cover!='undefined'){
-  			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
+  			newBook.set("cover_image", that.imageUrl);
   		};
   		console.log(this.bookData);
   		newBook.set("quantity_total", that.totalAmount);
@@ -483,30 +499,30 @@ window.require.register("views/addbook-view", function(exports, require, module)
   					console.log(error);
   				}
   			});
-  		}else {alert("You need to add a quantity")};
-  	},
+  			}else {alert("You need to add a quantity")};
+  		},
 
-  	quantity: function() {
-  		var that = this;
-  		var data = Application.addBookView.bookData;
-  		var quantityPrompt = {
-  			state0: { 
-  				title: "Edit Quantity",
-  				buttons: { "Submit": true, "Cancel": false },
-  				html:'<select id="qty-input" name="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>',
-  				submit: function(e,v,m,f){
-  					console.log(f.amount);
-  					that.totalAmount=f.amount;
-  					$("#numberAvailable").html("Number Available: "+that.totalAmount+"");
-  					that.totalAmount = parseInt(that.totalAmount);
-  					
+  		quantity: function() {
+  			var that = this;
+  			var data = Application.addBookView.bookData;
+  			var quantityPrompt = {
+  				state0: { 
+  					title: "Edit Quantity",
+  					buttons: { "Submit": true, "Cancel": false },
+  					html:'<select id="qty-input" name="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>',
+  					submit: function(e,v,m,f){
+  						console.log(f.amount);
+  						that.totalAmount=f.amount;
+  						$("#numberAvailable").html("Number Available: "+that.totalAmount+"");
+  						that.totalAmount = parseInt(that.totalAmount);
+
+  					}
   				}
-  			}
-  		};
-  		$.prompt(quantityPrompt);
-  	},
+  			};
+  			$.prompt(quantityPrompt);
+  		},
 
-  });
+  	});
   
 });
 window.require.register("views/addbookmanually-view", function(exports, require, module) {
