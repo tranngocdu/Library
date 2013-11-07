@@ -841,28 +841,29 @@ select#numberAvailable {
       padding: 1px 4% 0 0;
       font-weight: 300;
       &:active {
-        color: $red-active;
+        color: $primary;
       }
     }
   }
   .selected {
     background-color: $select;
+    color: $white;
   }
   .deselected {
     color: $black;
   }
 }
 
-// .student-check {
-//   width: 24px;
-//   height: 20px;
-//   background-image: url(../images/lib-sprites.png);
-//   background-size: 66px 46px;
-//   background-position: 24px 0;
-//   position: absolute;
-//   right: 24px;
-//   top: 9px;
-// }
+.student-check {
+  width: 24px;
+  height: 20px;
+  background-image: url(../images/lib-sprites.png);
+  background-size: 66px 46px;
+  background-position: 24px 0;
+  position: absolute;
+  right: 24px;
+  top: 9px;
+}
 
 /*
 ------------------------------
