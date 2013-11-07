@@ -92,7 +92,12 @@ module.exports = View.extend({
 						});
 					},
 					error: function(error) {
-						alert("Incorrect password");
+						navigator.notification.alert(
+							'The password you entered was incorrect.',  // message
+							function alertDismissed() {}, // callback
+							'Check Password',            // title
+							'OK'                  // buttonName
+						);
 						var oldPassword = $('#set-current').val("");
 						var password =  $('#set-new').val("");
 						var confirmPassword =  $('#set-new-confirm').val("");
@@ -100,7 +105,12 @@ module.exports = View.extend({
 				});
 			}
 			else {
-				alert("Passwords need to match");
+				navigator.notification.alert(
+						'The passwords did not match.',  // message
+						function alertDismissed() {}, // callback
+						'Try again',            // title
+						'OK'                  // buttonName
+					);
 			}
 
 		},
