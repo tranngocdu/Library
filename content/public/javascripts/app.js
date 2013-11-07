@@ -1360,20 +1360,12 @@ window.require.register("views/checkout-view", function(exports, require, module
   					}
   				});
   				} else {
-  					var quantityPrompt = {
-  						state1: { 
-  							title: "Oops...",
-  							html: "All copies have been check out!",
-  							buttons: { "Ok": true },
-  							submit: function(e,v,m,f){
-  								Application.router.navigate("#bookList" , {trigger: true});
-
-  							},
-  							cancel: function(){
-  							}
-  						}
-  					};
-  				$.prompt(quantityPrompt);
+  					navigator.notification.alert(
+  									'All copies have been checked out!',  // message
+  									function alertDismissed() {}, // callback
+  									'Oops!',            // title
+  									'OK'                  // buttonName
+  								);
   				};
   			},
   			error: function(error) {
@@ -1524,20 +1516,26 @@ window.require.register("views/home-view", function(exports, require, module) {
   			success: function(bookdetail) {
 
   				if (bookdetail == '') {
-  					var quantityPrompt = {
-  						state1: { 
-  							title: "Not so quick...",
-  							html: "You need to add this book to your library first.",
-  							buttons: { "Ok": true },
-  							submit: function(e,v,m,f){
-  								Application.router.navigate("#bookList" , {trigger: true});
+  					navigator.notification.alert(
+  						'You need to add this book to your library first.',  // message
+  						function alertDismissed() {}, // callback
+  						'Not so quick...',            // title
+  						'OK'                  // buttonName
+  					);
+  				// 	var quantityPrompt = {
+  				// 		state1: { 
+  				// 			title: "Not so quick...",
+  				// 			html: "You need to add this book to your library first.",
+  				// 			buttons: { "Ok": true },
+  				// 			submit: function(e,v,m,f){
+  				// 				Application.router.navigate("#bookList" , {trigger: true});
 
-  							},
-  							cancel: function(){
-  							}
-  						}
-  					};
-  				$.prompt(quantityPrompt);
+  				// 			},
+  				// 			cancel: function(){
+  				// 			}
+  				// 		}
+  				// 	};
+  				// $.prompt(quantityPrompt);
   				} else {
   				var bookdetailArray = JSON.stringify(bookdetail);
   				bookdetailArray = JSON.parse(bookdetailArray);
@@ -1565,20 +1563,12 @@ window.require.register("views/home-view", function(exports, require, module) {
 
   			success: function(bookdetail) {
   				if (bookdetail == '') {
-  					var quantityPrompt = {
-  						state1: { 
-  							title: "Not so quick...",
-  							html: "You need to add this book to your library first.",
-  							buttons: { "Ok": true },
-  							submit: function(e,v,m,f){
-  								Application.router.navigate("#bookList" , {trigger: true});
-
-  							},
-  							cancel: function(){
-  							}
-  						}
-  					};
-  				$.prompt(quantityPrompt);
+  					navigator.notification.alert(
+  											'You need to add this book to your library first.',  // message
+  											function alertDismissed() {}, // callback
+  											'Not so quick...',            // title
+  											'OK'                  // buttonName
+  										);
   				} else {
   				var bookdetailArray = JSON.stringify(bookdetail);
   				bookdetailArray = JSON.parse(bookdetailArray);
@@ -1680,7 +1670,7 @@ window.require.register("views/login-view", function(exports, require, module) {
   			  error: function(error) {
   			    // Show the error message somewhere
   			navigator.notification.alert(
-  				'First enter the email used for Class Library.',   // message
+  				'Please enter above the email you used for Class Library.',   // message
   				function alertDismissed() {}, // callback
   				'Enter your email',            // title
   				'OK'                  // buttonName
@@ -1926,8 +1916,14 @@ window.require.register("views/signup-view", function(exports, require, module) 
   			},
   			error: function(user, error) {
   				// Show the error message somewhere and let the user try again.
-  				alert("Error: " + error.code + " " + error.message);
-  			}
+  				// alert("Error: " + error.code + " " + error.message);
+  					navigator.notification.alert(
+  						'Please fill out all fields.',  // message
+  						function alertDismissed() {}, // callback
+  						'All Fields Required',            // title
+  						'OK'                  // buttonName
+  					);
+  				}	
   		});
 
 
@@ -1978,8 +1974,8 @@ window.require.register("views/signup-view", function(exports, require, module) 
   			});
   		}
   		else{
-  			navigator.notification.alert(
-  				'Please enter all fields',  // message
+  			navigator.notification.alert (
+  				'Please fill out all fields.',  // message
   				function alertDismissed() {}, // callback
   				'All Fields Required',            // title
   				'OK'                  // buttonName

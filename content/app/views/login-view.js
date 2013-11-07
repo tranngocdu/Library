@@ -79,7 +79,7 @@ module.exports = View.extend({
 			  error: function(error) {
 			    // Show the error message somewhere
 			navigator.notification.alert(
-				'First enter the email used for Class Library.',   // message
+				'Please enter above the email you used for Class Library.',   // message
 				function alertDismissed() {}, // callback
 				'Enter your email',            // title
 				'OK'                  // buttonName

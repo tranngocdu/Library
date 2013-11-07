@@ -133,20 +133,12 @@ module.exports = View.extend({
 					}
 				});
 				} else {
-					var quantityPrompt = {
-						state1: { 
-							title: "Oops...",
-							html: "All copies have been check out!",
-							buttons: { "Ok": true },
-							submit: function(e,v,m,f){
-								Application.router.navigate("#bookList" , {trigger: true});
-
-							},
-							cancel: function(){
-							}
-						}
-					};
-				$.prompt(quantityPrompt);
+					navigator.notification.alert(
+									'All copies have been checked out!',  // message
+									function alertDismissed() {}, // callback
+									'Oops!',            // title
+									'OK'                  // buttonName
+								);
 				};
 			},
 			error: function(error) {

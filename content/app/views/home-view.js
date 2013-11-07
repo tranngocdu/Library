@@ -133,20 +133,26 @@ module.exports = View.extend({
 			success: function(bookdetail) {
 
 				if (bookdetail == '') {
-					var quantityPrompt = {
-						state1: { 
-							title: "Not so quick...",
-							html: "You need to add this book to your library first.",
-							buttons: { "Ok": true },
-							submit: function(e,v,m,f){
-								Application.router.navigate("#bookList" , {trigger: true});
+					navigator.notification.alert(
+						'You need to add this book to your library first.',  // message
+						function alertDismissed() {}, // callback
+						'Not so quick...',            // title
+						'OK'                  // buttonName
+					);
+				// 	var quantityPrompt = {
+				// 		state1: { 
+				// 			title: "Not so quick...",
+				// 			html: "You need to add this book to your library first.",
+				// 			buttons: { "Ok": true },
+				// 			submit: function(e,v,m,f){
+				// 				Application.router.navigate("#bookList" , {trigger: true});
 
-							},
-							cancel: function(){
-							}
-						}
-					};
-				$.prompt(quantityPrompt);
+				// 			},
+				// 			cancel: function(){
+				// 			}
+				// 		}
+				// 	};
+				// $.prompt(quantityPrompt);
 				} else {
 				var bookdetailArray = JSON.stringify(bookdetail);
 				bookdetailArray = JSON.parse(bookdetailArray);
@@ -174,20 +180,12 @@ module.exports = View.extend({
 
 			success: function(bookdetail) {
 				if (bookdetail == '') {
-					var quantityPrompt = {
-						state1: { 
-							title: "Not so quick...",
-							html: "You need to add this book to your library first.",
-							buttons: { "Ok": true },
-							submit: function(e,v,m,f){
-								Application.router.navigate("#bookList" , {trigger: true});
-
-							},
-							cancel: function(){
-							}
-						}
-					};
-				$.prompt(quantityPrompt);
+					navigator.notification.alert(
+											'You need to add this book to your library first.',  // message
+											function alertDismissed() {}, // callback
+											'Not so quick...',            // title
+											'OK'                  // buttonName
+										);
 				} else {
 				var bookdetailArray = JSON.stringify(bookdetail);
 				bookdetailArray = JSON.parse(bookdetailArray);

@@ -48,8 +48,14 @@ module.exports = View.extend({
 			},
 			error: function(user, error) {
 				// Show the error message somewhere and let the user try again.
-				alert("Error: " + error.code + " " + error.message);
-			}
+				// alert("Error: " + error.code + " " + error.message);
+					navigator.notification.alert(
+						'Please fill out all fields.',  // message
+						function alertDismissed() {}, // callback
+						'All Fields Required',            // title
+						'OK'                  // buttonName
+					);
+				}	
 		});
 
 
@@ -100,8 +106,8 @@ module.exports = View.extend({
 			});
 		}
 		else{
-			navigator.notification.alert(
-				'Please enter all fields',  // message
+			navigator.notification.alert (
+				'Please fill out all fields.',  // message
 				function alertDismissed() {}, // callback
 				'All Fields Required',            // title
 				'OK'                  // buttonName
