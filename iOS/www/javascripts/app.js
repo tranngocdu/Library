@@ -433,6 +433,7 @@ window.require.register("views/addbook-view", function(exports, require, module)
   	},
 
   	render: function() {
+  		var that = this;
   		var data = Application.addBookView.bookData;
   		var passData = data;
   		console.log(passData);
@@ -440,6 +441,20 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		var combinedString = dataString.substring(0,6) + dataString.substring(20);
   		var data=JSON.parse(combinedString);
   		this.bookData = data;
+  		
+  		$.ajax({
+  			data: {
+  				url: Application.addBookView.bookData.ISBN.cover.medium
+  			},
+  			url: "https://www.filepicker.io/api/store/S3?key=A8GpOnfHhQxiznYCtXZ9Uz",
+  			type: "POST",
+  			success: function (data) {
+  				that.imageUrl = data.url;
+  			},
+  			error: function (jqXHR,textStatus,errorThrown) {
+  			}
+  		});
+  		
   		this.$el.html(this.template(data));
 
   		return this;
@@ -452,8 +467,6 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		var NewBook=Parse.Object.extend("NewBook");
   		var newBook=new NewBook();
   		newBook.set("title", this.bookData.ISBN.title);
-  		//newBook.set("User", currentUserId);
-  		console.log(currentUser);
   		var lengthAuthors = this.bookData.ISBN.authors.length;
   		var i = 0;
   		var authorArray = new Array ();
@@ -464,7 +477,7 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		authorArray = authorArray.toString();
   		newBook.set("author", authorArray);
   		if (typeof this.bookData.ISBN.cover!='undefined'){
-  			newBook.set("cover_image", this.bookData.ISBN.cover.medium);
+  			newBook.set("cover_image", that.imageUrl);
   		};
   		console.log(this.bookData);
   		newBook.set("quantity_total", that.totalAmount);
@@ -483,30 +496,30 @@ window.require.register("views/addbook-view", function(exports, require, module)
   					console.log(error);
   				}
   			});
-  		}else {alert("You need to add a quantity")};
-  	},
+  			}else {alert("You need to add a quantity")};
+  		},
 
-  	quantity: function() {
-  		var that = this;
-  		var data = Application.addBookView.bookData;
-  		var quantityPrompt = {
-  			state0: { 
-  				title: "Edit Quantity",
-  				buttons: { "Submit": true, "Cancel": false },
-  				html:'<select id="qty-input" name="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>',
-  				submit: function(e,v,m,f){
-  					console.log(f.amount);
-  					that.totalAmount=f.amount;
-  					$("#numberAvailable").html("Number Available: "+that.totalAmount+"");
-  					that.totalAmount = parseInt(that.totalAmount);
-  					
+  		quantity: function() {
+  			var that = this;
+  			var data = Application.addBookView.bookData;
+  			var quantityPrompt = {
+  				state0: { 
+  					title: "Edit Quantity",
+  					buttons: { "Submit": true, "Cancel": false },
+  					html:'<select id="qty-input" name="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>',
+  					submit: function(e,v,m,f){
+  						console.log(f.amount);
+  						that.totalAmount=f.amount;
+  						$("#numberAvailable").html("Number Available: "+that.totalAmount+"");
+  						that.totalAmount = parseInt(that.totalAmount);
+
+  					}
   				}
-  			}
-  		};
-  		$.prompt(quantityPrompt);
-  	},
+  			};
+  			$.prompt(quantityPrompt);
+  		},
 
-  });
+  	});
   
 });
 window.require.register("views/addbookmanually-view", function(exports, require, module) {
@@ -535,6 +548,7 @@ window.require.register("views/addbookmanually-view", function(exports, require,
   		var title = $("#title").val();
   		var author = $("#author").val();
   		var numberAvailable = $("#numberAvailable").val();
+  		numberAvailable = parseInt(numberAvailable);
   		var currentUser = Parse.User.current();
   		var currentUserId = currentUser.id;
   		var date = new Date();
@@ -679,9 +693,13 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   				that.bookinfoknow = bookdetailArray[0];
   				that.ISBN = bookdetailArray[0].ISBN;
   				that.$el.html(that.template(bookdetailArray));
-  				if (bookdetailArray[0].studentList.length == 0) {
+  				if ((bookdetailArray[0].studentList.length == 0) || (jQuery.isEmptyObject(bookdetailArray[0].studentList[0]) == true)) {
   					$("#checkout-list").hide();
-  				}		
+  				}
+  				if (bookdetailArray[0].studentList[0] == "") {
+  					alert("nil");
+  				}
+  				that.screwyou = bookdetailArray[0].studentList[0];
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
@@ -1553,7 +1571,8 @@ window.require.register("views/login-view", function(exports, require, module) {
   			  },
   			  error: function(error) {
   			    // Show the error message somewhere
-  			    alert("Error: " + error.code + " " + error.message);
+  			alert("Please enter an email address used with Class Library");
+  			    //alert("Error: " + error.code + " " + error.message);
   			  }
   			});
   		} else {
@@ -1946,7 +1965,7 @@ window.require.register("views/templates/addBook", function(exports, require, mo
       + "</h2>\n      <h3>";
     stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack2 || stack2 === 0) { buffer += stack2; }
-    buffer += "</h3>\n      <h4>ISBN Number</h4>\n      <p id=\"numberAvailable\"></p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-quantity\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
+    buffer += "</h3>\n      <p id=\"numberAvailable\"></p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-quantity\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;

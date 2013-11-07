@@ -23,6 +23,7 @@ module.exports = View.extend({
 		var title = $("#title").val();
 		var author = $("#author").val();
 		var numberAvailable = $("#numberAvailable").val();
+		numberAvailable = parseInt(numberAvailable);
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var date = new Date();

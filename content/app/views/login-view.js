@@ -73,7 +73,8 @@ module.exports = View.extend({
 			  },
 			  error: function(error) {
 			    // Show the error message somewhere
-			    alert("Error: " + error.code + " " + error.message);
+			alert("Please enter an email address used with Class Library");
+			    //alert("Error: " + error.code + " " + error.message);
 			  }
 			});
 		} else {

@@ -23,7 +23,8 @@ module.exports = View.extend({
 		var dataString = JSON.stringify(data);
 		var combinedString = dataString.substring(0,6) + dataString.substring(20);
 		var data=JSON.parse(combinedString);
-
+		this.bookData = data;
+		
 		$.ajax({
 			data: {
 				url: Application.addBookView.bookData.ISBN.cover.medium
@@ -32,13 +33,11 @@ module.exports = View.extend({
 			type: "POST",
 			success: function (data) {
 				that.imageUrl = data.url;
-
 			},
 			error: function (jqXHR,textStatus,errorThrown) {
 			}
 		});
 		
-		this.bookData = data;
 		this.$el.html(this.template(data));
 
 		return this;
@@ -51,8 +50,6 @@ module.exports = View.extend({
 		var NewBook=Parse.Object.extend("NewBook");
 		var newBook=new NewBook();
 		newBook.set("title", this.bookData.ISBN.title);
-		//newBook.set("User", currentUserId);
-		console.log(currentUser);
 		var lengthAuthors = this.bookData.ISBN.authors.length;
 		var i = 0;
 		var authorArray = new Array ();

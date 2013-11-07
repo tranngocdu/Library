@@ -31,9 +31,13 @@ module.exports = View.extend({
 				that.bookinfoknow = bookdetailArray[0];
 				that.ISBN = bookdetailArray[0].ISBN;
 				that.$el.html(that.template(bookdetailArray));
-				if (bookdetailArray[0].studentList.length == 0) {
+				if ((bookdetailArray[0].studentList.length == 0) || (jQuery.isEmptyObject(bookdetailArray[0].studentList[0]) == true)) {
 					$("#checkout-list").hide();
-				}		
+				}
+				if (bookdetailArray[0].studentList[0] == "") {
+					alert("nil");
+				}
+				that.screwyou = bookdetailArray[0].studentList[0];
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
