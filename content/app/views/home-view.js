@@ -26,13 +26,21 @@ module.exports = View.extend({
 	render: function () {
 		this.$el.html(this.template());
 		if (Application.homeView.checkedOut == true) {
-			$('body').append('<div id="checkedPrompt">HEWHEHE </div>');
+			$('body').append('<div id="checkedPrompt">Happy reading!</div>');
+			$('#checkedPrompt').fadeIn(400);
 			Application.homeView.checkedOut = false;
+			setTimeout(function(){
+				$('#checkedPrompt').fadeOut(400, function() { $(this).remove(); });
+			}, 3000);
 		}
 		
 		if (Application.homeView.checkedIn == true) {
-			$('body').append('<div id="checkedPrompt">HEWHEHE </div>');
-			Application.homeView.checkedIn = false;
+			$('body').append('<div id="checkedPrompt">Back on the shelf!</div>');
+			$('#checkedPrompt').fadeIn(400);
+			Application.homeView.checkedOut = false;
+			setTimeout(function(){
+				$('#checkedPrompt').fadeOut(400, function() { $(this).remove(); });
+			}, 3000);
 		}
 		
 		var current = Parse.User.current();

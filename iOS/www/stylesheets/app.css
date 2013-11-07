@@ -207,11 +207,11 @@ div.ui-mobile-viewport {
   General Styles
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000036}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000036}}
 html {
   -webkit-font-smoothing: antialiased; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000310}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000310}}
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
@@ -221,7 +221,7 @@ body {
   line-height: 1;
   background-color: white !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000320}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000320}}
 ::-webkit-input-placeholder {
   color: #bbbbbb;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -232,12 +232,12 @@ body {
   Resets
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000331}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000331}}
 * {
   -webkit-box-sizing: border-box;
   /* apply a natural box layout model to all elements */ }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000336}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000336}}
 input.ui-input-text,
 textarea.ui-input-text {
   margin: 0;
@@ -245,18 +245,18 @@ textarea.ui-input-text {
   -webkit-appearance: none;
   /* disables inner shadows on iOS */ }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000342}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000342}}
 .ui-input-search, div.ui-input-text {
   margin: 0 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000347}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000347}}
 .ui-focus,
 .ui-btn:focus {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000353}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000353}}
 input,
 select {
   outline: none 0 !important;
@@ -265,18 +265,18 @@ select {
   border: none;
   border-bottom: 1px solid #CACACA; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000361}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000361}}
 h1, h2, h3, h4, h5, p {
   margin: 0;
   padding: 0;
   line-height: 1.2; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000367}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000367}}
 ul li {
   padding: 0;
   list-style-type: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000372}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000372}}
 form {
   margin-bottom: 0; }
 
@@ -285,40 +285,40 @@ form {
   Helper Styles
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000381}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000381}}
 .clearfix {
   zoom: 1; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000383}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000383}}
   .clearfix:before, .clearfix:after {
     content: "";
     display: table; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000384}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000384}}
   .clearfix:after {
     clear: both; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000387}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000387}}
 .hide {
   display: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000391}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000391}}
 .hide-hard {
   display: none !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000395}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000395}}
 .block {
   display: block !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000399}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\0000399}}
 .save {
   font-weight: 500; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003103}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003103}}
 .truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003109}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003109}}
 .truncate-two {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -326,7 +326,7 @@ form {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003117}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003117}}
 .truncate-three {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -334,7 +334,7 @@ form {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003125}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003125}}
 .inactive {
   border-bottom: 0 none; }
 
@@ -343,7 +343,7 @@ form {
   Scroll
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003134}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003134}}
 #wrapper {
   position: absolute;
   overflow-y: auto;
@@ -354,13 +354,13 @@ form {
   left: 0;
   width: 100%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003145}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003145}}
 #scroller {
   min-height: 100%;
   -webkit-transform: translateZ(0);
   padding: 20px 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003151}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003151}}
 .bottomless {
   bottom: 0 !important; }
 
@@ -369,12 +369,12 @@ form {
   Layout
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003163}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003163}}
 .container {
   width: 90%;
   margin: 0 auto; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003168}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003168}}
 #header {
   position: fixed;
   z-index: 9;
@@ -384,25 +384,25 @@ form {
   height: 65px;
   background-color: #f46b63;
   border-bottom: 1px solid #c95750; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003177}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003177}}
   #header h1 {
     text-align: center;
     padding-top: 32px;
     color: white; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003184}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003184}}
 .extended-header {
   height: 110px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003188}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003188}}
 .hidden {
   display: none !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003192}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003192}}
 .visible {
   display: block !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003196}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003196}}
 #footer {
   position: absolute;
   width: 100%;
@@ -412,12 +412,12 @@ form {
   background-color: white;
   border-top: 1px solid #dbdbdb;
   z-index: 998; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003205}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003205}}
   #footer ul {
     list-style-type: none;
     margin: 0;
     padding: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003209}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003209}}
     #footer ul li {
       display: inline-block;
       width: 24.5%;
@@ -425,7 +425,7 @@ form {
       color: #818181;
       font-size: 14px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003222}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003222}}
 .footer-icon {
   background-color: red;
   margin: 7px auto 5px auto;
@@ -435,46 +435,46 @@ form {
   width: 32px;
   height: 30px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003232}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003232}}
 #icon-home {
   background-position: 2px 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003233}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003233}}
 .home-active {
   background-position: 2px -33px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003235}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003235}}
 #icon-books {
   background-position: -38px 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003236}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003236}}
 .books-active {
   background-position: -38px -33px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003238}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003238}}
 #icon-students {
   background-position: -76px 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003239}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003239}}
 .students-active {
   background-position: -76px -33px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003241}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003241}}
 #icon-settings {
   background-position: -118px 1px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003242}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003242}}
 .settings-active {
   background-position: -118px -32px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003245}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003245}}
 .back,
 .right-btn {
   color: white;
   position: absolute;
   font-size: 17px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003251}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003251}}
 .back {
   top: 35px;
   left: 10px;
@@ -485,12 +485,12 @@ form {
   background-position: 1px -1px;
   background-repeat: no-repeat;
   padding: 0 0 0 18px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003261}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003261}}
   .back:active {
     color: #c95750;
     background-position: 1px -26px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003267}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003267}}
 .plus-btn {
   position: absolute;
   color: white;
@@ -499,19 +499,19 @@ form {
   height: 40px;
   top: 25px;
   right: 6px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003275}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003275}}
   .plus-btn span {
     position: absolute;
     top: 10px;
     left: 16px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003280}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003280}}
   .plus-btn:active {
     color: #c95750; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003282}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003282}}
     .plus-btn:active > .plus {
       background-position: -17px -25px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003288}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003288}}
 .plus {
   position: absolute;
   top: 8px;
@@ -522,15 +522,15 @@ form {
   background-size: 66px 46px;
   background-position: -17px 0;
   background-repeat: no-repeat; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003298}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003298}}
   .plus:active {
     background-position: -17px -25px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003303}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003303}}
 .right-btn {
   top: 35px;
   right: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003306}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003306}}
   .right-btn:active {
     color: #c95750; }
 
@@ -539,20 +539,20 @@ form {
   Typography
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003317}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003317}}
 h1 {
   color: #282828;
   font-size: 18px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003322}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003322}}
 .active {
   color: #f46b63 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003326}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003326}}
 a {
   color: #3cc1a6;
   text-decoration: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003329}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003329}}
   a:active {
     color: #15b595; }
 
@@ -561,51 +561,51 @@ a {
   Buttons
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003339}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003339}}
 .button {
   -webkit-border-radius: 5px;
   border-radius: 5px;
   text-align: center; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003345}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003345}}
 .primary-fill {
   border: 1px solid #3cc1a6;
   background-color: #3cc1a6;
   color: white; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003349}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003349}}
   .primary-fill:active {
     border: 1px solid #15b595;
     background-color: #15b595; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003355}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003355}}
 .primary {
   color: #3cc1a6;
   border: 1px solid #3cc1a6; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003358}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003358}}
   .primary:active {
     border: 1px solid #15b595;
     color: #15b595; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003364}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003364}}
 .secondary {
   color: #f46b63;
   border: 1px solid #f46b63; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003367}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003367}}
   .secondary:active {
     border: 1px solid #e5534b;
     color: #e5534b; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003373}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003373}}
 .secondary-fill {
   border: 1px solid #f46b63;
   background-color: #f46b63;
   color: white; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003377}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003377}}
   .secondary-fill:active {
     background-color: #e5534b;
     border: 1px solid #e5534b; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003383}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003383}}
 .disabled {
   color: #a8a8a8;
   border: 1px solid #a8a8a8; }
@@ -615,7 +615,7 @@ a {
   Signup & Login
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003397}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003397}}
 #signup-view h2,
 #login-view h2,
 #settings-view h2,
@@ -623,7 +623,7 @@ a {
   text-align: center;
   color: #818181;
   margin-bottom: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003402}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003402}}
 #signup-view input,
 #login-view input,
 #settings-view input,
@@ -632,15 +632,15 @@ a {
   width: 100%;
   font-size: 16px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003410}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003410}}
 #login-view h2 {
   margin-top: 20px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003415}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003415}}
 .first-input {
   border-top: 1px solid #CACACA; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003429}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003429}}
 #create-account,
 #have-account,
 #login,
@@ -657,7 +657,7 @@ a {
   margin: 0 auto;
   font-size: 16px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003440}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003440}}
 #create-account,
 #login,
 #add-student,
@@ -666,11 +666,11 @@ a {
   margin-top: 20px;
   margin-bottom: 10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003445}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003445}}
 #logout {
   margin-bottom: 10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003449}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003449}}
 #disclaimer {
   color: #a8a8a8;
   font-size: 12px;
@@ -682,13 +682,13 @@ a {
   bottom: 5%;
   line-height: 1.6; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003461}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003461}}
 #forgot {
   margin-top: 20px;
   text-align: center;
   font-size: 12px;
   color: #3cc1a6; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003466}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003466}}
   #forgot:active {
     color: #15b595; }
 
@@ -697,11 +697,11 @@ a {
   Home
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003476}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003476}}
 .home {
   padding-top: 100px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003480}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003480}}
 .check-out,
 .check-in {
   width: 240px;
@@ -709,47 +709,59 @@ a {
   margin: 0 auto;
   font-size: 18px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003487}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003487}}
 .check-out {
   margin-bottom: 25px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003491}}
+#checkedPrompt {
+  position: fixed;
+  top: 65px;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  padding: 10px 0 12px 0;
+  background-color: #424242;
+  color: white;
+  display: none; }
 
 /*
 ------------------------------
   Add Book
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003497}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003509}}
 .add-book,
 .check {
   width: 90%;
   margin: 0 auto;
   text-align: center;
   padding: 10px !important; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003502}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003514}}
   .add-book img,
   .check img {
     height: 190px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003505}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003517}}
   .add-book h2,
   .check h2 {
     font-size: 16px;
     font-weight: 500;
     padding-top: 7px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003511}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003523}}
   .add-book h3,
   .check h3 {
     font-size: 14px;
     font-weight: 300;
     color: #a8a8a8;
     padding-top: 4px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003518}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003530}}
   .add-book h4,
   .check h4 {
     font-weight: 300;
     color: #a8a8a8;
     font-size: 14px;
     padding-top: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003525}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003537}}
   .add-book p,
   .check p {
     font-size: 13px;
@@ -757,41 +769,41 @@ a {
     color: #3cc1a6;
     padding: 5px 0 15px 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003532}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003544}}
 .ab-btn {
   width: 140px;
   padding: 8px 0 10px 0;
   margin: 0 auto 10px auto;
   font-size: 16px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003539}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003551}}
 .availables {
   overflow: hidden;
   margin: 5px 0 15px 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003542}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003554}}
   .availables #totalBooks {
     font-size: 13px;
     font-weight: 500;
     color: #282828;
     display: inline-block; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003549}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003561}}
   .availables #availableBooks {
     font-size: 13px;
     font-weight: 500;
     color: #3cc1a6;
     display: inline-block; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003555}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003567}}
   .availables em {
     font-style: normal;
     display: inline-block;
     color: #a8a8a8; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003563}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003575}}
 #addBookManually-view .no-art {
   width: 100px;
   height: 100px;
   margin: 0 auto; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003568}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003580}}
 #addBookManually-view .no-icon {
   width: 70px;
   height: 68px;
@@ -800,32 +812,32 @@ a {
   margin: 10px auto;
   opacity: 0.1; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003578}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003590}}
 .add-scroll {
   padding-top: 0 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003582}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003594}}
 .sm-btn {
   width: 120px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003586}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003598}}
 #addPhoto {
   margin: 10px auto 20px auto; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003590}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003602}}
 #addBook {
   margin: 20px auto; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003594}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003606}}
 #custom-art {
   margin: 10px 0;
   text-align: center;
   display: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003598}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003610}}
   #custom-art img {
     height: 160px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003603}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003615}}
 select#numberAvailable {
   width: 100%;
   height: 36px;
@@ -837,7 +849,7 @@ select#numberAvailable {
   Check In / Check Out
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003615}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003627}}
 .check {
   width: 100%;
   height: 250px;
@@ -846,25 +858,25 @@ select#numberAvailable {
   text-align: left;
   background-color: #fff;
   border-bottom: 1px solid #dbdbdb; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003623}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003635}}
   .check img {
     height: 160px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003626}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003638}}
   .check .title-art {
     float: left;
     max-width: 120px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003630}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003642}}
   .check .title-info {
     width: 54%;
     float: left;
     margin-left: 15px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003635}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003647}}
   .check .check-btn {
     width: 120px;
     padding: 8px 0 10px 0;
     font-size: 16px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003641}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003653}}
 .name-header {
   width: 100%;
   margin: 0 auto;
@@ -874,21 +886,21 @@ select#numberAvailable {
   padding: 11px 0 12px 0;
   border-bottom: 1px solid #dbdbdb; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003650}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003662}}
 .check-wrap {
   top: 290px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003653}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003665}}
 .check-scroller {
   padding: 0 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003658}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003670}}
 #checkout-view .no-art {
   width: 100px;
   height: 100px;
   margin: 10px auto 0 auto;
   float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003664}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003676}}
 #checkout-view .no-icon {
   width: 70px;
   height: 68px;
@@ -902,12 +914,12 @@ select#numberAvailable {
   Book Details
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003680}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003692}}
 #bookdetail-view .no-art {
   width: 120px;
   height: 120px;
   margin: 0 auto; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003685}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003697}}
 #bookdetail-view .no-icon {
   width: 90px;
   height: 87px;
@@ -921,34 +933,34 @@ select#numberAvailable {
   Book List
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003700}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003712}}
 .booklist-wrap {
   top: 90px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003703}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003715}}
 #filter-wrap {
   border-top: 1px solid #c95750;
   margin-top: 10px;
   padding-top: 9px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003708}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003720}}
 .filter {
   overflow: hidden;
   width: 95%;
   margin: 0 auto;
   font-size: 14px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003713}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003725}}
   .filter span {
     float: left;
     padding: 5px 0 8px 0;
     text-align: center;
     color: white; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003719}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003731}}
   .filter #filt-available {
     width: 30%;
     border-top: 1px solid #c95750;
     border-bottom: 1px solid #c95750; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003724}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003736}}
   .filter #filt-checked {
     width: 40%;
     border: 1px solid #c95750;
@@ -956,7 +968,7 @@ select#numberAvailable {
     -webkit-border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003733}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003745}}
   .filter #filt-all {
     border: 1px solid #c95750;
     width: 30%;
@@ -964,102 +976,102 @@ select#numberAvailable {
     -webkit-border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003742}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003754}}
   .filter .selected {
     background-color: #c95750;
     color: white; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003748}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003760}}
 #booklist {
   width: 92%;
   margin: 0 auto;
   padding-left: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003752}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003764}}
   #booklist li {
     border-bottom: 1px solid #dbdbdb;
     padding: 5px 0;
     overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003756}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003768}}
     #booklist li img {
       width: 52px;
       float: left;
       margin-right: 15px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003761}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003773}}
     #booklist li .book-meta {
       float: left;
       width: 76%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003764}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003776}}
       #booklist li .book-meta h2 {
         font-size: 16px;
         font-weight: 500; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003767}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003779}}
         #booklist li .book-meta h2:active {
           color: #818181; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003771}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003783}}
       #booklist li .book-meta h3 {
         font-size: 14px;
         font-weight: 300;
         color: #a8a8a8;
         padding-top: 3px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003777}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003789}}
       #booklist li .book-meta p {
         font-size: 13px;
         font-weight: 500;
         color: #3cc1a6;
         padding-top: 4px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003783}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003795}}
       #booklist li .book-meta .out {
         color: #f46b63; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003790}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003802}}
 .students {
   padding: 0 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003794}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003806}}
 #checkout-list {
   width: 100%;
   margin: 0 auto 15px auto; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003797}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003809}}
   #checkout-list h5 {
     color: #f46b63;
     font-weight: 500;
     font-size: 16px;
     border-bottom: 1px solid #dbdbdb;
     padding-bottom: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003804}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003816}}
   #checkout-list ul {
     margin: 0;
     padding: 0;
     text-align: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003808}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003820}}
     #checkout-list ul li {
       border-bottom: 1px solid #dbdbdb;
       padding: 8px 0 10px 0;
       font-weight: 500;
       font-size: 14px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003817}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003829}}
 #studentlist {
   padding-left: 0;
   margin: 0 auto;
   width: 100%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003821}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003833}}
   #studentlist li {
     border-bottom: 1px solid #dbdbdb;
     padding: 12px 0 14px 4%;
     overflow: hidden;
     font-weight: 500;
     position: relative; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003827}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003839}}
     #studentlist li .first-name {
       font-weight: 500;
       margin-right: 5px;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003832}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003844}}
     #studentlist li .last-name {
       width: 70%;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003836}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003848}}
     #studentlist li .delete-name {
       color: #f46b63;
       text-align: right;
@@ -1067,18 +1079,18 @@ select#numberAvailable {
       font-size: 15px;
       padding: 1px 4% 0 0;
       font-weight: 300; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003843}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003855}}
       #studentlist li .delete-name:active {
         color: #3cc1a6; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003848}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003860}}
   #studentlist .selected {
     background-color: #424242;
     color: white; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003852}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003864}}
   #studentlist .deselected {
     color: #282828; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003857}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003869}}
 .student-check {
   width: 24px;
   height: 20px;
@@ -1094,7 +1106,7 @@ select#numberAvailable {
   Settings
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003873}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003885}}
 .settings-scroll {
   padding: 5px 0 15px 0 !important; }
 
@@ -1103,7 +1115,7 @@ select#numberAvailable {
   Impromptu
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003883}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003895}}
 select#qty-input {
   width: 50%;
   border-top: 1px solid #dbdbdb;
@@ -1113,29 +1125,29 @@ select#qty-input {
   font-size: 16px;
   text-indent: 45%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003895}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003907}}
 #jqi_state0_buttonScan,
 #jqi_state0_buttonSubmit,
 #jqi_state0_buttonNo {
   border-left: 0 none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003900}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003912}}
 #jqi_state0_buttonManual,
 #jqi_state0_buttonList {
   border-right: 0 none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003905}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003917}}
 #jqi_state0_buttonCancel,
 #jqi_state0_buttonYes {
   color: #f46b63;
   border-right: 0 none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003910}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003922}}
 .jqifade {
   position: absolute;
   background-color: #777777; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003914}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003926}}
 div.jqi {
   width: 270px;
   margin-left: -135px !important;
@@ -1150,7 +1162,7 @@ div.jqi {
   -webkit-border-radius: 6px;
   padding: 7px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003930}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003942}}
 div.jqi .jqiclose {
   position: absolute;
   top: 4px;
@@ -1160,17 +1172,17 @@ div.jqi .jqiclose {
   color: #bbbbbb;
   font-size: 0px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003938}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003950}}
 div.jqi .jqistate {
   background-color: #fff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003941}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003953}}
 div.jqi .jqititle {
   padding: 5px 0 0 0;
   font-size: 21px;
   font-weight: 500; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003946}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003958}}
 div.jqi .jqimessage {
   padding: 5px 0 15px 0;
   font-size: 16px;
@@ -1178,7 +1190,7 @@ div.jqi .jqimessage {
   font-weight: 300;
   line-height: 1.4; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003953}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003965}}
 div.jqi .jqibuttons {
   text-align: center;
   margin: 0 -7px -7px -7px;
@@ -1188,7 +1200,7 @@ div.jqi .jqibuttons {
   -moz-border-radius: 0 0 6px 6px;
   -webkit-border-radius: 0 0 6px 6px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003962}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003974}}
 div.jqi .jqibuttons button {
   margin: 0;
   padding: 15px 20px;
@@ -1201,17 +1213,17 @@ div.jqi .jqibuttons button {
   font-size: 16px;
   font-family: Arial !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003974}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003986}}
 div.jqi .jqibuttons button.jqidefaultbutton {
   color: #3cc1a6;
   border-right: none !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003979}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003991}}
 .jqiwarning .jqi .jqibuttons {
   background-color: #a8a8a8; }
 
 /* sub states */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003984}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003996}}
 div.jqi .jqiparentstate::after {
   background-color: #777;
   opacity: 0.6;
@@ -1226,7 +1238,7 @@ div.jqi .jqiparentstate::after {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003995}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031007}}
 div.jqi .jqisubstate {
   position: absolute;
   top: 0;
@@ -1239,12 +1251,12 @@ div.jqi .jqisubstate {
   -moz-border-radius: 0 0 6px 6px;
   -webkit-border-radius: 0 0 6px 6px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031007}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031019}}
 div.jqi .jqisubstate .jqibuttons button {
   padding: 10px 18px; }
 
 /* arrows for tooltips/tours */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031012}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031024}}
 .jqi .jqiarrow {
   position: absolute;
   height: 0;
@@ -1253,77 +1265,77 @@ div.jqi .jqisubstate .jqibuttons button {
   font-size: 0;
   border: solid 10px transparent; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031014}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031026}}
 .jqi .jqiarrowtl {
   left: 10px;
   top: -20px;
   border-bottom-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031015}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031027}}
 .jqi .jqiarrowtc {
   left: 50%;
   top: -20px;
   border-bottom-color: #ffffff;
   margin-left: -10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031016}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031028}}
 .jqi .jqiarrowtr {
   right: 10px;
   top: -20px;
   border-bottom-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031018}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031030}}
 .jqi .jqiarrowbl {
   left: 10px;
   bottom: -20px;
   border-top-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031019}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031031}}
 .jqi .jqiarrowbc {
   left: 50%;
   bottom: -20px;
   border-top-color: #ffffff;
   margin-left: -10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031020}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031032}}
 .jqi .jqiarrowbr {
   right: 10px;
   bottom: -20px;
   border-top-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031022}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031034}}
 .jqi .jqiarrowlt {
   left: -20px;
   top: 10px;
   border-right-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031023}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031035}}
 .jqi .jqiarrowlm {
   left: -20px;
   top: 50%;
   border-right-color: #ffffff;
   margin-top: -10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031024}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031036}}
 .jqi .jqiarrowlb {
   left: -20px;
   bottom: 10px;
   border-right-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031026}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031038}}
 .jqi .jqiarrowrt {
   right: -20px;
   top: 10px;
   border-left-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031027}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031039}}
 .jqi .jqiarrowrm {
   right: -20px;
   top: 50%;
   border-left-color: #ffffff;
   margin-top: -10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/aswantner\/Desktop\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031028}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031040}}
 .jqi .jqiarrowrb {
   right: -20px;
   bottom: 10px;
