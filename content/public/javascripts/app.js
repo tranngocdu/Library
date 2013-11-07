@@ -440,6 +440,21 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		var dataString = JSON.stringify(data);
   		var combinedString = dataString.substring(0,6) + dataString.substring(20);
   		var data=JSON.parse(combinedString);
+
+  		$.ajax({
+  			data: {
+  				url: Application.addBookView.bookData.ISBN.cover.medium
+  			},
+  			url: "https://www.filepicker.io/api/store/S3?key=A8GpOnfHhQxiznYCtXZ9Uz",
+  			type: "POST",
+  			success: function (data) {
+  				that.imageUrl = data.url;
+
+  			},
+  			error: function (jqXHR,textStatus,errorThrown) {
+  			}
+  		});
+  		
   		this.bookData = data;
   		
   		$.ajax({
