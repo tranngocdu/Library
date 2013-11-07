@@ -1611,7 +1611,16 @@ window.require.register("views/settings-view", function(exports, require, module
   		'click #save': 'save',
   		'click #addBook': 'addBook',
   		'click #changeQuantity': 'changeQuantity',
-  		'click #help':'sendHelp'
+  		'click #help':'sendHelp',
+  		'focus #set-new-confirm': 'footer',
+  		'focus #set-new': 'footer',
+  		'focus #set-current': 'footer',
+  		'focus #set-email': 'footer',
+  		'blur #set-new-confirm': 'footer',
+  		'blur #set-new': 'footer',
+  		'blur #set-current': 'footer',
+  		'blur #set-email': 'footer'
+
   	},
 
   	initialize: function () {
@@ -1641,9 +1650,22 @@ window.require.register("views/settings-view", function(exports, require, module
   		});
   	},
 
-  	// changePass: function () {
-  		// $('input.hide-hard').addClass("block");
-  		// },
+  	footer: function() {
+
+  		setTimeout(function(){
+  			if (($("#set-new-confirm").is(":focus")) || ($("#set-new").is(":focus")) || ($("#set-current").is(":focus")) || ($("#set-email").is(":focus"))){
+  				$("#footer").addClass("hidden");
+  				$("#footer").removeClass("visible");
+  				$("#wrapper").css("bottom", "0px");
+  			} else {
+  				$("#footer").removeClass("hidden");
+  				$("#footer").addClass("visible");
+  				$("#wrapper").css("bottom", "65px");
+  				
+  			}
+
+  			},200);
+  		},
 
   		save: function() {
   			var that = this;
@@ -1713,21 +1735,21 @@ window.require.register("views/settings-view", function(exports, require, module
   					title: "Help Me",
   					buttons: { "Cancel": false, "Submit": true },
   					html:'</br>Email <input type="text" name="email" value="'+that.username+'" style="font-size:18px;width:100%;text-align:center;"></br></br>'+
-  							 'Message <input type="text" name="message" value="" style="font-size:18px;width:100%;text-align:left;"></br>',
+  					'Message <input type="text" name="message" value="" style="font-size:18px;width:100%;text-align:left;"></br>',
   					submit: function(e,v,m,f){
   						if(v){
   							console.log(v);
   							$.ajax({
-  									data: {
-  										body: f.message,
-  										replyto: f.email 
-  									},
-  									url: "http://bohemian.webscript.io/classLibraryContact",
-  									type: "POST",
-  								});
-  						}else {alert("This email was cancelled");
-  									console.log(v);
-  									}
+  								data: {
+  									body: f.message,
+  									replyto: f.email 
+  								},
+  								url: "http://bohemian.webscript.io/classLibraryContact",
+  								type: "POST",
+  							});
+  						}else {
+  							console.log(v);
+  						}
   					}
   				}
   			};	
