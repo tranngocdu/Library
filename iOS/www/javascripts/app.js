@@ -2000,7 +2000,7 @@ window.require.register("views/templates/addBookManually", function(exports, req
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  \n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll\">\n    <div id=\"custom-art\"><img src=\"\"></div>\n		<div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Add Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <input id=\"numberAvailable\" type=\"text\" placeholder=\"Quantity Available\" />\n\n    <div id=\"addBook\" class=\"button primary-fill\">Add Book</div>\n\n\n  </div> "
+    buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  \n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll long-page\">\n    <div id=\"custom-art\"><img src=\"\"></div>\n		<div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Add Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <input id=\"numberAvailable\" type=\"text\" placeholder=\"Quantity Available\" />\n\n    <div id=\"addBook\" class=\"button primary-fill\">Add Book</div>\n\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
@@ -2312,7 +2312,7 @@ window.require.register("views/templates/settings", function(exports, require, m
     var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container settings-scroll\">\n\n    "
+    buffer += "<div id=\"header\">\n  <h1>Settings</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container settings-scroll long-page\">\n\n    "
       + "\n    <input id=\"set-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" value=\"";
     if (stack1 = helpers.username) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
     else { stack1 = depth0.username; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }

@@ -152,6 +152,10 @@ form {
   bottom: 0 !important;
 }
 
+.long-page {
+  padding-bottom: 65px;
+}
+
 /*
 ------------------------------
   Layout
@@ -573,7 +577,7 @@ a {
 }
 
 .add-scroll {
-  padding: 0 !important;
+  padding-top: 0 !important;
 }
 
 .sm-btn {
