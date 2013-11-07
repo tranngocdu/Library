@@ -488,6 +488,18 @@ a {
   margin-bottom: 25px;
 }
 
+#checkedPrompt {
+  position: fixed;
+  top: 65px;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  padding: 10px 0 12px 0;
+  background-color: $select;
+  color: $white;
+  display: none;
+}
+
 /*
 ------------------------------
   Add Book

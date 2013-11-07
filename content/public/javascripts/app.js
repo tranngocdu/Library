@@ -1384,13 +1384,21 @@ window.require.register("views/home-view", function(exports, require, module) {
   	render: function () {
   		this.$el.html(this.template());
   		if (Application.homeView.checkedOut == true) {
-  			$('body').append('<div id="checkedPrompt">HEWHEHE </div>');
+  			$('body').append('<div id="checkedPrompt">Happy reading!</div>');
+  			$('#checkedPrompt').fadeIn(400);
   			Application.homeView.checkedOut = false;
+  			setTimeout(function(){
+  				$('#checkedPrompt').fadeOut(400, function() { $(this).remove(); });
+  			}, 3000);
   		}
   		
   		if (Application.homeView.checkedIn == true) {
-  			$('body').append('<div id="checkedPrompt">HEWHEHE </div>');
-  			Application.homeView.checkedIn = false;
+  			$('body').append('<div id="checkedPrompt">Back on the shelf!</div>');
+  			$('#checkedPrompt').fadeIn(400);
+  			Application.homeView.checkedOut = false;
+  			setTimeout(function(){
+  				$('#checkedPrompt').fadeOut(400, function() { $(this).remove(); });
+  			}, 3000);
   		}
   		
   		var current = Parse.User.current();
@@ -2027,7 +2035,7 @@ window.require.register("views/templates/addBookManually", function(exports, req
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  \n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll long-page\">\n    <div id=\"custom-art\"><img src=\"\"></div>\n		<div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Add Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <select id=\"numberAvailable\" name=\"amount\" data-role=\"none\">\n      <option value=\"1\">1</option>\n      <option value=\"2\">2</option>\n      <option value=\"3\">3</option>\n      <option value=\"4\">4</option>\n      <option value=\"5\">5</option>\n      <option value=\"6\">6</option>\n      <option value=\"7\">7</option>\n      <option value=\"8\">8</option>\n      <option value=\"9\">9</option>\n      <option value=\"10\">10</option>\n    </select>\n\n\n\n    <div id=\"addBook\" class=\"button primary-fill\">Add Book</div>\n\n\n  </div> "
+    buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll long-page\">\n    <div id=\"custom-art\"><img src=\"\"></div>\n		<div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Add Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <select id=\"numberAvailable\" name=\"amount\" data-role=\"none\">\n      <option value=\"1\">1</option>\n      <option value=\"2\">2</option>\n      <option value=\"3\">3</option>\n      <option value=\"4\">4</option>\n      <option value=\"5\">5</option>\n      <option value=\"6\">6</option>\n      <option value=\"7\">7</option>\n      <option value=\"8\">8</option>\n      <option value=\"9\">9</option>\n      <option value=\"10\">10</option>\n    </select>\n\n    <div id=\"addBook\" class=\"button primary-fill\">Add Book</div>\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
