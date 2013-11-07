@@ -1183,6 +1183,7 @@ window.require.register("views/checkin-view", function(exports, require, module)
 
   				usersBooks.save(null, {
   					success: function(newBook) {
+  						Application.homeView.checkedIn = true;
   						Application.router.navigate("#home" , {trigger: true});
   					},
   					error: function(newBook, error) {
@@ -1308,7 +1309,6 @@ window.require.register("views/checkout-view", function(exports, require, module
   				console.log("thisshouldhave" + studentsCheck);
   				console.log(studentsCheck);
   				
-  				
   				var length = studentsCheck.length;
   				var cutItem = undefined;
   				var i;
@@ -1330,6 +1330,7 @@ window.require.register("views/checkout-view", function(exports, require, module
   				
   				usersBooks.save(null, {
   					success: function(newBook) {
+  						Application.homeView.checkedOut = true;
   						Application.router.navigate("#home" , {trigger: true});
   					},
   					error: function(newBook, error) {
@@ -1382,6 +1383,16 @@ window.require.register("views/home-view", function(exports, require, module) {
 
   	render: function () {
   		this.$el.html(this.template());
+  		if (Application.homeView.checkedOut == true) {
+  			$('body').append('<div id="checkedPrompt">HEWHEHE </div>');
+  			Application.homeView.checkedOut = false;
+  		}
+  		
+  		if (Application.homeView.checkedIn == true) {
+  			$('body').append('<div id="checkedPrompt">HEWHEHE </div>');
+  			Application.homeView.checkedIn = false;
+  		}
+  		
   		var current = Parse.User.current();
   		if(current===null){
   			$("#footer").addClass("hidden");
@@ -1419,7 +1430,6 @@ window.require.register("views/home-view", function(exports, require, module) {
 
   				},
   				cancel: function(){
-  					alert("cancel");
   				}
   			}
   		};
@@ -1439,12 +1449,9 @@ window.require.register("views/home-view", function(exports, require, module) {
   					else {
   						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-
   						scanner.scan(
   							function (result) {
   								if (result.text){
-  								alert("success");
   								Application.homeView.ISBN = result.text;
   								Application.homeView.$el.trigger("bookInfoCheckin");
   								}
@@ -1457,7 +1464,6 @@ window.require.register("views/home-view", function(exports, require, module) {
 
   				},
   				cancel: function(){
-  					alert("cancel");
   				}
   			}
   		};

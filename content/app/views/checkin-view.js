@@ -109,6 +109,7 @@ module.exports = View.extend({
 
 				usersBooks.save(null, {
 					success: function(newBook) {
+						Application.homeView.checkedIn = true;
 						Application.router.navigate("#home" , {trigger: true});
 					},
 					error: function(newBook, error) {

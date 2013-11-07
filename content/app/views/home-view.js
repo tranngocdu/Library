@@ -25,6 +25,16 @@ module.exports = View.extend({
 
 	render: function () {
 		this.$el.html(this.template());
+		if (Application.homeView.checkedOut == true) {
+			$('body').append('<div id="checkedPrompt">HEWHEHE </div>');
+			Application.homeView.checkedOut = false;
+		}
+		
+		if (Application.homeView.checkedIn == true) {
+			$('body').append('<div id="checkedPrompt">HEWHEHE </div>');
+			Application.homeView.checkedIn = false;
+		}
+		
 		var current = Parse.User.current();
 		if(current===null){
 			$("#footer").addClass("hidden");
@@ -62,7 +72,6 @@ module.exports = View.extend({
 
 				},
 				cancel: function(){
-					alert("cancel");
 				}
 			}
 		};
@@ -82,12 +91,9 @@ module.exports = View.extend({
 					else {
 						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-
 						scanner.scan(
 							function (result) {
 								if (result.text){
-								alert("success");
 								Application.homeView.ISBN = result.text;
 								Application.homeView.$el.trigger("bookInfoCheckin");
 								}
@@ -100,7 +106,6 @@ module.exports = View.extend({
 
 				},
 				cancel: function(){
-					alert("cancel");
 				}
 			}
 		};

@@ -103,7 +103,6 @@ module.exports = View.extend({
 				console.log("thisshouldhave" + studentsCheck);
 				console.log(studentsCheck);
 				
-				
 				var length = studentsCheck.length;
 				var cutItem = undefined;
 				var i;
@@ -125,6 +124,7 @@ module.exports = View.extend({
 				
 				usersBooks.save(null, {
 					success: function(newBook) {
+						Application.homeView.checkedOut = true;
 						Application.router.navigate("#home" , {trigger: true});
 					},
 					error: function(newBook, error) {
