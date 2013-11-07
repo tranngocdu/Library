@@ -37,7 +37,7 @@ module.exports = View.extend({
 		if (Application.homeView.checkedIn == true) {
 			$('body').append('<div id="checkedPrompt">Back on the shelf!</div>');
 			$('#checkedPrompt').fadeIn(400);
-			Application.homeView.checkedOut = false;
+			Application.homeView.checkedIn = false;
 			setTimeout(function(){
 				$('#checkedPrompt').fadeOut(400, function() { $(this).remove(); });
 			}, 3000);
@@ -96,7 +96,7 @@ module.exports = View.extend({
 					if (v == true) {
 						Application.router.navigate("#bookList", {trigger:true});
 					}
-					else {
+					else if (v === "scan"){
 						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
 						scanner.scan(
@@ -131,12 +131,30 @@ module.exports = View.extend({
 		query.find({
 
 			success: function(bookdetail) {
+
+				if (bookdetail == '') {
+					var quantityPrompt = {
+						state1: { 
+							title: "Not so quick...",
+							html: "You need to add this book to your library first.",
+							buttons: { "Ok": true },
+							submit: function(e,v,m,f){
+								Application.router.navigate("#bookList" , {trigger: true});
+
+							},
+							cancel: function(){
+							}
+						}
+					};
+				$.prompt(quantityPrompt);
+				} else {
 				var bookdetailArray = JSON.stringify(bookdetail);
 				bookdetailArray = JSON.parse(bookdetailArray);
 				Application.checkOutView.bookInfo = bookdetailArray;
 				Application.router.navigate("#checkOut", {
 					trigger: true
 				});
+				}
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
@@ -155,12 +173,29 @@ module.exports = View.extend({
 		query.find({
 
 			success: function(bookdetail) {
+				if (bookdetail == '') {
+					var quantityPrompt = {
+						state1: { 
+							title: "Not so quick...",
+							html: "You need to add this book to your library first.",
+							buttons: { "Ok": true },
+							submit: function(e,v,m,f){
+								Application.router.navigate("#bookList" , {trigger: true});
+
+							},
+							cancel: function(){
+							}
+						}
+					};
+				$.prompt(quantityPrompt);
+				} else {
 				var bookdetailArray = JSON.stringify(bookdetail);
 				bookdetailArray = JSON.parse(bookdetailArray);
 				Application.checkInView.bookInfo = bookdetailArray;
 				Application.router.navigate("#checkIn", {
 					trigger: true
 				});
+				}
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);

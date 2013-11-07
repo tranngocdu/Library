@@ -20,8 +20,11 @@ module.exports = View.extend({
 		this.$el.html(this.template(bookData));
 		that.ISBN = Application.checkInView.bookInfo[0].ISBN;
 		var studentBookList = Application.checkInView.bookInfo[0].studentList;
-		if (studentBookList.length == 0) {
-			setTimeout(function(){$(".name-header").hide();},200);
+		if ((studentBookList.length == 0) || (jQuery.isEmptyObject(studentBookList[0]) == true)) {
+			setTimeout(function(){
+				$(".name-header").hide();
+				$(".check-wrap").hide();
+			},200);
 
 		}
 		setTimeout(function(){$('.students').html(that.templateStudents(studentBookList));},500);

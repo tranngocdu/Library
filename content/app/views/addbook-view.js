@@ -23,6 +23,7 @@ module.exports = View.extend({
 		var dataString = JSON.stringify(data);
 		var combinedString = dataString.substring(0,6) + dataString.substring(20);
 		var data=JSON.parse(combinedString);
+		that.totalAmount = 1;
 		this.bookData = data;
 		
 		$.ajax({
@@ -39,6 +40,8 @@ module.exports = View.extend({
 		});
 		
 		this.$el.html(this.template(data));
+
+		// $("p#numberAvailable").html("Number Available: "+that.totalAmount+"");
 
 		return this;
 	},
@@ -79,7 +82,22 @@ module.exports = View.extend({
 					console.log(error);
 				}
 			});
-			}else {alert("You need to add a quantity")};
+			}else {
+					var quantityPrompt = {
+						state1: { 
+							title: "But how many?",
+							html: "You need to add quantity of books first.",
+							buttons: { "Ok": true },
+							submit: function(e,v,m,f){
+								Application.router.navigate("#bookList" , {trigger: true});
+
+							},
+							cancel: function(){
+							}
+						}
+					};
+				$.prompt(quantityPrompt);
+			};
 		},
 
 		quantity: function() {

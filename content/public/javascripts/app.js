@@ -440,6 +440,7 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		var dataString = JSON.stringify(data);
   		var combinedString = dataString.substring(0,6) + dataString.substring(20);
   		var data=JSON.parse(combinedString);
+  		that.totalAmount = 1;
   		this.bookData = data;
   		
   		$.ajax({
@@ -456,6 +457,8 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		});
   		
   		this.$el.html(this.template(data));
+
+  		// $("p#numberAvailable").html("Number Available: "+that.totalAmount+"");
 
   		return this;
   	},
@@ -496,7 +499,22 @@ window.require.register("views/addbook-view", function(exports, require, module)
   					console.log(error);
   				}
   			});
-  			}else {alert("You need to add a quantity")};
+  			}else {
+  					var quantityPrompt = {
+  						state1: { 
+  							title: "But how many?",
+  							html: "You need to add quantity of books first.",
+  							buttons: { "Ok": true },
+  							submit: function(e,v,m,f){
+  								Application.router.navigate("#bookList" , {trigger: true});
+
+  							},
+  							cancel: function(){
+  							}
+  						}
+  					};
+  				$.prompt(quantityPrompt);
+  			};
   		},
 
   		quantity: function() {
@@ -1094,8 +1112,11 @@ window.require.register("views/checkin-view", function(exports, require, module)
   		this.$el.html(this.template(bookData));
   		that.ISBN = Application.checkInView.bookInfo[0].ISBN;
   		var studentBookList = Application.checkInView.bookInfo[0].studentList;
-  		if (studentBookList.length == 0) {
-  			setTimeout(function(){$(".name-header").hide();},200);
+  		if ((studentBookList.length == 0) || (jQuery.isEmptyObject(studentBookList[0]) == true)) {
+  			setTimeout(function(){
+  				$(".name-header").hide();
+  				$(".check-wrap").hide();
+  			},200);
 
   		}
   		setTimeout(function(){$('.students').html(that.templateStudents(studentBookList));},500);
@@ -1339,8 +1360,20 @@ window.require.register("views/checkout-view", function(exports, require, module
   					}
   				});
   				} else {
-  					alert("You don't have any books to check out!")
-  					Application.router.navigate("#home" , {trigger: true});
+  					var quantityPrompt = {
+  						state1: { 
+  							title: "Oops...",
+  							html: "All copies have been check out!",
+  							buttons: { "Ok": true },
+  							submit: function(e,v,m,f){
+  								Application.router.navigate("#bookList" , {trigger: true});
+
+  							},
+  							cancel: function(){
+  							}
+  						}
+  					};
+  				$.prompt(quantityPrompt);
   				};
   			},
   			error: function(error) {
@@ -1395,7 +1428,7 @@ window.require.register("views/home-view", function(exports, require, module) {
   		if (Application.homeView.checkedIn == true) {
   			$('body').append('<div id="checkedPrompt">Back on the shelf!</div>');
   			$('#checkedPrompt').fadeIn(400);
-  			Application.homeView.checkedOut = false;
+  			Application.homeView.checkedIn = false;
   			setTimeout(function(){
   				$('#checkedPrompt').fadeOut(400, function() { $(this).remove(); });
   			}, 3000);
@@ -1454,7 +1487,7 @@ window.require.register("views/home-view", function(exports, require, module) {
   					if (v == true) {
   						Application.router.navigate("#bookList", {trigger:true});
   					}
-  					else {
+  					else if (v === "scan"){
   						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
   						scanner.scan(
@@ -1489,12 +1522,30 @@ window.require.register("views/home-view", function(exports, require, module) {
   		query.find({
 
   			success: function(bookdetail) {
+
+  				if (bookdetail == '') {
+  					var quantityPrompt = {
+  						state1: { 
+  							title: "Not so quick...",
+  							html: "You need to add this book to your library first.",
+  							buttons: { "Ok": true },
+  							submit: function(e,v,m,f){
+  								Application.router.navigate("#bookList" , {trigger: true});
+
+  							},
+  							cancel: function(){
+  							}
+  						}
+  					};
+  				$.prompt(quantityPrompt);
+  				} else {
   				var bookdetailArray = JSON.stringify(bookdetail);
   				bookdetailArray = JSON.parse(bookdetailArray);
   				Application.checkOutView.bookInfo = bookdetailArray;
   				Application.router.navigate("#checkOut", {
   					trigger: true
   				});
+  				}
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
@@ -1513,12 +1564,29 @@ window.require.register("views/home-view", function(exports, require, module) {
   		query.find({
 
   			success: function(bookdetail) {
+  				if (bookdetail == '') {
+  					var quantityPrompt = {
+  						state1: { 
+  							title: "Not so quick...",
+  							html: "You need to add this book to your library first.",
+  							buttons: { "Ok": true },
+  							submit: function(e,v,m,f){
+  								Application.router.navigate("#bookList" , {trigger: true});
+
+  							},
+  							cancel: function(){
+  							}
+  						}
+  					};
+  				$.prompt(quantityPrompt);
+  				} else {
   				var bookdetailArray = JSON.stringify(bookdetail);
   				bookdetailArray = JSON.parse(bookdetailArray);
   				Application.checkInView.bookInfo = bookdetailArray;
   				Application.router.navigate("#checkIn", {
   					trigger: true
   				});
+  				}
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
@@ -1584,7 +1652,12 @@ window.require.register("views/login-view", function(exports, require, module) {
   						});
   					},
   					error: function(user, error) {
-  							alert("Login Failed");
+  					navigator.notification.alert(
+  						'Check your username or password.',  // message
+  						function alertDismissed() {}, // callback
+  						'Incorrect Login',            // title
+  						'OK'                  // buttonName
+  			);
   					}
   			});
   		}
@@ -1606,12 +1679,21 @@ window.require.register("views/login-view", function(exports, require, module) {
   			  },
   			  error: function(error) {
   			    // Show the error message somewhere
-  			alert("Please enter an email address used with Class Library");
-  			    //alert("Error: " + error.code + " " + error.message);
+  			navigator.notification.alert(
+  				'First enter the email used for Class Library.',   // message
+  				function alertDismissed() {}, // callback
+  				'Enter your email',            // title
+  				'OK'                  // buttonName
+  				);
   			  }
   			});
   		} else {
-  			alert("Please enter an email address and then tap 'Forgot your password'");
+  			navigator.notification.alert(
+  				'Enter Email.',  // message
+  				function alertDismissed() {}, // callback
+  				'Enter the email used for Class Library and tap "Forgot your password?".',            // title
+  				'OK'                  // buttonName
+  				);
   		}	
   	},
 
@@ -2022,7 +2104,7 @@ window.require.register("views/templates/addBook", function(exports, require, mo
       + "</h2>\n      <h3>";
     stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack2 || stack2 === 0) { buffer += stack2; }
-    buffer += "</h3>\n      <p id=\"numberAvailable\"></p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-quantity\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
+    buffer += "</h3>\n      <p id=\"numberAvailable\">Number Available: 1</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-quantity\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;

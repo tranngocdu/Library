@@ -51,7 +51,12 @@ module.exports = View.extend({
 						});
 					},
 					error: function(user, error) {
-							alert("Login Failed");
+					navigator.notification.alert(
+						'Check your username or password.',  // message
+						function alertDismissed() {}, // callback
+						'Incorrect Login',            // title
+						'OK'                  // buttonName
+			);
 					}
 			});
 		}
@@ -73,12 +78,21 @@ module.exports = View.extend({
 			  },
 			  error: function(error) {
 			    // Show the error message somewhere
-			alert("Please enter an email address used with Class Library");
-			    //alert("Error: " + error.code + " " + error.message);
+			navigator.notification.alert(
+				'First enter the email used for Class Library.',   // message
+				function alertDismissed() {}, // callback
+				'Enter your email',            // title
+				'OK'                  // buttonName
+				);
 			  }
 			});
 		} else {
-			alert("Please enter an email address and then tap 'Forgot your password'");
+			navigator.notification.alert(
+				'Enter Email.',  // message
+				function alertDismissed() {}, // callback
+				'Enter the email used for Class Library and tap "Forgot your password?".',            // title
+				'OK'                  // buttonName
+				);
 		}	
 	},
 

@@ -133,8 +133,20 @@ module.exports = View.extend({
 					}
 				});
 				} else {
-					alert("You don't have any books to check out!")
-					Application.router.navigate("#home" , {trigger: true});
+					var quantityPrompt = {
+						state1: { 
+							title: "Oops...",
+							html: "All copies have been check out!",
+							buttons: { "Ok": true },
+							submit: function(e,v,m,f){
+								Application.router.navigate("#bookList" , {trigger: true});
+
+							},
+							cancel: function(){
+							}
+						}
+					};
+				$.prompt(quantityPrompt);
 				};
 			},
 			error: function(error) {
