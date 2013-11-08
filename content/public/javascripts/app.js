@@ -583,10 +583,12 @@ window.require.register("views/addbookmanually-view", function(exports, require,
 
   		addBook:function () {
   			var that = this;
-
   			var title = $("#title").val();
   			var author = $("#author").val();
   			var numberAvailable = $("#numberAvailable").val();
+  			
+  			if (title && author && numberAvailable) {
+  			
   			numberAvailable = parseInt(numberAvailable);
   			var currentUser = Parse.User.current();
   			var currentUserId = currentUser.id;
@@ -615,6 +617,15 @@ window.require.register("views/addbookmanually-view", function(exports, require,
   					console.log(error);
   				}
   			});
+  		}
+  		else {
+  			navigator.notification.alert(
+  				'Please add a title, author, and quantity.',  // message
+  				function alertDismissed() {}, // callback
+  				'Try Again',            // title
+  				'OK'                  // buttonName
+  			);
+  		}
 
   		},
 
@@ -1012,40 +1023,36 @@ window.require.register("views/booklist-view", function(exports, require, module
 
   	addBook: function() {
 
-  		var quantityPrompt = {
-  			state0: { 
-  				title: "Add Book",
-  				buttons: { "Scan": "scan", "Manual": true, "Cancel":false},
-  				// html: 'How do you want to add a book?',
-  				position: { container: '', width: 270},
-  				submit: function(e,v,m,f){
-  					if (v == true) {
-  						Application.router.navigate("#addBookManually", {trigger:true});
-  					}
-  					else if(v === "scan") {
-  						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+  		navigator.notification.confirm(
+  			'', // message
+  			onConfirm,            // callback to invoke with index of button pressed
+  			'Add Book',           // title
+  			'Scan,Manual, Cancel'         // buttonLabels
+  		);
 
-  						scanner.scan(
-  							function (result) {
-  								if(result.text){
-  								Application.bookListView.ISBN = result.text;
-  								Application.addBookView.ISBN = result.text;
-  								Application.bookListView.$el.trigger("getbookinfo");
-  								}
-  							}, 
-  							function (error) {
-  								alert("Scanning failed: " + error);
-  							}
-  						);
-  					}
+  		function onConfirm(buttonIndex) {
+  			if (buttonIndex == 1) {
+  				var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  				},
-  				cancel: function(){
-  					alert("cancel");
-  				}
+  				scanner.scan(
+  					function (result) {
+  						if(result.text){
+  							Application.bookListView.ISBN = result.text;
+  							Application.addBookView.ISBN = result.text;
+  							Application.bookListView.$el.trigger("getbookinfo");
+  						}
+  					}, 
+  					function (error) {
+  						alert("Scanning failed: " + error);
+  					}
+  				);
   			}
-  		};
-  		$.prompt(quantityPrompt);
+  			else if (buttonIndex ==2) {
+  				Application.router.navigate("#addBookManually", {trigger:true});
+
+  			}
+  		}		        
+
   	},
 
   	bookDetail: function(e) {

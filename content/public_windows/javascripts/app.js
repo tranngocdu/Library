@@ -440,6 +440,7 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		var dataString = JSON.stringify(data);
   		var combinedString = dataString.substring(0,6) + dataString.substring(20);
   		var data=JSON.parse(combinedString);
+  		that.totalAmount = 1;
   		this.bookData = data;
   		
   		$.ajax({
@@ -456,6 +457,8 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		});
   		
   		this.$el.html(this.template(data));
+
+  		// $("p#numberAvailable").html("Number Available: "+that.totalAmount+"");
 
   		return this;
   	},
@@ -496,7 +499,22 @@ window.require.register("views/addbook-view", function(exports, require, module)
   					console.log(error);
   				}
   			});
-  			}else {alert("You need to add a quantity")};
+  			}else {
+  					var quantityPrompt = {
+  						state1: { 
+  							title: "But how many?",
+  							html: "You need to add quantity of books first.",
+  							buttons: { "Ok": true },
+  							submit: function(e,v,m,f){
+  								Application.router.navigate("#bookList" , {trigger: true});
+
+  							},
+  							cancel: function(){
+  							}
+  						}
+  					};
+  				$.prompt(quantityPrompt);
+  			};
   		},
 
   		quantity: function() {
@@ -1094,8 +1112,11 @@ window.require.register("views/checkin-view", function(exports, require, module)
   		this.$el.html(this.template(bookData));
   		that.ISBN = Application.checkInView.bookInfo[0].ISBN;
   		var studentBookList = Application.checkInView.bookInfo[0].studentList;
-  		if (studentBookList.length == 0) {
-  			setTimeout(function(){$(".name-header").hide();},200);
+  		if ((studentBookList.length == 0) || (jQuery.isEmptyObject(studentBookList[0]) == true)) {
+  			setTimeout(function(){
+  				$(".name-header").hide();
+  				$(".check-wrap").hide();
+  			},200);
 
   		}
   		setTimeout(function(){$('.students').html(that.templateStudents(studentBookList));},500);
@@ -1339,8 +1360,12 @@ window.require.register("views/checkout-view", function(exports, require, module
   					}
   				});
   				} else {
-  					alert("You don't have any books to check out!")
-  					Application.router.navigate("#home" , {trigger: true});
+  					navigator.notification.alert(
+  									'All copies have been checked out!',  // message
+  									function alertDismissed() {}, // callback
+  									'Oops!',            // title
+  									'OK'                  // buttonName
+  								);
   				};
   			},
   			error: function(error) {
@@ -1384,13 +1409,21 @@ window.require.register("views/home-view", function(exports, require, module) {
   	render: function () {
   		this.$el.html(this.template());
   		if (Application.homeView.checkedOut == true) {
-  			$('body').append('<div id="checkedPrompt">HEWHEHE </div>');
+  			$('body').append('<div id="checkedPrompt">Happy reading!</div>');
+  			$('#checkedPrompt').fadeIn(400);
   			Application.homeView.checkedOut = false;
+  			setTimeout(function(){
+  				$('#checkedPrompt').fadeOut(400, function() { $(this).remove(); });
+  			}, 3000);
   		}
   		
   		if (Application.homeView.checkedIn == true) {
-  			$('body').append('<div id="checkedPrompt">HEWHEHE </div>');
+  			$('body').append('<div id="checkedPrompt">Back on the shelf!</div>');
+  			$('#checkedPrompt').fadeIn(400);
   			Application.homeView.checkedIn = false;
+  			setTimeout(function(){
+  				$('#checkedPrompt').fadeOut(400, function() { $(this).remove(); });
+  			}, 3000);
   		}
   		
   		var current = Parse.User.current();
@@ -1446,7 +1479,7 @@ window.require.register("views/home-view", function(exports, require, module) {
   					if (v == true) {
   						Application.router.navigate("#bookList", {trigger:true});
   					}
-  					else {
+  					else if (v === "scan"){
   						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
   						scanner.scan(
@@ -1481,12 +1514,36 @@ window.require.register("views/home-view", function(exports, require, module) {
   		query.find({
 
   			success: function(bookdetail) {
+
+  				if (bookdetail == '') {
+  					navigator.notification.alert(
+  						'You need to add this book to your library first.',  // message
+  						function alertDismissed() {}, // callback
+  						'Not so quick...',            // title
+  						'OK'                  // buttonName
+  					);
+  				// 	var quantityPrompt = {
+  				// 		state1: { 
+  				// 			title: "Not so quick...",
+  				// 			html: "You need to add this book to your library first.",
+  				// 			buttons: { "Ok": true },
+  				// 			submit: function(e,v,m,f){
+  				// 				Application.router.navigate("#bookList" , {trigger: true});
+
+  				// 			},
+  				// 			cancel: function(){
+  				// 			}
+  				// 		}
+  				// 	};
+  				// $.prompt(quantityPrompt);
+  				} else {
   				var bookdetailArray = JSON.stringify(bookdetail);
   				bookdetailArray = JSON.parse(bookdetailArray);
   				Application.checkOutView.bookInfo = bookdetailArray;
   				Application.router.navigate("#checkOut", {
   					trigger: true
   				});
+  				}
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
@@ -1505,12 +1562,21 @@ window.require.register("views/home-view", function(exports, require, module) {
   		query.find({
 
   			success: function(bookdetail) {
+  				if (bookdetail == '') {
+  					navigator.notification.alert(
+  											'You need to add this book to your library first.',  // message
+  											function alertDismissed() {}, // callback
+  											'Not so quick...',            // title
+  											'OK'                  // buttonName
+  										);
+  				} else {
   				var bookdetailArray = JSON.stringify(bookdetail);
   				bookdetailArray = JSON.parse(bookdetailArray);
   				Application.checkInView.bookInfo = bookdetailArray;
   				Application.router.navigate("#checkIn", {
   					trigger: true
   				});
+  				}
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
@@ -1576,7 +1642,12 @@ window.require.register("views/login-view", function(exports, require, module) {
   						});
   					},
   					error: function(user, error) {
-  							alert("Login Failed");
+  					navigator.notification.alert(
+  						'Check your username or password.',  // message
+  						function alertDismissed() {}, // callback
+  						'Incorrect Login',            // title
+  						'OK'                  // buttonName
+  			);
   					}
   			});
   		}
@@ -1598,12 +1669,21 @@ window.require.register("views/login-view", function(exports, require, module) {
   			  },
   			  error: function(error) {
   			    // Show the error message somewhere
-  			alert("Please enter an email address used with Class Library");
-  			    //alert("Error: " + error.code + " " + error.message);
+  			navigator.notification.alert(
+  				'Please enter above the email you used for Class Library.',   // message
+  				function alertDismissed() {}, // callback
+  				'Enter your email',            // title
+  				'OK'                  // buttonName
+  				);
   			  }
   			});
   		} else {
-  			alert("Please enter an email address and then tap 'Forgot your password'");
+  			navigator.notification.alert(
+  				'Enter Email.',  // message
+  				function alertDismissed() {}, // callback
+  				'Enter the email used for Class Library and tap "Forgot your password?".',            // title
+  				'OK'                  // buttonName
+  				);
   		}	
   	},
 
@@ -1720,7 +1800,12 @@ window.require.register("views/settings-view", function(exports, require, module
   						});
   					},
   					error: function(error) {
-  						alert("Incorrect password");
+  						navigator.notification.alert(
+  							'The password you entered was incorrect.',  // message
+  							function alertDismissed() {}, // callback
+  							'Check Password',            // title
+  							'OK'                  // buttonName
+  						);
   						var oldPassword = $('#set-current').val("");
   						var password =  $('#set-new').val("");
   						var confirmPassword =  $('#set-new-confirm').val("");
@@ -1728,7 +1813,12 @@ window.require.register("views/settings-view", function(exports, require, module
   				});
   			}
   			else {
-  				alert("Passwords need to match");
+  				navigator.notification.alert(
+  						'The passwords did not match.',  // message
+  						function alertDismissed() {}, // callback
+  						'Try again',            // title
+  						'OK'                  // buttonName
+  					);
   			}
 
   		},
@@ -1758,11 +1848,10 @@ window.require.register("views/settings-view", function(exports, require, module
   		sendHelp: function() {
   			var that = this;
   			var helpPrompt = {
-  				state0: { 
+  				state2: { 
   					title: "Help Me",
   					buttons: { "Cancel": false, "Submit": true },
-  					html:'</br>Email <input type="text" name="email" value="'+that.username+'" style="font-size:18px;width:100%;text-align:center;"></br></br>'+
-  					'Message <input type="text" name="message" value="" style="font-size:18px;width:100%;text-align:left;"></br>',
+  					html:'<input id="help-input" type="text" name="email" placeholder="Your Email" value="'+that.username+'"/>'+'<textarea id="help-textarea" name="message" value="" placeholder="Your Message"></textarea>',
   					submit: function(e,v,m,f){
   						if(v){
   							console.log(v);
@@ -1836,8 +1925,14 @@ window.require.register("views/signup-view", function(exports, require, module) 
   			},
   			error: function(user, error) {
   				// Show the error message somewhere and let the user try again.
-  				alert("Error: " + error.code + " " + error.message);
-  			}
+  				// alert("Error: " + error.code + " " + error.message);
+  					navigator.notification.alert(
+  						'Please fill out all fields.',  // message
+  						function alertDismissed() {}, // callback
+  						'All Fields Required',            // title
+  						'OK'                  // buttonName
+  					);
+  				}	
   		});
 
 
@@ -1888,8 +1983,8 @@ window.require.register("views/signup-view", function(exports, require, module) 
   			});
   		}
   		else{
-  			navigator.notification.alert(
-  				'Please enter all fields',  // message
+  			navigator.notification.alert (
+  				'Please fill out all fields.',  // message
   				function alertDismissed() {}, // callback
   				'All Fields Required',            // title
   				'OK'                  // buttonName
@@ -2014,7 +2109,7 @@ window.require.register("views/templates/addBook", function(exports, require, mo
       + "</h2>\n      <h3>";
     stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack2 || stack2 === 0) { buffer += stack2; }
-    buffer += "</h3>\n      <p id=\"numberAvailable\"></p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-quantity\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
+    buffer += "</h3>\n      <p id=\"numberAvailable\">Number Available: 1</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-quantity\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
@@ -2027,7 +2122,7 @@ window.require.register("views/templates/addBookManually", function(exports, req
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  \n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll long-page\">\n    <div id=\"custom-art\"><img src=\"\"></div>\n		<div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Add Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <select id=\"numberAvailable\" name=\"amount\" data-role=\"none\">\n      <option value=\"1\">1</option>\n      <option value=\"2\">2</option>\n      <option value=\"3\">3</option>\n      <option value=\"4\">4</option>\n      <option value=\"5\">5</option>\n      <option value=\"6\">6</option>\n      <option value=\"7\">7</option>\n      <option value=\"8\">8</option>\n      <option value=\"9\">9</option>\n      <option value=\"10\">10</option>\n    </select>\n\n\n\n    <div id=\"addBook\" class=\"button primary-fill\">Add Book</div>\n\n\n  </div> "
+    buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll long-page\">\n    <div id=\"custom-art\"><img src=\"\"></div>\n		<div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Add Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <select id=\"numberAvailable\" name=\"amount\" data-role=\"none\">\n      <option value=\"1\">1</option>\n      <option value=\"2\">2</option>\n      <option value=\"3\">3</option>\n      <option value=\"4\">4</option>\n      <option value=\"5\">5</option>\n      <option value=\"6\">6</option>\n      <option value=\"7\">7</option>\n      <option value=\"8\">8</option>\n      <option value=\"9\">9</option>\n      <option value=\"10\">10</option>\n    </select>\n\n    <div id=\"addBook\" class=\"button primary-fill\">Add Book</div>\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
