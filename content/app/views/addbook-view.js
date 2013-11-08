@@ -26,7 +26,7 @@ module.exports = View.extend({
 		that.totalAmount = 1;
 		this.bookData = data;
 
-		if (Application.addBookView.bookData.ISBN.cover.medium) {
+		if (typeof this.bookData.ISBN.cover!='undefined') {
 
 			$.ajax({
 				data: {

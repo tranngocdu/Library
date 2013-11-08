@@ -443,7 +443,7 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		that.totalAmount = 1;
   		this.bookData = data;
 
-  		if (Application.addBookView.bookData.ISBN.cover.medium) {
+  		if (typeof this.bookData.ISBN.cover!='undefined') {
 
   			$.ajax({
   				data: {
