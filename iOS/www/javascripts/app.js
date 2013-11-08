@@ -622,7 +622,7 @@ window.require.register("views/addbookmanually-view", function(exports, require,
   			navigator.notification.alert(
   				'Please add a title, author, and quantity.',  // message
   				function alertDismissed() {}, // callback
-  				'Incomplete',            // title
+  				'Try Again',            // title
   				'OK'                  // buttonName
   			);
   		}
@@ -1024,7 +1024,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   	addBook: function() {
 
   		navigator.notification.confirm(
-  			'You are the winner!', // message
+  			'', // message
   			onConfirm,            // callback to invoke with index of button pressed
   			'Add Book',           // title
   			'Scan,Manual, Cancel'         // buttonLabels
@@ -1775,7 +1775,7 @@ window.require.register("views/settings-view", function(exports, require, module
   				$("#footer").removeClass("hidden");
   				$("#footer").addClass("visible");
   				$("#wrapper").css("bottom", "65px");
-  				
+
   			}
 
   			},200);
@@ -1821,11 +1821,11 @@ window.require.register("views/settings-view", function(exports, require, module
   			}
   			else {
   				navigator.notification.alert(
-  						'The passwords did not match.',  // message
-  						function alertDismissed() {}, // callback
-  						'Try again',            // title
-  						'OK'                  // buttonName
-  					);
+  					'The passwords did not match.',  // message
+  					function alertDismissed() {}, // callback
+  					'Try again',            // title
+  					'OK'                  // buttonName
+  				);
   			}
 
   		},
@@ -1853,31 +1853,32 @@ window.require.register("views/settings-view", function(exports, require, module
   		},
 
   		sendHelp: function() {
+  			alert("damn you");
   			var that = this;
-  			var helpPrompt = {
-  				state2: { 
-  					title: "Help Me",
-  					buttons: { "Cancel": false, "Submit": true },
-  					html:'<input id="help-input" type="text" name="email" placeholder="Your Email" value="'+that.username+'"/>'+'<textarea id="help-textarea" name="message" value="" placeholder="Your Message"></textarea>',
-  					submit: function(e,v,m,f){
-  						if(v){
-  							console.log(v);
-  							$.ajax({
-  								data: {
-  									body: f.message,
-  									replyto: f.email 
-  								},
-  								url: "http://bohemian.webscript.io/classLibraryContact",
-  								type: "POST",
-  							});
-  						}else {
-  							console.log(v);
-  						}
-  					}
+
+  			function onPrompt(results) {
+  				if (results.buttonIndex == 1) {
+  					$.ajax({
+  						data: {
+  							body: results.input1,
+  							replyto: that.username 
+  						},
+  						url: "http://bohemian.webscript.io/classLibraryContact",
+  						type: "POST",
+  					});
   				}
-  			};	
-  			$.prompt(helpPrompt);
+  			}
+
+  			navigator.notification.prompt(
+  				'Please enter your message',  // message
+  				onPrompt,                  // callback to invoke
+  				'Help me',            // title
+  				['Ok','Cancel'],             // buttonLabels
+  				''                 // defaultText
+  			);
+
   		},
+
 
   	});
 });
