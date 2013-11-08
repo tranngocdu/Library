@@ -123,7 +123,7 @@ module.exports = View.extend({
 	addBook: function() {
 
 		navigator.notification.confirm(
-			'You are the winner!', // message
+			'', // message
 			onConfirm,            // callback to invoke with index of button pressed
 			'Add Book',           // title
 			'Scan,Manual, Cancel'         // buttonLabels

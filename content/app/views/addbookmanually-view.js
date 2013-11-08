@@ -40,10 +40,12 @@ module.exports = View.extend({
 
 		addBook:function () {
 			var that = this;
-
 			var title = $("#title").val();
 			var author = $("#author").val();
 			var numberAvailable = $("#numberAvailable").val();
+			
+			if (title && author && numberAvailable) {
+			
 			numberAvailable = parseInt(numberAvailable);
 			var currentUser = Parse.User.current();
 			var currentUserId = currentUser.id;
@@ -72,6 +74,15 @@ module.exports = View.extend({
 					console.log(error);
 				}
 			});
+		}
+		else {
+			navigator.notification.alert(
+				'Please add a title, author, and quantity.',  // message
+				function alertDismissed() {}, // callback
+				'Try Again',            // title
+				'OK'                  // buttonName
+			);
+		}
 
 		},
 

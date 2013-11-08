@@ -583,10 +583,12 @@ window.require.register("views/addbookmanually-view", function(exports, require,
 
   		addBook:function () {
   			var that = this;
-
   			var title = $("#title").val();
   			var author = $("#author").val();
   			var numberAvailable = $("#numberAvailable").val();
+  			
+  			if (title && author && numberAvailable) {
+  			
   			numberAvailable = parseInt(numberAvailable);
   			var currentUser = Parse.User.current();
   			var currentUserId = currentUser.id;
@@ -615,6 +617,15 @@ window.require.register("views/addbookmanually-view", function(exports, require,
   					console.log(error);
   				}
   			});
+  		}
+  		else {
+  			navigator.notification.alert(
+  				'Please add a title, author, and quantity.',  // message
+  				function alertDismissed() {}, // callback
+  				'Try Again',            // title
+  				'OK'                  // buttonName
+  			);
+  		}
 
   		},
 
@@ -1013,7 +1024,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   	addBook: function() {
 
   		navigator.notification.confirm(
-  			'You are the winner!', // message
+  			'', // message
   			onConfirm,            // callback to invoke with index of button pressed
   			'Add Book',           // title
   			'Scan,Manual, Cancel'         // buttonLabels
