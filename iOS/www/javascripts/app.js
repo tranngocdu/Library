@@ -1012,40 +1012,36 @@ window.require.register("views/booklist-view", function(exports, require, module
 
   	addBook: function() {
 
-  		var quantityPrompt = {
-  			state0: { 
-  				title: "Add Book",
-  				buttons: { "Scan": "scan", "Manual": true, "Cancel":false},
-  				// html: 'How do you want to add a book?',
-  				position: { container: '', width: 270},
-  				submit: function(e,v,m,f){
-  					if (v == true) {
-  						Application.router.navigate("#addBookManually", {trigger:true});
-  					}
-  					else if(v === "scan") {
-  						var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+  		navigator.notification.confirm(
+  			'You are the winner!', // message
+  			onConfirm,            // callback to invoke with index of button pressed
+  			'Add Book',           // title
+  			'Scan,Manual, Cancel'         // buttonLabels
+  		);
 
-  						scanner.scan(
-  							function (result) {
-  								if(result.text){
-  								Application.bookListView.ISBN = result.text;
-  								Application.addBookView.ISBN = result.text;
-  								Application.bookListView.$el.trigger("getbookinfo");
-  								}
-  							}, 
-  							function (error) {
-  								alert("Scanning failed: " + error);
-  							}
-  						);
-  					}
+  		function onConfirm(buttonIndex) {
+  			if (buttonIndex == 1) {
+  				var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-  				},
-  				cancel: function(){
-  					alert("cancel");
-  				}
+  				scanner.scan(
+  					function (result) {
+  						if(result.text){
+  							Application.bookListView.ISBN = result.text;
+  							Application.addBookView.ISBN = result.text;
+  							Application.bookListView.$el.trigger("getbookinfo");
+  						}
+  					}, 
+  					function (error) {
+  						alert("Scanning failed: " + error);
+  					}
+  				);
   			}
-  		};
-  		$.prompt(quantityPrompt);
+  			else if (buttonIndex ==2) {
+  				Application.router.navigate("#addBookManually", {trigger:true});
+
+  			}
+  		}		        
+
   	},
 
   	bookDetail: function(e) {
