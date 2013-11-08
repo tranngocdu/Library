@@ -140,11 +140,10 @@ module.exports = View.extend({
 		sendHelp: function() {
 			var that = this;
 			var helpPrompt = {
-				state0: { 
+				state2: { 
 					title: "Help Me",
 					buttons: { "Cancel": false, "Submit": true },
-					html:'</br>Email <input type="text" name="email" value="'+that.username+'" style="font-size:18px;width:100%;text-align:center;"></br></br>'+
-					'Message <input type="text" name="message" value="" style="font-size:18px;width:100%;text-align:left;"></br>',
+					html:'<input id="help-input" type="text" name="email" placeholder="Your Email" value="'+that.username+'"/>'+'<textarea id="help-textarea" name="message" value="" placeholder="Your Message"></textarea>',
 					submit: function(e,v,m,f){
 						if(v){
 							console.log(v);

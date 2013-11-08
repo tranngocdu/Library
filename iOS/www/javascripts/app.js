@@ -1800,7 +1800,12 @@ window.require.register("views/settings-view", function(exports, require, module
   						});
   					},
   					error: function(error) {
-  						alert("Incorrect password");
+  						navigator.notification.alert(
+  							'The password you entered was incorrect.',  // message
+  							function alertDismissed() {}, // callback
+  							'Check Password',            // title
+  							'OK'                  // buttonName
+  						);
   						var oldPassword = $('#set-current').val("");
   						var password =  $('#set-new').val("");
   						var confirmPassword =  $('#set-new-confirm').val("");
@@ -1808,7 +1813,12 @@ window.require.register("views/settings-view", function(exports, require, module
   				});
   			}
   			else {
-  				alert("Passwords need to match");
+  				navigator.notification.alert(
+  						'The passwords did not match.',  // message
+  						function alertDismissed() {}, // callback
+  						'Try again',            // title
+  						'OK'                  // buttonName
+  					);
   			}
 
   		},
@@ -1838,11 +1848,10 @@ window.require.register("views/settings-view", function(exports, require, module
   		sendHelp: function() {
   			var that = this;
   			var helpPrompt = {
-  				state0: { 
+  				state2: { 
   					title: "Help Me",
   					buttons: { "Cancel": false, "Submit": true },
-  					html:'</br>Email <input type="text" name="email" value="'+that.username+'" style="font-size:18px;width:100%;text-align:center;"></br></br>'+
-  					'Message <input type="text" name="message" value="" style="font-size:18px;width:100%;text-align:left;"></br>',
+  					html:'<input id="help-input" type="text" name="email" placeholder="Your Email" value="'+that.username+'"/>'+'<textarea id="help-textarea" name="message" value="" placeholder="Your Message"></textarea>',
   					submit: function(e,v,m,f){
   						if(v){
   							console.log(v);

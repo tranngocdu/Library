@@ -50,12 +50,17 @@ textarea.ui-input-text {
     box-shadow: none ;
 }
 input,
-select {
+select,
+textarea {
     outline: none 0!important;
     -webkit-appearance: none;
     border-radius: 0;
     border: none;
     border-bottom: 1px solid #CACACA;
+}
+
+textarea {
+  resize: none;
 }
 
 h1, h2, h3, h4, h5, p {
@@ -886,6 +891,21 @@ select#numberAvailable {
   padding: 5px 0 15px 0 !important;
 }
 
+.jqimessage {
+  input,textarea {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  #help-input {
+    height: 30px;
+  }
+  #help-textarea {
+    margin-top: 10px;
+    border-bottom: 0 none;
+  }
+}
+
 
 /*
 ------------------------------
@@ -902,15 +922,21 @@ select#qty-input {
   text-indent: 45%;
 }
 
+#jqi_state2_buttonCancel {
+  color: $red;
+}
+
 #jqi_state0_buttonScan,
 #jqi_state1_buttonOk,
 #jqi_state0_buttonSubmit,
-#jqi_state0_buttonNo {
+#jqi_state0_buttonNo,
+#jqi_state2_buttonCancel {
   border-left: 0 none;
 }
 
 #jqi_state0_buttonManual,
-#jqi_state0_buttonList {
+#jqi_state0_buttonList,
+#jqi_state2_buttonSubmit {
   border-right: 0 none;
 }
 
