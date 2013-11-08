@@ -790,12 +790,13 @@ select#numberAvailable {
         font-weight: 300;
         color: $light-grey;
         padding-top: 3px;
+        line-height: 1.3;
       }
       p {
         font-size: 13px;
         font-weight: 500;
         color: $primary;
-        padding-top: 4px;
+        padding-top: 3px;
       }
       .out {
         color: $red;
