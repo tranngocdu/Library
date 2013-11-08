@@ -1024,7 +1024,7 @@ select#numberAvailable {
         font-size: 13px;
         font-weight: 500;
         color: #3cc1a6;
-        padding-top: 4px; }
+        padding-top: 3px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003801}}
       #booklist li .book-meta .out {
         color: #f46b63; }
