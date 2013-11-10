@@ -2143,7 +2143,7 @@ window.require.register("views/templates/addBook", function(exports, require, mo
       + "</h2>\n      <h3>";
     stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack2 || stack2 === 0) { buffer += stack2; }
-    buffer += "</h3>\n      <p id=\"numberAvailable\">Number Available: 1</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn ab-big button primary-fill\">Add Book</div>\n    <div id=\"edit-quantity\" class=\"ab-btn button primary\">Edit Quantity</div>\n    "
+    buffer += "</h3>\n      <p id=\"numberAvailable\">Number Available: 1</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-quantity\" class=\"ab-btn button primary\">Edit Quantity</div>\n    "
       + "\n\n  </div> "
       + "\n</div> "
       + "\n\n";
@@ -2443,7 +2443,7 @@ window.require.register("views/templates/home", function(exports, require, modul
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n	<h1>Home</h1>\n</div>\n\n<div id=\"wrapper\">\n	<div id=\"scroller\" class=\"home\">\n		<div id=\"checkOut\" class=\"check-out button primary-fill\">Check Out</div>\n		<div id=\"checkIn\" class=\"check-in button secondary\">Check In</div>\n	</div> "
+    buffer += "<div id=\"header\">\n	<h1>Home</h1>\n</div>\n\n<div id=\"checkedPrompt\">Back on the shelf</div>\n\n<div id=\"wrapper\">\n	<div id=\"scroller\" class=\"home\">\n		<div id=\"checkOut\" class=\"check-out button primary-fill\">Check Out</div>\n		<div id=\"checkIn\" class=\"check-in button secondary\">Check In</div>\n	</div> "
       + "\n</div> ";
     return buffer;
     });

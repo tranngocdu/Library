@@ -721,14 +721,13 @@ a {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003496}}
 #checkedPrompt {
   position: fixed;
-  top: 65px;
+  bottom: 65px;
   width: 100%;
   text-align: center;
   font-weight: 500;
   padding: 10px 0 13px 0;
-  background-color: #c95750;
-  color: white;
-  display: none; }
+  background-color: #424242;
+  color: white; }
 
 /*
 ------------------------------
@@ -776,8 +775,8 @@ a {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003549}}
 .ab-btn {
-  width: 140px;
-  padding: 8px 0 10px 0;
+  width: 200px;
+  padding: 10px 0 12px 0;
   margin: 0 auto 10px auto;
   font-size: 16px; }
 
