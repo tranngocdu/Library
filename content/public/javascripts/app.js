@@ -1680,7 +1680,7 @@ window.require.register("views/login-view", function(exports, require, module) {
   			  error: function(error) {
   			    // Show the error message somewhere
   			navigator.notification.alert(
-  				'Please enter above the email you used for Class Library.',   // message
+  				'First enter above the you used for Class Library.',   // message
   				function alertDismissed() {}, // callback
   				'Enter your email',            // title
   				'OK'                  // buttonName
