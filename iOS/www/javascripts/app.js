@@ -526,7 +526,7 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		var quantityPrompt = {
   			state0: { 
   				title: "Edit Quantity",
-  				buttons: { "Submit": true, "Cancel": false },
+  				buttons: { "Cancel": false, "Submit": true },
   				html:'<select id="qty-input" name="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>',
   				submit: function(e,v,m,f){
   					console.log(f.amount);
@@ -852,7 +852,7 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   		var quantityPrompt = {
   			state0: { 
   				title: "Edit Quantity",
-  				buttons: { "Submit": true, "Cancel": false },
+  				buttons: { "Cancel": false, "Submit": true },
   				html:'<select id="qty-input" name="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>',
   				submit: function(e,v,m,f){
   					console.log(f.amount);
@@ -1680,7 +1680,7 @@ window.require.register("views/login-view", function(exports, require, module) {
   			  error: function(error) {
   			    // Show the error message somewhere
   			navigator.notification.alert(
-  				'Please enter above the email you used for Class Library.',   // message
+  				'First enter above the you used for Class Library.',   // message
   				function alertDismissed() {}, // callback
   				'Enter your email',            // title
   				'OK'                  // buttonName
@@ -2430,7 +2430,7 @@ window.require.register("views/templates/login", function(exports, require, modu
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n  <h1>Login</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <h2>First things first.</h2>\n    <input id=\"login-email\" class=\"first-input\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"login-pass\" type=\"password\" placeholder=\"Password\" />\n\n    <div id=\"login\" class=\"button primary-fill\">Sign In</div>\n    <div id=\"login-have-account\" class=\"button primary\">Create an Account</div>\n    <div id=\"forgot\">Forgot your password?</div>\n"
+    buffer += "<div id=\"header\">\n  <h1>Login</h1>\n</div>\n\n<div id=\"wrapper\" class=\"bottomless\">\n  <div id=\"scroller\" class=\"container\">\n\n    <h2>First things first.</h2>\n    <input id=\"login-email\" type=\"email\" autocomplete=\"off\" placeholder=\"Email\" />\n    <input id=\"login-pass\" type=\"password\" placeholder=\"Password\" />\n\n    <div id=\"login\" class=\"button primary-fill\">Sign In</div>\n    <div id=\"login-have-account\" class=\"button primary\">Create an Account</div>\n    <div id=\"forgot\">Forgot your password?</div>\n"
       + "\n\n  </div> "
       + "\n</div> "
       + "\n\n";

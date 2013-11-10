@@ -1136,7 +1136,6 @@ select#numberAvailable {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/Dimitar\/Development\/Library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003916}}
 select#qty-input {
   width: 50%;
-  border-top: 1px solid #dbdbdb;
   height: 40px;
   margin: 10px 0;
   text-align: center !important;
