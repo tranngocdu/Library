@@ -20,12 +20,12 @@ module.exports = View.extend({
 
 	render: function() {
 		var that=this;
+		that.$el.html(that.template());
 		var query = new Parse.Query("NewBook");
 		query.equalTo("objectId", Application.bookDetailView.bookId);
 		query.find({
 
 			success: function(bookdetail) {
-
 				var bookdetailArray = JSON.stringify(bookdetail);
 				bookdetailArray = JSON.parse(bookdetailArray);
 				that.bookinfoknow = bookdetailArray[0];
@@ -34,10 +34,6 @@ module.exports = View.extend({
 				if ((bookdetailArray[0].studentList.length == 0) || (jQuery.isEmptyObject(bookdetailArray[0].studentList[0]) == true)) {
 					$("#checkout-list").hide();
 				}
-				if (bookdetailArray[0].studentList[0] == "") {
-					alert("nil");
-				}
-				that.screwyou = bookdetailArray[0].studentList[0];
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
