@@ -30,6 +30,7 @@ module.exports = View.extend({
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
 		query.equalTo("User", currentUserId);
+		query.ascending("title");
 		query.find({
 			success: function(usersBooks) {
 				var bookArray = JSON.stringify(usersBooks);
@@ -55,6 +56,7 @@ module.exports = View.extend({
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
 		query.equalTo("User", currentUserId);
+		query.ascending("title");
 		query.find({
 			success: function(usersBooks) {
 				var bookArray = JSON.stringify(usersBooks);
@@ -79,6 +81,7 @@ module.exports = View.extend({
 		var query = new Parse.Query("NewBook");
 		query.equalTo("User", currentUserId);
 		query.notEqualTo("quantity_available", 0);
+		query.ascending("title");
 		query.find({
 			success: function(usersBooks) {
 
@@ -105,6 +108,7 @@ module.exports = View.extend({
 		var query = new Parse.Query("NewBook");
 		query.equalTo("User", currentUserId);
 		query.notEqualTo("quantity_out", 0);
+		query.ascending("title");
 		query.find({
 			success: function(usersBooks) {
 

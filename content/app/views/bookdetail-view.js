@@ -153,8 +153,9 @@ module.exports = View.extend({
 					query.first({
 						success: function(usersBooks) {
 							console.log(usersBooks);
-							var quantityAvailable = usersBooks.attributes.quantity_available;
-							quantityAvailable = quantityAvailable + 1;
+							var quantityOut = usersBooks.attributes.quantity_out;	
+							var quantityAvailable = totalAmount - quantityOut;
+							$("#availableBooks").html("<span>"+quantityAvailable+" Available</span>");
 
 							usersBooks.set("quantity_available",quantityAvailable);
 							usersBooks.set("quantity_total",totalAmount);
