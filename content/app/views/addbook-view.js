@@ -40,6 +40,8 @@ module.exports = View.extend({
 				error: function (jqXHR,textStatus,errorThrown) {
 				}
 			});
+		} else {
+			that.imageUrl = undefined;
 		}
 
 		this.$el.html(this.template(data));
@@ -56,15 +58,18 @@ module.exports = View.extend({
 		var NewBook=Parse.Object.extend("NewBook");
 		var newBook=new NewBook();
 		newBook.set("title", this.bookData.ISBN.title);
-		var lengthAuthors = this.bookData.ISBN.authors.length;
-		var i = 0;
-		var authorArray = new Array ();
-		while (i < lengthAuthors) {
-			authorArray.push(this.bookData.ISBN.authors[i].name);
-			i++;
+		if (typeof this.bookData.ISBN.authors!='undefined'){
+
+			var lengthAuthors = this.bookData.ISBN.authors.length;
+			var i = 0;
+			var authorArray = new Array ();
+			while (i < lengthAuthors) {
+				authorArray.push(this.bookData.ISBN.authors[i].name);
+				i++;
+			}
+			authorArray = authorArray.toString();
+			newBook.set("author", authorArray);
 		}
-		authorArray = authorArray.toString();
-		newBook.set("author", authorArray);
 		if (typeof this.bookData.ISBN.cover!='undefined'){
 			newBook.set("cover_image", that.imageUrl);
 		};
