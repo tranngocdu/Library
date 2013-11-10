@@ -80,7 +80,12 @@ module.exports = View.extend({
 						user.set("password", password);
 						user.save(null, {
 							success: function(user) {
-								alert("Settings have been changed");
+								navigator.notification.alert(
+									'Settings have been changed.',  // message
+									function alertDismissed() {}, // callback
+									'Changed',            // title
+									'OK'                  // buttonName
+								);
 								Application.router.navigate("#home", {
 									trigger: true
 								});
@@ -116,13 +121,26 @@ module.exports = View.extend({
 		},
 
 		logout: function () {
-			window.localStorage.removeItem("userId");
-			Parse.User.logOut();
-			$("#footer").removeClass("visible");
-			$("#footer").addClass("hidden");
-			Application.router.navigate("#login", {
-				trigger: true
-			});
+			
+			function onConfirm(results) {
+				if (results.buttonIndex == 1) {
+					window.localStorage.removeItem("userId");
+					Parse.User.logOut();
+					$("#footer").removeClass("visible");
+					$("#footer").addClass("hidden");
+					Application.router.navigate("#login", {
+						trigger: true
+					});
+				}
+			}
+			
+			navigator.notification.confirm(
+				'Are you sure you want to logout?',  // message
+				onConfirm,                  // callback to invoke
+				'Log Out',            // title
+				['Ok','Cancel']             // buttonLabels
+			);
+
 		},
 
 		addBook: function() {
