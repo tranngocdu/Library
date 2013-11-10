@@ -457,6 +457,8 @@ window.require.register("views/addbook-view", function(exports, require, module)
   				error: function (jqXHR,textStatus,errorThrown) {
   				}
   			});
+  		} else {
+  			that.imageUrl = undefined;
   		}
 
   		this.$el.html(this.template(data));
@@ -473,15 +475,18 @@ window.require.register("views/addbook-view", function(exports, require, module)
   		var NewBook=Parse.Object.extend("NewBook");
   		var newBook=new NewBook();
   		newBook.set("title", this.bookData.ISBN.title);
-  		var lengthAuthors = this.bookData.ISBN.authors.length;
-  		var i = 0;
-  		var authorArray = new Array ();
-  		while (i < lengthAuthors) {
-  			authorArray.push(this.bookData.ISBN.authors[i].name);
-  			i++;
+  		if (typeof this.bookData.ISBN.authors!='undefined'){
+
+  			var lengthAuthors = this.bookData.ISBN.authors.length;
+  			var i = 0;
+  			var authorArray = new Array ();
+  			while (i < lengthAuthors) {
+  				authorArray.push(this.bookData.ISBN.authors[i].name);
+  				i++;
+  			}
+  			authorArray = authorArray.toString();
+  			newBook.set("author", authorArray);
   		}
-  		authorArray = authorArray.toString();
-  		newBook.set("author", authorArray);
   		if (typeof this.bookData.ISBN.cover!='undefined'){
   			newBook.set("cover_image", that.imageUrl);
   		};
@@ -735,12 +740,12 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
 
   	render: function() {
   		var that=this;
+  		that.$el.html(that.template());
   		var query = new Parse.Query("NewBook");
   		query.equalTo("objectId", Application.bookDetailView.bookId);
   		query.find({
 
   			success: function(bookdetail) {
-
   				var bookdetailArray = JSON.stringify(bookdetail);
   				bookdetailArray = JSON.parse(bookdetailArray);
   				that.bookinfoknow = bookdetailArray[0];
@@ -749,10 +754,6 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   				if ((bookdetailArray[0].studentList.length == 0) || (jQuery.isEmptyObject(bookdetailArray[0].studentList[0]) == true)) {
   					$("#checkout-list").hide();
   				}
-  				if (bookdetailArray[0].studentList[0] == "") {
-  					alert("nil");
-  				}
-  				that.screwyou = bookdetailArray[0].studentList[0];
   			},
   			error: function(error) {
   				alert("Error: " + error.code + " " + error.message);
@@ -872,8 +873,9 @@ window.require.register("views/bookdetail-view", function(exports, require, modu
   					query.first({
   						success: function(usersBooks) {
   							console.log(usersBooks);
-  							var quantityAvailable = usersBooks.attributes.quantity_available;
-  							quantityAvailable = quantityAvailable + 1;
+  							var quantityOut = usersBooks.attributes.quantity_out;	
+  							var quantityAvailable = totalAmount - quantityOut;
+  							$("#availableBooks").html("<span>"+quantityAvailable+" Available</span>");
 
   							usersBooks.set("quantity_available",quantityAvailable);
   							usersBooks.set("quantity_total",totalAmount);
@@ -934,6 +936,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("NewBook");
   		query.equalTo("User", currentUserId);
+  		query.ascending("title");
   		query.find({
   			success: function(usersBooks) {
   				var bookArray = JSON.stringify(usersBooks);
@@ -959,6 +962,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   		var currentUserId = currentUser.id;
   		var query = new Parse.Query("NewBook");
   		query.equalTo("User", currentUserId);
+  		query.ascending("title");
   		query.find({
   			success: function(usersBooks) {
   				var bookArray = JSON.stringify(usersBooks);
@@ -983,6 +987,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   		var query = new Parse.Query("NewBook");
   		query.equalTo("User", currentUserId);
   		query.notEqualTo("quantity_available", 0);
+  		query.ascending("title");
   		query.find({
   			success: function(usersBooks) {
 
@@ -1009,6 +1014,7 @@ window.require.register("views/booklist-view", function(exports, require, module
   		var query = new Parse.Query("NewBook");
   		query.equalTo("User", currentUserId);
   		query.notEqualTo("quantity_out", 0);
+  		query.ascending("title");
   		query.find({
   			success: function(usersBooks) {
 
@@ -1798,7 +1804,12 @@ window.require.register("views/settings-view", function(exports, require, module
   						user.set("password", password);
   						user.save(null, {
   							success: function(user) {
-  								alert("Settings have been changed");
+  								navigator.notification.alert(
+  									'Settings have been changed.',  // message
+  									function alertDismissed() {}, // callback
+  									'Changed',            // title
+  									'OK'                  // buttonName
+  								);
   								Application.router.navigate("#home", {
   									trigger: true
   								});
@@ -1834,13 +1845,26 @@ window.require.register("views/settings-view", function(exports, require, module
   		},
 
   		logout: function () {
-  			window.localStorage.removeItem("userId");
-  			Parse.User.logOut();
-  			$("#footer").removeClass("visible");
-  			$("#footer").addClass("hidden");
-  			Application.router.navigate("#login", {
-  				trigger: true
-  			});
+  			
+  			function onConfirm(results) {
+  				if (results.buttonIndex == 1) {
+  					window.localStorage.removeItem("userId");
+  					Parse.User.logOut();
+  					$("#footer").removeClass("visible");
+  					$("#footer").addClass("hidden");
+  					Application.router.navigate("#login", {
+  						trigger: true
+  					});
+  				}
+  			}
+  			
+  			navigator.notification.confirm(
+  				'Are you sure you want to logout?',  // message
+  				onConfirm,                  // callback to invoke
+  				'Log Out',            // title
+  				['Ok','Cancel']             // buttonLabels
+  			);
+
   		},
 
   		addBook: function() {
@@ -2119,7 +2143,8 @@ window.require.register("views/templates/addBook", function(exports, require, mo
       + "</h2>\n      <h3>";
     stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
     if(stack2 || stack2 === 0) { buffer += stack2; }
-    buffer += "</h3>\n      <p id=\"numberAvailable\">Number Available: 1</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-quantity\" class=\"ab-btn button primary\">Edit Quantity</div>\n    <div id=\"remove-book\" class=\"ab-btn button secondary\">Remove Book</div>\n\n  </div> "
+    buffer += "</h3>\n      <p id=\"numberAvailable\">Number Available: 1</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button secondary-fill\">Add Book</div>\n    <div id=\"edit-quantity\" class=\"ab-btn button primary\">Edit Quantity</div>\n    "
+      + "\n\n  </div> "
       + "\n</div> "
       + "\n\n";
     return buffer;
