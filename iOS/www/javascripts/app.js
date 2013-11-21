@@ -1080,8 +1080,13 @@ window.require.register("views/booklist-view", function(exports, require, module
   			url: "http://openlibrary.org/api/books",
   			type: "GET",
   			success: function (data) {
-  				//Catch if data is blank, ISBN is not found
-  				if(data == "") {
+  				
+  				Application.bookListView.damnyou = data;
+  				var dataString = JSON.stringify(data);
+  				var combinedString = dataString.substring(0,6) + dataString.substring(20);
+  				var dataHere=JSON.parse(combinedString);
+
+  				if(typeof dataHere.ISBN === typeof undefined) {
   					Application.router.navigate("#addBookManually", {
   						trigger: true
   					});
@@ -2443,7 +2448,7 @@ window.require.register("views/templates/home", function(exports, require, modul
     var buffer = "";
 
 
-    buffer += "<div id=\"header\">\n	<h1>Home</h1>\n</div>\n\n<div id=\"checkedPrompt\">Back on the shelf</div>\n\n<div id=\"wrapper\">\n	<div id=\"scroller\" class=\"home\">\n		<div id=\"checkOut\" class=\"check-out button primary-fill\">Check Out</div>\n		<div id=\"checkIn\" class=\"check-in button secondary\">Check In</div>\n	</div> "
+    buffer += "<div id=\"header\">\n	<h1>Home</h1>\n</div>\n\n<div id=\"wrapper\">\n	<div id=\"scroller\" class=\"home\">\n		<div id=\"checkOut\" class=\"check-out button primary-fill\">Check Out</div>\n		<div id=\"checkIn\" class=\"check-in button secondary\">Check In</div>\n	</div> "
       + "\n</div> ";
     return buffer;
     });

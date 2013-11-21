@@ -1080,8 +1080,13 @@ window.require.register("views/booklist-view", function(exports, require, module
   			url: "http://openlibrary.org/api/books",
   			type: "GET",
   			success: function (data) {
-  				//Catch if data is blank, ISBN is not found
-  				if(data == "") {
+  				
+  				Application.bookListView.damnyou = data;
+  				var dataString = JSON.stringify(data);
+  				var combinedString = dataString.substring(0,6) + dataString.substring(20);
+  				var dataHere=JSON.parse(combinedString);
+
+  				if(typeof dataHere.ISBN === typeof undefined) {
   					Application.router.navigate("#addBookManually", {
   						trigger: true
   					});
