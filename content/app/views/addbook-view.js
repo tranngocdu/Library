@@ -17,6 +17,7 @@ module.exports = View.extend({
 
 	render: function() {
 		var that = this;
+		that.canSave = false;
 		var data = Application.addBookView.bookData;
 		var passData = data;
 		console.log(passData);
@@ -36,12 +37,14 @@ module.exports = View.extend({
 				type: "POST",
 				success: function (data) {
 					that.imageUrl = data.url;
+					that.canSave = true;
 				},
 				error: function (jqXHR,textStatus,errorThrown) {
 				}
 			});
 		} else {
 			that.imageUrl = undefined;
+			that.canSave = true;
 		}
 
 		this.$el.html(this.template(data));
@@ -53,59 +56,71 @@ module.exports = View.extend({
 
 	addBook: function() {
 		var that = this;
-		var currentUser = Parse.User.current();
-		var currentUserId = currentUser.id;
-		var NewBook=Parse.Object.extend("NewBook");
-		var newBook=new NewBook();
-		newBook.set("title", this.bookData.ISBN.title);
-		if (typeof this.bookData.ISBN.authors!='undefined'){
 
-			var lengthAuthors = this.bookData.ISBN.authors.length;
-			var i = 0;
-			var authorArray = new Array ();
-			while (i < lengthAuthors) {
-				authorArray.push(this.bookData.ISBN.authors[i].name);
-				i++;
+		if (that.canSave == true) {
+			var that = this;
+			var currentUser = Parse.User.current();
+			var currentUserId = currentUser.id;
+			var NewBook=Parse.Object.extend("NewBook");
+			var newBook=new NewBook();
+			newBook.set("title", this.bookData.ISBN.title);
+			if (typeof this.bookData.ISBN.authors!='undefined'){
+
+				var lengthAuthors = this.bookData.ISBN.authors.length;
+				var i = 0;
+				var authorArray = new Array ();
+				while (i < lengthAuthors) {
+					authorArray.push(this.bookData.ISBN.authors[i].name);
+					i++;
+				}
+				authorArray = authorArray.toString();
+				newBook.set("author", authorArray);
 			}
-			authorArray = authorArray.toString();
-			newBook.set("author", authorArray);
-		}
-		if (typeof this.bookData.ISBN.cover!='undefined'){
-			newBook.set("cover_image", that.imageUrl);
-		};
-		console.log(this.bookData);
-		newBook.set("quantity_total", that.totalAmount);
-		newBook.set("quantity_out", 0);
-		newBook.set("quantity_available", that.totalAmount);
-		newBook.set("User", currentUserId);
-		newBook.set("studentList",[{}]);
-		newBook.set("ISBN", that.ISBN);
-		if(that.totalAmount){
-			newBook.save(null, {
-				success: function(newBook) {
-					Application.router.navigate("#bookList" , {trigger: true});
-				},
-				error: function(newBook, error) {
-					alert('Back to the drawing board');
-					console.log(error);
-				}
-			});
-		}else {
-			var quantityPrompt = {
-				state1: { 
-					title: "But how many?",
-					html: "You need to add quantity of books first.",
-					buttons: { "Ok": true },
-					submit: function(e,v,m,f){
-						Application.router.navigate("#bookList" , {trigger: true});
-
-					},
-					cancel: function(){
-					}
-				}
+			if (typeof this.bookData.ISBN.cover!='undefined'){
+				newBook.set("cover_image", that.imageUrl);
 			};
-			$.prompt(quantityPrompt);
-		};
+			console.log(this.bookData);
+			newBook.set("quantity_total", that.totalAmount);
+			newBook.set("quantity_out", 0);
+			newBook.set("quantity_available", that.totalAmount);
+			newBook.set("User", currentUserId);
+			newBook.set("studentList",[{}]);
+			newBook.set("ISBN", that.ISBN);
+			if(that.totalAmount){
+				newBook.save(null, {
+					success: function(newBook) {
+						Application.router.navigate("#bookList" , {trigger: true});
+					},
+					error: function(newBook, error) {
+						alert('Back to the drawing board');
+						console.log(error);
+					}
+				});
+			}else {
+				var quantityPrompt = {
+					state1: { 
+						title: "But how many?",
+						html: "Please add quantity of books first.",
+						buttons: { "Ok": true },
+						submit: function(e,v,m,f){
+							Application.router.navigate("#bookList" , {trigger: true});
+
+						},
+						cancel: function(){
+						}
+					}
+				};
+				$.prompt(quantityPrompt);
+			};
+		}
+		else {
+			navigator.notification.alert(
+				'Please try again in one second, the photo is still uploading.',  // message
+				function alertDismissed() {}, // callback
+				'Try Again',            // title
+				'OK'                  // buttonName
+			);
+		}
 	},
 
 	quantity: function() {

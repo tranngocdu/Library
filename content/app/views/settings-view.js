@@ -122,8 +122,8 @@ module.exports = View.extend({
 
 		logout: function () {
 			
-			function onConfirm(results) {
-				if (results.buttonIndex == 1) {
+			function onConfirm(buttonIndex) {
+				if (buttonIndex == 1) {
 					window.localStorage.removeItem("userId");
 					Parse.User.logOut();
 					$("#footer").removeClass("visible");
@@ -138,7 +138,7 @@ module.exports = View.extend({
 				'Are you sure you want to logout?',  // message
 				onConfirm,                  // callback to invoke
 				'Log Out',            // title
-				['Ok','Cancel']             // buttonLabels
+				'Ok,Cancel'             // buttonLabels
 			);
 
 		},
