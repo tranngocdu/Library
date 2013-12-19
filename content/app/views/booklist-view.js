@@ -29,6 +29,7 @@ module.exports = View.extend({
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
+		query.limit(1000);
 		query.equalTo("User", currentUserId);
 		query.ascending("title");
 		query.find({
@@ -36,6 +37,7 @@ module.exports = View.extend({
 				var bookArray = JSON.stringify(usersBooks);
 				var bookArray = JSON.parse(bookArray);
 				that.bookArray = bookArray;	
+				console.log(JSON.stringify(bookArray));
 				$('.booklist-wrap').html(that.templateBooks(bookArray));				
 			},
 			error: function(error) {
