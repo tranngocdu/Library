@@ -629,9 +629,17 @@ module.exports = View.extend({
 			var that = this;
 			var title = $("#title").val();
 			var author = $("#author").val();
+			var isbn = $("#isbn").val();
 			var numberAvailable = $("#numberAvailable").val();
 			
-			if (title && author && numberAvailable) {
+			if(isbn.length!=13){
+				navigator.notification.alert(
+				"Please make sure you're using the 13 digit ISBN ",  // message
+				function alertDismissed() {}, // callback
+				'Try Again',            // title
+				'OK'                  // buttonName
+			);
+			}else if (title && author && numberAvailable) {
 			
 			numberAvailable = parseInt(numberAvailable);
 			var currentUser = Parse.User.current();
@@ -651,7 +659,7 @@ module.exports = View.extend({
 			newBook.set("quantity_available", numberAvailable);
 			newBook.set("User", currentUserId);
 			newBook.set("studentList",[{}]);
-			newBook.set("ISBN", currentUserId+date);
+			newBook.set("ISBN", isbn);
 			newBook.save(null, {
 				success: function(newBook) {
 					Application.router.navigate("#bookList" , {trigger: true});
@@ -1582,7 +1590,7 @@ module.exports = View.extend({
 
 				if (bookdetail == '') {
 					navigator.notification.alert(
-						'You need to add this book to your library first.',  // message
+						"We couldn't find a book with that ISBN number. Please check the ISBN numbers and try again.",  // message
 						function alertDismissed() {}, // callback
 						'Not so quick...',            // title
 						'OK'                  // buttonName
@@ -1629,7 +1637,7 @@ module.exports = View.extend({
 			success: function(bookdetail) {
 				if (bookdetail == '') {
 					navigator.notification.alert(
-											'You need to add this book to your library first.',  // message
+											"We couldn't find a book with that ISBN number. Please check the ISBN numbers and try again.",  // message
 											function alertDismissed() {}, // callback
 											'Not so quick...',            // title
 											'OK'                  // buttonName
@@ -2213,7 +2221,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "";
 
 
-  buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll long-page\">\n    <div id=\"custom-art\"><img src=\"\"></div>\n		<div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Add Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <select id=\"numberAvailable\" name=\"amount\" data-role=\"none\">\n      <option value=\"1\">1</option>\n      <option value=\"2\">2</option>\n      <option value=\"3\">3</option>\n      <option value=\"4\">4</option>\n      <option value=\"5\">5</option>\n      <option value=\"6\">6</option>\n      <option value=\"7\">7</option>\n      <option value=\"8\">8</option>\n      <option value=\"9\">9</option>\n      <option value=\"10\">10</option>\n    </select>\n\n    <div id=\"addBook\" class=\"button primary-fill\">Add Book</div>\n\n  </div> "
+  buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll long-page\">\n    <div id=\"custom-art\"><img src=\"\"></div>\n		<div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Add Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <input id=\"isbn\" type=\"number\" placeholder=\"Book ISBN\" />\n    <select id=\"numberAvailable\" name=\"amount\" data-role=\"none\">\n      <option value=\"1\">1</option>\n      <option value=\"2\">2</option>\n      <option value=\"3\">3</option>\n      <option value=\"4\">4</option>\n      <option value=\"5\">5</option>\n      <option value=\"6\">6</option>\n      <option value=\"7\">7</option>\n      <option value=\"8\">8</option>\n      <option value=\"9\">9</option>\n      <option value=\"10\">10</option>\n    </select>\n\n    <div id=\"addBook\" class=\"button primary-fill\">Add Book</div>\n\n  </div> "
     + "\n</div> "
     + "\n\n";
   return buffer;

@@ -134,7 +134,7 @@ module.exports = View.extend({
 
 				if (bookdetail == '') {
 					navigator.notification.alert(
-						'You need to add this book to your library first.',  // message
+						"We couldn't find a book with that ISBN number. Please check the ISBN numbers and try again.",  // message
 						function alertDismissed() {}, // callback
 						'Not so quick...',            // title
 						'OK'                  // buttonName
@@ -181,7 +181,7 @@ module.exports = View.extend({
 			success: function(bookdetail) {
 				if (bookdetail == '') {
 					navigator.notification.alert(
-											'You need to add this book to your library first.',  // message
+											"We couldn't find a book with that ISBN number. Please check the ISBN numbers and try again.",  // message
 											function alertDismissed() {}, // callback
 											'Not so quick...',            // title
 											'OK'                  // buttonName

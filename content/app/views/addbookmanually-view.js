@@ -42,9 +42,17 @@ module.exports = View.extend({
 			var that = this;
 			var title = $("#title").val();
 			var author = $("#author").val();
+			var isbn = $("#isbn").val();
 			var numberAvailable = $("#numberAvailable").val();
 			
-			if (title && author && numberAvailable) {
+			if(isbn.length!=13){
+				navigator.notification.alert(
+				"Please make sure you're using the 13 digit ISBN ",  // message
+				function alertDismissed() {}, // callback
+				'Try Again',            // title
+				'OK'                  // buttonName
+			);
+			}else if (title && author && numberAvailable) {
 			
 			numberAvailable = parseInt(numberAvailable);
 			var currentUser = Parse.User.current();
@@ -64,7 +72,7 @@ module.exports = View.extend({
 			newBook.set("quantity_available", numberAvailable);
 			newBook.set("User", currentUserId);
 			newBook.set("studentList",[{}]);
-			newBook.set("ISBN", currentUserId+date);
+			newBook.set("ISBN", isbn);
 			newBook.save(null, {
 				success: function(newBook) {
 					Application.router.navigate("#bookList" , {trigger: true});
