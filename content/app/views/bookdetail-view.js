@@ -28,9 +28,11 @@ module.exports = View.extend({
 			success: function(bookdetail) {
 				var bookdetailArray = JSON.stringify(bookdetail);
 				bookdetailArray = JSON.parse(bookdetailArray);
+				this.bookdetailArray = bookdetailArray;
 				that.bookinfoknow = bookdetailArray[0];
 				that.ISBN = bookdetailArray[0].ISBN;
 				that.$el.html(that.template(bookdetailArray));
+
 				if ((bookdetailArray[0].studentList.length == 0) || (jQuery.isEmptyObject(bookdetailArray[0].studentList[0]) == true)) {
 					$("#checkout-list").hide();
 				}
@@ -128,8 +130,26 @@ module.exports = View.extend({
 	},
 
 	editQuantity: function() {
+	var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("ISBN", Application.bookDetailView.ISBN);
+		query.equalTo("User", currentUserId);
+		query.find({
 
-		var data = Application.addBookView.bookData;
+			success: function(bookdetail) {
+				var bookdetailArray = JSON.stringify(bookdetail);
+				bookdetailArray = JSON.parse(bookdetailArray);
+				Application.editBookView.bookInfo = bookdetailArray;
+				Application.router.navigate("#editBook", {
+					trigger: true
+				});
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+		/*
 		var quantityPrompt = {
 			state0: { 
 				title: "Edit Quantity",
@@ -178,6 +198,7 @@ module.exports = View.extend({
 			}
 		};
 		$.prompt(quantityPrompt);
+		*/
 	}
 
 });

@@ -121,6 +121,7 @@ Application = {
 			var AddBook = require('views/addbook-view');
 			var AddStudent = require('views/addstudent-view');
 			var BookDetail = require('views/bookdetail-view');
+			var EditBook = require('views/editbook-view');
 			var BookList = require('views/booklist-view');
 			var CheckIn = require('views/checkin-view');
 			var CheckOut = require('views/checkout-view');
@@ -137,6 +138,7 @@ Application = {
 			this.addBookView = new AddBook();
 			this.addStudentView = new AddStudent();
 			this.bookDetailView = new BookDetail();
+			this.editBookView = new EditBook();
 			this.bookListView = new BookList();
 			this.checkInView = new CheckIn();
 			this.checkOutView = new CheckOut();
@@ -252,6 +254,7 @@ module.exports = Backbone.Router.extend({
 		'home':'home',
 		'addBook':'addBook',
 		'addStudent':'addStudent',
+		'editBook':'editBook',
 		'bookDetail':'bookDetail',
 		'bookList':'bookList',
 		'checkIn':'checkIn',
@@ -327,6 +330,9 @@ module.exports = Backbone.Router.extend({
 		},
 		addBookManually:function() {
 			this.changePage(Application.addBookManuallyView);
+		},
+		editBook:function() {
+			this.changePage(Application.editBookView);
 		},
 		login:function() {
 			this.changePage(Application.loginView);
@@ -794,9 +800,11 @@ module.exports = View.extend({
 			success: function(bookdetail) {
 				var bookdetailArray = JSON.stringify(bookdetail);
 				bookdetailArray = JSON.parse(bookdetailArray);
+				this.bookdetailArray = bookdetailArray;
 				that.bookinfoknow = bookdetailArray[0];
 				that.ISBN = bookdetailArray[0].ISBN;
 				that.$el.html(that.template(bookdetailArray));
+
 				if ((bookdetailArray[0].studentList.length == 0) || (jQuery.isEmptyObject(bookdetailArray[0].studentList[0]) == true)) {
 					$("#checkout-list").hide();
 				}
@@ -894,8 +902,26 @@ module.exports = View.extend({
 	},
 
 	editQuantity: function() {
+	var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("NewBook");
+		query.equalTo("ISBN", Application.bookDetailView.ISBN);
+		query.equalTo("User", currentUserId);
+		query.find({
 
-		var data = Application.addBookView.bookData;
+			success: function(bookdetail) {
+				var bookdetailArray = JSON.stringify(bookdetail);
+				bookdetailArray = JSON.parse(bookdetailArray);
+				Application.editBookView.bookInfo = bookdetailArray;
+				Application.router.navigate("#editBook", {
+					trigger: true
+				});
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+		/*
 		var quantityPrompt = {
 			state0: { 
 				title: "Edit Quantity",
@@ -944,6 +970,7 @@ module.exports = View.extend({
 			}
 		};
 		$.prompt(quantityPrompt);
+		*/
 	}
 
 });
@@ -980,7 +1007,7 @@ module.exports = View.extend({
 		var that = this;
 		that.$el.html(that.template());
 		var currentUser = Parse.User.current();
-		var currentUserId = currentUser.id;
+		var currentUserId = "JTNTVZuavf";
 		var query = new Parse.Query("NewBook");
 		query.limit(1000);
 		query.equalTo("User", currentUserId);
@@ -1450,6 +1477,168 @@ module.exports = View.extend({
 
 
 });
+
+});
+
+;require.register("views/editbook-view", function(exports, require, module) {
+var View = require('./view');
+var template = require('./templates/editBook');
+
+module.exports = View.extend({
+	id: 'editBook-view',
+	template: template,
+	events: {
+		'click #addBook':'addBook',
+		'click #addPhoto':'addPhoto',
+		'focus #title': 'footer',
+		'focus #author': 'footer',
+		'focus #numberAvailable': 'footer',
+		'blur #title': 'footer',
+		'blur #author': 'footer',
+		'blur #numberAvailable': 'footer',
+	},
+
+	initialize: function() {
+	},
+
+	render: function() {
+		var that = this;
+		that.bookData = Application.editBookView.bookInfo;
+		this.$el.html(this.template(that.bookData));
+		console.log(that.bookData);
+		setTimeout(function(){$('select option[value="'+parseInt(Application.editBookView.bookData[0].quantity_total)+'"]').attr("selected",true);},300);
+		return this;		
+	},
+
+	footer: function() {
+
+		setTimeout(function(){
+			if (($("#title").is(":focus")) || ($("#author").is(":focus")) || ($("#numberAvailable").is(":focus"))){
+				$("#footer").addClass("hidden");
+				$("#footer").removeClass("visible");
+				$("#wrapper").css("bottom", "0px");
+			} else {
+				$("#footer").removeClass("hidden");
+				$("#footer").addClass("visible");
+				$("#wrapper").css("bottom", "65px");
+			}
+			},200);
+		},
+
+		addBook:function () {
+		var that = this;
+		var query = new Parse.Query("NewBook");
+		var currentUser = Parse.User.current();
+		var currentUserId = currentUser.id;
+		query.equalTo("User", currentUserId);
+		query.equalTo("ISBN", Application.editBookView.bookData.ISBN);
+		console.log(Application.editBookView.bookData[0].ISBN)
+		query.first({
+			success: function(usersBooks) {
+			var that = this;
+			var title = "";
+			if($("#title").length=0){
+				title = $("#title").val();
+			}else{
+				title = $("#title").attr("placeholder");
+			}
+			var author = "";
+			if($("#author").length=0){
+				title = $("#author").val();}
+			else{
+				title = $("#author").attr("placeholder");
+			}
+			var isbn = "";
+			if($("#isbn").length=0){
+				isbn = $("#isbn").val();}
+			else{
+				isbn = $("#isbn").attr("placeholder");
+			}
+			var numberAvailable = $("#numberAvailable").val();
+			
+			if(isbn.length!=13){
+				navigator.notification.alert(
+				"Please make sure you're using the 13 digit ISBN ",  // message
+				function alertDismissed() {}, // callback
+				'Try Again',            // title
+				'OK'                  // buttonName
+			);
+			}else if (title && author && numberAvailable) {
+			
+			numberAvailable = parseInt(numberAvailable);
+			var currentUser = Parse.User.current();
+			var currentUserId = currentUser.id;
+			var date = new Date();
+			date = date.getTime();
+			newBook.set("title", title);
+			newBook.set("author", author);
+			if (that.thumbnail_url) {
+				newBook.set("cover_image", that.thumbnail_url);
+			}
+			newBook.set("quantity_total", numberAvailable);
+			newBook.set("quantity_out", 0);
+			newBook.set("quantity_available", numberAvailable);
+			newBook.set("User", currentUserId);
+			newBook.set("studentList",[{}]);
+			newBook.set("ISBN", isbn);
+			newBook.save(null, {
+				success: function(newBook) {
+					Application.router.navigate("#bookList" , {trigger: true});
+				},
+				error: function(newBook, error) {
+					alert('Back to the drawing board');
+					console.log(error);
+				}
+			});
+		}
+		else {
+			navigator.notification.alert(
+				'Please add a title, author, and quantity.',  // message
+				function alertDismissed() {}, // callback
+				'Try Again',            // title
+				'OK'                  // buttonName
+			);
+		}
+	//end save book
+	}
+})
+		},
+
+		addPhoto: function() {
+			var that = this;
+			if (!window.plugins.filepicker) {
+				alert("clicked");
+
+				return;
+			}
+
+			var uploadSuccess = function(args) {
+				if (args.result == 'didFinishPickingMediaWithInfo') {
+					that.thumbnail_url = args.FPPickerControllerRemoteURL + '/convert?w=150';
+					$(".no-icon").hide();
+					$("#custom-art").show();
+					$("#custom-art").html('<img src='+that.thumbnail_url+'></img>')
+
+					//$('#picker').removeClass('background-image');
+					//$('#picker').css('background-image', 'url(' + that.thumbnail_url + ')');
+				}
+			};
+
+			var uploadError = function(args) {
+				console.log('Error during Filepicker upload');
+			};
+
+			window.plugins.filepicker.pick(
+				{
+					dataTypes: ['image/*'],
+					sourceNames: ['FPSourceCamera', 'FPSourceCameraRoll', 'FPSourceDropbox', 'FPSourceGoogleDrive', 'FPSourceGmail', 'FPSourceFacebook', 'FPSourceInstagram', 'FPSourceImagesearch']
+				},
+				uploadSuccess,
+				uploadError
+			);
+		}
+
+	});
 
 });
 
@@ -2277,7 +2466,7 @@ function program1(depth0,data) {
     + " Available</span>\n				</div>\n				<div class=\"clearfix\"></div>\n				\n	    </div>\n	<div id=\"checkout-list\">\n		<h5>Copies loaned to:</h5>\n		  <ul id=\"studentlist\">\n		    ";
   stack1 = helpers.each.call(depth0, depth0.studentList, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n		    </ul>	\n		</div>\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"checkin-book\" class=\"ab-btn button secondary\">Check In</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Quantity</div>\n	    <div id=\"remove-book-prompt\" data-id=\"";
+  buffer += "\n		    </ul>	\n		</div>\n\n	    <div id=\"checkout-book\" class=\"ab-btn button primary-fill\">Check Out</div>\n	    <div id=\"checkin-book\" class=\"ab-btn button secondary\">Check In</div>\n	    <div id=\"edit-book\" class=\"ab-btn button primary\">Edit Book</div>\n	    <div id=\"remove-book-prompt\" data-id=\"";
   if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -2503,6 +2692,60 @@ function program4(depth0,data) {
   buffer += "\n\n</div> "
     + "\n<div class=\"clearfix\"></div>\n\n<div class=\"name-header\">Pick your name</div>\n\n<div id=\"wrapper\" class=\"check-wrap\">\n	<div id=\"scroller\" class=\"students\">\n	</div> "
     + "\n</div> ";
+  return buffer;
+  });
+});
+
+;require.register("views/templates/editBook", function(exports, require, module) {
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n    ";
+  stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Change Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" />\n    <input id=\"author\" type=\"text\" placeholder=\"";
+  if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" />\n    <input id=\"isbn\" type=\"number\" placeholder=\"";
+  if (stack1 = helpers.ISBN) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.ISBN; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" />\n    <select id=\"numberAvailable\" name=\"amount\" data-role=\"none\">\n      <option value=\"1\">1</option>\n      <option value=\"2\">2</option>\n      <option value=\"3\">3</option>\n      <option value=\"4\">4</option>\n      <option value=\"5\">5</option>\n      <option value=\"6\">6</option>\n      <option value=\"7\">7</option>\n      <option value=\"8\">8</option>\n      <option value=\"9\">9</option>\n      <option value=\"10\">10</option>\n    </select>\n    ";
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n        <div style=\"width:150px;margin:0 auto;\">\n          <img src=\"";
+  if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n        </div>\n        ";
+  return buffer;
+  }
+
+function program4(depth0,data) {
+  
+  
+  return "\n          <div class=\"no-icon\"></div>\n        ";
+  }
+
+  buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  <h1>Edit Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll long-page\">\n    ";
+  stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    <div id=\"addBook\" class=\"button primary-fill\">Save Book</div>\n\n  </div> "
+    + "\n</div> "
+    + "\n\n";
   return buffer;
   });
 });

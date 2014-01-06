@@ -8,6 +8,7 @@ module.exports = Backbone.Router.extend({
 		'home':'home',
 		'addBook':'addBook',
 		'addStudent':'addStudent',
+		'editBook':'editBook',
 		'bookDetail':'bookDetail',
 		'bookList':'bookList',
 		'checkIn':'checkIn',
@@ -83,6 +84,9 @@ module.exports = Backbone.Router.extend({
 		},
 		addBookManually:function() {
 			this.changePage(Application.addBookManuallyView);
+		},
+		editBook:function() {
+			this.changePage(Application.editBookView);
 		},
 		login:function() {
 			this.changePage(Application.loginView);
