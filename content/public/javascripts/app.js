@@ -1505,7 +1505,7 @@ module.exports = View.extend({
 		var that = this;
 		that.bookData = Application.editBookView.bookInfo;
 		this.$el.html(this.template(that.bookData));
-		console.log(that.bookData);
+		console.log($(that.bookData));
 		setTimeout(function(){$('select option[value="'+parseInt(Application.editBookView.bookData[0].quantity_total)+'"]').attr("selected",true);},300);
 		return this;		
 	},
@@ -1572,8 +1572,8 @@ module.exports = View.extend({
 				date = date.getTime();
 				newBook.set("title", title);
 				newBook.set("author", author);
-				if (that.thumbnail_url) {
-					newBook.set("cover_image", that.thumbnail_url);
+				if ($(".custom-art").children('img').attr("src").length>0) {
+					newBook.set("cover_image", $(".custom-art").children('img').attr("src"));
 				}
 				newBook.set("quantity_total", numberAvailable);
 				newBook.set("User", currentUserId);
@@ -1606,8 +1606,8 @@ module.exports = View.extend({
 				if (args.result == 'didFinishPickingMediaWithInfo') {
 					that.thumbnail_url = args.FPPickerControllerRemoteURL + '/convert?w=150';
 					$(".no-icon").hide();
-					$("#custom-art").show();
-					$("#custom-art").html('<img src='+that.thumbnail_url+'></img>')
+					$(".custom-art").show();
+					$(".custom-art").html('<img src="'+that.thumbnail_url+'""></img>')
 
 					//$('#picker').removeClass('background-image');
 					//$('#picker').css('background-image', 'url(' + that.thumbnail_url + ')');
@@ -2695,10 +2695,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n    ";
-  stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Change Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"";
+  buffer += "\n        <div class=\"custom-art\" style=\"width:150px;margin:10px auto 0;\">\n          <img src=\"";
+  if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n        </div>\n          <div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Change Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -2712,22 +2713,6 @@ function program1(depth0,data) {
   buffer += escapeExpression(stack1)
     + "\" />\n    <select id=\"numberAvailable\" name=\"amount\" data-role=\"none\">\n      <option value=\"1\">1</option>\n      <option value=\"2\">2</option>\n      <option value=\"3\">3</option>\n      <option value=\"4\">4</option>\n      <option value=\"5\">5</option>\n      <option value=\"6\">6</option>\n      <option value=\"7\">7</option>\n      <option value=\"8\">8</option>\n      <option value=\"9\">9</option>\n      <option value=\"10\">10</option>\n    </select>\n    ";
   return buffer;
-  }
-function program2(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n        <div style=\"width:150px;margin:0 auto;\">\n          <img src=\"";
-  if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\">\n        </div>\n        ";
-  return buffer;
-  }
-
-function program4(depth0,data) {
-  
-  
-  return "\n          <div class=\"no-icon\"></div>\n        ";
   }
 
   buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  <h1>Edit Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll long-page\">\n    ";

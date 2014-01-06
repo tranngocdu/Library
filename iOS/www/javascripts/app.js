@@ -1007,7 +1007,7 @@ module.exports = View.extend({
 		var that = this;
 		that.$el.html(that.template());
 		var currentUser = Parse.User.current();
-		var currentUserId = "JTNTVZuavf";
+		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
 		query.limit(1000);
 		query.equalTo("User", currentUserId);
@@ -1531,76 +1531,66 @@ module.exports = View.extend({
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		query.equalTo("User", currentUserId);
-		query.equalTo("ISBN", Application.editBookView.bookData.ISBN);
+		query.equalTo("ISBN", Application.editBookView.bookData[0].ISBN);
 		console.log(Application.editBookView.bookData[0].ISBN)
 		query.first({
-			success: function(usersBooks) {
-			var that = this;
-			var title = "";
-			if($("#title").length=0){
-				title = $("#title").val();
-			}else{
-				title = $("#title").attr("placeholder");
-			}
-			var author = "";
-			if($("#author").length=0){
-				title = $("#author").val();}
-			else{
-				title = $("#author").attr("placeholder");
-			}
-			var isbn = "";
-			if($("#isbn").length=0){
-				isbn = $("#isbn").val();}
-			else{
-				isbn = $("#isbn").attr("placeholder");
-			}
-			var numberAvailable = $("#numberAvailable").val();
-			
-			if(isbn.length!=13){
-				navigator.notification.alert(
-				"Please make sure you're using the 13 digit ISBN ",  // message
-				function alertDismissed() {}, // callback
-				'Try Again',            // title
-				'OK'                  // buttonName
-			);
-			}else if (title && author && numberAvailable) {
-			
-			numberAvailable = parseInt(numberAvailable);
-			var currentUser = Parse.User.current();
-			var currentUserId = currentUser.id;
-			var date = new Date();
-			date = date.getTime();
-			newBook.set("title", title);
-			newBook.set("author", author);
-			if (that.thumbnail_url) {
-				newBook.set("cover_image", that.thumbnail_url);
-			}
-			newBook.set("quantity_total", numberAvailable);
-			newBook.set("quantity_out", 0);
-			newBook.set("quantity_available", numberAvailable);
-			newBook.set("User", currentUserId);
-			newBook.set("studentList",[{}]);
-			newBook.set("ISBN", isbn);
-			newBook.save(null, {
-				success: function(newBook) {
-					Application.router.navigate("#bookList" , {trigger: true});
-				},
-				error: function(newBook, error) {
-					alert('Back to the drawing board');
-					console.log(error);
+			success: function(newBook) {
+				var that = this;
+				var title = "";
+				if($("#title").val().length>0){
+					title = $("#title").val();
+				}else{
+					title = $("#title").attr("placeholder");
 				}
-			});
-		}
-		else {
-			navigator.notification.alert(
-				'Please add a title, author, and quantity.',  // message
-				function alertDismissed() {}, // callback
-				'Try Again',            // title
-				'OK'                  // buttonName
-			);
-		}
-	//end save book
-	}
+				var author = "";
+				if($("#author").val().length>0){
+					author = $("#author").val();}
+				else{
+					author = $("#author").attr("placeholder");
+				}
+				var isbn = "";
+				if($("#isbn").val().length>0){
+					isbn = $("#isbn").val();}
+				else{
+					isbn = $("#isbn").attr("placeholder");
+				}
+				var numberAvailable = $("#numberAvailable").val();
+				
+				if(isbn.length!=13){
+					navigator.notification.alert(
+					"Please make sure you're using the 13 digit ISBN ",  // message
+					function alertDismissed() {}, // callback
+					'Try Again',            // title
+					'OK'                  // buttonName
+				);
+				}else{
+				
+				numberAvailable = parseInt(numberAvailable);
+				var currentUser = Parse.User.current();
+				var currentUserId = currentUser.id;
+				var date = new Date();
+				date = date.getTime();
+				newBook.set("title", title);
+				newBook.set("author", author);
+				if ($(".custom-art").children('img').attr("src").length>0) {
+					newBook.set("cover_image", $(".custom-art").children('img').attr("src"));
+				}
+				newBook.set("quantity_total", numberAvailable);
+				newBook.set("User", currentUserId);
+				newBook.set("studentList",[{}]);
+				newBook.set("ISBN", isbn);
+				newBook.save(null, {
+					success: function(newBook) {
+						Application.router.navigate("#bookList" , {trigger: true});
+					},
+					error: function(newBook, error) {
+						alert('Back to the drawing board');
+						console.log(error);
+					}
+				});
+				}
+			//end save book
+			}
 })
 		},
 
@@ -1616,8 +1606,8 @@ module.exports = View.extend({
 				if (args.result == 'didFinishPickingMediaWithInfo') {
 					that.thumbnail_url = args.FPPickerControllerRemoteURL + '/convert?w=150';
 					$(".no-icon").hide();
-					$("#custom-art").show();
-					$("#custom-art").html('<img src='+that.thumbnail_url+'></img>')
+					$(".custom-art").show();
+					$(".custom-art").html('<img src="'+that.thumbnail_url+'""></img>')
 
 					//$('#picker').removeClass('background-image');
 					//$('#picker').css('background-image', 'url(' + that.thumbnail_url + ')');
@@ -2705,10 +2695,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n    ";
-  stack1 = helpers['if'].call(depth0, depth0.cover_image, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Change Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"";
+  buffer += "\n        <div class=\"custom-art\" style=\"width:150px;margin:0 auto;\">\n          <img src=\"\"";
+  if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\"\">\n        </div>\n          <div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Change Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -2722,22 +2713,6 @@ function program1(depth0,data) {
   buffer += escapeExpression(stack1)
     + "\" />\n    <select id=\"numberAvailable\" name=\"amount\" data-role=\"none\">\n      <option value=\"1\">1</option>\n      <option value=\"2\">2</option>\n      <option value=\"3\">3</option>\n      <option value=\"4\">4</option>\n      <option value=\"5\">5</option>\n      <option value=\"6\">6</option>\n      <option value=\"7\">7</option>\n      <option value=\"8\">8</option>\n      <option value=\"9\">9</option>\n      <option value=\"10\">10</option>\n    </select>\n    ";
   return buffer;
-  }
-function program2(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n        <div style=\"width:150px;margin:0 auto;\">\n          <img src=\"";
-  if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\">\n        </div>\n        ";
-  return buffer;
-  }
-
-function program4(depth0,data) {
-  
-  
-  return "\n          <div class=\"no-icon\"></div>\n        ";
   }
 
   buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  <h1>Edit Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll long-page\">\n    ";
