@@ -1,0 +1,35 @@
+<div id="header">
+	<div class="back">Cancel</div>
+  <h1>Edit Book</h1>
+</div>
+
+<div id="wrapper">
+  <div id="scroller" class="container add-scroll long-page">
+    {{#each this}}
+        <div class="custom-art" style="width:150px;margin:10px auto 0;">
+          <img src="{{cover_image}}">
+        </div>
+          <div class="no-icon"></div>
+    <div id="addPhoto" class="button sm-btn secondary">Change Photo</div>
+
+    <input id="title" class="first-input" type="text" placeholder="{{title}}" />
+    <input id="author" type="text" placeholder="{{author}}" />
+    <input id="isbn" type="number" placeholder="{{ISBN}}" />
+    <select id="numberAvailable" name="amount" data-role="none">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+    {{/each}}
+    <div id="addBook" class="button primary-fill">Save Book</div>
+
+  </div> {{!-- /#scroller --}}
+</div> {{!-- /#wrapper --}}
+
