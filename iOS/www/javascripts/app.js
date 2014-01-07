@@ -1505,7 +1505,7 @@ module.exports = View.extend({
 		var that = this;
 		that.bookData = Application.editBookView.bookInfo;
 		this.$el.html(this.template(that.bookData));
-		console.log(that.bookData);
+		console.log($(that.bookData));
 		setTimeout(function(){$('select option[value="'+parseInt(Application.editBookView.bookData[0].quantity_total)+'"]').attr("selected",true);},300);
 		return this;		
 	},
@@ -2695,11 +2695,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n        <div class=\"custom-art\" style=\"width:150px;margin:0 auto;\">\n          <img src=\"\"";
+  buffer += "\n        <div class=\"custom-art\" style=\"width:150px;margin:10px auto 0;\">\n          <img src=\"";
   if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\"\">\n        </div>\n          <div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Change Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"";
+    + "\">\n        </div>\n          <div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Change Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
