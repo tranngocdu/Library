@@ -1505,8 +1505,11 @@ module.exports = View.extend({
 		var that = this;
 		that.bookData = Application.editBookView.bookInfo;
 		this.$el.html(this.template(that.bookData));
-		console.log($(that.bookData));
-		setTimeout(function(){$('select option[value="'+parseInt(Application.editBookView.bookData[0].quantity_total)+'"]').attr("selected",true);},300);
+		//console.log(JSON.stringify(that.bookData));
+		setTimeout(function(){$('select option[value="'+parseInt(Application.editBookView.bookInfo[0].quantity_total)+'"]').attr("selected",true);},200);
+		setTimeout(function(){$("#title").val(Application.editBookView.bookInfo[0].title);},200);
+		setTimeout(function(){$("#author").val(Application.editBookView.bookInfo[0].author);},200);
+		setTimeout(function(){$("#isbn").val(Application.editBookView.bookInfo[0].ISBN);},200);
 		return this;		
 	},
 
