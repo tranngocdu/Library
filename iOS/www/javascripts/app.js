@@ -1010,7 +1010,7 @@ module.exports = View.extend({
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
 		query.limit(1000);
-		query.equalTo("User", currentUserId);
+		query.equalTo("User", "rqjBaGnk5M");
 		query.ascending("title");
 		query.find({
 			success: function(usersBooks) {
@@ -1019,11 +1019,15 @@ module.exports = View.extend({
 				that.bookArray = bookArray;	
 				console.log(JSON.stringify(bookArray));
 				$('.booklist-wrap').html(that.templateBooks(bookArray));				
+				$("img.lazy").lazyload({
+					container: $("#wrapper")
+				});
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
 			}
 		});
+
 
 		return this;
 	},
@@ -1076,6 +1080,7 @@ module.exports = View.extend({
 				alert("Error: " + error.code + " " + error.message);
 			}
 		});
+		
 
 	},
 
@@ -1352,6 +1357,7 @@ module.exports = View.extend({
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("Student");
 		query.equalTo("UserId", currentUserId);
+		query.ascending("Name");
 		query.find({
 			success: function(students) {
 				var studentArray = JSON.stringify(students);
@@ -1505,8 +1511,11 @@ module.exports = View.extend({
 		var that = this;
 		that.bookData = Application.editBookView.bookInfo;
 		this.$el.html(this.template(that.bookData));
-		console.log($(that.bookData));
-		setTimeout(function(){$('select option[value="'+parseInt(Application.editBookView.bookData[0].quantity_total)+'"]').attr("selected",true);},300);
+		//console.log(JSON.stringify(that.bookData));
+		setTimeout(function(){$('select option[value="'+parseInt(Application.editBookView.bookInfo[0].quantity_total)+'"]').attr("selected",true);},200);
+		setTimeout(function(){$("#title").val(Application.editBookView.bookInfo[0].title);},200);
+		setTimeout(function(){$("#author").val(Application.editBookView.bookInfo[0].author);},200);
+		setTimeout(function(){$("#isbn").val(Application.editBookView.bookInfo[0].ISBN);},200);
 		return this;		
 	},
 
@@ -2292,6 +2301,7 @@ module.exports = View.extend({
 		console.log(currentUser);
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("Student");
+		query.limit(1000);
 		query.equalTo("UserId", currentUserId);
 		query.ascending("Name");
 		query.find({
@@ -2552,11 +2562,11 @@ function program1(depth0,data) {
 function program2(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n			<img src=\"";
+  buffer += "\n			<img data-original=\"";
   if (stack1 = helpers.cover_image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.cover_image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">\n			";
+    + "\" class=\"lazy\">\n			";
   return buffer;
   }
 

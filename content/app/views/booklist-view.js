@@ -30,7 +30,7 @@ module.exports = View.extend({
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
 		query.limit(1000);
-		query.equalTo("User", currentUserId);
+		query.equalTo("User", "rqjBaGnk5M");
 		query.ascending("title");
 		query.find({
 			success: function(usersBooks) {
@@ -39,11 +39,15 @@ module.exports = View.extend({
 				that.bookArray = bookArray;	
 				console.log(JSON.stringify(bookArray));
 				$('.booklist-wrap').html(that.templateBooks(bookArray));				
+				$("img.lazy").lazyload({
+					container: $("#wrapper")
+				});
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
 			}
 		});
+
 
 		return this;
 	},
@@ -96,6 +100,7 @@ module.exports = View.extend({
 				alert("Error: " + error.code + " " + error.message);
 			}
 		});
+		
 
 	},
 
