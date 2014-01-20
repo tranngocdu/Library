@@ -30,7 +30,7 @@ module.exports = View.extend({
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
 		query.limit(1000);
-		query.equalTo("User", "rqjBaGnk5M");
+		query.equalTo("User", currentUserId);
 		query.ascending("title");
 		query.find({
 			success: function(usersBooks) {
