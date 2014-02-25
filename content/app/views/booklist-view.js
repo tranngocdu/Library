@@ -35,13 +35,15 @@ module.exports = View.extend({
 		query.find({
 			success: function(usersBooks) {
 				var bookArray = JSON.stringify(usersBooks);
-				var bookArray = JSON.parse(bookArray);
-				that.bookArray = bookArray;	
-				console.log(JSON.stringify(bookArray));
-				$('.booklist-wrap').html(that.templateBooks(bookArray));				
-				$("img.lazy").lazyload({
-					container: $("#wrapper")
-				});
+				bookArray = JSON.parse(bookArray);
+				that.bookArrayAll = bookArray; 
+				console.log(JSON.stringify(that.bookArrayAll));
+				$('.booklist-wrap').html(that.templateBooks(that.bookArrayAll));				
+				setTimeout(function(){
+					$("img.lazy").lazyload({
+						container: $("#wrapper")
+					});
+				},800);
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
@@ -53,27 +55,14 @@ module.exports = View.extend({
 	},
 
 	allSelected: function() {
+		var that = this;
+		$('#wrapper').html(that.templateBooks(that.bookArrayAll));
 		$('#filt-all').addClass("selected");
 		$('#filt-available').removeClass("selected");
 		$('#filt-checked').removeClass("selected");
-		var that = this;
-		this.$el.html(this.template());
-		var currentUser = Parse.User.current();
-		var currentUserId = currentUser.id;
-		var query = new Parse.Query("NewBook");
-		query.equalTo("User", currentUserId);
-		query.ascending("title");
-		query.find({
-			success: function(usersBooks) {
-				var bookArray = JSON.stringify(usersBooks);
-				var bookArray = JSON.parse(bookArray);
-				that.bookArray = bookArray;				
-				$('#wrapper').html(that.templateBooks(bookArray));
-			},
-			error: function(error) {
-				alert("Error: " + error.code + " " + error.message);
-			}
-		});
+		$("img.lazy").lazyload({
+					container: $("#wrapper")
+				});
 
 	},
 
@@ -95,6 +84,9 @@ module.exports = View.extend({
 				var bookArray = JSON.parse(bookArray);
 				that.bookArray = bookArray;				
 				$('#wrapper').html(that.templateBooks(bookArray));
+				$("img.lazy").lazyload({
+					container: $("#wrapper")
+				});
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);
@@ -123,6 +115,9 @@ module.exports = View.extend({
 				var bookArray = JSON.parse(bookArray);
 				that.bookArray = bookArray;				
 				$('#wrapper').html(that.templateBooks(bookArray));
+				$("img.lazy").lazyload({
+					container: $("#wrapper")
+				});
 			},
 			error: function(error) {
 				alert("Error: " + error.code + " " + error.message);

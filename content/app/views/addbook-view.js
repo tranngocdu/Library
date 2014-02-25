@@ -26,6 +26,7 @@ module.exports = View.extend({
 		var data=JSON.parse(combinedString);
 		that.totalAmount = 1;
 		this.bookData = data;
+		that.data = data;
 
 		if (typeof this.bookData.ISBN.cover!='undefined') {
 
@@ -37,17 +38,38 @@ module.exports = View.extend({
 				type: "POST",
 				success: function (data) {
 					that.imageUrl = data.url;
+					that.data['image-url'] = that.imageUrl;
 					that.canSave = true;
+					that.$el.html(that.template(that.data));
 				},
 				error: function (jqXHR,textStatus,errorThrown) {
 				}
 			});
 		} else {
-			that.imageUrl = undefined;
-			that.canSave = true;
+			if(typeof Application.addBookView.bookData.ISBN.identifiers.isbn_13[0] != 'undefined') {
+				that.imageUrl = "http://covers.openlibrary.org/b/isbn/"+Application.addBookView.bookData.ISBN.identifiers.isbn_13[0]+"-L.jpg";
+				that.canSave = true;
+				$.ajax({
+					data: {
+						url: that.imageUrl
+					},
+					url: "https://www.filepicker.io/api/store/S3?key=A8GpOnfHhQxiznYCtXZ9Uz",
+					type: "POST",
+					success: function (data) {
+						that.imageUrl = data.url;
+						that.data['image-url'] = that.imageUrl;
+						that.canSave = true;
+						that.$el.html(that.template(that.data));
+					},
+					error: function (jqXHR,textStatus,errorThrown) {
+					}
+				});
+			}else {
+				that.imageUrl = undefined;
+				that.canSave = true;
+				this.$el.html(this.template(that.data));
+			}
 		}
-
-		this.$el.html(this.template(data));
 
 		// $("p#numberAvailable").html("Number Available: "+that.totalAmount+"");
 
@@ -76,7 +98,7 @@ module.exports = View.extend({
 				authorArray = authorArray.toString();
 				newBook.set("author", authorArray);
 			}
-			if (typeof this.bookData.ISBN.cover!='undefined'){
+			if (typeof that.imageUrl != 'undefined'){
 				newBook.set("cover_image", that.imageUrl);
 			};
 			console.log(this.bookData);
