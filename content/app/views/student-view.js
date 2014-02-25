@@ -41,11 +41,15 @@ module.exports = View.extend({
 	
 	currentBooks: function() {
 		var that = this;
+		$('#filt-current').addClass("selected");
+		$('#filt-past').removeClass("selected");
 		$('#wrapper').html(that.templateBooks(that.currentBookArray));
 	},
 	
 	pastBooks: function() {
 		var that = this;
+		$('#filt-current').removeClass("selected");
+		$('#filt-past').addClass("selected");
 		$('#wrapper').html(that.templateBooks(that.pastBookArray));
 	}
 

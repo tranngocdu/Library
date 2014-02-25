@@ -14,7 +14,9 @@
 			<div class="book-meta">
 				<h2 class="truncate-two">{{title}}</h2>
 				<h3 class="truncate">{{author}}</h3>
+				{{#if quantity_available}}
 				<p>{{quantity_available}} Available</p>
+				{{/if}}
 			</div>
 		</li>
 		{{/each}}
