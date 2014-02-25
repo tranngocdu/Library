@@ -37,9 +37,9 @@ Application = {
 			var Settings = require('views/settings-view');
 			var Signup = require('views/signup-view');
 			var StudentList = require('views/studentlist-view');
+			var Student = require('views/student-view');
 
 			var Router = require('lib/router');
-
 
 			this.homeView = new Home();
 			this.addBookView = new AddBook();
@@ -54,6 +54,7 @@ Application = {
 			this.settingsView = new Settings();
 			this.signupView = new Signup();
 			this.studentListView = new StudentList();
+			this.studentView = new Student();
 
 			this.router = new Router();
 
@@ -112,8 +113,6 @@ Application = {
 
 				}
 			}
-
-
 
 			$('#home_tab').bind('tap', homeTab);
 			$('#backButton').bind('tap', homeTab);

@@ -11,7 +11,7 @@
   	<ul id="studentlist">
 	{{#each this}}
   		<li id="{{objectId}}">
-  			<p class="first-name">{{Name}}</p> 
+  			<p data-id="{{objectId}}" class="first-name">{{Name}}</p> 
 			<p data-id="{{objectId}}" class="delete-name">Delete</p>
   		</li>
 	{{/each}}

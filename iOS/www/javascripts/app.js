@@ -43,20 +43,20 @@
 
   var initModule = function(name, definition) {
     var module = {id: name, exports: {}};
+    cache[name] = module;
     definition(module.exports, localRequire(name), module);
-    var exports = cache[name] = module.exports;
-    return exports;
+    return module.exports;
   };
 
   var require = function(name, loaderPath) {
     var path = expand(name, '.');
     if (loaderPath == null) loaderPath = '/';
 
-    if (has(cache, path)) return cache[path];
+    if (has(cache, path)) return cache[path].exports;
     if (has(modules, path)) return initModule(path, modules[path]);
 
     var dirIndex = expand(path, './index');
-    if (has(cache, dirIndex)) return cache[dirIndex];
+    if (has(cache, dirIndex)) return cache[dirIndex].exports;
     if (has(modules, dirIndex)) return initModule(dirIndex, modules[dirIndex]);
 
     throw new Error('Cannot find module "' + name + '" from '+ '"' + loaderPath + '"');
@@ -130,9 +130,9 @@ Application = {
 			var Settings = require('views/settings-view');
 			var Signup = require('views/signup-view');
 			var StudentList = require('views/studentlist-view');
+			var Student = require('views/student-view');
 
 			var Router = require('lib/router');
-
 
 			this.homeView = new Home();
 			this.addBookView = new AddBook();
@@ -147,6 +147,7 @@ Application = {
 			this.settingsView = new Settings();
 			this.signupView = new Signup();
 			this.studentListView = new StudentList();
+			this.studentView = new Student();
 
 			this.router = new Router();
 
@@ -206,8 +207,6 @@ Application = {
 				}
 			}
 
-
-
 			$('#home_tab').bind('tap', homeTab);
 			$('#backButton').bind('tap', homeTab);
 
@@ -263,7 +262,9 @@ module.exports = Backbone.Router.extend({
 		'login':'login',
 		'settings':'settings',
 		'signup':'signup',
-		'studentList':'studentList'
+		'studentList':'studentList',
+		'student':'student'
+		
 
 	},
 
@@ -345,6 +346,9 @@ module.exports = Backbone.Router.extend({
 		},
 		studentList:function() {
 			this.changePage(Application.studentListView);
+		},
+		student:function() {
+			this.changePage(Application.student);
 		},
 
 		//Functions for page transitions
@@ -710,15 +714,8 @@ module.exports = View.extend({
 			var uploadError = function(args) {
 				console.log('Error during Filepicker upload');
 			};
-
-			window.plugins.filepicker.pick(
-				{
-					dataTypes: ['image/*'],
-					sourceNames: ['FPSourceCamera', 'FPSourceCameraRoll', 'FPSourceDropbox', 'FPSourceGoogleDrive', 'FPSourceGmail', 'FPSourceFacebook', 'FPSourceInstagram', 'FPSourceImagesearch']
-				},
-				uploadSuccess,
-				uploadError
-			);
+			
+			
 		}
 
 	});
@@ -1505,8 +1502,11 @@ module.exports = View.extend({
 		var that = this;
 		that.bookData = Application.editBookView.bookInfo;
 		this.$el.html(this.template(that.bookData));
-		console.log($(that.bookData));
-		setTimeout(function(){$('select option[value="'+parseInt(Application.editBookView.bookData[0].quantity_total)+'"]').attr("selected",true);},300);
+		//console.log(JSON.stringify(that.bookData));
+		setTimeout(function(){$('select option[value="'+parseInt(Application.editBookView.bookInfo[0].quantity_total)+'"]').attr("selected",true);},200);
+		setTimeout(function(){$("#title").val(Application.editBookView.bookInfo[0].title);},200);
+		setTimeout(function(){$("#author").val(Application.editBookView.bookInfo[0].author);},200);
+		setTimeout(function(){$("#isbn").val(Application.editBookView.bookInfo[0].ISBN);},200);
 		return this;		
 	},
 
@@ -2269,16 +2269,15 @@ module.exports = View.extend({
 
 });
 
-;require.register("views/studentlist-view", function(exports, require, module) {
+;require.register("views/student-view", function(exports, require, module) {
 var View = require('./view');
-var template = require('./templates/studentList');
+var template = require('./templates/student');
 
 module.exports = View.extend({
-	id: 'studentlist-view',
+	id: 'student-view',
 	template: template,
 	events: {
-		'click #add':'addStudent',
-		'click .delete-name':'deleteStudent'
+
 	},
 
 	initialize: function() {
@@ -2331,30 +2330,93 @@ module.exports = View.extend({
 		    alert("This was not retreived correctly.");
 		  }
 		});
+	}
+
+});
+
+});
+
+;require.register("views/studentlist-view", function(exports, require, module) {
+var View = require('./view');
+var template = require('./templates/studentList');
+
+module.exports = View.extend({
+	id: 'studentlist-view',
+	template: template,
+	events: {
+		'click #add':'addStudent',
+		'click .delete-name':'deleteStudent',
+		'click .first-name':'studentPage'
+	},
+
+	initialize: function() {
+
+	},
+
+	render: function() {
+		this.$el.html(this.template());
+		var that = this;
+		var currentUser = Parse.User.current();
+		console.log(currentUser);
+		var currentUserId = currentUser.id;
+		var query = new Parse.Query("Student");
+		query.equalTo("UserId", currentUserId);
+		query.ascending("Name");
+		query.find({
+			success: function(students) {
+				var studentArray = JSON.stringify(students);
+				var studentArray = JSON.parse(studentArray);
+				that.$el.html(that.template(studentArray));
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+
+		return this;
+	},
+
+	append: function(){
+
+	},
+
+	addStudent: function () {
+		Application.router.navigate("#addStudent", {trigger:true});
+	},
+	
+	studentPage:function() {
+		var studentId = $(e.currentTarget).data('id');
+		Application.router.navigate("#student", {trigger:true});
+	},
+
+	deleteStudent: function(e) {
 		
-		/*navigator.notification.confirm(
+		navigator.notification.confirm(
 			'Are you sure you want to delete this student?',  // message
 			function(buttonIndex){
 				if (buttonIndex == 2)
 				{
+					var studentId = $(e.currentTarget).data('id');
 					var Student = Parse.Object.extend("Student");
 					var query = new Parse.Query(Student);
 					query.get(studentId, {
-					  success: function(myObj) {
-					    // The object was retrieved successfully.
-					    myObj.destroy({});
-					  },
-					  error: function(object, error) {
-					    alert("This was not retreived correctly.");
-					  }
+						success: function(myObj) {
+							// The object was retrieved successfully.
+							myObj.destroy({});
+							$("#"+studentId).remove();
+		
+						},
+						error: function(object, error) {
+							alert("This was not retreived correctly.");
+						}
 					});
+
 				}
 			},         // callback
 			'Delete',            // title
 			'Cancel, OK'                  // buttonName
 		);
 		//send call to delete student
-		*/
 	}
 
 });
@@ -2788,6 +2850,44 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   });
 });
 
+;require.register("views/templates/student", function(exports, require, module) {
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n  		<li id=\"";
+  if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n  			<p data-id=\"";
+  if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"first-name\">";
+  if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p> \n			<p data-id=\"";
+  if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"delete-name\">Delete</p>\n  		</li>\n	";
+  return buffer;
+  }
+
+  buffer += "<div id=\"header\">\n	<h1>Students</h1>\n  <div id=\"add\" class=\"plus-btn\">\n    <span>Add</span>\n    <div class=\"plus\"></div>\n  </div>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"students\">\n  	<ul id=\"studentlist\">\n	";
+  stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n  	</ul>\n\n  </div> "
+    + "\n</div> ";
+  return buffer;
+  });
+});
+
 ;require.register("views/templates/studentList", function(exports, require, module) {
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
@@ -2801,7 +2901,11 @@ function program1(depth0,data) {
   if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">\n  			<p class=\"first-name\">";
+    + "\">\n  			<p data-id=\"";
+  if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"first-name\">";
   if (stack1 = helpers.Name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.Name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -2879,4 +2983,4 @@ module.exports = Backbone.View.extend({
 });
 
 ;
-//@ sourceMappingURL=app.js.map
+//# sourceMappingURL=app.js.map
