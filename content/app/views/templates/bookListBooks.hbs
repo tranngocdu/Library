@@ -1,5 +1,6 @@
 
 <div id="scroller" class="usersBooks">
+	{{#if this}}
 	<ul id="booklist">
 		{{#each this}}
 		<li data-id="{{objectId}}" class="bookItem">
@@ -18,4 +19,7 @@
 		</li>
 		{{/each}}
 	</ul>
+	{{else}}
+	<h2>No Books</h2>
+	{{/if}}
 </div> {{!-- /#scroller --}}
