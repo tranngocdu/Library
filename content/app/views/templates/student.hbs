@@ -1,22 +1,13 @@
-<div id="header">
-	<h1>Students</h1>
-  <div id="add" class="plus-btn">
-    <span>Add</span>
-    <div class="plus"></div>
-  </div>
+<div id="header" class="extended-header">
+  <h1>Student</h1>
+  <div id="filter-wrap">
+  	<div class="filter">
+		<span id="filt-current" class="selected">Current Books</span>
+  		<span id="filt-past">Past Books</span>
+  	</div>
+	</div>
 </div>
 
-<div id="wrapper">
-  <div id="scroller" class="students">
-  	<ul id="studentlist">
-	{{#each this}}
-  		<li id="{{objectId}}">
-  			<p data-id="{{objectId}}" class="first-name">{{Name}}</p> 
-			<p data-id="{{objectId}}" class="delete-name">Delete</p>
-  		</li>
-	{{/each}}
+<div id="wrapper" class="booklist-wrap">
 
-  	</ul>
-
-  </div> {{!-- /#scroller --}}
 </div> {{!-- /#wrapper --}}

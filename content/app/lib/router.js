@@ -103,7 +103,7 @@ module.exports = Backbone.Router.extend({
 			this.changePage(Application.studentListView);
 		},
 		student:function() {
-			this.changePage(Application.student);
+			this.changePage(Application.studentView);
 		},
 
 		//Functions for page transitions
