@@ -21,6 +21,7 @@ module.exports = View.extend({
 		console.log(currentUser);
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("Student");
+		query.limit(1000);
 		query.equalTo("UserId", currentUserId);
 		query.ascending("Name");
 		query.find({

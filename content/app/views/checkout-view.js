@@ -26,6 +26,7 @@ module.exports = View.extend({
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("Student");
 		query.equalTo("UserId", currentUserId);
+		query.ascending("Name");
 		query.find({
 			success: function(students) {
 				var studentArray = JSON.stringify(students);

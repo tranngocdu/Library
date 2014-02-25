@@ -4,7 +4,7 @@
 		{{#each this}}
 		<li data-id="{{objectId}}" class="bookItem">
 			{{#if cover_image}}
-			<img src="{{cover_image}}">
+			<img data-original="{{cover_image}}" class="lazy">
 			{{else}}
 			<div class="no-art">
 				<div class="no-icon"></div>
