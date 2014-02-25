@@ -17,7 +17,9 @@ module.exports = Backbone.Router.extend({
 		'login':'login',
 		'settings':'settings',
 		'signup':'signup',
-		'studentList':'studentList'
+		'studentList':'studentList',
+		'student':'student'
+		
 
 	},
 
@@ -99,6 +101,9 @@ module.exports = Backbone.Router.extend({
 		},
 		studentList:function() {
 			this.changePage(Application.studentListView);
+		},
+		student:function() {
+			this.changePage(Application.student);
 		},
 
 		//Functions for page transitions
