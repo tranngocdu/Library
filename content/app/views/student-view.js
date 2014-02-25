@@ -1,11 +1,14 @@
 var View = require('./view');
 var template = require('./templates/student');
+var templateBooks = require('./templates/bookListBooks');
 
 module.exports = View.extend({
 	id: 'student-view',
 	template: template,
+	templateBooks:templateBooks,
 	events: {
-
+		'click #filt-current':'currentBooks',
+		'click #filt-past':'pastBooks',
 	},
 
 	initialize: function() {
@@ -13,51 +16,37 @@ module.exports = View.extend({
 	},
 
 	render: function() {
-		this.$el.html(this.template());
 		var that = this;
+		that.currentBookArray = {};
+		that.pastBookArray = {};
+		this.$el.html(this.template());
 		var currentUser = Parse.User.current();
 		console.log(currentUser);
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("Student");
-		query.equalTo("UserId", currentUserId);
-		query.ascending("Name");
-		query.find({
-			success: function(students) {
-				var studentArray = JSON.stringify(students);
-				var studentArray = JSON.parse(studentArray);
-				that.$el.html(that.template(studentArray));
-			},
-			error: function(error) {
-				alert("Error: " + error.code + " " + error.message);
+		query.equalTo("objectId", this.id);
+		query.first({
+			success:function(student) {
+				var bookArray = JSON.stringify(student);
+				var bookArray = JSON.parse(bookArray);
+				that.bookArray = bookArray;	
+				that.currentBookArray = that.bookArray.currentBooks;
+				that.pastBookArray = that.bookArray.pastBooks;
+				$('#wrapper').html(that.templateBooks(that.currentBooksArray));
 			}
-		});
+		})
 
 		return this;
 	},
-
-	append: function(){
-
+	
+	currentBooks: function() {
+		var that = this;
+		$('#wrapper').html(that.templateBooks(that.currentBookArray));
 	},
-
-	addStudent: function () {
-		Application.router.navigate("#addStudent", {trigger:true});
-	},
-
-	deleteStudent: function(e) {
-		var studentId = $(e.currentTarget).data('id');
-		var Student = Parse.Object.extend("Student");
-		var query = new Parse.Query(Student);
-		query.get(studentId, {
-		  success: function(myObj) {
-		    // The object was retrieved successfully.
-		    myObj.destroy({});
-			$("#"+studentId).remove();
-		
-		  },
-		  error: function(object, error) {
-		    alert("This was not retreived correctly.");
-		  }
-		});
+	
+	pastBooks: function() {
+		var that = this;
+		$('#wrapper').html(that.templateBooks(that.pastBookArray));
 	}
 
 });

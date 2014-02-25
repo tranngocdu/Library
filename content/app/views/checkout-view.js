@@ -95,6 +95,8 @@ module.exports = View.extend({
 				var studentsCheck = usersBooks.attributes.studentList;
 				var quantityAvailable = usersBooks.attributes.quantity_available;
 				var quantityTotal = usersBooks.attributes.quantity_total;
+				var title = usersBooks.attributes.title;
+				
 				console.log(studentsCheck);
 				//Modifications to numbers
 				if ((quantityAvailable - 1)>=0){
@@ -125,6 +127,8 @@ module.exports = View.extend({
 				
 				usersBooks.save(null, {
 					success: function(newBook) {
+						var studentData = {"studentId":that.studentId, "ISBN":that.ISBN, "title":title};
+						Parse.Cloud.run("studentCheckOut", studentData);
 						Application.homeView.checkedOut = true;
 						Application.router.navigate("#home" , {trigger: true});
 					},

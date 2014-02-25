@@ -736,12 +736,12 @@ select#numberAvailable {
     color: $white;
   }
   #filt-available {
-    width: 30%;
+    width: 40%;
     border-top: 1px solid $filter;
     border-bottom: 1px solid $filter;
   }
   #filt-checked {
-    width: 40%;
+    width: 30%;
     border: 1px solid $filter;
     -webkit-border-top-right-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
@@ -756,6 +756,24 @@ select#numberAvailable {
     -webkit-border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    
+  }
+  #filt-current {
+    border: 1px solid $filter;
+    width: 50%;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    
+  }
+  #filt-past {
+    border: 1px solid $filter;
+    width: 50%;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
     
   }
   .selected {

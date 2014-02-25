@@ -48,6 +48,7 @@ module.exports = View.extend({
 	
 	studentPage:function(e) {
 		var studentId = $(e.currentTarget).data('id');
+		Application.studentView.id = studentId;
 		Application.router.navigate("#student", {trigger:true});
 	},
 
