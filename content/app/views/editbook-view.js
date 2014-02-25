@@ -55,6 +55,9 @@ module.exports = View.extend({
 		console.log(Application.editBookView.bookData[0].ISBN)
 		query.first({
 			success: function(newBook) {
+				var quantityAvailable = newBook.attributes.quantity_available;
+				var quantityOldTotal = newBook.attributes.quantity_total;
+				
 				var that = this;
 				var title = "";
 				if($("#title").val().length>0){
@@ -86,6 +89,10 @@ module.exports = View.extend({
 				}else{
 				
 				numberAvailable = parseInt(numberAvailable);
+	//			var quantityAvailable = newBook.attributes.quantity_available;
+	//			var quantityOldTotal = newBook.attributes.quantity_total;
+				var quantityDiff = numberAvailable - quantityOldTotal;
+				quantityAvailable = quantityAvailable + quantityDiff; 
 				var currentUser = Parse.User.current();
 				var currentUserId = currentUser.id;
 				var date = new Date();
@@ -96,6 +103,7 @@ module.exports = View.extend({
 					newBook.set("cover_image", $(".custom-art").children('img').attr("src"));
 				}
 				newBook.set("quantity_total", numberAvailable);
+				newBook.set("quantity_available", quantityAvailable);
 				newBook.set("User", currentUserId);
 				newBook.set("studentList",[{}]);
 				newBook.set("ISBN", isbn);
