@@ -822,10 +822,11 @@ module.exports = View.extend({
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
 		query.equalTo("ISBN", Application.bookDetailView.ISBN);
-		query.equalTo("User", currentUserId);
+		query.equalTo("User", "bePhpJ45bf");
 		query.find({
 
 			success: function(bookdetail) {
+				console.log(bookdetail);
 				var bookdetailArray = JSON.stringify(bookdetail);
 				bookdetailArray = JSON.parse(bookdetailArray);
 				Application.checkOutView.bookInfo = bookdetailArray;
@@ -1010,7 +1011,7 @@ module.exports = View.extend({
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("NewBook");
 		query.limit(1000);
-		query.equalTo("User", "rqjBaGnk5M");
+		query.equalTo("User", "bePhpJ45bf");
 		query.ascending("title");
 		query.find({
 			success: function(usersBooks) {
@@ -1350,13 +1351,14 @@ module.exports = View.extend({
 
 	render: function() {
 		var that=this;
-		data = Application.checkOutView.bookInfo;
+		var data = Application.checkOutView.bookInfo;
+		console.log(data);
 		that.ISBN = Application.checkOutView.bookInfo[0].ISBN;
 		this.$el.html(this.template(data));
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("Student");
-		query.equalTo("UserId", currentUserId);
+		query.equalTo("UserId", "bePhpJ45bf");
 		query.ascending("Name");
 		query.find({
 			success: function(students) {

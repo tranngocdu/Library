@@ -639,7 +639,8 @@ select#numberAvailable {
   background-color: #fff;
   border-bottom: 1px solid $border;
   img {
-    height: 160px;
+    max-height: 150px !important;
+    max-width: 110px !important;
   }
   .title-art {
     float: left;

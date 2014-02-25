@@ -54,6 +54,7 @@ module.exports = View.extend({
 		query.find({
 
 			success: function(bookdetail) {
+				console.log(bookdetail);
 				var bookdetailArray = JSON.stringify(bookdetail);
 				bookdetailArray = JSON.parse(bookdetailArray);
 				Application.checkOutView.bookInfo = bookdetailArray;
