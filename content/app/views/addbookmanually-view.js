@@ -18,8 +18,11 @@ module.exports = View.extend({
 	initialize: function() {
 	},
 
-	render: function() {
-		this.$el.html(this.template());
+	render: function(data) {
+		var that = this;
+		this.data = {};
+		this.data['book-isbn'] = Application.addBookManuallyView.ISBN;
+		this.$el.html(this.template(this.data));
 		return this;
 	},
 
@@ -45,14 +48,7 @@ module.exports = View.extend({
 			var isbn = $("#isbn").val();
 			var numberAvailable = $("#numberAvailable").val();
 			
-			if(isbn.length!=13){
-				navigator.notification.alert(
-				"Please make sure you're using the 13 digit ISBN ",  // message
-				function alertDismissed() {}, // callback
-				'Try Again',            // title
-				'OK'                  // buttonName
-			);
-			}else if (title && author && numberAvailable) {
+			if (title && author && numberAvailable) {
 			
 			numberAvailable = parseInt(numberAvailable);
 			var currentUser = Parse.User.current();

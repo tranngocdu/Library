@@ -142,6 +142,7 @@ module.exports = View.extend({
 				scanner.scan(
 					function (result) {
 						if(result.text){
+							console.log(result);
 							Application.bookListView.ISBN = result.text;
 							Application.addBookView.ISBN = result.text;
 							Application.bookListView.$el.trigger("getbookinfo");
@@ -167,6 +168,8 @@ module.exports = View.extend({
 	},
 
 	getBookInfo: function() {
+		var that = this;
+		this.ISBN = Application.bookListView.ISBN;
 		$.ajax({
 			data: {
 				bibkeys: "ISBN:" + Application.bookListView.ISBN,
@@ -176,13 +179,13 @@ module.exports = View.extend({
 			url: "http://openlibrary.org/api/books",
 			type: "GET",
 			success: function (data) {
-				
 				Application.bookListView.damnyou = data;
 				var dataString = JSON.stringify(data);
 				var combinedString = dataString.substring(0,6) + dataString.substring(20);
 				var dataHere=JSON.parse(combinedString);
 
 				if(typeof dataHere.ISBN === typeof undefined) {
+					Application.addBookManuallyView.ISBN = that.ISBN;
 					Application.router.navigate("#addBookManually", {
 						trigger: true
 					});

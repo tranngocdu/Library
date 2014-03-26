@@ -43,20 +43,20 @@
 
   var initModule = function(name, definition) {
     var module = {id: name, exports: {}};
-    cache[name] = module;
     definition(module.exports, localRequire(name), module);
-    return module.exports;
+    var exports = cache[name] = module.exports;
+    return exports;
   };
 
   var require = function(name, loaderPath) {
     var path = expand(name, '.');
     if (loaderPath == null) loaderPath = '/';
 
-    if (has(cache, path)) return cache[path].exports;
+    if (has(cache, path)) return cache[path];
     if (has(modules, path)) return initModule(path, modules[path]);
 
     var dirIndex = expand(path, './index');
-    if (has(cache, dirIndex)) return cache[dirIndex].exports;
+    if (has(cache, dirIndex)) return cache[dirIndex];
     if (has(modules, dirIndex)) return initModule(dirIndex, modules[dirIndex]);
 
     throw new Error('Cannot find module "' + name + '" from '+ '"' + loaderPath + '"');
@@ -455,7 +455,8 @@ module.exports = View.extend({
 		"dataLoaded":"append",
 		'click #done':'addBook',
 		'click #edit-quantity':'quantity',
-		'click #add-book':'addBook'
+		'click #add-book':'addBook',
+		'click #addPhoto': 'addPhoto',
 	},
 
 	initialize: function() {
@@ -467,13 +468,13 @@ module.exports = View.extend({
 		that.canSave = false;
 		var data = Application.addBookView.bookData;
 		var passData = data;
-		console.log(passData);
+		console.log(JSON.stringify(passData));
 		var dataString = JSON.stringify(data);
 		var combinedString = dataString.substring(0,6) + dataString.substring(20);
 		var data=JSON.parse(combinedString);
 		that.totalAmount = 1;
 		this.bookData = data;
-		that.data = data;
+		this.data = data;
 
 		if (typeof this.bookData.ISBN.cover!='undefined') {
 
@@ -493,7 +494,7 @@ module.exports = View.extend({
 				}
 			});
 		} else {
-			if(typeof Application.addBookView.bookData.ISBN.identifiers.isbn_13[0] != 'undefined') {
+			if(typeof Application.addBookView.bookData.ISBN.identifiers.isbn_13 != 'undefined') {
 				that.imageUrl = "http://covers.openlibrary.org/b/isbn/"+Application.addBookView.bookData.ISBN.identifiers.isbn_13[0]+"-L.jpg";
 				that.canSave = true;
 				$.ajax({
@@ -547,7 +548,7 @@ module.exports = View.extend({
 			}
 			if (typeof that.imageUrl != 'undefined'){
 				newBook.set("cover_image", that.imageUrl);
-			};
+			}
 			console.log(this.bookData);
 			newBook.set("quantity_total", that.totalAmount);
 			newBook.set("quantity_out", 0);
@@ -612,6 +613,43 @@ module.exports = View.extend({
 		$.prompt(quantityPrompt);
 	},
 
+	addPhoto: function() {
+		var that = this;
+		if (!window.plugins.filepicker) {
+			alert("clicked");
+
+			return;
+		}
+
+		var uploadSuccess = function(args) {
+			if (args.result == 'didFinishPickingMediaWithInfo') {
+				that.thumbnail_url = args.FPPickerControllerRemoteURL + '/convert?w=150';
+				that.imageUrl = that.thumbnail_url;
+				$(".no-icon").hide();
+				$("#addPhoto").hide();
+				$("#custom-art").show();
+				$("#custom-art").html('<img src='+that.thumbnail_url+'></img>')
+
+				//$('#picker').removeClass('background-image');
+				//$('#picker').css('background-image', 'url(' + that.thumbnail_url + ')');
+			}
+		};
+
+		var uploadError = function(args) {
+			console.log('Error during Filepicker upload');
+		};
+
+		window.plugins.filepicker.pick(
+			{
+				dataTypes: ['image/*'],
+				sourceNames: ['FPSourceCamera', 'FPSourceCameraRoll', 'FPSourceDropbox', 'FPSourceGoogleDrive', 'FPSourceGmail', 'FPSourceFacebook', 'FPSourceInstagram', 'FPSourceImagesearch']
+			},
+			uploadSuccess,
+			uploadError
+		);
+
+	},
+
 });
 
 });
@@ -637,8 +675,11 @@ module.exports = View.extend({
 	initialize: function() {
 	},
 
-	render: function() {
-		this.$el.html(this.template());
+	render: function(data) {
+		var that = this;
+		this.data = {};
+		this.data['book-isbn'] = Application.addBookManuallyView.ISBN;
+		this.$el.html(this.template(this.data));
 		return this;
 	},
 
@@ -664,14 +705,7 @@ module.exports = View.extend({
 			var isbn = $("#isbn").val();
 			var numberAvailable = $("#numberAvailable").val();
 			
-			if(isbn.length!=13){
-				navigator.notification.alert(
-				"Please make sure you're using the 13 digit ISBN ",  // message
-				function alertDismissed() {}, // callback
-				'Try Again',            // title
-				'OK'                  // buttonName
-			);
-			}else if (title && author && numberAvailable) {
+			if (title && author && numberAvailable) {
 			
 			numberAvailable = parseInt(numberAvailable);
 			var currentUser = Parse.User.current();
@@ -1150,6 +1184,7 @@ module.exports = View.extend({
 				scanner.scan(
 					function (result) {
 						if(result.text){
+							console.log(result);
 							Application.bookListView.ISBN = result.text;
 							Application.addBookView.ISBN = result.text;
 							Application.bookListView.$el.trigger("getbookinfo");
@@ -1175,6 +1210,8 @@ module.exports = View.extend({
 	},
 
 	getBookInfo: function() {
+		var that = this;
+		this.ISBN = Application.bookListView.ISBN;
 		$.ajax({
 			data: {
 				bibkeys: "ISBN:" + Application.bookListView.ISBN,
@@ -1184,13 +1221,13 @@ module.exports = View.extend({
 			url: "http://openlibrary.org/api/books",
 			type: "GET",
 			success: function (data) {
-				
 				Application.bookListView.damnyou = data;
 				var dataString = JSON.stringify(data);
 				var combinedString = dataString.substring(0,6) + dataString.substring(20);
 				var dataHere=JSON.parse(combinedString);
 
 				if(typeof dataHere.ISBN === typeof undefined) {
+					Application.addBookManuallyView.ISBN = that.ISBN;
 					Application.router.navigate("#addBookManually", {
 						trigger: true
 					});
@@ -2474,24 +2511,40 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n	  ";
-  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\n	  ";
-  return buffer;
-  }
-
-  buffer += "<div id=\"header\">\n  <div class=\"back\">Cancel</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n    <div class=\"title-art\">\n      <img src=\"";
+  buffer += "\n        <img src=\"";
   if (stack1 = helpers['image-url']) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0['image-url']; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">\n      <h2>"
+    + "\">\n      ";
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  
+  return "\n        <div class=\"no-icon\"></div>\n        <div id=\"addPhoto\" class=\"button sm-btn secondary\">Add Photo</div>\n      ";
+  }
+
+function program5(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n        ";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\n        ";
+  return buffer;
+  }
+
+  buffer += "<div id=\"header\">\n  <div class=\"back\">Cancel</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"add-book\">\n\n    <div class=\"title-art\">\n      <div id=\"custom-art\"><img src=\"\"></div>\n      ";
+  stack1 = helpers['if'].call(depth0, depth0['image-url'], {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n      <h2>"
     + escapeExpression(((stack1 = ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</h2>\n      <h3>";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    + "</h2>\n      <h3>\n        ";
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.ISBN),stack1 == null || stack1 === false ? stack1 : stack1.authors), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "</h3>\n      <p id=\"numberAvailable\">Number Available: 1</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-quantity\" class=\"ab-btn button primary\">Edit Quantity</div>\n    "
+  buffer += "\n      </h3>\n      <p id=\"numberAvailable\">Number Available: 1</p>\n    </div>\n\n    <div id=\"add-book\" class=\"ab-btn button primary-fill\">Add Book</div>\n    <div id=\"edit-quantity\" class=\"ab-btn button primary\">Edit Quantity</div>\n    "
     + "\n\n  </div> "
     + "\n</div> "
     + "\n\n";
@@ -2503,10 +2556,14 @@ function program1(depth0,data) {
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "";
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll long-page\">\n    <div id=\"custom-art\"><img src=\"\"></div>\n		<div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Add Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <input id=\"isbn\" type=\"number\" placeholder=\"Book ISBN\" />\n    <select id=\"numberAvailable\" name=\"amount\" data-role=\"none\">\n      <option value=\"1\">1</option>\n      <option value=\"2\">2</option>\n      <option value=\"3\">3</option>\n      <option value=\"4\">4</option>\n      <option value=\"5\">5</option>\n      <option value=\"6\">6</option>\n      <option value=\"7\">7</option>\n      <option value=\"8\">8</option>\n      <option value=\"9\">9</option>\n      <option value=\"10\">10</option>\n    </select>\n\n    <div id=\"addBook\" class=\"button primary-fill\">Add Book</div>\n\n  </div> "
+  buffer += "<div id=\"header\">\n	<div class=\"back\">Cancel</div>\n  <h1>Add Book</h1>\n</div>\n\n<div id=\"wrapper\">\n  <div id=\"scroller\" class=\"container add-scroll long-page\">\n    <div id=\"custom-art\"><img src=\"\"></div>\n		<div class=\"no-icon\"></div>\n    <div id=\"addPhoto\" class=\"button sm-btn secondary\">Add Photo</div>\n\n    <input id=\"title\" class=\"first-input\" type=\"text\" placeholder=\"Book Title\" />\n    <input id=\"author\" type=\"text\" placeholder=\"Book Author\" />\n    <input id=\"isbn\" type=\"number\" placeholder=\"Book ISBN\" value=\"";
+  if (stack1 = helpers['book-isbn']) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0['book-isbn']; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" />\n    <select id=\"numberAvailable\" name=\"amount\" data-role=\"none\">\n      <option value=\"1\">1</option>\n      <option value=\"2\">2</option>\n      <option value=\"3\">3</option>\n      <option value=\"4\">4</option>\n      <option value=\"5\">5</option>\n      <option value=\"6\">6</option>\n      <option value=\"7\">7</option>\n      <option value=\"8\">8</option>\n      <option value=\"9\">9</option>\n      <option value=\"10\">10</option>\n    </select>\n\n    <div id=\"addBook\" class=\"button primary-fill\">Add Book</div>\n\n  </div> "
     + "\n</div> "
     + "\n\n";
   return buffer;
@@ -3026,4 +3083,4 @@ module.exports = Backbone.View.extend({
 });
 
 ;
-//# sourceMappingURL=app.js.map
+//@ sourceMappingURL=app.js.map

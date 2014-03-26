@@ -593,6 +593,22 @@ a {
   }
 }
 
+#addBook-view {
+  .no-art {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+  .no-icon {
+    width: 70px;
+    height: 68px;
+    background-image: url(../images/no-art.png);
+    background-size: 70px 68px;
+    margin: 10px auto;
+    opacity: 0.1;
+  }
+}
+
 .add-scroll {
   padding-top: 0 !important;
 }

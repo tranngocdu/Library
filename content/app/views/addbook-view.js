@@ -8,7 +8,8 @@ module.exports = View.extend({
 		"dataLoaded":"append",
 		'click #done':'addBook',
 		'click #edit-quantity':'quantity',
-		'click #add-book':'addBook'
+		'click #add-book':'addBook',
+		'click #addPhoto': 'addPhoto',
 	},
 
 	initialize: function() {
@@ -20,13 +21,13 @@ module.exports = View.extend({
 		that.canSave = false;
 		var data = Application.addBookView.bookData;
 		var passData = data;
-		console.log(passData);
+		console.log(JSON.stringify(passData));
 		var dataString = JSON.stringify(data);
 		var combinedString = dataString.substring(0,6) + dataString.substring(20);
 		var data=JSON.parse(combinedString);
 		that.totalAmount = 1;
 		this.bookData = data;
-		that.data = data;
+		this.data = data;
 
 		if (typeof this.bookData.ISBN.cover!='undefined') {
 
@@ -46,7 +47,7 @@ module.exports = View.extend({
 				}
 			});
 		} else {
-			if(typeof Application.addBookView.bookData.ISBN.identifiers.isbn_13[0] != 'undefined') {
+			if(typeof Application.addBookView.bookData.ISBN.identifiers.isbn_13 != 'undefined') {
 				that.imageUrl = "http://covers.openlibrary.org/b/isbn/"+Application.addBookView.bookData.ISBN.identifiers.isbn_13[0]+"-L.jpg";
 				that.canSave = true;
 				$.ajax({
@@ -100,7 +101,7 @@ module.exports = View.extend({
 			}
 			if (typeof that.imageUrl != 'undefined'){
 				newBook.set("cover_image", that.imageUrl);
-			};
+			}
 			console.log(this.bookData);
 			newBook.set("quantity_total", that.totalAmount);
 			newBook.set("quantity_out", 0);
@@ -163,6 +164,43 @@ module.exports = View.extend({
 			}
 		};
 		$.prompt(quantityPrompt);
+	},
+
+	addPhoto: function() {
+		var that = this;
+		if (!window.plugins.filepicker) {
+			alert("clicked");
+
+			return;
+		}
+
+		var uploadSuccess = function(args) {
+			if (args.result == 'didFinishPickingMediaWithInfo') {
+				that.thumbnail_url = args.FPPickerControllerRemoteURL + '/convert?w=150';
+				that.imageUrl = that.thumbnail_url;
+				$(".no-icon").hide();
+				$("#addPhoto").hide();
+				$("#custom-art").show();
+				$("#custom-art").html('<img src='+that.thumbnail_url+'></img>')
+
+				//$('#picker').removeClass('background-image');
+				//$('#picker').css('background-image', 'url(' + that.thumbnail_url + ')');
+			}
+		};
+
+		var uploadError = function(args) {
+			console.log('Error during Filepicker upload');
+		};
+
+		window.plugins.filepicker.pick(
+			{
+				dataTypes: ['image/*'],
+				sourceNames: ['FPSourceCamera', 'FPSourceCameraRoll', 'FPSourceDropbox', 'FPSourceGoogleDrive', 'FPSourceGmail', 'FPSourceFacebook', 'FPSourceInstagram', 'FPSourceImagesearch']
+			},
+			uploadSuccess,
+			uploadError
+		);
+
 	},
 
 });
