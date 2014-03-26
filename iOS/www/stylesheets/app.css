@@ -869,23 +869,24 @@ select#numberAvailable {
   border-bottom: 1px solid #dbdbdb; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003641}}
   .check img {
-    height: 160px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003644}}
+    max-height: 150px !important;
+    max-width: 110px !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003645}}
   .check .title-art {
     float: left;
     max-width: 120px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003648}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003649}}
   .check .title-info {
     width: 54%;
     float: left;
     margin-left: 15px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003653}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003654}}
   .check .check-btn {
     width: 120px;
     padding: 8px 0 10px 0;
     font-size: 16px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003659}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003660}}
 .name-header {
   width: 100%;
   margin: 0 auto;
@@ -895,21 +896,21 @@ select#numberAvailable {
   padding: 11px 0 12px 0;
   border-bottom: 1px solid #dbdbdb; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003668}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003669}}
 .check-wrap {
   top: 290px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003671}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003672}}
 .check-scroller {
   padding: 0 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003676}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003677}}
 #checkout-view .no-art {
   width: 100px;
   height: 100px;
   margin: 10px auto 0 auto;
   float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003682}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003683}}
 #checkout-view .no-icon {
   width: 70px;
   height: 68px;
@@ -923,12 +924,12 @@ select#numberAvailable {
   Book Details
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003698}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003699}}
 #bookdetail-view .no-art {
   width: 120px;
   height: 120px;
   margin: 0 auto; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003703}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003704}}
 #bookdetail-view .no-icon {
   width: 90px;
   height: 87px;
@@ -942,42 +943,42 @@ select#numberAvailable {
   Book List
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003718}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003719}}
 .booklist-wrap {
   top: 90px !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003721}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003722}}
 #filter-wrap {
   border-top: 1px solid #c95750;
   margin-top: 10px;
   padding-top: 9px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003726}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003727}}
 .filter {
   overflow: hidden;
   width: 95%;
   margin: 0 auto;
   font-size: 14px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003731}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003732}}
   .filter span {
     float: left;
     padding: 5px 0 8px 0;
     text-align: center;
     color: white; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003737}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003738}}
   .filter #filt-available {
-    width: 30%;
+    width: 40%;
     border-top: 1px solid #c95750;
     border-bottom: 1px solid #c95750; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003742}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003743}}
   .filter #filt-checked {
-    width: 40%;
+    width: 30%;
     border: 1px solid #c95750;
     -webkit-border-top-right-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003751}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003752}}
   .filter #filt-all {
     border: 1px solid #c95750;
     width: 30%;
@@ -985,103 +986,119 @@ select#numberAvailable {
     -webkit-border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003760}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003761}}
+  .filter #filt-current {
+    border: 1px solid #c95750;
+    width: 50%;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003770}}
+  .filter #filt-past {
+    border: 1px solid #c95750;
+    width: 50%;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003779}}
   .filter .selected {
     background-color: #c95750;
     color: white; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003766}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003785}}
 #booklist {
   width: 92%;
   margin: 0 auto;
   padding-left: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003770}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003789}}
   #booklist li {
     border-bottom: 1px solid #dbdbdb;
     padding: 5px 0;
     overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003774}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003793}}
     #booklist li img {
       width: 52px;
       float: left;
       margin-right: 15px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003779}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003798}}
     #booklist li .book-meta {
       float: left;
       width: 76%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003782}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003801}}
       #booklist li .book-meta h2 {
         font-size: 16px;
         font-weight: 500; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003785}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003804}}
         #booklist li .book-meta h2:active {
           color: #818181; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003789}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003808}}
       #booklist li .book-meta h3 {
         font-size: 14px;
         font-weight: 300;
         color: #a8a8a8;
         padding-top: 3px;
         line-height: 1.3; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003796}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003815}}
       #booklist li .book-meta p {
         font-size: 13px;
         font-weight: 500;
         color: #3cc1a6;
         padding-top: 3px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003802}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003821}}
       #booklist li .book-meta .out {
         color: #f46b63; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003809}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003828}}
 .students {
   padding: 0 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003813}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003832}}
 #checkout-list {
   width: 100%;
   margin: 0 auto 15px auto; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003816}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003835}}
   #checkout-list h5 {
     color: #f46b63;
     font-weight: 500;
     font-size: 16px;
     border-bottom: 1px solid #dbdbdb;
     padding-bottom: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003823}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003842}}
   #checkout-list ul {
     margin: 0;
     padding: 0;
     text-align: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003827}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003846}}
     #checkout-list ul li {
       border-bottom: 1px solid #dbdbdb;
       padding: 8px 0 10px 0;
       font-weight: 500;
       font-size: 14px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003836}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003855}}
 #studentlist {
   padding-left: 0;
   margin: 0 auto;
   width: 100%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003840}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003859}}
   #studentlist li {
     border-bottom: 1px solid #dbdbdb;
     padding: 12px 0 14px 4%;
     overflow: hidden;
     font-weight: 500;
     position: relative; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003846}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003865}}
     #studentlist li .first-name {
       font-weight: 500;
       margin-right: 5px;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003851}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003870}}
     #studentlist li .last-name {
       width: 70%;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003855}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003874}}
     #studentlist li .delete-name {
       color: #f46b63;
       text-align: right;
@@ -1089,18 +1106,18 @@ select#numberAvailable {
       font-size: 15px;
       padding: 1px 4% 0 0;
       font-weight: 300; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003862}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003881}}
       #studentlist li .delete-name:active {
         color: #3cc1a6; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003867}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003886}}
   #studentlist .selected {
     background-color: #424242;
     color: white; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003871}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003890}}
   #studentlist .deselected {
     color: #282828; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003876}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003895}}
 .student-check {
   width: 24px;
   height: 20px;
@@ -1116,18 +1133,18 @@ select#numberAvailable {
   Settings
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003892}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003911}}
 .settings-scroll {
   padding: 5px 0 15px 0 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003897}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003916}}
 .jqimessage input, .jqimessage textarea {
   width: 100%;
   font-size: 14px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003902}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003921}}
 .jqimessage #help-input {
   height: 30px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003905}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003924}}
 .jqimessage #help-textarea {
   margin-top: 10px;
   border-bottom: 0 none; }
@@ -1137,7 +1154,7 @@ select#numberAvailable {
   Impromptu
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003917}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003936}}
 select#qty-input {
   width: 50%;
   height: 40px;
@@ -1146,11 +1163,11 @@ select#qty-input {
   font-size: 16px;
   text-indent: 45%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003927}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003946}}
 #jqi_state2_buttonCancel {
   color: #f46b63; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003935}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003954}}
 #jqi_state0_buttonScan,
 #jqi_state1_buttonOk,
 #jqi_state0_buttonSubmit,
@@ -1158,24 +1175,24 @@ select#qty-input {
 #jqi_state2_buttonCancel {
   border-left: 0 none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003941}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003960}}
 #jqi_state0_buttonManual,
 #jqi_state0_buttonList,
 #jqi_state2_buttonSubmit {
   border-right: 0 none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003946}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003965}}
 #jqi_state0_buttonCancel,
 #jqi_state0_buttonYes {
   color: #f46b63;
   border-right: 0 none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003951}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003970}}
 .jqifade {
   position: absolute;
   background-color: #282828; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003955}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003974}}
 div.jqi {
   width: 270px;
   margin-left: -135px !important;
@@ -1191,7 +1208,7 @@ div.jqi {
   padding: 7px;
   top: 30% !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003972}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003991}}
 div.jqi .jqiclose {
   position: absolute;
   top: 4px;
@@ -1201,17 +1218,17 @@ div.jqi .jqiclose {
   color: #bbbbbb;
   font-size: 0px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003980}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003999}}
 div.jqi .jqistate {
   background-color: #fff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003983}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031002}}
 div.jqi .jqititle {
   padding: 5px 0 0 0;
   font-size: 21px;
   font-weight: 500; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003988}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031007}}
 div.jqi .jqimessage {
   padding: 5px 0 15px 0;
   font-size: 16px;
@@ -1219,7 +1236,7 @@ div.jqi .jqimessage {
   font-weight: 300;
   line-height: 1.4; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003995}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031014}}
 div.jqi .jqibuttons {
   text-align: center;
   margin: 0 -7px -7px -7px;
@@ -1229,7 +1246,7 @@ div.jqi .jqibuttons {
   -moz-border-radius: 0 0 6px 6px;
   -webkit-border-radius: 0 0 6px 6px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031004}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031023}}
 div.jqi .jqibuttons button {
   margin: 0;
   padding: 15px 20px;
@@ -1242,17 +1259,17 @@ div.jqi .jqibuttons button {
   font-size: 16px;
   font-family: Arial !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031016}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031035}}
 div.jqi .jqibuttons button.jqidefaultbutton {
   color: #3cc1a6;
   border-right: none !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031021}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031040}}
 .jqiwarning .jqi .jqibuttons {
   background-color: #a8a8a8; }
 
 /* sub states */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031026}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031045}}
 div.jqi .jqiparentstate::after {
   background-color: #777;
   opacity: 0.6;
@@ -1267,7 +1284,7 @@ div.jqi .jqiparentstate::after {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031037}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031056}}
 div.jqi .jqisubstate {
   position: absolute;
   top: 0;
@@ -1280,12 +1297,12 @@ div.jqi .jqisubstate {
   -moz-border-radius: 0 0 6px 6px;
   -webkit-border-radius: 0 0 6px 6px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031049}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031068}}
 div.jqi .jqisubstate .jqibuttons button {
   padding: 10px 18px; }
 
 /* arrows for tooltips/tours */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031054}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031073}}
 .jqi .jqiarrow {
   position: absolute;
   height: 0;
@@ -1294,77 +1311,77 @@ div.jqi .jqisubstate .jqibuttons button {
   font-size: 0;
   border: solid 10px transparent; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031056}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031075}}
 .jqi .jqiarrowtl {
   left: 10px;
   top: -20px;
   border-bottom-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031057}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031076}}
 .jqi .jqiarrowtc {
   left: 50%;
   top: -20px;
   border-bottom-color: #ffffff;
   margin-left: -10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031058}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031077}}
 .jqi .jqiarrowtr {
   right: 10px;
   top: -20px;
   border-bottom-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031060}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031079}}
 .jqi .jqiarrowbl {
   left: 10px;
   bottom: -20px;
   border-top-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031061}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031080}}
 .jqi .jqiarrowbc {
   left: 50%;
   bottom: -20px;
   border-top-color: #ffffff;
   margin-left: -10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031062}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031081}}
 .jqi .jqiarrowbr {
   right: 10px;
   bottom: -20px;
   border-top-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031064}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031083}}
 .jqi .jqiarrowlt {
   left: -20px;
   top: 10px;
   border-right-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031065}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031084}}
 .jqi .jqiarrowlm {
   left: -20px;
   top: 50%;
   border-right-color: #ffffff;
   margin-top: -10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031066}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031085}}
 .jqi .jqiarrowlb {
   left: -20px;
   bottom: 10px;
   border-right-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031068}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031087}}
 .jqi .jqiarrowrt {
   right: -20px;
   top: 10px;
   border-left-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031069}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031088}}
 .jqi .jqiarrowrm {
   right: -20px;
   top: 50%;
   border-left-color: #ffffff;
   margin-top: -10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031070}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/albertswantner\/Dropbox\/Bohemian\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031089}}
 .jqi .jqiarrowrb {
   right: -20px;
   bottom: 10px;

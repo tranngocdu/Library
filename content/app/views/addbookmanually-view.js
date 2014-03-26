@@ -117,11 +117,7 @@ module.exports = View.extend({
 			var uploadError = function(args) {
 				console.log('Error during Filepicker upload');
 			};
-			
-			// #BRUNCH_IF (Web)
-			alert('working web');			
-			
-			// #BRUNCH_ELIF (iOS)
+
 			window.plugins.filepicker.pick(
 				{
 					dataTypes: ['image/*'],
@@ -130,9 +126,7 @@ module.exports = View.extend({
 				uploadSuccess,
 				uploadError
 			);
-			//#BRUNCH_ELSE
-			alert('damn you');
-			// #BRUNCH_ENDIF
+
 		}
 
 	});
