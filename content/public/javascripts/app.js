@@ -2002,7 +2002,12 @@ module.exports = View.extend({
 		if($("#login-email").text){
 			Parse.User.requestPasswordReset($("#login-email").val(), {
 			  success: function() {
-			  	alert("A link was sent to "+$("#login-email").val()+" to reset your password.")
+			  	navigator.notification.alert(
+						'An email has been sent to '+$("#login-email").val(),   // message
+						function alertDismissed() {}, // callback
+						'Reset Password',            // title
+						'OK'                  // buttonName
+					);
 			  },
 			  error: function(error) {
 			    // Show the error message somewhere
@@ -2281,12 +2286,14 @@ module.exports = View.extend({
 				
 			},
 			error: function(user, error) {
+				console.log(error);
+				console.log(JSON.stringify(error));
 				// Show the error message somewhere and let the user try again.
 				// alert("Error: " + error.code + " " + error.message);
 					navigator.notification.alert(
-						'Please fill out all fields.',  // message
+						error.message,  // message
 						function alertDismissed() {}, // callback
-						'All Fields Required',            // title
+						'Error',            // title
 						'OK'                  // buttonName
 					);
 				}	

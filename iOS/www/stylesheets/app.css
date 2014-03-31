@@ -694,7 +694,7 @@ a {
 #forgot {
   margin-top: 20px;
   text-align: center;
-  font-size: 12px;
+  font-size: 16px;
   color: #3cc1a6; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003471}}
   #forgot:active {
@@ -1035,84 +1035,85 @@ select#numberAvailable {
     #booklist li img {
       width: 52px;
       float: left;
-      margin-right: 15px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003814}}
+      margin-right: 15px;
+      height: 71px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003815}}
     #booklist li .book-meta {
       float: left;
       width: 76%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003817}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003818}}
       #booklist li .book-meta h2 {
         font-size: 16px;
         font-weight: 500; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003820}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003821}}
         #booklist li .book-meta h2:active {
           color: #818181; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003824}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003825}}
       #booklist li .book-meta h3 {
         font-size: 14px;
         font-weight: 300;
         color: #a8a8a8;
         padding-top: 3px;
         line-height: 1.3; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003831}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003832}}
       #booklist li .book-meta p {
         font-size: 13px;
         font-weight: 500;
         color: #3cc1a6;
         padding-top: 3px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003837}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003838}}
       #booklist li .book-meta .out {
         color: #f46b63; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003844}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003845}}
 .students {
   padding: 0 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003848}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003849}}
 #checkout-list {
   width: 100%;
   margin: 0 auto 15px auto; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003851}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003852}}
   #checkout-list h5 {
     color: #f46b63;
     font-weight: 500;
     font-size: 16px;
     border-bottom: 1px solid #dbdbdb;
     padding-bottom: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003858}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003859}}
   #checkout-list ul {
     margin: 0;
     padding: 0;
     text-align: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003862}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003863}}
     #checkout-list ul li {
       border-bottom: 1px solid #dbdbdb;
       padding: 8px 0 10px 0;
       font-weight: 500;
       font-size: 14px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003871}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003872}}
 #studentlist {
   padding-left: 0;
   margin: 0 auto;
   width: 100%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003875}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003876}}
   #studentlist li {
     border-bottom: 1px solid #dbdbdb;
     padding: 12px 0 14px 4%;
     overflow: hidden;
     font-weight: 500;
     position: relative; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003881}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003882}}
     #studentlist li .first-name {
       font-weight: 500;
       margin-right: 5px;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003886}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003887}}
     #studentlist li .last-name {
       width: 70%;
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003890}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003891}}
     #studentlist li .delete-name {
       color: #f46b63;
       text-align: right;
@@ -1120,18 +1121,18 @@ select#numberAvailable {
       font-size: 15px;
       padding: 1px 4% 0 0;
       font-weight: 300; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003897}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003898}}
       #studentlist li .delete-name:active {
         color: #3cc1a6; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003902}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003903}}
   #studentlist .selected {
     background-color: #424242;
     color: white; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003906}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003907}}
   #studentlist .deselected {
     color: #282828; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003911}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003912}}
 .student-check {
   width: 24px;
   height: 20px;
@@ -1147,18 +1148,18 @@ select#numberAvailable {
   Settings
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003927}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003928}}
 .settings-scroll {
   padding: 5px 0 15px 0 !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003932}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003933}}
 .jqimessage input, .jqimessage textarea {
   width: 100%;
   font-size: 14px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003937}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003938}}
 .jqimessage #help-input {
   height: 30px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003940}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003941}}
 .jqimessage #help-textarea {
   margin-top: 10px;
   border-bottom: 0 none; }
@@ -1168,7 +1169,7 @@ select#numberAvailable {
   Impromptu
 ------------------------------
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003952}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003953}}
 select#qty-input {
   width: 50%;
   height: 40px;
@@ -1177,11 +1178,11 @@ select#qty-input {
   font-size: 16px;
   text-indent: 45%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003962}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003963}}
 #jqi_state2_buttonCancel {
   color: #f46b63; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003970}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003971}}
 #jqi_state0_buttonScan,
 #jqi_state1_buttonOk,
 #jqi_state0_buttonSubmit,
@@ -1189,24 +1190,24 @@ select#qty-input {
 #jqi_state2_buttonCancel {
   border-left: 0 none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003976}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003977}}
 #jqi_state0_buttonManual,
 #jqi_state0_buttonList,
 #jqi_state2_buttonSubmit {
   border-right: 0 none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003981}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003982}}
 #jqi_state0_buttonCancel,
 #jqi_state0_buttonYes {
   color: #f46b63;
   border-right: 0 none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003986}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003987}}
 .jqifade {
   position: absolute;
   background-color: #282828; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003990}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\00003991}}
 div.jqi {
   width: 270px;
   margin-left: -135px !important;
@@ -1222,7 +1223,7 @@ div.jqi {
   padding: 7px;
   top: 30% !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031007}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031008}}
 div.jqi .jqiclose {
   position: absolute;
   top: 4px;
@@ -1232,17 +1233,17 @@ div.jqi .jqiclose {
   color: #bbbbbb;
   font-size: 0px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031015}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031016}}
 div.jqi .jqistate {
   background-color: #fff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031018}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031019}}
 div.jqi .jqititle {
   padding: 5px 0 0 0;
   font-size: 21px;
   font-weight: 500; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031023}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031024}}
 div.jqi .jqimessage {
   padding: 5px 0 15px 0;
   font-size: 16px;
@@ -1250,7 +1251,7 @@ div.jqi .jqimessage {
   font-weight: 300;
   line-height: 1.4; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031030}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031031}}
 div.jqi .jqibuttons {
   text-align: center;
   margin: 0 -7px -7px -7px;
@@ -1260,7 +1261,7 @@ div.jqi .jqibuttons {
   -moz-border-radius: 0 0 6px 6px;
   -webkit-border-radius: 0 0 6px 6px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031039}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031040}}
 div.jqi .jqibuttons button {
   margin: 0;
   padding: 15px 20px;
@@ -1273,17 +1274,17 @@ div.jqi .jqibuttons button {
   font-size: 16px;
   font-family: Arial !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031051}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031052}}
 div.jqi .jqibuttons button.jqidefaultbutton {
   color: #3cc1a6;
   border-right: none !important; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031056}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031057}}
 .jqiwarning .jqi .jqibuttons {
   background-color: #a8a8a8; }
 
 /* sub states */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031061}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031062}}
 div.jqi .jqiparentstate::after {
   background-color: #777;
   opacity: 0.6;
@@ -1298,7 +1299,7 @@ div.jqi .jqiparentstate::after {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031072}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031073}}
 div.jqi .jqisubstate {
   position: absolute;
   top: 0;
@@ -1311,12 +1312,12 @@ div.jqi .jqisubstate {
   -moz-border-radius: 0 0 6px 6px;
   -webkit-border-radius: 0 0 6px 6px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031084}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031085}}
 div.jqi .jqisubstate .jqibuttons button {
   padding: 10px 18px; }
 
 /* arrows for tooltips/tours */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031089}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031090}}
 .jqi .jqiarrow {
   position: absolute;
   height: 0;
@@ -1325,77 +1326,77 @@ div.jqi .jqisubstate .jqibuttons button {
   font-size: 0;
   border: solid 10px transparent; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031091}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031092}}
 .jqi .jqiarrowtl {
   left: 10px;
   top: -20px;
   border-bottom-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031092}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031093}}
 .jqi .jqiarrowtc {
   left: 50%;
   top: -20px;
   border-bottom-color: #ffffff;
   margin-left: -10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031093}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031094}}
 .jqi .jqiarrowtr {
   right: 10px;
   top: -20px;
   border-bottom-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031095}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031096}}
 .jqi .jqiarrowbl {
   left: 10px;
   bottom: -20px;
   border-top-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031096}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031097}}
 .jqi .jqiarrowbc {
   left: 50%;
   bottom: -20px;
   border-top-color: #ffffff;
   margin-left: -10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031097}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031098}}
 .jqi .jqiarrowbr {
   right: 10px;
   bottom: -20px;
   border-top-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031099}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031100}}
 .jqi .jqiarrowlt {
   left: -20px;
   top: 10px;
   border-right-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031100}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031101}}
 .jqi .jqiarrowlm {
   left: -20px;
   top: 50%;
   border-right-color: #ffffff;
   margin-top: -10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031101}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031102}}
 .jqi .jqiarrowlb {
   left: -20px;
   bottom: 10px;
   border-right-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031103}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031104}}
 .jqi .jqiarrowrt {
   right: -20px;
   top: 10px;
   border-left-color: #ffffff; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031104}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031105}}
 .jqi .jqiarrowrm {
   right: -20px;
   top: 50%;
   border-left-color: #ffffff;
   margin-top: -10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031105}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/grett\/Documents\/Work\/library\/content\/app\/styles\/scss\/_styles\.scss}line{font-family:\000031106}}
 .jqi .jqiarrowrb {
   right: -20px;
   bottom: 10px;

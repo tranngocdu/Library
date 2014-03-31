@@ -74,7 +74,12 @@ module.exports = View.extend({
 		if($("#login-email").text){
 			Parse.User.requestPasswordReset($("#login-email").val(), {
 			  success: function() {
-			  	alert("A link was sent to "+$("#login-email").val()+" to reset your password.")
+			  	navigator.notification.alert(
+						'An email has been sent to '+$("#login-email").val(),   // message
+						function alertDismissed() {}, // callback
+						'Reset Password',            // title
+						'OK'                  // buttonName
+					);
 			  },
 			  error: function(error) {
 			    // Show the error message somewhere
