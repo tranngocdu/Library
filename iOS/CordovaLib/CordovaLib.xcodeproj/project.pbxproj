@@ -553,7 +553,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"ARCHS[sdk=iphoneos*]" = armv7;
+				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD)";
 				"ARCHS[sdk=iphoneos6.*]" = "$(ARCHS_STANDARD)";
 				"ARCHS[sdk=iphoneos7.*]" = "$(ARCHS_STANDARD)";
 				"ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD)";
