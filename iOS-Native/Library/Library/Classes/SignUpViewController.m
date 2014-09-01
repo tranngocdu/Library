@@ -36,7 +36,11 @@
     
     _btnIHaveAccount.layer.cornerRadius = 5.0f;
     _btnIHaveAccount.layer.borderWidth = 1.0f;
-    _btnIHaveAccount.layer.borderColor = [UIColorFromRGB(0x3cc1a6) CGColor];
+    _btnIHaveAccount.layer.borderColor = [UIColorFromRGB(kAppGreen) CGColor];
+    
+    _tfEmail.delegate = self;
+    _tfPassword.delegate = self;
+    _tfPasswordConfirm.delegate = self;
 }
 
 - (void)viewDidLoad
@@ -56,6 +60,23 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == _tfEmail)
+    {
+        [_tfPassword becomeFirstResponder];
+    }
+    else if (textField == _tfPassword)
+    {
+        [_tfPasswordConfirm becomeFirstResponder];
+    }
+    else if (textField == _tfPasswordConfirm)
+    {
+        [_tfPasswordConfirm resignFirstResponder];
+    }
+    return YES;
 }
 
 /*

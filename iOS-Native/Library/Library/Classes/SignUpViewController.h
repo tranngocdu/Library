@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SignUpViewController : UIViewController
+@interface SignUpViewController : UIViewController <UITextFieldDelegate>
+
 @property (strong, nonatomic) IBOutlet UITextField *tfEmail;
 @property (strong, nonatomic) IBOutlet UITextField *tfPassword;
 @property (strong, nonatomic) IBOutlet UITextField *tfPasswordConfirm;

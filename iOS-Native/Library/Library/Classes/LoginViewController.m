@@ -34,7 +34,7 @@
     
     _btnCreateAccount.layer.cornerRadius = 5.0f;
     _btnCreateAccount.layer.borderWidth = 1.0f;
-    _btnCreateAccount.layer.borderColor = [UIColorFromRGB(0x3cc1a6) CGColor];
+    _btnCreateAccount.layer.borderColor = [UIColorFromRGB(kAppGreen) CGColor];
     
     _tfEmail.delegate = self;
     _tfPassword.delegate = self;
@@ -86,6 +86,14 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    if (textField == _tfEmail)
+    {
+        [_tfPassword becomeFirstResponder];
+    }
+    else if (textField == _tfPassword)
+    {
+        [_tfPassword resignFirstResponder];
+    }
     return YES;
 }
 /*

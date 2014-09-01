@@ -22,6 +22,8 @@
 		722B121419B45AE5009613B8 /* LibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 722B121319B45AE5009613B8 /* LibraryTests.m */; };
 		722B122F19B47955009613B8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722B122C19B47955009613B8 /* LoginViewController.m */; };
 		722B123019B47955009613B8 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722B122E19B47955009613B8 /* SignUpViewController.m */; };
+		72CC557319B4E034009E9DC3 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CC557219B4E034009E9DC3 /* HomeViewController.m */; };
+		72CC557619B4E511009E9DC3 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CC557519B4E511009E9DC3 /* SettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,10 @@
 		722B122D19B47955009613B8 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpViewController.h; path = Library/Classes/SignUpViewController.h; sourceTree = "<group>"; };
 		722B122E19B47955009613B8 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpViewController.m; path = Library/Classes/SignUpViewController.m; sourceTree = "<group>"; };
 		72CC557019B4CD5F009E9DC3 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Library/Classes/Constants.h; sourceTree = "<group>"; };
+		72CC557119B4E034009E9DC3 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = Library/Classes/HomeViewController.h; sourceTree = "<group>"; };
+		72CC557219B4E034009E9DC3 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = Library/Classes/HomeViewController.m; sourceTree = "<group>"; };
+		72CC557419B4E511009E9DC3 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Library/Classes/SettingsViewController.h; sourceTree = "<group>"; };
+		72CC557519B4E511009E9DC3 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Library/Classes/SettingsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +169,10 @@
 				722B122C19B47955009613B8 /* LoginViewController.m */,
 				722B122D19B47955009613B8 /* SignUpViewController.h */,
 				722B122E19B47955009613B8 /* SignUpViewController.m */,
+				72CC557119B4E034009E9DC3 /* HomeViewController.h */,
+				72CC557219B4E034009E9DC3 /* HomeViewController.m */,
+				72CC557419B4E511009E9DC3 /* SettingsViewController.h */,
+				72CC557519B4E511009E9DC3 /* SettingsViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -267,6 +277,8 @@
 				722B11F919B45AE5009613B8 /* AppDelegate.m in Sources */,
 				722B11F519B45AE5009613B8 /* main.m in Sources */,
 				722B123019B47955009613B8 /* SignUpViewController.m in Sources */,
+				72CC557619B4E511009E9DC3 /* SettingsViewController.m in Sources */,
+				72CC557319B4E034009E9DC3 /* HomeViewController.m in Sources */,
 				722B122F19B47955009613B8 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
