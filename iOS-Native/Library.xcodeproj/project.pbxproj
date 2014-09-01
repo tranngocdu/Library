@@ -14,14 +14,14 @@
 		722B11F519B45AE5009613B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 722B11F419B45AE5009613B8 /* main.m */; };
 		722B11F919B45AE5009613B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 722B11F819B45AE5009613B8 /* AppDelegate.m */; };
 		722B11FC19B45AE5009613B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722B11FA19B45AE5009613B8 /* Main.storyboard */; };
-		722B11FF19B45AE5009613B8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722B11FE19B45AE5009613B8 /* ViewController.m */; };
 		722B120119B45AE5009613B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 722B120019B45AE5009613B8 /* Images.xcassets */; };
 		722B120819B45AE5009613B8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722B120719B45AE5009613B8 /* XCTest.framework */; };
 		722B120919B45AE5009613B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722B11E819B45AE5009613B8 /* Foundation.framework */; };
 		722B120A19B45AE5009613B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722B11EC19B45AE5009613B8 /* UIKit.framework */; };
 		722B121219B45AE5009613B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 722B121019B45AE5009613B8 /* InfoPlist.strings */; };
 		722B121419B45AE5009613B8 /* LibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 722B121319B45AE5009613B8 /* LibraryTests.m */; };
-		722B122019B45C93009613B8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722B121F19B45C93009613B8 /* LoginViewController.m */; };
+		722B122F19B47955009613B8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722B122C19B47955009613B8 /* LoginViewController.m */; };
+		722B123019B47955009613B8 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722B122E19B47955009613B8 /* SignUpViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,16 +46,16 @@
 		722B11F719B45AE5009613B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		722B11F819B45AE5009613B8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		722B11FB19B45AE5009613B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		722B11FD19B45AE5009613B8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		722B11FE19B45AE5009613B8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		722B120019B45AE5009613B8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		722B120619B45AE5009613B8 /* LibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		722B120719B45AE5009613B8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		722B120F19B45AE5009613B8 /* LibraryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LibraryTests-Info.plist"; sourceTree = "<group>"; };
 		722B121119B45AE5009613B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		722B121319B45AE5009613B8 /* LibraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibraryTests.m; sourceTree = "<group>"; };
-		722B121E19B45C93009613B8 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		722B121F19B45C93009613B8 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		722B122B19B47955009613B8 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Library/Classes/LoginViewController.h; sourceTree = "<group>"; };
+		722B122C19B47955009613B8 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Library/Classes/LoginViewController.m; sourceTree = "<group>"; };
+		722B122D19B47955009613B8 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpViewController.h; path = Library/Classes/SignUpViewController.h; sourceTree = "<group>"; };
+		722B122E19B47955009613B8 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpViewController.m; path = Library/Classes/SignUpViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,8 +119,6 @@
 				722B11F819B45AE5009613B8 /* AppDelegate.m */,
 				722B11FA19B45AE5009613B8 /* Main.storyboard */,
 				722B121D19B45B65009613B8 /* Classes */,
-				722B11FD19B45AE5009613B8 /* ViewController.h */,
-				722B11FE19B45AE5009613B8 /* ViewController.m */,
 				722B120019B45AE5009613B8 /* Images.xcassets */,
 				722B11EF19B45AE5009613B8 /* Supporting Files */,
 			);
@@ -159,8 +157,10 @@
 		722B121D19B45B65009613B8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				722B121E19B45C93009613B8 /* LoginViewController.h */,
-				722B121F19B45C93009613B8 /* LoginViewController.m */,
+				722B122B19B47955009613B8 /* LoginViewController.h */,
+				722B122C19B47955009613B8 /* LoginViewController.m */,
+				722B122D19B47955009613B8 /* SignUpViewController.h */,
+				722B122E19B47955009613B8 /* SignUpViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -262,10 +262,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				722B122019B45C93009613B8 /* LoginViewController.m in Sources */,
-				722B11FF19B45AE5009613B8 /* ViewController.m in Sources */,
 				722B11F919B45AE5009613B8 /* AppDelegate.m in Sources */,
 				722B11F519B45AE5009613B8 /* main.m in Sources */,
+				722B123019B47955009613B8 /* SignUpViewController.m in Sources */,
+				722B122F19B47955009613B8 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
