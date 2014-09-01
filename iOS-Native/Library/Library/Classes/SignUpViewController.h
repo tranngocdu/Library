@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface SignUpViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UITextField *tfEmail;
+@property (strong, nonatomic) IBOutlet UITextField *tfPassword;
+@property (strong, nonatomic) IBOutlet UITextField *tfPasswordConfirm;
+@property (strong, nonatomic) IBOutlet UIButton *btnCreateAccount;
+@property (strong, nonatomic) IBOutlet UIButton *btnIHaveAccount;
 
 @end

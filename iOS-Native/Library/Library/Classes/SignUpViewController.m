@@ -7,6 +7,8 @@
 //
 
 #import "SignUpViewController.h"
+#import "Constants.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface SignUpViewController ()
 
@@ -14,19 +16,40 @@
 
 @implementation SignUpViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [self performSelectorOnMainThread:@selector(decorate) withObject:nil waitUntilDone:NO];
+        
     }
     return self;
+}
+
+- (void) decorate
+{
+    _tfPassword.secureTextEntry = YES;
+    _tfPasswordConfirm.secureTextEntry = YES;
+    
+    _btnCreateAccount.layer.cornerRadius = 5.0f;
+    
+    _btnIHaveAccount.layer.cornerRadius = 5.0f;
+    _btnIHaveAccount.layer.borderWidth = 1.0f;
+    _btnIHaveAccount.layer.borderColor = [UIColorFromRGB(0x3cc1a6) CGColor];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [_btnIHaveAccount addTarget:self action:@selector(goBackToLoginScreen) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+- (void) goBackToLoginScreen
+{
+    [self.navigationController popViewControllerAnimated: YES];
 }
 
 - (void)didReceiveMemoryWarning

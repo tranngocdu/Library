@@ -7,6 +7,8 @@
 //
 
 #import "LoginViewController.h"
+#import "Constants.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface LoginViewController ()
 
@@ -14,19 +16,37 @@
 
 @implementation LoginViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+
+
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [self performSelectorOnMainThread:@selector(decorate) withObject:nil waitUntilDone:NO];
     }
     return self;
+}
+
+- (void)decorate
+{
+    _btnLogin.layer.cornerRadius = 5.0f;
+    
+    _btnCreateAccount.layer.cornerRadius = 5.0f;
+    _btnCreateAccount.layer.borderWidth = 1.0f;
+    _btnCreateAccount.layer.borderColor = [UIColorFromRGB(0x3cc1a6) CGColor];
+    
+    _tfEmail.delegate = self;
+    _tfPassword.delegate = self;
+    _tfPassword.secureTextEntry = YES;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [_btnForgotPassword addTarget:self action:@selector(buttonResetPasswordDidClick) forControlEvents: UIControlEventTouchUpInside];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,16 +60,34 @@
     NSLog(@"Login");
 }
 
-- (IBAction)gotoCreateAccount:(id)sender
+- (void)buttonResetPasswordDidClick
 {
-    NSLog(@"Create account");
+    if ([_tfEmail.text isEqualToString:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter your email"
+                                                        message: @"First enter above the email you used for Class Library"
+                                                       delegate: nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles: nil];
+        [alert show];
+    }
+    else
+    {
+        // TODO: Send recovery email to the target address
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset password"
+                                                        message: [NSString stringWithFormat:@"An email has been sent to %@", _tfEmail.text]
+                                                       delegate: nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
-- (IBAction)gotoResetPassword:(id)sender
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSLog(@"Reset password");
+    [textField resignFirstResponder];
+    return YES;
 }
-
 /*
 #pragma mark - Navigation
 

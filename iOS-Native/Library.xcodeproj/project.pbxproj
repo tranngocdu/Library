@@ -56,6 +56,7 @@
 		722B122C19B47955009613B8 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Library/Classes/LoginViewController.m; sourceTree = "<group>"; };
 		722B122D19B47955009613B8 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpViewController.h; path = Library/Classes/SignUpViewController.h; sourceTree = "<group>"; };
 		722B122E19B47955009613B8 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpViewController.m; path = Library/Classes/SignUpViewController.m; sourceTree = "<group>"; };
+		72CC557019B4CD5F009E9DC3 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Library/Classes/Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +158,7 @@
 		722B121D19B45B65009613B8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				72CC557019B4CD5F009E9DC3 /* Constants.h */,
 				722B122B19B47955009613B8 /* LoginViewController.h */,
 				722B122C19B47955009613B8 /* LoginViewController.m */,
 				722B122D19B47955009613B8 /* SignUpViewController.h */,

@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController <UITextFieldDelegate>
 
-@property (nonatomic) IBOutlet UIButton *btnLogin;
-@property (nonatomic) IBOutlet UIButton *btnCreateAccount;
-@property (strong, nonatomic) IBOutlet UILabel *forgotPasswordLabel;
+@property (strong, nonatomic) IBOutlet UIButton *btnLogin;
+@property (strong, nonatomic) IBOutlet UIButton *btnCreateAccount;
+@property (strong, nonatomic) IBOutlet UIButton *btnForgotPassword;
+@property (strong, nonatomic) IBOutlet UITextField *tfEmail;
+@property (strong, nonatomic) IBOutlet UITextField *tfPassword;
 
 - (IBAction)doLogin:(id)sender;
-- (IBAction)gotoCreateAccount:(id)sender;
-- (IBAction)gotoResetPassword:(id)sender;
 @end
