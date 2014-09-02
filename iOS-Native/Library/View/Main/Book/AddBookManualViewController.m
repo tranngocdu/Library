@@ -1,43 +1,32 @@
 //
-//  StudentsViewController.m
+//  AddBookManualViewController.m
 //  Library
 //
-//  Created by hangnguyen on 9/2/14.
-//  Copyright (c) 2014 hangnguyen. All rights reserved.
+//  Created by Tien Nguyen Thanh on 9/2/14.
+//  Copyright (c) 2014 Tien Nguyen Thanh. All rights reserved.
 //
 
-#import "StudentsViewController.h"
+#import "AddBookManualViewController.h"
 
-@interface StudentsViewController ()
+@interface AddBookManualViewController ()
 
 @end
 
-@implementation StudentsViewController
+@implementation AddBookManualViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-        
+    if (self) {
+        // Custom initialization
     }
-
     return self;
-}
-
-- (void) decorate
-{
-    UINavigationController *controller = self.navigationController;
-    if (controller == nil)
-    {
-        NSLog(@"nil");
-    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self decorate];
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning

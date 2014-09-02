@@ -37,6 +37,11 @@
     _btnHelpMe.layer.cornerRadius = 5.0;
     _btnHelpMe.layer.borderWidth = 1.0;
     _btnHelpMe.layer.borderColor = [UIColorFromRGB(kAppGreen) CGColor];
+    
+    _tfEmail.delegate = self;
+    _tfCurrentPassword.delegate = self;
+    _tfNewPassword.delegate = self;
+    _tfNewPasswordConfirm.delegate = self;
 }
 
 - (void)viewDidLoad
@@ -49,6 +54,27 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == _tfEmail)
+    {
+        [_tfCurrentPassword becomeFirstResponder];
+    }
+    else if (textField == _tfCurrentPassword)
+    {
+        [_tfNewPassword becomeFirstResponder];
+    }
+    else if (textField == _tfNewPassword)
+    {
+        [_tfNewPasswordConfirm becomeFirstResponder];
+    }
+    else if (textField == _tfNewPasswordConfirm)
+    {
+        [_tfNewPasswordConfirm resignFirstResponder];
+    }
+    return YES;
 }
 
 /*

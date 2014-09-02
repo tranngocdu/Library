@@ -20,6 +20,10 @@
 		722B120A19B45AE5009613B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722B11EC19B45AE5009613B8 /* UIKit.framework */; };
 		722B121219B45AE5009613B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 722B121019B45AE5009613B8 /* InfoPlist.strings */; };
 		722B121419B45AE5009613B8 /* LibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 722B121319B45AE5009613B8 /* LibraryTests.m */; };
+		7233434F19B56D3B0039720C /* AddStudentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7233434E19B56D3B0039720C /* AddStudentViewController.m */; };
+		72D2356E19B589A9003963E5 /* AddBookManualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D2356D19B589A9003963E5 /* AddBookManualViewController.m */; };
+		72D2357119B58F22003963E5 /* BookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D2357019B58F22003963E5 /* BookDetailViewController.m */; };
+		72D2357419B58F37003963E5 /* CheckOutBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D2357319B58F37003963E5 /* CheckOutBookViewController.m */; };
 		8C14561B19B5547B009616DE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C14560E19B5547B009616DE /* LoginViewController.m */; };
 		8C14561C19B5547B009616DE /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C14561319B5547B009616DE /* HomeViewController.m */; };
 		8C14561D19B5547B009616DE /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C14561619B5547B009616DE /* SettingsViewController.m */; };
@@ -57,6 +61,14 @@
 		722B120F19B45AE5009613B8 /* LibraryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LibraryTests-Info.plist"; sourceTree = "<group>"; };
 		722B121119B45AE5009613B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		722B121319B45AE5009613B8 /* LibraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibraryTests.m; sourceTree = "<group>"; };
+		7233434D19B56D3B0039720C /* AddStudentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddStudentViewController.h; sourceTree = "<group>"; };
+		7233434E19B56D3B0039720C /* AddStudentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddStudentViewController.m; sourceTree = "<group>"; };
+		72D2356C19B589A9003963E5 /* AddBookManualViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBookManualViewController.h; sourceTree = "<group>"; };
+		72D2356D19B589A9003963E5 /* AddBookManualViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBookManualViewController.m; sourceTree = "<group>"; };
+		72D2356F19B58F22003963E5 /* BookDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailViewController.h; sourceTree = "<group>"; };
+		72D2357019B58F22003963E5 /* BookDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailViewController.m; sourceTree = "<group>"; };
+		72D2357219B58F37003963E5 /* CheckOutBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOutBookViewController.h; sourceTree = "<group>"; };
+		72D2357319B58F37003963E5 /* CheckOutBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOutBookViewController.m; sourceTree = "<group>"; };
 		8C14560D19B5547B009616DE /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		8C14560E19B5547B009616DE /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		8C14561219B5547B009616DE /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -194,10 +206,10 @@
 		8C14560F19B5547B009616DE /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				8C14561019B5547B009616DE /* Book */,
 				8C14561119B5547B009616DE /* Home */,
-				8C14561419B5547B009616DE /* Setting */,
+				8C14561019B5547B009616DE /* Book */,
 				8C14561719B5547B009616DE /* Student */,
+				8C14561419B5547B009616DE /* Setting */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -207,6 +219,12 @@
 			children = (
 				8C14562319B5552B009616DE /* BooksViewController.h */,
 				8C14562419B5552B009616DE /* BooksViewController.m */,
+				72D2356C19B589A9003963E5 /* AddBookManualViewController.h */,
+				72D2356D19B589A9003963E5 /* AddBookManualViewController.m */,
+				72D2356F19B58F22003963E5 /* BookDetailViewController.h */,
+				72D2357019B58F22003963E5 /* BookDetailViewController.m */,
+				72D2357219B58F37003963E5 /* CheckOutBookViewController.h */,
+				72D2357319B58F37003963E5 /* CheckOutBookViewController.m */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -234,6 +252,8 @@
 			children = (
 				8C14562019B554DB009616DE /* StudentsViewController.h */,
 				8C14562119B554DB009616DE /* StudentsViewController.m */,
+				7233434D19B56D3B0039720C /* AddStudentViewController.h */,
+				7233434E19B56D3B0039720C /* AddStudentViewController.m */,
 			);
 			path = Student;
 			sourceTree = "<group>";
@@ -344,14 +364,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72D2357119B58F22003963E5 /* BookDetailViewController.m in Sources */,
 				722B11F919B45AE5009613B8 /* AppDelegate.m in Sources */,
 				722B11F519B45AE5009613B8 /* main.m in Sources */,
 				8C14561E19B5547B009616DE /* SignUpViewController.m in Sources */,
+				7233434F19B56D3B0039720C /* AddStudentViewController.m in Sources */,
 				8C14561D19B5547B009616DE /* SettingsViewController.m in Sources */,
 				8C14561B19B5547B009616DE /* LoginViewController.m in Sources */,
 				8C14562519B5552B009616DE /* BooksViewController.m in Sources */,
+				72D2356E19B589A9003963E5 /* AddBookManualViewController.m in Sources */,
 				8C14562219B554DB009616DE /* StudentsViewController.m in Sources */,
 				8C14561C19B5547B009616DE /* HomeViewController.m in Sources */,
+				72D2357419B58F37003963E5 /* CheckOutBookViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

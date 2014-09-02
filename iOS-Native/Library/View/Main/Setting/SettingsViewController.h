@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : UIViewController <UITextFieldDelegate>
 
 
 @property (strong, nonatomic) IBOutlet UITextField *tfEmail;

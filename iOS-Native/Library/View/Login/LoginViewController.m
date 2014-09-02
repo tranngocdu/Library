@@ -59,6 +59,15 @@
 - (IBAction)doLogin:(id)sender
 {
     NSLog(@"Login");
+    if ([_tfEmail.text isEqualToString:@""] || [_tfPassword.text isEqualToString: @""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"All Fields Required"
+                                                        message: @"Please enter username and password"
+                                                       delegate: nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 - (IBAction)buttonResetPasswordDidClick:(id)sender
