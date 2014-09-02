@@ -17,4 +17,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *tfPassword;
 
 - (IBAction)doLogin:(id)sender;
+- (IBAction)buttonResetPasswordDidClick:(id)sender;
+
 @end

@@ -19,10 +19,11 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder: aDecoder];
-    if (self) {
-        // Custom initialization
-        [self performSelectorOnMainThread:@selector(decorate) withObject:nil waitUntilDone:NO];
+    if (self)
+    {
+
     }
+    
     return self;
 }
 
@@ -38,7 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self decorate];
 }
 
 - (void)didReceiveMemoryWarning

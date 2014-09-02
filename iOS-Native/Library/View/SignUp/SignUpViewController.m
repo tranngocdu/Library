@@ -21,9 +21,9 @@
     self = [super initWithCoder:aDecoder];
     if (self)
     {
-        [self performSelectorOnMainThread:@selector(decorate) withObject:nil waitUntilDone:NO];
-        
+
     }
+
     return self;
 }
 
@@ -46,12 +46,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [_btnIHaveAccount addTarget:self action:@selector(goBackToLoginScreen) forControlEvents:UIControlEventTouchUpInside];
-    
+
+    [self decorate];
 }
 
-- (void) goBackToLoginScreen
+- (IBAction) goBackToLoginScreen:(id)sender
 {
     [self.navigationController popViewControllerAnimated: YES];
 }

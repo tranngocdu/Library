@@ -23,12 +23,13 @@
     self = [super initWithCoder:aDecoder];
     if (self)
     {
-        [self performSelectorOnMainThread:@selector(decorate) withObject:nil waitUntilDone:NO];
+
     }
+
     return self;
 }
 
-- (void)decorate
+- (void) decorate
 {
     _btnLogin.layer.cornerRadius = 5.0f;
     
@@ -44,8 +45,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [_btnForgotPassword addTarget:self action:@selector(buttonResetPasswordDidClick) forControlEvents: UIControlEventTouchUpInside];
+
+    [self decorate];
 
 }
 
@@ -60,7 +61,7 @@
     NSLog(@"Login");
 }
 
-- (void)buttonResetPasswordDidClick
+- (IBAction)buttonResetPasswordDidClick:(id)sender
 {
     if ([_tfEmail.text isEqualToString:@""])
     {

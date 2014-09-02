@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "Library/Classes/Constants.h"
 
 @implementation AppDelegate
 
