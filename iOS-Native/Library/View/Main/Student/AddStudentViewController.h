@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddStudentViewController : UIViewController
+@interface AddStudentViewController : UIViewController <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *btnAddStudent;
 @property (strong, nonatomic) IBOutlet UITextField *tfStudentName;

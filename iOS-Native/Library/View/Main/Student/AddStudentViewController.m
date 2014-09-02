@@ -28,6 +28,8 @@
 - (void) decorate
 {
     _btnAddStudent.layer.cornerRadius = 5.0;
+    
+    _tfStudentName.delegate = self;
 }
 
 - (void)viewDidLoad
@@ -40,6 +42,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [_tfStudentName resignFirstResponder];
+    return YES;
 }
 
 /*
