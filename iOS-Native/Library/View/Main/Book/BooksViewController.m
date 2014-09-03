@@ -19,7 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-
+        
     }
     
     return self;
@@ -29,7 +29,9 @@
 {
     _topTab.layer.cornerRadius = 5.0f;
     _topTab.layer.masksToBounds = YES;
-
+    
+    NSLog(@"NAV: %@", self.navigationController == nil ? @" NO" : @" YES");
+    self.title = @"Hello";
 }
 
 - (void)viewDidLoad
