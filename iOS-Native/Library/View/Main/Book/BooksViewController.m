@@ -31,13 +31,16 @@
     _topTab.layer.masksToBounds = YES;
     
     NSLog(@"NAV: %@", self.navigationController == nil ? @" NO" : @" YES");
-    self.title = @"Hello";
+    [self.tabBarController setTitle:@"Books"];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self decorate];
+    
+    // Sample books
+    books = [NSArray arrayWithObjects:@"Book1", @"Book2", @"Book3", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +49,29 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [books count];
+};
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *simpleTableIndentifier = @"BookTable";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIndentifier];
+    
+    if(cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIndentifier];
+    }
+    
+    cell.textLabel.text = [books objectAtIndex:indexPath.row];
+    return cell;
+};
+
+
+- (IBAction)segmentChanged:(id)sender {
+    UISegmentedControl *segmentedControl = (UISegmentedControl *) sender;
+    NSInteger selectedSegment = segmentedControl.selectedSegmentIndex;
+    
+    NSLog(@"%i", selectedSegment);
+}
 /*
 #pragma mark - Navigation
 

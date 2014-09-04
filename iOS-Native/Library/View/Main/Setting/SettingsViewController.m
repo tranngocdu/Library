@@ -48,6 +48,7 @@
 {
     [super viewDidLoad];
     [self decorate];
+    [self.tabBarController setTitle:@"Settings"];
 }
 
 - (void)didReceiveMemoryWarning

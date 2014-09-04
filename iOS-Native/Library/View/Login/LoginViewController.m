@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "HomeViewController.h"
 #import "Constants.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -67,6 +68,10 @@
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles: nil];
         [alert show];
+    } else {
+        HomeViewController *tabView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
+        [self.navigationController pushViewController:tabView animated:YES];
+        [tabView.navigationItem setHidesBackButton:YES];
     }
 }
 
@@ -104,6 +109,7 @@
     {
         [_tfPassword resignFirstResponder];
     }
+    
     return YES;
 }
 /*

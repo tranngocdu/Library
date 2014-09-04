@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BooksViewController : UIViewController
+@interface BooksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
-
+    NSArray *books;
 }
+
+- (IBAction)segmentChanged:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *topTab;
 

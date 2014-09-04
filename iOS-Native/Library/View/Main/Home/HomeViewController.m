@@ -40,6 +40,7 @@
 {
     [super viewDidLoad];
     [self decorate];
+    [self.tabBarController setTitle:@"Library"];
 }
 
 - (void)didReceiveMemoryWarning

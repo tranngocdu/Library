@@ -38,6 +38,7 @@
 {
     [super viewDidLoad];
     [self decorate];
+    [self.tabBarController setTitle:@"Students"];
 }
 
 - (void)didReceiveMemoryWarning
