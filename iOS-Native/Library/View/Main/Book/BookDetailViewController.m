@@ -35,6 +35,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)removeBook:(id)sender {
+    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Confirmation"
+                                                       message:@"Are you sure you wish to remove XXX from your collection?"
+                                                      delegate:self
+                                             cancelButtonTitle:@"No"
+                                             otherButtonTitles:@"Yes", nil];
+    [theAlert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"%i", buttonIndex);
+};
+
 /*
 #pragma mark - Navigation
 

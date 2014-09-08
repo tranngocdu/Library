@@ -40,6 +40,10 @@
 {
     [super viewDidLoad];
     [self decorate];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
     [self.tabBarController setTitle:@"Library"];
 }
 

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BookDetailViewController : UIViewController
+@interface BookDetailViewController : UIViewController <UIAlertViewDelegate>
+
+- (IBAction)removeBook:(id)sender;
 
 @end

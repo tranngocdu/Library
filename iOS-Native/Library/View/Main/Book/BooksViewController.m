@@ -7,6 +7,7 @@
 //
 
 #import "BooksViewController.h"
+#import "BookDetailViewController.h"
 
 @interface BooksViewController ()
 
@@ -31,7 +32,6 @@
     _topTab.layer.masksToBounds = YES;
     
     NSLog(@"NAV: %@", self.navigationController == nil ? @" NO" : @" YES");
-    [self.tabBarController setTitle:@"Books"];
 }
 
 - (void)viewDidLoad
@@ -40,7 +40,12 @@
     [self decorate];
     
     // Sample books
-    books = [NSArray arrayWithObjects:@"Book1", @"Book2", @"Book3", nil];
+    books = [NSArray arrayWithObjects: @"Harry Potter and the Sorcerer's Stone", @"Harry Potter and the Chamber of Secrets", @"Harry Potter and the Prisoner of Azkaban", nil];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [self.tabBarController setTitle:@"Books"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,7 +67,15 @@
     }
     
     cell.textLabel.text = [books objectAtIndex:indexPath.row];
+    
     return cell;
+};
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%i", indexPath.row);
+    
+    BookDetailViewController *bookDetailView = [self.storyboard instantiateViewControllerWithIdentifier:@"BookDetailIndentifier"];
+    [self.navigationController pushViewController:bookDetailView animated:YES];
 };
 
 
