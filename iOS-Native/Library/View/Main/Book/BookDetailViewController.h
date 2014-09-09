@@ -10,6 +10,9 @@
 
 @interface BookDetailViewController : UIViewController <UIAlertViewDelegate>
 
+- (IBAction)checkoutBook:(id)sender;
+- (IBAction)checkinBook:(id)sender;
+- (IBAction)editBook:(id)sender;
 - (IBAction)removeBook:(id)sender;
 
 @end

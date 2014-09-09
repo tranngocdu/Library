@@ -7,6 +7,7 @@
 //
 
 #import "StudentsViewController.h"
+#import "AddStudentViewController.h"
 
 @interface StudentsViewController ()
 
@@ -40,15 +41,15 @@
     [self decorate];
 }
 
-- (void) viewDidAppear:(BOOL)animated
-{
-    [self.tabBarController setTitle:@"Students"];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)addStudent:(id)sender {
+    AddStudentViewController *addStudentView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddStudentIndentifier"];
+    [self.navigationController pushViewController:addStudentView animated:YES];
 }
 
 /*

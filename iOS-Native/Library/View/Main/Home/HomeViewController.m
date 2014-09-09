@@ -42,15 +42,18 @@
     [self decorate];
 }
 
-- (void) viewDidAppear:(BOOL)animated
-{
-    [self.tabBarController setTitle:@"Library"];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)checkin:(id)sender {
+    NSLog(@"Check in");
+}
+
+- (void)checkout:(id)sender {
+    NSLog(@"Check out");
 }
 
 /*

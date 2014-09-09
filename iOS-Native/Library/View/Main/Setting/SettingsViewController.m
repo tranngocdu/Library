@@ -50,11 +50,6 @@
     [self decorate];
 }
 
-- (void) viewDidAppear:(BOOL)animated
-{
-    [self.tabBarController setTitle:@"Settings"];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -31,6 +31,8 @@
 		8C14562219B554DB009616DE /* StudentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C14562119B554DB009616DE /* StudentsViewController.m */; };
 		8C14562519B5552B009616DE /* BooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C14562419B5552B009616DE /* BooksViewController.m */; };
 		8C14562719B55A1C009616DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C14562619B55A1C009616DE /* QuartzCore.framework */; };
+		BA0AA97419BF33FA00A19E24 /* CheckInBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0AA97319BF33FA00A19E24 /* CheckInBookViewController.m */; };
+		BA0AA97719BF34B700A19E24 /* EditBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0AA97619BF34B600A19E24 /* EditBookViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,10 @@
 		8C14562319B5552B009616DE /* BooksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksViewController.h; sourceTree = "<group>"; };
 		8C14562419B5552B009616DE /* BooksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksViewController.m; sourceTree = "<group>"; };
 		8C14562619B55A1C009616DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BA0AA97219BF33FA00A19E24 /* CheckInBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckInBookViewController.h; sourceTree = "<group>"; };
+		BA0AA97319BF33FA00A19E24 /* CheckInBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckInBookViewController.m; sourceTree = "<group>"; };
+		BA0AA97519BF34B600A19E24 /* EditBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBookViewController.h; sourceTree = "<group>"; };
+		BA0AA97619BF34B600A19E24 /* EditBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditBookViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +231,10 @@
 				72D2357019B58F22003963E5 /* BookDetailViewController.m */,
 				72D2357219B58F37003963E5 /* CheckOutBookViewController.h */,
 				72D2357319B58F37003963E5 /* CheckOutBookViewController.m */,
+				BA0AA97219BF33FA00A19E24 /* CheckInBookViewController.h */,
+				BA0AA97319BF33FA00A19E24 /* CheckInBookViewController.m */,
+				BA0AA97519BF34B600A19E24 /* EditBookViewController.h */,
+				BA0AA97619BF34B600A19E24 /* EditBookViewController.m */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -365,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72D2357119B58F22003963E5 /* BookDetailViewController.m in Sources */,
+				BA0AA97419BF33FA00A19E24 /* CheckInBookViewController.m in Sources */,
 				722B11F919B45AE5009613B8 /* AppDelegate.m in Sources */,
 				722B11F519B45AE5009613B8 /* main.m in Sources */,
 				8C14561E19B5547B009616DE /* SignUpViewController.m in Sources */,
@@ -376,6 +387,7 @@
 				8C14562219B554DB009616DE /* StudentsViewController.m in Sources */,
 				8C14561C19B5547B009616DE /* HomeViewController.m in Sources */,
 				72D2357419B58F37003963E5 /* CheckOutBookViewController.m in Sources */,
+				BA0AA97719BF34B700A19E24 /* EditBookViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

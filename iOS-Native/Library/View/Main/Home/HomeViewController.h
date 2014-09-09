@@ -10,6 +10,9 @@
 
 @interface HomeViewController : UIViewController
 
+- (IBAction)checkin:(id)sender;
+- (IBAction)checkout:(id)sender;
+
 @property (strong, nonatomic) IBOutlet UIButton *btnCheckOut;
 @property (strong, nonatomic) IBOutlet UIButton *btnCheckIn;
 

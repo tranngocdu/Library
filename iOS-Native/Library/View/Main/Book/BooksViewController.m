@@ -8,6 +8,7 @@
 
 #import "BooksViewController.h"
 #import "BookDetailViewController.h"
+#import "EditBookViewController.h"
 
 @interface BooksViewController ()
 
@@ -41,11 +42,6 @@
     
     // Sample books
     books = [NSArray arrayWithObjects: @"Harry Potter and the Sorcerer's Stone", @"Harry Potter and the Chamber of Secrets", @"Harry Potter and the Prisoner of Azkaban", nil];
-}
-
-- (void) viewDidAppear:(BOOL)animated
-{
-    [self.tabBarController setTitle:@"Books"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,6 +81,13 @@
     
     NSLog(@"%i", selectedSegment);
 }
+
+- (void)addBookManual:(id)sender {
+    EditBookViewController *editView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIndentifier"];
+    [self.navigationController pushViewController:editView animated:YES];
+}
+
+
 /*
 #pragma mark - Navigation
 

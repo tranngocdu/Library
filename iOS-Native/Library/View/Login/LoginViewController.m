@@ -69,9 +69,8 @@
                                               otherButtonTitles: nil];
         [alert show];
     } else {
-        HomeViewController *tabView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
-        [self.navigationController pushViewController:tabView animated:YES];
-        [tabView.navigationItem setHidesBackButton:YES];
+        HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
+        [self.navigationController presentViewController:homeView animated:YES completion:nil];
     }
 }
 

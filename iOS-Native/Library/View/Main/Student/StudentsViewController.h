@@ -10,4 +10,6 @@
 
 @interface StudentsViewController : UIViewController
 
+- (IBAction)addStudent:(id)sender;
+
 @end

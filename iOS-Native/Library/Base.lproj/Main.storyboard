@@ -201,7 +201,7 @@
             </objects>
             <point key="canvasLocation" x="1852" y="2166"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--Settings View Controller - Settings-->
         <scene sceneID="Amc-w9-lsM">
             <objects>
                 <viewController id="ciZ-ow-C1C" customClass="SettingsViewController" sceneMemberID="viewController">
@@ -287,7 +287,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="HHM-D9-ybC"/>
+                    <navigationItem key="navigationItem" title="Settings" id="HHM-D9-ybC"/>
                     <connections>
                         <outlet property="btnHelpMe" destination="9K7-6Q-uv9" id="7Wd-eL-7GF"/>
                         <outlet property="btnLogOut" destination="Fln-gV-Z47" id="ztz-jc-c9g"/>
@@ -302,7 +302,7 @@
             </objects>
             <point key="canvasLocation" x="2404" y="5299"/>
         </scene>
-        <!--Students View Controller-->
+        <!--Students View Controller - Students-->
         <scene sceneID="dFI-nR-iC9">
             <objects>
                 <viewController id="Ud5-mW-tXV" customClass="StudentsViewController" sceneMemberID="viewController">
@@ -322,7 +322,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VWe-bY-3zP"/>
+                    <navigationItem key="navigationItem" title="Students" id="VWe-bY-3zP">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="Li0-Kp-anC">
+                            <connections>
+                                <action selector="addStudent:" destination="Ud5-mW-tXV" id="fGC-Eh-S4K"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VwN-R8-iUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -331,7 +337,7 @@
         <!--Add Student View Controller-->
         <scene sceneID="8fn-mg-hDj">
             <objects>
-                <viewController id="KmI-or-enk" customClass="AddStudentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddStudentIndentifier" id="KmI-or-enk" customClass="AddStudentViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fa0-bY-mS7"/>
                         <viewControllerLayoutGuide type="bottom" id="bRx-Qz-asL"/>
@@ -383,10 +389,10 @@
             </objects>
             <point key="canvasLocation" x="2812" y="4595"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Home View Controller - Library-->
         <scene sceneID="oCC-4T-YVN">
             <objects>
-                <viewController id="drF-sU-Nyg" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeIndentifier" id="drF-sU-Nyg" customClass="HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tbH-5B-j3n"/>
                         <viewControllerLayoutGuide type="bottom" id="GJ1-1a-2EJ"/>
@@ -404,6 +410,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkout:" destination="drF-sU-Nyg" eventType="touchUpInside" id="32K-0N-I3Q"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdz-ZA-EoZ">
                                 <rect key="frame" x="40" y="246" width="240" height="54"/>
@@ -414,11 +423,14 @@
                                     <color key="titleColor" red="0.95686280729999995" green="0.4156863093" blue="0.38823533059999998" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkin:" destination="drF-sU-Nyg" eventType="touchUpInside" id="Raj-Ms-bq5"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="fVH-fe-b3I"/>
+                    <navigationItem key="navigationItem" title="Library" id="fVH-fe-b3I"/>
                     <connections>
                         <outlet property="btnCheckIn" destination="Hdz-ZA-EoZ" id="fBN-cd-9PN"/>
                         <outlet property="btnCheckOut" destination="8a6-ZY-n29" id="Wmv-1q-yaF"/>
@@ -450,7 +462,7 @@
             </objects>
             <point key="canvasLocation" x="1342" y="3139"/>
         </scene>
-        <!--Books View Controller-->
+        <!--Books View Controller - Books-->
         <scene sceneID="p5c-zW-Kvo">
             <objects>
                 <viewController id="hAe-hM-Hu2" customClass="BooksViewController" sceneMemberID="viewController">
@@ -488,7 +500,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ODl-ns-6lz"/>
+                    <navigationItem key="navigationItem" title="Books" id="ODl-ns-6lz">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="NEs-kJ-KqP">
+                            <connections>
+                                <action selector="addBookManual:" destination="hAe-hM-Hu2" id="ksV-3K-ACK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="topTab" destination="niX-Rb-ymb" id="VCW-zt-k5f"/>
                     </connections>
@@ -500,7 +518,7 @@
         <!--Add Book Manual View Controller-->
         <scene sceneID="3vu-fT-Vt2">
             <objects>
-                <viewController id="hTq-qI-Ljr" customClass="AddBookManualViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddBookManualIndentifier" id="hTq-qI-Ljr" customClass="AddBookManualViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Yr-Rf-AtU"/>
                         <viewControllerLayoutGuide type="bottom" id="tIX-0U-tZH"/>
@@ -547,7 +565,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="deviceRGB"/>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="82N-bj-bQW">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Total" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="82N-bj-bQW">
                                 <rect key="frame" x="25" y="318" width="270" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -595,7 +613,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ui-kl-1Qh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3616" y="4175"/>
+            <point key="canvasLocation" x="3504" y="4595"/>
         </scene>
         <!--Book Detail View Controller-->
         <scene sceneID="vXU-6P-0vl">
@@ -614,37 +632,37 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="190" translatesAutoresizingMaskIntoConstraints="NO" id="UUF-AS-Ll1">
-                                        <rect key="frame" x="0.0" y="-67" width="320" height="131"/>
+                                        <rect key="frame" x="0.0" y="-67" width="320" height="95"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Learning Objective - C 2.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWZ-Rd-FMf">
-                                        <rect key="frame" x="20" y="72" width="280" height="26"/>
+                                        <rect key="frame" x="20" y="43" width="280" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Robert Clair" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQT-Ck-SHa">
-                                        <rect key="frame" x="20" y="106" width="280" height="20"/>
+                                        <rect key="frame" x="20" y="77" width="280" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ISBN: 0321771386" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eE9-oJ-HrN">
-                                        <rect key="frame" x="20" y="134" width="280" height="21"/>
+                                        <rect key="frame" x="20" y="105" width="280" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1 Total / 1 Available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI0-m6-1gR">
-                                        <rect key="frame" x="20" y="163" width="280" height="21"/>
+                                        <rect key="frame" x="20" y="134" width="280" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fxt-PL-wYg">
-                                        <rect key="frame" x="60" y="192" width="200" height="40"/>
+                                        <rect key="frame" x="60" y="163" width="200" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" title="Check Out">
@@ -652,35 +670,46 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="qCb-pj-Yot" kind="push" id="jJ3-rH-Kuw"/>
+                                            <action selector="checkoutBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="nBg-hA-F0W"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hO-4Y-EtV">
-                                        <rect key="frame" x="60" y="240" width="200" height="40"/>
+                                        <rect key="frame" x="60" y="211" width="200" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" title="Check In">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="checkinBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="dIi-G1-D75"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2E7-cl-R34">
-                                        <rect key="frame" x="60" y="288" width="200" height="40"/>
+                                        <rect key="frame" x="60" y="259" width="200" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" title="Edit Book">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="editBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="tIm-v2-ceH"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doK-fQ-ZC7">
-                                        <rect key="frame" x="60" y="336" width="200" height="40"/>
+                                        <rect key="frame" x="60" y="307" width="200" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="backgroundColor" red="0.95686280729999995" green="0.4156863093" blue="0.38823533059999998" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" title="Remove book">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="removeBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="sMQ-kM-eq1"/>
                                         </connections>
@@ -694,12 +723,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pqt-8J-8ym" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2912" y="3879"/>
+            <point key="canvasLocation" x="2896" y="3867"/>
         </scene>
-        <!--View Controller-->
+        <!--Check In Book View Controller-->
         <scene sceneID="xnQ-ej-K2F">
             <objects>
-                <viewController id="6tD-nv-74R" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckinBookIndentifier" id="6tD-nv-74R" customClass="CheckInBookViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gir-CK-rDf"/>
                         <viewControllerLayoutGuide type="bottom" id="zMF-ga-beJ"/>
@@ -745,12 +774,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zrn-78-bZ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4297" y="4151"/>
+            <point key="canvasLocation" x="3504" y="3867"/>
         </scene>
         <!--Check Out Book View Controller-->
         <scene sceneID="AAn-hq-vAb">
             <objects>
-                <viewController id="qCb-pj-Yot" customClass="CheckOutBookViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckoutBookIndentifier" id="qCb-pj-Yot" customClass="CheckOutBookViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FuA-x6-ErI"/>
                         <viewControllerLayoutGuide type="bottom" id="Dgm-fu-MEo"/>
@@ -802,7 +831,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k7z-ij-gO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4300" y="3478"/>
+            <point key="canvasLocation" x="3504" y="3139"/>
         </scene>
         <!--Navigation Controller - Home-->
         <scene sceneID="bq9-11-DAx">

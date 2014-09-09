@@ -13,6 +13,7 @@
     NSArray *books;
 }
 
+- (IBAction)addBookManual:(id)sender;
 - (IBAction)segmentChanged:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *topTab;

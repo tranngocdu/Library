@@ -7,6 +7,10 @@
 //
 
 #import "BookDetailViewController.h"
+#import "AddBookManualViewController.h"
+#import "CheckOutBookViewController.h"
+#import "CheckInBookViewController.h"
+#import "EditBookViewController.h"
 
 @interface BookDetailViewController ()
 
@@ -27,12 +31,32 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.navigationItem setTitle:@"Book Detail"];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)addBookManual:(id)sender {
+    EditBookViewController *editView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIndentifier"];
+    [self.navigationController pushViewController:editView animated:YES];
+}
+
+- (void)checkoutBook:(id)sender {
+    CheckOutBookViewController *checkoutView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckoutBookIndentifier"];
+    [self.navigationController pushViewController:checkoutView animated:YES];
+}
+
+- (void)checkinBook:(id)sender {
+    CheckInBookViewController *checkinView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckinBookIndentifier"];
+    [self.navigationController pushViewController:checkinView animated:YES];
+}
+
+- (void)editBook:(id)sender {
+    NSLog(@"Edit book");
 }
 
 - (IBAction)removeBook:(id)sender {
@@ -46,7 +70,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSLog(@"%i", buttonIndex);
-};
+}
 
 /*
 #pragma mark - Navigation

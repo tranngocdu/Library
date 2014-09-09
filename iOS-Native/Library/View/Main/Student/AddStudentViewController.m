@@ -36,6 +36,7 @@
 {
     [super viewDidLoad];
     [self decorate];
+    [self.navigationItem setTitle:@"Add Student"];
 }
 
 - (void)didReceiveMemoryWarning
