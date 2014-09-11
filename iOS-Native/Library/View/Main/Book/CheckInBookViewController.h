@@ -10,4 +10,6 @@
 
 @interface CheckInBookViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIButton *btnCheckin;
+
 @end

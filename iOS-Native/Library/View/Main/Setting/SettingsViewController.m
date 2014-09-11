@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "Constants.h"
+#import "UIButton+AppButton.h"
 
 @interface SettingsViewController ()
 
@@ -28,15 +29,9 @@
 
 - (void) decorate
 {
-    _btnUpdateAccount.layer.cornerRadius = 5.0;
-    _btnUpdateAccount.layer.borderWidth = 1.0;
-    _btnUpdateAccount.layer.borderColor = [UIColorFromRGB(kAppGreen) CGColor];
-    
-    _btnLogOut.layer.cornerRadius = 5.0;
-    
-    _btnHelpMe.layer.cornerRadius = 5.0;
-    _btnHelpMe.layer.borderWidth = 1.0;
-    _btnHelpMe.layer.borderColor = [UIColorFromRGB(kAppGreen) CGColor];
+    [_btnUpdateAccount setAppButtonHasBackgroundColor:NO withColor:UIColorFromRGB(kAppGreen)];
+    [_btnLogOut setAppButtonHasBackgroundColor:NO withColor:UIColorFromRGB(kAppRed)];
+    [_btnHelpMe setAppButtonHasBackgroundColor:NO withColor:UIColorFromRGB(kAppGreen)];
     
     _tfEmail.delegate = self;
     _tfCurrentPassword.delegate = self;

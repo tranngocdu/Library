@@ -13,6 +13,7 @@
 
 #define kAppGreen 0x3cc1a6
 #define kAppRed 0xf46b63
+#define kAppGray 0xd3d3d3
 
 #define RunOnUI(A) [self performSelectorOnMainThread:@selector(A) withObject:nil waitUntilDone:NO];
 

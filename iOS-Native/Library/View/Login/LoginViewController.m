@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "HomeViewController.h"
 #import "Constants.h"
+#import "UIButton+AppButton.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface LoginViewController ()
@@ -32,11 +33,8 @@
 
 - (void) decorate
 {
-    _btnLogin.layer.cornerRadius = 5.0f;
-    
-    _btnCreateAccount.layer.cornerRadius = 5.0f;
-    _btnCreateAccount.layer.borderWidth = 1.0f;
-    _btnCreateAccount.layer.borderColor = [UIColorFromRGB(kAppGreen) CGColor];
+    [_btnLogin setAppButtonHasBackgroundColor:YES withColor:UIColorFromRGB(kAppGreen)];
+    [_btnCreateAccount setAppButtonHasBackgroundColor:NO withColor:UIColorFromRGB(kAppGreen)];
     
     _tfEmail.delegate = self;
     _tfPassword.delegate = self;

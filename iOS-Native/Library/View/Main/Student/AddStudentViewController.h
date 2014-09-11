@@ -10,6 +10,8 @@
 
 @interface AddStudentViewController : UIViewController <UITextFieldDelegate>
 
+- (IBAction)addStudent:(id)sender;
+
 @property (strong, nonatomic) IBOutlet UIButton *btnAddStudent;
 @property (strong, nonatomic) IBOutlet UITextField *tfStudentName;
 

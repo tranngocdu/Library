@@ -11,6 +11,7 @@
 #import "CheckOutBookViewController.h"
 #import "CheckInBookViewController.h"
 #import "EditBookViewController.h"
+#import "UIButton+AppButton.h"
 
 @interface BookDetailViewController ()
 
@@ -29,17 +30,10 @@
 
 - (void) decorate
 {
-    _btnCheckinBook.layer.cornerRadius = 5.0;
-    _btnCheckinBook.layer.borderWidth = 1.0f;
-    _btnCheckinBook.layer.borderColor = [UIColorFromRGB(kAppRed) CGColor];
-    _btnCheckinBook.layer.backgroundColor = nil;
-    [_btnCheckinBook setTitleColor:UIColorFromRGB(kAppRed) forState:UIControlStateNormal];
-    
-    _btnEditBook.layer.cornerRadius = 5.0;
-    _btnEditBook.layer.borderWidth = 1.0f;
-    _btnEditBook.layer.borderColor = [UIColorFromRGB(kAppGreen) CGColor];
-    _btnEditBook.layer.backgroundColor = nil;
-    [_btnEditBook setTitleColor:UIColorFromRGB(kAppGreen) forState:UIControlStateNormal];
+    [_btnCheckoutBook setAppButtonHasBackgroundColor:YES withColor:UIColorFromRGB(kAppGreen)];
+    [_btnCheckinBook setAppButtonHasBackgroundColor:NO withColor:UIColorFromRGB(kAppRed)];
+    [_btnEditBook setAppButtonHasBackgroundColor:NO withColor:UIColorFromRGB(kAppGreen)];
+    [_btnRemoveBook setAppButtonHasBackgroundColor:YES withColor:UIColorFromRGB(kAppRed)];
 }
 
 - (void)viewDidLoad

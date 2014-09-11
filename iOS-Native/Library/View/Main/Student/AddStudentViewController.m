@@ -7,6 +7,7 @@
 //
 
 #import "AddStudentViewController.h"
+#import "UIButton+AppButton.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface AddStudentViewController ()
@@ -27,7 +28,7 @@
 
 - (void) decorate
 {
-    _btnAddStudent.layer.cornerRadius = 5.0;
+    [_btnAddStudent setAppButtonHasBackgroundColor:YES withColor:UIColorFromRGB(kAppGreen)];
     
     _tfStudentName.delegate = self;
 }
@@ -43,6 +44,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)addStudent:(id)sender {
+    NSLog(@"Add student");
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

@@ -10,4 +10,6 @@
 
 @interface CheckOutBookViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIButton *btnCheckout;
+
 @end

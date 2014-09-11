@@ -7,7 +7,9 @@
 //
 
 #import "HomeViewController.h"
+#import "CheckInModalViewController.h"
 #import "Constants.h"
+#import "UIButton+AppButton.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface HomeViewController ()
@@ -29,11 +31,8 @@
 
 - (void) decorate
 {
-    _btnCheckIn.layer.cornerRadius = 5.0;
-    _btnCheckIn.layer.borderWidth = 1.0f;
-    _btnCheckIn.layer.borderColor = [UIColorFromRGB(kAppRed) CGColor];
-    
-    _btnCheckOut.layer.cornerRadius = 5.0;
+    [_btnCheckOut setAppButtonHasBackgroundColor:YES withColor:UIColorFromRGB(kAppGreen)];
+    [_btnCheckIn setAppButtonHasBackgroundColor:NO withColor:UIColorFromRGB(kAppRed)];
 }
 
 - (void)viewDidLoad
@@ -49,7 +48,28 @@
 }
 
 - (void)checkin:(id)sender {
-    NSLog(@"Check in");
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    if (self.childViewControllers.count == 0) {
+        self.modal = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckInModalIndentifier"];
+        [self addChildViewController:self.modal];
+//        self.modal.view.frame = CGRectMake(0, 0, 200, 200);
+        [self.view addSubview:self.modal.view];
+        [UIView animateWithDuration:0.5 animations:^{
+            self.modal.view.frame = CGRectMake(screenWidth/4, screenHeight/4, 200, 200);;
+        } completion:^(BOOL finished) {
+            [self.modal didMoveToParentViewController:self];
+        }];
+    } else{
+        [UIView animateWithDuration:0.5 animations:^{
+            self.modal.view.frame = CGRectMake(screenWidth/4, screenHeight/4, 200, 200);
+        } completion:^(BOOL finished) {
+            [self.modal.view removeFromSuperview];
+            [self.modal removeFromParentViewController];
+            self.modal = nil;
+        }];
+    }
 }
 
 - (void)checkout:(id)sender {

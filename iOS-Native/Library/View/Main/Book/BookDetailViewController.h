@@ -15,7 +15,9 @@
 - (IBAction)editBook:(id)sender;
 - (IBAction)removeBook:(id)sender;
 
-@property (strong, nonatomic) IBOutlet UIButton *btnEditBook;
 @property (strong, nonatomic) IBOutlet UIButton *btnCheckinBook;
+@property (strong, nonatomic) IBOutlet UIButton *btnCheckoutBook;
+@property (strong, nonatomic) IBOutlet UIButton *btnEditBook;
+@property (strong, nonatomic) IBOutlet UIButton *btnRemoveBook;
 
 @end

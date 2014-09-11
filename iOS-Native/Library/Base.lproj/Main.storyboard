@@ -343,6 +343,9 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addStudent:" destination="KmI-or-enk" eventType="touchUpInside" id="baG-Rc-kpC"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -408,6 +411,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Tp-rM-Ar0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2404" y="3131"/>
+        </scene>
+        <!--Check In Modal View Controller-->
+        <scene sceneID="h8x-P5-Mjd">
+            <objects>
+                <viewController storyboardIdentifier="CheckInModalIndentifier" id="nlG-5R-bqe" customClass="CheckInModalViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hNo-g8-fqj"/>
+                        <viewControllerLayoutGuide type="bottom" id="d0r-I7-557"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Shx-yg-KM5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XR-gP-2PH">
+                                <rect key="frame" x="139" y="150" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.95686280729999995" green="0.4156863093" blue="0.38823533059999998" alpha="1" colorSpace="deviceRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mo5-J9-pvL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2959" y="2938"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="CRu-vZ-Dw9">
@@ -618,18 +647,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="checkoutBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="nBg-hA-F0W"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hO-4Y-EtV">
-                                        <rect key="frame" x="60" y="211" width="200" height="40"/>
-                                        <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
-                                        <state key="normal" title="Check In">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="checkinBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="dIi-G1-D75"/>
+                                            <action selector="checkoutBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="bW1-oJ-0o6"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2E7-cl-R34">
@@ -650,13 +668,19 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="removeBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="sMQ-kM-eq1"/>
+                                            <action selector="removeBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="6Dh-Hd-E2A"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hO-4Y-EtV">
+                                        <rect key="frame" x="60" y="211" width="200" height="40"/>
+                                        <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
+                                        <state key="normal" title="Check In">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="checkinBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="dIi-G1-D75"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -667,7 +691,9 @@
                     <navigationItem key="navigationItem" id="hel-YO-ESV"/>
                     <connections>
                         <outlet property="btnCheckinBook" destination="4hO-4Y-EtV" id="j0y-m5-6Xi"/>
+                        <outlet property="btnCheckoutBook" destination="Fxt-PL-wYg" id="ERv-kC-bxm"/>
                         <outlet property="btnEditBook" destination="2E7-cl-R34" id="wS3-5n-gim"/>
+                        <outlet property="btnRemoveBook" destination="doK-fQ-ZC7" id="8hF-tI-2f0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pqt-8J-8ym" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -715,6 +741,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="btnCheckin" destination="jn9-HM-kox" id="QGW-y5-uoa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zrn-78-bZ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -740,14 +769,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tNk-ER-mxP">
-                                <rect key="frame" x="141" y="183" width="120" height="36"/>
-                                <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
-                                <state key="normal" title="Check Out">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Robert Clair" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kv5-M4-Foc">
                                 <rect key="frame" x="141" y="126" width="164" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -762,10 +783,21 @@
                                 <rect key="frame" x="0.0" y="247" width="320" height="270"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tNk-ER-mxP">
+                                <rect key="frame" x="141" y="183" width="120" height="36"/>
+                                <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="Check Out">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="WoK-0m-YyJ"/>
+                    <connections>
+                        <outlet property="btnCheckout" destination="tNk-ER-mxP" id="eae-pA-ljV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k7z-ij-gO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

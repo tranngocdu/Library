@@ -7,6 +7,7 @@
 //
 
 #import "CheckInBookViewController.h"
+#import "UIButton+AppButton.h"
 
 @interface CheckInBookViewController ()
 
@@ -23,11 +24,16 @@
     return self;
 }
 
+- (void) decorate {
+    [_btnCheckin setAppButtonHasBackgroundColor:NO withColor:UIColorFromRGB(kAppGray)];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self.navigationItem setTitle:@"Check In"];
+    [self decorate];
 }
 
 - (void)didReceiveMemoryWarning

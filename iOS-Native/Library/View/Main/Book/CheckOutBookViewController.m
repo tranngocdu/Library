@@ -7,6 +7,7 @@
 //
 
 #import "CheckOutBookViewController.h"
+#import "UIButton+AppButton.h"
 
 @interface CheckOutBookViewController ()
 
@@ -23,10 +24,16 @@
     return self;
 }
 
+- (void) decorate {
+    [_btnCheckout setAppButtonHasBackgroundColor:NO withColor:UIColorFromRGB(kAppGray)];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.navigationItem setTitle:@"Check Out"];
+    [self decorate];
 }
 
 - (void)didReceiveMemoryWarning
