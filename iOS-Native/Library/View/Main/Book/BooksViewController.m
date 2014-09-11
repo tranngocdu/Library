@@ -31,6 +31,7 @@
 {
     _topTab.layer.cornerRadius = 5.0f;
     _topTab.layer.masksToBounds = YES;
+    _topTab.layer.borderColor = [[UIColor whiteColor] CGColor];
     
     NSLog(@"NAV: %@", self.navigationController == nil ? @" NO" : @" YES");
 }
@@ -68,18 +69,17 @@
 };
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%i", indexPath.row);
+    NSLog(@"%ld", indexPath.row);
     
     BookDetailViewController *bookDetailView = [self.storyboard instantiateViewControllerWithIdentifier:@"BookDetailIndentifier"];
     [self.navigationController pushViewController:bookDetailView animated:YES];
 };
 
-
 - (IBAction)segmentChanged:(id)sender {
     UISegmentedControl *segmentedControl = (UISegmentedControl *) sender;
     NSInteger selectedSegment = segmentedControl.selectedSegmentIndex;
     
-    NSLog(@"%i", selectedSegment);
+    NSLog(@"%ld", selectedSegment);
 }
 
 - (void)addBookManual:(id)sender {
