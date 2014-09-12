@@ -1,5 +1,5 @@
 //
-//  CheckInModalViewController.h
+//  CheckOutModalViewController.h
 //  Library
 //
 //  Created by Nam Huynh on 9/12/14.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CheckInModalViewController : UIViewController <UIViewControllerTransitioningDelegate>
+@interface CheckOutModalViewController : UIViewController <UIViewControllerTransitioningDelegate>
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)scan:(id)sender;

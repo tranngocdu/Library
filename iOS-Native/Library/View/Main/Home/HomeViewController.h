@@ -15,6 +15,5 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *btnCheckOut;
 @property (strong, nonatomic) IBOutlet UIButton *btnCheckIn;
-@property (strong,nonatomic) UIViewController *modal;
 
 @end

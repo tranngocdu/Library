@@ -1,15 +1,15 @@
 //
-//  CheckInModalViewController.m
+//  CheckOutModalViewController.m
 //  Library
 //
 //  Created by Nam Huynh on 9/12/14.
 //  Copyright (c) 2014 Nam Huynh. All rights reserved.
 //
 
-#import "CheckInModalViewController.h"
+#import "CheckOutModalViewController.h"
 #import "BooksViewController.h"
 
-@implementation CheckInModalViewController
+@implementation CheckOutModalViewController
 
 - (void)scan:(id)sender {
     NSLog(@"Scan");
@@ -19,6 +19,7 @@
 - (void)list:(id)sender {
     NSLog(@"List");
     [self.presentingViewController dismissViewControllerAnimated:NO completion:^{
+        NSLog(@"%@", self);
         BooksViewController *bookView = [self.storyboard instantiateViewControllerWithIdentifier:@"BookViewIndentifier"];
         [self.navigationController pushViewController:bookView animated:YES];
     }];

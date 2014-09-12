@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "CheckInModalViewController.h"
+#import "CheckOutModalViewController.h"
 #import "Constants.h"
 #import "UIButton+AppButton.h"
 #import <QuartzCore/QuartzCore.h>
@@ -48,32 +49,21 @@
 }
 
 - (void)checkin:(id)sender {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    if (self.childViewControllers.count == 0) {
-        self.modal = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckInModalIndentifier"];
-        [self addChildViewController:self.modal];
-//        self.modal.view.frame = CGRectMake(0, 0, 200, 200);
-        [self.view addSubview:self.modal.view];
-        [UIView animateWithDuration:0.5 animations:^{
-            self.modal.view.frame = CGRectMake(screenWidth/4, screenHeight/4, 200, 200);;
-        } completion:^(BOOL finished) {
-            [self.modal didMoveToParentViewController:self];
-        }];
-    } else{
-        [UIView animateWithDuration:0.5 animations:^{
-            self.modal.view.frame = CGRectMake(screenWidth/4, screenHeight/4, 200, 200);
-        } completion:^(BOOL finished) {
-            [self.modal.view removeFromSuperview];
-            [self.modal removeFromParentViewController];
-            self.modal = nil;
-        }];
-    }
+    // Add modal view
+    CheckInModalViewController *checkinView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckInModalIndentifier"];
+    
+    [checkinView setTransitioningDelegate:self.transitioningDelegate];
+    checkinView.modalPresentationStyle = UIModalPresentationCustom;
+    [self presentViewController:checkinView animated:NO completion:nil];
 }
 
 - (void)checkout:(id)sender {
-    NSLog(@"Check out");
+    // Add modal view
+    CheckInModalViewController *checkoutView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckOutModalIndentifier"];
+    
+    [checkoutView setTransitioningDelegate:self.transitioningDelegate];
+    checkoutView.modalPresentationStyle = UIModalPresentationCustom;
+    [self presentViewController:checkoutView animated:NO completion:nil];
 }
 
 /*
