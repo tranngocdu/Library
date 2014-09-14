@@ -7,7 +7,7 @@
 //
 
 #import "CheckInModalViewController.h"
-#import "BooksViewController.h"
+#import "HomeViewController.h"
 
 @implementation CheckInModalViewController
 
@@ -19,8 +19,8 @@
 - (void)list:(id)sender {
     NSLog(@"List");
     [self.presentingViewController dismissViewControllerAnimated:NO completion:^{
-        BooksViewController *bookView = [self.storyboard instantiateViewControllerWithIdentifier:@"BookViewIndentifier"];
-        [self.navigationController pushViewController:bookView animated:YES];
+        HomeViewController *homeView = [[HomeViewController alloc] init];
+        [homeView presentBooksView];
     }];
 }
 

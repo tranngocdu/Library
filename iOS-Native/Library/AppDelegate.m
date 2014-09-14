@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
@@ -16,6 +17,11 @@
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(kAppRed)];
     [[UINavigationBar appearance] setTintColor: [UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
+    // Init parse
+    [Parse setApplicationId:@"hc7wyBlPLbosKj26FTiu8CvOcsECdeDVOGcEADZH" clientKey:@"eJGnhcwE48DQPdpq7MA9S8lYI7XgEi7vINje0TQZ"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
     return YES;
 }
 							

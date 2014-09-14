@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "CheckInModalViewController.h"
 #import "CheckOutModalViewController.h"
+#import "BooksViewController.h"
 #import "Constants.h"
 #import "UIButton+AppButton.h"
 #import <QuartzCore/QuartzCore.h>
@@ -64,6 +65,12 @@
     [checkoutView setTransitioningDelegate:self.transitioningDelegate];
     checkoutView.modalPresentationStyle = UIModalPresentationCustom;
     [self presentViewController:checkoutView animated:NO completion:nil];
+}
+
+- (void)presentBooksView {
+    BooksViewController *booksView = [self.storyboard instantiateViewControllerWithIdentifier:@"BooksViewIndentifier"];
+    NSLog(@"Present view");
+    [self.navigationController presentViewController:booksView animated:YES completion:nil];
 }
 
 /*

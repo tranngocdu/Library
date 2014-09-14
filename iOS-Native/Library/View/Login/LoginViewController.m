@@ -11,6 +11,7 @@
 #import "Constants.h"
 #import "UIButton+AppButton.h"
 #import <QuartzCore/QuartzCore.h>
+#import <Parse/Parse.h>
 
 @interface LoginViewController ()
 
@@ -46,6 +47,12 @@
     [super viewDidLoad];
 
     [self decorate];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Student"];
+    [query getObjectInBackgroundWithId:@"1" block:^(PFObject *student, NSError *error) {
+        // Do something with the returned PFObject in the gameScore variable.
+        NSLog(@"%@", student);
+    }];
 
 }
 

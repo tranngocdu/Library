@@ -37,6 +37,14 @@
 		B41FABEF19C341430015A624 /* CheckOutModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B41FABEE19C341430015A624 /* CheckOutModalViewController.m */; };
 		B451E2A719C2011B0041E88C /* UIButton+AppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2A619C2011B0041E88C /* UIButton+AppButton.m */; };
 		B451E2AD19C20F010041E88C /* CheckInModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2AC19C20F010041E88C /* CheckInModalViewController.m */; };
+		B4F9216B19C541090005C612 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9216A19C541090005C612 /* AudioToolbox.framework */; };
+		B4F9216D19C541130005C612 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9216C19C541130005C612 /* CFNetwork.framework */; };
+		B4F9216F19C5412A0005C612 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9216E19C5412A0005C612 /* CoreLocation.framework */; };
+		B4F9217119C541470005C612 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9217019C541470005C612 /* libz.dylib */; };
+		B4F9217319C541520005C612 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9217219C541520005C612 /* MobileCoreServices.framework */; };
+		B4F9217519C5416A0005C612 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9217419C5416A0005C612 /* Security.framework */; };
+		B4F9217719C541720005C612 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9217619C541720005C612 /* StoreKit.framework */; };
+		B4F9217919C5417C0005C612 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9217819C5417C0005C612 /* SystemConfiguration.framework */; };
 		BA0AA97419BF33FA00A19E24 /* CheckInBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0AA97319BF33FA00A19E24 /* CheckInBookViewController.m */; };
 		BA0AA97719BF34B700A19E24 /* EditBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0AA97619BF34B600A19E24 /* EditBookViewController.m */; };
 /* End PBXBuildFile section */
@@ -100,6 +108,14 @@
 		B451E2A619C2011B0041E88C /* UIButton+AppButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AppButton.m"; sourceTree = "<group>"; };
 		B451E2AB19C20F010041E88C /* CheckInModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckInModalViewController.h; sourceTree = "<group>"; };
 		B451E2AC19C20F010041E88C /* CheckInModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckInModalViewController.m; sourceTree = "<group>"; };
+		B4F9216A19C541090005C612 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		B4F9216C19C541130005C612 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		B4F9216E19C5412A0005C612 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B4F9217019C541470005C612 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		B4F9217219C541520005C612 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		B4F9217419C5416A0005C612 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		B4F9217619C541720005C612 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		B4F9217819C5417C0005C612 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BA0AA97219BF33FA00A19E24 /* CheckInBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckInBookViewController.h; sourceTree = "<group>"; };
 		BA0AA97319BF33FA00A19E24 /* CheckInBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckInBookViewController.m; sourceTree = "<group>"; };
 		BA0AA97519BF34B600A19E24 /* EditBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBookViewController.h; sourceTree = "<group>"; };
@@ -111,9 +127,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4F9217919C5417C0005C612 /* SystemConfiguration.framework in Frameworks */,
+				B4F9217719C541720005C612 /* StoreKit.framework in Frameworks */,
+				B4F9217519C5416A0005C612 /* Security.framework in Frameworks */,
+				8C14562719B55A1C009616DE /* QuartzCore.framework in Frameworks */,
+				B4F9217319C541520005C612 /* MobileCoreServices.framework in Frameworks */,
+				B4F9217119C541470005C612 /* libz.dylib in Frameworks */,
+				B4F9216F19C5412A0005C612 /* CoreLocation.framework in Frameworks */,
+				B4F9216D19C541130005C612 /* CFNetwork.framework in Frameworks */,
+				B4F9216B19C541090005C612 /* AudioToolbox.framework in Frameworks */,
 				8C325EAE19C4C238005838A6 /* ParseFacebookUtils.framework in Frameworks */,
 				8C325EAC19C4C238005838A6 /* Bolts.framework in Frameworks */,
-				8C14562719B55A1C009616DE /* QuartzCore.framework in Frameworks */,
 				722B11EB19B45AE5009613B8 /* CoreGraphics.framework in Frameworks */,
 				722B11ED19B45AE5009613B8 /* UIKit.framework in Frameworks */,
 				8C325EAD19C4C238005838A6 /* Parse.framework in Frameworks */,
@@ -156,6 +180,14 @@
 		722B11E719B45AE5009613B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B4F9217819C5417C0005C612 /* SystemConfiguration.framework */,
+				B4F9217619C541720005C612 /* StoreKit.framework */,
+				B4F9217419C5416A0005C612 /* Security.framework */,
+				B4F9217219C541520005C612 /* MobileCoreServices.framework */,
+				B4F9217019C541470005C612 /* libz.dylib */,
+				B4F9216E19C5412A0005C612 /* CoreLocation.framework */,
+				B4F9216C19C541130005C612 /* CFNetwork.framework */,
+				B4F9216A19C541090005C612 /* AudioToolbox.framework */,
 				8C325EA919C4C238005838A6 /* Bolts.framework */,
 				8C325EAA19C4C238005838A6 /* Parse.framework */,
 				8C325EAB19C4C238005838A6 /* ParseFacebookUtils.framework */,

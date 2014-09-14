@@ -12,6 +12,7 @@
 
 - (IBAction)checkin:(id)sender;
 - (IBAction)checkout:(id)sender;
+- (void)presentBooksView;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnCheckOut;
 @property (strong, nonatomic) IBOutlet UIButton *btnCheckIn;
