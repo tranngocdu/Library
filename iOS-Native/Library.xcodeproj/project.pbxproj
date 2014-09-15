@@ -37,6 +37,7 @@
 		B41FABEF19C341430015A624 /* CheckOutModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B41FABEE19C341430015A624 /* CheckOutModalViewController.m */; };
 		B451E2A719C2011B0041E88C /* UIButton+AppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2A619C2011B0041E88C /* UIButton+AppButton.m */; };
 		B451E2AD19C20F010041E88C /* CheckInModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2AC19C20F010041E88C /* CheckInModalViewController.m */; };
+		B4F1452F19C73870005B595E /* Utilties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F1452E19C73870005B595E /* Utilties.m */; };
 		B4F9216B19C541090005C612 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9216A19C541090005C612 /* AudioToolbox.framework */; };
 		B4F9216D19C541130005C612 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9216C19C541130005C612 /* CFNetwork.framework */; };
 		B4F9216F19C5412A0005C612 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9216E19C5412A0005C612 /* CoreLocation.framework */; };
@@ -108,6 +109,8 @@
 		B451E2A619C2011B0041E88C /* UIButton+AppButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AppButton.m"; sourceTree = "<group>"; };
 		B451E2AB19C20F010041E88C /* CheckInModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckInModalViewController.h; sourceTree = "<group>"; };
 		B451E2AC19C20F010041E88C /* CheckInModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckInModalViewController.m; sourceTree = "<group>"; };
+		B4F1452D19C73870005B595E /* Utilties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilties.h; sourceTree = "<group>"; };
+		B4F1452E19C73870005B595E /* Utilties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilties.m; sourceTree = "<group>"; };
 		B4F9216A19C541090005C612 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		B4F9216C19C541130005C612 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B4F9216E19C5412A0005C612 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -340,6 +343,8 @@
 			children = (
 				B451E2A519C2011B0041E88C /* UIButton+AppButton.h */,
 				B451E2A619C2011B0041E88C /* UIButton+AppButton.m */,
+				B4F1452D19C73870005B595E /* Utilties.h */,
+				B4F1452E19C73870005B595E /* Utilties.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -451,6 +456,7 @@
 				8C14561D19B5547B009616DE /* SettingsViewController.m in Sources */,
 				B451E2AD19C20F010041E88C /* CheckInModalViewController.m in Sources */,
 				8C14561B19B5547B009616DE /* LoginViewController.m in Sources */,
+				B4F1452F19C73870005B595E /* Utilties.m in Sources */,
 				8C14562519B5552B009616DE /* BooksViewController.m in Sources */,
 				B41FABEF19C341430015A624 /* CheckOutModalViewController.m in Sources */,
 				72D2356E19B589A9003963E5 /* AddBookManualViewController.m in Sources */,

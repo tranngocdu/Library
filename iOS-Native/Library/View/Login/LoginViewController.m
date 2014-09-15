@@ -10,6 +10,7 @@
 #import "HomeViewController.h"
 #import "Constants.h"
 #import "UIButton+AppButton.h"
+#import "Utilties.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Parse/Parse.h>
 
@@ -47,13 +48,16 @@
     [super viewDidLoad];
 
     [self decorate];
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"Student"];
-    [query getObjectInBackgroundWithId:@"1" block:^(PFObject *student, NSError *error) {
-        // Do something with the returned PFObject in the gameScore variable.
-        NSLog(@"%@", student);
-    }];
+}
 
+- (void) viewDidAppear:(BOOL)animated {
+    // Get user data
+    PFUser *currentUser = [PFUser currentUser];
+    // If user is already logged in, move to home view
+    if (currentUser) {
+        HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
+        [self.navigationController presentViewController:homeView animated:YES completion:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,41 +68,52 @@
 
 - (IBAction)doLogin:(id)sender
 {
-    NSLog(@"Login");
+    Utilties *utilties = [[Utilties alloc] init];
     if ([_tfEmail.text isEqualToString:@""] || [_tfPassword.text isEqualToString: @""])
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"All Fields Required"
-                                                        message: @"Please enter username and password"
-                                                       delegate: nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles: nil];
-        [alert show];
+        [utilties showAlertWithTitle:@"All Fields Required" withMessage:@"Please enter username and password."];
     } else {
-        HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
-        [self.navigationController presentViewController:homeView animated:YES completion:nil];
+        // Disable button
+        _btnLogin.enabled = NO;
+        _btnCreateAccount.enabled = NO;
+        _btnForgotPassword.enabled = NO;
+        
+        NSString *email = _tfEmail.text;
+        NSString *password = _tfPassword.text;
+        
+        [PFUser logInWithUsernameInBackground:email password:password
+        block:^(PFUser *user, NSError *error) {
+            // Enable button again
+            _btnLogin.enabled = YES;
+            _btnCreateAccount.enabled = YES;
+            _btnForgotPassword.enabled = YES;
+            
+            if (user) {
+                // Do stuff after successful login.
+                NSLog(@"Login successful with usernane: %@", user.username);
+                HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
+                [self.navigationController presentViewController:homeView animated:YES completion:nil];
+            } else {
+                // The login failed. Check error to see why.
+                NSLog(@"Wrong username or password");
+                [utilties showAlertWithTitle:@"Incorrect Login" withMessage:@"Please check your username or password."];
+            }
+        }];
     }
 }
 
 - (IBAction)buttonResetPasswordDidClick:(id)sender
 {
-    if ([_tfEmail.text isEqualToString:@""])
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter your email"
-                                                        message: @"First enter above the email you used for Class Library"
-                                                       delegate: nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles: nil];
-        [alert show];
-    }
-    else
-    {
-        // TODO: Send recovery email to the target address
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset password"
-                                                        message: [NSString stringWithFormat:@"An email has been sent to %@", _tfEmail.text]
-                                                       delegate: nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles: nil];
-        [alert show];
+    Utilties *utilities = [[Utilties alloc] init];
+    NSString *email = _tfEmail.text;
+    if ([email isEqualToString:@""]) {
+        [utilities showAlertWithTitle:@"Enter your email" withMessage:@"First enter above the email you used for Class Library"];
+    } else {
+        // Send recovery email to the target address
+        [PFUser requestPasswordResetForEmailInBackground:email];
+        // Alert
+        NSString *alertMsg = [NSString stringWithFormat:@"An email has been sent to %@", email];
+        [utilities showAlertWithTitle:@"Reset password" withMessage:alertMsg];
     }
 }
 

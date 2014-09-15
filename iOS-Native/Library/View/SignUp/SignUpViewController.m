@@ -7,8 +7,12 @@
 //
 
 #import "SignUpViewController.h"
+#import "HomeViewController.h"
 #import "Constants.h"
+#import "UIButton+AppButton.h"
+#import "Utilties.h"
 #import <QuartzCore/QuartzCore.h>
+#import <Parse/Parse.h>
 
 @interface SignUpViewController ()
 
@@ -32,11 +36,8 @@
     _tfPassword.secureTextEntry = YES;
     _tfPasswordConfirm.secureTextEntry = YES;
     
-    _btnCreateAccount.layer.cornerRadius = 5.0f;
-    
-    _btnIHaveAccount.layer.cornerRadius = 5.0f;
-    _btnIHaveAccount.layer.borderWidth = 1.0f;
-    _btnIHaveAccount.layer.borderColor = [UIColorFromRGB(kAppGreen) CGColor];
+    [_btnCreateAccount setAppButtonHasBackgroundColor:YES withColor:UIColorFromRGB(kAppGreen)];
+    [_btnIHaveAccount setAppButtonHasBackgroundColor:NO withColor:UIColorFromRGB(kAppGreen)];
     
     _tfEmail.delegate = self;
     _tfPassword.delegate = self;
@@ -76,6 +77,65 @@
         [_tfPasswordConfirm resignFirstResponder];
     }
     return YES;
+}
+
+- (void)signup:(id)sender {
+    NSString *email = _tfEmail.text;
+    NSString *password = _tfPassword.text;
+    NSString *passwordConfirm = _tfPasswordConfirm.text;
+    
+    Utilties *utilities = [[Utilties alloc] init];
+    
+    // Validate sign up informations
+    if ([email isEqualToString:@""]) {
+        [utilities showAlertWithTitle:@"Error" withMessage:@"Cannot sign up user with an empty name."];
+    } else if ([password isEqualToString:@""]) {
+        [utilities showAlertWithTitle:@"Error" withMessage:@"Cannot sign up user with an empty password."];
+    } else if (![password isEqualToString:passwordConfirm]) {
+        [utilities showAlertWithTitle:@"Error" withMessage:@"Your password do not match. Please try again."];
+    } else {
+        // Disable button
+        _btnCreateAccount.enabled = NO;
+        _btnIHaveAccount.enabled = NO;
+        
+        // Create user parse object
+        PFUser *user = [PFUser user];
+        user.username = email;
+        user.password = password;
+        user.email = email;
+        
+        // Send data
+        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            // Enable button again
+            _btnCreateAccount.enabled = YES;
+            _btnIHaveAccount.enabled = YES;
+            
+            if (!error) {
+                NSLog(@"User %@ created", email);
+                // Hooray! Let them use the app now.
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"OK"
+                                                                message:@"Your account has been created successful."
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            } else {
+                // Show the errorString somewhere and let the user try again.
+                NSString *errorString = [error userInfo][@"error"];
+                NSLog(@"%@", errorString);
+                
+                NSString *alertMsg = [NSString stringWithFormat:@"Username %@ already taken.", email];
+                [utilities showAlertWithTitle:@"Error" withMessage:alertMsg];
+            }
+        }];
+
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    // Move to home view
+    HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
+    [self.navigationController presentViewController:homeView animated:YES completion:nil];
 }
 
 /*
