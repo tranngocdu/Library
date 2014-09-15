@@ -19,7 +19,7 @@
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     // Init parse
-    [Parse setApplicationId:@"hc7wyBlPLbosKj26FTiu8CvOcsECdeDVOGcEADZH" clientKey:@"eJGnhcwE48DQPdpq7MA9S8lYI7XgEi7vINje0TQZ"];
+    [Parse setApplicationId:@"YFn8jWiFw3LJNLHjdMSbCF2f7F4hN6bhYWTqrnPX" clientKey:@"OSCmrjmExp1FKpbXw0kLfyjfi9w029t2RmpzwDWk"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     return YES;
