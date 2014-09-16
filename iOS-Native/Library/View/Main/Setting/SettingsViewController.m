@@ -7,8 +7,10 @@
 //
 
 #import "SettingsViewController.h"
+#import "LoginViewController.h"
 #import "Constants.h"
 #import "UIButton+AppButton.h"
+#import <Parse/Parse.h>
 
 @interface SettingsViewController ()
 
@@ -70,6 +72,12 @@
         [_tfNewPasswordConfirm resignFirstResponder];
     }
     return YES;
+}
+
+- (void)logout:(id)sender {
+    [PFUser logOut];
+    LoginViewController *loginView = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginIndentifier"];
+    [self.navigationController presentViewController:loginView animated:YES completion:nil];
 }
 
 /*

@@ -8,6 +8,9 @@
 
 #import "AddBookManualViewController.h"
 #import "UIButton+AppButton.h"
+#import "Utilties.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <Parse/Parse.h>
 
 @interface AddBookManualViewController ()
 
@@ -52,17 +55,42 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSLog(@"%@", info);
-    NSString *mediaType = info[UIImagePickerControllerOriginalImage];
-//    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-    if ([mediaType isEqualToString:@"public.image"]) {
+    NSString *mediaType = info[UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = info[UIImagePickerControllerOriginalImage];
         _tfImage.image = image;
+    } else {
+        Utilties *utilities = [[Utilties alloc] init];
+        [utilities showAlertWithTitle:@"Error" withMessage:@"Only accept image."];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)addBook:(id)sender {
+    NSString *bookTitle = _tfTitle.text;
+    NSString *bookAuthor = _tfAuthor.text;
+    NSString *bookISBN = _tfIsbn.text;
+    NSString *bookQuantity = _tfQuantity.text;
+    
+    // Validate informations
+    if ([bookTitle isEqualToString:@""] || [bookAuthor isEqualToString:@""]) {
+        Utilties *utilities = [[Utilties alloc] init];
+        [utilities showAlertWithTitle:@"Try Again" withMessage:@"Please add a title, author and quantity."];
+    } else {
+        NSLog(@"%@", _tfImage);
+        PFUser *currentUser = [PFUser currentUser];
+        PFObject *book = [PFObject objectWithClassName:@"NewBook"];
+        book[@"title"] = bookTitle;
+        book[@"author"] = bookAuthor;
+        book[@"ISBN"] = bookISBN;
+        book[@"cover_image"] = bookQuantity;
+        book[@"User"] = currentUser.objectId;
+        book[@"studentList"] = bookAuthor;
+        book[@"quantity_total"] = bookQuantity;
+        book[@"quantity_out"] = 0;
+        book[@"quantity_available"] = bookQuantity;
+    }
+    
     NSLog(@"Add book");
 }
 

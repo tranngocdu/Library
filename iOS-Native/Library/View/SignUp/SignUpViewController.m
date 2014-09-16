@@ -98,7 +98,7 @@
         _btnCreateAccount.enabled = NO;
         _btnIHaveAccount.enabled = NO;
         
-        // Create user parse object
+        // Create user using parse
         PFUser *user = [PFUser user];
         user.username = email;
         user.password = password;

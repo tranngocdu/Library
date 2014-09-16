@@ -18,7 +18,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *tfTitle;
 @property (strong, nonatomic) IBOutlet UITextField *tfAuthor;
 @property (strong, nonatomic) IBOutlet UITextField *tfIsbn;
-@property (strong, nonatomic) IBOutlet UITextField *tfName;
+@property (strong, nonatomic) IBOutlet UITextField *tfQuantity;
 @property (strong, nonatomic) IBOutlet UIButton *btnAddBook;
 
 

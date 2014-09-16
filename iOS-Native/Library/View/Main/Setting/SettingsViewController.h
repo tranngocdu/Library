@@ -10,6 +10,7 @@
 
 @interface SettingsViewController : UIViewController <UITextFieldDelegate>
 
+- (IBAction)logout:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UITextField *tfEmail;
 @property (strong, nonatomic) IBOutlet UITextField *tfCurrentPassword;

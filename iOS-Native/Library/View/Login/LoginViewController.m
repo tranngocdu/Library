@@ -90,7 +90,7 @@
             
             if (user) {
                 // Do stuff after successful login.
-                NSLog(@"Login successful with usernane: %@", user.username);
+                NSLog(@"Login successful with username: %@", user.username);
                 HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
                 [self.navigationController presentViewController:homeView animated:YES completion:nil];
             } else {
