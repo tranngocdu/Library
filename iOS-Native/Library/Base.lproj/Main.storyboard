@@ -730,6 +730,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="addPhoto:" destination="hTq-qI-Ljr" eventType="touchUpInside" id="aL9-o4-Qm6"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgn-11-4ZF">
                                 <rect key="frame" x="60" y="375" width="200" height="40"/>
@@ -738,6 +741,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="addBook:" destination="hTq-qI-Ljr" eventType="touchUpInside" id="Odu-fn-X7d"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="auG-bv-RBe">
                                 <rect key="frame" x="125" y="77" width="70" height="68"/>
@@ -750,6 +756,7 @@
                         <outlet property="btnAddBook" destination="bgn-11-4ZF" id="X51-J3-0dF"/>
                         <outlet property="btnAddPhoto" destination="hui-b7-FQp" id="Lwe-hg-Jf0"/>
                         <outlet property="tfAuthor" destination="XxA-9I-eCv" id="EgD-LC-2cH"/>
+                        <outlet property="tfImage" destination="auG-bv-RBe" id="3ZE-yr-VXC"/>
                         <outlet property="tfIsbn" destination="CQ8-ZH-iki" id="7kD-Wm-ovj"/>
                         <outlet property="tfName" destination="82N-bj-bQW" id="s9O-QC-TN7"/>
                         <outlet property="tfTitle" destination="GsE-en-GZg" id="sEQ-pK-mfF"/>

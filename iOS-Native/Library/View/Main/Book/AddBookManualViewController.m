@@ -7,6 +7,7 @@
 //
 
 #import "AddBookManualViewController.h"
+#import "UIButton+AppButton.h"
 
 @interface AddBookManualViewController ()
 
@@ -23,10 +24,16 @@
     return self;
 }
 
+- (void)decorate {
+    [_btnAddPhoto setAppButtonHasBackgroundColor:NO withColor:UIColorFromRGB(kAppRed)];
+    [_btnAddBook setAppButtonHasBackgroundColor:YES withColor:UIColorFromRGB(kAppGreen)];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self decorate];
     [self.navigationItem setTitle:@"Add Book"];
 }
 
@@ -34,6 +41,29 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)addPhoto:(id)sender {
+    NSLog(@"Add photo");
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    NSLog(@"%@", info);
+    NSString *mediaType = info[UIImagePickerControllerOriginalImage];
+//    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+    if ([mediaType isEqualToString:@"public.image"]) {
+        UIImage *image = info[UIImagePickerControllerOriginalImage];
+        _tfImage.image = image;
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)addBook:(id)sender {
+    NSLog(@"Add book");
 }
 
 /*
