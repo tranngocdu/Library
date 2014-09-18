@@ -8,6 +8,8 @@
 
 #import "StudentsViewController.h"
 #import "AddStudentViewController.h"
+#import "Utilties.h"
+#import <Parse/Parse.h>
 
 @interface StudentsViewController ()
 
@@ -35,10 +37,55 @@
     }
 }
 
+- (void)getListStudent {
+    PFUser *currentUser = [PFUser currentUser];
+    
+    // Create query
+    PFQuery *query = [PFQuery queryWithClassName:@"Student"];
+    [query whereKey:@"UserId" equalTo:currentUser.objectId];
+    query.limit = 1000;
+    [query orderByAscending:@"Name"];
+
+    // Query
+    [query findObjectsInBackgroundWithBlock:^(NSArray *data, NSError *error) {
+        if (!error) {
+            students = data;
+            [_tfStudentList reloadData];
+            NSLog(@"%@", data);
+        } else {
+            // Alert error
+            Utilties *utilities = [[Utilties alloc] init];
+            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error."];
+        }
+    }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [students count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *tableIndentifier = @"studentListCell";
+    
+    StudentCell *cell = (StudentCell *)[tableView
+                         dequeueReusableCellWithIdentifier:tableIndentifier
+                         forIndexPath:indexPath];
+
+    // Get student
+    PFObject *student = [students objectAtIndex:indexPath.row];
+    cell.tfName.text = student[@"Name"];
+    
+    return cell;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self decorate];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self getListStudent];
 }
 
 - (void)didReceiveMemoryWarning

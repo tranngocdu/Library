@@ -8,7 +8,9 @@
 
 #import "AddStudentViewController.h"
 #import "UIButton+AppButton.h"
+#import "Utilties.h"
 #import <QuartzCore/QuartzCore.h>
+#import <Parse/Parse.h>
 
 @interface AddStudentViewController ()
 
@@ -47,8 +49,29 @@
 }
 
 - (void)addStudent:(id)sender {
-    NSLog(@"Add student");
-    [self.navigationController popViewControllerAnimated:YES];
+    Utilties *utilities = [[Utilties alloc] init];
+    NSString *studentName = _tfStudentName.text;
+    if ([studentName isEqualToString:@""]) {
+        [utilities showAlertWithTitle:@"Error" withMessage:@"Require student name."];
+    } else {
+        // Create student object
+        PFObject *student = [PFObject objectWithClassName:@"Student"];
+        PFUser *currentUser = [PFUser currentUser];
+        
+        // Assign informations
+        student[@"Name"] = studentName;
+        student[@"UserId"] = currentUser.objectId;
+        
+        // Save student using parse object
+        [student saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if(!error) {
+                // If successful, back to student list view
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            }
+        }];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

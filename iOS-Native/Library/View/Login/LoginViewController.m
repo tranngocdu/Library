@@ -68,10 +68,10 @@
 
 - (IBAction)doLogin:(id)sender
 {
-    Utilties *utilties = [[Utilties alloc] init];
+    Utilties *utilities = [[Utilties alloc] init];
     if ([_tfEmail.text isEqualToString:@""] || [_tfPassword.text isEqualToString: @""])
     {
-        [utilties showAlertWithTitle:@"All Fields Required" withMessage:@"Please enter username and password."];
+        [utilities showAlertWithTitle:@"All Fields Required" withMessage:@"Please enter username and password."];
     } else {
         // Disable button
         _btnLogin.enabled = NO;
@@ -96,7 +96,7 @@
             } else {
                 // The login failed. Check error to see why.
                 NSLog(@"Wrong username or password");
-                [utilties showAlertWithTitle:@"Incorrect Login" withMessage:@"Please check your username or password."];
+                [utilities showAlertWithTitle:@"Incorrect Login" withMessage:@"Please check your username or password."];
             }
         }];
     }

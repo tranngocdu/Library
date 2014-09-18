@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StudentCell.h"
 
-@interface StudentsViewController : UIViewController
+@interface StudentsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+    NSArray *students;
+    StudentCell *studentCell;
+}
 
 - (IBAction)addStudent:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UITableView *tfStudentList;
 
 @end
