@@ -266,6 +266,42 @@
             </objects>
             <point key="canvasLocation" x="2404" y="5299"/>
         </scene>
+        <!--Student Detail View Controller-->
+        <scene sceneID="cKs-sj-zfA">
+            <objects>
+                <viewController storyboardIdentifier="StudentDetailIdentifier" id="Ook-B9-LmN" customClass="StudentDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oxW-iL-1Qq"/>
+                        <viewControllerLayoutGuide type="bottom" id="SM8-6c-PAU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Wzn-t7-CnM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gN5-sD-wGS">
+                                <rect key="frame" x="0.0" y="63" width="320" height="56"/>
+                                <color key="backgroundColor" red="1" green="0.50533642194949524" blue="0.50920481449981958" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oYF-LF-BRB">
+                                <rect key="frame" x="16" y="77" width="288" height="29"/>
+                                <color key="backgroundColor" red="1" green="0.50533642190000005" blue="0.50920481449999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <segments>
+                                    <segment title="Current Books"/>
+                                    <segment title="Past Books"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="topTab" destination="oYF-LF-BRB" id="X3G-g6-xfA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ap3-Gl-dxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2896" y="4595"/>
+        </scene>
         <!--Students-->
         <scene sceneID="dFI-nR-iC9">
             <objects>
@@ -283,9 +319,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="studentListCell" id="8S5-c6-NPX" customClass="StudentCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8S5-c6-NPX" id="vyG-7u-25t">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rcz-LR-Oap">
@@ -294,7 +331,7 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLS-w9-K3h">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLS-w9-K3h">
                                                     <rect key="frame" x="24" y="0.0" width="206" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -303,7 +340,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="btnDelete" destination="rcz-LR-Oap" id="T0v-14-hZ0"/>
+                                            <outlet property="btnDelete" destination="rcz-LR-Oap" id="2fw-Sh-wnV"/>
                                             <outlet property="tfName" destination="WLS-w9-K3h" id="FCL-ze-0t2"/>
                                         </connections>
                                     </tableViewCell>
@@ -386,7 +423,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JOY-Jj-wgm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2896" y="4595"/>
+            <point key="canvasLocation" x="2896" y="5299"/>
         </scene>
         <!--Library-->
         <scene sceneID="oCC-4T-YVN">
@@ -1067,24 +1104,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="97h-Va-kI8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1878" y="5299"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="JIy-ZR-KMX">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="qnE-Mw-zmg" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Kdh-Em-tcd"/>
-                        <viewControllerLayoutGuide type="bottom" id="g7v-aT-cP2"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="WgN-7w-iC1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nSk-4d-R9H" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WDM-Lf-D5K">

@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Utilties : NSObject
+@interface Utilties : NSObject {
+    UIView *loadingView;
+}
 
 - (void)showAlertWithTitle:(NSString *)title withMessage: (NSString *) message;
 

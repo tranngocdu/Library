@@ -8,6 +8,7 @@
 
 #import "StudentsViewController.h"
 #import "AddStudentViewController.h"
+#import "StudentDetailViewController.h"
 #import "Utilties.h"
 #import <Parse/Parse.h>
 
@@ -38,6 +39,7 @@
 }
 
 - (void)getListStudent {
+    Utilties *utilities = [[Utilties alloc] init];
     PFUser *currentUser = [PFUser currentUser];
     
     // Create query
@@ -49,12 +51,10 @@
     // Query
     [query findObjectsInBackgroundWithBlock:^(NSArray *data, NSError *error) {
         if (!error) {
-            students = data;
+            students = (NSMutableArray *)data;
             [_tfStudentList reloadData];
-            NSLog(@"%@", data);
         } else {
             // Alert error
-            Utilties *utilities = [[Utilties alloc] init];
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error."];
         }
     }];
@@ -74,18 +74,54 @@
     // Get student
     PFObject *student = [students objectAtIndex:indexPath.row];
     cell.tfName.text = student[@"Name"];
+    cell.btnDelete.tag = indexPath.row;
+    [cell.btnDelete addTarget:self action:@selector(clickOnDeleteButton:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    StudentDetailViewController *studentDetailView = [self.storyboard instantiateViewControllerWithIdentifier:@"StudentDetailIdentifier"];
+    [self.navigationController pushViewController:studentDetailView animated:YES];
+}
+
+- (void)clickOnDeleteButton:(UIButton *)sender {
+    if(sender.tag >= 0) {
+        cellSelect = (int)sender.tag;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete" message:@"Are you sure you want to delete this student?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(buttonIndex == 1) {
+        // If clicked at OK button, get student from data and delete
+        PFObject *student = [students objectAtIndex:cellSelect];
+        [student deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if(!error) {
+                // Remove item out of data
+                [students removeObjectAtIndex:cellSelect];
+                
+                // Reload list view
+                [_tfStudentList reloadData];
+            } else {
+                NSLog(@"Error when delete student %@", error);
+                Utilties *utilities = [[Utilties alloc] init];
+                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            }
+        }];
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self getListStudent];
     [self decorate];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self getListStudent];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,6 +133,10 @@
 - (void)addStudent:(id)sender {
     AddStudentViewController *addStudentView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddStudentIndentifier"];
     [self.navigationController pushViewController:addStudentView animated:YES];
+}
+
+- (void)deleteStudent:(id)sender {
+    NSLog(@"Delete");
 }
 
 /*

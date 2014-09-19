@@ -79,7 +79,7 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"%ld", buttonIndex);
+    NSLog(@"%ld", (long)buttonIndex);
 }
 
 /*

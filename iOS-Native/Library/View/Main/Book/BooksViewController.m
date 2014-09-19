@@ -69,7 +69,7 @@
 };
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%ld", indexPath.row);
+    NSLog(@"%ld", (long)indexPath.row);
     
     BookDetailViewController *bookDetailView = [self.storyboard instantiateViewControllerWithIdentifier:@"BookDetailIndentifier"];
     [self.navigationController pushViewController:bookDetailView animated:YES];
@@ -79,7 +79,7 @@
     UISegmentedControl *segmentedControl = (UISegmentedControl *) sender;
     NSInteger selectedSegment = segmentedControl.selectedSegmentIndex;
     
-    NSLog(@"%ld", selectedSegment);
+    NSLog(@"%ld", (long)selectedSegment);
 }
 
 - (void)addBookManual:(id)sender {

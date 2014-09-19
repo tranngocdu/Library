@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "StudentCell.h"
 
-@interface StudentsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
-    NSArray *students;
+@interface StudentsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate> {
+    NSMutableArray *students;
     StudentCell *studentCell;
+    int cellSelect;
 }
 
 - (IBAction)addStudent:(id)sender;
+//- (IBAction)viewStudentDetail:(id)sender;
+- (IBAction)deleteStudent:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UITableView *tfStudentList;
 

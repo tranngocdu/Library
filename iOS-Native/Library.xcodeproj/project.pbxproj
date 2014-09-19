@@ -38,6 +38,7 @@
 		B451E2A719C2011B0041E88C /* UIButton+AppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2A619C2011B0041E88C /* UIButton+AppButton.m */; };
 		B451E2AD19C20F010041E88C /* CheckInModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2AC19C20F010041E88C /* CheckInModalViewController.m */; };
 		B47034F619CB29B900139B00 /* StudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B47034F519CB29B900139B00 /* StudentCell.m */; };
+		B4DD987819CC2E0A009A0D83 /* StudentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DD987719CC2E0A009A0D83 /* StudentDetailViewController.m */; };
 		B4F1452F19C73870005B595E /* Utilties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F1452E19C73870005B595E /* Utilties.m */; };
 		B4F9216B19C541090005C612 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9216A19C541090005C612 /* AudioToolbox.framework */; };
 		B4F9216D19C541130005C612 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9216C19C541130005C612 /* CFNetwork.framework */; };
@@ -112,6 +113,8 @@
 		B451E2AC19C20F010041E88C /* CheckInModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckInModalViewController.m; sourceTree = "<group>"; };
 		B47034F419CB29B900139B00 /* StudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentCell.h; sourceTree = "<group>"; };
 		B47034F519CB29B900139B00 /* StudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentCell.m; sourceTree = "<group>"; };
+		B4DD987619CC2E0A009A0D83 /* StudentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentDetailViewController.h; sourceTree = "<group>"; };
+		B4DD987719CC2E0A009A0D83 /* StudentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentDetailViewController.m; sourceTree = "<group>"; };
 		B4F1452D19C73870005B595E /* Utilties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilties.h; sourceTree = "<group>"; };
 		B4F1452E19C73870005B595E /* Utilties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilties.m; sourceTree = "<group>"; };
 		B4F9216A19C541090005C612 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -330,6 +333,8 @@
 				7233434E19B56D3B0039720C /* AddStudentViewController.m */,
 				B47034F419CB29B900139B00 /* StudentCell.h */,
 				B47034F519CB29B900139B00 /* StudentCell.m */,
+				B4DD987619CC2E0A009A0D83 /* StudentDetailViewController.h */,
+				B4DD987719CC2E0A009A0D83 /* StudentDetailViewController.m */,
 			);
 			path = Student;
 			sourceTree = "<group>";
@@ -456,6 +461,7 @@
 				B451E2A719C2011B0041E88C /* UIButton+AppButton.m in Sources */,
 				722B11F919B45AE5009613B8 /* AppDelegate.m in Sources */,
 				B47034F619CB29B900139B00 /* StudentCell.m in Sources */,
+				B4DD987819CC2E0A009A0D83 /* StudentDetailViewController.m in Sources */,
 				722B11F519B45AE5009613B8 /* main.m in Sources */,
 				8C14561E19B5547B009616DE /* SignUpViewController.m in Sources */,
 				7233434F19B56D3B0039720C /* AddStudentViewController.m in Sources */,
