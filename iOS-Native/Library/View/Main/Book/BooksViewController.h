@@ -10,12 +10,14 @@
 
 @interface BooksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
-    NSArray *books;
+    NSMutableArray *books;
 }
 
 - (IBAction)addBookManual:(id)sender;
 - (IBAction)segmentChanged:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *topTab;
+@property (strong, nonatomic) IBOutlet UIView *topView;
+@property (strong, nonatomic) IBOutlet UITableView *listBooks;
 
 @end

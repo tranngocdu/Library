@@ -81,7 +81,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Get student
+    PFObject *student = [students objectAtIndex:indexPath.row];
+    
     StudentDetailViewController *studentDetailView = [self.storyboard instantiateViewControllerWithIdentifier:@"StudentDetailIdentifier"];
+    
+    // Set student id
+    [studentDetailView setStudentId:(NSString *)student.objectId];
+    
     [self.navigationController pushViewController:studentDetailView animated:YES];
 }
 

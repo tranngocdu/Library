@@ -9,6 +9,9 @@
 #import "BooksViewController.h"
 #import "BookDetailViewController.h"
 #import "EditBookViewController.h"
+#import "BookCell.h"
+#import "Utilties.h"
+#import <Parse/Parse.h>
 
 @interface BooksViewController ()
 
@@ -31,18 +34,21 @@
 {
     _topTab.layer.cornerRadius = 5.0f;
     _topTab.layer.masksToBounds = YES;
-    _topTab.layer.borderColor = [[UIColor whiteColor] CGColor];
+    _topTab.layer.borderColor = [UIColorFromRGB(kAppPink) CGColor];
+    _topTab.layer.backgroundColor = [UIColorFromRGB(kAppPink) CGColor];
     
-    NSLog(@"NAV: %@", self.navigationController == nil ? @" NO" : @" YES");
+    _topView.layer.backgroundColor = [UIColorFromRGB(kAppPink) CGColor];
+//    NSLog(@"NAV: %@", self.navigationController == nil ? @" NO" : @" YES");
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     [self decorate];
-    
-    // Sample books
-    books = [NSArray arrayWithObjects: @"Harry Potter and the Sorcerer's Stone", @"Harry Potter and the Chamber of Secrets", @"Harry Potter and the Prisoner of Azkaban", nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    // Load available books
+    [self loadBooksWithType:0];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,33 +59,85 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [books count];
-};
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *simpleTableIndentifier = @"BookTable";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIndentifier];
+    static NSString *tableIndentifier = @"bookListCell";
     
-    if(cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIndentifier];
-    }
+    BookCell *cell = (BookCell *)[tableView
+                                        dequeueReusableCellWithIdentifier:tableIndentifier
+                                        forIndexPath:indexPath];
     
-    cell.textLabel.text = [books objectAtIndex:indexPath.row];
+    // Get student
+    PFObject *book = [books objectAtIndex:indexPath.row];
+    cell.lblBookAuthor.text = book[@"author"];
+    cell.lblBookName.text = book[@"title"];
     
+    cell.lblBookQuantity.text = [NSString stringWithFormat:@"%@ available", book[@"quantity_available"]];
+    
+    NSString *imageUrl = book[@"cover_image"];
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        cell.bookPhoto.image = [UIImage imageWithData:data];
+    }];
+
     return cell;
-};
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%ld", (long)indexPath.row);
     
     BookDetailViewController *bookDetailView = [self.storyboard instantiateViewControllerWithIdentifier:@"BookDetailIndentifier"];
     [self.navigationController pushViewController:bookDetailView animated:YES];
-};
+}
+
+- (void)loadBooksWithType:(int)type {
+    PFUser *currentUser = [PFUser currentUser];
+    PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
+    
+    // Remove old data
+    [books removeAllObjects];
+    [_listBooks reloadData];
+    
+    [query whereKey:@"User" equalTo:currentUser.objectId];
+    
+    if (type == 0) {
+        [query whereKey:@"quantity_available" greaterThan:@"0"];
+    } else if (type == 1){
+        [query whereKey:@"quantity_out" greaterThan:@0];
+    }
+    
+    [query orderByDescending:@"createdAt"];
+    query.limit = 1000;
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error) {
+            books = (NSMutableArray *)objects;
+            // Rerender table view
+            [_listBooks reloadData];
+            NSLog(@"%@", books);
+        } else {
+            Utilties *utilities = [[Utilties alloc] init];
+            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+        }
+    }];
+}
 
 - (IBAction)segmentChanged:(id)sender {
     UISegmentedControl *segmentedControl = (UISegmentedControl *) sender;
     NSInteger selectedSegment = segmentedControl.selectedSegmentIndex;
     
-    NSLog(@"%ld", (long)selectedSegment);
+    // Load available books
+    if (selectedSegment == 0) {
+        [self loadBooksWithType:0];
+    }
+    // Load checked out books
+    else if (selectedSegment == 1) {
+        [self loadBooksWithType:1];
+    }
+    // Load all books
+    else if (selectedSegment == 2) {
+        [self loadBooksWithType:2];
+    }
 }
 
 - (void)addBookManual:(id)sender {

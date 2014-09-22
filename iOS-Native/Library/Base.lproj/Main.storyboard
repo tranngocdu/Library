@@ -280,22 +280,24 @@
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gN5-sD-wGS">
                                 <rect key="frame" x="0.0" y="63" width="320" height="56"/>
-                                <color key="backgroundColor" red="1" green="0.50533642194949524" blue="0.50920481449981958" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oYF-LF-BRB">
                                 <rect key="frame" x="16" y="77" width="288" height="29"/>
-                                <color key="backgroundColor" red="1" green="0.50533642190000005" blue="0.50920481449999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <segments>
                                     <segment title="Current Books"/>
                                     <segment title="Past Books"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="Ook-B9-LmN" eventType="valueChanged" id="l7P-0R-0HH"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="topTab" destination="oYF-LF-BRB" id="X3G-g6-xfA"/>
+                        <outlet property="topView" destination="gN5-sD-wGS" id="w5D-J5-5GS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ap3-Gl-dxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -682,7 +684,7 @@
         <!--Books-->
         <scene sceneID="p5c-zW-Kvo">
             <objects>
-                <viewController storyboardIdentifier="BooksViewIndentifier" id="hAe-hM-Hu2" customClass="BooksViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BooksViewIdentifier" id="hAe-hM-Hu2" customClass="BooksViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Vgo-aA-BDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="Pfv-W7-cQ6"/>
@@ -691,9 +693,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-Sf-RNg">
+                                <rect key="frame" x="0.0" y="64" width="322" height="57"/>
+                            </view>
                             <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="niX-Rb-ymb">
                                 <rect key="frame" x="20" y="76" width="284" height="29"/>
-                                <color key="backgroundColor" red="0.95686280729999995" green="0.4156863093" blue="0.38823533059999998" alpha="1" colorSpace="deviceRGB"/>
                                 <segments>
                                     <segment title="Avaiable"/>
                                     <segment title="Checked Out"/>
@@ -704,11 +708,49 @@
                                     <action selector="segmentChanged:" destination="hAe-hM-Hu2" eventType="valueChanged" id="MuD-Bf-sGV"/>
                                 </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Q24-94-mAZ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Q24-94-mAZ">
                                 <rect key="frame" x="0.0" y="120" width="320" height="399"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bookListCell" id="hlX-ar-xW9" customClass="BookCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hlX-ar-xW9" id="Pvh-ap-n0P">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fNn-cJ-Jwx">
+                                                    <rect key="frame" x="21" y="8" width="70" height="70"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wJ-5F-205">
+                                                    <rect key="frame" x="99" y="13" width="221" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Author" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmd-eW-75S">
+                                                    <rect key="frame" x="99" y="32" width="221" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3 Available" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNG-CU-lgb">
+                                                    <rect key="frame" x="99" y="57" width="221" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                    <color key="textColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="bookPhoto" destination="fNn-cJ-Jwx" id="tge-bj-0V1"/>
+                                            <outlet property="lblBookAuthor" destination="lmd-eW-75S" id="pWl-b7-Vw2"/>
+                                            <outlet property="lblBookName" destination="2wJ-5F-205" id="Jqm-OS-emJ"/>
+                                            <outlet property="lblBookQuantity" destination="pNG-CU-lgb" id="aWB-I3-5V1"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="hAe-hM-Hu2" id="qoO-br-R1z"/>
+                                    <outlet property="dataSource" destination="hAe-hM-Hu2" id="x1a-sZ-o8M"/>
                                     <outlet property="delegate" destination="hAe-hM-Hu2" id="zkP-2r-2Gj"/>
                                 </connections>
                             </tableView>
@@ -723,12 +765,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="listBooks" destination="Q24-94-mAZ" id="IOA-vm-dbz"/>
                         <outlet property="topTab" destination="niX-Rb-ymb" id="Swm-uZ-SyP"/>
+                        <outlet property="topView" destination="XdF-Sf-RNg" id="M6B-1a-nH4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZyJ-NX-B3X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2396" y="3867"/>
+            <point key="canvasLocation" x="2396" y="3866"/>
         </scene>
         <!--Add Book Manual View Controller-->
         <scene sceneID="3vu-fT-Vt2">
@@ -823,7 +867,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ui-kl-1Qh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3504" y="4595"/>
+            <point key="canvasLocation" x="3410" y="4585"/>
         </scene>
         <!--Book Detail View Controller-->
         <scene sceneID="vXU-6P-0vl">
@@ -924,7 +968,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pqt-8J-8ym" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2896" y="3867"/>
+            <point key="canvasLocation" x="2847" y="3867"/>
         </scene>
         <!--Check In Book View Controller-->
         <scene sceneID="xnQ-ej-K2F">
@@ -973,7 +1017,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zrn-78-bZ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3504" y="3867"/>
+            <point key="canvasLocation" x="3379" y="3867"/>
         </scene>
         <!--Check Out Book View Controller-->
         <scene sceneID="AAn-hq-vAb">

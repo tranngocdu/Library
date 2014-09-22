@@ -7,6 +7,7 @@
 //
 
 #import "AddBookManualViewController.h"
+#import "BooksViewController.h"
 #import "UIButton+AppButton.h"
 #import "Utilties.h"
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -72,26 +73,40 @@
     NSString *bookISBN = _tfIsbn.text;
     NSString *bookQuantity = _tfQuantity.text;
     
+    Utilties *utilities = [[Utilties alloc] init];
+    
     // Validate informations
     if ([bookTitle isEqualToString:@""] || [bookAuthor isEqualToString:@""]) {
-        Utilties *utilities = [[Utilties alloc] init];
         [utilities showAlertWithTitle:@"Try Again" withMessage:@"Please add a title, author and quantity."];
     } else {
-        NSLog(@"%@", _tfImage);
         PFUser *currentUser = [PFUser currentUser];
         PFObject *book = [PFObject objectWithClassName:@"NewBook"];
         book[@"title"] = bookTitle;
         book[@"author"] = bookAuthor;
         book[@"ISBN"] = bookISBN;
-        book[@"cover_image"] = bookQuantity;
+        book[@"cover_image"] = @"http://image.mp3.zdn.vn/thumb/165_165/covers/3/3/33e23a4ab94e902d9850109f4fba0e24_1411148582.jpg";
         book[@"User"] = currentUser.objectId;
-        book[@"studentList"] = bookAuthor;
+        book[@"studentList"] = [NSMutableArray array];
         book[@"quantity_total"] = bookQuantity;
-        book[@"quantity_out"] = 0;
+        book[@"quantity_out"] = @0;
         book[@"quantity_available"] = bookQuantity;
+        
+//        // Get current date in ISO format
+//        NSDateFormatter *currentDate = [[NSDateFormatter alloc] init];
+//        [currentDate setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+//        
+//        book[@"createdAt"] = [currentDate stringFromDate:[NSDate date]];
+//        book[@"updatedAt"] = [currentDate stringFromDate:[NSDate date]];
+        
+        [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if(!error) {
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                NSLog(@"Error: %@", error);
+                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            }
+        }];
     }
-    
-    NSLog(@"Add book");
 }
 
 /*

@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StudentDetailViewController : UIViewController
+@interface StudentDetailViewController : UIViewController {
+    NSString *studentId;
+}
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *topTab;
+@property (strong, nonatomic) IBOutlet UIView *topView;
+
+- (IBAction)segmentChanged:(id)sender;
+- (void)setStudentId:(NSString *)sId;
 
 @end

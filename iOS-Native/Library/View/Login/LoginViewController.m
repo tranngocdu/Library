@@ -56,7 +56,7 @@
     // If user is already logged in, move to home view
     if (currentUser) {
         HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
-        [self.navigationController presentViewController:homeView animated:YES completion:nil];
+        [self.navigationController presentViewController:homeView animated:NO completion:nil];
     }
 }
 

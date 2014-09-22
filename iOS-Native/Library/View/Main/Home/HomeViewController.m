@@ -68,7 +68,7 @@
 }
 
 - (void)presentBooksView {
-    BooksViewController *booksView = [self.storyboard instantiateViewControllerWithIdentifier:@"BooksViewIndentifier"];
+    BooksViewController *booksView = [self.storyboard instantiateViewControllerWithIdentifier:@"BooksViewIdentifier"];
     NSLog(@"Present view");
     [self.navigationController presentViewController:booksView animated:YES completion:nil];
 }
