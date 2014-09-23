@@ -40,7 +40,9 @@
 		B47034F619CB29B900139B00 /* StudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B47034F519CB29B900139B00 /* StudentCell.m */; };
 		B4D042AB19D06B7A003B76BE /* BookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D042AA19D06B7A003B76BE /* BookCell.m */; };
 		B4DD987819CC2E0A009A0D83 /* StudentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DD987719CC2E0A009A0D83 /* StudentDetailViewController.m */; };
-		B4F1452F19C73870005B595E /* Utilties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F1452E19C73870005B595E /* Utilties.m */; };
+		B4EE86FF19D1AB0D00B195FC /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EE86FE19D1AB0D00B195FC /* Utilities.m */; };
+		B4EE870319D1B2A500B195FC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4EE870219D1B2A500B195FC /* AssetsLibrary.framework */; };
+		B4EE870519D1B2B900B195FC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4EE870419D1B2B900B195FC /* CoreFoundation.framework */; };
 		B4F9216B19C541090005C612 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9216A19C541090005C612 /* AudioToolbox.framework */; };
 		B4F9216D19C541130005C612 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9216C19C541130005C612 /* CFNetwork.framework */; };
 		B4F9216F19C5412A0005C612 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F9216E19C5412A0005C612 /* CoreLocation.framework */; };
@@ -118,8 +120,10 @@
 		B4D042AA19D06B7A003B76BE /* BookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCell.m; sourceTree = "<group>"; };
 		B4DD987619CC2E0A009A0D83 /* StudentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentDetailViewController.h; sourceTree = "<group>"; };
 		B4DD987719CC2E0A009A0D83 /* StudentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentDetailViewController.m; sourceTree = "<group>"; };
-		B4F1452D19C73870005B595E /* Utilties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilties.h; sourceTree = "<group>"; };
-		B4F1452E19C73870005B595E /* Utilties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilties.m; sourceTree = "<group>"; };
+		B4EE86FD19D1AB0D00B195FC /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		B4EE86FE19D1AB0D00B195FC /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		B4EE870219D1B2A500B195FC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		B4EE870419D1B2B900B195FC /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		B4F9216A19C541090005C612 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		B4F9216C19C541130005C612 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B4F9216E19C5412A0005C612 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -139,6 +143,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4EE870519D1B2B900B195FC /* CoreFoundation.framework in Frameworks */,
+				B4EE870319D1B2A500B195FC /* AssetsLibrary.framework in Frameworks */,
 				B4F9217919C5417C0005C612 /* SystemConfiguration.framework in Frameworks */,
 				B4F9217719C541720005C612 /* StoreKit.framework in Frameworks */,
 				B4F9217519C5416A0005C612 /* Security.framework in Frameworks */,
@@ -192,6 +198,8 @@
 		722B11E719B45AE5009613B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B4EE870419D1B2B900B195FC /* CoreFoundation.framework */,
+				B4EE870219D1B2A500B195FC /* AssetsLibrary.framework */,
 				B4F9217819C5417C0005C612 /* SystemConfiguration.framework */,
 				B4F9217619C541720005C612 /* StoreKit.framework */,
 				B4F9217419C5416A0005C612 /* Security.framework */,
@@ -358,8 +366,8 @@
 			children = (
 				B451E2A519C2011B0041E88C /* UIButton+AppButton.h */,
 				B451E2A619C2011B0041E88C /* UIButton+AppButton.m */,
-				B4F1452D19C73870005B595E /* Utilties.h */,
-				B4F1452E19C73870005B595E /* Utilties.m */,
+				B4EE86FD19D1AB0D00B195FC /* Utilities.h */,
+				B4EE86FE19D1AB0D00B195FC /* Utilities.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -467,6 +475,7 @@
 				B451E2A719C2011B0041E88C /* UIButton+AppButton.m in Sources */,
 				722B11F919B45AE5009613B8 /* AppDelegate.m in Sources */,
 				B47034F619CB29B900139B00 /* StudentCell.m in Sources */,
+				B4EE86FF19D1AB0D00B195FC /* Utilities.m in Sources */,
 				B4DD987819CC2E0A009A0D83 /* StudentDetailViewController.m in Sources */,
 				722B11F519B45AE5009613B8 /* main.m in Sources */,
 				8C14561E19B5547B009616DE /* SignUpViewController.m in Sources */,
@@ -474,7 +483,6 @@
 				8C14561D19B5547B009616DE /* SettingsViewController.m in Sources */,
 				B451E2AD19C20F010041E88C /* CheckInModalViewController.m in Sources */,
 				8C14561B19B5547B009616DE /* LoginViewController.m in Sources */,
-				B4F1452F19C73870005B595E /* Utilties.m in Sources */,
 				8C14562519B5552B009616DE /* BooksViewController.m in Sources */,
 				B41FABEF19C341430015A624 /* CheckOutModalViewController.m in Sources */,
 				72D2356E19B589A9003963E5 /* AddBookManualViewController.m in Sources */,
@@ -609,6 +617,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/parse-library-1.3.0",
+					/Users/namhuynh/Desktop/library/iOS/Library/Plugins/Filepicker,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Library/Library-Prefix.pch";
@@ -627,6 +636,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/parse-library-1.3.0",
+					/Users/namhuynh/Desktop/library/iOS/Library/Plugins/Filepicker,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Library/Library-Prefix.pch";

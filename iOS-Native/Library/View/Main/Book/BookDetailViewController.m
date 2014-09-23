@@ -12,6 +12,8 @@
 #import "CheckInBookViewController.h"
 #import "EditBookViewController.h"
 #import "UIButton+AppButton.h"
+#import "Utilities.h"
+#import <Parse/Parse.h>
 
 @interface BookDetailViewController ()
 
@@ -36,18 +38,49 @@
     [_btnRemoveBook setAppButtonHasBackgroundColor:YES withColor:UIColorFromRGB(kAppRed)];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    [_scroller setScrollEnabled:YES];
+    [_scroller setContentSize:CGSizeMake(screenWidth, screenHeight)];
     [super viewDidLoad];
     [self decorate];
     // Do any additional setup after loading the view.
     [self.navigationItem setTitle:@"Book Detail"];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    // Get book informations
+    PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
+    [query getObjectInBackgroundWithId:bookId block:^(PFObject *book, NSError *error) {
+        if(!error) {
+            NSLog(@"%@", book);
+            _lblBookTitle.text = book[@"title"];
+            _lblBookAuthor.text = book[@"author"];
+            _lblBookISBN.text = book[@"ISBN"];
+            _lblBookQuantity.text = [NSString stringWithFormat:@"%@ total / %@ Available", book[@"quantity_total"], book[@"quantity_available"]];
+            NSString *imageUrl = book[@"cover_image"];
+            [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                _imgBookCover.image = [UIImage imageWithData:data];
+            }];
+        } else {
+            NSLog(@"%@", error);
+            Utilities *utilities = [[Utilities alloc] init];
+            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+        }
+    }];
+
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setBookId:(NSString *)bId {
+    bookId = bId;
 }
 
 - (void)addBookManual:(id)sender {

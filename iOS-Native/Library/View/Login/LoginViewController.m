@@ -10,7 +10,7 @@
 #import "HomeViewController.h"
 #import "Constants.h"
 #import "UIButton+AppButton.h"
-#import "Utilties.h"
+#import "Utilities.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Parse/Parse.h>
 
@@ -68,7 +68,7 @@
 
 - (IBAction)doLogin:(id)sender
 {
-    Utilties *utilities = [[Utilties alloc] init];
+    Utilities *utilities = [[Utilities alloc] init];
     if ([_tfEmail.text isEqualToString:@""] || [_tfPassword.text isEqualToString: @""])
     {
         [utilities showAlertWithTitle:@"All Fields Required" withMessage:@"Please enter username and password."];
@@ -104,7 +104,7 @@
 
 - (IBAction)buttonResetPasswordDidClick:(id)sender
 {
-    Utilties *utilities = [[Utilties alloc] init];
+    Utilities *utilities = [[Utilities alloc] init];
     NSString *email = _tfEmail.text;
     if ([email isEqualToString:@""]) {
         [utilities showAlertWithTitle:@"Enter your email" withMessage:@"First enter above the email you used for Class Library"];

@@ -1,14 +1,14 @@
 //
-//  Utilties.m
+//  Utilities.m
 //  Library
 //
-//  Created by Nam Huynh on 9/15/14.
+//  Created by Nam Huynh on 9/23/14.
 //  Copyright (c) 2014 Nam Huynh. All rights reserved.
 //
 
-#import "Utilties.h"
+#import "Utilities.h"
 
-@implementation Utilties
+@implementation Utilities
 
 - (void)showAlertWithTitle:(NSString *)title withMessage: (NSString *) message {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
@@ -18,5 +18,6 @@
                                           otherButtonTitles:nil];
     [alert show];
 }
+
 
 @end

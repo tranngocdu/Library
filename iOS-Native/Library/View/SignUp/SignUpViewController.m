@@ -10,7 +10,7 @@
 #import "HomeViewController.h"
 #import "Constants.h"
 #import "UIButton+AppButton.h"
-#import "Utilties.h"
+#import "Utilities.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Parse/Parse.h>
 
@@ -84,7 +84,7 @@
     NSString *password = _tfPassword.text;
     NSString *passwordConfirm = _tfPasswordConfirm.text;
     
-    Utilties *utilities = [[Utilties alloc] init];
+    Utilities *utilities = [[Utilities alloc] init];
     
     // Validate sign up informations
     if ([email isEqualToString:@""]) {

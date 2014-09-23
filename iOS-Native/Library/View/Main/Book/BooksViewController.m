@@ -10,7 +10,7 @@
 #import "BookDetailViewController.h"
 #import "EditBookViewController.h"
 #import "BookCell.h"
-#import "Utilties.h"
+#import "Utilities.h"
 #import <Parse/Parse.h>
 
 @interface BooksViewController ()
@@ -84,9 +84,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%ld", (long)indexPath.row);
-    
     BookDetailViewController *bookDetailView = [self.storyboard instantiateViewControllerWithIdentifier:@"BookDetailIndentifier"];
+    PFObject *book = [books objectAtIndex:indexPath.row];
+    [bookDetailView setBookId:book.objectId];
     [self.navigationController pushViewController:bookDetailView animated:YES];
 }
 
@@ -114,9 +114,8 @@
             books = (NSMutableArray *)objects;
             // Rerender table view
             [_listBooks reloadData];
-            NSLog(@"%@", books);
         } else {
-            Utilties *utilities = [[Utilties alloc] init];
+            Utilities *utilities = [[Utilities alloc] init];
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
         }
     }];

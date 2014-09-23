@@ -8,7 +8,7 @@
 
 #import "AddStudentViewController.h"
 #import "UIButton+AppButton.h"
-#import "Utilties.h"
+#import "Utilities.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Parse/Parse.h>
 
@@ -49,7 +49,7 @@
 }
 
 - (void)addStudent:(id)sender {
-    Utilties *utilities = [[Utilties alloc] init];
+    Utilities *utilities = [[Utilities alloc] init];
     NSString *studentName = _tfStudentName.text;
     if ([studentName isEqualToString:@""]) {
         [utilities showAlertWithTitle:@"Error" withMessage:@"Require student name."];

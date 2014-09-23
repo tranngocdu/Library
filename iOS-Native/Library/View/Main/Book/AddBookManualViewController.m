@@ -9,7 +9,7 @@
 #import "AddBookManualViewController.h"
 #import "BooksViewController.h"
 #import "UIButton+AppButton.h"
-#import "Utilties.h"
+#import "Utilities.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <Parse/Parse.h>
 
@@ -61,7 +61,7 @@
         UIImage *image = info[UIImagePickerControllerOriginalImage];
         _tfImage.image = image;
     } else {
-        Utilties *utilities = [[Utilties alloc] init];
+        Utilities *utilities = [[Utilities alloc] init];
         [utilities showAlertWithTitle:@"Error" withMessage:@"Only accept image."];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -73,7 +73,7 @@
     NSString *bookISBN = _tfIsbn.text;
     NSString *bookQuantity = _tfQuantity.text;
     
-    Utilties *utilities = [[Utilties alloc] init];
+    Utilities *utilities = [[Utilities alloc] init];
     
     // Validate informations
     if ([bookTitle isEqualToString:@""] || [bookAuthor isEqualToString:@""]) {

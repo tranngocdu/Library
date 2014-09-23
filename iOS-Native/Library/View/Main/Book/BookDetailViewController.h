@@ -8,16 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BookDetailViewController : UIViewController <UIAlertViewDelegate>
+@interface BookDetailViewController : UIViewController <UIAlertViewDelegate> {
+    NSString *bookId;
+}
 
 - (IBAction)checkoutBook:(id)sender;
 - (IBAction)checkinBook:(id)sender;
 - (IBAction)editBook:(id)sender;
 - (IBAction)removeBook:(id)sender;
 
+- (void)setBookId:(NSString *)bId;
+
+@property (strong, nonatomic) IBOutlet UIImageView *imgBookCover;
+@property (strong, nonatomic) IBOutlet UILabel *lblBookTitle;
+@property (strong, nonatomic) IBOutlet UILabel *lblBookAuthor;
+@property (strong, nonatomic) IBOutlet UILabel *lblBookISBN;
+@property (strong, nonatomic) IBOutlet UILabel *lblBookQuantity;
 @property (strong, nonatomic) IBOutlet UIButton *btnCheckinBook;
 @property (strong, nonatomic) IBOutlet UIButton *btnCheckoutBook;
 @property (strong, nonatomic) IBOutlet UIButton *btnEditBook;
 @property (strong, nonatomic) IBOutlet UIButton *btnRemoveBook;
+@property (strong, nonatomic) IBOutlet UIScrollView *scroller;
 
 @end

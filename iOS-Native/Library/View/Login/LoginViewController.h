@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Utilties.h"
+#import "Utilities.h"
 
 @interface LoginViewController : UIViewController <UITextFieldDelegate>
 

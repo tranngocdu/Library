@@ -9,7 +9,7 @@
 #import "StudentsViewController.h"
 #import "AddStudentViewController.h"
 #import "StudentDetailViewController.h"
-#import "Utilties.h"
+#import "Utilities.h"
 #import <Parse/Parse.h>
 
 @interface StudentsViewController ()
@@ -39,7 +39,7 @@
 }
 
 - (void)getListStudent {
-    Utilties *utilities = [[Utilties alloc] init];
+    Utilities *utilities = [[Utilities alloc] init];
     PFUser *currentUser = [PFUser currentUser];
     
     // Create query
@@ -113,7 +113,7 @@
                 [_tfStudentList reloadData];
             } else {
                 NSLog(@"Error when delete student %@", error);
-                Utilties *utilities = [[Utilties alloc] init];
+                Utilities *utilities = [[Utilities alloc] init];
                 [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
             }
         }];

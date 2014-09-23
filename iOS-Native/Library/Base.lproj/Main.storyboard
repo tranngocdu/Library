@@ -884,33 +884,31 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H4H-nJ-99d">
                                 <rect key="frame" x="0.0" y="66" width="320" height="453"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="190" translatesAutoresizingMaskIntoConstraints="NO" id="UUF-AS-Ll1">
-                                        <rect key="frame" x="0.0" y="-67" width="320" height="95"/>
-                                        <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Learning Objective - C 2.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWZ-Rd-FMf">
-                                        <rect key="frame" x="20" y="43" width="280" height="26"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ff" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWZ-Rd-FMf">
+                                        <rect key="frame" x="20" y="88" width="280" height="26"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Robert Clair" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQT-Ck-SHa">
-                                        <rect key="frame" x="20" y="77" width="280" height="20"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ggs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQT-Ck-SHa">
+                                        <rect key="frame" x="20" y="115" width="280" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ISBN: 0321771386" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eE9-oJ-HrN">
-                                        <rect key="frame" x="20" y="105" width="280" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="gg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eE9-oJ-HrN">
+                                        <rect key="frame" x="20" y="136" width="280" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1 Total / 1 Available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI0-m6-1gR">
-                                        <rect key="frame" x="20" y="134" width="280" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="fff" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI0-m6-1gR">
+                                        <rect key="frame" x="20" y="156" width="280" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fxt-PL-wYg">
-                                        <rect key="frame" x="60" y="163" width="200" height="40"/>
+                                        <rect key="frame" x="60" y="204" width="200" height="40"/>
                                         <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" title="Check Out">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -921,7 +919,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2E7-cl-R34">
-                                        <rect key="frame" x="60" y="259" width="200" height="40"/>
+                                        <rect key="frame" x="60" y="300" width="200" height="40"/>
                                         <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" title="Edit Book">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -932,7 +930,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doK-fQ-ZC7">
-                                        <rect key="frame" x="60" y="307" width="200" height="40"/>
+                                        <rect key="frame" x="60" y="348" width="200" height="40"/>
                                         <color key="backgroundColor" red="0.95686280729999995" green="0.4156863093" blue="0.38823533059999998" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" title="Remove book">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -943,7 +941,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hO-4Y-EtV">
-                                        <rect key="frame" x="60" y="211" width="200" height="40"/>
+                                        <rect key="frame" x="60" y="252" width="200" height="40"/>
                                         <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" title="Check In">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -953,6 +951,10 @@
                                             <action selector="checkinBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="dIi-G1-D75"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="190" translatesAutoresizingMaskIntoConstraints="NO" id="UUF-AS-Ll1">
+                                        <rect key="frame" x="60" y="-65" width="200" height="153"/>
+                                        <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
+                                    </imageView>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -964,6 +966,12 @@
                         <outlet property="btnCheckoutBook" destination="Fxt-PL-wYg" id="ERv-kC-bxm"/>
                         <outlet property="btnEditBook" destination="2E7-cl-R34" id="wS3-5n-gim"/>
                         <outlet property="btnRemoveBook" destination="doK-fQ-ZC7" id="8hF-tI-2f0"/>
+                        <outlet property="imgBookCover" destination="UUF-AS-Ll1" id="qrN-df-kub"/>
+                        <outlet property="lblBookAuthor" destination="vQT-Ck-SHa" id="okz-rg-0uh"/>
+                        <outlet property="lblBookISBN" destination="eE9-oJ-HrN" id="TGj-cv-DYj"/>
+                        <outlet property="lblBookQuantity" destination="KI0-m6-1gR" id="HaJ-l4-Mb2"/>
+                        <outlet property="lblBookTitle" destination="oWZ-Rd-FMf" id="gbN-pG-nVu"/>
+                        <outlet property="scroller" destination="H4H-nJ-99d" id="4N1-Gw-IOf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pqt-8J-8ym" userLabel="First Responder" sceneMemberID="firstResponder"/>
