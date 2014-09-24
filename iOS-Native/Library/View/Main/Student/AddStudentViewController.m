@@ -58,6 +58,9 @@
         PFObject *student = [PFObject objectWithClassName:@"Student"];
         PFUser *currentUser = [PFUser currentUser];
         
+        // Disable add student button
+        _btnAddStudent.enabled = NO;
+        
         // Assign informations
         student[@"Name"] = studentName;
         student[@"UserId"] = currentUser.objectId;
@@ -65,6 +68,8 @@
         // Save student using parse object
         [student saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if(!error) {
+                // Enable add student button
+                _btnAddStudent.enabled = YES;
                 // If successful, back to student list view
                 [self.navigationController popViewControllerAnimated:YES];
             } else {
