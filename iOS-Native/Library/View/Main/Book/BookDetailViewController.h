@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface BookDetailViewController : UIViewController <UIAlertViewDelegate> {
     NSString *bookId;
+    PFObject *book;
 }
 
 - (IBAction)checkoutBook:(id)sender;
@@ -23,7 +25,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblBookTitle;
 @property (strong, nonatomic) IBOutlet UILabel *lblBookAuthor;
 @property (strong, nonatomic) IBOutlet UILabel *lblBookISBN;
-@property (strong, nonatomic) IBOutlet UILabel *lblBookQuantity;
+@property (strong, nonatomic) IBOutlet UILabel *lblBookQuantityTotal;
+@property (strong, nonatomic) IBOutlet UILabel *lblBookQuantityAvailable;
 @property (strong, nonatomic) IBOutlet UIButton *btnCheckinBook;
 @property (strong, nonatomic) IBOutlet UIButton *btnCheckoutBook;
 @property (strong, nonatomic) IBOutlet UIButton *btnEditBook;

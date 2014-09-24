@@ -39,38 +39,47 @@
 }
 
 - (void)viewDidLoad {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
+    CGFloat scrollViewHeight = 0.0f;
+    for (UIView* view in _scroller.subviews) {
+        scrollViewHeight += view.frame.size.height;
+    }
+    
     [_scroller setScrollEnabled:YES];
-    [_scroller setContentSize:CGSizeMake(screenWidth, screenHeight)];
+    [_scroller setContentSize:CGSizeMake(320, scrollViewHeight)];
     [super viewDidLoad];
     [self decorate];
     // Do any additional setup after loading the view.
     [self.navigationItem setTitle:@"Book Detail"];
+    
+    // Hide all buttons
+    [self setAllButtonsHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"Load book");
     // Get book informations
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
-    [query getObjectInBackgroundWithId:bookId block:^(PFObject *book, NSError *error) {
+    [query getObjectInBackgroundWithId:bookId block:^(PFObject *object, NSError *error) {
         if(!error) {
-            NSLog(@"%@", book);
+            book = object;
             _lblBookTitle.text = book[@"title"];
             _lblBookAuthor.text = book[@"author"];
-            _lblBookISBN.text = book[@"ISBN"];
-            _lblBookQuantity.text = [NSString stringWithFormat:@"%@ total / %@ Available", book[@"quantity_total"], book[@"quantity_available"]];
+            _lblBookISBN.text = [NSString stringWithFormat:@"ISBN: %@",  book[@"ISBN"]];
+            _lblBookQuantityTotal.text = [NSString stringWithFormat:@"%@ Total  /", book[@"quantity_total"]];
+            _lblBookQuantityAvailable.text = [NSString stringWithFormat:@"%@ Available", book[@"quantity_available"]];
             NSString *imageUrl = book[@"cover_image"];
             [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                 _imgBookCover.image = [UIImage imageWithData:data];
             }];
+            
+            // Enable buttons
+            [self setAllButtonsHidden:NO];
         } else {
             NSLog(@"%@", error);
             Utilities *utilities = [[Utilities alloc] init];
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
         }
     }];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,6 +92,13 @@
     bookId = bId;
 }
 
+- (void)setAllButtonsHidden:(BOOL)isHidden {
+    _btnCheckinBook.hidden = isHidden;
+    _btnCheckoutBook.hidden = isHidden;
+    _btnEditBook.hidden = isHidden;
+    _btnRemoveBook.hidden = isHidden;
+}
+
 - (void)addBookManual:(id)sender {
     EditBookViewController *editView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIndentifier"];
     [self.navigationController pushViewController:editView animated:YES];
@@ -90,6 +106,7 @@
 
 - (void)checkoutBook:(id)sender {
     CheckOutBookViewController *checkoutView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckoutBookIndentifier"];
+    [checkoutView setBook:book];
     [self.navigationController pushViewController:checkoutView animated:YES];
 }
 
@@ -104,7 +121,7 @@
 
 - (IBAction)removeBook:(id)sender {
     UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Confirmation"
-                                                       message:@"Are you sure you wish to remove XXX from your collection?"
+                                                       message: [NSString stringWithFormat:@"Are you sure you wish to remove %@ from your collection?", book[@"title"]]
                                                       delegate:self
                                              cancelButtonTitle:@"No"
                                              otherButtonTitles:@"Yes", nil];
@@ -112,7 +129,10 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"%ld", (long)buttonIndex);
+    // If yes
+    if (buttonIndex == 1) {
+        NSLog(@"YES");
+    }
 }
 
 /*

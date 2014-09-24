@@ -7,7 +7,10 @@
 //
 
 #import "CheckOutBookViewController.h"
+#import "HomeViewController.h"
 #import "UIButton+AppButton.h"
+#import "Utilities.h"
+#import <Parse/Parse.h>
 
 @interface CheckOutBookViewController ()
 
@@ -36,10 +39,126 @@
     [self decorate];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    // Set view
+    _lblBookTitle.text = book[@"title"];
+    _lblBookAuthor.text = book[@"author"];
+    _lblBookISBN.text = book[@"ISBN"];
+    _lblBookQuantityAvailable.text = [NSString stringWithFormat:@"%@ Available", book[@"quantity_available"]];
+    NSString *imageUrl = book[@"cover_image"];
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        _imgBookCover.image = [UIImage imageWithData:data];
+    }];
+    
+    // Load list students
+    PFUser *currentUser = [PFUser currentUser];
+    PFQuery *query = [PFQuery queryWithClassName:@"Student"];
+    [query whereKey:@"UserId" equalTo:currentUser.objectId];
+    [query orderByDescending:@"createdAt"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error) {
+            students = objects;
+            [_tbvListStudents reloadData];
+        } else {
+            Utilities *utilities = [[Utilities alloc] init];
+            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+        }
+    }];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setBook:(PFObject *)object {
+    book = object;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [students count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"CheckOutStudentCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+   if(cell == nil) {
+       cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    PFObject *std  = [students objectAtIndex:indexPath.row];
+    cell.textLabel.text = std[@"Name"];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    student = [students objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView  cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    student = [students objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView  cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryNone;
+}
+
+- (void)checkout:(id)sender {
+    Utilities *utilities = [[Utilities alloc] init];
+    if(!student) {
+        [utilities showAlertWithTitle:@"Library" withMessage:@"Please pick a student"];
+    } else {
+        // Get book informations
+        PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
+        [query getObjectInBackgroundWithId:book.objectId block:^(PFObject *object, NSError *error) {
+            if (!error) {
+                bool isExist = false;
+                // Check user is in book students list or not
+                for (PFObject *std in book[@"studentList"]){
+                    if([std.objectId isEqual:student.objectId]) {
+                        isExist = true;
+                    }
+                }
+                
+                // If not exist, push student to students list
+                if (!isExist) {
+                    NSMutableArray *studentList = (NSMutableArray *)book[@"studentList"];
+                    [studentList addObject:student];
+                    book[@"studentList"] = studentList;
+                    
+//                    int quantityAvailable = [book[@"quantity_available"] intValue];
+//
+//                    
+//                    
+//                    // Reduce book available 1
+//                    if(book[@"quantity_available"] > 1) {
+//                        int available = (int)book[@"quantity_available"];
+//                        book[@"quantity_available"] = available - 1;
+//                    }
+                    
+                    [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                        if (!error) {
+                            // Move to home view
+                            HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
+                            [self.navigationController presentViewController:homeView animated:YES completion:^{
+                                [utilities showAlertWithTitle:@"Library" withMessage:@"Happy reading!"];
+                            }];
+                        } else {
+                            NSLog(@"Error: %@", error);
+                            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+                        }
+                    }];
+                } else {
+                    [utilities showAlertWithTitle:@"Library" withMessage:@"This student has been checked out"];
+                }
+            } else {
+                NSLog(@"Error: %@", error);
+                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            }
+        }];
+    }
 }
 
 /*
