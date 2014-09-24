@@ -128,8 +128,8 @@
                     [studentList addObject:student];
                     book[@"studentList"] = studentList;
                     
-//                    int quantityAvailable = [book[@"quantity_available"] to int];
-//                    
+//                    int quantityAvailable = [book[@"quantity_available"] intValue];
+//
 //                    
 //                    
 //                    // Reduce book available 1
