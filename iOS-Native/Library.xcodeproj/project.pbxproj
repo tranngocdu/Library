@@ -31,9 +31,14 @@
 		8C14562219B554DB009616DE /* StudentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C14562119B554DB009616DE /* StudentsViewController.m */; };
 		8C14562519B5552B009616DE /* BooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C14562419B5552B009616DE /* BooksViewController.m */; };
 		8C14562719B55A1C009616DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C14562619B55A1C009616DE /* QuartzCore.framework */; };
-		8C325EAC19C4C238005838A6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C325EA919C4C238005838A6 /* Bolts.framework */; };
-		8C325EAD19C4C238005838A6 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C325EAA19C4C238005838A6 /* Parse.framework */; };
-		8C325EAE19C4C238005838A6 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C325EAB19C4C238005838A6 /* ParseFacebookUtils.framework */; };
+		8C37C38219D32DF800692B18 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C37C38119D32DF800692B18 /* libiconv.dylib */; };
+		8C37C39319D32EAF00692B18 /* scannerOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C37C38619D32EAF00692B18 /* scannerOverlay.xib */; };
+		8C37C39419D32EAF00692B18 /* zxing-all-in-one.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C37C38719D32EAF00692B18 /* zxing-all-in-one.cpp */; };
+		8C37C39619D32EAF00692B18 /* FPPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C37C38C19D32EAF00692B18 /* FPPicker.bundle */; };
+		8C37C39719D32EAF00692B18 /* FPPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C37C38D19D32EAF00692B18 /* FPPicker.framework */; };
+		8C37C39819D32EAF00692B18 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C37C38F19D32EAF00692B18 /* Bolts.framework */; };
+		8C37C39919D32EAF00692B18 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C37C39019D32EAF00692B18 /* Parse.framework */; };
+		8C37C39A19D32EAF00692B18 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C37C39119D32EAF00692B18 /* ParseFacebookUtils.framework */; };
 		B41FABEF19C341430015A624 /* CheckOutModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B41FABEE19C341430015A624 /* CheckOutModalViewController.m */; };
 		B451E2A719C2011B0041E88C /* UIButton+AppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2A619C2011B0041E88C /* UIButton+AppButton.m */; };
 		B451E2AD19C20F010041E88C /* CheckInModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2AC19C20F010041E88C /* CheckInModalViewController.m */; };
@@ -108,6 +113,18 @@
 		8C325EA919C4C238005838A6 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "parse-library-1.3.0/Bolts.framework"; sourceTree = "<group>"; };
 		8C325EAA19C4C238005838A6 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "parse-library-1.3.0/Parse.framework"; sourceTree = "<group>"; };
 		8C325EAB19C4C238005838A6 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = "parse-library-1.3.0/ParseFacebookUtils.framework"; sourceTree = "<group>"; };
+		8C37C38119D32DF800692B18 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		8C37C38519D32EAF00692B18 /* CDVBarcodeScanner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDVBarcodeScanner.mm; sourceTree = "<group>"; };
+		8C37C38619D32EAF00692B18 /* scannerOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = scannerOverlay.xib; sourceTree = "<group>"; };
+		8C37C38719D32EAF00692B18 /* zxing-all-in-one.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "zxing-all-in-one.cpp"; sourceTree = "<group>"; };
+		8C37C38819D32EAF00692B18 /* zxing-all-in-one.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "zxing-all-in-one.h"; sourceTree = "<group>"; };
+		8C37C38A19D32EAF00692B18 /* CDVFilepicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVFilepicker.h; sourceTree = "<group>"; };
+		8C37C38B19D32EAF00692B18 /* CDVFilepicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVFilepicker.m; sourceTree = "<group>"; };
+		8C37C38C19D32EAF00692B18 /* FPPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FPPicker.bundle; sourceTree = "<group>"; };
+		8C37C38D19D32EAF00692B18 /* FPPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FPPicker.framework; sourceTree = "<group>"; };
+		8C37C38F19D32EAF00692B18 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		8C37C39019D32EAF00692B18 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		8C37C39119D32EAF00692B18 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		B41FABED19C341430015A624 /* CheckOutModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOutModalViewController.h; sourceTree = "<group>"; };
 		B41FABEE19C341430015A624 /* CheckOutModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOutModalViewController.m; sourceTree = "<group>"; };
 		B451E2A519C2011B0041E88C /* UIButton+AppButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AppButton.h"; sourceTree = "<group>"; };
@@ -143,22 +160,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C37C38219D32DF800692B18 /* libiconv.dylib in Frameworks */,
 				B4EE870519D1B2B900B195FC /* CoreFoundation.framework in Frameworks */,
+				8C37C39719D32EAF00692B18 /* FPPicker.framework in Frameworks */,
 				B4EE870319D1B2A500B195FC /* AssetsLibrary.framework in Frameworks */,
 				B4F9217919C5417C0005C612 /* SystemConfiguration.framework in Frameworks */,
+				8C37C39A19D32EAF00692B18 /* ParseFacebookUtils.framework in Frameworks */,
 				B4F9217719C541720005C612 /* StoreKit.framework in Frameworks */,
 				B4F9217519C5416A0005C612 /* Security.framework in Frameworks */,
 				8C14562719B55A1C009616DE /* QuartzCore.framework in Frameworks */,
 				B4F9217319C541520005C612 /* MobileCoreServices.framework in Frameworks */,
 				B4F9217119C541470005C612 /* libz.dylib in Frameworks */,
+				8C37C39919D32EAF00692B18 /* Parse.framework in Frameworks */,
 				B4F9216F19C5412A0005C612 /* CoreLocation.framework in Frameworks */,
 				B4F9216D19C541130005C612 /* CFNetwork.framework in Frameworks */,
+				8C37C39819D32EAF00692B18 /* Bolts.framework in Frameworks */,
 				B4F9216B19C541090005C612 /* AudioToolbox.framework in Frameworks */,
-				8C325EAE19C4C238005838A6 /* ParseFacebookUtils.framework in Frameworks */,
-				8C325EAC19C4C238005838A6 /* Bolts.framework in Frameworks */,
 				722B11EB19B45AE5009613B8 /* CoreGraphics.framework in Frameworks */,
 				722B11ED19B45AE5009613B8 /* UIKit.framework in Frameworks */,
-				8C325EAD19C4C238005838A6 /* Parse.framework in Frameworks */,
 				722B11E919B45AE5009613B8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,6 +217,7 @@
 		722B11E719B45AE5009613B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C37C38119D32DF800692B18 /* libiconv.dylib */,
 				B4EE870419D1B2B900B195FC /* CoreFoundation.framework */,
 				B4EE870219D1B2A500B195FC /* AssetsLibrary.framework */,
 				B4F9217819C5417C0005C612 /* SystemConfiguration.framework */,
@@ -230,6 +250,7 @@
 				722B11F819B45AE5009613B8 /* AppDelegate.m */,
 				722B11FA19B45AE5009613B8 /* Main.storyboard */,
 				722B120019B45AE5009613B8 /* Images.xcassets */,
+				8C37C38319D32EAF00692B18 /* Libs */,
 				722B11EF19B45AE5009613B8 /* Supporting Files */,
 			);
 			path = Library;
@@ -361,6 +382,48 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		8C37C38319D32EAF00692B18 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				8C37C38419D32EAF00692B18 /* BarcodeScanner */,
+				8C37C38919D32EAF00692B18 /* Filepicker */,
+				8C37C38E19D32EAF00692B18 /* parse-library-1.4.1 */,
+			);
+			path = Libs;
+			sourceTree = SOURCE_ROOT;
+		};
+		8C37C38419D32EAF00692B18 /* BarcodeScanner */ = {
+			isa = PBXGroup;
+			children = (
+				8C37C38519D32EAF00692B18 /* CDVBarcodeScanner.mm */,
+				8C37C38619D32EAF00692B18 /* scannerOverlay.xib */,
+				8C37C38719D32EAF00692B18 /* zxing-all-in-one.cpp */,
+				8C37C38819D32EAF00692B18 /* zxing-all-in-one.h */,
+			);
+			path = BarcodeScanner;
+			sourceTree = "<group>";
+		};
+		8C37C38919D32EAF00692B18 /* Filepicker */ = {
+			isa = PBXGroup;
+			children = (
+				8C37C38A19D32EAF00692B18 /* CDVFilepicker.h */,
+				8C37C38B19D32EAF00692B18 /* CDVFilepicker.m */,
+				8C37C38C19D32EAF00692B18 /* FPPicker.bundle */,
+				8C37C38D19D32EAF00692B18 /* FPPicker.framework */,
+			);
+			path = Filepicker;
+			sourceTree = "<group>";
+		};
+		8C37C38E19D32EAF00692B18 /* parse-library-1.4.1 */ = {
+			isa = PBXGroup;
+			children = (
+				8C37C38F19D32EAF00692B18 /* Bolts.framework */,
+				8C37C39019D32EAF00692B18 /* Parse.framework */,
+				8C37C39119D32EAF00692B18 /* ParseFacebookUtils.framework */,
+			);
+			path = "parse-library-1.4.1";
+			sourceTree = "<group>";
+		};
 		B451E2A419C201020041E88C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -449,8 +512,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				722B120119B45AE5009613B8 /* Images.xcassets in Resources */,
+				8C37C39619D32EAF00692B18 /* FPPicker.bundle in Resources */,
 				722B11F319B45AE5009613B8 /* InfoPlist.strings in Resources */,
 				722B11FC19B45AE5009613B8 /* Main.storyboard in Resources */,
+				8C37C39319D32EAF00692B18 /* scannerOverlay.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +548,7 @@
 				8C14561D19B5547B009616DE /* SettingsViewController.m in Sources */,
 				B451E2AD19C20F010041E88C /* CheckInModalViewController.m in Sources */,
 				8C14561B19B5547B009616DE /* LoginViewController.m in Sources */,
+				8C37C39419D32EAF00692B18 /* zxing-all-in-one.cpp in Sources */,
 				8C14562519B5552B009616DE /* BooksViewController.m in Sources */,
 				B41FABEF19C341430015A624 /* CheckOutModalViewController.m in Sources */,
 				72D2356E19B589A9003963E5 /* AddBookManualViewController.m in Sources */,
@@ -618,6 +684,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/parse-library-1.3.0",
 					/Users/namhuynh/Desktop/library/iOS/Library/Plugins/Filepicker,
+					"$(PROJECT_DIR)/Libs/Filepicker",
+					"$(PROJECT_DIR)/Libs/parse-library-1.4.1",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Library/Library-Prefix.pch";
@@ -637,6 +705,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/parse-library-1.3.0",
 					/Users/namhuynh/Desktop/library/iOS/Library/Plugins/Filepicker,
+					"$(PROJECT_DIR)/Libs/Filepicker",
+					"$(PROJECT_DIR)/Libs/parse-library-1.4.1",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Library/Library-Prefix.pch";
