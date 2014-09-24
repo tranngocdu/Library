@@ -14,6 +14,8 @@
 #import "UIButton+AppButton.h"
 #import <QuartzCore/QuartzCore.h>
 
+#import "BarcodeReaderViewController.h"
+
 @interface HomeViewController ()
 
 @end
@@ -41,6 +43,14 @@
 {
     [super viewDidLoad];
     [self decorate];
+
+    BarcodeReaderViewController *ba = [[BarcodeReaderViewController alloc] initWithDelegate:self];
+    [self presentViewController:ba animated:YES completion:nil];
+}
+
+- (void)barcodeReader:(BarcodeReaderViewController *)barcodeReader onFoundItem:(NSString *)content withType:(NSString *)type
+{
+    NSLog(@"Detected Item: %@, %@", content, type);
 }
 
 - (void)didReceiveMemoryWarning

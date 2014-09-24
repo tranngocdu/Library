@@ -39,6 +39,7 @@
 		8C37C39819D32EAF00692B18 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C37C38F19D32EAF00692B18 /* Bolts.framework */; };
 		8C37C39919D32EAF00692B18 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C37C39019D32EAF00692B18 /* Parse.framework */; };
 		8C37C39A19D32EAF00692B18 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C37C39119D32EAF00692B18 /* ParseFacebookUtils.framework */; };
+		8C37C39E19D344B900692B18 /* BarcodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C37C39D19D344B900692B18 /* BarcodeReaderViewController.m */; };
 		B41FABEF19C341430015A624 /* CheckOutModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B41FABEE19C341430015A624 /* CheckOutModalViewController.m */; };
 		B451E2A719C2011B0041E88C /* UIButton+AppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2A619C2011B0041E88C /* UIButton+AppButton.m */; };
 		B451E2AD19C20F010041E88C /* CheckInModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2AC19C20F010041E88C /* CheckInModalViewController.m */; };
@@ -125,6 +126,8 @@
 		8C37C38F19D32EAF00692B18 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		8C37C39019D32EAF00692B18 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		8C37C39119D32EAF00692B18 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		8C37C39C19D344B900692B18 /* BarcodeReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarcodeReaderViewController.h; sourceTree = "<group>"; };
+		8C37C39D19D344B900692B18 /* BarcodeReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarcodeReaderViewController.m; sourceTree = "<group>"; };
 		B41FABED19C341430015A624 /* CheckOutModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOutModalViewController.h; sourceTree = "<group>"; };
 		B41FABEE19C341430015A624 /* CheckOutModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOutModalViewController.m; sourceTree = "<group>"; };
 		B451E2A519C2011B0041E88C /* UIButton+AppButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AppButton.h"; sourceTree = "<group>"; };
@@ -385,6 +388,7 @@
 		8C37C38319D32EAF00692B18 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				8C37C39B19D344B900692B18 /* BarcodeReader */,
 				8C37C38419D32EAF00692B18 /* BarcodeScanner */,
 				8C37C38919D32EAF00692B18 /* Filepicker */,
 				8C37C38E19D32EAF00692B18 /* parse-library-1.4.1 */,
@@ -422,6 +426,15 @@
 				8C37C39119D32EAF00692B18 /* ParseFacebookUtils.framework */,
 			);
 			path = "parse-library-1.4.1";
+			sourceTree = "<group>";
+		};
+		8C37C39B19D344B900692B18 /* BarcodeReader */ = {
+			isa = PBXGroup;
+			children = (
+				8C37C39C19D344B900692B18 /* BarcodeReaderViewController.h */,
+				8C37C39D19D344B900692B18 /* BarcodeReaderViewController.m */,
+			);
+			path = BarcodeReader;
 			sourceTree = "<group>";
 		};
 		B451E2A419C201020041E88C /* Utilities */ = {
@@ -534,6 +547,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C37C39E19D344B900692B18 /* BarcodeReaderViewController.m in Sources */,
 				72D2357119B58F22003963E5 /* BookDetailViewController.m in Sources */,
 				B4D042AB19D06B7A003B76BE /* BookCell.m in Sources */,
 				BA0AA97419BF33FA00A19E24 /* CheckInBookViewController.m in Sources */,

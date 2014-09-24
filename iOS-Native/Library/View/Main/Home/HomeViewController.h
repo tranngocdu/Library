@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BarcodeReaderViewController.h"
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : UIViewController <BarcodeReaderDelegate>
 
 - (IBAction)checkin:(id)sender;
 - (IBAction)checkout:(id)sender;
