@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface BookDetailViewController : UIViewController <UIAlertViewDelegate> {
+@interface BookDetailViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate> {
     NSString *bookId;
     PFObject *book;
+    NSArray *studentsList;
 }
 
 - (IBAction)checkoutBook:(id)sender;
@@ -32,5 +33,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnEditBook;
 @property (strong, nonatomic) IBOutlet UIButton *btnRemoveBook;
 @property (strong, nonatomic) IBOutlet UIScrollView *scroller;
+@property (strong, nonatomic) IBOutlet UILabel *lblLoaned;
+@property (strong, nonatomic) IBOutlet UITableView *tbvStudentsLoaned;
 
 @end

@@ -87,16 +87,9 @@
         book[@"cover_image"] = @"http://image.mp3.zdn.vn/thumb/165_165/covers/3/3/33e23a4ab94e902d9850109f4fba0e24_1411148582.jpg";
         book[@"User"] = currentUser.objectId;
         book[@"studentList"] = [NSMutableArray array];
-        book[@"quantity_total"] = bookQuantity;
+        book[@"quantity_total"] = @([bookQuantity intValue]);
         book[@"quantity_out"] = @0;
-        book[@"quantity_available"] = bookQuantity;
-        
-//        // Get current date in ISO format
-//        NSDateFormatter *currentDate = [[NSDateFormatter alloc] init];
-//        [currentDate setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-//        
-//        book[@"createdAt"] = [currentDate stringFromDate:[NSDate date]];
-//        book[@"updatedAt"] = [currentDate stringFromDate:[NSDate date]];
+        book[@"quantity_available"] = @([bookQuantity intValue]);
         
         [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if(!error) {

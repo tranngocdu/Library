@@ -34,7 +34,6 @@
 		8C325EAC19C4C238005838A6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C325EA919C4C238005838A6 /* Bolts.framework */; };
 		8C325EAD19C4C238005838A6 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C325EAA19C4C238005838A6 /* Parse.framework */; };
 		8C325EAE19C4C238005838A6 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C325EAB19C4C238005838A6 /* ParseFacebookUtils.framework */; };
-		B41FABEF19C341430015A624 /* CheckOutModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B41FABEE19C341430015A624 /* CheckOutModalViewController.m */; };
 		B451E2A719C2011B0041E88C /* UIButton+AppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2A619C2011B0041E88C /* UIButton+AppButton.m */; };
 		B451E2AD19C20F010041E88C /* CheckInModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2AC19C20F010041E88C /* CheckInModalViewController.m */; };
 		B47034F619CB29B900139B00 /* StudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B47034F519CB29B900139B00 /* StudentCell.m */; };
@@ -108,8 +107,6 @@
 		8C325EA919C4C238005838A6 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "parse-library-1.3.0/Bolts.framework"; sourceTree = "<group>"; };
 		8C325EAA19C4C238005838A6 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "parse-library-1.3.0/Parse.framework"; sourceTree = "<group>"; };
 		8C325EAB19C4C238005838A6 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = "parse-library-1.3.0/ParseFacebookUtils.framework"; sourceTree = "<group>"; };
-		B41FABED19C341430015A624 /* CheckOutModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOutModalViewController.h; sourceTree = "<group>"; };
-		B41FABEE19C341430015A624 /* CheckOutModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOutModalViewController.m; sourceTree = "<group>"; };
 		B451E2A519C2011B0041E88C /* UIButton+AppButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AppButton.h"; sourceTree = "<group>"; };
 		B451E2A619C2011B0041E88C /* UIButton+AppButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AppButton.m"; sourceTree = "<group>"; };
 		B451E2AB19C20F010041E88C /* CheckInModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckInModalViewController.h; sourceTree = "<group>"; };
@@ -322,8 +319,6 @@
 				8C14561319B5547B009616DE /* HomeViewController.m */,
 				B451E2AB19C20F010041E88C /* CheckInModalViewController.h */,
 				B451E2AC19C20F010041E88C /* CheckInModalViewController.m */,
-				B41FABED19C341430015A624 /* CheckOutModalViewController.h */,
-				B41FABEE19C341430015A624 /* CheckOutModalViewController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -484,7 +479,6 @@
 				B451E2AD19C20F010041E88C /* CheckInModalViewController.m in Sources */,
 				8C14561B19B5547B009616DE /* LoginViewController.m in Sources */,
 				8C14562519B5552B009616DE /* BooksViewController.m in Sources */,
-				B41FABEF19C341430015A624 /* CheckOutModalViewController.m in Sources */,
 				72D2356E19B589A9003963E5 /* AddBookManualViewController.m in Sources */,
 				8C14562219B554DB009616DE /* StudentsViewController.m in Sources */,
 				8C14561C19B5547B009616DE /* HomeViewController.m in Sources */,

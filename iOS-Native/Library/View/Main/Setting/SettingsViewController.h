@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
-@interface SettingsViewController : UIViewController <UITextFieldDelegate>
+@interface SettingsViewController : UIViewController <UITextFieldDelegate> {
+    PFUser *user;
+}
 
+- (IBAction)update:(id)sender;
 - (IBAction)logout:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UITextField *tfEmail;

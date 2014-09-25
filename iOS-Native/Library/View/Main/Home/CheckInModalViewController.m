@@ -7,21 +7,36 @@
 //
 
 #import "CheckInModalViewController.h"
-#import "HomeViewController.h"
+#import "BooksViewController.h"
 
 @implementation CheckInModalViewController
 
+- (void)viewDidAppear:(BOOL)animated {
+    if (checkType == 1) {
+        _lblCheck.text = @"Check In";
+    } else {
+        _lblCheck.text = @"Check Out";
+    }
+}
+
+- (void)setType:(int)typeNum {
+    checkType = typeNum;
+}
+
 - (void)scan:(id)sender {
-    NSLog(@"Scan");
+    if (checkType == 1) {
+        NSLog(@"Check in");
+    } else {
+        NSLog(@"Check out");
+    }
     [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (void)list:(id)sender {
-    NSLog(@"List");
-    [self.presentingViewController dismissViewControllerAnimated:NO completion:^{
-        HomeViewController *homeView = [[HomeViewController alloc] init];
-        [homeView presentBooksView];
-    }];
+//    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+//        BooksViewController *bookView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
+//        [self.navigationController presentViewController:bookView animated:YES completion:nil];
+//    }];
 }
 
 - (void)cancel:(id)sender {

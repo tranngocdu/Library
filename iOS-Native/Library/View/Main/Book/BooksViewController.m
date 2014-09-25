@@ -70,6 +70,7 @@
     
     // Get student
     PFObject *book = [books objectAtIndex:indexPath.row];
+
     cell.lblBookAuthor.text = book[@"author"];
     cell.lblBookName.text = book[@"title"];
     
@@ -101,7 +102,7 @@
     [query whereKey:@"User" equalTo:currentUser.objectId];
     
     if (type == 0) {
-        [query whereKey:@"quantity_available" greaterThan:@"0"];
+        [query whereKey:@"quantity_available" greaterThan:@0];
     } else if (type == 1){
         [query whereKey:@"quantity_out" greaterThan:@0];
     }
@@ -112,6 +113,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error) {
             books = (NSMutableArray *)objects;
+
             // Rerender table view
             [_listBooks reloadData];
         } else {

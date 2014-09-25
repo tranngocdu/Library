@@ -50,17 +50,18 @@
     [self decorate];
     // Do any additional setup after loading the view.
     [self.navigationItem setTitle:@"Book Detail"];
-    
-    // Hide all buttons
-    [self setAllButtonsHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"Load book");
+    // Hide all buttons
+    [self setAllButtonsHidden:YES];
+    
     // Get book informations
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     [query getObjectInBackgroundWithId:bookId block:^(PFObject *object, NSError *error) {
         if(!error) {
+            NSLog(@"%@", object);
             book = object;
             _lblBookTitle.text = book[@"title"];
             _lblBookAuthor.text = book[@"author"];
@@ -72,6 +73,15 @@
                 _imgBookCover.image = [UIImage imageWithData:data];
             }];
             
+            // Display list of students loaned this book
+            studentsList = book[@"studentList"];
+            
+            if ([studentsList count] > 0) {
+                _lblLoaned.hidden = NO;
+                _tbvStudentsLoaned.hidden = NO;
+                [_tbvStudentsLoaned reloadData];
+            }
+            
             // Enable buttons
             [self setAllButtonsHidden:NO];
         } else {
@@ -80,6 +90,23 @@
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
         }
     }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [studentsList count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"studentCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    PFObject *student = [studentsList objectAtIndex:indexPath.row];
+    cell.textLabel.text = @"dasdas";
+    
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning
@@ -106,7 +133,7 @@
 
 - (void)checkoutBook:(id)sender {
     CheckOutBookViewController *checkoutView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckoutBookIndentifier"];
-    [checkoutView setBook:book];
+    [checkoutView setBookId:book.objectId];
     [self.navigationController pushViewController:checkoutView animated:YES];
 }
 
