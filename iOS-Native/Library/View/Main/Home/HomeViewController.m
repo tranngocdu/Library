@@ -42,18 +42,57 @@
 {
     [super viewDidLoad];
     [self decorate];
+}
 
-    BarcodeReaderViewController *ba = [[BarcodeReaderViewController alloc] initWithDelegate:self];
-    [self.navigationController pushViewController:ba animated:YES];
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"viewWillAppear -------- Show tab bar when hidden");
+    self.tabBarController.tabBar.hidden = NO;
+}
+
+- (void)checkinModal:(CheckInModalViewController *)checkInModal type:(int)type onClickAt:(int)buttonIndex
+{
+    NSLog(@"Click at : %d, %d", type, buttonIndex);
+
+    if(buttonIndex == 1) {
+        // Scan
+
+#if TARGET_IPHONE_SIMULATOR
+        NSString *cheatISBN = @"123456789";
+        NSString *cheatType = @"org.iso.QRCode";
+        [self barcodeReader:nil onFoundItem:cheatISBN withType:cheatType];
+#else
+        BarcodeReaderViewController *barcodeReader = [[BarcodeReaderViewController alloc] initWithDelegate:self];
+        [self.navigationController pushViewController:barcodeReader animated:YES];
+        self.tabBarController.tabBar.hidden = YES;
+#endif
+
+    } else if(buttonIndex == 2) {
+        // List
+
+    } else if(buttonIndex == 3) {
+        // Cancel
+
+    }
 }
 
 - (void)barcodeReader:(BarcodeReaderViewController *)barcodeReader onFoundItem:(NSString *)content withType:(NSString *)type
 {
-    NSLog(@"Detected Item: %@, %@", content, type);
+    NSLog(@"Detected Item: %@, contentType %@, modalType: %d", content, type, actionModalType);
 
-    [self.navigationController popViewControllerAnimated:YES];
+    // Boy xu ly cai nay nhe
+    if(actionModalType == 1) {
+        // Checkin
 
-    //[barcodeReader dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        // Checkout
+
+    }
+
+    // Check to ignore case of Simulator not show Barcode Reader View Controller
+    if([self.navigationController.viewControllers count] > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,9 +107,11 @@
     
     [checkView setTransitioningDelegate:self.transitioningDelegate];
     checkView.modalPresentationStyle = UIModalPresentationCustom;
-    
+
+    actionModalType = 1;
     [checkView setType:1];
-    
+    [checkView setDelegate:self];
+
     [self presentViewController:checkView animated:NO completion:nil];
 }
 
@@ -80,8 +121,10 @@
     
     [checkView setTransitioningDelegate:self.transitioningDelegate];
     checkView.modalPresentationStyle = UIModalPresentationCustom;
-    
+
+    actionModalType = 2;
     [checkView setType:2];
+    [checkView setDelegate:self];
     
     [self presentViewController:checkView animated:NO completion:nil];
 }

@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "BarcodeReaderViewController.h"
+#import "CheckInModalViewController.h"
 
-@interface HomeViewController : UIViewController <BarcodeReaderDelegate>
+@interface HomeViewController : UIViewController <BarcodeReaderDelegate, CheckInModalDelegate>
+{
+    int actionModalType;
+}
 
 - (IBAction)checkin:(id)sender;
 - (IBAction)checkout:(id)sender;

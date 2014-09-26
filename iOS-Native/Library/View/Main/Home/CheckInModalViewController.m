@@ -23,25 +23,25 @@
     checkType = typeNum;
 }
 
+-(void) dismissWithClickPosition:(int)clickPos;
+{
+    [self.presentingViewController dismissViewControllerAnimated:NO completion:^ {
+        if(self.delegate && [self.delegate respondsToSelector:@selector(checkinModal:type:onClickAt:)]) {
+            [self.delegate checkinModal:self type:checkType onClickAt:clickPos];
+        }
+    }];
+}
+
 - (void)scan:(id)sender {
-    
-    if (checkType == 1) {
-        NSLog(@"Check in");
-    } else {
-        NSLog(@"Check out");
-    }
-    [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+    [self dismissWithClickPosition:1];
 }
 
 - (void)list:(id)sender {
-//    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:^{
-//        BooksViewController *bookView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
-//        [self.navigationController presentViewController:bookView animated:YES completion:nil];
-//    }];
+    [self dismissWithClickPosition:2];
 }
 
 - (void)cancel:(id)sender {
-    [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+    [self dismissWithClickPosition:3];
 }
 
 @end
