@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "LoginViewController.h"
+#import "HomeViewController.h"
 #import "Constants.h"
 #import "UIButton+AppButton.h"
 #import <Parse/Parse.h>
@@ -37,14 +38,23 @@
     
     _tfEmail.delegate = self;
     _tfCurrentPassword.delegate = self;
+    _tfCurrentPassword.secureTextEntry = YES;
     _tfNewPassword.delegate = self;
+    _tfNewPassword.secureTextEntry = YES;
     _tfNewPasswordConfirm.delegate = self;
+    _tfNewPasswordConfirm.secureTextEntry = YES;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self decorate];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    user = [PFUser currentUser];
+    _tfEmail.text = user[@"username"];
+    _tfEmail.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,10 +84,53 @@
     return YES;
 }
 
+- (void)update:(id)sender {
+    NSString *currentPassword = _tfCurrentPassword.text;
+    NSString *newPassword = _tfNewPassword.text;
+    NSString *newPasswordConfirm = _tfNewPasswordConfirm.text;
+    
+    Utilities *utilities = [[Utilities alloc] init];
+    
+    if([currentPassword isEqualToString:@""] ||
+       [newPassword isEqualToString:@""]) {
+        [utilities showAlertWithTitle:@"Check Password" withMessage:@"The password you entered was incorrect."];
+    } else if(![newPassword isEqualToString:newPasswordConfirm]) {
+        [utilities showAlertWithTitle:@"Try again" withMessage:@"The passwords did not match."];
+    } else {
+        // Login to check current password
+        [PFUser logInWithUsernameInBackground:user[@"username"] password:currentPassword block:^(PFUser *checkuser, NSError *error) {
+            if (!error) {
+                user.password = newPassword;
+                [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if(!error) {
+                        // Relogin with new password
+                        [PFUser logInWithUsernameInBackground:user[@"username"] password:newPassword block:^(PFUser *user, NSError *error) {
+                            if (!error) {
+                                HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
+                                [self.navigationController presentViewController:homeView animated:YES completion:^{
+                                    [utilities showAlertWithTitle:@"Changed" withMessage:@"Settings have been changed."];
+                                }];
+                            } else {
+                                NSLog(@"Error: %@", error);
+                                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error."];
+                            }
+                        }];
+                    } else {
+                        NSLog(@"Error: %@", error);
+                        [utilities showAlertWithTitle:@"Error" withMessage:@"Server error."];
+                    }
+                }];
+            } else {
+                NSLog(@"Error: %@", error);
+                [utilities showAlertWithTitle:@"Error" withMessage:@"Wrong current password."];
+            }
+        }];
+    }
+}
+
 - (void)logout:(id)sender {
     [PFUser logOut];
-    LoginViewController *loginView = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginIndentifier"];
-    [self.navigationController presentViewController:loginView animated:YES completion:nil];
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

@@ -50,13 +50,9 @@
     [self decorate];
     // Do any additional setup after loading the view.
     [self.navigationItem setTitle:@"Book Detail"];
-    
-    // Hide all buttons
-    [self setAllButtonsHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"Load book");
     // Get book informations
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     [query getObjectInBackgroundWithId:bookId block:^(PFObject *object, NSError *error) {
@@ -72,14 +68,60 @@
                 _imgBookCover.image = [UIImage imageWithData:data];
             }];
             
-            // Enable buttons
-            [self setAllButtonsHidden:NO];
+            // If have students checked out, load students informations
+            if ([book[@"studentList"] count] > 0) {
+                NSMutableArray *stds = [[NSMutableArray alloc] init];
+                for (PFObject *std in book[@"studentList"]) {
+                    [stds addObject:std.objectId];
+                }
+                
+                PFQuery *stdQuery = [PFQuery queryWithClassName:@"Student"];
+                [stdQuery whereKey:@"objectId" containedIn:stds];
+                
+                [stdQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    studentsList = objects;
+                    _lblLoaned.hidden = NO;
+                    _tbvStudentsLoaned.hidden = NO;
+                    _viewButtons.hidden = NO;
+                    
+                    // Set height of table view
+                    int rowHeight = 44;
+                    float tbvHeight = rowHeight * [studentsList count];
+                    _tbvStudentsLoaned.frame = CGRectMake(_tbvStudentsLoaned.frame.origin.x, _tbvStudentsLoaned.frame.origin.y, _tbvStudentsLoaned.frame.size.width, tbvHeight);
+                    
+                    NSLog(@"%f", tbvHeight);
+                    
+                    CGRect theFrame = [_viewButtons frame];
+                    theFrame.origin.y = 1000;
+                    
+                    _viewButtons.frame = theFrame;
+                    
+                    [_tbvStudentsLoaned reloadData];
+                }];
+            }
         } else {
             NSLog(@"%@", error);
             Utilities *utilities = [[Utilities alloc] init];
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
         }
     }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [studentsList count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"studentCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    PFObject *student = [studentsList objectAtIndex:indexPath.row];
+    cell.textLabel.text = student[@"Name"];
+    
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,13 +134,6 @@
     bookId = bId;
 }
 
-- (void)setAllButtonsHidden:(BOOL)isHidden {
-    _btnCheckinBook.hidden = isHidden;
-    _btnCheckoutBook.hidden = isHidden;
-    _btnEditBook.hidden = isHidden;
-    _btnRemoveBook.hidden = isHidden;
-}
-
 - (void)addBookManual:(id)sender {
     EditBookViewController *editView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIndentifier"];
     [self.navigationController pushViewController:editView animated:YES];
@@ -106,17 +141,20 @@
 
 - (void)checkoutBook:(id)sender {
     CheckOutBookViewController *checkoutView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckoutBookIndentifier"];
-    [checkoutView setBook:book];
+    [checkoutView setBookId:book.objectId];
     [self.navigationController pushViewController:checkoutView animated:YES];
 }
 
 - (void)checkinBook:(id)sender {
     CheckInBookViewController *checkinView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckinBookIndentifier"];
+    [checkinView setBookId:book.objectId];
     [self.navigationController pushViewController:checkinView animated:YES];
 }
 
 - (void)editBook:(id)sender {
-    NSLog(@"Edit book");
+    EditBookViewController *editView = [self.storyboard instantiateViewControllerWithIdentifier:@"EditBookIdentifier"];
+    [editView setBookId:book.objectId];
+    [self.navigationController pushViewController:editView animated:YES];
 }
 
 - (IBAction)removeBook:(id)sender {
@@ -131,7 +169,15 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     // If yes
     if (buttonIndex == 1) {
-        NSLog(@"YES");
+        [book deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                NSLog(@"Error: %@", error);
+                Utilities *utilities = [[Utilities alloc] init];
+                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error."];
+            }
+        }];
     }
 }
 

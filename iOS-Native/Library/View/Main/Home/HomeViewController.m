@@ -8,7 +8,6 @@
 
 #import "HomeViewController.h"
 #import "CheckInModalViewController.h"
-#import "CheckOutModalViewController.h"
 #import "BooksViewController.h"
 #import "Constants.h"
 #import "UIButton+AppButton.h"
@@ -45,12 +44,16 @@
     [self decorate];
 
     BarcodeReaderViewController *ba = [[BarcodeReaderViewController alloc] initWithDelegate:self];
-    [self presentViewController:ba animated:YES completion:nil];
+    [self.navigationController pushViewController:ba animated:YES];
 }
 
 - (void)barcodeReader:(BarcodeReaderViewController *)barcodeReader onFoundItem:(NSString *)content withType:(NSString *)type
 {
     NSLog(@"Detected Item: %@, %@", content, type);
+
+    [self.navigationController popViewControllerAnimated:YES];
+
+    //[barcodeReader dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,24 +64,30 @@
 
 - (void)checkin:(id)sender {
     // Add modal view
-    CheckInModalViewController *checkinView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckInModalIndentifier"];
+    CheckInModalViewController *checkView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckInModalIdentifier"];
     
-    [checkinView setTransitioningDelegate:self.transitioningDelegate];
-    checkinView.modalPresentationStyle = UIModalPresentationCustom;
-    [self presentViewController:checkinView animated:NO completion:nil];
+    [checkView setTransitioningDelegate:self.transitioningDelegate];
+    checkView.modalPresentationStyle = UIModalPresentationCustom;
+    
+    [checkView setType:1];
+    
+    [self presentViewController:checkView animated:NO completion:nil];
 }
 
 - (void)checkout:(id)sender {
     // Add modal view
-    CheckInModalViewController *checkoutView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckOutModalIndentifier"];
+    CheckInModalViewController *checkView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckInModalIdentifier"];
     
-    [checkoutView setTransitioningDelegate:self.transitioningDelegate];
-    checkoutView.modalPresentationStyle = UIModalPresentationCustom;
-    [self presentViewController:checkoutView animated:NO completion:nil];
+    [checkView setTransitioningDelegate:self.transitioningDelegate];
+    checkView.modalPresentationStyle = UIModalPresentationCustom;
+    
+    [checkView setType:2];
+    
+    [self presentViewController:checkView animated:NO completion:nil];
 }
 
 - (void)presentBooksView {
-    BooksViewController *booksView = [self.storyboard instantiateViewControllerWithIdentifier:@"BooksViewIdentifier"];
+    BooksViewController *booksView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
     NSLog(@"Present view");
     [self.navigationController presentViewController:booksView animated:YES completion:nil];
 }

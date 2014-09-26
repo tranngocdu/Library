@@ -7,9 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
-@interface CheckInBookViewController : UIViewController
+@interface CheckInBookViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+    NSString *bookId;
+    PFObject *book;
+    PFObject *student;
+    NSMutableArray *students;
+}
 
+@property (strong, nonatomic) IBOutlet UITableView *tbvListStudents;
 @property (strong, nonatomic) IBOutlet UIButton *btnCheckin;
+@property (strong, nonatomic) IBOutlet UIImageView *imgBookCover;
+@property (strong, nonatomic) IBOutlet UILabel *lblBookTitle;
+@property (strong, nonatomic) IBOutlet UILabel *lblBookAuthor;
+@property (strong, nonatomic) IBOutlet UILabel *lblBookISBN;
+@property (strong, nonatomic) IBOutlet UILabel *lblBookQuantityAvailable;
+@property (strong, nonatomic) IBOutlet UILabel *lblPickName;
+
+- (IBAction)checkin:(id)sender;
+- (void)setBookId:(NSString *)objectId;
 
 @end

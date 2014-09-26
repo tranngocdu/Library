@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 
 @interface CheckOutBookViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+    NSString *bookId;
     PFObject *book;
     PFObject *student;
     NSArray *students;
@@ -23,7 +24,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblBookISBN;
 @property (strong, nonatomic) IBOutlet UILabel *lblBookQuantityAvailable;
 
-- (void)setBook:(PFObject *)object;
+- (void)setBookId:(NSString *)objectId;
 - (IBAction)checkout:(id)sender;
 
 @end

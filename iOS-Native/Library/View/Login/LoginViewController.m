@@ -58,6 +58,9 @@
         HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
         [self.navigationController presentViewController:homeView animated:NO completion:nil];
     }
+    
+    self.tfPassword.text = @"";
+    self.tfEmail.text = @"";
 }
 
 - (void)didReceiveMemoryWarning
