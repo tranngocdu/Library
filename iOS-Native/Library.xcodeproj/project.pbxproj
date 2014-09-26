@@ -40,10 +40,6 @@
 		8C37C39919D32EAF00692B18 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C37C39019D32EAF00692B18 /* Parse.framework */; };
 		8C37C39A19D32EAF00692B18 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C37C39119D32EAF00692B18 /* ParseFacebookUtils.framework */; };
 		8C37C39E19D344B900692B18 /* BarcodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C37C39D19D344B900692B18 /* BarcodeReaderViewController.m */; };
-		B41FABEF19C341430015A624 /* CheckOutModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B41FABEE19C341430015A624 /* CheckOutModalViewController.m */; };
-		8C325EAC19C4C238005838A6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C325EA919C4C238005838A6 /* Bolts.framework */; };
-		8C325EAD19C4C238005838A6 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C325EAA19C4C238005838A6 /* Parse.framework */; };
-		8C325EAE19C4C238005838A6 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C325EAB19C4C238005838A6 /* ParseFacebookUtils.framework */; };
 		B451E2A719C2011B0041E88C /* UIButton+AppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2A619C2011B0041E88C /* UIButton+AppButton.m */; };
 		B451E2AD19C20F010041E88C /* CheckInModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2AC19C20F010041E88C /* CheckInModalViewController.m */; };
 		B47034F619CB29B900139B00 /* StudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B47034F519CB29B900139B00 /* StudentCell.m */; };
@@ -114,10 +110,7 @@
 		8C14562319B5552B009616DE /* BooksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksViewController.h; sourceTree = "<group>"; };
 		8C14562419B5552B009616DE /* BooksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksViewController.m; sourceTree = "<group>"; };
 		8C14562619B55A1C009616DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		8C325EA919C4C238005838A6 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "parse-library-1.3.0/Bolts.framework"; sourceTree = "<group>"; };
-		8C325EAA19C4C238005838A6 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "parse-library-1.3.0/Parse.framework"; sourceTree = "<group>"; };
-		8C325EAB19C4C238005838A6 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = "parse-library-1.3.0/ParseFacebookUtils.framework"; sourceTree = "<group>"; };
-	8C37C38119D32DF800692B18 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		8C37C38119D32DF800692B18 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		8C37C38519D32EAF00692B18 /* CDVBarcodeScanner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDVBarcodeScanner.mm; sourceTree = "<group>"; };
 		8C37C38619D32EAF00692B18 /* scannerOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = scannerOverlay.xib; sourceTree = "<group>"; };
 		8C37C38719D32EAF00692B18 /* zxing-all-in-one.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "zxing-all-in-one.cpp"; sourceTree = "<group>"; };
@@ -131,8 +124,6 @@
 		8C37C39119D32EAF00692B18 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		8C37C39C19D344B900692B18 /* BarcodeReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarcodeReaderViewController.h; sourceTree = "<group>"; };
 		8C37C39D19D344B900692B18 /* BarcodeReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarcodeReaderViewController.m; sourceTree = "<group>"; };
-		B41FABED19C341430015A624 /* CheckOutModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOutModalViewController.h; sourceTree = "<group>"; };
-		B41FABEE19C341430015A624 /* CheckOutModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOutModalViewController.m; sourceTree = "<group>"; };
 		B451E2A519C2011B0041E88C /* UIButton+AppButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AppButton.h"; sourceTree = "<group>"; };
 		B451E2A619C2011B0041E88C /* UIButton+AppButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AppButton.m"; sourceTree = "<group>"; };
 		B451E2AB19C20F010041E88C /* CheckInModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckInModalViewController.h; sourceTree = "<group>"; };
@@ -234,9 +225,6 @@
 				B4F9216E19C5412A0005C612 /* CoreLocation.framework */,
 				B4F9216C19C541130005C612 /* CFNetwork.framework */,
 				B4F9216A19C541090005C612 /* AudioToolbox.framework */,
-				8C325EA919C4C238005838A6 /* Bolts.framework */,
-				8C325EAA19C4C238005838A6 /* Parse.framework */,
-				8C325EAB19C4C238005838A6 /* ParseFacebookUtils.framework */,
 				8C14562619B55A1C009616DE /* QuartzCore.framework */,
 				722B11E819B45AE5009613B8 /* Foundation.framework */,
 				722B11EA19B45AE5009613B8 /* CoreGraphics.framework */,
