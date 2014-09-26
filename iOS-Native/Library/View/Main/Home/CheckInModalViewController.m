@@ -24,6 +24,7 @@
 }
 
 - (void)scan:(id)sender {
+    
     if (checkType == 1) {
         NSLog(@"Check in");
     } else {

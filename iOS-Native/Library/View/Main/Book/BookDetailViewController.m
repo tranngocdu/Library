@@ -73,6 +73,9 @@
                 _imgBookCover.image = [UIImage imageWithData:data];
             }];
             
+            // Get student informations
+            for(PFObject *std in )
+            
             // Display list of students loaned this book
             studentsList = book[@"studentList"];
             
@@ -103,7 +106,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    PFObject *student = [studentsList objectAtIndex:indexPath.row];
+//    PFObject *student = [studentsList objectAtIndex:indexPath.row];
     cell.textLabel.text = @"dasdas";
     
     return cell;
@@ -139,6 +142,7 @@
 
 - (void)checkinBook:(id)sender {
     CheckInBookViewController *checkinView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckinBookIndentifier"];
+    [checkinView setBookId:book.objectId];
     [self.navigationController pushViewController:checkinView animated:YES];
 }
 
@@ -158,7 +162,15 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     // If yes
     if (buttonIndex == 1) {
-        NSLog(@"YES");
+        [book deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                NSLog(@"Error: %@", error);
+                Utilities *utilities = [[Utilities alloc] init];
+                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error."];
+            }
+        }];
     }
 }
 
