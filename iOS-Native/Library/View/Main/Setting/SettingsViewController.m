@@ -131,11 +131,6 @@
 - (void)logout:(id)sender {
     [PFUser logOut];
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    /*
-    return;
-    LoginViewController *loginView = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginIdentifier"];
-    [self.navigationController pushViewController:loginView animated:YES];
-    */
 }
 
 /*

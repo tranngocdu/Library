@@ -46,6 +46,9 @@
         if (!error) {
             book = object;
             // Set view
+            _lblPickName.hidden = NO;
+            _btnCheckin.hidden = NO;
+            
             _lblBookTitle.text = book[@"title"];
             _lblBookAuthor.text = book[@"author"];
             _lblBookISBN.text = book[@"ISBN"];
@@ -55,8 +58,22 @@
                 _imgBookCover.image = [UIImage imageWithData:data];
             }];
             
-            students = book[@"studentList"];
-            [_tbvListStudents reloadData];
+            // If have students checked out, load students informations
+            if ([book[@"studentList"] count] > 0) {
+                NSMutableArray *stds = [[NSMutableArray alloc] init];
+                for (PFObject *std in book[@"studentList"]) {
+                    [stds addObject:std.objectId];
+                }
+                
+                PFQuery *stdQuery = [PFQuery queryWithClassName:@"Student"];
+                [stdQuery whereKey:@"objectId" containedIn:stds];
+                
+                [stdQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    students = (NSMutableArray *)objects;
+                    _tbvListStudents.hidden = NO;
+                    [_tbvListStudents reloadData];
+                }];
+            }
         } else {
             NSLog(@"Error: %@", error);
             Utilities *utilities = [[Utilities alloc] init];
@@ -81,8 +98,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-//    PFObject *std  = [students objectAtIndex:indexPath.row];
-    cell.textLabel.text = @"asdasds";
+    PFObject *std  = [students objectAtIndex:indexPath.row];
+    cell.textLabel.text = std[@"Name"];
     return cell;
 }
 
@@ -105,6 +122,17 @@
     NSLog(@"fetch book with id: %@", book.objectId);
     [query getObjectInBackgroundWithId:book.objectId block:^(PFObject *object, NSError *error) {
         if (!error) {
+            book = object;
+            // Slice student out of studentList
+            NSInteger count = [students count];
+            for (NSInteger index = (count - 1); index >= 0; index--) {
+                PFObject *std = students[index];
+                if ([std.objectId isEqualToString:student.objectId]) {
+                    [students removeObjectAtIndex:index];
+                }
+            }
+            book[@"studentList"] = students;
+            
             // Check available quantity
             int quantityAvailable = [book[@"quantity_available"] intValue];
             // Increase available books 1
@@ -116,7 +144,7 @@
             
             book[@"quantity_available"] = @(quantityAvailable);
             book[@"quantity_out"] = @(quantityOut);
-            
+
             [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {
                     // Move to home view

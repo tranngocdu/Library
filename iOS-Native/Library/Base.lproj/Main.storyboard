@@ -10,8 +10,8 @@
             <objects>
                 <viewController storyboardIdentifier="LoginIdentifier" id="vzw-0f-VbL" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="s9V-6J-y2b"/>
-                        <viewControllerLayoutGuide type="bottom" id="For-aQ-Kdq"/>
+                        <viewControllerLayoutGuide type="top" id="pr5-1W-Cg7"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dml-3u-TnL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DsJ-fK-1DU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -96,8 +96,8 @@
             <objects>
                 <viewController id="Sto-N4-iTd" customClass="SignUpViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="wHD-BK-ofP"/>
-                        <viewControllerLayoutGuide type="bottom" id="fBJ-4d-ThY"/>
+                        <viewControllerLayoutGuide type="top" id="Z9a-fs-QJC"/>
+                        <viewControllerLayoutGuide type="bottom" id="oRf-0P-11W"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zJs-Zg-Sts">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -178,8 +178,8 @@
             <objects>
                 <viewController id="ciZ-ow-C1C" customClass="SettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="C4u-iu-x1y"/>
-                        <viewControllerLayoutGuide type="bottom" id="fsG-YX-3hY"/>
+                        <viewControllerLayoutGuide type="top" id="Cd7-Qc-m9G"/>
+                        <viewControllerLayoutGuide type="bottom" id="0w4-eS-0C8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="004-RJ-8gn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -274,8 +274,8 @@
             <objects>
                 <viewController storyboardIdentifier="StudentDetailIdentifier" id="Ook-B9-LmN" customClass="StudentDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="oxW-iL-1Qq"/>
-                        <viewControllerLayoutGuide type="bottom" id="SM8-6c-PAU"/>
+                        <viewControllerLayoutGuide type="top" id="vKG-6p-TMP"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZvG-68-MvG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Wzn-t7-CnM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -312,8 +312,8 @@
             <objects>
                 <viewController id="Ud5-mW-tXV" customClass="StudentsViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2Bl-TX-agt"/>
-                        <viewControllerLayoutGuide type="bottom" id="NAd-Kk-wJg"/>
+                        <viewControllerLayoutGuide type="top" id="d1N-lI-Rry"/>
+                        <viewControllerLayoutGuide type="bottom" id="7l6-1b-Xau"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Jdu-kL-YEM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -378,8 +378,8 @@
             <objects>
                 <viewController storyboardIdentifier="AddStudentIndentifier" id="KmI-or-enk" customClass="AddStudentViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Fa0-bY-mS7"/>
-                        <viewControllerLayoutGuide type="bottom" id="bRx-Qz-asL"/>
+                        <viewControllerLayoutGuide type="top" id="RJu-j8-Ksz"/>
+                        <viewControllerLayoutGuide type="bottom" id="urM-mH-UMQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="f7z-Er-45k">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -435,8 +435,8 @@
             <objects>
                 <viewController storyboardIdentifier="HomeIndentifier" id="drF-sU-Nyg" customClass="HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="tbH-5B-j3n"/>
-                        <viewControllerLayoutGuide type="bottom" id="GJ1-1a-2EJ"/>
+                        <viewControllerLayoutGuide type="top" id="WeH-Ms-OBP"/>
+                        <viewControllerLayoutGuide type="bottom" id="DRP-TZ-D58"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="G3R-ER-vVP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -484,8 +484,8 @@
             <objects>
                 <viewController storyboardIdentifier="CheckInModalIdentifier" id="nlG-5R-bqe" customClass="CheckInModalViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qai-Xg-ESy"/>
-                        <viewControllerLayoutGuide type="bottom" id="gp0-dI-KZF"/>
+                        <viewControllerLayoutGuide type="top" id="Bja-i6-M57"/>
+                        <viewControllerLayoutGuide type="bottom" id="k7t-N7-Mm1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CAL-GT-Grc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -597,8 +597,8 @@
             <objects>
                 <viewController storyboardIdentifier="BooksViewIdentifier" id="hAe-hM-Hu2" customClass="BooksViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Vgo-aA-BDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="Pfv-W7-cQ6"/>
+                        <viewControllerLayoutGuide type="top" id="qbH-em-nMY"/>
+                        <viewControllerLayoutGuide type="bottom" id="RYC-9X-uS6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mtb-gB-jeE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -690,8 +690,8 @@
             <objects>
                 <viewController storyboardIdentifier="AddBookManualIndentifier" id="hTq-qI-Ljr" customClass="AddBookManualViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0Yr-Rf-AtU"/>
-                        <viewControllerLayoutGuide type="bottom" id="tIX-0U-tZH"/>
+                        <viewControllerLayoutGuide type="top" id="tWh-22-DKN"/>
+                        <viewControllerLayoutGuide type="bottom" id="8dk-sq-QNa"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="G9G-SG-tmK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -785,8 +785,8 @@
             <objects>
                 <viewController storyboardIdentifier="BookDetailIndentifier" id="2oe-aK-hv2" customClass="BookDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="gSe-4n-uDD"/>
-                        <viewControllerLayoutGuide type="bottom" id="i7N-p6-UC6"/>
+                        <viewControllerLayoutGuide type="top" id="xSE-Po-Nuw"/>
+                        <viewControllerLayoutGuide type="bottom" id="AiR-Gm-2rP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DoL-s4-WiE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -813,50 +813,6 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fxt-PL-wYg">
-                                        <rect key="frame" x="60" y="358" width="200" height="40"/>
-                                        <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
-                                        <state key="normal" title="Check Out">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="checkoutBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="bW1-oJ-0o6"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2E7-cl-R34">
-                                        <rect key="frame" x="60" y="454" width="200" height="40"/>
-                                        <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
-                                        <state key="normal" title="Edit Book">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="editBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="tIm-v2-ceH"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doK-fQ-ZC7">
-                                        <rect key="frame" x="60" y="502" width="200" height="40"/>
-                                        <color key="backgroundColor" red="0.95686280729999995" green="0.4156863093" blue="0.38823533059999998" alpha="1" colorSpace="deviceRGB"/>
-                                        <state key="normal" title="Remove book">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="removeBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="6Dh-Hd-E2A"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hO-4Y-EtV">
-                                        <rect key="frame" x="60" y="406" width="200" height="40"/>
-                                        <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
-                                        <state key="normal" title="Check In">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="checkinBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="dIi-G1-D75"/>
-                                        </connections>
-                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="190" translatesAutoresizingMaskIntoConstraints="NO" id="UUF-AS-Ll1">
                                         <rect key="frame" x="60" y="-65" width="200" height="153"/>
                                     </imageView>
@@ -885,6 +841,55 @@
                                             <outlet property="delegate" destination="2oe-aK-hv2" id="uQf-zc-6s5"/>
                                         </connections>
                                     </tableView>
+                                    <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cgv-dP-nuN">
+                                        <rect key="frame" x="60" y="216" width="200" height="183"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hO-4Y-EtV">
+                                                <rect key="frame" x="0.0" y="48" width="200" height="40"/>
+                                                <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
+                                                <state key="normal" title="Check In">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="checkinBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="dIi-G1-D75"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fxt-PL-wYg">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
+                                                <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
+                                                <state key="normal" title="Check Out">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="checkoutBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="bW1-oJ-0o6"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2E7-cl-R34">
+                                                <rect key="frame" x="0.0" y="95" width="200" height="40"/>
+                                                <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
+                                                <state key="normal" title="Edit Book">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="editBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="tIm-v2-ceH"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doK-fQ-ZC7">
+                                                <rect key="frame" x="0.0" y="143" width="200" height="40"/>
+                                                <color key="backgroundColor" red="0.95686280729999995" green="0.4156863093" blue="0.38823533059999998" alpha="1" colorSpace="deviceRGB"/>
+                                                <state key="normal" title="Remove book">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="removeBook:" destination="2oe-aK-hv2" eventType="touchUpInside" id="6Dh-Hd-E2A"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </view>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -905,6 +910,7 @@
                         <outlet property="lblLoaned" destination="erm-HM-w0D" id="kTQ-4V-49E"/>
                         <outlet property="scroller" destination="H4H-nJ-99d" id="4N1-Gw-IOf"/>
                         <outlet property="tbvStudentsLoaned" destination="4eh-dK-6dJ" id="1U4-RL-qyG"/>
+                        <outlet property="viewButtons" destination="Cgv-dP-nuN" id="Xte-u0-3Av"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pqt-8J-8ym" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -916,8 +922,8 @@
             <objects>
                 <viewController storyboardIdentifier="CheckinBookIndentifier" id="6tD-nv-74R" customClass="CheckInBookViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="gir-CK-rDf"/>
-                        <viewControllerLayoutGuide type="bottom" id="zMF-ga-beJ"/>
+                        <viewControllerLayoutGuide type="top" id="WLc-EM-XYM"/>
+                        <viewControllerLayoutGuide type="bottom" id="kIG-8U-WNC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dmF-3t-geu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -943,7 +949,7 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9v-50-fYi">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9v-50-fYi">
                                 <rect key="frame" x="148" y="183" width="120" height="36"/>
                                 <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
                                 <state key="normal" title="Check In">
@@ -960,7 +966,7 @@
                                 <color key="textColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DoL-sY-bHt">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DoL-sY-bHt">
                                 <rect key="frame" x="0.0" y="287" width="320" height="242"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -968,7 +974,7 @@
                                     <outlet property="delegate" destination="6tD-nv-74R" id="bVj-ej-0tN"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pick your name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1C-SK-RdJ">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pick your name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1C-SK-RdJ">
                                 <rect key="frame" x="16" y="258" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.95686280729999995" green="0.4156863093" blue="0.38823533059999998" alpha="1" colorSpace="deviceRGB"/>
@@ -984,6 +990,7 @@
                         <outlet property="lblBookISBN" destination="Unc-vK-QIm" id="0se-y9-8DZ"/>
                         <outlet property="lblBookQuantityAvailable" destination="faE-kP-oxo" id="cpN-Bz-Xbf"/>
                         <outlet property="lblBookTitle" destination="QoH-Vy-BaE" id="qHx-58-uSm"/>
+                        <outlet property="lblPickName" destination="L1C-SK-RdJ" id="q6u-eX-BpK"/>
                         <outlet property="tbvListStudents" destination="DoL-sY-bHt" id="O5S-Dg-J7d"/>
                     </connections>
                 </viewController>
@@ -991,13 +998,107 @@
             </objects>
             <point key="canvasLocation" x="3379" y="3867"/>
         </scene>
+        <!--Edit Book View Controller-->
+        <scene sceneID="1dV-tA-Nye">
+            <objects>
+                <viewController storyboardIdentifier="EditBookIdentifier" id="5jy-gS-Tmo" customClass="EditBookViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Lf5-H4-Sq3"/>
+                        <viewControllerLayoutGuide type="bottom" id="1nD-PA-DRf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zbf-95-jcW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OO1-gO-aKq">
+                                <rect key="frame" x="20" y="292" width="280" height="1"/>
+                                <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Book Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bDN-N8-dkA">
+                                <rect key="frame" x="25" y="292" width="270" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                            </textField>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KZ2-6W-I4e">
+                                <rect key="frame" x="20" y="328" width="280" height="1"/>
+                                <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Book Author" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y7v-IH-9JT">
+                                <rect key="frame" x="25" y="328" width="270" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                            </textField>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j4a-UA-blS">
+                                <rect key="frame" x="20" y="363" width="280" height="1"/>
+                                <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Book ISBN" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oOe-wS-qfI">
+                                <rect key="frame" x="25" y="364" width="270" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                            </textField>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4c9-b0-Wwm">
+                                <rect key="frame" x="20" y="398" width="280" height="1"/>
+                                <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Total" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4FU-Ll-q20">
+                                <rect key="frame" x="25" y="398" width="270" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="done"/>
+                            </textField>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yXq-5Z-L4a">
+                                <rect key="frame" x="20" y="433" width="280" height="1"/>
+                                <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyF-wq-Lkd">
+                                <rect key="frame" x="100" y="235" width="120" height="40"/>
+                                <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="Change Photo">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeBookCover:" destination="5jy-gS-Tmo" eventType="touchUpInside" id="RB3-9N-3hO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PLc-XS-u8M">
+                                <rect key="frame" x="60" y="455" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="Save Book">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveBook:" destination="5jy-gS-Tmo" eventType="touchUpInside" id="nuQ-Iz-Ftl"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="STy-Vo-ePG">
+                                <rect key="frame" x="74" y="83" width="172" height="142"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnChangeCover" destination="wyF-wq-Lkd" id="XuA-dc-Kql"/>
+                        <outlet property="btnSaveBook" destination="PLc-XS-u8M" id="nfH-kd-6eY"/>
+                        <outlet property="imgBookCover" destination="STy-Vo-ePG" id="sYM-KG-4Tu"/>
+                        <outlet property="lblBookAuthor" destination="y7v-IH-9JT" id="zzT-eW-rjU"/>
+                        <outlet property="lblBookISBN" destination="oOe-wS-qfI" id="sR2-R0-AnS"/>
+                        <outlet property="lblBookQuantity" destination="4FU-Ll-q20" id="abH-BB-etE"/>
+                        <outlet property="lblBookTitle" destination="bDN-N8-dkA" id="6MG-z0-8FC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uy8-J9-n8g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4036" y="3866"/>
+        </scene>
         <!--Check Out Book View Controller-->
         <scene sceneID="AAn-hq-vAb">
             <objects>
                 <viewController storyboardIdentifier="CheckoutBookIndentifier" id="qCb-pj-Yot" customClass="CheckOutBookViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FuA-x6-ErI"/>
-                        <viewControllerLayoutGuide type="bottom" id="Dgm-fu-MEo"/>
+                        <viewControllerLayoutGuide type="top" id="5s7-Qh-GTj"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yqq-3M-ysd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YXs-pC-VVX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>

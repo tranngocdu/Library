@@ -13,7 +13,7 @@
     NSString *bookId;
     PFObject *book;
     PFObject *student;
-    NSArray *students;
+    NSMutableArray *students;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tbvListStudents;
@@ -23,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblBookAuthor;
 @property (strong, nonatomic) IBOutlet UILabel *lblBookISBN;
 @property (strong, nonatomic) IBOutlet UILabel *lblBookQuantityAvailable;
+@property (strong, nonatomic) IBOutlet UILabel *lblPickName;
 
 - (IBAction)checkin:(id)sender;
 - (void)setBookId:(NSString *)objectId;

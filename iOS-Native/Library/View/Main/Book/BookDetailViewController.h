@@ -35,5 +35,6 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scroller;
 @property (strong, nonatomic) IBOutlet UILabel *lblLoaned;
 @property (strong, nonatomic) IBOutlet UITableView *tbvStudentsLoaned;
+@property (strong, nonatomic) IBOutlet UIView *viewButtons;
 
 @end
