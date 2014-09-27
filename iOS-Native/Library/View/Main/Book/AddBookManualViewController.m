@@ -58,10 +58,16 @@
     fpController.dataTypes = [NSArray arrayWithObjects:@"text/plain", nil];
     
     // Select and order the sources (Optional) Default is all sources
-    fpController.sourceNames = [[NSArray alloc] initWithObjects: FPSourceImagesearch, FPSourceDropbox, nil];
+    fpController.sourceNames = [[NSArray alloc] initWithObjects: FPSourceCamera, FPSourceCameraRoll, FPSourceDropbox, FPSourceFacebook, FPSourceFlickr, FPSourceGmail, FPSourceBox, FPSourceGithub, FPSourceGoogleDrive, FPSourceImagesearch, FPSourceInstagram, FPSourcePicasa,  nil];
     
     // You can set some of the in built Camera properties as you would with UIImagePicker
     fpController.allowsEditing = YES;
+    
+    // Allowing multiple file selection
+    fpController.selectMultiple = NO;
+    
+    // Limiting the maximum number of files that can be uploaded at one time
+    fpController.maxFiles = 1;
     
     
     /* Control if we should upload or download the files for you.
@@ -69,7 +75,7 @@
      * When a user selects a local file, we'll upload it and return a remote url
      * When a user selects a remote file, we'll download it and return the filedata to you.
      */
-    //fpController.shouldUpload = NO;
+    fpController.shouldUpload = YES;
     //fpController.shouldDownload = NO;
     
     // Display it.
@@ -78,22 +84,11 @@
 
 - (void)FPPickerController:(FPPickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSLog(@"%@", info);
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSString *mediaType = info[UIImagePickerControllerMediaType];
-    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        UIImage *image = info[UIImagePickerControllerOriginalImage];
-        _tfImage.image = image;
-    } else {
-        Utilities *utilities = [[Utilities alloc] init];
-        [utilities showAlertWithTitle:@"Error" withMessage:@"Only accept image."];
-    }
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    bookCoverUrl = [NSString stringWithString:info.url]
 }
 
 - (void)FPPickerControllerDidCancel:(FPPickerController *)picker {
-    NSLog(@"Cancel");
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)addBook:(id)sender {
@@ -113,7 +108,7 @@
         book[@"title"] = bookTitle;
         book[@"author"] = bookAuthor;
         book[@"ISBN"] = bookISBN;
-        book[@"cover_image"] = @"http://image.mp3.zdn.vn/thumb/165_165/covers/3/3/33e23a4ab94e902d9850109f4fba0e24_1411148582.jpg";
+        book[@"cover_image"] = bookCoverUrl;
         book[@"User"] = currentUser.objectId;
         book[@"studentList"] = [NSMutableArray array];
         book[@"quantity_total"] = @([bookQuantity intValue]);

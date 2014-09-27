@@ -99,6 +99,9 @@
                     
                     [self performSelector:@selector(test) withObject:nil afterDelay:5];
                 }];
+            } else {
+                _viewButtons.hidden = NO;
+                _tbvStudentsLoaned.hidden = YES;
             }
         } else {
             NSLog(@"%@", error);
