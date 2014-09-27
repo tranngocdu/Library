@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FPPicker/FPPicker.h>
 
-@interface AddBookManualViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface AddBookManualViewController : UIViewController <FPPickerDelegate>
 
 - (IBAction)addPhoto:(id)sender;
 - (IBAction)addBook:(id)sender;

@@ -48,11 +48,36 @@
 }
 
 - (void)addPhoto:(id)sender {
-    NSLog(@"Add photo");
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-    [self presentViewController:picker animated:YES completion:nil];
+    // To create the object
+    FPPickerController *fpController = [[FPPickerController alloc] init];
+    
+    // Set the delegate
+    fpController.fpdelegate = self;
+    
+    // Ask for specific data types. (Optional) Default is all files.
+    fpController.dataTypes = [NSArray arrayWithObjects:@"text/plain", nil];
+    
+    // Select and order the sources (Optional) Default is all sources
+    fpController.sourceNames = [[NSArray alloc] initWithObjects: FPSourceImagesearch, FPSourceDropbox, nil];
+    
+    // You can set some of the in built Camera properties as you would with UIImagePicker
+    fpController.allowsEditing = YES;
+    
+    
+    /* Control if we should upload or download the files for you.
+     * Default is yes.
+     * When a user selects a local file, we'll upload it and return a remote url
+     * When a user selects a remote file, we'll download it and return the filedata to you.
+     */
+    //fpController.shouldUpload = NO;
+    //fpController.shouldDownload = NO;
+    
+    // Display it.
+    [self presentViewController:fpController animated:YES completion:nil];
+}
+
+- (void)FPPickerController:(FPPickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    NSLog(@"%@", info);
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -65,6 +90,10 @@
         [utilities showAlertWithTitle:@"Error" withMessage:@"Only accept image."];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)FPPickerControllerDidCancel:(FPPickerController *)picker {
+    NSLog(@"Cancel");
 }
 
 - (void)addBook:(id)sender {
