@@ -80,41 +80,38 @@
                 
                 [stdQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                     studentsList = objects;
-                    _lblLoaned.hidden = NO;
-                    _tbvStudentsLoaned.hidden = NO;
-                    _viewButtons.hidden = NO;
                     
                     // Set height of table view
                     int rowHeight = 44;
                     float tbvHeight = rowHeight * [studentsList count];
                     _tbvStudentsLoaned.frame = CGRectMake(_tbvStudentsLoaned.frame.origin.x, _tbvStudentsLoaned.frame.origin.y, _tbvStudentsLoaned.frame.size.width, tbvHeight);
-                    
-                    NSLog(@"%f", tbvHeight);
-                    
-                    // settable height o day.
-#warning
-                    
-                    // set button view sau lung table
-                    CGRect theFrame = [_viewButtons frame];
-                    theFrame.origin.y = _tbvStudentsLoaned.frame.origin.y + _tbvStudentsLoaned.frame.size.height + 5;
 
+                    CGRect theFrame = [_viewButtons frame];
+                    theFrame.origin.y = _tbvStudentsLoaned.frame.origin.y + tbvHeight + 15;
                     
-                    // ham nay do ha ?
-                    NSLog(@"%@", NSStringFromCGRect(theFrame));
-                    _viewButtons.frame = theFrame;
-                    NSLog(@"%@", NSStringFromCGRect(_viewButtons.frame));
-                    
-                    NSLog(@"%@", NSStringFromCGSize(self.scroller.contentSize));
-                    
+                    self.viewButtons.frame = theFrame;
                     [_tbvStudentsLoaned reloadData];
+                    
+                    // after set data show the view
+                    _lblLoaned.hidden = NO;
+                    _tbvStudentsLoaned.hidden = NO;
+                    _viewButtons.hidden = NO;
+                    
+                    [self performSelector:@selector(test) withObject:nil afterDelay:5];
                 }];
             }
         } else {
             NSLog(@"%@", error);
             Utilities *utilities = [[Utilities alloc] init];
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            _viewButtons.hidden = NO;
         }
     }];
+}
+
+- (void) test
+{
+                        NSLog(@"%@", NSStringFromCGRect(_viewButtons.frame));
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
