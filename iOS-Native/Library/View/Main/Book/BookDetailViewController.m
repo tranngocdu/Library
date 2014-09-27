@@ -91,10 +91,20 @@
                     
                     NSLog(@"%f", tbvHeight);
                     
-                    CGRect theFrame = [_viewButtons frame];
-                    theFrame.origin.y = 1000;
+                    // settable height o day.
+#warning
                     
+                    // set button view sau lung table
+                    CGRect theFrame = [_viewButtons frame];
+                    theFrame.origin.y = _tbvStudentsLoaned.frame.origin.y + _tbvStudentsLoaned.frame.size.height + 5;
+
+                    
+                    // ham nay do ha ?
+                    NSLog(@"%@", NSStringFromCGRect(theFrame));
                     _viewButtons.frame = theFrame;
+                    NSLog(@"%@", NSStringFromCGRect(_viewButtons.frame));
+                    
+                    NSLog(@"%@", NSStringFromCGSize(self.scroller.contentSize));
                     
                     [_tbvStudentsLoaned reloadData];
                 }];
