@@ -8,9 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class CheckInModalViewController;
+@protocol CheckInModalDelegate <NSObject>
+
+@required
+- (void) checkinModal:(CheckInModalViewController*)checkInModal type:(int)type onClickAt:(int)buttonIndex;
+
+@end
+
 @interface CheckInModalViewController : UIViewController <UIViewControllerTransitioningDelegate> {
     int checkType;
 }
+
+@property (nonatomic, assign) id<CheckInModalDelegate>delegate;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)scan:(id)sender;
