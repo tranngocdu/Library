@@ -12,8 +12,9 @@
 #import "Constants.h"
 #import "UIButton+AppButton.h"
 #import <QuartzCore/QuartzCore.h>
-
+#import <Parse/Parse.h>
 #import "BarcodeReaderViewController.h"
+#import "Utilities.h"
 
 @interface HomeViewController ()
 
@@ -81,14 +82,29 @@
 {
     NSLog(@"Detected Item: %@, contentType %@, modalType: %d", content, type, actionModalType);
 
-    // Boy xu ly cai nay nhe
-    if(actionModalType == 1) {
-        // Checkin
+#warning Hinh nhu ben Checkin, Check ViewCOntroller cua e da xu ly cai nay roi ha?
+    PFUser *currentUser = [PFUser currentUser];
+    PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
+    [query whereKey:@"ISBN" equalTo:content];
+    [query whereKey:@"User" equalTo:currentUser.objectId];
 
-    } else {
-        // Checkout
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error) {
+            NSLog(@"%@", objects);
+            
+            if(actionModalType == 1) {
+                // Checkin
 
-    }
+            } else {
+                // Checkout
+                
+            }
+
+        } else {
+            Utilities *utilities = [[Utilities alloc] init];
+            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+        }
+    }];
 
     // Check to ignore case of Simulator not show Barcode Reader View Controller
     if([self.navigationController.viewControllers count] > 1) {
