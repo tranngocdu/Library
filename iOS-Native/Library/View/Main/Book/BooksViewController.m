@@ -101,9 +101,9 @@
     
     [query whereKey:@"User" equalTo:currentUser.objectId];
     
-    if (type == 0) {
+    if (type == 1) {
         [query whereKey:@"quantity_available" greaterThan:@0];
-    } else if (type == 1){
+    } else if (type == 2){
         [query whereKey:@"quantity_out" greaterThan:@0];
     }
     
@@ -128,16 +128,16 @@
     NSInteger selectedSegment = segmentedControl.selectedSegmentIndex;
     
     // Load available books
-    if (selectedSegment == 0) {
-        [self loadBooksWithType:0];
-    }
-    // Load checked out books
-    else if (selectedSegment == 1) {
+    if (selectedSegment == 1) {
         [self loadBooksWithType:1];
     }
-    // Load all books
+    // Load checked out books
     else if (selectedSegment == 2) {
         [self loadBooksWithType:2];
+    }
+    // Load all books
+    else if (selectedSegment == 0) {
+        [self loadBooksWithType:0];
     }
 }
 

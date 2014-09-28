@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.9" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ctc-aK-Lk6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ctc-aK-Lk6">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Login-->
@@ -430,10 +430,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4">
-                        <size key="portraitSize" width="320" height="568"/>
-                        <size key="landscapeSize" width="568" height="320"/>
-                    </simulatedScreenMetrics>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnAddStudent" destination="WZF-TX-fuN" id="GiN-gK-Qu3"/>
                         <outlet property="tfStudentName" destination="A2x-wN-iUE" id="9kA-mc-Hip"/>
@@ -622,9 +619,9 @@
                                 <rect key="frame" x="20" y="76" width="284" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="Avaiable"/>
-                                    <segment title="Checked Out"/>
                                     <segment title="All Books"/>
+                                    <segment title="Available"/>
+                                    <segment title="Checked Out"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -1228,7 +1225,7 @@
         <scene sceneID="bq9-11-DAx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1vh-na-lwL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="68Q-UM-NLg"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="toolbar-home.png" id="68Q-UM-NLg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tf8-2I-c22">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1247,7 +1244,7 @@
         <scene sceneID="WDc-S1-y5z">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WHR-Ue-AUz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Books" id="TkA-wA-yR2"/>
+                    <tabBarItem key="tabBarItem" title="Books" image="toolbar-book.png" id="TkA-wA-yR2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SHJ-wM-2ZX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1266,7 +1263,7 @@
         <scene sceneID="3tD-LK-2gC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Vuj-sN-GlK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Students" id="7v8-lH-bq6"/>
+                    <tabBarItem key="tabBarItem" title="Students" image="toolbar-student.png" id="7v8-lH-bq6"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BjW-HR-K5U">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1285,7 +1282,7 @@
         <scene sceneID="NyT-Az-kDO">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yy9-X5-q1H" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="Oz1-XR-qck"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="toolbar-setting.png" id="Oz1-XR-qck"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="peK-bv-Qi6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1352,12 +1349,15 @@
             <point key="canvasLocation" x="1329" y="2166"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="toolbar-book.png" width="24" height="29"/>
+        <image name="toolbar-home.png" width="28" height="29"/>
+        <image name="toolbar-setting.png" width="25" height="26"/>
+        <image name="toolbar-student.png" width="28" height="29"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4">
-            <size key="portraitSize" width="320" height="568"/>
-            <size key="landscapeSize" width="568" height="320"/>
-        </simulatedScreenMetrics>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
 </document>

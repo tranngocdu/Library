@@ -69,6 +69,7 @@
 
     } else if(buttonIndex == 2) {
         // List
+        [self.tabBarController setSelectedIndex:1];
 
     } else if(buttonIndex == 3) {
         // Cancel
@@ -106,7 +107,8 @@
     CheckInModalViewController *checkView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckInModalIdentifier"];
     
     [checkView setTransitioningDelegate:self.transitioningDelegate];
-    checkView.modalPresentationStyle = UIModalPresentationCustom;
+    checkView.modalPresentationStyle = UIModalPresentationCurrentContext;
+    self.modalPresentationStyle = UIModalPresentationCurrentContext;
 
     actionModalType = 1;
     [checkView setType:1];

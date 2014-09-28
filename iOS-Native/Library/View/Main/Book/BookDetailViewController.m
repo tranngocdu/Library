@@ -96,25 +96,26 @@
                     _lblLoaned.hidden = NO;
                     _tbvStudentsLoaned.hidden = NO;
                     _viewButtons.hidden = NO;
-                    
-                    [self performSelector:@selector(test) withObject:nil afterDelay:5];
+
+                    [self adjustScrollSize];
                 }];
             } else {
                 _viewButtons.hidden = NO;
                 _tbvStudentsLoaned.hidden = YES;
+                [self adjustScrollSize];
             }
         } else {
             NSLog(@"%@", error);
             Utilities *utilities = [[Utilities alloc] init];
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
             _viewButtons.hidden = NO;
+            [self adjustScrollSize];
         }
     }];
 }
 
-- (void) test
-{
-                        NSLog(@"%@", NSStringFromCGRect(_viewButtons.frame));
+- (void) adjustScrollSize {
+    _scroller.contentSize = CGSizeMake(self.view.frame.size.width, _viewButtons.frame.origin.y + _viewButtons.frame.size.height + 5);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

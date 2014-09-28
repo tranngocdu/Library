@@ -17,6 +17,8 @@
     } else {
         _lblCheck.text = @"Check Out";
     }
+
+    self.view.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.5];
 }
 
 - (void)setType:(int)typeNum {
