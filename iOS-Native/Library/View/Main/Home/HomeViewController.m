@@ -123,8 +123,7 @@
     CheckInModalViewController *checkView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckInModalIdentifier"];
     
     [checkView setTransitioningDelegate:self.transitioningDelegate];
-    checkView.modalPresentationStyle = UIModalPresentationCurrentContext;
-    self.modalPresentationStyle = UIModalPresentationCurrentContext;
+    checkView.modalPresentationStyle = UIModalPresentationCustom;
 
     actionModalType = 1;
     [checkView setType:1];
