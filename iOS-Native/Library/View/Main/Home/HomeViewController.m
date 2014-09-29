@@ -78,6 +78,13 @@
     }
 }
 
+- (void)barcodeReaderOnCancel:(BarcodeReaderViewController *)barcodeReader
+{
+    if([self.navigationController.viewControllers count] > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 - (void)barcodeReader:(BarcodeReaderViewController *)barcodeReader onFoundItem:(NSString *)content withType:(NSString *)type
 {
     NSLog(@"Detected Item: %@, contentType %@, modalType: %d", content, type, actionModalType);

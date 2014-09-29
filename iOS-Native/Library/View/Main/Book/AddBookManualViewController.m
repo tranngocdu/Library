@@ -55,7 +55,7 @@
     fpController.fpdelegate = self;
     
     // Ask for specific data types. (Optional) Default is all files.
-    fpController.dataTypes = [NSArray arrayWithObjects:@"text/plain", nil];
+    fpController.dataTypes = [NSArray arrayWithObjects:@"image/*", nil];
 
     // Select and order the sources (Optional) Default is all sources
     //fpController.sourceNames = [[NSArray alloc] initWithObjects: FPSourceCamera, FPSourceCameraRoll, FPSourceDropbox, FPSourceFacebook, FPSourceFlickr, FPSourceGmail, FPSourceBox, FPSourceGithub, FPSourceGoogleDrive, FPSourceImagesearch, FPSourceInstagram, FPSourcePicasa,  nil];
