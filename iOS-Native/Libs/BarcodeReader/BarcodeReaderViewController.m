@@ -19,6 +19,8 @@
 
     UIView *_highlightView;
     UILabel *_label;
+    UIButton *_cancel;
+
 }
 @end
 
@@ -48,6 +50,13 @@
     _highlightView.layer.borderWidth = 3;
     [self.view addSubview:_highlightView];
 
+    float bw = 80;
+    _cancel = [[UIButton alloc] init];
+    _cancel.frame = CGRectMake((self.view.frame.size.width-bw)/2.0, self.view.bounds.size.height - 40, bw, 40);
+    [_cancel setTitle:@"Cancel" forState:UIControlStateNormal];
+    [_cancel addTarget:self action:@selector(onCancel) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_cancel];
+
     _label = [[UILabel alloc] init];
     _label.frame = CGRectMake(0, self.view.bounds.size.height - 40, self.view.bounds.size.width, 40);
     _label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
@@ -55,7 +64,7 @@
     _label.textColor = [UIColor whiteColor];
     _label.textAlignment = NSTextAlignmentCenter;
     _label.text = @"(none)";
-    [self.view addSubview:_label];
+    //[self.view addSubview:_label];
 
     _session = [[AVCaptureSession alloc] init];
     _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -146,6 +155,13 @@
     }
 
     _highlightView.frame = highlightViewRect;
+}
+
+- (void) onCancel
+{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(barcodeReaderOnCancel:)]) {
+        [self.delegate barcodeReaderOnCancel:self];
+    }
 }
 
 @end

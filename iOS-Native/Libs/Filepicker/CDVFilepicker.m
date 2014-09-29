@@ -22,7 +22,7 @@
     
     if ([options objectForKey:@"dataTypes"] != nil) {
         NSArray *dataTypes = [options objectForKey:@"dataTypes"];
-        fpController.dataTypes = dataTypes;
+        fpController.dataTypes = dataTypes;F
     }
     
     if ([options objectForKey:@"sourceNames"] != nil) {

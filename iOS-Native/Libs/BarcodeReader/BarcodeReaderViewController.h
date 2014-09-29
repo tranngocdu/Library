@@ -13,6 +13,7 @@
 
 @required
 - (void) barcodeReader:(BarcodeReaderViewController*)barcodeReader onFoundItem:(NSString*)content withType:(NSString*)type;
+- (void) barcodeReaderOnCancel:(BarcodeReaderViewController*)barcodeReader;
 
 @end
 
