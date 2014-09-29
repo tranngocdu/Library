@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <FPPicker/FPPicker.h>
+#import "UIButton+AppButton.h"
 
-@interface EditBookViewController : UIViewController {
+@interface EditBookViewController : UIViewController <FPPickerDelegate> {
     NSString *bookId;
     PFObject *book;
+    NSMutableString *bookCoverUrl;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *imgBookCover;
@@ -25,6 +28,7 @@
 - (IBAction)changeBookCover:(id)sender;
 - (IBAction)saveBook:(id)sender;
 
+- (void)getBookToEdit;
 - (void)setBookId:(NSString *)bId;
 
 @end

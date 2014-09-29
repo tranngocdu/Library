@@ -707,7 +707,7 @@
         <!--Add Book Manual View Controller-->
         <scene sceneID="3vu-fT-Vt2">
             <objects>
-                <viewController storyboardIdentifier="AddBookManualIndentifier" id="hTq-qI-Ljr" customClass="AddBookManualViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddBookManualIdentifier" id="hTq-qI-Ljr" customClass="AddBookManualViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G9G-SG-tmK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -806,6 +806,91 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ui-kl-1Qh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3410" y="4585"/>
+        </scene>
+        <!--Add Book Modal View Controller-->
+        <scene sceneID="Qjs-iI-uaM">
+            <objects>
+                <viewController storyboardIdentifier="AddBookModalIdentifier" id="hyD-bE-5cO" customClass="AddBookModalViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s8Z-5O-J4v">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.40000000000000002" contentMode="scaleToFill" id="6dn-de-XBy">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="gCy-hO-QNi">
+                                <rect key="frame" x="23" y="224" width="273" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="Abl-0I-FVa">
+                                        <rect key="frame" x="0.0" y="58" width="273" height="62"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7z5-kk-8EG">
+                                                <rect key="frame" x="90" y="0.0" width="90" height="62"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Manual">
+                                                    <color key="titleColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addManual:" destination="hyD-bE-5cO" eventType="touchUpInside" id="fMh-5N-NSf"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="i1G-z2-hZQ">
+                                                <rect key="frame" x="180" y="0.0" width="90" height="62"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" red="0.95686280729999995" green="0.4156863093" blue="0.38823533059999998" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancel:" destination="hyD-bE-5cO" eventType="touchUpInside" id="jkR-fI-zag"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yzb-FZ-Rna">
+                                                <rect key="frame" x="0.0" y="0.0" width="90" height="62"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Scan">
+                                                    <color key="titleColor" red="0.23529411759999999" green="0.75686274509999996" blue="0.65098039220000004" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="scan:" destination="hyD-bE-5cO" eventType="touchUpInside" id="xvr-MH-d6M"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.96834047379999999" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Book" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mBK-y7-kNA">
+                                        <rect key="frame" x="8" y="8" width="265" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oaZ-OM-3cR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3917" y="4595"/>
         </scene>
         <!--Book Detail View Controller-->
         <scene sceneID="vXU-6P-0vl">

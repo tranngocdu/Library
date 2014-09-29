@@ -8,7 +8,8 @@
 
 #import "BooksViewController.h"
 #import "BookDetailViewController.h"
-#import "EditBookViewController.h"
+#import "AddBookModalViewController.h"
+#import "AddBookManualViewController.h"
 #import "BookCell.h"
 #import "Utilities.h"
 #import <Parse/Parse.h>
@@ -142,8 +143,26 @@
 }
 
 - (void)addBookManual:(id)sender {
-    EditBookViewController *editView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIndentifier"];
-    [self.navigationController pushViewController:editView animated:YES];
+    // Add modal view
+    AddBookModalViewController *addModal = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookModalIdentifier"];
+    
+    [addModal setTransitioningDelegate:self.transitioningDelegate];
+    addModal.modalPresentationStyle = UIModalPresentationCustom;
+    [addModal setDelegate:self];
+    
+    [self presentViewController:addModal animated:NO completion:nil];
+}
+
+- (void)addBookModal:(AddBookModalViewController*)addBookModal onClickAt:(int)buttonIndex {
+    NSLog(@"%d", buttonIndex);
+    if (buttonIndex == 1) {
+        
+    } else if (buttonIndex == 2) {
+        AddBookManualViewController *addManualView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIdentifier"];
+        [self.navigationController pushViewController:addManualView animated:YES];
+    } else {
+        NSLog(@"Cancel add book modal");
+    }
 }
 
 

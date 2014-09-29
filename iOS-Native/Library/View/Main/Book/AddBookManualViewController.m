@@ -55,7 +55,7 @@
     fpController.fpdelegate = self;
     
     // Ask for specific data types. (Optional) Default is all files.
-    fpController.dataTypes = [NSArray arrayWithObjects:@"text/plain", nil];
+    fpController.dataTypes = [NSArray arrayWithObjects:@"image/*", nil];
 
     // Select and order the sources (Optional) Default is all sources
     //fpController.sourceNames = [[NSArray alloc] initWithObjects: FPSourceCamera, FPSourceCameraRoll, FPSourceDropbox, FPSourceFacebook, FPSourceFlickr, FPSourceGmail, FPSourceBox, FPSourceGithub, FPSourceGoogleDrive, FPSourceImagesearch, FPSourceInstagram, FPSourcePicasa,  nil];
@@ -85,8 +85,10 @@
 }
 
 - (void)FPPickerController:(FPPickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSLog(@"%@", info);
-//    bookCoverUrl = [NSString stringWithString:info.url]
+    bookCoverUrl = [info objectForKey:@"FPPickerControllerRemoteURL"];
+    NSData *imageData = [NSData dataWithContentsOfFile:[info objectForKey:@"FPPickerControllerMediaURL"]];
+    _tfImage.image = [[UIImage alloc] initWithData:imageData];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)FPPickerControllerDidCancel:(FPPickerController *)picker {

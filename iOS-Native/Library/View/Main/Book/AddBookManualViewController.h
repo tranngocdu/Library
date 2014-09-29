@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <FPPicker/FPPicker.h>
 
-@interface AddBookManualViewController : UIViewController <FPPickerDelegate, FPSaveDelegate> {
+@interface AddBookManualViewController : UIViewController <FPPickerDelegate> {
     NSMutableString *bookCoverUrl;
 }
 
