@@ -39,13 +39,6 @@
 }
 
 - (void)viewDidLoad {
-    CGFloat scrollViewHeight = 0.0f;
-    for (UIView* view in _scroller.subviews) {
-        scrollViewHeight += view.frame.size.height;
-    }
-    
-    [_scroller setScrollEnabled:YES];
-    [_scroller setContentSize:CGSizeMake(320, scrollViewHeight)];
     [super viewDidLoad];
     [self decorate];
     // Do any additional setup after loading the view.

@@ -113,7 +113,7 @@
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     student = [students objectAtIndex:indexPath.row];
-    UITableViewCell *cell = [tableView  cellForRowAtIndexPath:indexPath];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryNone;
 }
 

@@ -133,6 +133,51 @@
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)helpme:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Help me" message:@"Please enter your message" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+    // Add input field
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    // Set default text
+    [alert textFieldAtIndex:0].text = @"Hi Albert!";
+    // Show alert
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    // If clicked on OK button
+    if (buttonIndex == 1) {
+        NSString *msg = [[alertView textFieldAtIndex:0] text];
+        PFUser *currentUser = [PFUser currentUser];
+        
+        // If valid message
+        if ([msg length]) {
+            // Url
+            NSString *sendUrl = @"http://bohemian.webscript.io/classLibraryContact";
+            
+            // Create dictionary
+            NSMutableDictionary *dictData = [[NSMutableDictionary alloc]init];
+            
+            // Set informations
+            [dictData setObject:msg forKey:@"body"];
+            [dictData setObject:currentUser.objectId forKey:@"replyto"];
+            
+            // Convert to JSON
+            NSError *writeError = nil;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictData options:NSJSONWritingPrettyPrinted error:&writeError];
+            NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            
+            // Create request
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:sendUrl]];
+            [request setHTTPMethod:@"POST"];
+            [request setValue:@"text/xml" forHTTPHeaderField:@"Content-type"];
+            [request setHTTPBody:[jsonString dataUsingEncoding:NSASCIIStringEncoding]];
+            
+            // Send
+            [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:nil];
+        }
+    }
+}
+
 /*
 #pragma mark - Navigation
 
