@@ -12,6 +12,7 @@
 #import "AddBookManualViewController.h"
 #import "BookCell.h"
 #import "Utilities.h"
+#import "BarcodeReaderViewController.h"
 #import <Parse/Parse.h>
 
 @interface BooksViewController ()
@@ -148,7 +149,7 @@
     
     [addModal setTransitioningDelegate:self.transitioningDelegate];
     addModal.modalPresentationStyle = UIModalPresentationCustom;
-//    [addModal setDelegate:self];
+    [addModal setDelegate:self];
     
     [self presentViewController:addModal animated:NO completion:nil];
 }
@@ -156,13 +157,26 @@
 - (void)addBookModal:(AddBookModalViewController*)addBookModal onClickAt:(int)buttonIndex {
     NSLog(@"%d", buttonIndex);
     if (buttonIndex == 1) {
-        
+        BarcodeReaderViewController *barcodeReader = [[BarcodeReaderViewController alloc] initWithDelegate:self];
+        [self.navigationController pushViewController:barcodeReader animated:YES];
+        self.tabBarController.tabBar.hidden = YES;
     } else if (buttonIndex == 2) {
         AddBookManualViewController *addManualView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIdentifier"];
         [self.navigationController pushViewController:addManualView animated:YES];
     } else {
         NSLog(@"Cancel add book modal");
     }
+}
+
+- (void)barcodeReaderOnCancel:(BarcodeReaderViewController *)barcodeReader {
+    if ([self.navigationController.viewControllers count] > 1){
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)barcodeReader:(BarcodeReaderViewController *)barcodeReader onFoundItem:(NSString *)content withType:(NSString *)type {
+    NSLog(@"type: %@", type);
+    NSLog(@"content: %@", content);
 }
 
 

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddBookModalViewController.h"
+#import "BarcodeReaderViewController.h"
 
-@interface BooksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface BooksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddBookModalDelegate, BarcodeReaderDelegate>
 {
     NSMutableArray *books;
 }

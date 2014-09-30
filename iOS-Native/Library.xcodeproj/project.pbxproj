@@ -53,6 +53,7 @@
 		B451E2A719C2011B0041E88C /* UIButton+AppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2A619C2011B0041E88C /* UIButton+AppButton.m */; };
 		B451E2AD19C20F010041E88C /* CheckInModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2AC19C20F010041E88C /* CheckInModalViewController.m */; };
 		B47034F619CB29B900139B00 /* StudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B47034F519CB29B900139B00 /* StudentCell.m */; };
+		B4A3868519DAFE5A009783BE /* AddBookScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A3868419DAFE5A009783BE /* AddBookScanViewController.m */; };
 		B4B156B319D9BE0300CFC429 /* AddBookModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B156B219D9BE0300CFC429 /* AddBookModalViewController.m */; };
 		B4D042AB19D06B7A003B76BE /* BookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D042AA19D06B7A003B76BE /* BookCell.m */; };
 		B4DD987819CC2E0A009A0D83 /* StudentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DD987719CC2E0A009A0D83 /* StudentDetailViewController.m */; };
@@ -151,6 +152,8 @@
 		B451E2AC19C20F010041E88C /* CheckInModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckInModalViewController.m; sourceTree = "<group>"; };
 		B47034F419CB29B900139B00 /* StudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentCell.h; sourceTree = "<group>"; };
 		B47034F519CB29B900139B00 /* StudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentCell.m; sourceTree = "<group>"; };
+		B4A3868319DAFE5A009783BE /* AddBookScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBookScanViewController.h; sourceTree = "<group>"; };
+		B4A3868419DAFE5A009783BE /* AddBookScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBookScanViewController.m; sourceTree = "<group>"; };
 		B4B156B119D9BE0300CFC429 /* AddBookModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBookModalViewController.h; sourceTree = "<group>"; };
 		B4B156B219D9BE0300CFC429 /* AddBookModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBookModalViewController.m; sourceTree = "<group>"; };
 		B4D042A919D06B7A003B76BE /* BookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCell.h; sourceTree = "<group>"; };
@@ -352,6 +355,8 @@
 				B4D042AA19D06B7A003B76BE /* BookCell.m */,
 				B4B156B119D9BE0300CFC429 /* AddBookModalViewController.h */,
 				B4B156B219D9BE0300CFC429 /* AddBookModalViewController.m */,
+				B4A3868319DAFE5A009783BE /* AddBookScanViewController.h */,
+				B4A3868419DAFE5A009783BE /* AddBookScanViewController.m */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -614,6 +619,7 @@
 				8C14562219B554DB009616DE /* StudentsViewController.m in Sources */,
 				8C14561C19B5547B009616DE /* HomeViewController.m in Sources */,
 				72D2357419B58F37003963E5 /* CheckOutBookViewController.m in Sources */,
+				B4A3868519DAFE5A009783BE /* AddBookScanViewController.m in Sources */,
 				BA0AA97719BF34B700A19E24 /* EditBookViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
