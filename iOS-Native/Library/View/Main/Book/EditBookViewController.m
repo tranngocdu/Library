@@ -53,7 +53,6 @@
     [query getObjectInBackgroundWithId:bookId block:^(PFObject *object, NSError *error) {
         if(!error) {
             book = object;
-            NSLog(@"%@", book);
             _lblBookTitle.text = book[@"title"];
             _lblBookAuthor.text = book[@"author"];
             _lblBookISBN.text = book[@"ISBN"];
@@ -114,8 +113,10 @@
 
 - (void)FPPickerController:(FPPickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     bookCoverUrl = [info objectForKey:@"FPPickerControllerRemoteURL"];
-    NSData *imageData = [NSData dataWithContentsOfFile:[info objectForKey:@"FPPickerControllerMediaURL"]];
-    _imgBookCover.image = [[UIImage alloc] initWithData:imageData];
+    NSString *imageUrl = [info objectForKey:@"FPPickerControllerMediaURL"];
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        _imgBookCover.image = [[UIImage alloc] initWithData:data];
+    }];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

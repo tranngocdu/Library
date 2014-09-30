@@ -148,7 +148,7 @@
     
     [addModal setTransitioningDelegate:self.transitioningDelegate];
     addModal.modalPresentationStyle = UIModalPresentationCustom;
-    [addModal setDelegate:self];
+//    [addModal setDelegate:self];
     
     [self presentViewController:addModal animated:NO completion:nil];
 }

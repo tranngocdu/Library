@@ -43,6 +43,7 @@
 {
     [super viewDidLoad];
     [self decorate];
+    [self.tabBarController.tabBar setTintColor:UIColorFromRGB(kAppRed)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
