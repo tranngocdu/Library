@@ -55,7 +55,7 @@
     _cancel.frame = CGRectMake((self.view.frame.size.width-bw)/2.0, self.view.bounds.size.height - 40, bw, 40);
     [_cancel setTitle:@"Cancel" forState:UIControlStateNormal];
     [_cancel addTarget:self action:@selector(onCancel) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_cancel];
+    //[self.view addSubview:_cancel];
 
     _label = [[UILabel alloc] init];
     _label.frame = CGRectMake(0, self.view.bounds.size.height - 40, self.view.bounds.size.width, 40);

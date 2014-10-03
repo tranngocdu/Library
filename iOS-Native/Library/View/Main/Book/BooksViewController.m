@@ -158,15 +158,9 @@
 - (void)addBookModal:(AddBookModalViewController*)addBookModal onClickAt:(int)buttonIndex {
     NSLog(@"%d", buttonIndex);
     if (buttonIndex == 1) {
-//        BarcodeReaderViewController *barcodeReader = [[BarcodeReaderViewController alloc] initWithDelegate:self];
-//        [self.navigationController pushViewController:barcodeReader animated:YES];
-//        self.tabBarController.tabBar.hidden = YES;
-        AddBookScanViewController *addScanView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookScanIdentifier"];
-        [addScanView setBookTitle:@"Eragon"];
-        [addScanView setBookAuthor:@"Anynomous"];
-        [addScanView setBookQuantity:@"5"];
-        [addScanView setBookISBN:@"1233214566540"];
-        [self.navigationController pushViewController:addScanView animated:YES];
+        BarcodeReaderViewController *barcodeReader = [[BarcodeReaderViewController alloc] initWithDelegate:self];
+        [self.navigationController pushViewController:barcodeReader animated:YES];
+        self.tabBarController.tabBar.hidden = YES;
     } else if (buttonIndex == 2) {
         AddBookManualViewController *addManualView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIdentifier"];
         [self.navigationController pushViewController:addManualView animated:YES];
@@ -184,6 +178,13 @@
 - (void)barcodeReader:(BarcodeReaderViewController *)barcodeReader onFoundItem:(NSString *)content withType:(NSString *)type {
     NSLog(@"type: %@", type);
     NSLog(@"content: %@", content);
+
+    AddBookScanViewController *addScanView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookScanIdentifier"];
+    [addScanView setBookTitle:@"Eragon"];
+    [addScanView setBookAuthor:@"Anynomous"];
+    [addScanView setBookQuantity:@"5"];
+    [addScanView setBookISBN:content];
+    [self.navigationController pushViewController:addScanView animated:YES];
 }
 
 
