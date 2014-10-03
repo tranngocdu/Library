@@ -11,10 +11,13 @@
 
 @interface AddBookManualViewController : UIViewController <FPPickerDelegate> {
     NSMutableString *bookCoverUrl;
+    NSMutableString *bookISBN;
 }
 
 - (IBAction)addPhoto:(id)sender;
 - (IBAction)addBook:(id)sender;
+
+- (void)setBookISBN:(NSString *)isbn;
 
 @property (strong, nonatomic) IBOutlet UIImageView *tfImage;
 @property (strong, nonatomic) IBOutlet UIButton *btnAddPhoto;

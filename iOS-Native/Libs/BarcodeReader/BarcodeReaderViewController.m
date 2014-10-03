@@ -55,7 +55,7 @@
     _cancel.frame = CGRectMake((self.view.frame.size.width-bw)/2.0, self.view.bounds.size.height - 40, bw, 40);
     [_cancel setTitle:@"Cancel" forState:UIControlStateNormal];
     [_cancel addTarget:self action:@selector(onCancel) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_cancel];
+    //[self.view addSubview:_cancel];
 
     _label = [[UILabel alloc] init];
     _label.frame = CGRectMake(0, self.view.bounds.size.height - 40, self.view.bounds.size.width, 40);
@@ -110,12 +110,12 @@
                             AVMetadataObjectTypeQRCode,
                             AVMetadataObjectTypeAztecCode ];
 
-    NSArray *iOS8Array = @[
-                           AVMetadataObjectTypeInterleaved2of5Code,
-                           AVMetadataObjectTypeITF14Code,
-                           AVMetadataObjectTypeDataMatrixCode ];
-
     if([[[UIDevice currentDevice].systemVersion substringToIndex:2] floatValue] >= 7.9) {
+        NSArray *iOS8Array = @[
+                               AVMetadataObjectTypeInterleaved2of5Code,
+                               AVMetadataObjectTypeITF14Code,
+                               AVMetadataObjectTypeDataMatrixCode ];
+        
         barCodeTypes = [barCodeTypes arrayByAddingObjectsFromArray:iOS8Array];
     }
 

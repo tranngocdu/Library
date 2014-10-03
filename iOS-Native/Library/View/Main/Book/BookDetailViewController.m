@@ -98,7 +98,7 @@
                 [self adjustScrollSize];
             }
         } else {
-            NSLog(@"%@", error);
+            NSLog(@"AA %@", error);
             Utilities *utilities = [[Utilities alloc] init];
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
             _viewButtons.hidden = NO;

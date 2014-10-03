@@ -47,6 +47,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    if (![bookISBN isEqualToString:@""]) {
+        _tfIsbn.text = bookISBN;
+    }
+    bookISBN = [NSMutableString stringWithFormat:@""];
+}
+
 - (void)addPhoto:(id)sender {
     // To create the object
     FPPickerController *fpController = [[FPPickerController alloc] init];
@@ -58,7 +65,7 @@
     fpController.dataTypes = [NSArray arrayWithObjects:@"image/*", nil];
 
     // Select and order the sources (Optional) Default is all sources
-    //fpController.sourceNames = [[NSArray alloc] initWithObjects: FPSourceCamera, FPSourceCameraRoll, FPSourceDropbox, FPSourceFacebook, FPSourceFlickr, FPSourceGmail, FPSourceBox, FPSourceGithub, FPSourceGoogleDrive, FPSourceImagesearch, FPSourceInstagram, FPSourcePicasa,  nil];
+//    fpController.sourceNames = [[NSArray alloc] initWithObjects: FPSourceCamera, FPSourceCameraRoll, FPSourceDropbox, FPSourceFacebook, FPSourceFlickr, FPSourceGmail, FPSourceBox, FPSourceGithub, FPSourceGoogleDrive, FPSourceImagesearch, FPSourceInstagram, FPSourcePicasa,  nil];
 
     fpController.sourceNames = [[NSArray alloc] initWithObjects:FPSourceCamera, FPSourceCameraRoll, FPSourceBox, FPSourceDropbox, FPSourceFacebook, FPSourceGithub, FPSourceGmail, FPSourceImagesearch, FPSourceGoogleDrive, FPSourceInstagram, FPSourceFlickr, FPSourcePicasa, FPSourceSkydrive, FPSourceEvernote, nil];
     
@@ -93,6 +100,10 @@
 
 - (void)FPPickerControllerDidCancel:(FPPickerController *)picker {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)setBookISBN:(NSString *)isbn {
+    bookISBN = [NSMutableString stringWithString:isbn];
 }
 
 - (void)addBook:(id)sender {

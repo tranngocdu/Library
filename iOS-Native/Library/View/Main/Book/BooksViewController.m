@@ -54,6 +54,11 @@
     [self loadBooksWithType:0];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.tabBarController.tabBar.hidden = NO;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -158,15 +163,13 @@
 - (void)addBookModal:(AddBookModalViewController*)addBookModal onClickAt:(int)buttonIndex {
     NSLog(@"%d", buttonIndex);
     if (buttonIndex == 1) {
+#if TARGET_IPHONE_SIMULATOR
+        [self barcodeReader:nil onFoundItem:@"9781234567897" withType:@"org.gs1.EAN-13"];
+#else
         BarcodeReaderViewController *barcodeReader = [[BarcodeReaderViewController alloc] initWithDelegate:self];
         [self.navigationController pushViewController:barcodeReader animated:YES];
         self.tabBarController.tabBar.hidden = YES;
-//        AddBookScanViewController *addScanView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookScanIdentifier"];
-//        [addScanView setBookTitle:@"Eragon"];
-//        [addScanView setBookAuthor:@"Anynomous"];
-//        [addScanView setBookQuantity:@"5"];
-//        [addScanView setBookISBN:@"1233214566540"];
-//        [self.navigationController pushViewController:addScanView animated:YES];
+#endif
     } else if (buttonIndex == 2) {
         AddBookManualViewController *addManualView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIdentifier"];
         [self.navigationController pushViewController:addManualView animated:YES];
@@ -176,14 +179,54 @@
 }
 
 - (void)barcodeReaderOnCancel:(BarcodeReaderViewController *)barcodeReader {
-    if ([self.navigationController.viewControllers count] > 1){
+
+    if ([self.navigationController.viewControllers count] > 1) {
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
 - (void)barcodeReader:(BarcodeReaderViewController *)barcodeReader onFoundItem:(NSString *)content withType:(NSString *)type {
-    NSLog(@"type: %@", type);
-    NSLog(@"content: %@", content);
+    Utilities *utilities = [[Utilities alloc] init];
+    
+    NSString *sendUrl = [NSString stringWithFormat:@"http://openlibrary.org/api/books?bibkeys=%@&jscmd=data&format=json", content];
+    NSURL *url = [[NSURL alloc] initWithString:sendUrl];
+    
+    [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url] queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+            [utilities showAlertWithTitle:@"Error" withMessage:@"Error when getting book informations."];
+        } else {
+            NSError *parseError = nil;
+            NSDictionary *parseData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+            // If parse error
+            if (parseError != nil ) {
+                AddBookManualViewController *addManualView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIdentifier"];
+                [addManualView setBookISBN:content];
+                [self.navigationController pushViewController:addManualView animated:YES];
+            } else {
+                NSArray *result = [parseData objectForKey:content];
+                // Set book data
+                AddBookScanViewController *addScanView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookScanIdentifier"];
+                
+                for (NSString *key in result) {
+                    if([key isEqualToString:@"title"]) {
+                        [addScanView setBookTitle:[result valueForKey:key]];
+                    } else if ([key isEqualToString:@"authors"]) {
+                        NSArray *bookAuthors = [result valueForKey:key];
+                        NSString *author = [[bookAuthors objectAtIndex:0] valueForKey:@"name"];
+                        [addScanView setBookAuthor:author];
+                    } else if ([key isEqualToString:@"cover"]) {
+                        NSDictionary *bookCovers = [result valueForKey:key];
+                        NSString *coverMedium = [bookCovers valueForKey:@"medium"];
+                        [addScanView setBookCover:coverMedium];
+                    }
+                }
+                [addScanView setBookISBN:content];
+                [addScanView setBookQuantity:@"1"];
+                [self.navigationController pushViewController:addScanView animated:YES];
+            }
+        }
+    }];
 }
 
 

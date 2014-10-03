@@ -28,6 +28,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self decorate];
+    
+    // Disable buttons
+    _btnAddBook.enabled = NO;
+    _btnAddPhoto.enabled = NO;
+    _btnEditQuantity.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,6 +44,14 @@
     _lblTitle.text = bookTitle;
     _lblAuthor.text = bookAuthor;
     _lblQuantity.text = [NSString stringWithFormat:@"Number available: %@", bookQuantity];
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:bookCoverUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        _imgBookCover.image = [UIImage imageWithData:data];
+    }];
+    
+    // Enable buttons
+    _btnAddBook.enabled = YES;
+    _btnAddPhoto.enabled = YES;
+    _btnEditQuantity.enabled = YES;
 }
 
 - (void)setBookTitle:(NSString *)title {
@@ -55,6 +68,10 @@
 
 - (void)setBookISBN:(NSString *)isbn {
     bookISBN = isbn;
+}
+
+- (void)setBookCover:(NSString *)cover {
+    bookCoverUrl = cover;
 }
 
 - (void)addBook:(id)sender {

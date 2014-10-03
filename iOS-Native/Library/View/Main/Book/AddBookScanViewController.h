@@ -10,11 +10,11 @@
 #import <FPPicker/FPPicker.h>
 
 @interface AddBookScanViewController : UIViewController <FPPickerDelegate> {
-    NSString *bookTitle;
-    NSString *bookAuthor;
-    NSString *bookQuantity;
-    NSString *bookCoverUrl;
-    NSString *bookISBN;
+    NSMutableString *bookTitle;
+    NSMutableString *bookAuthor;
+    NSMutableString *bookQuantity;
+    NSMutableString *bookCoverUrl;
+    NSMutableString *bookISBN;
 }
 
 - (IBAction)addPhoto:(id)sender;
@@ -25,6 +25,7 @@
 - (void)setBookAuthor:(NSString *)author;
 - (void)setBookQuantity:(NSString *)quantity;
 - (void)setBookISBN:(NSString *)isbn;
+- (void)setBookCover:(NSString *)cover;
 
 @property (strong, nonatomic) IBOutlet UIImageView *imgBookCover;
 @property (strong, nonatomic) IBOutlet UIButton *btnAddPhoto;
