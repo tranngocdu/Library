@@ -54,6 +54,11 @@
     [self loadBooksWithType:0];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.tabBarController.tabBar.hidden = NO;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -158,9 +163,15 @@
 - (void)addBookModal:(AddBookModalViewController*)addBookModal onClickAt:(int)buttonIndex {
     NSLog(@"%d", buttonIndex);
     if (buttonIndex == 1) {
+
+#if TARGET_IPHONE_SIMULATOR
+        [self barcodeReader:nil onFoundItem:@"9780123456786" withType:@"org.gs1.EAN-13"];
+#else
         BarcodeReaderViewController *barcodeReader = [[BarcodeReaderViewController alloc] initWithDelegate:self];
         [self.navigationController pushViewController:barcodeReader animated:YES];
         self.tabBarController.tabBar.hidden = YES;
+#endif
+
     } else if (buttonIndex == 2) {
         AddBookManualViewController *addManualView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIdentifier"];
         [self.navigationController pushViewController:addManualView animated:YES];
@@ -170,7 +181,8 @@
 }
 
 - (void)barcodeReaderOnCancel:(BarcodeReaderViewController *)barcodeReader {
-    if ([self.navigationController.viewControllers count] > 1){
+
+    if ([self.navigationController.viewControllers count] > 1) {
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

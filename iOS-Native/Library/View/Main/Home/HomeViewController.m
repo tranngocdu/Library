@@ -60,8 +60,8 @@
         // Scan
 
 #if TARGET_IPHONE_SIMULATOR
-        NSString *cheatISBN = @"123456789";
-        NSString *cheatType = @"org.iso.QRCode";
+        NSString *cheatISBN = @"9780123456786";
+        NSString *cheatType = @"org.gs1.EAN-13";
         [self barcodeReader:nil onFoundItem:cheatISBN withType:cheatType];
 #else
         BarcodeReaderViewController *barcodeReader = [[BarcodeReaderViewController alloc] initWithDelegate:self];
