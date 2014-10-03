@@ -110,12 +110,12 @@
                             AVMetadataObjectTypeQRCode,
                             AVMetadataObjectTypeAztecCode ];
 
-    NSArray *iOS8Array = @[
-                           AVMetadataObjectTypeInterleaved2of5Code,
-                           AVMetadataObjectTypeITF14Code,
-                           AVMetadataObjectTypeDataMatrixCode ];
-
     if([[[UIDevice currentDevice].systemVersion substringToIndex:2] floatValue] >= 7.9) {
+        NSArray *iOS8Array = @[
+                               AVMetadataObjectTypeInterleaved2of5Code,
+                               AVMetadataObjectTypeITF14Code,
+                               AVMetadataObjectTypeDataMatrixCode ];
+        
         barCodeTypes = [barCodeTypes arrayByAddingObjectsFromArray:iOS8Array];
     }
 
