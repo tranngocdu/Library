@@ -49,6 +49,7 @@
 {
     [super viewDidLoad];
     [self decorate];
+    utilities = [[Utilities alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -89,19 +90,19 @@
     NSString *newPassword = _tfNewPassword.text;
     NSString *newPasswordConfirm = _tfNewPasswordConfirm.text;
     
-    Utilities *utilities = [[Utilities alloc] init];
-    
     if([currentPassword isEqualToString:@""] ||
        [newPassword isEqualToString:@""]) {
         [utilities showAlertWithTitle:@"Check Password" withMessage:@"The password you entered was incorrect."];
     } else if(![newPassword isEqualToString:newPasswordConfirm]) {
         [utilities showAlertWithTitle:@"Try again" withMessage:@"The passwords did not match."];
     } else {
+        [utilities showLoading];
         // Login to check current password
         [PFUser logInWithUsernameInBackground:user[@"username"] password:currentPassword block:^(PFUser *checkuser, NSError *error) {
             if (!error) {
                 user.password = newPassword;
                 [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    [utilities hideLoading];
                     if(!error) {
                         // Relogin with new password
                         [PFUser logInWithUsernameInBackground:user[@"username"] password:newPassword block:^(PFUser *user, NSError *error) {
@@ -121,6 +122,7 @@
                     }
                 }];
             } else {
+                [utilities hideLoading];
                 NSLog(@"Error: %@", error);
                 [utilities showAlertWithTitle:@"Error" withMessage:@"Wrong current password."];
             }

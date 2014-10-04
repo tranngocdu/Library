@@ -9,7 +9,6 @@
 #import "AddBookScanViewController.h"
 #import "EditBookModalViewController.h"
 #import "UIButton+AppButton.h"
-#import "Utilities.h"
 #import <Parse/Parse.h>
 
 @interface AddBookScanViewController ()
@@ -42,6 +41,7 @@
     [self decorate];
     // Disable buttons
     [self disableButtons];
+    utilities = [[Utilities alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,7 +86,7 @@
     // Disable buttons
     [self disableButtons];
     
-    Utilities *utilities = [[Utilities alloc] init];
+    [utilities showLoading];
     
     PFUser *currentUser = [PFUser currentUser];
     PFObject *book = [PFObject objectWithClassName:@"NewBook"];
@@ -101,6 +101,7 @@
     book[@"quantity_available"] = @([bookQuantity intValue]);
     
     [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [utilities hideLoading];
         if(!error) {
             [self.navigationController popViewControllerAnimated:YES];
         } else {

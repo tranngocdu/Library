@@ -12,7 +12,6 @@
 #import "AddBookManualViewController.h"
 #import "AddBookScanViewController.h"
 #import "BookCell.h"
-#import "Utilities.h"
 #import "BarcodeReaderViewController.h"
 #import <Parse/Parse.h>
 
@@ -47,6 +46,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self decorate];
+    utilities = [[Utilities alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -85,9 +85,11 @@
     cell.lblBookQuantity.text = [NSString stringWithFormat:@"%@ available", book[@"quantity_available"]];
     
     NSString *imageUrl = book[@"cover_image"];
-    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        cell.bookPhoto.image = [UIImage imageWithData:data];
-    }];
+    if(imageUrl != nil) {
+        [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            cell.bookPhoto.image = [UIImage imageWithData:data];
+        }];
+    }
 
     return cell;
 }
@@ -100,6 +102,8 @@
 }
 
 - (void)loadBooksWithType:(int)type {
+    [utilities showLoading];
+    
     PFUser *currentUser = [PFUser currentUser];
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     
@@ -125,9 +129,10 @@
             // Rerender table view
             [_listBooks reloadData];
         } else {
-            Utilities *utilities = [[Utilities alloc] init];
+            NSLog(@"Error: %@", error);
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
         }
+        [utilities hideLoading];
     }];
 }
 
@@ -161,8 +166,6 @@
 }
 
 - (void)addBookModal:(AddBookModalViewController*)addBookModal onClickAt:(int)buttonIndex {
-    NSLog(@"%d", buttonIndex);
-    
     if (buttonIndex == 1) {
 #if TARGET_IPHONE_SIMULATOR
         [self barcodeReader:nil onFoundItem:@"2145431431257" withType:@"org.gs1.EAN-13"];
@@ -187,8 +190,6 @@
 }
 
 - (void)barcodeReader:(BarcodeReaderViewController *)barcodeReader onFoundItem:(NSString *)content withType:(NSString *)type {
-    Utilities *utilities = [[Utilities alloc] init];
-
     if ([self.navigationController.viewControllers count] > 1) {
         [self.navigationController popViewControllerAnimated:YES];
     }

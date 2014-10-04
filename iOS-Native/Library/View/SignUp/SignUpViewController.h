@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Utilities.h"
 
 @interface SignUpViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
 {
-
+    Utilities *utilities;
 }
 
 @property (strong, nonatomic) IBOutlet UITextField *tfEmail;

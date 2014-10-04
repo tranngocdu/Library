@@ -9,7 +9,6 @@
 #import "AddBookManualViewController.h"
 #import "BooksViewController.h"
 #import "UIButton+AppButton.h"
-#import "Utilities.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <Parse/Parse.h>
 
@@ -40,6 +39,7 @@
     [self decorate];
     [self.navigationItem setTitle:@"Add Book"];
     _tfQuantity.text = @"1";
+    utilities = [[Utilities alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,9 +117,7 @@
     bookISBN = [NSMutableString stringWithFormat:@"%@", _tfIsbn.text];
     NSString *bookQuantity = _tfQuantity.text;
     int bookQuan = [bookQuantity intValue];
-    
-    Utilities *utilities = [[Utilities alloc] init];
-    
+
     // Validate informations
     if ([bookTitle isEqualToString:@""] || [bookAuthor isEqualToString:@""]) {
         [utilities showAlertWithTitle:@"Try Again" withMessage:@"Please add a title, author and quantity."];
@@ -132,6 +130,11 @@
         _btnAddBook.enabled = YES;
         _btnAddPhoto.enabled = YES;
     } else {
+        if(bookCoverUrl == nil) {
+            bookCoverUrl = [NSMutableString stringWithFormat:@""];
+        }
+        
+        [utilities showLoading];
         PFUser *currentUser = [PFUser currentUser];
         PFObject *book = [PFObject objectWithClassName:@"NewBook"];
         book[@"title"] = bookTitle;
@@ -145,6 +148,7 @@
         book[@"quantity_available"] = @([bookQuantity intValue]);
         
         [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [utilities hideLoading];
             if(!error) {
                 [self.navigationController popViewControllerAnimated:YES];
             } else {

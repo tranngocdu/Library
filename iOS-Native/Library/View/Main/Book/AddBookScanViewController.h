@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <FPPicker/FPPicker.h>
 #import "EditBookModalViewController.h"
+#import "Utilities.h"
 
 @interface AddBookScanViewController : UIViewController <FPPickerDelegate, EditDelegate> {
     NSMutableString *bookTitle;
@@ -16,6 +17,7 @@
     NSMutableString *bookQuantity;
     NSMutableString *bookCoverUrl;
     NSMutableString *bookISBN;
+    Utilities *utilities;
 }
 
 - (IBAction)addPhoto:(id)sender;

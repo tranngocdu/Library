@@ -8,7 +8,6 @@
 
 #import "EditBookModalViewController.h"
 #import "AddBookScanViewController.h"
-#import "Utilities.h"
 
 @interface EditBookModalViewController ()
 

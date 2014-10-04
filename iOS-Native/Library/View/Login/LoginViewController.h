@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Utilities.h"
 
-@interface LoginViewController : UIViewController <UITextFieldDelegate>
+@interface LoginViewController : UIViewController <UITextFieldDelegate> {
+    Utilities *utilities;
+}
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLogin;
 @property (strong, nonatomic) IBOutlet UIButton *btnCreateAccount;

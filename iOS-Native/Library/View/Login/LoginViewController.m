@@ -10,7 +10,6 @@
 #import "HomeViewController.h"
 #import "Constants.h"
 #import "UIButton+AppButton.h"
-#import "Utilities.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Parse/Parse.h>
 
@@ -48,6 +47,7 @@
     [super viewDidLoad];
 
     [self decorate];
+    utilities = [[Utilities alloc] init];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -71,11 +71,11 @@
 
 - (IBAction)doLogin:(id)sender
 {
-    Utilities *utilities = [[Utilities alloc] init];
     if ([_tfEmail.text isEqualToString:@""] || [_tfPassword.text isEqualToString: @""])
     {
         [utilities showAlertWithTitle:@"All Fields Required" withMessage:@"Please enter username and password."];
     } else {
+        [utilities showLoading];
         // Disable button
         _btnLogin.enabled = NO;
         _btnCreateAccount.enabled = NO;
@@ -86,6 +86,7 @@
         
         [PFUser logInWithUsernameInBackground:email password:password
         block:^(PFUser *user, NSError *error) {
+            [utilities hideLoading];
             // Enable button again
             _btnLogin.enabled = YES;
             _btnCreateAccount.enabled = YES;
@@ -107,7 +108,6 @@
 
 - (IBAction)buttonResetPasswordDidClick:(id)sender
 {
-    Utilities *utilities = [[Utilities alloc] init];
     NSString *email = _tfEmail.text;
     if ([email isEqualToString:@""]) {
         [utilities showAlertWithTitle:@"Enter your email" withMessage:@"First enter above the email you used for Class Library"];

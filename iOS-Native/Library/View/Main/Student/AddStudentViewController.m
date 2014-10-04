@@ -8,7 +8,6 @@
 
 #import "AddStudentViewController.h"
 #import "UIButton+AppButton.h"
-#import "Utilities.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Parse/Parse.h>
 
@@ -40,6 +39,7 @@
     [super viewDidLoad];
     [self decorate];
     [self.navigationItem setTitle:@"Add Student"];
+    utilities = [[Utilities alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,11 +49,11 @@
 }
 
 - (void)addStudent:(id)sender {
-    Utilities *utilities = [[Utilities alloc] init];
     NSString *studentName = _tfStudentName.text;
     if ([studentName isEqualToString:@""]) {
         [utilities showAlertWithTitle:@"Error" withMessage:@"Require student name."];
     } else {
+        [utilities showLoading];
         // Create student object
         PFObject *student = [PFObject objectWithClassName:@"Student"];
         PFUser *currentUser = [PFUser currentUser];
@@ -67,6 +67,7 @@
         
         // Save student using parse object
         [student saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [utilities hideLoading];
             if(!error) {
                 // Enable add student button
                 _btnAddStudent.enabled = YES;

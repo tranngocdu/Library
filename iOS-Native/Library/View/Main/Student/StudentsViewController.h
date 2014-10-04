@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "StudentCell.h"
+#import "Utilities.h"
+
 
 @interface StudentsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate> {
     NSMutableArray *students;
     StudentCell *studentCell;
     int cellSelect;
+    Utilities *utilities;
 }
 
 - (IBAction)addStudent:(id)sender;

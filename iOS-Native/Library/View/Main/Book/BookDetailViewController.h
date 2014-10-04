@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "Utilities.h"
 
 @interface BookDetailViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate> {
     NSString *bookId;
     PFObject *book;
     NSArray *studentsList;
+    Utilities *utilities;
 }
 
 - (IBAction)checkoutBook:(id)sender;

@@ -10,7 +10,6 @@
 #import "HomeViewController.h"
 #import "Constants.h"
 #import "UIButton+AppButton.h"
-#import "Utilities.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Parse/Parse.h>
 
@@ -49,6 +48,7 @@
     [super viewDidLoad];
 
     [self decorate];
+    utilities = [[Utilities alloc] init];
 }
 
 - (IBAction) goBackToLoginScreen:(id)sender
@@ -84,8 +84,6 @@
     NSString *password = _tfPassword.text;
     NSString *passwordConfirm = _tfPasswordConfirm.text;
     
-    Utilities *utilities = [[Utilities alloc] init];
-    
     // Validate sign up informations
     if ([email isEqualToString:@""]) {
         [utilities showAlertWithTitle:@"Error" withMessage:@"Cannot sign up user with an empty name."];
@@ -94,6 +92,7 @@
     } else if (![password isEqualToString:passwordConfirm]) {
         [utilities showAlertWithTitle:@"Error" withMessage:@"Your password do not match. Please try again."];
     } else {
+        [utilities showLoading];
         // Disable button
         _btnCreateAccount.enabled = NO;
         _btnIHaveAccount.enabled = NO;
@@ -106,6 +105,7 @@
         
         // Send data
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [utilities hideLoading];
             // Enable button again
             _btnCreateAccount.enabled = YES;
             _btnIHaveAccount.enabled = YES;
