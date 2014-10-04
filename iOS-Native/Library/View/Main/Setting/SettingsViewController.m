@@ -49,7 +49,6 @@
 {
     [super viewDidLoad];
     [self decorate];
-    utilities = [[Utilities alloc] init];
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTouchAtBackground)];
     [self.view addGestureRecognizer:tap];
@@ -99,39 +98,39 @@
     
     if([currentPassword isEqualToString:@""] ||
        [newPassword isEqualToString:@""]) {
-        [utilities showAlertWithTitle:@"Check Password" withMessage:@"The password you entered was incorrect."];
+        [[Utilities share] showAlertWithTitle:@"Check Password" withMessage:@"The password you entered was incorrect."];
     } else if(![newPassword isEqualToString:newPasswordConfirm]) {
-        [utilities showAlertWithTitle:@"Try again" withMessage:@"The passwords did not match."];
+        [[Utilities share] showAlertWithTitle:@"Try again" withMessage:@"The passwords did not match."];
     } else {
-        [utilities showLoading];
+        [[Utilities share] showLoading];
         // Login to check current password
         [PFUser logInWithUsernameInBackground:user[@"username"] password:currentPassword block:^(PFUser *checkuser, NSError *error) {
             if (!error) {
                 user.password = newPassword;
                 [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    [utilities hideLoading];
+                    [[Utilities share] hideLoading];
                     if(!error) {
                         // Relogin with new password
                         [PFUser logInWithUsernameInBackground:user[@"username"] password:newPassword block:^(PFUser *user, NSError *error) {
                             if (!error) {
                                 HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
                                 [self.navigationController presentViewController:homeView animated:YES completion:^{
-                                    [utilities showAlertWithTitle:@"Changed" withMessage:@"Settings have been changed."];
+                                    [[Utilities share] showAlertWithTitle:@"Changed" withMessage:@"Settings have been changed."];
                                 }];
                             } else {
                                 NSLog(@"Error: %@", error);
-                                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error."];
+                                [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error."];
                             }
                         }];
                     } else {
                         NSLog(@"Error: %@", error);
-                        [utilities showAlertWithTitle:@"Error" withMessage:@"Server error."];
+                        [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error."];
                     }
                 }];
             } else {
-                [utilities hideLoading];
+                [[Utilities share] hideLoading];
                 NSLog(@"Error: %@", error);
-                [utilities showAlertWithTitle:@"Error" withMessage:@"Wrong current password."];
+                [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Wrong current password."];
             }
         }];
     }

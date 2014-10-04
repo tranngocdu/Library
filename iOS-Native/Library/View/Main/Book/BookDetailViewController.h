@@ -14,7 +14,6 @@
     NSString *bookId;
     PFObject *book;
     NSArray *studentsList;
-    Utilities *utilities;
 }
 
 - (IBAction)checkoutBook:(id)sender;

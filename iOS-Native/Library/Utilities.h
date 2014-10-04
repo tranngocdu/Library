@@ -10,7 +10,10 @@
 
 @interface Utilities : NSObject {
     UIView *loadingView;
+    UIActivityIndicatorView *spinner;
 }
+
++ (Utilities*)share;
 
 - (void)showAlertWithTitle:(NSString *)title withMessage: (NSString *) message;
 - (void)showLoading;

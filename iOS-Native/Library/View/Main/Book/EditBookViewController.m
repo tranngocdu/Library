@@ -44,7 +44,6 @@
     [self getBookToEdit];
 
     [self registerKeyboardEvent];
-    utilities = [[Utilities alloc] init];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -103,7 +102,7 @@
 
 - (void)getBookToEdit {
     NSLog(@"bookId: %@", bookId);
-    [utilities showLoading];
+    [[Utilities share] showLoading];
     // Get book informations
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     [query getObjectInBackgroundWithId:bookId block:^(PFObject *object, NSError *error) {
@@ -125,9 +124,9 @@
             }
         } else {
             NSLog(@"Error: %@", error);
-            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error."];
+            [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error."];
         }
-        [utilities hideLoading];
+        [[Utilities share] hideLoading];
     }];
 }
 
@@ -194,11 +193,11 @@
     
     // Validate informations
     if ([bookTitle isEqualToString:@""] || [bookAuthor isEqualToString:@""]) {
-        [utilities showAlertWithTitle:@"Try Again" withMessage:@"Please add a title, author and quantity."];
+        [[Utilities share] showAlertWithTitle:@"Try Again" withMessage:@"Please add a title, author and quantity."];
     } else if ([bookISBN length] != 13) {
-        [utilities showAlertWithTitle:@"Try Again" withMessage:@"Please make sure you're using the 13 digit ISBN."];
+        [[Utilities share] showAlertWithTitle:@"Try Again" withMessage:@"Please make sure you're using the 13 digit ISBN."];
     } else {
-        [utilities showLoading];
+        [[Utilities share] showLoading];
         // Set book
         book[@"title"] = bookTitle;
         book[@"author"] = bookAuthor;
@@ -218,13 +217,13 @@
         book[@"quantity_total"] = @([bookQuantity intValue]);
         
         [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            [utilities hideLoading];
+            [[Utilities share] hideLoading];
             if(!error) {
                 [self getBookToEdit];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             } else {
                 NSLog(@"Error: %@", error);
-                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+                [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
             }
         }];
     }

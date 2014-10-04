@@ -39,7 +39,6 @@
     [super viewDidLoad];
     [self decorate];
     [self.navigationItem setTitle:@"Add Student"];
-    utilities = [[Utilities alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,9 +50,9 @@
 - (void)addStudent:(id)sender {
     NSString *studentName = _tfStudentName.text;
     if ([studentName isEqualToString:@""]) {
-        [utilities showAlertWithTitle:@"Error" withMessage:@"Require student name."];
+        [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Require student name."];
     } else {
-        [utilities showLoading];
+        [[Utilities share] showLoading];
         // Create student object
         PFObject *student = [PFObject objectWithClassName:@"Student"];
         PFUser *currentUser = [PFUser currentUser];
@@ -67,14 +66,14 @@
         
         // Save student using parse object
         [student saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            [utilities hideLoading];
+            [[Utilities share] hideLoading];
             if(!error) {
                 // Enable add student button
                 _btnAddStudent.enabled = YES;
                 // If successful, back to student list view
                 [self.navigationController popViewControllerAnimated:YES];
             } else {
-                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+                [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
             }
         }];
     }

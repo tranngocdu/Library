@@ -17,7 +17,6 @@
     NSMutableString *bookQuantity;
     NSMutableString *bookCoverUrl;
     NSMutableString *bookISBN;
-    Utilities *utilities;
 }
 
 - (IBAction)addPhoto:(id)sender;

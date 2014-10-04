@@ -36,11 +36,10 @@
 	// Do any additional setup after loading the view.
     [self.navigationItem setTitle:@"Check In"];
     [self decorate];
-    utilities = [[Utilities alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [utilities showLoading];
+    [[Utilities share] showLoading];
     // Get book by id
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     [query whereKey:@"ISBN" equalTo:bookISBN];
@@ -78,9 +77,9 @@
             }
         } else {
             NSLog(@"Error: %@", error);
-            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
         }
-        [utilities hideLoading];
+        [[Utilities share] hideLoading];
     }];
 }
 
@@ -118,7 +117,7 @@
 }
 
 - (void)checkin:(id)sender {
-    [utilities showLoading];
+    [[Utilities share] showLoading];
     // Get book informations
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     NSLog(@"fetch book with id: %@", book.objectId);
@@ -148,22 +147,22 @@
             book[@"quantity_out"] = @(quantityOut);
 
             [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                [utilities hideLoading];
+                [[Utilities share] hideLoading];
                 if (!error) {
                     // Move to home view
                     HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
                     [self.navigationController presentViewController:homeView animated:YES completion:^{
-                        [utilities showAlertWithTitle:@"Library" withMessage:@"Back on the shelf!"];
+                        [[Utilities share] showAlertWithTitle:@"Library" withMessage:@"Back on the shelf!"];
                     }];
                 } else {
                     NSLog(@"Error: %@", error);
-                    [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+                    [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
                 }
             }];
         } else {
             NSLog(@"Error: %@", error);
-            [utilities hideLoading];
-            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            [[Utilities share] hideLoading];
+            [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
         }
     }];
 }

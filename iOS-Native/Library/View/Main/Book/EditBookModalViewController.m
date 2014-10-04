@@ -33,8 +33,7 @@
     // Validate quantity number
     int num = [_tfQuantity.text intValue];
     if (num < 1) {
-        Utilities *utilities = [[Utilities alloc] init];
-        [utilities showAlertWithTitle:@"Error" withMessage:@"Invalid book quantity."];
+        [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Invalid book quantity."];
     } else {
         if(self.editDelegate && [self.editDelegate respondsToSelector:@selector(onEditChangedValue:)]) {
             [self.editDelegate onEditChangedValue:_tfQuantity.text];

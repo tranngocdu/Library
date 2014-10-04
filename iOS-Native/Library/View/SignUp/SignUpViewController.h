@@ -11,7 +11,7 @@
 
 @interface SignUpViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
 {
-    Utilities *utilities;
+    
 }
 
 @property (strong, nonatomic) IBOutlet UITextField *tfEmail;

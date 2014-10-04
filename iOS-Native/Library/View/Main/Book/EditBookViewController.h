@@ -16,7 +16,6 @@
     NSString *bookId;
     PFObject *book;
     NSMutableString *bookCoverUrl;
-    Utilities *utilities;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *imgBookCover;

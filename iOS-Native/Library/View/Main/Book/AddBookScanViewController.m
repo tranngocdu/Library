@@ -41,7 +41,6 @@
     [self decorate];
     // Disable buttons
     [self disableButtons];
-    utilities = [[Utilities alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,7 +85,7 @@
     // Disable buttons
     [self disableButtons];
     
-    [utilities showLoading];
+    [[Utilities share] showLoading];
     
     PFUser *currentUser = [PFUser currentUser];
     PFObject *book = [PFObject objectWithClassName:@"NewBook"];
@@ -101,12 +100,12 @@
     book[@"quantity_available"] = @([bookQuantity intValue]);
     
     [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        [utilities hideLoading];
+        [[Utilities share] hideLoading];
         if(!error) {
             [self.navigationController popViewControllerAnimated:YES];
         } else {
             NSLog(@"Error: %@", error);
-            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
             // Enable buttons
             [self enableButtons];
         }

@@ -36,11 +36,10 @@
     // Do any additional setup after loading the view.
     [self.navigationItem setTitle:@"Check Out"];
     [self decorate];
-    utilities = [[Utilities alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [utilities showLoading];
+    [[Utilities share] showLoading];
     // Get book by id
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     [query whereKey:@"ISBN" equalTo:bookISBN];
@@ -68,14 +67,14 @@
                     [_tbvListStudents reloadData];
                 } else {
                     NSLog(@"Error: %@", error);
-                    [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+                    [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
                 }
-                [utilities hideLoading];
+                [[Utilities share] hideLoading];
             }];
         } else {
             NSLog(@"Error: %@", error);
-            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
-            [utilities hideLoading];
+            [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            [[Utilities share] hideLoading];
         }
     }];
 }
@@ -121,9 +120,9 @@
 
 - (void)checkout:(id)sender {
     if(!student) {
-        [utilities showAlertWithTitle:@"Library" withMessage:@"Please pick a student"];
+        [[Utilities share] showAlertWithTitle:@"Library" withMessage:@"Please pick a student"];
     } else {
-        [utilities showLoading];
+        [[Utilities share] showLoading];
         // Get book informations
         PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
         NSLog(@"fetch book with id: %@", book.objectId);
@@ -132,8 +131,8 @@
                 // Check available quantity
                 int quantityAvailable = [book[@"quantity_available"] intValue];
                 if (quantityAvailable <= 0) {
-                    [utilities hideLoading];
-                    [utilities showAlertWithTitle:@"Oops!" withMessage:@"All copies has been checked out!"];
+                    [[Utilities share] hideLoading];
+                    [[Utilities share] showAlertWithTitle:@"Oops!" withMessage:@"All copies has been checked out!"];
                 } else {
                     bool isExist = false;
                     // Check user is in book students list or not
@@ -171,23 +170,23 @@
                                 // Move to home view
                                 HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
                                 [self.navigationController presentViewController:homeView animated:YES completion:^{
-                                    [utilities showAlertWithTitle:@"Library" withMessage:@"Happy reading!"];
+                                    [[Utilities share] showAlertWithTitle:@"Library" withMessage:@"Happy reading!"];
                                 }];
                             } else {
                                 NSLog(@"Error: %@", error);
-                                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+                                [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
                             }
-                            [utilities hideLoading];
+                            [[Utilities share] hideLoading];
                         }];
                     } else {
-                        [utilities hideLoading];
-                        [utilities showAlertWithTitle:@"Library" withMessage:@"This student has been checked out!"];
+                        [[Utilities share] hideLoading];
+                        [[Utilities share] showAlertWithTitle:@"Library" withMessage:@"This student has been checked out!"];
                     }
                 }
             } else {
                 NSLog(@"Error: %@", error);
-                [utilities hideLoading];
-                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+                [[Utilities share] hideLoading];
+                [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
             }
         }];
     }

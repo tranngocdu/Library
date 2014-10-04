@@ -39,7 +39,6 @@
     [self decorate];
     [self.navigationItem setTitle:@"Add Book"];
     _tfQuantity.text = @"1";
-    utilities = [[Utilities alloc] init];
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickedAtBackground)];
     [self.view addGestureRecognizer:tap];
@@ -173,12 +172,12 @@
 
     // Validate informations
     if ([bookTitle isEqualToString:@""] || [bookAuthor isEqualToString:@""]) {
-        [utilities showAlertWithTitle:@"Try Again" withMessage:@"Please add a title, author and quantity."];
+        [[Utilities share] showAlertWithTitle:@"Try Again" withMessage:@"Please add a title, author and quantity."];
         // Enable buttons
         _btnAddBook.enabled = YES;
         _btnAddPhoto.enabled = YES;
     } else if (bookQuan < 1) {
-        [utilities showAlertWithTitle:@"Try Again" withMessage:@"Invalid book quantity."];
+        [[Utilities share] showAlertWithTitle:@"Try Again" withMessage:@"Invalid book quantity."];
         // Enable buttons
         _btnAddBook.enabled = YES;
         _btnAddPhoto.enabled = YES;
@@ -187,7 +186,7 @@
             bookCoverUrl = [NSMutableString stringWithFormat:@""];
         }
         
-        [utilities showLoading];
+        [[Utilities share] showLoading];
         PFUser *currentUser = [PFUser currentUser];
         PFObject *book = [PFObject objectWithClassName:@"NewBook"];
         book[@"title"] = bookTitle;
@@ -201,12 +200,12 @@
         book[@"quantity_available"] = @([bookQuantity intValue]);
         
         [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            [utilities hideLoading];
+            [[Utilities share] hideLoading];
             if(!error) {
                 [self.navigationController popViewControllerAnimated:YES];
             } else {
                 NSLog(@"Error: %@", error);
-                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+                [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
                 // Enable buttons
                 _btnAddBook.enabled = YES;
                 _btnAddPhoto.enabled = YES;

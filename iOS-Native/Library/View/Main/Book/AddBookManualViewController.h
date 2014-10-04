@@ -13,7 +13,6 @@
 @interface AddBookManualViewController : UIViewController <FPPickerDelegate, UITextFieldDelegate> {
     NSMutableString *bookCoverUrl;
     NSMutableString *bookISBN;
-    Utilities *utilities;
 }
 
 - (IBAction)addPhoto:(id)sender;

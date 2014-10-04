@@ -48,7 +48,6 @@
     [super viewDidLoad];
 
     [self decorate];
-    utilities = [[Utilities alloc] init];
 }
 
 - (IBAction) goBackToLoginScreen:(id)sender
@@ -86,13 +85,13 @@
     
     // Validate sign up informations
     if ([email isEqualToString:@""]) {
-        [utilities showAlertWithTitle:@"Error" withMessage:@"Cannot sign up user with an empty name."];
+        [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Cannot sign up user with an empty name."];
     } else if ([password isEqualToString:@""]) {
-        [utilities showAlertWithTitle:@"Error" withMessage:@"Cannot sign up user with an empty password."];
+        [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Cannot sign up user with an empty password."];
     } else if (![password isEqualToString:passwordConfirm]) {
-        [utilities showAlertWithTitle:@"Error" withMessage:@"Your password do not match. Please try again."];
+        [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Your password do not match. Please try again."];
     } else {
-        [utilities showLoading];
+        [[Utilities share] showLoading];
         // Disable button
         _btnCreateAccount.enabled = NO;
         _btnIHaveAccount.enabled = NO;
@@ -105,7 +104,7 @@
         
         // Send data
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            [utilities hideLoading];
+            [[Utilities share] hideLoading];
             // Enable button again
             _btnCreateAccount.enabled = YES;
             _btnIHaveAccount.enabled = YES;
@@ -125,7 +124,7 @@
                 NSLog(@"%@", errorString);
                 
                 NSString *alertMsg = [NSString stringWithFormat:@"Username %@ already taken.", email];
-                [utilities showAlertWithTitle:@"Error" withMessage:alertMsg];
+                [[Utilities share] showAlertWithTitle:@"Error" withMessage:alertMsg];
             }
         }];
 

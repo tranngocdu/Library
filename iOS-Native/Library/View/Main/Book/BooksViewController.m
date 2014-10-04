@@ -46,7 +46,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self decorate];
-    utilities = [[Utilities alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -102,7 +101,7 @@
 }
 
 - (void)loadBooksWithType:(int)type {
-    [utilities showLoading];
+    [[Utilities share] showLoading];
     
     PFUser *currentUser = [PFUser currentUser];
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
@@ -130,9 +129,9 @@
             [_listBooks reloadData];
         } else {
             NSLog(@"Error: %@", error);
-            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
         }
-        [utilities hideLoading];
+        [[Utilities share] hideLoading];
     }];
 }
 
@@ -193,14 +192,18 @@
     if ([self.navigationController.viewControllers count] > 1) {
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
+
     NSString *sendUrl = [NSString stringWithFormat:@"http://openlibrary.org/api/books?bibkeys=%@&jscmd=data&format=json", content];
     NSURL *url = [[NSURL alloc] initWithString:sendUrl];
-    
+
+    [[Utilities share] showLoading];
     [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url] queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        
+        [[Utilities share] hideLoading];
+
         if (error) {
             NSLog(@"Error: %@", error);
-            [utilities showAlertWithTitle:@"Error" withMessage:@"Error when getting book informations."];
+            [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Error when getting book informations."];
         } else {
             NSError *parseError = nil;
             NSDictionary *parseData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];

@@ -41,11 +41,10 @@
     [self decorate];
     // Do any additional setup after loading the view.
     [self.navigationItem setTitle:@"Book Detail"];
-    utilities = [[Utilities alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [utilities showLoading];
+    [[Utilities share] showLoading];
     // Get book informations
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     [query getObjectInBackgroundWithId:bookId block:^(PFObject *object, NSError *error) {
@@ -99,7 +98,7 @@
             }
         } else {
             NSLog(@"AA %@", error);
-            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
             _viewButtons.hidden = NO;
             [self adjustScrollSize];
         }
@@ -108,7 +107,7 @@
 
 - (void) adjustScrollSize {
     _scroller.contentSize = CGSizeMake(self.view.frame.size.width, _viewButtons.frame.origin.y + _viewButtons.frame.size.height + 5);
-    [utilities hideLoading];
+    [[Utilities share] hideLoading];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -168,14 +167,14 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     // If yes
     if (buttonIndex == 1) {
-        [utilities showLoading];
+        [[Utilities share] showLoading];
         [book deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            [utilities hideLoading];
+            [[Utilities share] hideLoading];
             if (!error) {
                 [self.navigationController popViewControllerAnimated:YES];
             } else {
                 NSLog(@"Error: %@", error);
-                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error."];
+                [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error."];
             }
         }];
     }

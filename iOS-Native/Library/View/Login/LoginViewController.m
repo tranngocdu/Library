@@ -47,7 +47,6 @@
     [super viewDidLoad];
 
     [self decorate];
-    utilities = [[Utilities alloc] init];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -73,9 +72,9 @@
 {
     if ([_tfEmail.text isEqualToString:@""] || [_tfPassword.text isEqualToString: @""])
     {
-        [utilities showAlertWithTitle:@"All Fields Required" withMessage:@"Please enter username and password."];
+        [[Utilities share] showAlertWithTitle:@"All Fields Required" withMessage:@"Please enter username and password."];
     } else {
-        [utilities showLoading];
+        [[Utilities share] showLoading];
         // Disable button
         _btnLogin.enabled = NO;
         _btnCreateAccount.enabled = NO;
@@ -86,7 +85,7 @@
         
         [PFUser logInWithUsernameInBackground:email password:password
         block:^(PFUser *user, NSError *error) {
-            [utilities hideLoading];
+            [[Utilities share] hideLoading];
             // Enable button again
             _btnLogin.enabled = YES;
             _btnCreateAccount.enabled = YES;
@@ -100,7 +99,7 @@
             } else {
                 // The login failed. Check error to see why.
                 NSLog(@"Wrong username or password");
-                [utilities showAlertWithTitle:@"Incorrect Login" withMessage:@"Please check your username or password."];
+                [[Utilities share] showAlertWithTitle:@"Incorrect Login" withMessage:@"Please check your username or password."];
             }
         }];
     }
@@ -110,13 +109,13 @@
 {
     NSString *email = _tfEmail.text;
     if ([email isEqualToString:@""]) {
-        [utilities showAlertWithTitle:@"Enter your email" withMessage:@"First enter above the email you used for Class Library"];
+        [[Utilities share] showAlertWithTitle:@"Enter your email" withMessage:@"First enter above the email you used for Class Library"];
     } else {
         // Send recovery email to the target address
         [PFUser requestPasswordResetForEmailInBackground:email];
         // Alert
         NSString *alertMsg = [NSString stringWithFormat:@"An email has been sent to %@", email];
-        [utilities showAlertWithTitle:@"Reset password" withMessage:alertMsg];
+        [[Utilities share] showAlertWithTitle:@"Reset password" withMessage:alertMsg];
     }
 }
 

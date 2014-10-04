@@ -38,7 +38,7 @@
 }
 
 - (void)getListStudent {
-    [utilities showLoading];
+    [[Utilities share] showLoading];
     PFUser *currentUser = [PFUser currentUser];
     
     // Create query
@@ -49,13 +49,13 @@
 
     // Query
     [query findObjectsInBackgroundWithBlock:^(NSArray *data, NSError *error) {
-        [utilities hideLoading];
+        [[Utilities share] hideLoading];
         if (!error) {
             students = (NSMutableArray *)data;
             [_tfStudentList reloadData];
         } else {
             // Alert error
-            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error."];
+            [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error."];
         }
     }];
 }
@@ -102,11 +102,11 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == 1) {
-        [utilities showLoading];
+        [[Utilities share] showLoading];
         // If clicked at OK button, get student from data and delete
         PFObject *student = [students objectAtIndex:cellSelect];
         [student deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            [utilities hideLoading];
+            [[Utilities share] hideLoading];
             if(!error) {
                 // Remove item out of data
                 [students removeObjectAtIndex:cellSelect];
@@ -115,7 +115,7 @@
                 [_tfStudentList reloadData];
             } else {
                 NSLog(@"Error when delete student %@", error);
-                [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+                [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
             }
         }];
     }
@@ -126,7 +126,6 @@
     [super viewDidLoad];
     [self getListStudent];
     [self decorate];
-    utilities = [[Utilities alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

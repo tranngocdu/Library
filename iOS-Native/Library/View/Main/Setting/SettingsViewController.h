@@ -12,7 +12,7 @@
 
 @interface SettingsViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate> {
     PFUser *user;
-    Utilities *utilities;
+    
 }
 
 - (IBAction)update:(id)sender;

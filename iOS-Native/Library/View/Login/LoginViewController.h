@@ -10,7 +10,7 @@
 #import "Utilities.h"
 
 @interface LoginViewController : UIViewController <UITextFieldDelegate> {
-    Utilities *utilities;
+    
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLogin;

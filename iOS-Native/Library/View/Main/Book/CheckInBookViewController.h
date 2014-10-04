@@ -15,7 +15,6 @@
     PFObject *book;
     PFObject *student;
     NSMutableArray *students;
-    Utilities *utilities;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tbvListStudents;

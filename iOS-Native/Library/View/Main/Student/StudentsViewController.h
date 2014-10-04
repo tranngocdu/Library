@@ -15,7 +15,6 @@
     NSMutableArray *students;
     StudentCell *studentCell;
     int cellSelect;
-    Utilities *utilities;
 }
 
 - (IBAction)addStudent:(id)sender;

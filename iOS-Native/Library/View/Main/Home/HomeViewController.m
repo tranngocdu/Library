@@ -95,8 +95,6 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     
-    Utilities *utilities = [[Utilities alloc] init];
-    
     NSLog(@"Detected Item: %@, contentType %@, modalType: %d", content, type, actionModalType);
 
     PFUser *currentUser = [PFUser currentUser];
@@ -120,10 +118,10 @@
                     [self.navigationController pushViewController:checkoutView animated:YES];
                 }
             } else {
-                [utilities showAlertWithTitle:@"Not so quick..." withMessage:@"We couldn't find a book with that ISBN number. Please check the ISBN numbers and try again."];
+                [[Utilities share] showAlertWithTitle:@"Not so quick..." withMessage:@"We couldn't find a book with that ISBN number. Please check the ISBN numbers and try again."];
             }
         } else {
-            [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
         }
     }];
 }

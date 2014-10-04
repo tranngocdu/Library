@@ -10,6 +10,17 @@
 
 @implementation Utilities
 
++ (Utilities *)share {
+    static Utilities *shareObj = nil;
+    
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        shareObj = [[Utilities alloc] init];
+    });
+
+    return shareObj;
+}
+
 - (void)showAlertWithTitle:(NSString *)title withMessage: (NSString *) message {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
@@ -22,7 +33,16 @@
 - (void)showLoading {
     // Get screen size
     CGRect screenSize = [[UIScreen mainScreen] bounds];
-    
+
+    // release if existed
+    if(loadingView) {
+        [spinner removeFromSuperview];
+        spinner = nil;
+        
+        [loadingView  removeFromSuperview];
+        loadingView = nil;
+    }
+
     // Backdrop
     loadingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenSize.size.width, screenSize.size.height)];
     loadingView.backgroundColor = [UIColor blackColor];
@@ -30,7 +50,7 @@
     loadingView.layer.zPosition = 99999;
     
     // Spinner
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     spinner.center = CGPointMake(screenSize.size.width / 2, screenSize.size.height / 2);
     spinner.hidesWhenStopped = YES;
     [spinner startAnimating];
@@ -42,8 +62,10 @@
 }
 
 - (void)hideLoading {
-    [loadingView setUserInteractionEnabled:NO];
-    [loadingView removeFromSuperview];
+    if(loadingView) {
+        [loadingView setUserInteractionEnabled:NO];
+        [loadingView removeFromSuperview];
+    }
 }
 
 
