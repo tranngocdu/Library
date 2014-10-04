@@ -9,7 +9,6 @@
 #import "CheckOutBookViewController.h"
 #import "HomeViewController.h"
 #import "UIButton+AppButton.h"
-#import "Utilities.h"
 #import <Parse/Parse.h>
 
 @interface CheckOutBookViewController ()
@@ -37,9 +36,11 @@
     // Do any additional setup after loading the view.
     [self.navigationItem setTitle:@"Check Out"];
     [self decorate];
+    utilities = [[Utilities alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [utilities showLoading];
     // Get book by id
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     [query whereKey:@"ISBN" equalTo:bookISBN];
@@ -67,14 +68,14 @@
                     [_tbvListStudents reloadData];
                 } else {
                     NSLog(@"Error: %@", error);
-                    Utilities *utilities = [[Utilities alloc] init];
                     [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
                 }
+                [utilities hideLoading];
             }];
         } else {
             NSLog(@"Error: %@", error);
-            Utilities *utilities = [[Utilities alloc] init];
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            [utilities hideLoading];
         }
     }];
 }
@@ -119,10 +120,10 @@
 }
 
 - (void)checkout:(id)sender {
-    Utilities *utilities = [[Utilities alloc] init];
     if(!student) {
         [utilities showAlertWithTitle:@"Library" withMessage:@"Please pick a student"];
     } else {
+        [utilities showLoading];
         // Get book informations
         PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
         NSLog(@"fetch book with id: %@", book.objectId);
@@ -131,6 +132,7 @@
                 // Check available quantity
                 int quantityAvailable = [book[@"quantity_available"] intValue];
                 if (quantityAvailable <= 0) {
+                    [utilities hideLoading];
                     [utilities showAlertWithTitle:@"Oops!" withMessage:@"All copies has been checked out!"];
                 } else {
                     bool isExist = false;
@@ -175,13 +177,16 @@
                                 NSLog(@"Error: %@", error);
                                 [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
                             }
+                            [utilities hideLoading];
                         }];
                     } else {
+                        [utilities hideLoading];
                         [utilities showAlertWithTitle:@"Library" withMessage:@"This student has been checked out!"];
                     }
                 }
             } else {
                 NSLog(@"Error: %@", error);
+                [utilities hideLoading];
                 [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
             }
         }];

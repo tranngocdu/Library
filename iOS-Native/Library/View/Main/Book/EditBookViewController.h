@@ -10,11 +10,13 @@
 #import <Parse/Parse.h>
 #import <FPPicker/FPPicker.h>
 #import "UIButton+AppButton.h"
+#import "Utilities.h"
 
 @interface EditBookViewController : UIViewController <FPPickerDelegate> {
     NSString *bookId;
     PFObject *book;
     NSMutableString *bookCoverUrl;
+    Utilities *utilities;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *imgBookCover;

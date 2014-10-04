@@ -7,12 +7,10 @@
 //
 
 #import "BookDetailViewController.h"
-#import "AddBookManualViewController.h"
 #import "CheckOutBookViewController.h"
 #import "CheckInBookViewController.h"
 #import "EditBookViewController.h"
 #import "UIButton+AppButton.h"
-#import "Utilities.h"
 #import <Parse/Parse.h>
 
 @interface BookDetailViewController ()
@@ -43,9 +41,11 @@
     [self decorate];
     // Do any additional setup after loading the view.
     [self.navigationItem setTitle:@"Book Detail"];
+    utilities = [[Utilities alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [utilities showLoading];
     // Get book informations
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     [query getObjectInBackgroundWithId:bookId block:^(PFObject *object, NSError *error) {
@@ -99,7 +99,6 @@
             }
         } else {
             NSLog(@"AA %@", error);
-            Utilities *utilities = [[Utilities alloc] init];
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
             _viewButtons.hidden = NO;
             [self adjustScrollSize];
@@ -109,6 +108,7 @@
 
 - (void) adjustScrollSize {
     _scroller.contentSize = CGSizeMake(self.view.frame.size.width, _viewButtons.frame.origin.y + _viewButtons.frame.size.height + 5);
+    [utilities hideLoading];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -138,11 +138,6 @@
     bookId = bId;
 }
 
-- (void)addBookManual:(id)sender {
-    EditBookViewController *editView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIndentifier"];
-    [self.navigationController pushViewController:editView animated:YES];
-}
-
 - (void)checkoutBook:(id)sender {
     CheckOutBookViewController *checkoutView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckoutBookIndentifier"];
     [checkoutView setBookISBN:book[@"ISBN"]];
@@ -158,7 +153,6 @@
 - (void)editBook:(id)sender {
     EditBookViewController *editView = [self.storyboard instantiateViewControllerWithIdentifier:@"EditBookIdentifier"];
     [editView setBookId:book.objectId];
-    [editView getBookToEdit];
     [self.navigationController pushViewController:editView animated:YES];
 }
 
@@ -174,12 +168,13 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     // If yes
     if (buttonIndex == 1) {
+        [utilities showLoading];
         [book deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [utilities hideLoading];
             if (!error) {
                 [self.navigationController popViewControllerAnimated:YES];
             } else {
                 NSLog(@"Error: %@", error);
-                Utilities *utilities = [[Utilities alloc] init];
                 [utilities showAlertWithTitle:@"Error" withMessage:@"Server error."];
             }
         }];

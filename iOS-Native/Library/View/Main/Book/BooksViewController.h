@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "AddBookModalViewController.h"
 #import "BarcodeReaderViewController.h"
+#import "Utilities.h"
 
 @interface BooksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddBookModalDelegate, BarcodeReaderDelegate>
 {
     NSMutableArray *books;
+    Utilities *utilities;
 }
 
 - (IBAction)addBookManual:(id)sender;

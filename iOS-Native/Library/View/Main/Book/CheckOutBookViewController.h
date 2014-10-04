@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "Utilities.h"
 
 @interface CheckOutBookViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     NSString *bookISBN;
     PFObject *book;
     PFObject *student;
     NSArray *students;
+    Utilities *utilities;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tbvListStudents;

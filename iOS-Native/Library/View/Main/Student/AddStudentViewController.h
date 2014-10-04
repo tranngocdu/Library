@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Utilities.h"
 
-@interface AddStudentViewController : UIViewController <UITextFieldDelegate>
+@interface AddStudentViewController : UIViewController <UITextFieldDelegate> {
+    Utilities *utilities;
+}
 
 - (IBAction)addStudent:(id)sender;
 

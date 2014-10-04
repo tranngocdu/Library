@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <FPPicker/FPPicker.h>
+#import "Utilities.h"
 
 @interface AddBookManualViewController : UIViewController <FPPickerDelegate> {
     NSMutableString *bookCoverUrl;
     NSMutableString *bookISBN;
+    Utilities *utilities;
 }
 
 - (IBAction)addPhoto:(id)sender;

@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "Utilities.h"
 
 @interface SettingsViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate> {
     PFUser *user;
+    Utilities *utilities;
 }
 
 - (IBAction)update:(id)sender;

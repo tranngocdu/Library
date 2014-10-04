@@ -8,7 +8,6 @@
 
 #import "EditBookViewController.h"
 #import "BooksViewController.h"
-#import "Utilities.h"
 
 @interface EditBookViewController ()
 
@@ -35,10 +34,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self decorate];
+    utilities = [[Utilities alloc] init];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [self.navigationItem setTitle:@"Edit Book"];
+    [self getBookToEdit];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,6 +49,8 @@
 }
 
 - (void)getBookToEdit {
+    NSLog(@"bookId: %@", bookId);
+    [utilities showLoading];
     // Get book informations
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     [query getObjectInBackgroundWithId:bookId block:^(PFObject *object, NSError *error) {
@@ -59,14 +62,17 @@
             _lblBookQuantity.text = [NSString stringWithFormat:@"%@", book[@"quantity_total"]];
             
             NSString *imageUrl = book[@"cover_image"];
-            [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                _imgBookCover.image = [UIImage imageWithData:data];
-            }];
+            
+            if(imageUrl != nil) {
+                [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                    _imgBookCover.image = [UIImage imageWithData:data];
+                }];
+            }
         } else {
             NSLog(@"Error: %@", error);
-            Utilities *utilities = [[Utilities alloc] init];
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error."];
         }
+        [utilities hideLoading];
     }];
 }
 
@@ -131,14 +137,13 @@
     NSString *bookISBN = _lblBookISBN.text;
     NSString *bookQuantity = _lblBookQuantity.text;
     
-    Utilities *utilities = [[Utilities alloc] init];
-    
     // Validate informations
     if ([bookTitle isEqualToString:@""] || [bookAuthor isEqualToString:@""]) {
         [utilities showAlertWithTitle:@"Try Again" withMessage:@"Please add a title, author and quantity."];
     } else if ([bookISBN length] != 13) {
         [utilities showAlertWithTitle:@"Try Again" withMessage:@"Please make sure you're using the 13 digit ISBN."];
     } else {
+        [utilities showLoading];
         // Set book
         book[@"title"] = bookTitle;
         book[@"author"] = bookAuthor;
@@ -158,6 +163,7 @@
         book[@"quantity_total"] = @([bookQuantity intValue]);
         
         [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [utilities hideLoading];
             if(!error) {
                 [self getBookToEdit];
                 [self.navigationController popToRootViewControllerAnimated:YES];

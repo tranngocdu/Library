@@ -13,7 +13,7 @@
 }
 
 - (void)showAlertWithTitle:(NSString *)title withMessage: (NSString *) message;
-- (void)showLoading:(UIViewController *)view;
-- (void)hideLoading:(UIViewController *)view;
+- (void)showLoading;
+- (void)hideLoading;
 
 @end

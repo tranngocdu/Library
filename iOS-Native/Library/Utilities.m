@@ -19,15 +19,30 @@
     [alert show];
 }
 
-- (void)showLoading:(UIViewController *)view {
-    loadingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.view.frame.size.width, view.view.frame.size.height)];
+- (void)showLoading {
+    // Get screen size
+    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    
+    // Backdrop
+    loadingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenSize.size.width, screenSize.size.height)];
     loadingView.backgroundColor = [UIColor blackColor];
-    loadingView.alpha = 0.5;
+    loadingView.alpha = 0.7;
     loadingView.layer.zPosition = 99999;
-    [view.view addSubview:loadingView];
+    
+    // Spinner
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.center = CGPointMake(screenSize.size.width / 2, screenSize.size.height / 2);
+    spinner.hidesWhenStopped = YES;
+    [spinner startAnimating];
+    
+    // Add view
+    [loadingView addSubview:spinner];
+    [loadingView setUserInteractionEnabled:YES];
+    [[[[UIApplication sharedApplication] delegate] window] addSubview:loadingView];
 }
 
-- (void)hideLoading:(UIViewController *)view {
+- (void)hideLoading {
+    [loadingView setUserInteractionEnabled:NO];
     [loadingView removeFromSuperview];
 }
 

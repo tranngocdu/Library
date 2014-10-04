@@ -9,7 +9,6 @@
 #import "StudentsViewController.h"
 #import "AddStudentViewController.h"
 #import "StudentDetailViewController.h"
-#import "Utilities.h"
 #import <Parse/Parse.h>
 
 @interface StudentsViewController ()
@@ -39,7 +38,7 @@
 }
 
 - (void)getListStudent {
-    Utilities *utilities = [[Utilities alloc] init];
+    [utilities showLoading];
     PFUser *currentUser = [PFUser currentUser];
     
     // Create query
@@ -50,6 +49,7 @@
 
     // Query
     [query findObjectsInBackgroundWithBlock:^(NSArray *data, NSError *error) {
+        [utilities hideLoading];
         if (!error) {
             students = (NSMutableArray *)data;
             [_tfStudentList reloadData];
@@ -102,9 +102,11 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == 1) {
+        [utilities showLoading];
         // If clicked at OK button, get student from data and delete
         PFObject *student = [students objectAtIndex:cellSelect];
         [student deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [utilities hideLoading];
             if(!error) {
                 // Remove item out of data
                 [students removeObjectAtIndex:cellSelect];
@@ -113,7 +115,6 @@
                 [_tfStudentList reloadData];
             } else {
                 NSLog(@"Error when delete student %@", error);
-                Utilities *utilities = [[Utilities alloc] init];
                 [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
             }
         }];
@@ -125,6 +126,7 @@
     [super viewDidLoad];
     [self getListStudent];
     [self decorate];
+    utilities = [[Utilities alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
