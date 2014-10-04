@@ -1411,7 +1411,7 @@
                         <outlet property="imgBookCover" destination="STy-Vo-ePG" id="sYM-KG-4Tu"/>
                         <outlet property="lblBookAuthor" destination="y7v-IH-9JT" id="zzT-eW-rjU"/>
                         <outlet property="lblBookISBN" destination="oOe-wS-qfI" id="sR2-R0-AnS"/>
-                        <outlet property="lblBookQuantity" destination="4FU-Ll-q20" id="abH-BB-etE"/>
+                        <outlet property="lblBookQuantity" destination="4FU-Ll-q20" id="Bmu-Dv-KbG"/>
                         <outlet property="lblBookTitle" destination="bDN-N8-dkA" id="6MG-z0-8FC"/>
                     </connections>
                 </viewController>

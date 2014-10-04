@@ -109,6 +109,8 @@
     [query getObjectInBackgroundWithId:bookId block:^(PFObject *object, NSError *error) {
         if(!error) {
             book = object;
+
+            bookCoverUrl = book[@"cover_image"];
             _lblBookTitle.text = book[@"title"];
             _lblBookAuthor.text = book[@"author"];
             _lblBookISBN.text = book[@"ISBN"];
