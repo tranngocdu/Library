@@ -39,6 +39,7 @@
     // Do any additional setup after loading the view.
     [self decorate];
     [self.navigationItem setTitle:@"Add Book"];
+    _tfQuantity.text = @"1";
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,16 +108,29 @@
 }
 
 - (void)addBook:(id)sender {
+    // Disable buttons, prevent touch
+    _btnAddBook.enabled = NO;
+    _btnAddPhoto.enabled = NO;
+    
     NSString *bookTitle = _tfTitle.text;
     NSString *bookAuthor = _tfAuthor.text;
-    NSString *bookISBN = _tfIsbn.text;
+    bookISBN = [NSMutableString stringWithFormat:@"%@", _tfIsbn.text];
     NSString *bookQuantity = _tfQuantity.text;
+    int bookQuan = [bookQuantity intValue];
     
     Utilities *utilities = [[Utilities alloc] init];
     
     // Validate informations
     if ([bookTitle isEqualToString:@""] || [bookAuthor isEqualToString:@""]) {
         [utilities showAlertWithTitle:@"Try Again" withMessage:@"Please add a title, author and quantity."];
+        // Enable buttons
+        _btnAddBook.enabled = YES;
+        _btnAddPhoto.enabled = YES;
+    } else if (bookQuan < 1) {
+        [utilities showAlertWithTitle:@"Try Again" withMessage:@"Invalid book quantity."];
+        // Enable buttons
+        _btnAddBook.enabled = YES;
+        _btnAddPhoto.enabled = YES;
     } else {
         PFUser *currentUser = [PFUser currentUser];
         PFObject *book = [PFObject objectWithClassName:@"NewBook"];
@@ -136,6 +150,9 @@
             } else {
                 NSLog(@"Error: %@", error);
                 [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+                // Enable buttons
+                _btnAddBook.enabled = YES;
+                _btnAddPhoto.enabled = YES;
             }
         }];
     }

@@ -8,6 +8,7 @@
 
 #import "EditBookModalViewController.h"
 #import "AddBookScanViewController.h"
+#import "Utilities.h"
 
 @interface EditBookModalViewController ()
 
@@ -30,15 +31,18 @@
 }
 
 - (void)submit:(id)sender {
-    NSLog(@"submit");
-    // This will create new object
-    //AddBookScanViewController *addScanView = [[AddBookScanViewController alloc] init];
-
-    if(self.editDelegate && [self.editDelegate respondsToSelector:@selector(onEditChangedValue:)]) {
-        [self.editDelegate onEditChangedValue:_tfQuantity.text];
+    // Validate quantity number
+    int num = [_tfQuantity.text intValue];
+    if (num < 1) {
+        Utilities *utilities = [[Utilities alloc] init];
+        [utilities showAlertWithTitle:@"Error" withMessage:@"Invalid book quantity."];
+    } else {
+        if(self.editDelegate && [self.editDelegate respondsToSelector:@selector(onEditChangedValue:)]) {
+            [self.editDelegate onEditChangedValue:_tfQuantity.text];
+        }
+        
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
-
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

@@ -8,6 +8,8 @@
 
 #import "HomeViewController.h"
 #import "CheckInModalViewController.h"
+#import "CheckInBookViewController.h"
+#import "CheckOutBookViewController.h"
 #import "BooksViewController.h"
 #import "Constants.h"
 #import "UIButton+AppButton.h"
@@ -60,7 +62,7 @@
         // Scan
 
 #if TARGET_IPHONE_SIMULATOR
-        NSString *cheatISBN = @"9780123456786";
+        NSString *cheatISBN = @"9781234567897";
         NSString *cheatType = @"org.gs1.EAN-13";
         [self barcodeReader:nil onFoundItem:cheatISBN withType:cheatType];
 #else
@@ -93,9 +95,10 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     
+    Utilities *utilities = [[Utilities alloc] init];
+    
     NSLog(@"Detected Item: %@, contentType %@, modalType: %d", content, type, actionModalType);
 
-#warning Hinh nhu ben Checkin, Check ViewCOntroller cua e da xu ly cai nay roi ha?
     PFUser *currentUser = [PFUser currentUser];
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     [query whereKey:@"ISBN" equalTo:content];
@@ -103,18 +106,23 @@
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error) {
-            NSLog(@"%@", objects);
-            
-            if(actionModalType == 1) {
-                // Checkin
-
+            if ([objects count] > 0) {
+                PFObject *book = [objects objectAtIndex:0];
+                if(actionModalType == 1) {
+                    // Checkin
+                    CheckInBookViewController *checkinView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckinBookIndentifier"];
+                    [checkinView setBookISBN:book[@"ISBN"]];
+                    [self.navigationController pushViewController:checkinView animated:YES];
+                } else {
+                    // Checkout
+                    CheckOutBookViewController *checkoutView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckoutBookIndentifier"];
+                    [checkoutView setBookISBN:book[@"ISBN"]];
+                    [self.navigationController pushViewController:checkoutView animated:YES];
+                }
             } else {
-                // Checkout
-                
+                [utilities showAlertWithTitle:@"Not so quick..." withMessage:@"We couldn't find a book with that ISBN number. Please check the ISBN numbers and try again."];
             }
-
         } else {
-            Utilities *utilities = [[Utilities alloc] init];
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
         }
     }];

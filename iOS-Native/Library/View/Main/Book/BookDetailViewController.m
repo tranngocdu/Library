@@ -145,13 +145,13 @@
 
 - (void)checkoutBook:(id)sender {
     CheckOutBookViewController *checkoutView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckoutBookIndentifier"];
-    [checkoutView setBookId:book.objectId];
+    [checkoutView setBookISBN:book[@"ISBN"]];
     [self.navigationController pushViewController:checkoutView animated:YES];
 }
 
 - (void)checkinBook:(id)sender {
     CheckInBookViewController *checkinView = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckinBookIndentifier"];
-    [checkinView setBookId:book.objectId];
+    [checkinView setBookISBN:book[@"ISBN"]];
     [self.navigationController pushViewController:checkinView animated:YES];
 }
 

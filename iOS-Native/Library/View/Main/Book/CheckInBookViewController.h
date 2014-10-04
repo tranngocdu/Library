@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 
 @interface CheckInBookViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
-    NSString *bookId;
+    NSString *bookISBN;
     PFObject *book;
     PFObject *student;
     NSMutableArray *students;
@@ -26,6 +26,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblPickName;
 
 - (IBAction)checkin:(id)sender;
-- (void)setBookId:(NSString *)objectId;
+- (void)setBookISBN:(NSString *)isbn;
 
 @end

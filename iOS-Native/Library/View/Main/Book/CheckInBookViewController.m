@@ -42,9 +42,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     // Get book by id
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
-    [query getObjectInBackgroundWithId:bookId block:^(PFObject *object, NSError *error) {
+    [query whereKey:@"ISBN" equalTo:bookISBN];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            book = object;
+            book = [objects objectAtIndex:0];
             // Set view
             _lblPickName.hidden = NO;
             _btnCheckin.hidden = NO;
@@ -57,7 +58,7 @@
             [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                 _imgBookCover.image = [UIImage imageWithData:data];
             }];
-            
+
             // If have students checked out, load students informations
             if ([book[@"studentList"] count] > 0) {
                 NSMutableArray *stds = [[NSMutableArray alloc] init];
@@ -82,8 +83,8 @@
     }];
 }
 
-- (void)setBookId:(NSString *)objectId {
-    bookId = objectId;
+- (void)setBookISBN:(NSString *)isbn {
+    bookISBN = isbn;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

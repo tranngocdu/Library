@@ -24,15 +24,24 @@
     [_btnAddPhoto setAppButtonHasBackgroundColor:NO withColor:UIColorFromRGB(kAppRed)];
 }
 
+- (void)disableButtons {
+    _btnAddBook.enabled = NO;
+    _btnAddPhoto.enabled = NO;
+    _btnEditQuantity.enabled = NO;
+}
+
+- (void)enableButtons {
+    _btnAddBook.enabled = YES;
+    _btnAddPhoto.enabled = YES;
+    _btnEditQuantity.enabled = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self decorate];
-    
     // Disable buttons
-    _btnAddBook.enabled = NO;
-    _btnAddPhoto.enabled = NO;
-    _btnEditQuantity.enabled = NO;
+    [self disableButtons];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,9 +58,7 @@
     }];
     
     // Enable buttons
-    _btnAddBook.enabled = YES;
-    _btnAddPhoto.enabled = YES;
-    _btnEditQuantity.enabled = YES;
+    [self enableButtons];
 }
 
 - (void)setBookTitle:(NSString *)title {
@@ -76,6 +83,9 @@
 }
 
 - (void)addBook:(id)sender {
+    // Disable buttons
+    [self disableButtons];
+    
     Utilities *utilities = [[Utilities alloc] init];
     
     PFUser *currentUser = [PFUser currentUser];
@@ -96,6 +106,8 @@
         } else {
             NSLog(@"Error: %@", error);
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            // Enable buttons
+            [self enableButtons];
         }
     }];
 

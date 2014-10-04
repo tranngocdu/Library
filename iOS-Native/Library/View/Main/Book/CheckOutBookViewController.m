@@ -42,9 +42,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     // Get book by id
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
-    [query getObjectInBackgroundWithId:bookId block:^(PFObject *object, NSError *error) {
+    [query whereKey:@"ISBN" equalTo:bookISBN];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            book = object;
+            book = [objects objectAtIndex:0];
             // Set view
             _lblBookTitle.text = book[@"title"];
             _lblBookAuthor.text = book[@"author"];
@@ -84,8 +85,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setBookId:(NSString *)objectId {
-    bookId = objectId;
+- (void)setBookISBN:(NSString *)isbn {
+    bookISBN = isbn;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
