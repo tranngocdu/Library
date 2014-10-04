@@ -12,7 +12,7 @@
 #import "UIButton+AppButton.h"
 #import "Utilities.h"
 
-@interface EditBookViewController : UIViewController <FPPickerDelegate> {
+@interface EditBookViewController : UIViewController <FPPickerDelegate, UITextFieldDelegate> {
     NSString *bookId;
     PFObject *book;
     NSMutableString *bookCoverUrl;

@@ -19,4 +19,5 @@
 
 #define RunOnUI(A) [self performSelectorOnMainThread:@selector(A) withObject:nil waitUntilDone:NO];
 
+#define isIpad() ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
 #endif

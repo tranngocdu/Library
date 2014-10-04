@@ -1323,6 +1323,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="5jy-gS-Tmo" id="Wpx-IB-x6e"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" id="KZ2-6W-I4e">
                                 <rect key="frame" x="20" y="328" width="280" height="1"/>
@@ -1334,6 +1337,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="5jy-gS-Tmo" id="x9q-L5-MYP"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" id="j4a-UA-blS">
                                 <rect key="frame" x="20" y="363" width="280" height="1"/>
@@ -1345,6 +1351,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="5jy-gS-Tmo" id="K1D-fb-hdG"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" id="4c9-b0-Wwm">
                                 <rect key="frame" x="20" y="398" width="280" height="1"/>
@@ -1356,6 +1365,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="5jy-gS-Tmo" id="sAG-ld-39L"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" id="yXq-5Z-L4a">
                                 <rect key="frame" x="20" y="433" width="280" height="1"/>
