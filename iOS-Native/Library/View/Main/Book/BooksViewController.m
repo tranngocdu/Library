@@ -165,7 +165,7 @@
     
     if (buttonIndex == 1) {
 #if TARGET_IPHONE_SIMULATOR
-        [self barcodeReader:nil onFoundItem:@"9781234567897" withType:@"org.gs1.EAN-13"];
+        [self barcodeReader:nil onFoundItem:@"2145431431257" withType:@"org.gs1.EAN-13"];
 #else
         BarcodeReaderViewController *barcodeReader = [[BarcodeReaderViewController alloc] initWithDelegate:self];
         [self.navigationController pushViewController:barcodeReader animated:YES];
@@ -210,25 +210,31 @@
                 [self.navigationController pushViewController:addManualView animated:YES];
             } else {
                 NSArray *result = [parseData objectForKey:content];
-                // Set book data
-                AddBookScanViewController *addScanView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookScanIdentifier"];
-                
-                for (NSString *key in result) {
-                    if([key isEqualToString:@"title"]) {
-                        [addScanView setBookTitle:[result valueForKey:key]];
-                    } else if ([key isEqualToString:@"authors"]) {
-                        NSArray *bookAuthors = [result valueForKey:key];
-                        NSString *author = [[bookAuthors objectAtIndex:0] valueForKey:@"name"];
-                        [addScanView setBookAuthor:author];
-                    } else if ([key isEqualToString:@"cover"]) {
-                        NSDictionary *bookCovers = [result valueForKey:key];
-                        NSString *coverMedium = [bookCovers valueForKey:@"medium"];
-                        [addScanView setBookCover:coverMedium];
+                if ([result count]) {
+                    // Set book data
+                    AddBookScanViewController *addScanView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookScanIdentifier"];
+                    
+                    for (NSString *key in result) {
+                        if([key isEqualToString:@"title"]) {
+                            [addScanView setBookTitle:[result valueForKey:key]];
+                        } else if ([key isEqualToString:@"authors"]) {
+                            NSArray *bookAuthors = [result valueForKey:key];
+                            NSString *author = [[bookAuthors objectAtIndex:0] valueForKey:@"name"];
+                            [addScanView setBookAuthor:author];
+                        } else if ([key isEqualToString:@"cover"]) {
+                            NSDictionary *bookCovers = [result valueForKey:key];
+                            NSString *coverMedium = [bookCovers valueForKey:@"medium"];
+                            [addScanView setBookCover:coverMedium];
+                        }
                     }
+                    [addScanView setBookISBN:content];
+                    [addScanView setBookQuantity:@"1"];
+                    [self.navigationController pushViewController:addScanView animated:YES];
+                } else {
+                    AddBookManualViewController *addManualView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIdentifier"];
+                    [addManualView setBookISBN:content];
+                    [self.navigationController pushViewController:addManualView animated:YES];
                 }
-                [addScanView setBookISBN:content];
-                [addScanView setBookQuantity:@"1"];
-                [self.navigationController pushViewController:addScanView animated:YES];
             }
         }
     }];
