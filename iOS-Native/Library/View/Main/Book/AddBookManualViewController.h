@@ -10,7 +10,7 @@
 #import <FPPicker/FPPicker.h>
 #import "Utilities.h"
 
-@interface AddBookManualViewController : UIViewController <FPPickerDelegate> {
+@interface AddBookManualViewController : UIViewController <FPPickerDelegate, UITextFieldDelegate> {
     NSMutableString *bookCoverUrl;
     NSMutableString *bookISBN;
     Utilities *utilities;

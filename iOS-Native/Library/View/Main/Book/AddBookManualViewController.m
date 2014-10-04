@@ -215,6 +215,20 @@
     }
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if([textField isEqual:_tfTitle]) {
+        [_tfAuthor becomeFirstResponder];
+    } else if([textField isEqual:_tfAuthor]) {
+        [_tfIsbn becomeFirstResponder];
+    } else if([textField isEqual:_tfIsbn]) {
+        [_tfQuantity becomeFirstResponder];
+    } else if([textField isEqual:_tfQuantity]) {
+        [textField resignFirstResponder];
+    }
+
+    return YES;
+}
+
 /*
 #pragma mark - Navigation
 
