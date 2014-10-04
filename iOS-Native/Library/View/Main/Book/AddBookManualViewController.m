@@ -40,6 +40,9 @@
     [self.navigationItem setTitle:@"Add Book"];
     _tfQuantity.text = @"1";
     utilities = [[Utilities alloc] init];
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickedAtBackground)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,6 +56,56 @@
         _tfIsbn.text = bookISBN;
     }
     bookISBN = [NSMutableString stringWithFormat:@""];
+
+    [self registerKeyboardEvent];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [self unregisterKeyboardEvent];
+}
+
+- (void) registerKeyboardEvent {
+    // Listen for keyboard appearances and disappearances
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void) unregisterKeyboardEvent {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) keyboardDidShow:(NSNotification*)notify {
+
+    // Get the size of the keyboard.
+    NSDictionary* info = [notify userInfo];
+    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGSize keyboardSize = [aValue CGRectValue].size;
+
+    CGRect r = self.view.frame;
+    CGRect r2 = _tfQuantity.frame;
+    float eY = r2.origin.y + r2.size.height + 5;
+    float kbH = keyboardSize.height;
+    float posY = -kbH + (r.size.height - eY);
+
+    r.origin.y = posY;
+
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.frame = r;
+    }];
+}
+
+- (void) onClickedAtBackground {
+    [self.view endEditing:YES];
+}
+
+- (void) keyboardDidHide:(NSNotification*)notify {
+    CGRect r = self.view.frame;
+    r.origin.y = 0;
+
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.frame = r;
+    }];
 }
 
 - (void)addPhoto:(id)sender {

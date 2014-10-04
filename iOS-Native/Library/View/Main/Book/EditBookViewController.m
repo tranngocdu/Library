@@ -47,7 +47,7 @@
     utilities = [[Utilities alloc] init];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
+- (void) viewDidDisappear:(BOOL)animated {
     [self unregisterKeyboardEvent];
 }
 
@@ -89,8 +89,6 @@
 }
 
 - (void) onClickedAtBackground {
-    NSLog(@"-------------------");
-    //[_lblBookTitle resignFirstResponder];
     [self.view endEditing:YES];
 }
 

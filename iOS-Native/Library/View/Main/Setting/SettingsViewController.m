@@ -50,6 +50,13 @@
     [super viewDidLoad];
     [self decorate];
     utilities = [[Utilities alloc] init];
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTouchAtBackground)];
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void) onTouchAtBackground {
+    [self.view endEditing:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
