@@ -158,7 +158,6 @@
 - (void)editBook:(id)sender {
     EditBookViewController *editView = [self.storyboard instantiateViewControllerWithIdentifier:@"EditBookIdentifier"];
     [editView setBookId:book.objectId];
-    [editView getBookToEdit];
     [self.navigationController pushViewController:editView animated:YES];
 }
 

@@ -34,11 +34,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self decorate];
+    //[self decorate];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    [self.navigationItem setTitle:@"Edit Book"];
+    [self.navigationController setTitle:@"Edit Book"];
+    [self getBookToEdit];
 }
 
 - (void)didReceiveMemoryWarning
