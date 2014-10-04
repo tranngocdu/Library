@@ -162,6 +162,7 @@
 
 - (void)addBookModal:(AddBookModalViewController*)addBookModal onClickAt:(int)buttonIndex {
     NSLog(@"%d", buttonIndex);
+    
     if (buttonIndex == 1) {
 #if TARGET_IPHONE_SIMULATOR
         [self barcodeReader:nil onFoundItem:@"9781234567897" withType:@"org.gs1.EAN-13"];
@@ -187,6 +188,10 @@
 
 - (void)barcodeReader:(BarcodeReaderViewController *)barcodeReader onFoundItem:(NSString *)content withType:(NSString *)type {
     Utilities *utilities = [[Utilities alloc] init];
+
+    if ([self.navigationController.viewControllers count] > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     
     NSString *sendUrl = [NSString stringWithFormat:@"http://openlibrary.org/api/books?bibkeys=%@&jscmd=data&format=json", content];
     NSURL *url = [[NSURL alloc] initWithString:sendUrl];

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <FPPicker/FPPicker.h>
+#import "EditBookModalViewController.h"
 
-@interface AddBookScanViewController : UIViewController <FPPickerDelegate> {
+@interface AddBookScanViewController : UIViewController <FPPickerDelegate, EditDelegate> {
     NSMutableString *bookTitle;
     NSMutableString *bookAuthor;
     NSMutableString *bookQuantity;

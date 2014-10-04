@@ -31,10 +31,14 @@
 
 - (void)submit:(id)sender {
     NSLog(@"submit");
-    AddBookScanViewController *addScanView = [[AddBookScanViewController alloc] init];
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        [addScanView setBookQuantity:_tfQuantity.text];
-    }];
+    // This will create new object
+    //AddBookScanViewController *addScanView = [[AddBookScanViewController alloc] init];
+
+    if(self.editDelegate && [self.editDelegate respondsToSelector:@selector(onEditChangedValue:)]) {
+        [self.editDelegate onEditChangedValue:_tfQuantity.text];
+    }
+
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

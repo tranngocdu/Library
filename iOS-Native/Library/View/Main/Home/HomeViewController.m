@@ -88,6 +88,11 @@
 
 - (void)barcodeReader:(BarcodeReaderViewController *)barcodeReader onFoundItem:(NSString *)content withType:(NSString *)type
 {
+    // Check to ignore case of Simulator not show Barcode Reader View Controller
+    if([self.navigationController.viewControllers count] > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
     NSLog(@"Detected Item: %@, contentType %@, modalType: %d", content, type, actionModalType);
 
 #warning Hinh nhu ben Checkin, Check ViewCOntroller cua e da xu ly cai nay roi ha?
@@ -113,11 +118,6 @@
             [utilities showAlertWithTitle:@"Error" withMessage:@"Server error"];
         }
     }];
-
-    // Check to ignore case of Simulator not show Barcode Reader View Controller
-    if([self.navigationController.viewControllers count] > 1) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
 }
 
 - (void)didReceiveMemoryWarning

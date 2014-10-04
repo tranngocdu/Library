@@ -55,23 +55,24 @@
 }
 
 - (void)setBookTitle:(NSString *)title {
-    bookTitle = title;
+    bookTitle = [[NSMutableString alloc] initWithString:title];
 }
 
 - (void)setBookAuthor:(NSString *)author {
-    bookAuthor = author;
+    bookAuthor = [[NSMutableString alloc] initWithString:author];
 }
 
 - (void)setBookQuantity:(NSString *)quantity {
-    bookQuantity = quantity;
+    bookQuantity = [[NSMutableString alloc] initWithString:quantity];
+    _lblQuantity.text = [NSString stringWithFormat:@"Number available: %@", bookQuantity];
 }
 
 - (void)setBookISBN:(NSString *)isbn {
-    bookISBN = isbn;
+    bookISBN = [[NSMutableString alloc] initWithString:isbn];
 }
 
 - (void)setBookCover:(NSString *)cover {
-    bookCoverUrl = cover;
+    bookCoverUrl = [[NSMutableString alloc] initWithString:cover];
 }
 
 - (void)addBook:(id)sender {
@@ -150,11 +151,18 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void) onEditChangedValue:(NSString *)newValue {
+    [self setBookQuantity:newValue];
+}
 
 - (void)editQuantity:(id)sender {
     // Add modal view
     EditBookModalViewController *editModal = [self.storyboard instantiateViewControllerWithIdentifier:@"EditBookModalIdentifier"];
-    
+
+    // Set the delegate, it have an object Delegate for EditBookModalViewController to callback,
+    // or You can set object for callback
+    editModal.editDelegate = self;
+
     [editModal setTransitioningDelegate:self.transitioningDelegate];
     editModal.modalPresentationStyle = UIModalPresentationCustom;
     
