@@ -64,8 +64,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope {
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
+    searchResults = [books filteredArrayUsingPredicate:resultPredicate];
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar
+    selectedScopeButtonIndex]]];
+    return YES;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [books count];
+    if(tableView == self.searchDisplayController.searchResultsTableView) {
+        return [searchResults count];
+    } else {
+        return [books count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -75,8 +90,13 @@
                                         dequeueReusableCellWithIdentifier:tableIndentifier
                                         forIndexPath:indexPath];
     
-    // Get student
-    PFObject *book = [books objectAtIndex:indexPath.row];
+    // Get book
+    PFObject *book = nil;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        book = [searchResults objectAtIndex:indexPath.row];
+    } else {
+        book = [books objectAtIndex:indexPath.row];
+    }
 
     cell.lblBookAuthor.text = book[@"author"];
     cell.lblBookName.text = book[@"title"];
@@ -124,7 +144,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error) {
             books = (NSMutableArray *)objects;
-
+            NSLog(@"%@", books);
             // Rerender table view
             [_listBooks reloadData];
         } else {

@@ -14,6 +14,7 @@
 @interface BooksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddBookModalDelegate, BarcodeReaderDelegate>
 {
     NSMutableArray *books;
+    NSArray *searchResults;
 }
 
 - (IBAction)addBookManual:(id)sender;

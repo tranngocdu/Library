@@ -57,6 +57,7 @@
 		B4AE8A4F19DC3F86002B5985 /* EditBookModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4AE8A4E19DC3F86002B5985 /* EditBookModalViewController.m */; };
 		B4B156B319D9BE0300CFC429 /* AddBookModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B156B219D9BE0300CFC429 /* AddBookModalViewController.m */; };
 		B4D042AB19D06B7A003B76BE /* BookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D042AA19D06B7A003B76BE /* BookCell.m */; };
+		B4DA590019E426B000D72BF7 /* DataIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DA58FF19E426B000D72BF7 /* DataIndex.m */; };
 		B4DD987819CC2E0A009A0D83 /* StudentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DD987719CC2E0A009A0D83 /* StudentDetailViewController.m */; };
 		B4EE86FF19D1AB0D00B195FC /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EE86FE19D1AB0D00B195FC /* Utilities.m */; };
 		B4EE870319D1B2A500B195FC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4EE870219D1B2A500B195FC /* AssetsLibrary.framework */; };
@@ -161,6 +162,8 @@
 		B4B156B219D9BE0300CFC429 /* AddBookModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBookModalViewController.m; sourceTree = "<group>"; };
 		B4D042A919D06B7A003B76BE /* BookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCell.h; sourceTree = "<group>"; };
 		B4D042AA19D06B7A003B76BE /* BookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCell.m; sourceTree = "<group>"; };
+		B4DA58FE19E426B000D72BF7 /* DataIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataIndex.h; sourceTree = "<group>"; };
+		B4DA58FF19E426B000D72BF7 /* DataIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataIndex.m; sourceTree = "<group>"; };
 		B4DD987619CC2E0A009A0D83 /* StudentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentDetailViewController.h; sourceTree = "<group>"; };
 		B4DD987719CC2E0A009A0D83 /* StudentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentDetailViewController.m; sourceTree = "<group>"; };
 		B4EE86FD19D1AB0D00B195FC /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
@@ -486,6 +489,8 @@
 				B451E2A619C2011B0041E88C /* UIButton+AppButton.m */,
 				B4EE86FD19D1AB0D00B195FC /* Utilities.h */,
 				B4EE86FE19D1AB0D00B195FC /* Utilities.m */,
+				B4DA58FE19E426B000D72BF7 /* DataIndex.h */,
+				B4DA58FF19E426B000D72BF7 /* DataIndex.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -622,6 +627,7 @@
 				8C37C39419D32EAF00692B18 /* zxing-all-in-one.cpp in Sources */,
 				8C14562519B5552B009616DE /* BooksViewController.m in Sources */,
 				72D2356E19B589A9003963E5 /* AddBookManualViewController.m in Sources */,
+				B4DA590019E426B000D72BF7 /* DataIndex.m in Sources */,
 				8C14562219B554DB009616DE /* StudentsViewController.m in Sources */,
 				8C14561C19B5547B009616DE /* HomeViewController.m in Sources */,
 				72D2357419B58F37003963E5 /* CheckOutBookViewController.m in Sources */,
