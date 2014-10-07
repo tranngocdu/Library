@@ -46,11 +46,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self decorate];
+
+    self.searchDisplayController.delegate = self;
+    self.searchDisplayController.searchResultsDelegate = self;
+    self.searchDisplayController.searchResultsDataSource = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     // Load available books
     [self loadBooksWithType:0];
+
+    NSLog(@"%@", self.searchDisplayController.delegate);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -64,14 +70,63 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope {
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
-    searchResults = [books filteredArrayUsingPredicate:resultPredicate];
+- (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
+
+    NSLog(@"ABC ");
+    return YES;
+}
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSLog(@"Update");
+}
+
+- (void) filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope {
+    //NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
+
+    // this function scan all the array and check every item to get or eleminate this iiem
+    //searchResults = [books filteredArrayUsingPredicate:resultPredicate];
+
+    // Use alternative function
+    searchResults = [self getMatchedListWithCondition:searchText inList:books];
+}
+
+- (NSArray*) getMatchedListWithCondition:(NSString*)searchText inList:(NSArray*)inArray {
+
+    // this function scan all item of inArray and get/eleminate item
+    NSMutableArray *resultArray = [[NSMutableArray alloc] init];
+
+    for(int i=0; i<[inArray count]; i++) {
+        NSDictionary *item = inArray[i];
+        NSString *title = [item objectForKey:@"title"];
+
+        // Check if condition matched, add this item to result array
+        if([title rangeOfString:searchText].location != NSNotFound) {
+            [resultArray addObject:item];
+        }
+    }
+
+    NSLog(@"Length: %d", [resultArray count]);
+    
+    return resultArray;
+}
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+
+    NSLog(@"START SEARCH");
+    return YES;
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    
+    NSLog(@"END SEARCH");
+    return YES;
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+
     [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar
     selectedScopeButtonIndex]]];
+
     return YES;
 }
 
@@ -83,13 +138,17 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 85;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *tableIndentifier = @"bookListCell";
     
-    BookCell *cell = (BookCell *)[tableView
+    BookCell *cell = (BookCell *)[self.listBooks // tableView
                                         dequeueReusableCellWithIdentifier:tableIndentifier
                                         forIndexPath:indexPath];
-    
+
     // Get book
     PFObject *book = nil;
     if (tableView == self.searchDisplayController.searchResultsTableView) {
@@ -144,7 +203,8 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error) {
             books = (NSMutableArray *)objects;
-            NSLog(@"%@", books);
+            NSLog(@"%@", [books objectAtIndex:0]);
+
             // Rerender table view
             [_listBooks reloadData];
         } else {

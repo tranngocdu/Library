@@ -11,7 +11,7 @@
 #import "BarcodeReaderViewController.h"
 #import "Utilities.h"
 
-@interface BooksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddBookModalDelegate, BarcodeReaderDelegate>
+@interface BooksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddBookModalDelegate, BarcodeReaderDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UISearchResultsUpdating, UISearchControllerDelegate>
 {
     NSMutableArray *books;
     NSArray *searchResults;
