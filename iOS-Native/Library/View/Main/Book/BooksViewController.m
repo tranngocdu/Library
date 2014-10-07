@@ -55,8 +55,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     // Load available books
     [self loadBooksWithType:0];
-
-    NSLog(@"%@", self.searchDisplayController.delegate);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -110,6 +108,30 @@
     return resultArray;
 }
 
+- (NSDictionary*) sectionization:(NSArray*)inArray {
+    NSMutableDictionary *resultDic = [[NSMutableDictionary alloc] init];
+
+    for(int i=0; i<[inArray count]; i++) {
+        NSDictionary *item = inArray[i];
+
+        NSString *title = item[@"title"];
+        NSString *firstLetter = [title substringToIndex:1];
+        NSLog(@"%@, %@", title, firstLetter);
+
+        NSMutableArray *subList = resultDic[firstLetter];
+        if(!subList) {
+            subList = [[NSMutableArray alloc] init];
+            [resultDic setObject:subList forKey:firstLetter];
+        }
+
+        [subList addObject:item];
+    }
+
+    NSLog(@"Sectionilation : %d %d", [inArray count], [resultDic count]);
+
+    return resultDic;
+}
+
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
 
     NSLog(@"START SEARCH");
@@ -127,15 +149,33 @@
     [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar
     selectedScopeButtonIndex]]];
 
+    // Update search section new data
+    displayList = [self sectionization:searchResults];
+
     return YES;
 }
 
+- (void) reloadData:(NSArray*)inArray {
+    displayList = [self sectionization:inArray];
+    [_listBooks reloadData];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [[displayList allKeys] count];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+    NSString *key = [displayList allKeys][section];
+    return [displayList[key] count];
+
+    /*
     if(tableView == self.searchDisplayController.searchResultsTableView) {
         return [searchResults count];
     } else {
         return [books count];
     }
+    */
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -150,12 +190,16 @@
                                         forIndexPath:indexPath];
 
     // Get book
-    PFObject *book = nil;
+    NSString *key = [displayList allKeys][indexPath.section];
+    PFObject *book = [[displayList objectForKey:key] objectAtIndex:indexPath.row];
+
+    /*
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         book = [searchResults objectAtIndex:indexPath.row];
     } else {
         book = [books objectAtIndex:indexPath.row];
     }
+    */
 
     cell.lblBookAuthor.text = book[@"author"];
     cell.lblBookName.text = book[@"title"];
@@ -174,9 +218,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     BookDetailViewController *bookDetailView = [self.storyboard instantiateViewControllerWithIdentifier:@"BookDetailIndentifier"];
-    PFObject *book = [books objectAtIndex:indexPath.row];
+
+    //PFObject *book = [books objectAtIndex:indexPath.row];
+    NSString *key = [displayList allKeys][indexPath.section];
+    PFObject *book = [[displayList objectForKey:key] objectAtIndex:indexPath.row];
+
     [bookDetailView setBookId:book.objectId];
     [self.navigationController pushViewController:bookDetailView animated:YES];
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return [displayList allKeys];
+}
+
+- (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [[displayList allKeys] objectAtIndex:section];
 }
 
 - (void)loadBooksWithType:(int)type {
@@ -187,7 +243,11 @@
     
     // Remove old data
     [books removeAllObjects];
-    [_listBooks reloadData];
+    searchResults = [[NSArray alloc] init];
+    displayList = [[NSDictionary alloc] init];
+    [self reloadData:books];
+
+    //[_listBooks reloadData];
     
     [query whereKey:@"User" equalTo:currentUser.objectId];
     
@@ -206,7 +266,9 @@
             NSLog(@"%@", [books objectAtIndex:0]);
 
             // Rerender table view
-            [_listBooks reloadData];
+            //[_listBooks reloadData];
+            [self reloadData:books];
+
         } else {
             NSLog(@"Error: %@", error);
             [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];

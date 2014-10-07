@@ -15,6 +15,8 @@
 {
     NSMutableArray *books;
     NSArray *searchResults;
+
+    NSDictionary *displayList;
 }
 
 - (IBAction)addBookManual:(id)sender;
