@@ -64,7 +64,18 @@
             if ([book[@"studentList"] count] > 0) {
                 NSMutableArray *stds = [[NSMutableArray alloc] init];
                 for (PFObject *std in book[@"studentList"]) {
-                    [stds addObject:std.objectId];
+                    if([[std allKeys] count] > 0) {
+                        [stds addObject:std.objectId];
+                    }
+                }
+
+                // stop when no student in the list
+                if([stds count] <= 0) {
+                    _viewButtons.hidden = NO;
+                    _tbvStudentsLoaned.hidden = YES;
+                    [self adjustScrollSize];
+
+                    return;
                 }
                 
                 PFQuery *stdQuery = [PFQuery queryWithClassName:@"Student"];

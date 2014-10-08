@@ -70,7 +70,6 @@
 
 - (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
 
-    NSLog(@"ABC ");
     return YES;
 }
 
@@ -157,8 +156,6 @@
 
 - (void) reloadData:(NSArray*)inArray {
     [self sectionization:inArray];
-    NSLog(@"ABC: %@", [displayList allKeys]);
-
     [_listBooks reloadData];
 }
 
