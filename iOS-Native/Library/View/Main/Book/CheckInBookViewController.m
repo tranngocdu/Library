@@ -43,6 +43,7 @@
     // Get book by id
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     [query whereKey:@"ISBN" equalTo:bookISBN];
+    [query whereKey:@"User" equalTo:[PFUser currentUser].objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             book = [objects objectAtIndex:0];
@@ -63,17 +64,27 @@
             if ([book[@"studentList"] count] > 0) {
                 NSMutableArray *stds = [[NSMutableArray alloc] init];
                 for (PFObject *std in book[@"studentList"]) {
-                    [stds addObject:std.objectId];
+                    if([[std allKeys] count] > 0) {
+                        if (![std[@"objectId"] isEqualToString:@""]) {
+                            [stds addObject:std[@"objectId"]];
+                        } else {
+                            [stds addObject:std.objectId];
+                        }
+                    } else if (std.objectId) {
+                        [stds addObject:std.objectId];
+                    }
                 }
-                
-                PFQuery *stdQuery = [PFQuery queryWithClassName:@"Student"];
-                [stdQuery whereKey:@"objectId" containedIn:stds];
-                
-                [stdQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                    students = (NSMutableArray *)objects;
-                    _tbvListStudents.hidden = NO;
-                    [_tbvListStudents reloadData];
-                }];
+                // stop when no student in the list
+                if([stds count] > 0) {
+                    PFQuery *stdQuery = [PFQuery queryWithClassName:@"Student"];
+                    [stdQuery whereKey:@"objectId" containedIn:stds];
+                    
+                    [stdQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                        students = (NSMutableArray *)objects;
+                        _tbvListStudents.hidden = NO;
+                        [_tbvListStudents reloadData];
+                    }];
+                }
             }
         } else {
             NSLog(@"Error: %@", error);

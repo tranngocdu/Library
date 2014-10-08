@@ -102,7 +102,7 @@
         }
     }
 
-    NSLog(@"Length: %d", [resultArray count]);
+//    NSLog(@"Length: %d", [resultArray count]);
     
     return resultArray;
 }

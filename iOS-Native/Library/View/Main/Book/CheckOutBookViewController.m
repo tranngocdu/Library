@@ -43,6 +43,7 @@
     // Get book by id
     PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
     [query whereKey:@"ISBN" equalTo:bookISBN];
+    [query whereKey:@"User" equalTo:[PFUser currentUser].objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             book = [objects objectAtIndex:0];
