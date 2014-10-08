@@ -11,10 +11,15 @@
 #import "Utilities.h"
 
 
-@interface StudentsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate> {
+@interface StudentsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UISearchResultsUpdating, UISearchControllerDelegate> {
     NSMutableArray *students;
     StudentCell *studentCell;
     int cellSelect;
+    
+    NSArray *searchResults;
+    
+    NSDictionary *displayList;
+    NSArray *displaySortHeader;
 }
 
 - (IBAction)addStudent:(id)sender;

@@ -52,7 +52,7 @@
         [[Utilities share] hideLoading];
         if (!error) {
             students = (NSMutableArray *)data;
-            [_tfStudentList reloadData];
+            [self reloadData:students];
         } else {
             // Alert error
             [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error."];
@@ -60,8 +60,13 @@
     }];
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [displaySortHeader count];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [students count];
+    NSString *key = displaySortHeader[section];
+    return [displayList[key] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -70,9 +75,12 @@
     StudentCell *cell = (StudentCell *)[tableView
                          dequeueReusableCellWithIdentifier:tableIndentifier
                          forIndexPath:indexPath];
-
+    
+    NSString *key = displaySortHeader[indexPath.section];
+    PFObject *student = [[displayList objectForKey:key] objectAtIndex:indexPath.row];
+    
     // Get student
-    PFObject *student = [students objectAtIndex:indexPath.row];
+//    PFObject *student = [students objectAtIndex:indexPath.row];
     cell.tfName.text = student[@"Name"];
     cell.btnDelete.tag = indexPath.row;
     [cell.btnDelete addTarget:self action:@selector(clickOnDeleteButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -82,7 +90,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Get student
-    PFObject *student = [students objectAtIndex:indexPath.row];
+    NSString *key = displaySortHeader[indexPath.section];
+    PFObject *student = [[displayList objectForKey:key] objectAtIndex:indexPath.row];
     
     StudentDetailViewController *studentDetailView = [self.storyboard instantiateViewControllerWithIdentifier:@"StudentDetailIdentifier"];
     
@@ -90,6 +99,14 @@
     [studentDetailView setStudentId:(NSString *)student.objectId];
     
     [self.navigationController pushViewController:studentDetailView animated:YES];
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return displaySortHeader;
+}
+
+- (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return displaySortHeader[section];
 }
 
 - (void)clickOnDeleteButton:(UIButton *)sender {
@@ -112,7 +129,7 @@
                 [students removeObjectAtIndex:cellSelect];
                 
                 // Reload list view
-                [_tfStudentList reloadData];
+                [self reloadData:students];
             } else {
                 NSLog(@"Error when delete student %@", error);
                 [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
@@ -126,6 +143,10 @@
     [super viewDidLoad];
     [self getListStudent];
     [self decorate];
+    
+    self.searchDisplayController.delegate = self;
+    self.searchDisplayController.searchResultsDataSource = self;
+    self.searchDisplayController.searchResultsDelegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -136,6 +157,88 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
+    return YES;
+}
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSLog(@"Update");
+}
+
+- (void) filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope {
+    // Use alternative function
+    searchResults = [self getMatchedListWithCondition:searchText inList:students];
+}
+
+- (NSArray*) getMatchedListWithCondition:(NSString*)searchText inList:(NSArray*)inArray {
+    // this function scan all item of inArray and get/eleminate item
+    NSMutableArray *resultArray = [[NSMutableArray alloc] init];
+    
+    for(int i=0; i<[inArray count]; i++) {
+        NSDictionary *item = inArray[i];
+        NSString *title = [item objectForKey:@"title"];
+        
+        // Check if condition matched, add this item to result array
+        if([title rangeOfString:searchText].location != NSNotFound) {
+            [resultArray addObject:item];
+        }
+    }
+    
+    //    NSLog(@"Length: %d", [resultArray count]);
+    
+    return resultArray;
+}
+
+- (void) sectionization:(NSArray*)inArray {
+    NSMutableDictionary *resultDic = [NSMutableDictionary dictionary];
+    
+    for(int i=0; i<[inArray count]; i++) {
+        NSDictionary *item = inArray[i];
+        
+        NSString *title = item[@"Name"];
+        NSString *firstLetter = [[title substringToIndex:1] uppercaseString];
+        
+        NSMutableArray *subList = resultDic[firstLetter];
+        if(!subList) {
+            subList = [[NSMutableArray alloc] init];
+            [resultDic setObject:subList forKey:firstLetter];
+        }
+        
+        [subList addObject:item];
+    }
+    
+    // Sort ABC
+    displaySortHeader = [[resultDic allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    
+    // assign to Data List
+    displayList = resultDic;
+}
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    NSLog(@"aaa");
+    return YES;
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    NSLog(@"BBB");
+    return YES;
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    
+    [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar
+                                                                                                                                   selectedScopeButtonIndex]]];
+    
+    // Update search section new data
+    [self reloadData:searchResults];
+    return YES;
+}
+
+- (void) reloadData:(NSArray*)inArray {
+    [self sectionization:inArray];
+    [_tfStudentList reloadData];
 }
 
 - (void)addStudent:(id)sender {
