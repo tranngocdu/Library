@@ -179,13 +179,14 @@
 - (NSArray*) getMatchedListWithCondition:(NSString*)searchText inList:(NSArray*)inArray {
     // this function scan all item of inArray and get/eleminate item
     NSMutableArray *resultArray = [[NSMutableArray alloc] init];
-    
+    NSString *searchTextUpper = [searchText uppercaseString];
+
     for(int i=0; i<[inArray count]; i++) {
         NSDictionary *item = inArray[i];
-        NSString *title = [item objectForKey:@"Name"];
+        NSString *title = [[item objectForKey:@"Name"] uppercaseString];
         
         // Check if condition matched, add this item to result array
-        if([title rangeOfString:searchText].location != NSNotFound) {
+        if([title rangeOfString:searchTextUpper].location != NSNotFound) {
             [resultArray addObject:item];
         }
     }
