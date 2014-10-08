@@ -136,10 +136,27 @@
                     [[Utilities share] showAlertWithTitle:@"Oops!" withMessage:@"All copies has been checked out!"];
                 } else {
                     bool isExist = false;
+                    
+                    NSLog(@"%@", book[@"studentList"]);
+                    
                     // Check user is in book students list or not
                     for (PFObject *std in book[@"studentList"]){
-                        if([std.objectId isEqual:student.objectId]) {
-                            isExist = true;
+                        if ([[std allKeys] count] == 0) {
+                            NSLog(@"Do Nothing");
+                        } else if([[std allKeys] count] > 0) {
+                            if (![std[@"objectId"] isEqualToString:@""]) {
+                                if([std[@"objectId"] isEqual:student.objectId]) {
+                                    isExist = true;
+                                }
+                            } else {
+                                if([std.objectId isEqual:student.objectId]) {
+                                    isExist = true;
+                                }
+                            }
+                        } else if (std.objectId) {
+                            if([std.objectId isEqual:student.objectId]) {
+                                isExist = true;
+                            }
                         }
                     }
                     

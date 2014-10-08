@@ -227,6 +227,7 @@
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
     NSLog(@"BBB");
+    [self reloadData:students];
     return YES;
 }
 

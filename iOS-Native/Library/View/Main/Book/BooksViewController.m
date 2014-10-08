@@ -139,7 +139,7 @@
 }
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
-    
+    [self reloadData:books];
     NSLog(@"END SEARCH");
     return YES;
 }

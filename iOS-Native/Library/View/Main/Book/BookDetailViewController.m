@@ -59,20 +59,23 @@
             [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                 _imgBookCover.image = [UIImage imageWithData:data];
             }];
-            
             NSLog(@"%@", book);
-            
             // If have students checked out, load students informations
             if ([book[@"studentList"] count] > 0) {
                 NSMutableArray *stds = [[NSMutableArray alloc] init];
                 for (PFObject *std in book[@"studentList"]) {
-                    if([[std allKeys] count] > 0) {
+                    if ([[std allKeys] count] == 0) {
+                        NSLog(@"1");
+                    } else if([[std allKeys] count] > 0) {
                         if (![std[@"objectId"] isEqualToString:@""]) {
+                            NSLog(@"2");
                             [stds addObject:std[@"objectId"]];
                         } else {
+                            NSLog(@"3");
                             [stds addObject:std.objectId];
                         }
                     } else if (std.objectId) {
+                        NSLog(@"4");
                         [stds addObject:std.objectId];
                     }
                 }

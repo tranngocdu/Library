@@ -64,7 +64,9 @@
             if ([book[@"studentList"] count] > 0) {
                 NSMutableArray *stds = [[NSMutableArray alloc] init];
                 for (PFObject *std in book[@"studentList"]) {
-                    if([[std allKeys] count] > 0) {
+                    if ([[std allKeys] count] == 0) {
+                        
+                    } else if([[std allKeys] count] > 0) {
                         if (![std[@"objectId"] isEqualToString:@""]) {
                             [stds addObject:std[@"objectId"]];
                         } else {
