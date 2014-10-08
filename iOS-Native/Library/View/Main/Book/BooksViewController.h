@@ -17,6 +17,7 @@
     NSArray *searchResults;
 
     NSDictionary *displayList;
+    NSArray *displaySortHeader;
 }
 
 - (IBAction)addBookManual:(id)sender;

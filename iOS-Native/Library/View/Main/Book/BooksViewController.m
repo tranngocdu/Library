@@ -108,8 +108,8 @@
     return resultArray;
 }
 
-- (NSDictionary*) sectionization:(NSArray*)inArray {
-    NSMutableDictionary *tmpResultDic = [NSMutableDictionary dictionary];
+- (void) sectionization:(NSArray*)inArray {
+    NSMutableDictionary *resultDic = [NSMutableDictionary dictionary];
 
     for(int i=0; i<[inArray count]; i++) {
         NSDictionary *item = inArray[i];
@@ -117,40 +117,20 @@
         NSString *title = item[@"title"];
         NSString *firstLetter = [[title substringToIndex:1] uppercaseString];
 
-        NSMutableArray *subList = tmpResultDic[firstLetter];
+        NSMutableArray *subList = resultDic[firstLetter];
         if(!subList) {
             subList = [[NSMutableArray alloc] init];
-            [tmpResultDic setObject:subList forKey:firstLetter];
+            [resultDic setObject:subList forKey:firstLetter];
         }
 
         [subList addObject:item];
     }
 
-    NSMutableDictionary *resultDic = [NSMutableDictionary dictionary];
-
     // Sort ABC
-    NSArray *arr = [[NSArray alloc] initWithArray:[tmpResultDic allKeys]];
-    NSArray *sortKeysArray = [arr sortedArrayUsingSelector:@selector(compare:)];
+    displaySortHeader = [[resultDic allKeys] sortedArrayUsingSelector:@selector(compare:)];
 
-    NSLog(@"Sort Array Key: %@", sortKeysArray);
-
-    // Array sorted Dictionary
-    for (int j=[sortKeysArray count]-1; j>=0; j--) {
-        NSString *key = sortKeysArray[j];
-        NSMutableArray *object = tmpResultDic[key];
-        [tmpResultDic removeObjectForKey:key];
-
-        NSLog(@"Key : %@", key);
-
-        [resultDic setObject:object forKey:key];
-    }
-
-    NSLog(@"Sectionilation : %@", [resultDic allKeys]);
-
-    displayList = nil;
+    // assign to Data List
     displayList = resultDic;
-
-    return resultDic;
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
@@ -183,21 +163,13 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[displayList allKeys] count];
+    return [displaySortHeader count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    NSString *key = [displayList allKeys][section];
+    NSString *key = displaySortHeader[section];
     return [displayList[key] count];
-
-    /*
-    if(tableView == self.searchDisplayController.searchResultsTableView) {
-        return [searchResults count];
-    } else {
-        return [books count];
-    }
-    */
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -212,16 +184,8 @@
                                         forIndexPath:indexPath];
 
     // Get book
-    NSString *key = [displayList allKeys][indexPath.section];
+    NSString *key = displaySortHeader[indexPath.section];
     PFObject *book = [[displayList objectForKey:key] objectAtIndex:indexPath.row];
-
-    /*
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        book = [searchResults objectAtIndex:indexPath.row];
-    } else {
-        book = [books objectAtIndex:indexPath.row];
-    }
-    */
 
     cell.lblBookAuthor.text = book[@"author"];
     cell.lblBookName.text = book[@"title"];
@@ -242,7 +206,7 @@
     BookDetailViewController *bookDetailView = [self.storyboard instantiateViewControllerWithIdentifier:@"BookDetailIndentifier"];
 
     //PFObject *book = [books objectAtIndex:indexPath.row];
-    NSString *key = [displayList allKeys][indexPath.section];
+    NSString *key = displaySortHeader[indexPath.section];
     PFObject *book = [[displayList objectForKey:key] objectAtIndex:indexPath.row];
 
     [bookDetailView setBookId:book.objectId];
@@ -250,11 +214,11 @@
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return [displayList allKeys];
+    return displaySortHeader;
 }
 
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [[displayList allKeys] objectAtIndex:section];
+    return displaySortHeader[section];
 }
 
 - (void)loadBooksWithType:(int)type {
@@ -265,11 +229,10 @@
     
     // Remove old data
     [books removeAllObjects];
-    searchResults = [[NSArray alloc] init];
-    displayList = [[NSDictionary alloc] init];
+    searchResults = [NSArray array];
+    displayList = [NSDictionary dictionary];
+    displaySortHeader = [NSArray array];
     //[self reloadData:books];
-
-    //[_listBooks reloadData];
     
     [query whereKey:@"User" equalTo:currentUser.objectId];
     
@@ -288,7 +251,6 @@
             NSLog(@"%@", [books objectAtIndex:0]);
 
             // Rerender table view
-            //[_listBooks reloadData];
             [self reloadData:books];
 
         } else {
