@@ -230,7 +230,7 @@
     searchResults = [NSArray array];
     displayList = [NSDictionary dictionary];
     displaySortHeader = [NSArray array];
-    //[self reloadData:books];
+    [self reloadData:books];
     
     [query whereKey:@"User" equalTo:currentUser.objectId];
     
