@@ -52,6 +52,23 @@
 {
     NSLog(@"viewWillAppear -------- Show tab bar when hidden");
     self.tabBarController.tabBar.hidden = NO;
+    
+//    // Revert book informations
+//    NSArray *bookIds = [NSArray arrayWithObjects:@"RKuftmAuEc", @"8MB5KuFFRh", @"tlCgtUOcxP", @"fxcqBUViKw", @"8UNqSotPZj", @"xjPuvMAFKx", nil];
+//    for(NSString *bookId in bookIds) {
+//        PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
+//        // Retrieve the object by id
+//        [query getObjectInBackgroundWithId:bookId block:^(PFObject *book, NSError *error) {
+//            
+//            // Now let's update it with some new data. In this case, only cheatMode and score
+//            // will get sent to the cloud. playerName hasn't changed.
+//            book[@"quantity_out"] = @0;
+//            book[@"quantity_available"] = @1;
+//            book[@"studentList"] = [NSArray new];
+//            
+//            [book saveInBackground];
+//        }];
+//    }
 }
 
 - (void)checkinModal:(CheckInModalViewController *)checkInModal type:(int)type onClickAt:(int)buttonIndex

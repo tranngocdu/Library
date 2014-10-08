@@ -124,6 +124,7 @@
         [[Utilities share] showAlertWithTitle:@"Library" withMessage:@"Please pick a student"];
     } else {
         [[Utilities share] showLoading];
+
         // Get book informations
         PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
         NSLog(@"fetch book with id: %@", book.objectId);
@@ -164,11 +165,11 @@
                     if (!isExist) {
                         NSMutableArray *studentList = (NSMutableArray *)book[@"studentList"];
                         
-                        PFObject *studentInfo = [PFObject objectWithClassName:@"Student"];
-                        studentInfo[@"Name"] = student[@"Name"];
-                        studentInfo.objectId = student.objectId;
+                        NSArray *objects=[[NSArray alloc]initWithObjects:student.objectId, student[@"Name"],nil];
+                        NSArray *keys=[[NSArray alloc]initWithObjects:@"objectId", @"Name" ,nil];
+                        NSDictionary *dict=[NSDictionary dictionaryWithObjects:objects forKeys:keys];
                         
-                        [studentList addObject:studentInfo];
+                        [studentList addObject:dict];
                         book[@"studentList"] = studentList;
                         
                         // Reduce available books 1
