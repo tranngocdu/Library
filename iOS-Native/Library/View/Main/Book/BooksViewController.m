@@ -109,25 +109,46 @@
 }
 
 - (NSDictionary*) sectionization:(NSArray*)inArray {
-    NSMutableDictionary *resultDic = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *tmpResultDic = [NSMutableDictionary dictionary];
 
     for(int i=0; i<[inArray count]; i++) {
         NSDictionary *item = inArray[i];
 
         NSString *title = item[@"title"];
-        NSString *firstLetter = [title substringToIndex:1];
-        NSLog(@"%@, %@", title, firstLetter);
+        NSString *firstLetter = [[title substringToIndex:1] uppercaseString];
 
-        NSMutableArray *subList = resultDic[firstLetter];
+        NSMutableArray *subList = tmpResultDic[firstLetter];
         if(!subList) {
             subList = [[NSMutableArray alloc] init];
-            [resultDic setObject:subList forKey:firstLetter];
+            [tmpResultDic setObject:subList forKey:firstLetter];
         }
 
         [subList addObject:item];
     }
 
-    NSLog(@"Sectionilation : %d %d", [inArray count], [resultDic count]);
+    NSMutableDictionary *resultDic = [NSMutableDictionary dictionary];
+
+    // Sort ABC
+    NSArray *arr = [[NSArray alloc] initWithArray:[tmpResultDic allKeys]];
+    NSArray *sortKeysArray = [arr sortedArrayUsingSelector:@selector(compare:)];
+
+    NSLog(@"Sort Array Key: %@", sortKeysArray);
+
+    // Array sorted Dictionary
+    for (int j=[sortKeysArray count]-1; j>=0; j--) {
+        NSString *key = sortKeysArray[j];
+        NSMutableArray *object = tmpResultDic[key];
+        [tmpResultDic removeObjectForKey:key];
+
+        NSLog(@"Key : %@", key);
+
+        [resultDic setObject:object forKey:key];
+    }
+
+    NSLog(@"Sectionilation : %@", [resultDic allKeys]);
+
+    displayList = nil;
+    displayList = resultDic;
 
     return resultDic;
 }
@@ -150,13 +171,14 @@
     selectedScopeButtonIndex]]];
 
     // Update search section new data
-    displayList = [self sectionization:searchResults];
-
+    [self reloadData:searchResults];
     return YES;
 }
 
 - (void) reloadData:(NSArray*)inArray {
-    displayList = [self sectionization:inArray];
+    [self sectionization:inArray];
+    NSLog(@"ABC: %@", [displayList allKeys]);
+
     [_listBooks reloadData];
 }
 
@@ -245,7 +267,7 @@
     [books removeAllObjects];
     searchResults = [[NSArray alloc] init];
     displayList = [[NSDictionary alloc] init];
-    [self reloadData:books];
+    //[self reloadData:books];
 
     //[_listBooks reloadData];
     
