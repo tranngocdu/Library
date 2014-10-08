@@ -64,6 +64,10 @@
     return [displaySortHeader count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *key = displaySortHeader[section];
     return [displayList[key] count];
@@ -72,7 +76,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *tableIndentifier = @"studentListCell";
     
-    StudentCell *cell = (StudentCell *)[tableView
+    StudentCell *cell = (StudentCell *)[self.tfStudentList
                          dequeueReusableCellWithIdentifier:tableIndentifier
                          forIndexPath:indexPath];
     
@@ -178,7 +182,7 @@
     
     for(int i=0; i<[inArray count]; i++) {
         NSDictionary *item = inArray[i];
-        NSString *title = [item objectForKey:@"title"];
+        NSString *title = [item objectForKey:@"Name"];
         
         // Check if condition matched, add this item to result array
         if([title rangeOfString:searchText].location != NSNotFound) {
@@ -186,7 +190,7 @@
         }
     }
     
-    //    NSLog(@"Length: %d", [resultArray count]);
+//        NSLog(@"Length: %d", [resultArray count]);
     
     return resultArray;
 }
