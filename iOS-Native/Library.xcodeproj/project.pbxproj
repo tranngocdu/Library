@@ -50,6 +50,7 @@
 		8C37C39919D32EAF00692B18 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C37C39019D32EAF00692B18 /* Parse.framework */; };
 		8C37C39A19D32EAF00692B18 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C37C39119D32EAF00692B18 /* ParseFacebookUtils.framework */; };
 		8C37C39E19D344B900692B18 /* BarcodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C37C39D19D344B900692B18 /* BarcodeReaderViewController.m */; };
+		B434A2C819E6CBE9001AF01D /* no-art.png in Resources */ = {isa = PBXBuildFile; fileRef = B434A2C719E6CBE9001AF01D /* no-art.png */; };
 		B451E2A719C2011B0041E88C /* UIButton+AppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2A619C2011B0041E88C /* UIButton+AppButton.m */; };
 		B451E2AD19C20F010041E88C /* CheckInModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B451E2AC19C20F010041E88C /* CheckInModalViewController.m */; };
 		B47034F619CB29B900139B00 /* StudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B47034F519CB29B900139B00 /* StudentCell.m */; };
@@ -147,6 +148,7 @@
 		8C37C39119D32EAF00692B18 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		8C37C39C19D344B900692B18 /* BarcodeReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarcodeReaderViewController.h; sourceTree = "<group>"; };
 		8C37C39D19D344B900692B18 /* BarcodeReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarcodeReaderViewController.m; sourceTree = "<group>"; };
+		B434A2C719E6CBE9001AF01D /* no-art.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "no-art.png"; path = "../content/public/images/no-art.png"; sourceTree = "<group>"; };
 		B451E2A519C2011B0041E88C /* UIButton+AppButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AppButton.h"; sourceTree = "<group>"; };
 		B451E2A619C2011B0041E88C /* UIButton+AppButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AppButton.m"; sourceTree = "<group>"; };
 		B451E2AB19C20F010041E88C /* CheckInModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckInModalViewController.h; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 		722B11DC19B45AE5009613B8 = {
 			isa = PBXGroup;
 			children = (
+				B434A2C719E6CBE9001AF01D /* no-art.png */,
 				722B11EE19B45AE5009613B8 /* Library */,
 				722B120D19B45AE5009613B8 /* LibraryTests */,
 				722B11E719B45AE5009613B8 /* Frameworks */,
@@ -583,6 +586,7 @@
 				722B11FC19B45AE5009613B8 /* Main.storyboard in Resources */,
 				8C16FBD819D8670300CC64A1 /* toolbar-student@2x.png in Resources */,
 				8C16FBD719D8670300CC64A1 /* toolbar-setting-selected@2x.png in Resources */,
+				B434A2C819E6CBE9001AF01D /* no-art.png in Resources */,
 				8C37C39319D32EAF00692B18 /* scannerOverlay.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

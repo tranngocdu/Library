@@ -190,12 +190,34 @@
     
     cell.lblBookQuantity.text = [NSString stringWithFormat:@"%@ available", book[@"quantity_available"]];
     
-    NSString *imageUrl = book[@"cover_image"];
-    if(imageUrl != nil) {
+    // Init cell image
+    cell.bookPhoto.image = [UIImage imageNamed:@"no-art.png"];
+//    cell.bookPhoto.image = nil;
+    
+    // Get image async
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *imageUrl = book[@"cover_image"];
         [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-            cell.bookPhoto.image = [UIImage imageWithData:data];
+            if (data) {
+                UIImage *img = [UIImage imageWithData:data];
+                if (img) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        BookCell *updateCell = (id)[self.listBooks cellForRowAtIndexPath:indexPath];
+                        if (updateCell) {
+                            cell.bookPhoto.image = img;
+                        }
+                    });
+                }
+            }
         }];
-    }
+    });
+    
+//    NSString *imageUrl = book[@"cover_image"];
+//    if(imageUrl != nil) {
+//        [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+//            cell.bookPhoto.image = [UIImage imageWithData:data];
+//        }];
+//    }
 
     return cell;
 }
