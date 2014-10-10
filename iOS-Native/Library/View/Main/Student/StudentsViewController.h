@@ -20,6 +20,8 @@
     
     NSDictionary *displayList;
     NSArray *displaySortHeader;
+
+    BOOL hasCurrentViewRootActive;
 }
 
 - (IBAction)addStudent:(id)sender;

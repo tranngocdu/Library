@@ -18,6 +18,8 @@
 
     NSDictionary *displayList;
     NSArray *displaySortHeader;
+
+    BOOL hasCurrentViewRootActive;
 }
 
 - (IBAction)addBookManual:(id)sender;

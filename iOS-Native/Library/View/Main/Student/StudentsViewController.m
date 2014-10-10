@@ -93,6 +93,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    // Checkppint this stats
+    hasCurrentViewRootActive = NO;
+
     // Get student
     NSString *key = displaySortHeader[indexPath.section];
     PFObject *student = [[displayList objectForKey:key] objectAtIndex:indexPath.row];
@@ -154,16 +158,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self getListStudent];
     [self decorate];
-    
+
+    hasCurrentViewRootActive = YES;
     self.searchDisplayController.delegate = self;
     self.searchDisplayController.searchResultsDataSource = self;
     self.searchDisplayController.searchResultsDelegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    
+    if(hasCurrentViewRootActive) {
+        [self getListStudent];
+    }
+
+    hasCurrentViewRootActive = YES;
 }
 
 - (void)didReceiveMemoryWarning

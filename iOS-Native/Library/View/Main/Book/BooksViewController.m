@@ -28,7 +28,7 @@
     {
         
     }
-    
+
     return self;
 }
 
@@ -46,7 +46,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self decorate];
-
+    
+    hasCurrentViewRootActive = YES;
     self.searchDisplayController.delegate = self;
     self.searchDisplayController.searchResultsDelegate = self;
     self.searchDisplayController.searchResultsDataSource = self;
@@ -54,12 +55,19 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     // Load available books
-    [self loadBooksWithType:0];
+
+    if(hasCurrentViewRootActive) {
+        [self loadBooksWithType:0];
+    }
+
+    hasCurrentViewRootActive = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     self.tabBarController.tabBar.hidden = NO;
+
+    NSLog(@"%@", self.navigationController.viewControllers);
 }
 
 - (void)didReceiveMemoryWarning
@@ -223,6 +231,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    // Checkpoint the state
+    hasCurrentViewRootActive = NO;
+
     BookDetailViewController *bookDetailView = [self.storyboard instantiateViewControllerWithIdentifier:@"BookDetailIndentifier"];
 
     //PFObject *book = [books objectAtIndex:indexPath.row];
