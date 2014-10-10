@@ -106,7 +106,16 @@
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return displaySortHeader;
+    NSMutableArray *fullArray = [NSMutableArray arrayWithArray:[@"A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z" componentsSeparatedByString:@","]];
+
+    for(int i=0; i<[displaySortHeader count]; i++) {
+        NSString *letter = displaySortHeader[i];
+        if(![fullArray containsObject:letter]) {
+            [fullArray addObject:letter];
+        }
+    }
+
+    return [fullArray sortedArrayUsingSelector:@selector(compare:)]; //displaySortHeader;
 }
 
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
