@@ -86,8 +86,16 @@
     }
     else if (textField == _tfNewPasswordConfirm)
     {
-        [_tfNewPasswordConfirm resignFirstResponder];
+        [textField resignFirstResponder];
+
+        if(([_tfCurrentPassword.text length] > 0) &&
+           ([_tfEmail.text length] > 0) &&
+           ([_tfNewPassword.text length] > 0) &&
+           ([_tfNewPasswordConfirm.text length] > 0)) {
+            [self update:_btnUpdateAccount];
+        }
     }
+
     return YES;
 }
 

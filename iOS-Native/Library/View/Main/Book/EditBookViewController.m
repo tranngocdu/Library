@@ -238,6 +238,13 @@
         [_lblBookQuantity becomeFirstResponder];
     } else if([textField isEqual:_lblBookQuantity]) {
         [textField resignFirstResponder];
+
+        if(([_lblBookAuthor.text length] > 0) &&
+           ([_lblBookTitle.text length] > 0) &&
+           ([_lblBookQuantity.text intValue] > 0 &&
+            ([_lblBookISBN.text length] == 13))) {
+            [self saveBook:_btnSaveBook];
+        }
     }
 
     return YES;

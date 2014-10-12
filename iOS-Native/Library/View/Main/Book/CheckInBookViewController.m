@@ -145,7 +145,10 @@
                     [students removeObjectAtIndex:index];
                 }
             }
-            book[@"studentList"] = students;
+
+            NSLog(@"%@", students);
+
+            [book setObject:students forKey:@"studentList"];
             
             // Check available quantity
             int quantityAvailable = [book[@"quantity_available"] intValue];

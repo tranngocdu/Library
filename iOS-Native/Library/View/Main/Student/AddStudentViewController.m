@@ -81,7 +81,11 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [_tfStudentName resignFirstResponder];
+    [textField resignFirstResponder];
+    if([_tfStudentName.text length] > 0) {
+        [self addStudent:_btnAddStudent];
+    }
+    
     return YES;
 }
 

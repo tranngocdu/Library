@@ -128,7 +128,10 @@
     }
     else if (textField == _tfPassword)
     {
-        [_tfPassword resignFirstResponder];
+        [textField resignFirstResponder];
+        if(([_tfEmail.text length] > 0) && ([_tfPassword.text length] > 0)) {
+            [self doLogin:_btnLogin];
+        }
     }
     
     return YES;
