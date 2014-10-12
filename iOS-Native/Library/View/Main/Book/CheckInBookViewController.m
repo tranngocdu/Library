@@ -130,57 +130,58 @@
 }
 
 - (void)checkin:(id)sender {
-    [[Utilities share] showLoading];
-    // Get book informations
-    PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
-    NSLog(@"fetch book with id: %@", book.objectId);
-    [query getObjectInBackgroundWithId:book.objectId block:^(PFObject *object, NSError *error) {
-        if (!error) {
-            book = object;
-            // Slice student out of studentList
-            NSInteger count = [students count];
-            for (NSInteger index = (count - 1); index >= 0; index--) {
-                PFObject *std = students[index];
-                if ([std.objectId isEqualToString:student.objectId]) {
-                    [students removeObjectAtIndex:index];
+    if(!student) {
+        [[Utilities share] showAlertWithTitle:@"Library" withMessage:@"Please pick a student"];
+    } else {
+        [[Utilities share] showLoading];
+        // Get book informations
+        PFQuery *query = [PFQuery queryWithClassName:@"NewBook"];
+        NSLog(@"fetch book with id: %@", book.objectId);
+        [query getObjectInBackgroundWithId:book.objectId block:^(PFObject *object, NSError *error) {
+            if (!error) {
+                book = object;
+                // Slice student out of studentList
+                NSInteger count = [students count];
+                for (NSInteger index = (count - 1); index >= 0; index--) {
+                    PFObject *std = students[index];
+                    if ([std.objectId isEqualToString:student.objectId]) {
+                        [students removeObjectAtIndex:index];
+                    }
                 }
-            }
-
-            NSLog(@"%@", students);
-
-            [book setObject:students forKey:@"studentList"];
-            
-            // Check available quantity
-            int quantityAvailable = [book[@"quantity_available"] intValue];
-            // Increase available books 1
-            quantityAvailable = quantityAvailable + 1;
-            
-            // Recalculate quantity out
-            int quantityTotal = [book[@"quantity_total"] intValue];
-            int quantityOut = quantityTotal - quantityAvailable;
-            
-            book[@"quantity_available"] = @(quantityAvailable);
-            book[@"quantity_out"] = @(quantityOut);
-
-            [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                book[@"studentList"] = students;
+                
+                // Check available quantity
+                int quantityAvailable = [book[@"quantity_available"] intValue];
+                // Increase available books 1
+                quantityAvailable = quantityAvailable + 1;
+                
+                // Recalculate quantity out
+                int quantityTotal = [book[@"quantity_total"] intValue];
+                int quantityOut = quantityTotal - quantityAvailable;
+                
+                book[@"quantity_available"] = @(quantityAvailable);
+                book[@"quantity_out"] = @(quantityOut);
+                
+                [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    [[Utilities share] hideLoading];
+                    if (!error) {
+                        // Move to home view
+                        HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
+                        [self.navigationController presentViewController:homeView animated:YES completion:^{
+                            [[Utilities share] showAlertWithTitle:@"Library" withMessage:@"Back on the shelf!"];
+                        }];
+                    } else {
+                        NSLog(@"Error: %@", error);
+                        [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
+                    }
+                }];
+            } else {
+                NSLog(@"Error: %@", error);
                 [[Utilities share] hideLoading];
-                if (!error) {
-                    // Move to home view
-                    HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarIndetifier"];
-                    [self.navigationController presentViewController:homeView animated:YES completion:^{
-                        [[Utilities share] showAlertWithTitle:@"Library" withMessage:@"Back on the shelf!"];
-                    }];
-                } else {
-                    NSLog(@"Error: %@", error);
-                    [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
-                }
-            }];
-        } else {
-            NSLog(@"Error: %@", error);
-            [[Utilities share] hideLoading];
-            [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
-        }
-    }];
+                [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
+            }
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning
