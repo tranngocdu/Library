@@ -47,6 +47,11 @@
     [super viewDidLoad];
 
     [self decorate];
+
+    if(isIpad()) {
+        _tfEmail.textAlignment = NSTextAlignmentCenter;
+        _tfPassword.textAlignment = NSTextAlignmentCenter;
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {

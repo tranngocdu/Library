@@ -52,6 +52,13 @@
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTouchAtBackground)];
     [self.view addGestureRecognizer:tap];
+
+    if(isIpad()) {
+        _tfEmail.textAlignment = NSTextAlignmentCenter;
+        _tfCurrentPassword.textAlignment = NSTextAlignmentCenter;
+        _tfNewPassword.textAlignment = NSTextAlignmentCenter;
+        _tfNewPasswordConfirm.textAlignment = NSTextAlignmentCenter;
+    }
 }
 
 - (void) onTouchAtBackground {

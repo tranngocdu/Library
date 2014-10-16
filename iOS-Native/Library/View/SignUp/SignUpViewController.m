@@ -48,6 +48,12 @@
     [super viewDidLoad];
 
     [self decorate];
+
+    if(isIpad()) {
+        _tfEmail.textAlignment = NSTextAlignmentCenter;
+        _tfPassword.textAlignment = NSTextAlignmentCenter;
+        _tfPasswordConfirm.textAlignment = NSTextAlignmentCenter;
+    }
 }
 
 - (IBAction) goBackToLoginScreen:(id)sender

@@ -42,6 +42,13 @@
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickedAtBackground)];
     [self.view addGestureRecognizer:tap];
+
+    if(isIpad()) {
+        _tfAuthor.textAlignment = NSTextAlignmentCenter;
+        _tfIsbn.textAlignment = NSTextAlignmentCenter;
+        _tfQuantity.textAlignment = NSTextAlignmentCenter;
+        _tfTitle.textAlignment = NSTextAlignmentCenter;
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -39,6 +39,10 @@
     [super viewDidLoad];
     [self decorate];
     [self.navigationItem setTitle:@"Add Student"];
+
+    if(isIpad()) {
+        _tfStudentName.textAlignment = NSTextAlignmentCenter;
+    }
 }
 
 - (void)didReceiveMemoryWarning
