@@ -19,6 +19,8 @@
 
 @end
 
+
+
 @implementation BooksViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -28,7 +30,7 @@
     {
         
     }
-    
+
     return self;
 }
 
@@ -46,20 +48,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self decorate];
-
+<<<<<<< HEAD
+=======
+    
+    hasCurrentViewRootActive = YES;
+>>>>>>> b7e1cc96bdc535e86b63ba2c405846c4461becbd
     self.searchDisplayController.delegate = self;
     self.searchDisplayController.searchResultsDelegate = self;
     self.searchDisplayController.searchResultsDataSource = self;
 }
 
+- (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar
+{
+    return UIBarPositionTopAttached;
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     // Load available books
-    [self loadBooksWithType:0];
+
+    if(hasCurrentViewRootActive) {
+        [self loadBooksWithType:0];
+    }
+
+    hasCurrentViewRootActive = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     self.tabBarController.tabBar.hidden = NO;
+
+    NSLog(@"%@", self.navigationController.viewControllers);
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,6 +104,11 @@
     // Use alternative function
     searchResults = [self getMatchedListWithCondition:searchText inList:books];
 }
+
+- (UINavigationController *)navigationController {
+    return nil;
+}
+
 
 - (NSArray*) getMatchedListWithCondition:(NSString*)searchText inList:(NSArray*)inArray {
 
@@ -190,17 +213,43 @@
     
     cell.lblBookQuantity.text = [NSString stringWithFormat:@"%@ available", book[@"quantity_available"]];
     
-    NSString *imageUrl = book[@"cover_image"];
-    if(imageUrl != nil) {
+    // Init cell image
+    cell.bookPhoto.image = [UIImage imageNamed:@"no-art.png"];
+//    cell.bookPhoto.image = nil;
+    
+    // Get image async
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *imageUrl = book[@"cover_image"];
         [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-            cell.bookPhoto.image = [UIImage imageWithData:data];
+            if (data) {
+                UIImage *img = [UIImage imageWithData:data];
+                if (img) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        BookCell *updateCell = (id)[self.listBooks cellForRowAtIndexPath:indexPath];
+                        if (updateCell) {
+                            cell.bookPhoto.image = img;
+                        }
+                    });
+                }
+            }
         }];
-    }
+    });
+    
+//    NSString *imageUrl = book[@"cover_image"];
+//    if(imageUrl != nil) {
+//        [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+//            cell.bookPhoto.image = [UIImage imageWithData:data];
+//        }];
+//    }
 
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    // Checkpoint the state
+    hasCurrentViewRootActive = NO;
+
     BookDetailViewController *bookDetailView = [self.storyboard instantiateViewControllerWithIdentifier:@"BookDetailIndentifier"];
 
     //PFObject *book = [books objectAtIndex:indexPath.row];
@@ -212,7 +261,16 @@
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return displaySortHeader;
+    NSMutableArray *fullArray = [NSMutableArray arrayWithArray:[@"A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z" componentsSeparatedByString:@","]];
+
+    for(int i=0; i<[displaySortHeader count]; i++) {
+        NSString *letter = displaySortHeader[i];
+        if(![fullArray containsObject:letter]) {
+            [fullArray addObject:letter];
+        }
+    }
+
+    return [fullArray sortedArrayUsingSelector:@selector(compare:)]; //displaySortHeader;
 }
 
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {

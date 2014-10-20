@@ -48,6 +48,12 @@
     [super viewDidLoad];
 
     [self decorate];
+
+    if(isIpad()) {
+        _tfEmail.textAlignment = NSTextAlignmentCenter;
+        _tfPassword.textAlignment = NSTextAlignmentCenter;
+        _tfPasswordConfirm.textAlignment = NSTextAlignmentCenter;
+    }
 }
 
 - (IBAction) goBackToLoginScreen:(id)sender
@@ -73,7 +79,13 @@
     }
     else if (textField == _tfPasswordConfirm)
     {
-        [_tfPasswordConfirm resignFirstResponder];
+        [textField resignFirstResponder];
+
+        if(([_tfEmail.text length] > 0) &&
+           ([_tfPassword.text length] > 0) &&
+           ([_tfPasswordConfirm.text length] > 0)) {
+            [self signup:_btnCreateAccount];
+        }
     }
     return YES;
 }

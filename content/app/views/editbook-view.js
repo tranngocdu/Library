@@ -51,10 +51,12 @@ module.exports = View.extend({
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		query.equalTo("User", currentUserId);
-		query.equalTo("ISBN", Application.editBookView.bookData[0].ISBN);
-		console.log(Application.editBookView.bookData[0].ISBN)
+		console.log(Application.editBookView.bookData[0].objectId)
+		query.equalTo("objectId", Application.editBookView.bookData[0].objectId);
+		//console.log(Application.editBookView.bookData[0].ISBN)
 		query.first({
 			success: function(newBook) {
+				console.log(JSON.stringify(newBook))
 				var quantityAvailable = newBook.attributes.quantity_available;
 				var quantityOldTotal = newBook.attributes.quantity_total;
 				
@@ -72,9 +74,10 @@ module.exports = View.extend({
 					author = $("#author").attr("placeholder");
 				}
 				var isbn = "";
-				if($("#isbn").val().length>0){
-					isbn = $("#isbn").val();}
-				else{
+				console.log($("#isbn").val().length)
+				if($("#isbn").val().length>0) {
+					isbn = $("#isbn").val();
+				}else{
 					isbn = $("#isbn").attr("placeholder");
 				}
 				var numberAvailable = $("#numberAvailable").val();

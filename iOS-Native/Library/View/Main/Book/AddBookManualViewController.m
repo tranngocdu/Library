@@ -42,6 +42,13 @@
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickedAtBackground)];
     [self.view addGestureRecognizer:tap];
+
+    if(isIpad()) {
+        _tfAuthor.textAlignment = NSTextAlignmentCenter;
+        _tfIsbn.textAlignment = NSTextAlignmentCenter;
+        _tfQuantity.textAlignment = NSTextAlignmentCenter;
+        _tfTitle.textAlignment = NSTextAlignmentCenter;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -223,6 +230,12 @@
         [_tfQuantity becomeFirstResponder];
     } else if([textField isEqual:_tfQuantity]) {
         [textField resignFirstResponder];
+
+        if(([_tfTitle.text length] > 0) &&
+           ([_tfAuthor.text length] > 0) &&
+           ([_tfQuantity.text intValue] > 0)) {
+            [self addBook:_btnAddBook];
+        }
     }
 
     return YES;

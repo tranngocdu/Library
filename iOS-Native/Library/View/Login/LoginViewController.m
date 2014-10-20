@@ -47,6 +47,11 @@
     [super viewDidLoad];
 
     [self decorate];
+
+    if(isIpad()) {
+        _tfEmail.textAlignment = NSTextAlignmentCenter;
+        _tfPassword.textAlignment = NSTextAlignmentCenter;
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -128,7 +133,10 @@
     }
     else if (textField == _tfPassword)
     {
-        [_tfPassword resignFirstResponder];
+        [textField resignFirstResponder];
+        if(([_tfEmail.text length] > 0) && ([_tfPassword.text length] > 0)) {
+            [self doLogin:_btnLogin];
+        }
     }
     
     return YES;

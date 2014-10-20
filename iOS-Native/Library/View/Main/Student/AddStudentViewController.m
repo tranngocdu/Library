@@ -39,6 +39,10 @@
     [super viewDidLoad];
     [self decorate];
     [self.navigationItem setTitle:@"Add Student"];
+
+    if(isIpad()) {
+        _tfStudentName.textAlignment = NSTextAlignmentCenter;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,7 +85,11 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [_tfStudentName resignFirstResponder];
+    [textField resignFirstResponder];
+    if([_tfStudentName.text length] > 0) {
+        [self addStudent:_btnAddStudent];
+    }
+    
     return YES;
 }
 
