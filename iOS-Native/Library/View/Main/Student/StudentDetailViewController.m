@@ -46,7 +46,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Student"];
     [query getObjectInBackgroundWithId:studentId block:^(PFObject *object, NSError *error) {
         [[Utilities share] hideLoading];
-        
+
         if (!error) {
             NSLog(@"Student %@", object);
             NSString *stdentName = object[@"Name"];
