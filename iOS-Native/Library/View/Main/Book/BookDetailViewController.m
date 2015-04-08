@@ -128,7 +128,16 @@
 }
 
 - (void) adjustScrollSize {
-    _scroller.contentSize = CGSizeMake(self.view.frame.size.width, _viewButtons.frame.origin.y + _viewButtons.frame.size.height + 5);
+    CGFloat height = _viewButtons.frame.origin.y + _viewButtons.frame.size.height + 5;
+
+    CGRect r = _tbvStudentsLoaned.frame;
+    r.origin.y = height + 5;
+
+    height += _tbvStudentsLoaned.frame.size.height + 5;
+    r.size.height = height - 5 - r.origin.y;
+    _tbvStudentsLoaned.frame = r;
+
+    _scroller.contentSize = CGSizeMake(self.view.frame.size.width, height);
     [[Utilities share] hideLoading];
 }
 
