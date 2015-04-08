@@ -8,6 +8,7 @@
 
 #import "StudentDetailViewController.h"
 #import <Parse/Parse.h>
+#import "Utilities.h"
 
 @implementation StudentDetailViewController
 
@@ -40,10 +41,19 @@
 }
 
 - (void)getStudentInformation {
+    [[Utilities share] showLoading];
+
     PFQuery *query = [PFQuery queryWithClassName:@"Student"];
     [query getObjectInBackgroundWithId:studentId block:^(PFObject *object, NSError *error) {
+        [[Utilities share] hideLoading];
+        
         if (!error) {
             NSLog(@"Student %@", object);
+            NSString *stdentName = object[@"Name"];
+            if(stdentName) {
+                self.title = stdentName;
+            }
+
         } else {
             NSLog(@"Error %@", error);
         }
