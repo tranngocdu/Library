@@ -299,6 +299,8 @@
     query.limit = 1000;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [[Utilities share] hideLoading];
+        
         if(!error) {
             books = (NSMutableArray *)objects;
             NSLog(@"%@", [books objectAtIndex:0]);
@@ -310,7 +312,7 @@
             NSLog(@"Error: %@", error);
             [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
         }
-        [[Utilities share] hideLoading];
+
     }];
 }
 
