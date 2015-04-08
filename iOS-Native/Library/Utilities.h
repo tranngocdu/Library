@@ -16,6 +16,7 @@
 + (Utilities*)share;
 
 - (void)showAlertWithTitle:(NSString *)title withMessage: (NSString *) message;
+- (void)showLoadingWithLockScreen:(BOOL)isLookScreen;
 - (void)showLoading;
 - (void)hideLoading;
 

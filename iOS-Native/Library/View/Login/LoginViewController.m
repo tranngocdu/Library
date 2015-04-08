@@ -79,7 +79,7 @@
     {
         [[Utilities share] showAlertWithTitle:@"All Fields Required" withMessage:@"Please enter username and password."];
     } else {
-        [[Utilities share] showLoading];
+        [[Utilities share] showLoadingWithLockScreen:YES];
         // Disable button
         _btnLogin.enabled = NO;
         _btnCreateAccount.enabled = NO;

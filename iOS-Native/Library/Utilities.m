@@ -31,6 +31,10 @@
 }
 
 - (void)showLoading {
+    [self showLoadingWithLockScreen:NO];
+}
+
+- (void)showLoadingWithLockScreen:(BOOL)isLookScreen {
     // Get screen size
     CGRect screenSize = [[UIScreen mainScreen] bounds];
 
@@ -43,22 +47,27 @@
         loadingView = nil;
     }
 
-    // Backdrop
-    loadingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenSize.size.width, screenSize.size.height)];
-    loadingView.backgroundColor = [UIColor blackColor];
-    loadingView.alpha = 0.7;
-    loadingView.layer.zPosition = 99999;
-    
-    // Spinner
-    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    spinner.center = CGPointMake(screenSize.size.width / 2, screenSize.size.height / 2);
-    spinner.hidesWhenStopped = YES;
-    [spinner startAnimating];
-    
-    // Add view
-    [loadingView addSubview:spinner];
-    [loadingView setUserInteractionEnabled:YES];
-    [[[[UIApplication sharedApplication] delegate] window] addSubview:loadingView];
+    if(isLookScreen) {
+        // Backdrop
+        loadingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenSize.size.width, screenSize.size.height)];
+        loadingView.backgroundColor = [UIColor blackColor];
+        loadingView.alpha = 0.25;
+        loadingView.layer.zPosition = 99999;
+        
+        // Spinner
+        spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        spinner.center = CGPointMake(screenSize.size.width / 2, screenSize.size.height / 2);
+        spinner.hidesWhenStopped = YES;
+        [spinner startAnimating];
+
+        // Add view
+        [loadingView addSubview:spinner];
+        [loadingView setUserInteractionEnabled:YES];
+        [[[[UIApplication sharedApplication] delegate] window] addSubview:loadingView];
+
+    } else {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    }
 }
 
 - (void)hideLoading {
@@ -66,6 +75,8 @@
         [loadingView setUserInteractionEnabled:NO];
         [loadingView removeFromSuperview];
     }
+
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 

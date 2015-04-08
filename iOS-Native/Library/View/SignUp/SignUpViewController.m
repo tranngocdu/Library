@@ -103,7 +103,7 @@
     } else if (![password isEqualToString:passwordConfirm]) {
         [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Your password do not match. Please try again."];
     } else {
-        [[Utilities share] showLoading];
+        [[Utilities share] showLoadingWithLockScreen:YES];
         // Disable button
         _btnCreateAccount.enabled = NO;
         _btnIHaveAccount.enabled = NO;

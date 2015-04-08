@@ -102,9 +102,9 @@
     searchResults = [self getMatchedListWithCondition:searchText inList:books];
 }
 
-- (UINavigationController *)navigationController {
-    return nil;
-}
+//- (UINavigationController *)navigationController {
+//    return nil;
+//}
 
 
 - (NSArray*) getMatchedListWithCondition:(NSString*)searchText inList:(NSArray*)inArray {
