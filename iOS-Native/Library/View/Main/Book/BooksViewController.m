@@ -19,6 +19,8 @@
 
 @end
 
+
+
 @implementation BooksViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -51,6 +53,11 @@
     self.searchDisplayController.delegate = self;
     self.searchDisplayController.searchResultsDelegate = self;
     self.searchDisplayController.searchResultsDataSource = self;
+}
+
+- (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar
+{
+    return UIBarPositionTopAttached;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -94,6 +101,11 @@
     // Use alternative function
     searchResults = [self getMatchedListWithCondition:searchText inList:books];
 }
+
+- (UINavigationController *)navigationController {
+    return nil;
+}
+
 
 - (NSArray*) getMatchedListWithCondition:(NSString*)searchText inList:(NSArray*)inArray {
 

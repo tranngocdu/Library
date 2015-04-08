@@ -37,7 +37,7 @@ module.exports = View.extend({
 				var bookArray = JSON.stringify(usersBooks);
 				bookArray = JSON.parse(bookArray);
 				that.bookArrayAll = bookArray; 
-				console.log(JSON.stringify(that.bookArrayAll));
+				//console.log(JSON.stringify(that.bookArrayAll));
 				$('.booklist-wrap').html(that.templateBooks(that.bookArrayAll));				
 				setTimeout(function(){
 					$("img.lazy").lazyload({

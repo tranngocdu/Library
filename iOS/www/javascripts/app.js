@@ -43,20 +43,20 @@
 
   var initModule = function(name, definition) {
     var module = {id: name, exports: {}};
-    cache[name] = module;
     definition(module.exports, localRequire(name), module);
-    return module.exports;
+    var exports = cache[name] = module.exports;
+    return exports;
   };
 
   var require = function(name, loaderPath) {
     var path = expand(name, '.');
     if (loaderPath == null) loaderPath = '/';
 
-    if (has(cache, path)) return cache[path].exports;
+    if (has(cache, path)) return cache[path];
     if (has(modules, path)) return initModule(path, modules[path]);
 
     var dirIndex = expand(path, './index');
-    if (has(cache, dirIndex)) return cache[dirIndex].exports;
+    if (has(cache, dirIndex)) return cache[dirIndex];
     if (has(modules, dirIndex)) return initModule(dirIndex, modules[dirIndex]);
 
     throw new Error('Cannot find module "' + name + '" from '+ '"' + loaderPath + '"');
@@ -1079,7 +1079,7 @@ module.exports = View.extend({
 				var bookArray = JSON.stringify(usersBooks);
 				bookArray = JSON.parse(bookArray);
 				that.bookArrayAll = bookArray; 
-				console.log(JSON.stringify(that.bookArrayAll));
+				//console.log(JSON.stringify(that.bookArrayAll));
 				$('.booklist-wrap').html(that.templateBooks(that.bookArrayAll));				
 				setTimeout(function(){
 					$("img.lazy").lazyload({
@@ -1419,6 +1419,7 @@ module.exports = View.extend({
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		var query = new Parse.Query("Student");
+		query.limit(1000);
 		query.equalTo("UserId", currentUserId);
 		query.ascending("Name");
 		query.find({
@@ -1607,10 +1608,12 @@ module.exports = View.extend({
 		var currentUser = Parse.User.current();
 		var currentUserId = currentUser.id;
 		query.equalTo("User", currentUserId);
-		query.equalTo("ISBN", Application.editBookView.bookData[0].ISBN);
-		console.log(Application.editBookView.bookData[0].ISBN)
+		console.log(Application.editBookView.bookData[0].objectId)
+		query.equalTo("objectId", Application.editBookView.bookData[0].objectId);
+		//console.log(Application.editBookView.bookData[0].ISBN)
 		query.first({
 			success: function(newBook) {
+				console.log(JSON.stringify(newBook))
 				var quantityAvailable = newBook.attributes.quantity_available;
 				var quantityOldTotal = newBook.attributes.quantity_total;
 				
@@ -1628,9 +1631,11 @@ module.exports = View.extend({
 					author = $("#author").attr("placeholder");
 				}
 				var isbn = "";
-				if($("#isbn").val().length>0){
-					isbn = $("#isbn").val();}
-				else{
+				console.log($("#isbn").val().length)
+				if($("#isbn").val().length>0) {
+					isbn = $("#isbn").val();
+					console.log('not greater than 0')
+				}else{
 					isbn = $("#isbn").attr("placeholder");
 				}
 				var numberAvailable = $("#numberAvailable").val();
@@ -2902,7 +2907,7 @@ function program1(depth0,data) {
   if (stack1 = helpers.author) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.author; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" />\n    <input id=\"isbn\" type=\"number\" placeholder=\"";
+    + "\" />\n    <input id=\"isbn\" placeholder=\"";
   if (stack1 = helpers.ISBN) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.ISBN; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -3090,4 +3095,4 @@ module.exports = Backbone.View.extend({
 });
 
 ;
-//# sourceMappingURL=app.js.map
+//@ sourceMappingURL=app.js.map
