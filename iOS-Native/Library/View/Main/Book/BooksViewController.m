@@ -272,6 +272,11 @@
     return [fullArray sortedArrayUsingSelector:@selector(compare:)]; //displaySortHeader;
 }
 
+- (NSInteger) tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+    NSInteger section = [displaySortHeader indexOfObject:title];
+    return section;
+}
+
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return displaySortHeader[section];
 }
