@@ -92,11 +92,11 @@
     book[@"title"] = bookTitle;
     book[@"author"] = bookAuthor;
     book[@"ISBN"] = bookISBN;
-    book[@"cover_image"] = bookCoverUrl;
+    book[@"cover_image"] = (bookCoverUrl?bookCoverUrl:@"");
     book[@"User"] = currentUser.objectId;
-    book[@"studentList"] = [NSMutableArray array];
+    book[@"studentList"] = [[NSMutableArray alloc] init];
     book[@"quantity_total"] = @([bookQuantity intValue]);
-    book[@"quantity_out"] = @0;
+    book[@"quantity_out"] = @(0);
     book[@"quantity_available"] = @([bookQuantity intValue]);
     
     [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

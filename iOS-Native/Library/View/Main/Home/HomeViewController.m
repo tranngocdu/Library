@@ -119,7 +119,10 @@
     [query whereKey:@"ISBN" equalTo:content];
     [query whereKey:@"User" equalTo:currentUser.objectId];
 
+    [[Utilities share] showLoadingWithLockScreen:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [[Utilities share] hideLoading];
+        
         if(!error) {
             if ([objects count] > 0) {
                 PFObject *book = [objects objectAtIndex:0];

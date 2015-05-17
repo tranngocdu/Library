@@ -211,8 +211,7 @@
     cell.lblBookQuantity.text = [NSString stringWithFormat:@"%@ available", book[@"quantity_available"]];
     
     // Init cell image
-    cell.bookPhoto.image = [UIImage imageNamed:@"no-art.png"];
-//    cell.bookPhoto.image = nil;
+    cell.bookPhoto.image = nil;
     
     // Get image async
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -227,6 +226,9 @@
                             cell.bookPhoto.image = img;
                         }
                     });
+
+                } else {
+                    cell.bookPhoto.image = [UIImage imageNamed:@"no-art.png"];
                 }
             }
         }];
@@ -377,8 +379,8 @@
     NSString *sendUrl = [NSString stringWithFormat:@"http://openlibrary.org/api/books?bibkeys=%@&jscmd=data&format=json", content];
     NSURL *url = [[NSURL alloc] initWithString:sendUrl];
 
-    [[Utilities share] showLoading];
-    [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url] queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    [[Utilities share] showLoadingWithLockScreen:YES];
+    [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         
         [[Utilities share] hideLoading];
 
@@ -414,7 +416,10 @@
                     }
                     [addScanView setBookISBN:content];
                     [addScanView setBookQuantity:@"1"];
+
+                    // Fixed slow transition
                     [self.navigationController pushViewController:addScanView animated:YES];
+
                 } else {
                     AddBookManualViewController *addManualView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddBookManualIdentifier"];
                     [addManualView setBookISBN:content];
