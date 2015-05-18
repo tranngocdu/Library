@@ -13,7 +13,12 @@
 @interface BookDetailViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate> {
     NSString *bookId;
     PFObject *book;
+    
     NSArray *studentsList;
+
+    NSDictionary *displayList;
+    NSArray *displaySortHeader;
+    
 }
 
 - (IBAction)checkoutBook:(id)sender;

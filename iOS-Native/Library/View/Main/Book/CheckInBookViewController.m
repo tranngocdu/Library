@@ -84,7 +84,7 @@
                     [stdQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                         students = (NSMutableArray *)objects;
                         _tbvListStudents.hidden = NO;
-                        [_tbvListStudents reloadData];
+                        [self reloadData:students];
                     }];
                 }
             }
@@ -100,31 +100,94 @@
     bookISBN = isbn;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [students count];
+- (void) reloadData:(NSArray*)inArray {
+    [self sectionization:inArray];
+    [_tbvListStudents reloadData];
+}
+
+- (void) sectionization:(NSArray*)inArray {
+    NSMutableDictionary *resultDic = [NSMutableDictionary dictionary];
+
+    for(int i=0; i<[inArray count]; i++) {
+        NSDictionary *item = inArray[i];
+
+        NSString *title = item[@"Name"];
+        NSString *firstLetter = [[title substringToIndex:1] uppercaseString];
+
+        NSMutableArray *subList = resultDic[firstLetter];
+        if(!subList) {
+            subList = [[NSMutableArray alloc] init];
+            [resultDic setObject:subList forKey:firstLetter];
+        }
+
+        [subList addObject:item];
+    }
+
+    // Sort ABC
+    displaySortHeader = [[resultDic allKeys] sortedArrayUsingSelector:@selector(compare:)];
+
+    // assign to Data List
+    displayList = resultDic;
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    NSMutableArray *fullArray = [NSMutableArray arrayWithArray:[@"A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z" componentsSeparatedByString:@","]];
+
+    for(int i=0; i<[displaySortHeader count]; i++) {
+        NSString *letter = displaySortHeader[i];
+        if(![fullArray containsObject:letter]) {
+            [fullArray addObject:letter];
+        }
+    }
+
+    return [fullArray sortedArrayUsingSelector:@selector(compare:)]; //displaySortHeader;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+    NSInteger section = [displaySortHeader indexOfObject:title];
+    return section;
+}
+
+- (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return displaySortHeader[section];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [displaySortHeader count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSString *key = displaySortHeader[section];
+    return [displayList[key] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *key = displaySortHeader[indexPath.section];
+    PFObject *std = [[displayList objectForKey:key] objectAtIndex:indexPath.row];
+
     static NSString *cellIdentifier = @"CheckInStudentCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    
-    PFObject *std  = [students objectAtIndex:indexPath.row];
+
     cell.textLabel.text = std[@"Name"];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    student = [students objectAtIndex:indexPath.row];
+    NSString *key = displaySortHeader[indexPath.section];
+    student = [[displayList objectForKey:key] objectAtIndex:indexPath.row];
+
     UITableViewCell *cell = [tableView  cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    student = [students objectAtIndex:indexPath.row];
+    NSString *key = displaySortHeader[indexPath.section];
+    student = [[displayList objectForKey:key] objectAtIndex:indexPath.row];
+
     UITableViewCell *cell = [tableView  cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryNone;
 }

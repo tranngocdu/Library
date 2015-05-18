@@ -15,6 +15,9 @@
     PFObject *book;
     PFObject *student;
     NSArray *students;
+
+    NSDictionary *displayList;
+    NSArray *displaySortHeader;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tbvListStudents;
