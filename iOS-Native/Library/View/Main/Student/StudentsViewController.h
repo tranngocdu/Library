@@ -14,7 +14,7 @@
 @interface StudentsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UISearchResultsUpdating, UISearchControllerDelegate> {
     NSMutableArray *students;
     StudentCell *studentCell;
-    int cellSelect;
+    NSIndexPath *cellSelect;
     
     NSArray *searchResults;
     

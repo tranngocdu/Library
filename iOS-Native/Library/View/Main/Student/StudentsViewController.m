@@ -87,6 +87,7 @@
 //    PFObject *student = [students objectAtIndex:indexPath.row];
     cell.tfName.text = student[@"Name"];
     cell.btnDelete.tag = indexPath.row;
+    cell.btnDelete.superview.tag = indexPath.section;
     [cell.btnDelete addTarget:self action:@selector(clickOnDeleteButton:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
@@ -133,8 +134,16 @@
 
 - (void)clickOnDeleteButton:(UIButton *)sender {
     if(sender.tag >= 0) {
-        cellSelect = (int)sender.tag;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete" message:@"Are you sure you want to delete this student?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        NSInteger row = sender.tag;
+        NSInteger section = sender.superview.tag;
+        cellSelect = [NSIndexPath indexPathForRow:row inSection:section];
+
+        NSString *key = displaySortHeader[cellSelect.section];
+        PFObject *student = [[displayList objectForKey:key] objectAtIndex:cellSelect.row];
+
+        NSString *msg = [NSString stringWithFormat:@"Are you sure you want to delete this student name \"%@\"?", student[@"Name"]];
+
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete" message:msg delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
         [alert show];
     }
 }
@@ -142,16 +151,20 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == 1) {
         [[Utilities share] showLoading];
+
         // If clicked at OK button, get student from data and delete
-        PFObject *student = [students objectAtIndex:cellSelect];
+        NSString *key = displaySortHeader[cellSelect.section];
+        PFObject *student = [[displayList objectForKey:key] objectAtIndex:cellSelect.row];
+
         [student deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             [[Utilities share] hideLoading];
             if(!error) {
                 // Remove item out of data
-                [students removeObjectAtIndex:cellSelect];
+                [students removeObject:student];
                 
                 // Reload list view
                 [self reloadData:students];
+
             } else {
                 NSLog(@"Error when delete student %@", error);
                 [[Utilities share] showAlertWithTitle:@"Error" withMessage:@"Server error"];
@@ -273,20 +286,5 @@
     AddStudentViewController *addStudentView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddStudentIndentifier"];
     [self.navigationController pushViewController:addStudentView animated:YES];
 }
-
-- (void)deleteStudent:(id)sender {
-    NSLog(@"Delete");
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
