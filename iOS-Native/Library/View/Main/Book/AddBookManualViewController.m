@@ -197,9 +197,9 @@
         PFUser *currentUser = [PFUser currentUser];
         PFObject *book = [PFObject objectWithClassName:@"NewBook"];
         book[@"title"] = bookTitle;
-        book[@"author"] = bookAuthor;
+        book[@"author"] = (bookAuthor?bookAuthor:@"");
         book[@"ISBN"] = bookISBN;
-        book[@"cover_image"] = bookCoverUrl;
+        book[@"cover_image"] = (bookCoverUrl?bookCoverUrl:@"");
         book[@"User"] = currentUser.objectId;
         book[@"studentList"] = [NSMutableArray array];
         book[@"quantity_total"] = @([bookQuantity intValue]);

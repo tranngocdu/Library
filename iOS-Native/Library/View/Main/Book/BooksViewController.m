@@ -48,11 +48,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self decorate];
-    
-    hasCurrentViewRootActive = YES;
+
     self.searchDisplayController.delegate = self;
     self.searchDisplayController.searchResultsDelegate = self;
     self.searchDisplayController.searchResultsDataSource = self;
+
+    [_topTab setSelectedSegmentIndex:0];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:@"BookEdited" object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"BookEdited" object:nil];
+}
+
+- (void) reloadData {
+    [self loadBooksWithType:_topTab.selectedSegmentIndex];
 }
 
 - (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar
@@ -62,19 +73,12 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     // Load available books
-
-    if(hasCurrentViewRootActive) {
-        [self loadBooksWithType:0];
-    }
-
-    hasCurrentViewRootActive = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     self.tabBarController.tabBar.hidden = NO;
-
-    NSLog(@"%@", self.navigationController.viewControllers);
+    [self reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -245,9 +249,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    // Checkpoint the state
-    hasCurrentViewRootActive = NO;
 
     BookDetailViewController *bookDetailView = [self.storyboard instantiateViewControllerWithIdentifier:@"BookDetailIndentifier"];
 

@@ -181,9 +181,21 @@
 - (void)FPPickerController:(FPPickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     bookCoverUrl = [info objectForKey:@"FPPickerControllerRemoteURL"];
     NSString *imageUrl = [info objectForKey:@"FPPickerControllerMediaURL"];
-    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        _imgBookCover.image = [[UIImage alloc] initWithData:data];
-    }];
+
+    // Wrong logic
+//    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+//        _imgBookCover.image = [[UIImage alloc] initWithData:data];
+//    }];
+
+    // Save book
+    if([imageUrl isKindOfClass:[NSURL class]]) {
+        _imgBookCover.image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:(NSURL*)imageUrl]];
+    } else {
+        _imgBookCover.image = [UIImage imageWithContentsOfFile:imageUrl];
+    }
+
+    [self saveBook:nil];
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -207,9 +219,9 @@
         [[Utilities share] showLoading];
         // Set book
         book[@"title"] = bookTitle;
-        book[@"author"] = bookAuthor;
+        book[@"author"] = (bookAuthor?bookAuthor:@"");
         book[@"ISBN"] = bookISBN;
-        book[@"cover_image"] = bookCoverUrl;
+        book[@"cover_image"] = (bookCoverUrl?bookCoverUrl:@"");
         
         int quantityDiff = [bookQuantity intValue] - [book[@"quantity_total"] intValue];
         int quantityAvailable = [book[@"quantity_available"] intValue];
@@ -226,6 +238,10 @@
         [book saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             [[Utilities share] hideLoading];
             if(!error) {
+
+                // Broadcast saved
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"BookEdited" object:nil];
+
                 [self getBookToEdit];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             } else {
