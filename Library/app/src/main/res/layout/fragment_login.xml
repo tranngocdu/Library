@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/vertical_margin"
+    android:layout_marginRight="@dimen/vertical_margin"
+    android:layout_marginTop="@dimen/horizontal_margin"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_lv_2"
+        android:layout_marginTop="@dimen/margin_lv_2"
+        android:text="@string/header_login"
+        android:textSize="@dimen/text_size_header"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edt_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_header"
+        android:hint="@string/email" />
+
+    <EditText
+        android:id="@+id/edt_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_email"
+        android:layout_marginBottom="@dimen/margin_lv_2"
+        android:hint="@string/password" />
+
+    <Button
+        android:id="@+id/btn_sign_in"
+        android:layout_width="@dimen/btn_width_1"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_lv_1"
+        android:background="@drawable/btn_1"
+        android:text="@string/sign_in"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/btn_create_account"
+        android:layout_width="@dimen/btn_width_1"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_sign_in"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_lv_2"
+        android:background="@drawable/btn_2"
+        android:text="@string/create_an_account"
+        android:textColor="@color/green" />
+
+    <TextView
+        android:id="@+id/tv_forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_create_account"
+        android:layout_centerHorizontal="true"
+        android:text="@string/forgot_password"
+        android:textColor="@color/green"
+        android:textSize="@dimen/text_size_lv_1" />
+
+</RelativeLayout>
