@@ -1,4 +1,0 @@
-library
-=======
-
-Teacher Library Application
