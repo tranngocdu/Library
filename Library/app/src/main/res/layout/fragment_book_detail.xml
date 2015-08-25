@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Test Book"
+        android:textColor="@color/black_text"
+        android:textSize="@dimen/text_size_lv_2" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Destination"
+        android:textSize="@dimen/text_size_lv_1"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SERI:1234567890"
+        android:textSize="@dimen/text_size_lv_1"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available"
+            android:textSize="@dimen/text_size_lv_1"
+            android:layout_marginRight="50dp"
+            android:textColor="@color/green_pressed"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:textSize="@dimen/text_size_lv_1"
+            android:textColor="@color/black_text"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_checkOut"
+        android:layout_width="@dimen/btn_width_1"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_upgrade"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin_lv_1"
+        android:background="@drawable/btn_2"
+        android:text="@string/check_out"
+        android:textColor="@color/green" />
+
+    <Button
+        android:id="@+id/btn_checkIn"
+        android:layout_width="@dimen/btn_width_1"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_upgrade"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin_lv_1"
+        android:background="@drawable/btn_4"
+        android:text="@string/check_in"
+        android:textColor="@color/red" />
+
+    <Button
+        android:id="@+id/btn_editBook"
+        android:layout_width="@dimen/btn_width_1"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_upgrade"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin_lv_1"
+        android:background="@drawable/btn_2"
+        android:text="@string/edit_book"
+        android:textColor="@color/green" />
+
+    <Button
+        android:id="@+id/btn_removeBook"
+        android:layout_width="@dimen/btn_width_1"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_upgrade"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin_lv_1"
+        android:background="@drawable/btn_4"
+        android:text="@string/remove_book"
+        android:textColor="@color/red" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Copies loaned to:"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_size_lv_2"
+        android:gravity="center"/>
+
+</LinearLayout>

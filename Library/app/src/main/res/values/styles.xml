@@ -9,5 +9,6 @@
     <color name="red_pressed">#fbafab</color>
     <color name="green">#3cc1a6</color>
     <color name="green_pressed">#8dd4c6</color>
+    <color name="black_text">#000</color>
 
 </resources>
