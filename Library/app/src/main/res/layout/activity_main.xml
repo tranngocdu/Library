@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/layoutFooter"
-        android:layout_margin="@dimen/main_layout_margin"
         android:orientation="horizontal"/>
 
     <LinearLayout
@@ -32,7 +31,7 @@
                 android:id="@+id/btnHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_home"/>
+                android:background="@drawable/ic_main_home"/>
 
             <TextView
                 android:id="@+id/tvHome"
@@ -52,13 +51,13 @@
                 android:id="@+id/btnBooks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_book"/>
+                android:background="@drawable/ic_main_book"/>
 
             <TextView
                 android:id="@+id/tvBooks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/book"/>
+                android:text="@string/books"/>
         </LinearLayout>
 
         <LinearLayout
@@ -72,13 +71,13 @@
                 android:id="@+id/btnStudents"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_student"/>
+                android:background="@drawable/ic_main_student"/>
 
             <TextView
                 android:id="@+id/tvStudents"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/student"/>
+                android:text="@string/students"/>
         </LinearLayout>
 
         <LinearLayout
@@ -92,7 +91,7 @@
                 android:id="@+id/btnSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_setting"/>
+                android:background="@drawable/ic_main_setting"/>
 
             <TextView
                 android:id="@+id/tvSettings"

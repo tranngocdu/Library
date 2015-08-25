@@ -21,7 +21,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
     private EditText mEdtEmail, mEdtCurrentPassword, mEdtNewPassword, mEdtConfirmNewPassword;
     private Button mBtnUpgrade, mBtnHelpMe, mBtnLogout;
 
-    public static SettingsFragment newInstance()
+    public static SettingsFragment newInstances()
     {
         return new SettingsFragment();
     }
@@ -49,6 +49,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
     public void onViewCreated(View view, Bundle bundle)
     {
         super.onViewCreated(view, bundle);
+        initView(view);
+        initListener(view);
+        initDatas();
     }
 
 

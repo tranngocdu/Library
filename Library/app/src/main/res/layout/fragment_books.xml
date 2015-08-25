@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Books"
+            android:text="@string/books"
             android:textColor="@color/white"
             android:textSize="20dp"/>
 
@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Add"
+            android:text="@string/add"
             android:textColor="@color/white"
             android:textSize="20dp"/>
 
@@ -46,7 +46,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llnearRadioGroup"
+        android:id="@+id/layoutHeaderButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -55,9 +55,9 @@
 
         <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/fragment_books_radio_group_height"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/fragment_books_radio_group_margin"
             android:orientation="horizontal">
 
             <RadioButton
@@ -65,33 +65,33 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/button_book_allbooks"
+                android:background="@drawable/btn_fragment_books_background_allbooks"
                 android:button="@null"
                 android:gravity="center"
-                android:text="All Books"
-                android:textColor="@drawable/tv_book_color"/>
+                android:text="@string/all_books"
+                android:textColor="@drawable/tv_fragment_books_text_color_allbooks"/>
 
             <RadioButton
                 android:id="@+id/rbtAvailable"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/button_book_available"
+                android:background="@drawable/btn_fragment_books_background_available"
                 android:button="@null"
                 android:gravity="center"
-                android:text="Available"
-                android:textColor="@drawable/tv_book_color"/>
+                android:text="@string/available"
+                android:textColor="@drawable/tv_fragment_books_text_color_allbooks"/>
 
             <RadioButton
                 android:id="@+id/rbtCheckedOut"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/button_book_checkedout"
+                android:background="@drawable/btn_fragment_books_background_checkedout"
                 android:button="@null"
                 android:gravity="center"
-                android:text="Checked Out"
-                android:textColor="@drawable/tv_book_color"/>
+                android:text="@string/checked_out"
+                android:textColor="@drawable/tv_fragment_books_text_color_allbooks"/>
 
         </RadioGroup>
 
@@ -124,10 +124,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
-                    android:background="@drawable/edt_book_border_search"
+                    android:background="@drawable/edt_fragment_books_back_ground_search"
                     android:ems="15"
                     android:gravity="center"
-                    android:text="Search"/>
+                    android:hint="Search"/>
             </LinearLayout>
 
             <LinearLayout
@@ -145,7 +145,6 @@
             </LinearLayout>
         </LinearLayout>
 
-
         <!--Dictionary -->
         <LinearLayout
             android:layout_width="0dp"
@@ -153,12 +152,7 @@
             android:layout_weight="0.5"
             android:background="@color/blue"
             android:gravity="center"
-            android:orientation="vertical"
-            >
-
-
+            android:orientation="vertical">
         </LinearLayout>
-
-
     </LinearLayout>
 </LinearLayout>

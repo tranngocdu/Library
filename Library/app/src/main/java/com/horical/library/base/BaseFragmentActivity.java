@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.Stack;
 
@@ -48,7 +49,9 @@ abstract public class BaseFragmentActivity extends Activity implements FragmentM
         ft.show(f);
         ft.addToBackStack(tag);
         ft.commit();
+        Log.e("TAG", mFragmentTagStack.size() + " - ");
         mFragmentTagStack.add(tag);
+        Log.e("TAG", mFragmentTagStack.size() + "");
     }
 
     @Override

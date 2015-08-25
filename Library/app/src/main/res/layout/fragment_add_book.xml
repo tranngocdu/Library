@@ -8,7 +8,7 @@
                 android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/img_book_thumbnail"
+        android:id="@+id/imgBookThumbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
@@ -17,10 +17,10 @@
         android:id="@+id/btnAddPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/img_book_thumbnail"
+        android:layout_below="@+id/imgBookThumbnail"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_lv_1"
-        android:background="@drawable/button_not_fill_red"
+        android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
+        android:background="@drawable/selector_btn_common_background_no_fill_red"
         android:text="@string/add_photo"
         android:textColor="@color/red"
         />
@@ -47,24 +47,24 @@
         android:hint="@string/book_isbn"/>
 
     <EditText
-        android:id="@+id/edt_book_number"
+        android:id="@+id/edtBookNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edtBookISBM"
-        android:layout_marginBottom="@dimen/margin_lv_2"
+        android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
         android:inputType="number"
         android:text="1"
 
         />
 
     <Button
-        android:id="@+id/btn_add_book"
-        android:layout_width="@dimen/btn_width_1"
+        android:id="@+id/btnAddBook"
+        android:layout_width="@dimen/fragment_home_btn_checkout_width"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_book_number"
+        android:layout_below="@+id/edtBookNumber"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/button_fill_green"
+        android:background="@drawable/selector_btn_common_background_fill_green"
         android:text="@string/add_book"
-        android:textColor="#ffffff"/>
+        android:textColor="@color/white"/>
 
 </RelativeLayout>

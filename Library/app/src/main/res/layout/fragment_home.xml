@@ -7,21 +7,21 @@
 
     <Button
         android:id="@+id/btnCheckOut"
-        android:layout_width="@dimen/btn_width_1"
+        android:layout_width="@dimen/fragment_home_btn_checkout_width"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_lv_2"
-        android:background="@drawable/button_fill_green"
+        android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
+        android:background="@drawable/btn_common_background_fill_green"
         android:text="@string/check_out"
         android:textColor="#ffffff"/>
 
     <Button
         android:id="@+id/btnCheckIn"
-        android:layout_width="@dimen/btn_width_1"
+        android:layout_width="@dimen/fragment_home_btn_checkout_width"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnCheckOut"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/button_fill_red"
+        android:background="@drawable/btn_common_background_no_fill_red"
         android:text="@string/check_in"
         android:textColor="@color/red"/>
 

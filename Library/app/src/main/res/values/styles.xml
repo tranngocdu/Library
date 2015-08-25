@@ -5,13 +5,5 @@
         <!-- Customize your theme here. -->
     </style>
 
-<<<<<<< HEAD
-=======
-    <color name="red">#f46b63</color>
-    <color name="red_pressed">#fbafab</color>
-    <color name="green">#3cc1a6</color>
-    <color name="green_pressed">#8dd4c6</color>
-    <color name="black_text">#000</color>
->>>>>>> 1210b933201f1820be6df3342f4bf529193bd236
 
 </resources>

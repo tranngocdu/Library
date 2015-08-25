@@ -9,4 +9,9 @@
     <color name="brown">#c9c9ce</color>
     <color name="black">#030303</color>
     <color name="dark_black">#ab5a55</color>
+
+    <!--fragment_home -->
+    <!--fragment_books -->
+    <!--fragment_students -->
+    <!--fragment_settings -->
 </resources>

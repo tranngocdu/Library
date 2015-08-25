@@ -2,9 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginTop="1dp"
                 android:orientation="vertical">
 
     <TextView
@@ -12,10 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_lv_2"
-        android:layout_marginTop="@dimen/margin_lv_2"
+        android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
+        android:layout_marginTop="@dimen/fragment_home_btn_checkout_margin"
         android:text="@string/header_sign_up"
-        android:textSize="@dimen/text_size_header"
+        android:textSize="@dimen/activity_login_tv_header_size"
         android:textStyle="bold"/>
 
     <EditText
@@ -33,32 +30,32 @@
         android:hint="@string/password"/>
 
     <EditText
-        android:id="@+id/edt_re_password"
+        android:id="@+id/edtConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edtPassword"
-        android:layout_marginBottom="@dimen/margin_lv_2"
-        android:hint="@string/re_password"/>
+        android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
+        android:hint="@string/confirm_password"/>
 
     <Button
         android:id="@+id/btn_create_account"
-        android:layout_width="@dimen/btn_width_1"
+        android:layout_width="@dimen/fragment_home_btn_checkout_width"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_re_password"
+        android:layout_below="@+id/edtConfirmPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_lv_1"
-        android:background="@drawable/button_fill_green"
+        android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
+        android:background="@drawable/selector_btn_common_background_fill_green"
         android:text="@string/create_account"
         android:textColor="#ffffff"/>
 
     <Button
         android:id="@+id/btn_have_account"
-        android:layout_width="@dimen/btn_width_1"
+        android:layout_width="@dimen/fragment_home_btn_checkout_width"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_create_account"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_lv_2"
-        android:background="@drawable/button_not_fill_green"
+        android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
+        android:background="@drawable/selector_btn_common_background_no_fill_green"
         android:text="@string/have_account"
         android:textColor="@color/green"/>
 

@@ -51,9 +51,9 @@ public class BooksFragment extends BaseFragment implements View.OnClickListener
     public void onViewCreated(View view, Bundle bundle)
     {
         super.onViewCreated(view, bundle);
-        initListener(view);
         initDatas();
         initView(view);
+        initListener(view);
     }
 
     private void initDatas()
@@ -84,15 +84,16 @@ public class BooksFragment extends BaseFragment implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.rbtCheckedOut:
-                Toast.makeText(getActivity(), "Check in", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "rbtCheckedOut", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rbtAvailable:
-                Toast.makeText(getActivity(), "Check out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "rbtAvailable", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rbtAllBooks:
-                Toast.makeText(getActivity(), "Check out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "rbtAllBooks", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tvAddBooks:
+                Toast.makeText(getActivity(), "tvAddBooks", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
