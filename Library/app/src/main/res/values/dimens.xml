@@ -11,4 +11,5 @@
     <dimen name="margin_lv_2">20dp</dimen>
     <dimen name="text_size_header">30dp</dimen>
     <dimen name="text_size_lv_1">20dp</dimen>
+    <dimen name="text_size_lv_2">30dp</dimen>
 </resources>
