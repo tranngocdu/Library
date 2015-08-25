@@ -1,56 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/horizontal_margin"
-    android:layout_marginRight="@dimen/horizontal_margin"
-    android:layout_marginTop="@dimen/vertical_margin"
-    android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/main_layout_margin"
+                android:layout_marginRight="@dimen/main_layout_margin"
+                android:layout_marginTop="@dimen/main_layout_margin"
+                android:orientation="vertical">
 
     <ImageView
         android:id="@+id/img_book_thumbnail"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
     <Button
-        android:id="@+id/btn_add_photo"
+        android:id="@+id/btnAddPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/img_book_thumbnail"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/margin_lv_1"
-        android:background="@drawable/btn_4"
+        android:background="@drawable/button_not_fill_red"
         android:text="@string/add_photo"
-        android:textColor="@color/red" />
+        android:textColor="@color/red"
+        />
 
     <EditText
-        android:id="@+id/edt_book_title"
+        android:id="@+id/edtBookTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_add_photo"
-        android:hint="@string/book_title" />
+        android:layout_below="@+id/btnAddPhoto"
+        android:hint="@string/book_title"/>
 
     <EditText
-        android:id="@+id/edt_book_author"
+        android:id="@+id/edtBookAuthor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_book_title"
-        android:hint="@string/book_author" />
+        android:layout_below="@+id/edtBookTitle"
+        android:hint="@string/book_author"/>
 
     <EditText
-        android:id="@+id/edt_book_isbn"
+        android:id="@+id/edtBookISBM"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_book_author"
-        android:hint="@string/book_isbn" />
+        android:layout_below="@+id/edtBookAuthor"
+        android:hint="@string/book_isbn"/>
 
     <EditText
         android:id="@+id/edt_book_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_book_isbn"
+        android:layout_below="@+id/edtBookISBM"
         android:layout_marginBottom="@dimen/margin_lv_2"
-        android:hint="1" />
+        android:inputType="number"
+        android:text="1"
+
+        />
 
     <Button
         android:id="@+id/btn_add_book"
@@ -58,8 +63,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/edt_book_number"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/btn_1"
+        android:background="@drawable/button_fill_green"
         android:text="@string/add_book"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"/>
 
 </RelativeLayout>

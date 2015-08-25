@@ -5,9 +5,5 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <color name="red">#f46b63</color>
-    <color name="red_pressed">#fbafab</color>
-    <color name="green">#3cc1a6</color>
-    <color name="green_pressed">#8dd4c6</color>
 
 </resources>
