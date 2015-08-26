@@ -10,7 +10,9 @@
     <string name="header_log_in">First Things First</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="create_account">Create Account</string>
+    <string name="log_in">Login</string>
     <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
     <string name="have_account">I have an Account</string>
     <string name="forgot_password">Forgot your password ?</string>
     <!--fragment_home -->
