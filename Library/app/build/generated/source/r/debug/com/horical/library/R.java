@@ -1800,13 +1800,14 @@ containing a value of this type.
         public static final int hello_world=0x7f060027;
         public static final int help_me=0x7f060028;
         public static final int home=0x7f060029;
-        public static final int logout=0x7f06002a;
-        public static final int new_password=0x7f06002b;
-        public static final int password=0x7f06002c;
-        public static final int settings=0x7f06002d;
-        public static final int status_bar_notification_info_overflow=0x7f06002e;
-        public static final int students=0x7f06002f;
-        public static final int upgrade_account=0x7f060030;
+        public static final int library=0x7f06002a;
+        public static final int logout=0x7f06002b;
+        public static final int new_password=0x7f06002c;
+        public static final int password=0x7f06002d;
+        public static final int settings=0x7f06002e;
+        public static final int status_bar_notification_info_overflow=0x7f06002f;
+        public static final int students=0x7f060030;
+        public static final int upgrade_account=0x7f060031;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f080073;
