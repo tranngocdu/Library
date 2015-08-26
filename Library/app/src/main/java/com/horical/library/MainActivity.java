@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,7 @@ import com.horical.library.listenner.MainListenner;
 
 public class MainActivity extends BaseFragmentActivity implements View.OnClickListener, MainListenner
 {
-    private ImageButton mRdbHome, mRdbBooks, mRdbStudents, mRdbSettings;
+    private RadioButton mRdbHome, mRdbBooks, mRdbStudents, mRdbSettings;
     private TextView mTvHome, mTvBooks, mTvStudents, mTvSettings;
 
     private AppConstants.TAB_TYPE mCurrentTab = AppConstants.TAB_TYPE.TAB_NONE;
@@ -48,21 +49,17 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     private void initViews()
     {
-        mRdbHome = (ImageButton) findViewById(R.id.btnHome);
+        mRdbHome = (RadioButton) findViewById(R.id.btnHome);
         mRdbHome.setOnClickListener(this);
-        mTvHome = (TextView) findViewById(R.id.tvHome);
 
-        mRdbBooks = (ImageButton) findViewById(R.id.btnBooks);
+        mRdbBooks = (RadioButton) findViewById(R.id.btnBooks);
         mRdbBooks.setOnClickListener(this);
-        mTvBooks = (TextView) findViewById(R.id.tvBooks);
 
-        mRdbStudents = (ImageButton) findViewById(R.id.btnStudents);
+        mRdbStudents = (RadioButton) findViewById(R.id.btnStudents);
         mRdbStudents.setOnClickListener(this);
-        mTvStudents = (TextView) findViewById(R.id.tvStudents);
 
-        mRdbSettings = (ImageButton) findViewById(R.id.btnSettings);
+        mRdbSettings = (RadioButton) findViewById(R.id.btnSettings);
         mRdbSettings.setOnClickListener(this);
-        mTvSettings = (TextView) findViewById(R.id.tvSettings);
     }
 
     private void initListener()
