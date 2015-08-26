@@ -11,7 +11,8 @@
         android:layout_weight="1"
         android:background="@color/red"
         android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/">
 
         <TextView
             android:layout_width="wrap_content"
