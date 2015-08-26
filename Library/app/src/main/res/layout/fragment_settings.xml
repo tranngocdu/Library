@@ -18,7 +18,7 @@
             android:layout_gravity="center_vertical"
             android:text="@string/settings"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="@dimen/action_bar_text_size" />
     </LinearLayout>
 
     <LinearLayout
