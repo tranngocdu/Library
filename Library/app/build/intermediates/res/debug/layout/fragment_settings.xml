@@ -18,7 +18,7 @@
             android:layout_gravity="center_vertical"
             android:text="@string/settings"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="@dimen/action_bar_text_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -89,8 +89,4 @@
             android:textColor="@color/red" />
     </LinearLayout>
 
-<<<<<<< HEAD
-</RelativeLayout><!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/src/main/res/layout/fragment_settings.xml -->
-=======
-</LinearLayout><!-- From: file:/home/trandu/Git/hungpn/library/Library/app/src/main/res/layout/fragment_settings.xml -->
->>>>>>> a3ad34cdbc1d4622d31db6646ce66b138995f643
+</LinearLayout><!-- From: file:/D:/Library/Library/app/src/main/res/layout/fragment_settings.xml -->

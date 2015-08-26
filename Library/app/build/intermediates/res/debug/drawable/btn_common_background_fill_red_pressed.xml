@@ -5,4 +5,4 @@
         android:endColor="@color/red_pressed"
         android:startColor="@color/red_pressed"/>
     <corners android:radius="@dimen/btn_radius"/>
-</shape><!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/src/main/res/drawable/btn_common_background_fill_red_pressed.xml -->
+</shape><!-- From: file:/D:/Library/Library/app/src/main/res/drawable/btn_common_background_fill_red_pressed.xml -->

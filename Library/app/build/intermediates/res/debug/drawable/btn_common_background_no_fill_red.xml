@@ -8,4 +8,4 @@
         android:endColor="@android:color/transparent"
         android:startColor="@android:color/transparent"/>
     <corners android:radius="@dimen/btn_radius"/>
-</shape><!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/src/main/res/drawable/btn_common_background_no_fill_red.xml -->
+</shape><!-- From: file:/D:/Library/Library/app/src/main/res/drawable/btn_common_background_no_fill_red.xml -->

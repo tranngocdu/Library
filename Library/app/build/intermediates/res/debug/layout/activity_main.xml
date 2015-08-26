@@ -1,18 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/layoutContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/layoutFooter"
-        android:orientation="horizontal"/>
+        android:orientation="horizontal" />
 
-    <LinearLayout
+    <RadioGroup
         android:id="@+id/layoutFooter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,85 +20,50 @@
         android:orientation="horizontal"
         android:weightSum="4">
 
-        <LinearLayout
-            android:layout_width="0dp"
+        <RadioButton
+            android:id="@+id/btnHome"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/btn_tab_menu_home"
             android:gravity="center"
-            android:orientation="vertical">
+            android:text="Home"
+            android:textColor="@drawable/btn_tab_menu_home" />
 
-            <ImageButton
-                android:id="@+id/btnHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_main_home"/>
-
-            <TextView
-                android:id="@+id/tvHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/home"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
+        <RadioButton
+            android:id="@+id/btnBooks"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/btn_tab_menu_books"
             android:gravity="center"
-            android:orientation="vertical">
+            android:text="Books"
+            android:textAlignment="gravity"
+            android:textColor="@drawable/btn_tab_menu_books" />
 
-            <ImageButton
-                android:id="@+id/btnBooks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_main_book"/>
-
-            <TextView
-                android:id="@+id/tvBooks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/books"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
+        <RadioButton
+            android:id="@+id/btnStudents"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/btn_tab_menu_students"
             android:gravity="center"
-            android:orientation="vertical">
+            android:text="Students"
+            android:textColor="@drawable/btn_tab_menu_students" />
 
-            <ImageButton
-                android:id="@+id/btnStudents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_main_student"/>
-
-            <TextView
-                android:id="@+id/tvStudents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/students"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
+        <RadioButton
+            android:id="@+id/btnSettings"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/btn_tab_menu_settings"
             android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/btnSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_main_setting"/>
-
-            <TextView
-                android:id="@+id/tvSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/settings"/>
-        </LinearLayout>
-    </LinearLayout>
+            android:text="Settings"
+            android:textColor="@drawable/btn_tab_menu_settings" />
+    </RadioGroup>
 </RelativeLayout>
-<!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/src/main/res/layout/activity_main.xml -->
+<!-- From: file:/D:/Library/Library/app/src/main/res/layout/activity_main.xml -->
