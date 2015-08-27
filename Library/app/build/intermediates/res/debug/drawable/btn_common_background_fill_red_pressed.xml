@@ -5,4 +5,4 @@
         android:endColor="@color/red_pressed"
         android:startColor="@color/red_pressed"/>
     <corners android:radius="@dimen/btn_radius"/>
-</shape><!-- From: file:/E:/Horical-Library/Library-Update/Library/app/src/main/res/drawable/btn_common_background_fill_red_pressed.xml -->
+</shape><!-- From: file:/home/trandu/Git/hungpn/library/Library/app/src/main/res/drawable/btn_common_background_fill_red_pressed.xml -->

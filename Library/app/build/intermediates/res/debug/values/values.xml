@@ -203,6 +203,11 @@
     <dimen name="fragment_books_radio_group_margin">20dp</dimen>
     <dimen name="fragment_home_btn_checkout_margin">20dp</dimen>
     <dimen name="fragment_home_btn_checkout_width">250dp</dimen>
+    <dimen name="fragment_student_ab_text_size">20dp</dimen>
+    <dimen name="fragment_student_btn_width_1">250dp</dimen>
+    <dimen name="fragment_student_edt_search_height">35dp</dimen>
+    <dimen name="fragment_student_padding_lv_1">10dp</dimen>
+    <dimen name="frgament_student_margin_lv_1">10dp</dimen>
     <dimen name="main_layout_margin">10dp</dimen>
     <!-- From: file:/home/trandu/Git/hungpn/library/Library/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
     <eat-comment/>
@@ -247,6 +252,7 @@
     <string name="add">Add</string>
     <string name="add_book">Add Book</string>
     <string name="add_photo">Add Photo</string>
+    <string name="add_student">Add Student</string>
     <string name="all_books">All Books</string>
     <string name="app_name">Library</string>
     <string name="available">Available</string>
@@ -254,6 +260,7 @@
     <string name="book_isbn">Book ISBN</string>
     <string name="book_title">Book Title</string>
     <string name="books">Books</string>
+    <string name="btnadd">Add</string>
     <string name="check_in">Check In</string>
     <string name="check_out">Check Out</string>
     <string name="checked_out">Checked Out</string>
@@ -262,6 +269,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="create_account">Create Account</string>
     <string name="current_password">Current password</string>
+    <string name="edit_student">Edit Student</string>
     <string name="email">Email</string>
     <string name="forgot_password">Forgot your password ?</string>
     <string name="have_account">I have an Account</string>
@@ -275,6 +283,8 @@
     <string name="logout">Log Out</string>
     <string name="new_password">New password</string>
     <string name="password">Password</string>
+    <string name="remove_student">Remove Student</string>
+    <string name="save_student">Save Student</string>
     <string name="settings">Settings</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
@@ -283,6 +293,7 @@
     <string name="status_bar_notification_info_overflow">999+</string>
     <!-- From: file:/home/trandu/Git/hungpn/library/Library/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="student_name">Student name</string>
     <string name="students">Students</string>
     <string name="upgrade_account">Upgrade Account</string>
     <!-- From: file:/home/trandu/Git/hungpn/library/Library/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
@@ -1537,4 +1548,10 @@
     <style name="Widget.AppCompat.TextView.SpinnerItem" parent="Base.Widget.AppCompat.TextView.SpinnerItem"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="RtlOverlay.Widget.AppCompat.Toolbar.Button.Navigation"/>
+    <!-- From: file:/home/trandu/Git/hungpn/library/Library/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="ab_style">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>
