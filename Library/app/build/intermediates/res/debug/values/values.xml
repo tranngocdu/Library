@@ -288,7 +288,11 @@
     <string name="settings">Settings</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+<<<<<<< HEAD
     <!-- From: file:/E:/Horical-Library/Library-Update/Library/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
+=======
+    <!-- From: file:/home/trandu/Git/hungpn/library/Library/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
+>>>>>>> 414174ab1292223ac86b35c38a3243bf9203fe2e
     <eat-comment/>
     <string name="status_bar_notification_info_overflow">999+</string>
     <!-- From: file:/E:/Horical-Library/Library-Update/Library/app/src/main/res/values/strings.xml -->
@@ -1548,7 +1552,11 @@
     <style name="Widget.AppCompat.TextView.SpinnerItem" parent="Base.Widget.AppCompat.TextView.SpinnerItem"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="RtlOverlay.Widget.AppCompat.Toolbar.Button.Navigation"/>
+<<<<<<< HEAD
     <!-- From: file:/E:/Horical-Library/Library-Update/Library/app/src/main/res/values/styles.xml -->
+=======
+    <!-- From: file:/home/trandu/Git/hungpn/library/Library/app/src/main/res/values/styles.xml -->
+>>>>>>> 414174ab1292223ac86b35c38a3243bf9203fe2e
     <eat-comment/>
     <style name="ab_style">
         <item name="android:textSize">20dp</item>

@@ -10,6 +10,8 @@
     <color name="brown_dark">#777777</color>
     <color name="black">#030303</color>
     <color name="dark_black">#ab5a55</color>
+    <color name="tab_bg">#f8f8f8</color>
+    <color name="tab_border">#b2b2b2</color>
 
     <!--fragment_home -->
     <!--fragment_books -->
