@@ -4,6 +4,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.horical.library.listenner.MainListenner;
 
@@ -36,9 +42,42 @@ abstract public class BaseFragment extends Fragment
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+        initView(view);
+        initListener(view);
+        initData();
+        if (hasFooterLayout())
+        {
+            mMainListenner.showFooterLayout();
+        } else
+        {
+            mMainListenner.hideFooterLayout();
+        }
+    }
+
+
+    abstract protected void initView(View view);
+
+    abstract protected void initListener(View view);
+
+    abstract protected void initData();
+
+    abstract protected boolean hasFooterLayout();
+
+    @Override
     public void onDetach()
     {
         super.onDetach();
+        Toast.makeText(getActivity(), "detach", Toast.LENGTH_LONG).show();
+        if (!hasFooterLayout())
+        {
+            mMainListenner.showFooterLayout();
+        } else
+        {
+            mMainListenner.hideFooterLayout();
+        }
         mMainListenner = null;
     }
 }

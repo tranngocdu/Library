@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.horical.library.R;
 import com.horical.library.base.BaseFragment;
+import com.horical.library.listenner.MainListenner;
 
 /**
  * Created by trandu on 24/08/2015.
@@ -20,6 +21,8 @@ import com.horical.library.base.BaseFragment;
 public class BooksFragment extends BaseFragment implements View.OnClickListener
 {
     TextView mTvAddBooks;
+
+
     RadioButton mRbtAllBooks, mRbtAvailable, mRbtCheckedOut;
     EditText mEdtSearch;
 
@@ -51,9 +54,6 @@ public class BooksFragment extends BaseFragment implements View.OnClickListener
     public void onViewCreated(View view, Bundle bundle)
     {
         super.onViewCreated(view, bundle);
-        initDatas();
-        initView(view);
-        initListener(view);
     }
 
     private void initDatas()
@@ -61,7 +61,8 @@ public class BooksFragment extends BaseFragment implements View.OnClickListener
 
     }
 
-    private void initView(View view)
+    @Override
+    protected void initView(View view)
     {
         mRbtAllBooks = (RadioButton) view.findViewById(R.id.rbtAllBooks);
         mRbtAvailable = (RadioButton) view.findViewById(R.id.rbtAvailable);
@@ -70,13 +71,27 @@ public class BooksFragment extends BaseFragment implements View.OnClickListener
         mEdtSearch = (EditText) view.findViewById(R.id.edtSearch);
     }
 
-    private void initListener(View view)
+    @Override
+    protected void initListener(View view)
     {
         mRbtCheckedOut.setOnClickListener(this);
         mRbtAvailable.setOnClickListener(this);
         mRbtAllBooks.setOnClickListener(this);
         mTvAddBooks.setOnClickListener(this);
     }
+
+    @Override
+    protected void initData()
+    {
+
+    }
+
+    @Override
+    protected boolean hasFooterLayout()
+    {
+        return true;
+    }
+
 
     @Override
     public void onClick(View v)
@@ -94,6 +109,7 @@ public class BooksFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.tvAddBooks:
                 Toast.makeText(getActivity(), "tvAddBooks", Toast.LENGTH_SHORT).show();
+                mMainListenner.attachAddBookFragment();
                 break;
             default:
                 break;

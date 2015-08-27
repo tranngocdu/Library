@@ -1,22 +1,21 @@
 package com.horical.library.fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.horical.library.R;
+import com.horical.library.base.BaseFragment;
 
 /**
  * Created by trandu on 24/08/2015.
  */
-public class SettingsFragment extends Fragment implements View.OnClickListener
+public class SettingsFragment extends BaseFragment implements View.OnClickListener
 {
     private EditText mEdtEmail, mEdtCurrentPassword, mEdtNewPassword, mEdtConfirmNewPassword;
     private Button mBtnUpgrade, mBtnHelpMe, mBtnLogout;
@@ -49,13 +48,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
     public void onViewCreated(View view, Bundle bundle)
     {
         super.onViewCreated(view, bundle);
-        initView(view);
-        initListener(view);
-        initDatas();
     }
 
 
-    private void initView(View view)
+    @Override
+    protected void initView(View view)
     {
         mEdtCurrentPassword = (EditText) view.findViewById(R.id.edtCurrentPassword);
         mEdtConfirmNewPassword = (EditText) view.findViewById(R.id.edtConfirmNewPassword);
@@ -67,16 +64,24 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
         mBtnUpgrade = (Button) view.findViewById(R.id.btnUpgrade);
     }
 
-    private void initDatas()
-    {
-
-    }
-
-    private void initListener(View view)
+    @Override
+    public void initListener(View view)
     {
         mBtnHelpMe.setOnClickListener(this);
         mBtnLogout.setOnClickListener(this);
         mBtnUpgrade.setOnClickListener(this);
+    }
+
+    @Override
+    protected void initData()
+    {
+
+    }
+
+    @Override
+    protected boolean hasFooterLayout()
+    {
+        return true;
     }
 
     @Override

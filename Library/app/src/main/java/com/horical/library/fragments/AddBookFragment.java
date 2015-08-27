@@ -53,9 +53,6 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-        initView(view);
-        initDatas();
-        initListener(view);
     }
 
     private void initDatas()
@@ -63,7 +60,8 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
 
     }
 
-    private void initView(View view)
+    @Override
+    protected void initView(View view)
     {
         ibtnBack = (ImageButton) view.findViewById(R.id.ibtnBack);
         btnAddBook = (Button) view.findViewById(R.id.btnAddBook);
@@ -73,11 +71,24 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
         edtBookNumber = (EditText) view.findViewById(R.id.edtBookNumber);
     }
 
-    private void initListener(View view)
+    @Override
+    protected void initListener(View view)
     {
         btnAddPhoto.setOnClickListener(this);
         btnAddBook.setOnClickListener(this);
         ibtnBack.setOnClickListener(this);
+    }
+
+    @Override
+    protected void initData()
+    {
+
+    }
+
+    @Override
+    protected boolean hasFooterLayout()
+    {
+        return false;
     }
 
     @Override

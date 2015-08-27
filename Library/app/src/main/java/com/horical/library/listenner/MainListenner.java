@@ -6,5 +6,10 @@ package com.horical.library.listenner;
 public interface MainListenner
 {
     public void createCameraForScan();
+
     public void attachAddBookFragment();
+
+    public void showFooterLayout();
+
+    public void hideFooterLayout();
 }

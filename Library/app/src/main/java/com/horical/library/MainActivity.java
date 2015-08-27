@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 {
     private RadioButton mRdbHome, mRdbBooks, mRdbStudents, mRdbSettings;
     private TextView mTvHome, mTvBooks, mTvStudents, mTvSettings;
+    private RadioGroup mLayoutFooter;
 
     private AppConstants.TAB_TYPE mCurrentTab = AppConstants.TAB_TYPE.TAB_NONE;
 
@@ -61,6 +63,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
         mRdbSettings = (RadioButton) findViewById(R.id.btnSettings);
         mRdbSettings.setOnClickListener(this);
+
+        mLayoutFooter = (RadioGroup) findViewById(R.id.layoutFooter);
     }
 
     private void initListener()
@@ -86,6 +90,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 {
                     BooksFragment booksFragment = BooksFragment.newInstances();
                     showFragmentWithClearStack(booksFragment);
+                    //booksFragment.setCallBack(this);
                     mCurrentTab = AppConstants.TAB_TYPE.TAB_BOOKS;
                 }
                 break;
@@ -167,6 +172,20 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Override
     public void attachAddBookFragment()
     {
+        AddBookFragment addBookFragment = AddBookFragment.newInstances();
+        showFragment(addBookFragment);
 
+    }
+
+    @Override
+    public void showFooterLayout()
+    {
+        mLayoutFooter.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideFooterLayout()
+    {
+        mLayoutFooter.setVisibility(View.GONE);
     }
 }

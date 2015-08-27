@@ -58,7 +58,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener
         initListener(view);
     }
 
-    private void initView(View view)
+    public void initView(View view)
     {
         mBtnCheckIn = (Button) view.findViewById(R.id.btnCheckIn);
         mBtnCheckOut = (Button) view.findViewById(R.id.btnCheckOut);
@@ -69,10 +69,22 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener
 
     }
 
-    private void initListener(View view)
+    public void initListener(View view)
     {
         mBtnCheckIn.setOnClickListener(this);
         mBtnCheckOut.setOnClickListener(this);
+    }
+
+    @Override
+    protected void initData()
+    {
+
+    }
+
+    @Override
+    protected boolean hasFooterLayout()
+    {
+        return true;
     }
 
     @Override

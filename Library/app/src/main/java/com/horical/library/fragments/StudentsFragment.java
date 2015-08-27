@@ -47,19 +47,28 @@ public class StudentsFragment extends BaseFragment implements View.OnClickListen
         super.onViewCreated(view, bundle);
     }
 
-    private void initDatas()
+    @Override
+    protected void initView(View view)
     {
 
     }
 
-    private void initView(View view)
+    @Override
+    protected void initListener(View view)
     {
 
     }
 
-    private void initListener(View view)
+    @Override
+    protected void initData()
     {
 
+    }
+
+    @Override
+    protected boolean hasFooterLayout()
+    {
+        return true;
     }
 
     @Override
