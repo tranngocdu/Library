@@ -2,4 +2,4 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="true" android:color="@color/red"/>
     <item android:color="@color/white"/>
-</selector><!-- From: file:/home/trandu/Git/hungpn/library/Library/app/src/main/res/drawable/tv_fragment_books_text_color_allbooks.xml -->
+</selector><!-- From: file:/E:/Horical-Library/Library-Update/Library/app/src/main/res/drawable/tv_fragment_books_text_color_allbooks.xml -->
