@@ -34,6 +34,12 @@
     <string name="add_book">Add Book</string>
     <!--fragment_students -->
     <string name="students">Students</string>
+    <string name ="btnadd">Add</string>
+    <string name="add_student">Add Student</string>
+    <string name="edit_student">Edit Student</string>
+    <string name="save_student">Save Student</string>
+    <string name="remove_student">Remove Student</string>
+    <string name="student_name">Student name</string>
 
     <!--fragment_settings -->
     <string name="settings">Settings</string>
