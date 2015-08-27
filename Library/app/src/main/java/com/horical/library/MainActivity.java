@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.horical.library.base.BaseFragmentActivity;
+import com.horical.library.fragments.AddBookFragment;
 import com.horical.library.fragments.BooksFragment;
 import com.horical.library.fragments.HomeFragment;
 import com.horical.library.fragments.SettingsFragment;
@@ -155,5 +156,17 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
             }
         }
         return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public void createCameraForScan()
+    {
+
+    }
+
+    @Override
+    public void attachAddBookFragment()
+    {
+
     }
 }

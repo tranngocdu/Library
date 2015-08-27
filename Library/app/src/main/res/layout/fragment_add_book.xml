@@ -1,70 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/main_layout_margin"
-                android:layout_marginRight="@dimen/main_layout_margin"
-                android:layout_marginTop="@dimen/main_layout_margin"
-                android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imgBookThumbnail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-
-    <Button
-        android:id="@+id/btnAddPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imgBookThumbnail"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
-        android:background="@drawable/selector_btn_common_background_no_fill_red"
-        android:text="@string/add_photo"
-        android:textColor="@color/red"
-        />
-
-    <EditText
-        android:id="@+id/edtBookTitle"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnAddPhoto"
-        android:hint="@string/book_title"/>
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@color/red"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/edtBookAuthor"
+        <ImageButton
+            android:id="@+id/ibtnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:src="@drawable/abc_ab_share_pack_mtrl_alpha"/>
+
+        <TextView
+            android:id="@+id/btnBooks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="Books"
+            android:textColor="@color/white"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|"
+            android:text="Add Book"
+            android:textColor="@color/white"
+            android:textSize="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edtBookTitle"
-        android:hint="@string/book_author"/>
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edtBookISBM"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edtBookAuthor"
-        android:hint="@string/book_isbn"/>
+        <ImageView
+            android:id="@+id/imgBookThumbnail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
 
-    <EditText
-        android:id="@+id/edtBookNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edtBookISBM"
-        android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
-        android:inputType="number"
-        android:text="1"
+        <Button
+            android:id="@+id/btnAddPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgBookThumbnail"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
+            android:background="@drawable/selector_btn_common_background_no_fill_red"
+            android:text="@string/add_photo"
+            android:textColor="@color/red"
+            />
 
-        />
+        <EditText
+            android:id="@+id/edtBookTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnAddPhoto"
+            android:hint="@string/book_title"/>
 
-    <Button
-        android:id="@+id/btnAddBook"
-        android:layout_width="@dimen/fragment_home_btn_checkout_width"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edtBookNumber"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/selector_btn_common_background_fill_green"
-        android:text="@string/add_book"
-        android:textColor="@color/white"/>
+        <EditText
+            android:id="@+id/edtBookAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtBookTitle"
+            android:hint="@string/book_author"/>
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/edtBookISBM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtBookAuthor"
+            android:hint="@string/book_isbn"/>
+
+        <EditText
+            android:id="@+id/edtBookNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtBookISBM"
+            android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
+            android:inputType="number"
+            android:text="1"
+
+            />
+
+        <Button
+            android:id="@+id/btnAddBook"
+            android:layout_width="@dimen/fragment_home_btn_checkout_width"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtBookNumber"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/selector_btn_common_background_fill_green"
+            android:text="@string/add_book"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>
