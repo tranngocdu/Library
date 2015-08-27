@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values-xlarge-land/values-xlarge-land.xml -->
+=======
+    <!-- From: file:/E:/Horical-Library/Library-Update/Library/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values-xlarge-land/values-xlarge-land.xml -->
+>>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
     <eat-comment/>
     <dimen name="abc_search_view_text_min_width">256dip</dimen>
 </resources>

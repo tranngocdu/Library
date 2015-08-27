@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values-ca/values-ca.xml -->
+=======
+    <!-- From: file:/E:/Horical-Library/Library-Update/Library/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values-ca/values-ca.xml -->
+>>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
     <eat-comment/>
     <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Navega a la pàgina d\'inici"</string>
     <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Navega cap a dalt"</string>

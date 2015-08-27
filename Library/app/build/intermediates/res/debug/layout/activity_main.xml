@@ -67,4 +67,8 @@
             android:textColor="@drawable/btn_tab_menu_settings" />
     </RadioGroup>
 </RelativeLayout>
+<<<<<<< HEAD
 <!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/src/main/res/layout/activity_main.xml -->
+=======
+<!-- From: file:/E:/Horical-Library/Library-Update/Library/app/src/main/res/layout/activity_main.xml -->
+>>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627

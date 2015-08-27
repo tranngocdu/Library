@@ -12,8 +12,7 @@ import java.util.Stack;
 /**
  * Created by Diem Huong on 8/25/2015.
  */
-abstract public class BaseFragmentActivity extends Activity implements FragmentManager.OnBackStackChangedListener
-{
+abstract public class BaseFragmentActivity extends Activity implements FragmentManager.OnBackStackChangedListener {
     protected final Stack<String> mFragmentTagStack = new Stack<>();
 
     abstract protected Fragment onCreateMainFragment(Bundle savedInstancesState);
@@ -21,27 +20,23 @@ abstract public class BaseFragmentActivity extends Activity implements FragmentM
     abstract protected int getFragmentContainerId();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         showFragment(onCreateMainFragment(null));
         getFragmentManager().addOnBackStackChangedListener(this);
     }
 
-    public void showFragmentWithClearStack(Fragment f)
-    {
+    public void showFragmentWithClearStack(Fragment f) {
         getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         mFragmentTagStack.clear();
         showFragment(f);
     }
 
-    public void showFragment(Fragment f)
-    {
+    public void showFragment(Fragment f) {
         String tag = f.getClass().getName() + getNextPositionOfFragment(f.getClass().getName());
         final FragmentManager fm = getFragmentManager();
         final FragmentTransaction ft = fm.beginTransaction();
-        if (mFragmentTagStack.size() > 0)
-        {
+        if (mFragmentTagStack.size() > 0) {
             final Fragment ff = fm.findFragmentByTag(mFragmentTagStack.peek());
             ft.hide(ff);
         }
@@ -55,36 +50,28 @@ abstract public class BaseFragmentActivity extends Activity implements FragmentM
     }
 
     @Override
-    public void onBackStackChanged()
-    {
+    public void onBackStackChanged() {
         FragmentManager fm = getFragmentManager();
 
-        if (fm.getBackStackEntryCount() == mFragmentTagStack.size())
-        {
+        if (fm.getBackStackEntryCount() == mFragmentTagStack.size()) {
             return;
         }
 
-        if (mFragmentTagStack.size() > 1)
-        {
+        if (mFragmentTagStack.size() > 1) {
             FragmentTransaction ft = fm.beginTransaction();
             String tag = mFragmentTagStack.pop();
-            if (fm.findFragmentByTag(tag) != null)
-            {
+            if (fm.findFragmentByTag(tag) != null) {
                 ft.remove(fm.findFragmentByTag(tag));
             }
             ft.commit();
         }
     }
 
-    private int getNextPositionOfFragment(String tag)
-    {
+    private int getNextPositionOfFragment(String tag) {
         int pos = 0;
-        if (mFragmentTagStack.size() > 0)
-        {
-            for (String stackTag : mFragmentTagStack)
-            {
-                if (stackTag.contains(tag))
-                {
+        if (mFragmentTagStack.size() > 0) {
+            for (String stackTag : mFragmentTagStack) {
+                if (stackTag.contains(tag)) {
                     pos++;
                 }
             }

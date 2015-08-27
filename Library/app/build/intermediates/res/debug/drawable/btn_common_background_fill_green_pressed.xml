@@ -5,4 +5,8 @@
         android:endColor="@color/green_pressed"
         android:startColor="@color/green_pressed"/>
     <corners android:radius="@dimen/btn_radius"/>
+<<<<<<< HEAD
 </shape><!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/src/main/res/drawable/btn_common_background_fill_green_pressed.xml -->
+=======
+</shape><!-- From: file:/E:/Horical-Library/Library-Update/Library/app/src/main/res/drawable/btn_common_background_fill_green_pressed.xml -->
+>>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627

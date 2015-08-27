@@ -2,4 +2,8 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="true" android:color="@color/red"/>
     <item android:color="@color/white"/>
+<<<<<<< HEAD
 </selector><!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/src/main/res/drawable/tv_fragment_books_text_color_allbooks.xml -->
+=======
+</selector><!-- From: file:/E:/Horical-Library/Library-Update/Library/app/src/main/res/drawable/tv_fragment_books_text_color_allbooks.xml -->
+>>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627

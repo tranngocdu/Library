@@ -1562,6 +1562,7 @@ containing a value of this type.
         public static final int button_book_border_color=0x7f020048;
         public static final int edt_fragment_books_back_ground_search=0x7f020049;
         public static final int edt_fragment_students_backgroud_search=0x7f02004a;
+<<<<<<< HEAD
         public static final int ic_fragment_add_book_back=0x7f02004b;
         public static final int ic_main_book=0x7f02004c;
         public static final int ic_main_book_selected=0x7f02004d;
@@ -1580,6 +1581,25 @@ containing a value of this type.
     }
     public static final class id {
         public static final int action0=0x7f0c007b;
+=======
+        public static final int ic_main_book=0x7f02004b;
+        public static final int ic_main_book_selected=0x7f02004c;
+        public static final int ic_main_home=0x7f02004d;
+        public static final int ic_main_home_selected=0x7f02004e;
+        public static final int ic_main_setting=0x7f02004f;
+        public static final int ic_main_setting_selected=0x7f020050;
+        public static final int ic_main_student=0x7f020051;
+        public static final int ic_main_student_selected=0x7f020052;
+        public static final int notification_template_icon_bg=0x7f020058;
+        public static final int selector_btn_common_background_fill_green=0x7f020053;
+        public static final int selector_btn_common_background_fill_red=0x7f020054;
+        public static final int selector_btn_common_background_no_fill_green=0x7f020055;
+        public static final int selector_btn_common_background_no_fill_red=0x7f020056;
+        public static final int tv_fragment_books_text_color_allbooks=0x7f020057;
+    }
+    public static final class id {
+        public static final int action0=0x7f0c007a;
+>>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
         public static final int action_bar=0x7f0c0040;
         public static final int action_bar_activity_content=0x7f0c0000;
         public static final int action_bar_container=0x7f0c003f;
@@ -1588,13 +1608,21 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f0c0024;
         public static final int action_bar_title=0x7f0c0023;
         public static final int action_context_bar=0x7f0c0041;
+<<<<<<< HEAD
         public static final int action_divider=0x7f0c007f;
+=======
+        public static final int action_divider=0x7f0c007e;
+>>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
         public static final int action_menu_divider=0x7f0c0002;
         public static final int action_menu_presenter=0x7f0c0003;
         public static final int action_mode_bar=0x7f0c003d;
         public static final int action_mode_bar_stub=0x7f0c003c;
         public static final int action_mode_close_button=0x7f0c0025;
+<<<<<<< HEAD
         public static final int action_settings=0x7f0c0088;
+=======
+        public static final int action_settings=0x7f0c0087;
+>>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
         public static final int activity_chooser_view_content=0x7f0c0026;
         public static final int alertTitle=0x7f0c0030;
         public static final int always=0x7f0c0016;
@@ -1602,6 +1630,7 @@ containing a value of this type.
         public static final int btnAddBook=0x7f0c005c;
         public static final int btnAddPhoto=0x7f0c0057;
         public static final int btnBooks=0x7f0c0052;
+<<<<<<< HEAD
         public static final int btnCheckIn=0x7f0c0067;
         public static final int btnCheckOut=0x7f0c0066;
         public static final int btnHelpMe=0x7f0c0073;
@@ -1617,6 +1646,23 @@ containing a value of this type.
         public static final int cancel_action=0x7f0c007c;
         public static final int checkbox=0x7f0c0038;
         public static final int chronometer=0x7f0c0082;
+=======
+        public static final int btnCheckIn=0x7f0c0066;
+        public static final int btnCheckOut=0x7f0c0065;
+        public static final int btnHelpMe=0x7f0c0072;
+        public static final int btnHome=0x7f0c0051;
+        public static final int btnLogout=0x7f0c0073;
+        public static final int btnSettings=0x7f0c0054;
+        public static final int btnStudents=0x7f0c0053;
+        public static final int btnUpgrade=0x7f0c0071;
+        public static final int btn_create_account=0x7f0c006b;
+        public static final int btn_have_account=0x7f0c0077;
+        public static final int btn_sign_in=0x7f0c006a;
+        public static final int buttonPanel=0x7f0c0036;
+        public static final int cancel_action=0x7f0c007b;
+        public static final int checkbox=0x7f0c0038;
+        public static final int chronometer=0x7f0c0081;
+>>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
         public static final int collapseActionView=0x7f0c0017;
         public static final int contentPanel=0x7f0c0031;
         public static final int custom=0x7f0c0035;
@@ -1627,6 +1673,7 @@ containing a value of this type.
         public static final int disableHome=0x7f0c000c;
         public static final int dropdown=0x7f0c001c;
         public static final int edit_query=0x7f0c0042;
+<<<<<<< HEAD
         public static final int edtBookAuthor=0x7f0c0059;
         public static final int edtBookISBM=0x7f0c005a;
         public static final int edtBookNumber=0x7f0c005b;
@@ -1647,12 +1694,35 @@ containing a value of this type.
         public static final int expand_activities_button=0x7f0c0027;
         public static final int expanded_menu=0x7f0c0037;
         public static final int frameLayout=0x7f0c0065;
+=======
+        public static final int edtBookAuthor=0x7f0c0058;
+        public static final int edtBookISBM=0x7f0c0059;
+        public static final int edtBookNumber=0x7f0c005a;
+        public static final int edtBookTitle=0x7f0c0057;
+        public static final int edtConfirmNewPassword=0x7f0c0070;
+        public static final int edtConfirmPassword=0x7f0c0076;
+        public static final int edtCurrentPassword=0x7f0c006e;
+        public static final int edtEmail=0x7f0c006d;
+        public static final int edtName=0x7f0c005c;
+        public static final int edtNewPassword=0x7f0c006f;
+        public static final int edtNumber=0x7f0c005d;
+        public static final int edtPassword=0x7f0c0075;
+        public static final int edtSearch=0x7f0c0063;
+        public static final int edt_email=0x7f0c0068;
+        public static final int edt_password=0x7f0c0069;
+        public static final int end=0x7f0c0014;
+        public static final int end_padder=0x7f0c0086;
+        public static final int expand_activities_button=0x7f0c0027;
+        public static final int expanded_menu=0x7f0c0037;
+        public static final int frameLayout=0x7f0c0064;
+>>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
         public static final int home=0x7f0c0004;
         public static final int homeAsUp=0x7f0c000d;
         public static final int ibtnBack=0x7f0c0055;
         public static final int icon=0x7f0c002b;
         public static final int ifRoom=0x7f0c0018;
         public static final int image=0x7f0c0028;
+<<<<<<< HEAD
         public static final int imgBookThumbnail=0x7f0c0056;
         public static final int info=0x7f0c0086;
         public static final int layoutContent=0x7f0c004f;
@@ -1664,6 +1734,19 @@ containing a value of this type.
         public static final int listStudent=0x7f0c007a;
         public static final int list_item=0x7f0c002a;
         public static final int media_actions=0x7f0c007e;
+=======
+        public static final int imgBookThumbnail=0x7f0c0055;
+        public static final int info=0x7f0c0085;
+        public static final int layoutContent=0x7f0c004f;
+        public static final int layoutFooter=0x7f0c0050;
+        public static final int layoutHeaderButton=0x7f0c005f;
+        public static final int line1=0x7f0c007f;
+        public static final int line3=0x7f0c0083;
+        public static final int listMode=0x7f0c0009;
+        public static final int listStudent=0x7f0c0079;
+        public static final int list_item=0x7f0c002a;
+        public static final int media_actions=0x7f0c007d;
+>>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
         public static final int middle=0x7f0c0015;
         public static final int multiply=0x7f0c001e;
         public static final int never=0x7f0c0019;
@@ -1673,9 +1756,15 @@ containing a value of this type.
         public static final int progress_circular=0x7f0c0005;
         public static final int progress_horizontal=0x7f0c0006;
         public static final int radio=0x7f0c003a;
+<<<<<<< HEAD
         public static final int rbtAllBooks=0x7f0c0061;
         public static final int rbtAvailable=0x7f0c0062;
         public static final int rbtCheckedOut=0x7f0c0063;
+=======
+        public static final int rbtAllBooks=0x7f0c0060;
+        public static final int rbtAvailable=0x7f0c0061;
+        public static final int rbtCheckedOut=0x7f0c0062;
+>>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
         public static final int screen=0x7f0c001f;
         public static final int scrollView=0x7f0c0032;
         public static final int search_badge=0x7f0c0044;
@@ -1697,6 +1786,7 @@ containing a value of this type.
         public static final int src_atop=0x7f0c0020;
         public static final int src_in=0x7f0c0021;
         public static final int src_over=0x7f0c0022;
+<<<<<<< HEAD
         public static final int status_bar_latest_event_content=0x7f0c007d;
         public static final int submit_area=0x7f0c004b;
         public static final int tabMode=0x7f0c000b;
@@ -1712,6 +1802,23 @@ containing a value of this type.
         public static final int tvHeader=0x7f0c0075;
         public static final int tv_forgot_password=0x7f0c006d;
         public static final int tv_header=0x7f0c0068;
+=======
+        public static final int status_bar_latest_event_content=0x7f0c007c;
+        public static final int submit_area=0x7f0c004b;
+        public static final int tabMode=0x7f0c000b;
+        public static final int text=0x7f0c0084;
+        public static final int text2=0x7f0c0082;
+        public static final int textSpacerNoButtons=0x7f0c0033;
+        public static final int time=0x7f0c0080;
+        public static final int title=0x7f0c002c;
+        public static final int title_template=0x7f0c002f;
+        public static final int topPanel=0x7f0c002e;
+        public static final int tvAdd=0x7f0c0078;
+        public static final int tvAddBooks=0x7f0c005e;
+        public static final int tvHeader=0x7f0c0074;
+        public static final int tv_forgot_password=0x7f0c006c;
+        public static final int tv_header=0x7f0c0067;
+>>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
         public static final int up=0x7f0c0008;
         public static final int useLogo=0x7f0c0012;
         public static final int withText=0x7f0c001a;
