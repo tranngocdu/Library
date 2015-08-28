@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.horical.library.R;
@@ -19,6 +20,7 @@ import com.horical.library.base.BaseFragment;
 public class HomeFragment extends BaseFragment implements View.OnClickListener
 {
     private Button mBtnCheckOut, mBtnCheckIn;
+    private TextView textView;
 
     public HomeFragment()
     {
@@ -53,23 +55,18 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener
     public void onViewCreated(View view, Bundle bundle)
     {
         super.onViewCreated(view, bundle);
-        initDatas();
-        initView(view);
-        initListener(view);
     }
 
-    public void initView(View view)
+    @Override
+    protected void initView(View view)
     {
         mBtnCheckIn = (Button) view.findViewById(R.id.btnCheckIn);
         mBtnCheckOut = (Button) view.findViewById(R.id.btnCheckOut);
+        textView = (TextView) view.findViewById(R.id.textView);
     }
 
-    private void initDatas()
-    {
-
-    }
-
-    public void initListener(View view)
+    @Override
+    protected void initListener(View view)
     {
         mBtnCheckIn.setOnClickListener(this);
         mBtnCheckOut.setOnClickListener(this);
