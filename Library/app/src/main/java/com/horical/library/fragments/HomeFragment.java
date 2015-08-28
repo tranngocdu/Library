@@ -97,6 +97,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.btnCheckOut:
                 Toast.makeText(getActivity(), "Check out", Toast.LENGTH_SHORT).show();
+                mMainListenner.startCamera();
                 break;
             default:
                 break;

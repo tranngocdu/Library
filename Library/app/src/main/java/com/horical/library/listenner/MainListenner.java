@@ -12,4 +12,6 @@ public interface MainListenner
     public void showFooterLayout();
 
     public void hideFooterLayout();
+
+    public void startCamera();
 }
