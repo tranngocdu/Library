@@ -19,6 +19,11 @@
     <string name="home">Home</string>
     <string name="check_out">Check Out</string>
     <string name="check_in">Check In</string>
+
+    <!--fragment_book_detail -->
+    <string name="copy_loaned_to">Copy loaned to:</string>
+    <string name="edit_book">Edit Book</string>
+    <string name="remove_book">Remove Book</string>
     <!--fragment_books -->
     <string name="books">Books</string>
     <string name="add">Add</string>

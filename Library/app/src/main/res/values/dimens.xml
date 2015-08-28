@@ -26,6 +26,9 @@
     <!--fragment_books -->
     <dimen name="fragment_books_radio_group_height">30dp</dimen>
     <dimen name="fragment_books_radio_group_margin">20dp</dimen>
+
+    <!--fragment_book_detail-->
+    <dimen name="text_size_lv_2">25dp</dimen>
     <!--fragment_students -->
 
     <dimen name ="fragment_student_edt_search_height">35dp</dimen>

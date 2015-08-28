@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.horical.library.base.BaseFragmentActivity;
 import com.horical.library.fragments.AddBookFragment;
+import com.horical.library.fragments.BookDetailFragment;
 import com.horical.library.fragments.BooksFragment;
 import com.horical.library.fragments.HomeFragment;
 import com.horical.library.fragments.SettingsFragment;
@@ -180,6 +181,12 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         AddBookFragment addBookFragment = AddBookFragment.newInstances();
         showFragment(addBookFragment);
 
+    }
+
+    @Override
+    public void attachBookDetailFragment() {
+        BookDetailFragment bookDetailFragment = BookDetailFragment.newInstance();
+        showFragment(bookDetailFragment);
     }
 
     @Override

@@ -9,6 +9,8 @@ public interface MainListenner
 
     public void attachAddBookFragment();
 
+    public void attachBookDetailFragment();
+
     public void showFooterLayout();
 
     public void hideFooterLayout();
