@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_tab_bg"
         android:orientation="horizontal"
         android:weightSum="4">
 
@@ -67,8 +68,4 @@
             android:textColor="@drawable/btn_tab_menu_settings" />
     </RadioGroup>
 </RelativeLayout>
-<<<<<<< HEAD
-<!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/src/main/res/layout/activity_main.xml -->
-=======
-<!-- From: file:/E:/Horical-Library/Library-Update/Library/app/src/main/res/layout/activity_main.xml -->
->>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
+<!-- From: file:/E:/intern/Library/Libra/Library/Library/app/src/main/res/layout/activity_main.xml -->

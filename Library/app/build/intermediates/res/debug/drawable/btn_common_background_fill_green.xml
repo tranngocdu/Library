@@ -7,8 +7,4 @@
         android:endColor="@color/green"
         android:startColor="@color/green"/>
 
-<<<<<<< HEAD
-</shape><!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/src/main/res/drawable/btn_common_background_fill_green.xml -->
-=======
-</shape><!-- From: file:/E:/Horical-Library/Library-Update/Library/app/src/main/res/drawable/btn_common_background_fill_green.xml -->
->>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
+</shape><!-- From: file:/E:/intern/Library/Libra/Library/Library/app/src/main/res/drawable/btn_common_background_fill_green.xml -->

@@ -5,8 +5,4 @@
         android:endColor="@color/red"
         android:startColor="@color/red"/>
     <corners android:radius="@dimen/btn_radius"/>
-<<<<<<< HEAD
-</shape><!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/src/main/res/drawable/btn_common_background_fill_red.xml -->
-=======
-</shape><!-- From: file:/home/trandu/Git/hungpn/library/Library/app/src/main/res/drawable/btn_common_background_fill_red.xml -->
->>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
+</shape><!-- From: file:/E:/intern/Library/Libra/Library/Library/app/src/main/res/drawable/btn_common_background_fill_red.xml -->

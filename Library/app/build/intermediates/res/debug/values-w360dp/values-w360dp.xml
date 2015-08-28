@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<<<<<<< HEAD
-    <!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values-w360dp/values-w360dp.xml -->
-=======
-    <!-- From: file:/E:/Horical-Library/Library-Update/Library/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values-w360dp/values-w360dp.xml -->
->>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
+    <!-- From: file:/E:/intern/Library/Libra/Library/Library/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values-w360dp/values-w360dp.xml -->
     <eat-comment/>
     <integer name="abc_max_action_buttons">3</integer>
 </resources>

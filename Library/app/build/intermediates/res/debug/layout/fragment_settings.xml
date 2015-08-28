@@ -89,8 +89,4 @@
             android:textColor="@color/red" />
     </LinearLayout>
 
-<<<<<<< HEAD
-</LinearLayout><!-- From: file:/C:/Users/Diem%20Huong/Documents/GitHub/library-hung/library/Library/app/src/main/res/layout/fragment_settings.xml -->
-=======
-</LinearLayout><!-- From: file:/E:/Horical-Library/Library-Update/Library/app/src/main/res/layout/fragment_settings.xml -->
->>>>>>> 6c2e59014419bff0c8ca97011e383a7a5b7eb627
+</LinearLayout><!-- From: file:/E:/intern/Library/Libra/Library/Library/app/src/main/res/layout/fragment_settings.xml -->

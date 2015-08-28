@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/btnCheckOut"
+        android:layout_width="@dimen/fragment_home_btn_checkout_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
+        android:background="@drawable/selector_btn_common_background_no_fill_green"
+        android:text="@string/check_out"
+        android:textColor="@color/green" />
+    <Button
+        android:id="@+id/btnCheckIn"
+        android:layout_width="@dimen/fragment_home_btn_checkout_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
+        android:background="@drawable/selector_btn_common_background_no_fill_red"
+        android:text="@string/check_in"
+        android:textColor="@color/red" />
+    <Button
+        android:id="@+id/btnEditBook"
+        android:layout_width="@dimen/fragment_home_btn_checkout_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
+        android:background="@drawable/selector_btn_common_background_no_fill_green"
+        android:text="@string/edit_book"
+        android:textColor="@color/green" />
+    <Button
+        android:id="@+id/btnRemoveBook"
+        android:layout_width="@dimen/fragment_home_btn_checkout_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
+        android:background="@drawable/selector_btn_common_background_no_fill_red"
+        android:text="@string/remove_book"
+        android:textColor="@color/red" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/copy_loaned_to"
+        android:textSize="@dimen/text_size_lv_2"
+        android:gravity="center"/>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+
+        <ListView
+            android:id="@+id/lvBookName"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:background="@color/white"
+            android:cacheColorHint="#00000000"
+            android:divider="@color/red"
+            android:dividerHeight="1px"></ListView>
+
+        <LinearLayout
+            android:id="@+id/llSlideIndex"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"></LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

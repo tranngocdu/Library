@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.horical.library.R;
 import com.horical.library.base.BaseFragment;
+import com.horical.library.listenner.MainListenner;
 
 /**
  * Created by trandu on 24/08/2015.
@@ -91,6 +92,7 @@ public class SettingsFragment extends BaseFragment implements View.OnClickListen
         {
             case R.id.btnHelpMe:
                 Toast.makeText(getActivity(), "btnHelpMe", Toast.LENGTH_SHORT).show();
+                mMainListenner.attachBookDetailFragment();
                 break;
             case R.id.btnLogout:
                 Toast.makeText(getActivity(), "btnLogout", Toast.LENGTH_SHORT).show();
