@@ -16,7 +16,7 @@ public class BookDetail {
         bookList.add(book);
         book = new Book("Gulliver's Travels ", "Jonathan Swift ", "1726", "   Ireland ", "English");
         bookList.add(book);
-        book = new Book("War and Peace ", "Leo Tolstoy ", "1865–1869 ", "Russia ", "Russian");
+        book = new Book("War and Peace ", "Leo Tolstoy ", "1865ï¿½1869 ", "Russia ", "Russian");
         bookList.add(book);
         return bookList;
     }

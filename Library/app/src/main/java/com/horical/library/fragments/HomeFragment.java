@@ -1,9 +1,9 @@
 package com.horical.library.fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +13,19 @@ import android.widget.Toast;
 
 import com.horical.library.R;
 import com.horical.library.base.BaseFragment;
+import com.horical.library.scanner.ZBarConstants;
+import com.horical.library.scanner.ZBarScannerActivity;
+import com.horical.library.utils.CameraUtils;
 
 /**
  * Created by trandu on 24/08/2015.
  */
 public class HomeFragment extends BaseFragment implements View.OnClickListener
 {
+
+    public static final int ZBAR_SCANNER_REQUEST = 0;
+    public static final int ZBAR_QR_SCANNER_REQUEST = 1;
+
     private Button mBtnCheckOut, mBtnCheckIn;
     private TextView textView;
 
@@ -93,10 +100,39 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener
                 Toast.makeText(getActivity(), "Check in", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnCheckOut:
-                Toast.makeText(getActivity(), "Check out", Toast.LENGTH_SHORT).show();
-                mMainListenner.startCamera();
+                if (CameraUtils.isCameraAvailable(getActivity()))
+                {
+                    Intent intent = new Intent(getActivity(), ZBarScannerActivity.class);
+                    startActivityForResult(intent, ZBAR_SCANNER_REQUEST);
+                } else
+                {
+                    Toast.makeText(getActivity(), "Rear Facing Camera Unavailable", Toast.LENGTH_SHORT).show();
+                }
                 break;
             default:
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode)
+        {
+            case ZBAR_SCANNER_REQUEST:
+                if (resultCode == Activity.RESULT_OK)
+                {
+                    Toast.makeText(getActivity(), "Scan Result = " + data.getStringExtra(ZBarConstants.SCAN_RESULT), Toast.LENGTH_SHORT).show();
+                    textView.setText(data.getStringExtra(ZBarConstants.SCAN_RESULT));
+                } else if (resultCode == Activity.RESULT_CANCELED && data != null)
+                {
+                    String error = data.getStringExtra(ZBarConstants.ERROR_INFO);
+                    if (!TextUtils.isEmpty(error))
+                    {
+                        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                    }
+                }
                 break;
         }
     }
