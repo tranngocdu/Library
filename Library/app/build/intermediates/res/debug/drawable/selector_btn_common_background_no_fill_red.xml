@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/btn_common_background_fill_red_pressed" android:state_pressed="true"/>
-    <item android:drawable="@drawable/btn_common_background_no_fill_red"/>
-</selector><!-- From: file:/home/trandu/Git/hungpn/library/Library/app/src/main/res/drawable/selector_btn_common_background_no_fill_red.xml -->
