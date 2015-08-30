@@ -84,7 +84,6 @@ abstract public class BaseFragment extends Fragment
     public void onDetach()
     {
         super.onDetach();
-        Toast.makeText(getActivity(), "detach", Toast.LENGTH_LONG).show();
         if (currentActivity instanceof MainActivity)
         {
             if (!hasFooterLayout())

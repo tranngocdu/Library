@@ -1,12 +1,17 @@
 package com.horical.library;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.horical.library.base.BaseFragmentActivity;
 import com.horical.library.fragments.LoginFragment;
 import com.horical.library.fragments.SignUpFragment;
+import com.horical.library.listenner.BackPressListener;
 import com.horical.library.listenner.LoginActivityListener;
 
 /**
@@ -46,6 +51,53 @@ public class LoginActivity extends BaseFragmentActivity implements LoginActivity
                 showFragment(signUpFragment);
                 break;
         }
+    }
+
+    private static final long EXIT_INTERVAL = 2000L;
+    private long exitTimer = Long.MIN_VALUE;
+
+    @Override
+    public boolean dispatchKeyEvent(@NonNull KeyEvent event)
+    {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0)
+        {
+            FragmentManager fm = getFragmentManager();
+            if (mFragmentTagStack.size() > 0)
+            {
+                Fragment f = fm.findFragmentByTag(mFragmentTagStack.peek());
+                if (f instanceof BackPressListener)
+                {
+                    if (((BackPressListener) f).onBackPress())
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            boolean tryFinish = false;
+            if (mFragmentTagStack.size() == 1)
+            {
+                tryFinish = true;
+            }
+
+            if (tryFinish)
+            {
+                if ((exitTimer + EXIT_INTERVAL) < System.currentTimeMillis())
+                {
+                    Toast.makeText(this, getString(R.string.confirm_exit), Toast.LENGTH_SHORT).show();
+                    exitTimer = System.currentTimeMillis();
+                } else
+                {
+                    finish();
+                }
+                return true;
+            } else
+            {
+                return super.dispatchKeyEvent(event);
+            }
+        }
+        return super.dispatchKeyEvent(event);
     }
 
     @Override
