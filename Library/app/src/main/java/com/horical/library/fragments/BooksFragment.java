@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.horical.library.R;
 import com.horical.library.base.BaseFragment;
-import com.horical.library.listenner.MainListenner;
 
 /**
  * Created by trandu on 24/08/2015.
@@ -109,7 +108,7 @@ public class BooksFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.tvAddBooks:
                 Toast.makeText(getActivity(), "tvAddBooks", Toast.LENGTH_SHORT).show();
-                mMainListenner.attachAddBookFragment();
+                mMainActivityListener.attachAddBookFragment();
                 break;
             default:
                 break;

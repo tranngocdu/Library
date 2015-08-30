@@ -9,7 +9,7 @@
     <string name="header_sign_up">This\'ll be quick</string>
     <string name="header_log_in">First Things First</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="create_account">Create Account</string>
+    <string name="create_account">Create An Account</string>
     <string name="log_in">Login</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
@@ -39,7 +39,7 @@
     <string name="add_book">Add Book</string>
     <!--fragment_students -->
     <string name="students">Students</string>
-    <string name ="btnadd">Add</string>
+    <string name="btnadd">Add</string>
     <string name="add_student">Add Student</string>
     <string name="edit_student">Edit Student</string>
     <string name="save_student">Save Student</string>

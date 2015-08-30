@@ -17,34 +17,40 @@ import java.util.Vector;
 /**
  * Created by Van An on 8/28/2015.
  */
-public class BookDetailNameUserAdapter extends BaseAdapter {
+public class BookDetailNameUserAdapter extends BaseAdapter
+{
     Activity activity;
     private Vector<Book> books;
     public static ArrayList<Integer> arrayName;
-    public BookDetailNameUserAdapter(Activity activity, Vector<Book> books) {
+
+    public BookDetailNameUserAdapter(Activity activity, Vector<Book> books)
+    {
         this.activity = activity;
         this.books = books;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
         ViewHolder viewHolder;
-        LayoutInflater inflater= activity.getLayoutInflater();
-        convertView=inflater.inflate(R.layout.custom_listview_book_detail,null);
-        viewHolder=new ViewHolder();
-        viewHolder.tvName= (TextView) convertView.findViewById(R.id.tvBookName);
-        viewHolder.tvHeader= (TextView) convertView.findViewById(R.id.tvHeader);
-        viewHolder.llName= (LinearLayout) convertView.findViewById(R.id.llBookName);
-        viewHolder.llHeader= (LinearLayout) convertView.findViewById(R.id.llHeader);
+        LayoutInflater inflater = activity.getLayoutInflater();
+        convertView = inflater.inflate(R.layout.custom_listview_book_detail, null);
+        viewHolder = new ViewHolder();
+        viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvBookName);
+        viewHolder.tvHeader = (TextView) convertView.findViewById(R.id.tvHeader);
+        viewHolder.llName = (LinearLayout) convertView.findViewById(R.id.llBookName);
+        viewHolder.llHeader = (LinearLayout) convertView.findViewById(R.id.llHeader);
         convertView.setTag(viewHolder);
-        if (position<books.size()){
-            final Book subsidies=books.get(position);
-            if (subsidies!=null&&(subsidies.getName().length()==1)){
+        if (position < books.size())
+        {
+            final Book subsidies = books.get(position);
+            if (subsidies != null && (subsidies.getName().length() == 1))
+            {
                 viewHolder.llName.setVisibility(View.GONE);
                 viewHolder.llHeader.setVisibility(View.VISIBLE);
                 viewHolder.tvHeader.setText(subsidies.getName());
-            }
-            else {
+            } else
+            {
                 viewHolder.llHeader.setVisibility(View.GONE);
                 viewHolder.llName.setVisibility(View.VISIBLE);
                 viewHolder.tvName.setText(subsidies.getName());
@@ -54,20 +60,25 @@ public class BookDetailNameUserAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return books.size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(int position)
+    {
         return books.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int position)
+    {
         return position;
     }
-    private static class ViewHolder {
+
+    private static class ViewHolder
+    {
         TextView tvName, tvHeader;
         LinearLayout llName, llHeader;
     }

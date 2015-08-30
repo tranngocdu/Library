@@ -4,14 +4,13 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.horical.library.listenner.MainListenner;
+import com.horical.library.LoginActivity;
+import com.horical.library.MainActivity;
+import com.horical.library.listenner.LoginActivityListener;
+import com.horical.library.listenner.MainActivityListener;
 
 /**
  * Created by Diem Huong on 8/25/2015.
@@ -19,7 +18,9 @@ import com.horical.library.listenner.MainListenner;
 abstract public class BaseFragment extends Fragment
 {
     protected Context mContext;
-    protected MainListenner mMainListenner;
+    protected MainActivityListener mMainActivityListener;
+    protected LoginActivityListener mLoginActivityListener;
+    private Activity currentActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -34,7 +35,14 @@ abstract public class BaseFragment extends Fragment
         super.onAttach(activity);
         try
         {
-            mMainListenner = (MainListenner) activity;
+            currentActivity = getActivity();
+            if (currentActivity instanceof MainActivity)
+            {
+                mMainActivityListener = (MainActivityListener) activity;
+            } else if (currentActivity instanceof LoginActivity)
+            {
+                mLoginActivityListener = (LoginActivityListener) activity;
+            }
         } catch (ClassCastException e)
         {
             throw new ClassCastException(activity.toString() + " must implement MainListener");
@@ -48,12 +56,18 @@ abstract public class BaseFragment extends Fragment
         initView(view);
         initListener(view);
         initData();
-        if (hasFooterLayout())
+        if (currentActivity instanceof MainActivity)
         {
-            mMainListenner.showFooterLayout();
-        } else
+            if (hasFooterLayout())
+            {
+                mMainActivityListener.showFooterLayout();
+            } else
+            {
+                mMainActivityListener.hideFooterLayout();
+            }
+        } else if (currentActivity instanceof LoginActivity)
         {
-            mMainListenner.hideFooterLayout();
+            // do something
         }
     }
 
@@ -71,13 +85,19 @@ abstract public class BaseFragment extends Fragment
     {
         super.onDetach();
         Toast.makeText(getActivity(), "detach", Toast.LENGTH_LONG).show();
-        if (!hasFooterLayout())
+        if (currentActivity instanceof MainActivity)
         {
-            mMainListenner.showFooterLayout();
-        } else
+            if (!hasFooterLayout())
+            {
+                mMainActivityListener.showFooterLayout();
+            } else
+            {
+                mMainActivityListener.hideFooterLayout();
+            }
+            mMainActivityListener = null;
+        } else if (currentActivity instanceof LoginActivity)
         {
-            mMainListenner.hideFooterLayout();
+            mLoginActivityListener = null;
         }
-        mMainListenner = null;
     }
 }

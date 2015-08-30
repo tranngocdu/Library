@@ -20,9 +20,10 @@ import com.horical.library.fragments.HomeFragment;
 import com.horical.library.fragments.SettingsFragment;
 import com.horical.library.fragments.StudentsFragment;
 import com.horical.library.listenner.BackPressListener;
-import com.horical.library.listenner.MainListenner;
+import com.horical.library.listenner.MainActivityListener;
 
-public class MainActivity extends BaseFragmentActivity implements View.OnClickListener, MainListenner {
+public class MainActivity extends BaseFragmentActivity implements View.OnClickListener, MainActivityListener
+{
     private RadioButton mRdbHome, mRdbBooks, mRdbStudents, mRdbSettings;
     private TextView mTvHome, mTvBooks, mTvStudents, mTvSettings;
     private RadioGroup mLayoutFooter;
@@ -81,7 +82,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 if (mCurrentTab != AppConstants.TAB_TYPE.TAB_BOOKS) {
                     BooksFragment booksFragment = BooksFragment.newInstances();
                     showFragmentWithClearStack(booksFragment);
-                    //booksFragment.setCallBack(this);
                     mCurrentTab = AppConstants.TAB_TYPE.TAB_BOOKS;
                 }
                 break;
@@ -107,7 +107,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     private static final long EXIT_INTERVAL = 2000L;
     private long exitTimer = Long.MIN_VALUE;
 
-    //ham nay copy nhung chua hieu
     @Override
     public boolean dispatchKeyEvent(@NonNull KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK
