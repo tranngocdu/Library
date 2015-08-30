@@ -5,14 +5,25 @@ package com.horical.library.dto;
  */
 public class Book implements Comparable<Book> {
     private String name;
+    private String author;
     private String description;
     private String isbn;
     private String available;
     private String total;
 
-    public Book(String name, String description, String isbn, String available, String total) {
+    public Book() {
+    }
+
+    public Book(String name, String author, String available) {
+        this.name = name;
+        this.author = author;
+        this.available = available;
+    }
+
+    public Book(String name, String author, String description, String isbn, String available, String total) {
         super();
         this.name = name;
+        this.author = author;
         this.description = description;
         this.isbn = isbn;
         this.available = available;
@@ -57,6 +68,14 @@ public class Book implements Comparable<Book> {
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override

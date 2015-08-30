@@ -26,13 +26,19 @@
     <!--fragment_books -->
     <dimen name="fragment_books_radio_group_height">30dp</dimen>
     <dimen name="fragment_books_radio_group_margin">20dp</dimen>
+    <dimen name="fragment_books_list_view_text_size_lv1">15sp</dimen>
+    <dimen name="fragment_books_list_view_text_size_lv2">10sp</dimen>
+    <dimen name="fragment_books_list_view_text_header">20sp</dimen>
+    <dimen name="fragment_books_list_view_margin_bottom_lv1">15dp</dimen>
+    <dimen name="fragment_books_list_view_margin_bottom_lv2">5dp</dimen>
+    <dimen name="fragment_books_list_view_padding">5dp</dimen>
 
     <!--fragment_book_detail-->
     <dimen name="text_size_lv_2">25dp</dimen>
     <!--fragment_students -->
 
-    <dimen name ="fragment_student_edt_search_height">35dp</dimen>
-    <dimen name ="fragment_student_ab_text_size">20dp</dimen>
+    <dimen name="fragment_student_edt_search_height">35dp</dimen>
+    <dimen name="fragment_student_ab_text_size">20dp</dimen>
     <dimen name="fragment_student_btn_width_1">250dp</dimen>
     <dimen name="frgament_student_margin_lv_1">10dp</dimen>
     <dimen name="fragment_student_padding_lv_1">10dp</dimen>
