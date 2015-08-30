@@ -27,3 +27,7 @@ DerivedData
 #CocoaPods
 
 Pods
+
+Library/build
+Library/app/build
+
