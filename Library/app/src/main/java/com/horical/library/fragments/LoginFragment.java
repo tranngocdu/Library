@@ -65,6 +65,12 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
     protected boolean hasFooterLayout()
     {
         return false;

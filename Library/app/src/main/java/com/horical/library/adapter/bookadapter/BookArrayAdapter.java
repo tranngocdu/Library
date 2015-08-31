@@ -11,43 +11,51 @@ import java.util.ArrayList;
 /**
  * Created by trandu on 30/08/2015.
  */
-public class BookArrayAdapter extends BaseAdapter {
+public class BookArrayAdapter extends BaseAdapter
+{
 
     private Context mContext;
     private ArrayList<Item> mArrayList;
 
-    public BookArrayAdapter(Context context, ArrayList<Item> arrayList) {
+    public BookArrayAdapter(Context context, ArrayList<Item> arrayList)
+    {
         this.mContext = context;
         this.mArrayList = arrayList;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
         return getItem(position).getView(LayoutInflater.from(mContext), convertView);
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return mArrayList.size();
     }
 
     @Override
-    public Item getItem(int position) {
+    public Item getItem(int position)
+    {
         return mArrayList.get(position);
     }
 
     @Override
-    public int getItemViewType(int position) {
+    public int getItemViewType(int position)
+    {
         return getItem(position).getViewType();
     }
 
     @Override
-    public int getViewTypeCount() {
+    public int getViewTypeCount()
+    {
         return Item.ItemType.values().length;
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int position)
+    {
         return 0;
     }
 }

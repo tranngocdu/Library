@@ -54,15 +54,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_height="0dp"
+                android:layout_weight="0.60"
                 android:background="@color/brown">
 
                 <EditText
+                    android:id="@+id/edtSearch"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/frgament_student_margin_lv_1"
-                    android:background="@drawable/edt_fragment_students_backgroud_search"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/edt_fragment_books_back_ground_search"
                     android:ems="15"
                     android:gravity="center"
                     android:hint="Search"/>
@@ -70,38 +71,24 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="5.5">
+                android:layout_height="0dp"
+                android:layout_weight="5.5"
+                android:orientation="horizontal">
 
+                <ListView
+                    android:id="@+id/lvAllStudents"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"/>
 
-                <FrameLayout
-                    android:id="@+id/frameLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ListView
-                        android:id="@+id/listStudent"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                    </ListView>
-                </FrameLayout>
+                <ListView
+                    android:id="@+id/lvSideBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:divider="@null"
+                    android:gravity="center_horizontal"/>
             </LinearLayout>
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:background="@color/blue"
-            android:gravity="center"
-            android:orientation="vertical"
-            >
-
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>
