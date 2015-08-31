@@ -156,8 +156,8 @@
                 android:id="@+id/lvSideBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:divider="@null" />
+                android:divider="@null"
+                android:gravity="center_horizontal" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

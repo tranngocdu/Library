@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_weight="1"
             android:text="@string/log_in"
             android:textColor="@color/white"
-            android:textSize="@dimen/action_bar_text_size"/>
+            android:textSize="@dimen/action_bar_text_size" />
 
         <TextView
             android:layout_width="0dp"
@@ -29,12 +29,14 @@
             android:gravity="center_vertical|center_horizontal"
             android:text="@string/sign_up"
             android:textColor="@color/white"
-            android:textSize="@dimen/action_bar_text_size"/>
+            android:textSize="@dimen/action_bar_text_size" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/fragment_log_in_margin_left"
+        android:layout_marginRight="@dimen/fragment_log_in_margin_right"
         android:layout_weight="9"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical">
@@ -48,21 +50,21 @@
             android:layout_marginTop="@dimen/fragment_home_btn_checkout_margin"
             android:text="@string/header_sign_up"
             android:textSize="@dimen/activity_login_tv_header_size"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvHeader"
-            android:hint="@string/email"/>
+            android:hint="@string/email" />
 
         <EditText
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edtEmail"
-            android:hint="@string/password"/>
+            android:hint="@string/password" />
 
         <EditText
             android:id="@+id/edtConfirmPassword"
@@ -70,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/edtPassword"
             android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
-            android:hint="@string/confirm_password"/>
+            android:hint="@string/confirm_password" />
 
         <Button
             android:id="@+id/btnCreateAccount"
@@ -81,7 +83,7 @@
             android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
             android:background="@drawable/selector_btn_common_background_fill_green"
             android:text="@string/create_account"
-            android:textColor="#ffffff"/>
+            android:textColor="#ffffff" />
 
         <Button
             android:id="@+id/btnHadAccount"
@@ -92,7 +94,7 @@
             android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
             android:background="@drawable/selector_btn_common_background_no_fill_green"
             android:text="@string/have_account"
-            android:textColor="@color/green"/>
+            android:textColor="@color/green" />
     </LinearLayout>
 
 

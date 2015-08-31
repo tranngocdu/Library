@@ -17,6 +17,9 @@
 
     <!--login-->
     <dimen name="activity_login_tv_header_size">30dp</dimen>
+    <dimen name="fragment_log_in_margin_left">30dp</dimen>
+    <dimen name="fragment_log_in_margin_right">30dp</dimen>
+
 
     <!--fragment home-->
     <dimen name="fragment_home_btn_checkout_margin">20dp</dimen>
@@ -43,4 +46,6 @@
     <dimen name="frgament_student_margin_lv_1">10dp</dimen>
     <dimen name="fragment_student_padding_lv_1">10dp</dimen>
     <!--fragment_settings -->
+    <dimen name="fragment_settings_margin_left">30dp</dimen>
+    <dimen name="fragment_settings_margin_right">30dp</dimen>
 </resources>

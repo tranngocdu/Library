@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:background="@null"
     android:orientation="vertical">
 
@@ -9,7 +10,7 @@
         android:id="@+id/tvSidebar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
-        android:textColor="@color/blue" />
+        android:textColor="@color/blue"
+        android:textStyle="bold" />
 
 </LinearLayout>
