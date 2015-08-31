@@ -69,7 +69,7 @@ public class BookDetailFragment extends BaseFragment implements View.OnClickList
     @Override
     protected boolean hasFooterLayout()
     {
-        return true;
+        return false;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.horical.library.adapter;
+package com.horical.library.adapter.bookadapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
