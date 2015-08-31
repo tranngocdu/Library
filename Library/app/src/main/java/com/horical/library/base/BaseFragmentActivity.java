@@ -51,9 +51,7 @@ abstract public class BaseFragmentActivity extends Activity implements FragmentM
         ft.show(f);
         ft.addToBackStack(tag);
         ft.commit();
-        Log.e("TAG", mFragmentTagStack.size() + " - ");
         mFragmentTagStack.add(tag);
-        Log.e("TAG", mFragmentTagStack.size() + "");
     }
 
     @Override

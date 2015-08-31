@@ -8,15 +8,15 @@ import java.util.Vector;
 public class BookDetail {
     public static Vector<Book> getBookList() {
         Vector<Book> bookList = new Vector<Book>();
-        Book book = new Book("Abc", "adnndndnd", "adaddasd", "1", "3");
+        Book book = new Book("Abc", "", "adnndndnd", "adaddasd", "1", "3");
         bookList.add(book);
-        book = new Book("Tristram Shandy ", "Laurence Sterne ", "1760", " England ", "English");
+        book = new Book("Tristram Shandy ", "", "Laurence Sterne ", "1760", " England ", "English");
         bookList.add(book);
-        book = new Book("Confessions of Zeno ", "Italo Svevo ", "1923", " Italy ", "Italian");
+        book = new Book("Confessions of Zeno ", "", "Italo Svevo ", "1923", " Italy ", "Italian");
         bookList.add(book);
-        book = new Book("Gulliver's Travels ", "Jonathan Swift ", "1726", "   Ireland ", "English");
+        book = new Book("Gulliver's Travels ", "", "Jonathan Swift ", "1726", "   Ireland ", "English");
         bookList.add(book);
-        book = new Book("War and Peace ", "Leo Tolstoy ", "1865�1869 ", "Russia ", "Russian");
+        book = new Book("War and Peace ", "", "Leo Tolstoy ", "1865�1869 ", "Russia ", "Russian");
         bookList.add(book);
         return bookList;
     }

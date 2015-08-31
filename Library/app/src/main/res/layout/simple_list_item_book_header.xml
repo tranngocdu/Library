@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/fragment_book_list_view_header_bg"
+        android:padding="@dimen/fragment_books_list_view_padding"
+        android:text="New Text"
+        android:textColor="@color/black"
+        android:textSize="@dimen/fragment_books_list_view_text_size_lv1" />
+</LinearLayout>
