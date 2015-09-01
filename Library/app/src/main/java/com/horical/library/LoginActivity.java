@@ -37,12 +37,10 @@ public class LoginActivity extends BaseFragmentActivity implements LoginActivity
     private void SelectorFragmentByID(int id) {
         switch (id) {
             case 0:
-                LoginFragment loginFragment = new LoginFragment();
-                showFragmentWithClearStack(loginFragment);
+                showFragmentWithClearStack(LoginFragment.newInstances());
                 break;
             case 1:
-                SignUpFragment signUpFragment = new SignUpFragment();
-                showFragment(signUpFragment);
+                showFragment(SignUpFragment.newInstances());
                 break;
         }
     }
