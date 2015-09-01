@@ -11,7 +11,7 @@ import com.horical.library.dto.Book;
 /**
  * Created by trandu on 30/08/2015.
  */
-public class ItemBody implements Item {
+public class ItemBody extends Item {
 
     public Book mBook;
 

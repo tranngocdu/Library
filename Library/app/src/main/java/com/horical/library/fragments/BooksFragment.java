@@ -2,6 +2,8 @@ package com.horical.library.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,11 +97,97 @@ public class BooksFragment extends BaseFragment implements View.OnClickListener 
                 }
             }
         });
+        mEdtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
     protected void initData() {
         ArrayList arrayList = new ArrayList();
+        arrayList.add(new ItemBody(new Book("abc", "def", "100")));
+        arrayList.add(new ItemBody(new Book("ghi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("guh", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("goi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gpi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gtr", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gnb", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gmn", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uit", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uti", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uoi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uio", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("poi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("pji", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("abc", "def", "100")));
+        arrayList.add(new ItemBody(new Book("ghi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("guh", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("goi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gpi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gtr", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gnb", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gmn", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uit", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uti", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uoi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uio", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("poi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("pji", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("abc", "def", "100")));
+        arrayList.add(new ItemBody(new Book("ghi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("guh", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("goi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gpi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gtr", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gnb", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gmn", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uit", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uti", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uoi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uio", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("poi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("pji", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("abc", "def", "100")));
+        arrayList.add(new ItemBody(new Book("ghi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("guh", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("goi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gpi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gtr", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gnb", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("gmn", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uit", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uti", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uoi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uio", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("poi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("pji", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("abc", "def", "100")));
+        arrayList.add(new ItemBody(new Book("ghi", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("guh", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("bbb", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("bnv", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("bkl", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("hui", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("jni", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("uit", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("jdk", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("jvm", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("sdk", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("ndk", "ihg", "200")));
+        arrayList.add(new ItemBody(new Book("pji", "ihg", "200")));
         arrayList.add(new ItemBody(new Book("abc", "def", "100")));
         arrayList.add(new ItemBody(new Book("ghi", "ihg", "200")));
         arrayList.add(new ItemBody(new Book("guh", "ihg", "200")));
@@ -133,7 +221,6 @@ public class BooksFragment extends BaseFragment implements View.OnClickListener 
     protected boolean hasFooterLayout() {
         return true;
     }
-
 
     @Override
     public void onClick(View v) {

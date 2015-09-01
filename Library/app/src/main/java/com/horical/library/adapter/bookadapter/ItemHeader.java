@@ -11,7 +11,7 @@ import org.w3c.dom.Text;
 /**
  * Created by trandu on 30/08/2015.
  */
-public class ItemHeader implements Item {
+public class ItemHeader extends Item {
 
     public int mIndex;
     private String mText;
