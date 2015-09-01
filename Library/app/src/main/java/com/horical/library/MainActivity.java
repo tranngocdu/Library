@@ -12,18 +12,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.horical.library.base.BaseFragmentActivity;
+import com.horical.library.bases.BaseFragmentActivity;
 import com.horical.library.fragments.AddBookFragment;
 import com.horical.library.fragments.BookDetailFragment;
 import com.horical.library.fragments.BooksFragment;
 import com.horical.library.fragments.HomeFragment;
 import com.horical.library.fragments.SettingsFragment;
 import com.horical.library.fragments.StudentsFragment;
-import com.horical.library.listenner.BackPressListener;
-import com.horical.library.listenner.MainActivityListener;
+import com.horical.library.listenners.BackPressListener;
+import com.horical.library.listenners.MainActivityListener;
 
-public class MainActivity extends BaseFragmentActivity implements View.OnClickListener, MainActivityListener
-{
+public class MainActivity extends BaseFragmentActivity implements View.OnClickListener, MainActivityListener {
     private RadioButton mRdbHome, mRdbBooks, mRdbStudents, mRdbSettings;
     private TextView mTvHome, mTvBooks, mTvStudents, mTvSettings;
     private RadioGroup mLayoutFooter;
@@ -31,28 +30,24 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     private AppConstants.TAB_TYPE mCurrentTab = AppConstants.TAB_TYPE.TAB_NONE;
 
     @Override
-    protected Fragment onCreateMainFragment(Bundle savedInstancesState)
-    {
+    protected Fragment onCreateMainFragment(Bundle savedInstancesState) {
         mCurrentTab = AppConstants.TAB_TYPE.TAB_HOME;
         return HomeFragment.newInstance();
     }
 
     @Override
-    protected int getFragmentContainerId()
-    {
+    protected int getFragmentContainerId() {
         return R.id.layoutContent;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
     }
 
-    private void initViews()
-    {
+    private void initViews() {
         mRdbHome = (RadioButton) findViewById(R.id.btnHome);
         mRdbHome.setOnClickListener(this);
 
@@ -68,15 +63,12 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         mLayoutFooter = (RadioGroup) findViewById(R.id.layoutFooter);
     }
 
-    private void initListener()
-    {
+    private void initListener() {
 
     }
 
-    private void SelectorFragmentByID(int id)
-    {
-        switch (id)
-        {
+    private void SelectorFragmentByID(int id) {
+        switch (id) {
             case 0: //TAB_HOME
                 HomeFragment homeFragment = HomeFragment.newInstance();
                 showFragmentWithClearStack(homeFragment);
@@ -101,31 +93,25 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     }
 
     @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.btnHome:
-                if (mCurrentTab != AppConstants.TAB_TYPE.TAB_HOME)
-                {
+                if (mCurrentTab != AppConstants.TAB_TYPE.TAB_HOME) {
                     SelectorFragmentByID(0);
                 }
                 break;
             case R.id.btnBooks:
-                if (mCurrentTab != AppConstants.TAB_TYPE.TAB_BOOKS)
-                {
+                if (mCurrentTab != AppConstants.TAB_TYPE.TAB_BOOKS) {
                     SelectorFragmentByID(1);
                 }
                 break;
             case R.id.btnStudents:
-                if (mCurrentTab != AppConstants.TAB_TYPE.TAB_STUDENTS)
-                {
+                if (mCurrentTab != AppConstants.TAB_TYPE.TAB_STUDENTS) {
                     SelectorFragmentByID(2);
                 }
                 break;
             case R.id.btnSettings:
-                if (mCurrentTab != AppConstants.TAB_TYPE.TAB_SETTINGS)
-                {
+                if (mCurrentTab != AppConstants.TAB_TYPE.TAB_SETTINGS) {
                     SelectorFragmentByID(3);
                 }
                 break;
@@ -138,43 +124,33 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     private long exitTimer = Long.MIN_VALUE;
 
     @Override
-    public boolean dispatchKeyEvent(@NonNull KeyEvent event)
-    {
+    public boolean dispatchKeyEvent(@NonNull KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK
-                && event.getRepeatCount() == 0)
-        {
+                && event.getRepeatCount() == 0) {
             FragmentManager fm = getFragmentManager();
-            if (mFragmentTagStack.size() > 0)
-            {
+            if (mFragmentTagStack.size() > 0) {
                 Fragment f = fm.findFragmentByTag(mFragmentTagStack.peek());
-                if (f instanceof BackPressListener)
-                {
-                    if (((BackPressListener) f).onBackPress())
-                    {
+                if (f instanceof BackPressListener) {
+                    if (((BackPressListener) f).onBackPress()) {
                         return true;
                     }
                 }
             }
 
             boolean tryFinish = false;
-            if (mFragmentTagStack.size() == 1)
-            {
+            if (mFragmentTagStack.size() == 1) {
                 tryFinish = true;
             }
 
-            if (tryFinish)
-            {
-                if ((exitTimer + EXIT_INTERVAL) < System.currentTimeMillis())
-                {
+            if (tryFinish) {
+                if ((exitTimer + EXIT_INTERVAL) < System.currentTimeMillis()) {
                     Toast.makeText(this, getString(R.string.confirm_exit), Toast.LENGTH_SHORT).show();
                     exitTimer = System.currentTimeMillis();
-                } else
-                {
+                } else {
                     finish();
                 }
                 return true;
-            } else
-            {
+            } else {
                 return super.dispatchKeyEvent(event);
             }
         }
@@ -182,41 +158,35 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     }
 
     @Override
-    public void createCameraForScan()
-    {
+    public void createCameraForScan() {
 
     }
 
     @Override
-    public void attachAddBookFragment()
-    {
+    public void attachAddBookFragment() {
         AddBookFragment addBookFragment = AddBookFragment.newInstances();
         showFragment(addBookFragment);
 
     }
 
     @Override
-    public void attachBookDetailFragment()
-    {
+    public void attachBookDetailFragment() {
         BookDetailFragment bookDetailFragment = BookDetailFragment.newInstance();
         showFragment(bookDetailFragment);
     }
 
     @Override
-    public void showFooterLayout()
-    {
+    public void showFooterLayout() {
         mLayoutFooter.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideFooterLayout()
-    {
+    public void hideFooterLayout() {
         mLayoutFooter.setVisibility(View.GONE);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
 }

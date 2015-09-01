@@ -11,45 +11,39 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.horical.library.R;
-import com.horical.library.base.BaseFragment;
+import com.horical.library.bases.BaseFragment;
 
 /**
  * Created by Diem Huong on 8/29/2015.
  */
-public class SignUpFragment extends BaseFragment implements View.OnClickListener
-{
+public class SignUpFragment extends BaseFragment implements View.OnClickListener {
     private TextView mTvBackToLogin;
     private EditText mEdtEmail, mEdtPassword, mEdtConfirmPassword;
     private Button mBtnCreateAccount, mBtnHadAccount;
 
-    public static BaseFragment newInstances()
-    {
+    public static BaseFragment newInstances() {
         return new SignUpFragment();
     }
 
     @Override
-    public void onAttach(Activity activity)
-    {
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         return view;
     }
 
     @Override
-    protected void initView(View view)
-    {
+    protected void initView(View view) {
         mTvBackToLogin = (TextView) view.findViewById(R.id.tvBackToLogin);
 
         mEdtEmail = (EditText) view.findViewById(R.id.edtEmail);
@@ -61,8 +55,7 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
-    protected void initListener(View view)
-    {
+    protected void initListener(View view) {
         mTvBackToLogin.setOnClickListener(this);
 
         mEdtEmail.setOnClickListener(this);
@@ -74,22 +67,18 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
-    protected void initData()
-    {
+    protected void initData() {
 
     }
 
     @Override
-    protected boolean hasFooterLayout()
-    {
+    protected boolean hasFooterLayout() {
         return false;
     }
 
     @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.tvBackToLogin:
                 mLoginActivityListener.attachLoginFragment();
                 break;

@@ -1,10 +1,9 @@
-package com.horical.library.listenner;
+package com.horical.library.listenners;
 
 /**
  * Created by Diem Huong on 8/25/2015.
  */
-public interface MainActivityListener
-{
+public interface MainActivityListener {
     public void createCameraForScan();
 
     public void attachAddBookFragment();

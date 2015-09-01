@@ -9,60 +9,50 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.TextView;
 
 import com.horical.library.R;
-import com.horical.library.base.BaseFragment;
+import com.horical.library.bases.BaseFragment;
 
 /**
  * Created by Diem Huong on 8/27/2015.
  */
-public class AddBookFragment extends BaseFragment implements View.OnClickListener
-{
+public class AddBookFragment extends BaseFragment implements View.OnClickListener {
     private Button btnAddBook, btnAddPhoto;
     private ImageButton ibtnBack;
     private EditText edtBookTitle, edtBookAuthor, edtBookISBM, edtBookNumber;
 
-    public static AddBookFragment newInstances()
-    {
+    public static AddBookFragment newInstances() {
         return new AddBookFragment();
     }
 
     @Override
-    public void onAttach(Activity activity)
-    {
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_book, container, false);
         return view;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
-    {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void initDatas()
-    {
+    private void initDatas() {
 
     }
 
     @Override
-    protected void initView(View view)
-    {
+    protected void initView(View view) {
         ibtnBack = (ImageButton) view.findViewById(R.id.ibtnBack);
         btnAddBook = (Button) view.findViewById(R.id.btnAddBook);
         btnAddPhoto = (Button) view.findViewById(R.id.btnAddPhoto);
@@ -72,30 +62,25 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    protected void initListener(View view)
-    {
+    protected void initListener(View view) {
         btnAddPhoto.setOnClickListener(this);
         btnAddBook.setOnClickListener(this);
         ibtnBack.setOnClickListener(this);
     }
 
     @Override
-    protected void initData()
-    {
+    protected void initData() {
 
     }
 
     @Override
-    protected boolean hasFooterLayout()
-    {
+    protected boolean hasFooterLayout() {
         return false;
     }
 
     @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.btnAddBook:
                 break;
             case R.id.btnAddPhoto:

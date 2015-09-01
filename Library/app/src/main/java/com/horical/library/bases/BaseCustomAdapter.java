@@ -1,13 +1,15 @@
-package com.horical.library.base;
+package com.horical.library.bases;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.horical.library.adapter.bookadapter.Item;
-import com.horical.library.adapter.bookadapter.ItemBody;
-import com.horical.library.adapter.bookadapter.ItemHeader;
+import com.horical.library.adapters.Item;
+import com.horical.library.adapters.ItemBook;
+import com.horical.library.adapters.ItemHeader;
+import com.horical.library.adapters.ItemStudent;
 
 import java.util.ArrayList;
 
@@ -19,17 +21,19 @@ public class BaseCustomAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<Item> mArrayList;
 
-    public String[] alphabet = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+    public static String[] alphabet = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+    public int[] index = new int[alphabet.length];
 
 
     public BaseCustomAdapter(Context context, ArrayList<Item> arrayList) {
         mContext = context;
         mArrayList = arrayList;
+        mArrayList = sortAlphabet(mArrayList);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        return getItem(position).getView(LayoutInflater.from(mContext), convertView);
     }
 
     @Override
@@ -44,7 +48,7 @@ public class BaseCustomAdapter extends BaseAdapter {
 
     @Override
     public Item getItem(int position) {
-        return null;
+        return mArrayList.get(position);
     }
 
     @Override
@@ -61,11 +65,18 @@ public class BaseCustomAdapter extends BaseAdapter {
         ArrayList result = new ArrayList();
         ArrayList[] arrayLists = new ArrayList[alphabet.length];
         for (int i = 0; i < arrayList.size(); i++) {
-            String bookName = ((ItemBody) arrayList.get(i)).mBook.getName();
-            String firstChar = bookName.substring(0, 1);
+            Item item = arrayList.get(i);
+            String name = null;
+            if (item instanceof ItemBook) {
+                name = ((ItemBook) item).mBook.getName();
+            } else if (item instanceof ItemStudent) {
+                name = ((ItemStudent) item).mStudent.getName();
+            }
+            String firstChar = name.substring(0, 1);
             for (int j = 0; j < alphabet.length; j++) {
                 if (arrayLists[j] == null) {
                     arrayLists[j] = new ArrayList();
+                    index[j] = -1;
                 }
                 if (alphabet[j].equalsIgnoreCase(firstChar)) {
                     arrayLists[j].add(arrayList.get(i));
@@ -75,6 +86,7 @@ public class BaseCustomAdapter extends BaseAdapter {
         for (int i = 0; i < arrayLists.length; i++) {
             if (arrayLists[i].size() > 0) {
                 result.add(new ItemHeader(result.size(), alphabet[i]));
+                index[i] = result.size();
                 result.addAll(arrayLists[i]);
             }
         }

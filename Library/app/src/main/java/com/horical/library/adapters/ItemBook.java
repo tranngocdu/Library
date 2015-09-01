@@ -1,4 +1,4 @@
-package com.horical.library.adapter.bookadapter;
+package com.horical.library.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +11,11 @@ import com.horical.library.dto.Book;
 /**
  * Created by trandu on 30/08/2015.
  */
-public class ItemBody extends Item {
+public class ItemBook extends Item {
 
     public Book mBook;
 
-    public ItemBody(Book book) {
+    public ItemBook(Book book) {
         this.mBook = book;
     }
 
@@ -25,7 +25,7 @@ public class ItemBody extends Item {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.simple_list_item_book_body, null);
+            convertView = inflater.inflate(R.layout.simple_list_item_book, null);
             viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvBookName);
             viewHolder.tvAuthor = (TextView) convertView.findViewById(R.id.tvBookAuthor);
             viewHolder.tvAvailable = (TextView) convertView.findViewById(R.id.tvBookAvailable);
@@ -43,7 +43,7 @@ public class ItemBody extends Item {
 
     @Override
     public int getViewType() {
-        return ItemType.ITEM_BODY.ordinal();
+        return ItemType.ITEM_BOOK.ordinal();
     }
 
     class ViewHolder {

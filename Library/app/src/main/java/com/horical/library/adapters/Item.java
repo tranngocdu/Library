@@ -1,4 +1,4 @@
-package com.horical.library.adapter.bookadapter;
+package com.horical.library.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,7 @@ import android.view.View;
 public abstract class Item {
 
     public enum ItemType {
-        ITEM_HEADER, ITEM_BODY;
+        ITEM_HEADER, ITEM_BOOK, ITEM_STUDENT;
     }
 
     public abstract View getView(LayoutInflater inflater, View convertView);

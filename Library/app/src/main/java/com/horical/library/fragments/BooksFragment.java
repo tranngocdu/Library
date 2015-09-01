@@ -2,13 +2,10 @@ package com.horical.library.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -16,30 +13,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.horical.library.R;
-import com.horical.library.adapter.bookadapter.BookArrayAdapter;
-import com.horical.library.adapter.bookadapter.Item;
-import com.horical.library.adapter.bookadapter.ItemBody;
-import com.horical.library.adapter.bookadapter.ItemHeader;
-import com.horical.library.adapter.bookadapter.SideBarAdapter;
-import com.horical.library.base.BaseFragment;
+import com.horical.library.adapters.BookAdapter;
+import com.horical.library.adapters.ItemBook;
+import com.horical.library.bases.BaseFragmentHasList;
 import com.horical.library.dto.Book;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by trandu on 24/08/2015.
  */
-public class BooksFragment extends BaseFragment implements View.OnClickListener {
+public class BooksFragment extends BaseFragmentHasList implements View.OnClickListener, AdapterView.OnItemClickListener {
+
     private TextView mTvAddBooks;
     private RadioButton mRbtAllBooks, mRbtAvailable, mRbtCheckedOut;
     private EditText mEdtSearch;
-    private ListView mLvAllBook, mLvSideBar;
-    private BookArrayAdapter mBookAdapter;
-    private SideBarAdapter mSideBarAdapter;
-
-    public String[] alphabet = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-    public int[] index = new int[alphabet.length];
+    private ListView mLvAllBook;
+    private BookAdapter mBookAdapter;
 
     public static BooksFragment newInstances() {
         return new BooksFragment();
@@ -68,158 +58,133 @@ public class BooksFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     protected void initView(View view) {
+        super.initView(view);
         mRbtAllBooks = (RadioButton) view.findViewById(R.id.rbtAllBooks);
         mRbtAvailable = (RadioButton) view.findViewById(R.id.rbtAvailable);
         mRbtCheckedOut = (RadioButton) view.findViewById(R.id.rbtCheckedOut);
         mTvAddBooks = (TextView) view.findViewById(R.id.tvAddBooks);
         mEdtSearch = (EditText) view.findViewById(R.id.edtSearch);
-        mLvAllBook = (ListView) view.findViewById(R.id.lvAllBook);
-        mLvSideBar = (ListView) view.findViewById(R.id.lvSideBar);
+        mLvAllBook = (ListView) view.findViewById(R.id.lvAllBooks);
     }
 
     @Override
     protected void initListener(View view) {
+        super.initListener(view);
         mRbtCheckedOut.setOnClickListener(this);
         mRbtAvailable.setOnClickListener(this);
         mRbtAllBooks.setOnClickListener(this);
         mTvAddBooks.setOnClickListener(this);
+
         mLvAllBook.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-
             }
         });
-        mLvSideBar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
-                if (index[position] != -1) {
-                    mLvAllBook.smoothScrollToPositionFromTop(index[position] - 1, 0);
-                }
-            }
-        });
-        mEdtSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        mLvSideBar.setOnItemClickListener(this);
     }
 
     @Override
     protected void initData() {
+        super.initData();
         ArrayList arrayList = new ArrayList();
-        arrayList.add(new ItemBody(new Book("abc", "def", "100")));
-        arrayList.add(new ItemBody(new Book("ghi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("guh", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("goi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gpi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gtr", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gnb", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gmn", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uit", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uti", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uoi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uio", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("poi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("pji", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("abc", "def", "100")));
-        arrayList.add(new ItemBody(new Book("ghi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("guh", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("goi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gpi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gtr", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gnb", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gmn", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uit", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uti", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uoi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uio", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("poi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("pji", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("abc", "def", "100")));
-        arrayList.add(new ItemBody(new Book("ghi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("guh", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("goi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gpi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gtr", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gnb", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gmn", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uit", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uti", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uoi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uio", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("poi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("pji", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("abc", "def", "100")));
-        arrayList.add(new ItemBody(new Book("ghi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("guh", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("goi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gpi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gtr", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gnb", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gmn", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uit", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uti", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uoi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uio", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("poi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("pji", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("abc", "def", "100")));
-        arrayList.add(new ItemBody(new Book("ghi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("guh", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("bbb", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("bnv", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("bkl", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("hui", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("jni", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uit", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("jdk", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("jvm", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("sdk", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("ndk", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("pji", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("abc", "def", "100")));
-        arrayList.add(new ItemBody(new Book("ghi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("guh", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("goi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gpi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gtr", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gnb", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("gmn", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uit", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uti", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uoi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("uio", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("poi", "ihg", "200")));
-        arrayList.add(new ItemBody(new Book("pji", "ihg", "200")));
-        arrayList = sortAlphabet(arrayList);
-        mBookAdapter = new BookArrayAdapter(getActivity(), arrayList);
+        arrayList.add(new ItemBook(new Book("abc", "def", "100")));
+        arrayList.add(new ItemBook(new Book("ghi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("guh", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("goi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gpi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gtr", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gnb", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gmn", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uit", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uti", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uoi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uio", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("poi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("pji", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("abc", "def", "100")));
+        arrayList.add(new ItemBook(new Book("ghi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("guh", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("goi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gpi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gtr", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gnb", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gmn", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uit", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uti", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uoi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uio", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("poi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("pji", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("abc", "def", "100")));
+        arrayList.add(new ItemBook(new Book("ghi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("guh", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("goi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gpi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gtr", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gnb", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gmn", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uit", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uti", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uoi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uio", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("poi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("pji", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("abc", "def", "100")));
+        arrayList.add(new ItemBook(new Book("ghi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("guh", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("goi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gpi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gtr", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gnb", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gmn", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uit", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uti", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uoi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uio", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("poi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("pji", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("abc", "def", "100")));
+        arrayList.add(new ItemBook(new Book("ghi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("guh", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("bbb", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("bnv", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("bkl", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("hui", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("jni", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uit", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("jdk", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("jvm", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("sdk", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("ndk", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("pji", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("abc", "def", "100")));
+        arrayList.add(new ItemBook(new Book("ghi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("guh", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("goi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gpi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gtr", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gnb", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("gmn", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uit", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uti", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uoi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("uio", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("poi", "ihg", "200")));
+        arrayList.add(new ItemBook(new Book("pji", "ihg", "200")));
+        mBookAdapter = new BookAdapter(mContext, arrayList);
         mLvAllBook.setAdapter(mBookAdapter);
-        try {
-            ArrayList arrayList1 = new ArrayList();
-            for (int i = 0; i < alphabet.length; i++) {
-                arrayList1.add(alphabet[i]);
-            }
-            mSideBarAdapter = new SideBarAdapter(getActivity(), 0, arrayList1);
-            mLvSideBar.setAdapter(mSideBarAdapter);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
     @Override
     protected boolean hasFooterLayout() {
         return true;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (mBookAdapter.index[position] != -1) {
+            mLvAllBook.smoothScrollToPositionFromTop(mBookAdapter.index[position] - 1, 0);
+        }
     }
 
     @Override
@@ -243,30 +208,5 @@ public class BooksFragment extends BaseFragment implements View.OnClickListener 
         }
     }
 
-    public ArrayList<Item> sortAlphabet(ArrayList<Item> arrayList) {
-        ArrayList result = new ArrayList();
-        ArrayList[] arrayLists = new ArrayList[alphabet.length];
-        for (int i = 0; i < arrayList.size(); i++) {
-            String bookName = ((ItemBody) arrayList.get(i)).mBook.getName();
-            String firstChar = bookName.substring(0, 1);
-            for (int j = 0; j < alphabet.length; j++) {
-                if (arrayLists[j] == null) {
-                    arrayLists[j] = new ArrayList();
-                    index[j] = -1;
-                }
-                if (alphabet[j].equalsIgnoreCase(firstChar)) {
-                    arrayLists[j].add(arrayList.get(i));
-                }
-            }
-        }
-        for (int i = 0; i < arrayLists.length; i++) {
-            if (arrayLists[i].size() > 0) {
-                result.add(new ItemHeader(result.size(), alphabet[i]));
-                index[i] = result.size();
-                result.addAll(arrayLists[i]);
-            }
-        }
-        return result;
-    }
 
 }
