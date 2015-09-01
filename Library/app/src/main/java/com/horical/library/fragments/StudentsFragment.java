@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.horical.library.R;
 import com.horical.library.adapters.ItemStudent;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 
 public class StudentsFragment extends BaseFragmentHasList implements View.OnClickListener {
 
-
+    private TextView mTvAdd;
     private ListView mLvAllStudent;
     private StudentAdapter mStudentAdapter;
 
@@ -55,12 +56,14 @@ public class StudentsFragment extends BaseFragmentHasList implements View.OnClic
     @Override
     protected void initView(View view) {
         super.initView(view);
+        mTvAdd = (TextView) view.findViewById(R.id.tvAdd);
         mLvAllStudent = (ListView) view.findViewById(R.id.lvAllStudents);
     }
 
     @Override
     protected void initListener(View view) {
         super.initListener(view);
+        mTvAdd.setOnClickListener(this);
         mLvSideBar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -77,50 +80,6 @@ public class StudentsFragment extends BaseFragmentHasList implements View.OnClic
         try {
             ArrayList arrayList = new ArrayList();
             arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
-            arrayList.add(new ItemStudent(new Student()));
             mStudentAdapter = new StudentAdapter(mContext, arrayList);
             mLvAllStudent.setAdapter(mStudentAdapter);
         } catch (Exception ex) {
@@ -136,7 +95,9 @@ public class StudentsFragment extends BaseFragmentHasList implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
+            case R.id.tvAdd:
+                mMainActivityListener.attachAddStudentFragment();
+                break;
         }
     }
 }

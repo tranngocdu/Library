@@ -4,9 +4,9 @@ package com.horical.library.listenners;
  * Created by Diem Huong on 8/29/2015.
  */
 public interface LoginActivityListener {
-    public void startMainActivityByLogin();
+    void startMainActivityByLogin(String email, String token);
 
-    public void attachSignUpFragment();
+    void attachSignUpFragment();
 
-    public void attachLoginFragment();
+    void attachLoginFragment();
 }

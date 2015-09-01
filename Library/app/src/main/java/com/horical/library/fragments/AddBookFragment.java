@@ -35,7 +35,6 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
         super.onCreate(savedInstanceState);
     }
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_book, container, false);

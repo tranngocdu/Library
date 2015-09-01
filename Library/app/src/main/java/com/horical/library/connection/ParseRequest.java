@@ -1,5 +1,7 @@
 package com.horical.library.connection;
 
+import com.horical.library.MainApplication;
+import com.horical.library.connection.callback.ChangPasswordCallback;
 import com.horical.library.connection.callback.LoginCallback;
 import com.horical.library.connection.callback.LogoutCallback;
 import com.horical.library.connection.callback.SignupCallback;
@@ -7,6 +9,7 @@ import com.parse.LogInCallback;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 public class ParseRequest {
@@ -51,6 +54,25 @@ public class ParseRequest {
                 }
             }
         });
+    }
+
+    public static void changePassword(String password, final ChangPasswordCallback callback) {
+        try {
+            final ParseUser user = ParseUser.become(MainApplication.getToken());
+            user.setPassword(password);
+            user.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        callback.onChangePasswordSuccess(user);
+                    } else {
+                        callback.onChangePasswordError(e.toString());
+                    }
+                }
+            });
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
 }

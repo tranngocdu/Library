@@ -2,7 +2,6 @@ package com.horical.library.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,7 @@ import com.parse.ParseUser;
  * Created by Diem Huong on 8/29/2015.
  */
 public class LoginFragment extends BaseFragment implements View.OnClickListener, LoginCallback {
+
     private EditText mEdtEmail, mEdtPassword;
     private Button mBtnSignIn, mBtnCreateAccount;
     private TextView mTvForgotPassword;
@@ -73,7 +73,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             case R.id.btnSignIn:
                 String email = mEdtEmail.getText().toString().trim();
                 String password = mEdtPassword.getText().toString().trim();
-                Log.e("TAG", "onClick : " + email + "/" + password);
                 if (!email.equalsIgnoreCase("") && !password.equalsIgnoreCase("")) {
                     ParseRequest.login(email, password, this);
                 } else {
@@ -92,7 +91,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
     @Override
     public void onLoginSuccess(ParseUser user) {
-        mLoginActivityListener.startMainActivityByLogin();
+        mLoginActivityListener.startMainActivityByLogin(user.getEmail(), user.getSessionToken());
     }
 
     @Override

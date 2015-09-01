@@ -18,9 +18,11 @@ import com.horical.library.listenners.LoginActivityListener;
  * Created by Diem Huong on 8/29/2015.
  */
 public class LoginActivity extends BaseFragmentActivity implements LoginActivityListener {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkLogin();
         setContentView(R.layout.activity_login);
     }
 
@@ -83,8 +85,10 @@ public class LoginActivity extends BaseFragmentActivity implements LoginActivity
     }
 
     @Override
-    public void startMainActivityByLogin() {
+    public void startMainActivityByLogin(String email, String token) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("email", email);
+        intent.putExtra("token", token);
         startActivity(intent);
         this.finish();
     }
@@ -98,4 +102,11 @@ public class LoginActivity extends BaseFragmentActivity implements LoginActivity
     public void attachLoginFragment() {
         SelectorFragmentByID(0);
     }
+
+    public void checkLogin() {
+        if (!MainApplication.getToken().equalsIgnoreCase("null")) {
+            startMainActivityByLogin(MainApplication.getEmail(), MainApplication.getToken());
+        }
+    }
+
 }

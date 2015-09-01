@@ -1,6 +1,7 @@
 package com.horical.library.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +10,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.horical.library.LoginActivity;
+import com.horical.library.MainActivity;
+import com.horical.library.MainApplication;
 import com.horical.library.R;
 import com.horical.library.bases.BaseFragment;
+import com.horical.library.connection.ParseRequest;
+import com.horical.library.connection.callback.ChangPasswordCallback;
+import com.horical.library.connection.callback.LogoutCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 /**
  * Created by trandu on 24/08/2015.
  */
-public class SettingsFragment extends BaseFragment implements View.OnClickListener {
+public class SettingsFragment extends BaseFragment implements View.OnClickListener, ChangPasswordCallback, LogoutCallback {
     private EditText mEdtEmail, mEdtCurrentPassword, mEdtNewPassword, mEdtConfirmNewPassword;
-    private Button mBtnUpgrade, mBtnHelpMe, mBtnLogout;
+    private Button mBtnUpdate, mBtnHelpMe, mBtnLogout;
+    private ParseUser mUser;
 
     public static SettingsFragment newInstances() {
         return new SettingsFragment();
@@ -54,19 +64,24 @@ public class SettingsFragment extends BaseFragment implements View.OnClickListen
 
         mBtnHelpMe = (Button) view.findViewById(R.id.btnHelpMe);
         mBtnLogout = (Button) view.findViewById(R.id.btnLogout);
-        mBtnUpgrade = (Button) view.findViewById(R.id.btnUpgrade);
+        mBtnUpdate = (Button) view.findViewById(R.id.btnUpdate);
     }
 
     @Override
     public void initListener(View view) {
         mBtnHelpMe.setOnClickListener(this);
         mBtnLogout.setOnClickListener(this);
-        mBtnUpgrade.setOnClickListener(this);
+        mBtnUpdate.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
-
+        try {
+            mUser = ParseUser.become(MainApplication.getToken());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        mEdtEmail.setText(MainApplication.getEmail());
     }
 
     @Override
@@ -79,15 +94,53 @@ public class SettingsFragment extends BaseFragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.btnHelpMe:
                 Toast.makeText(getActivity(), "btnHelpMe", Toast.LENGTH_SHORT).show();
-                mMainActivityListener.attachBookDetailFragment();
                 break;
             case R.id.btnLogout:
-                Toast.makeText(getActivity(), "btnLogout", Toast.LENGTH_SHORT).show();
+                MainApplication.deleteToken();
+                ParseRequest.logout(this);
+                Intent intent = new Intent(mContext, LoginActivity.class);
+                startActivity(intent);
+                ((MainActivity) mContext).finish();
                 break;
-            case R.id.btnUpgrade:
-                Toast.makeText(getActivity(), "btnUpgrade", Toast.LENGTH_SHORT).show();
+            case R.id.btnUpdate:
+                update();
+                break;
             default:
-                break;
         }
+    }
+
+    public void update() {
+        String currentPassword = mEdtCurrentPassword.getText().toString();
+        String newPassword = mEdtNewPassword.getText().toString();
+        String reNewPassword = mEdtConfirmNewPassword.getText().toString();
+        if (currentPassword.equals("") || newPassword.equals("") || reNewPassword.equals("")) {
+            Toast.makeText(mContext, "Cant empty", Toast.LENGTH_SHORT).show();
+        } else {
+            if (newPassword.equals(reNewPassword)) {
+                ParseRequest.changePassword(newPassword, this);
+            } else {
+                Toast.makeText(mContext, "New password and re-password incorrect", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void onChangePasswordSuccess(ParseUser user) {
+        Toast.makeText(mContext, "Change password success", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onChangePasswordError(String message) {
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLogoutSuccess() {
+
+    }
+
+    @Override
+    public void onLogoutError(String message) {
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 }

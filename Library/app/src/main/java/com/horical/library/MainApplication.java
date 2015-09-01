@@ -2,6 +2,7 @@ package com.horical.library;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.horical.library.dto.NewBook;
 import com.horical.library.dto.Student;
@@ -12,7 +13,12 @@ import com.parse.ParsePush;
 import com.parse.SaveCallback;
 
 public class MainApplication extends Application {
+
     public static final String TAG = MainApplication.class.getSimpleName();
+    public static final String LIB_PREFERENCE = "UserToken";
+    public static final String TOKEN = "token";
+    public static final String EMAIL = "email";
+    private static SharedPreferences mSharedPreferences;
 
     private static Context mContext;
 
@@ -32,10 +38,32 @@ public class MainApplication extends Application {
 
             }
         });
+        mSharedPreferences = getSharedPreferences(LIB_PREFERENCE, MODE_PRIVATE);
     }
 
     public static Context getContext() {
         return mContext;
+    }
+
+    public static void saveUserSession(String email, String token) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString(TOKEN, token);
+        editor.putString(EMAIL, email);
+        editor.commit();
+    }
+
+    public static String getToken() {
+        return mSharedPreferences.getString(TOKEN, "null");
+    }
+
+    public static String getEmail() {
+        return mSharedPreferences.getString(EMAIL, "null");
+    }
+
+    public static void deleteToken() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.clear();
+        editor.commit();
     }
 
 }

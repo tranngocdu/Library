@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.horical.library.MainApplication;
 import com.horical.library.R;
 import com.horical.library.bases.BaseFragment;
 import com.horical.library.scanner.ZBarConstants;
@@ -27,6 +28,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private Button mBtnCheckOut, mBtnCheckIn;
     private TextView textView;
+    private String mUserEmail, mUserSessionToken;
 
     public HomeFragment() {
 
@@ -39,6 +41,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        Intent intent = activity.getIntent();
+        mUserEmail = intent.getStringExtra("email");
+        mUserSessionToken = intent.getStringExtra("token");
+        MainApplication.saveUserSession(mUserEmail, mUserSessionToken);
     }
 
     @Override
