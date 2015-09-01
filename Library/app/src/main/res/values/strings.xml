@@ -5,6 +5,10 @@
     <string name="confirm_exit">Tap back button again to exit app</string>
     <string name="library">Library</string>
 
+    <!-- Parse -->
+    <string name="parse_app_id">14hFx7nOtE3bywElLLAqy5YcBqB26UOlfIqegMAw</string>
+    <string name="parse_client_key">EtubSvydNR8Cog61DfnXUy9f52Ox0MAqVSt9kcNX</string>
+
     <!--login-->
     <string name="header_sign_up">This\'ll be quick</string>
     <string name="header_log_in">First Things First</string>

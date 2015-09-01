@@ -1,31 +1,47 @@
 package com.horical.library.dto;
 
-/**
- * Created by trandu on 01/09/2015.
- */
-public class Student {
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
 
-    private String name;
+import java.util.List;
+
+@ParseClassName("Student")
+public class Student extends ParseObject {
 
     public Student() {
-    }
 
-    public Student(String name) {
-        this.name = name;
     }
 
     public String getName() {
-        return name;
+        return getString("Name");
     }
 
     public void setName(String name) {
-        this.name = name;
+        put("Name", name);
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                '}';
+    public String getUserId() {
+        return getString("UserId");
     }
+
+    public void setUserId(String userId) {
+        put("UserId", userId);
+    }
+
+    public List<NewBook> currentBooks() {
+        return getList("currentBooks");
+    }
+
+    public void setCurrentBooks(List<NewBook> currentBooks) {
+        put("currentBooks", currentBooks);
+    }
+
+    public List<NewBook> pastBooks() {
+        return getList("pastBooks");
+    }
+
+    public void setPastBooks(List<NewBook> pastBooks) {
+        put("pastBooks", pastBooks);
+    }
+
 }
