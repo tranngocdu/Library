@@ -11,7 +11,11 @@ import com.horical.library.dto.Book;
 /**
  * Created by trandu on 30/08/2015.
  */
+<<<<<<< HEAD:Library/app/src/main/java/com/horical/library/adapters/ItemBook.java
 public class ItemBook extends Item {
+=======
+public class ItemBody extends Item {
+>>>>>>> 2a689dba6770d15904e82a0ad01cebd8d8d9d850:Library/app/src/main/java/com/horical/library/adapter/bookadapter/ItemBody.java
 
     public Book mBook;
 
