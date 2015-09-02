@@ -48,12 +48,16 @@
     <string name="add_book">Add Book</string>
     <!--fragment_students -->
     <string name="students">Students</string>
-    <string name="btnadd">Add</string>
+    <string name="btn_add">Add</string>
     <string name="add_student">Add Student</string>
     <string name="edit_student">Edit Student</string>
     <string name="save_student">Save Student</string>
     <string name="remove_student">Remove Student</string>
     <string name="student_name">Student name</string>
+    <string name="confirm_delete_student_title">Delete student</string>
+    <string name="confirm_delete_student_message">Are you sure delete this student?</string>
+
+    <!-- fragment_add_student -->
 
     <!--fragment_settings -->
     <string name="settings">Settings</string>

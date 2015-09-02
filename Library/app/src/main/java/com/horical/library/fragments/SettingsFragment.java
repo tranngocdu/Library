@@ -18,18 +18,22 @@ import com.horical.library.bases.BaseFragment;
 import com.horical.library.connection.ParseRequest;
 import com.horical.library.connection.callback.ChangPasswordCallback;
 import com.horical.library.connection.callback.LogoutCallback;
-import com.parse.ParseException;
 import com.parse.ParseUser;
 
 /**
  * Created by trandu on 24/08/2015.
  */
 public class SettingsFragment extends BaseFragment implements View.OnClickListener, ChangPasswordCallback, LogoutCallback {
+
+    private static SettingsFragment INSTANCE;
     private EditText mEdtEmail, mEdtCurrentPassword, mEdtNewPassword, mEdtConfirmNewPassword;
     private Button mBtnUpdate, mBtnHelpMe, mBtnLogout;
 
     public static SettingsFragment newInstances() {
-        return new SettingsFragment();
+        if (INSTANCE == null) {
+            INSTANCE = new SettingsFragment();
+        }
+        return INSTANCE;
     }
 
     @Override
@@ -76,6 +80,13 @@ public class SettingsFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void initData() {
         mEdtEmail.setText(MainApplication.getEmail());
+    }
+
+    @Override
+    protected void clearCached() {
+        mEdtCurrentPassword.setText("");
+        mEdtNewPassword.setText("");
+        mEdtConfirmNewPassword.setText("");
     }
 
     @Override

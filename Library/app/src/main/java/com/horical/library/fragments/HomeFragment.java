@@ -26,6 +26,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public static final int ZBAR_SCANNER_REQUEST = 0;
     public static final int ZBAR_QR_SCANNER_REQUEST = 1;
 
+    private static HomeFragment INSTANCE;
+
     private Button mBtnCheckOut, mBtnCheckIn;
     private TextView textView;
     private String mUserEmail, mUserSessionToken;
@@ -35,7 +37,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     public static HomeFragment newInstance() {
-        return new HomeFragment();
+        if (INSTANCE == null) {
+            INSTANCE = new HomeFragment();
+        }
+        return INSTANCE;
     }
 
     @Override
@@ -78,6 +83,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void initData() {
+
+    }
+
+    @Override
+    protected void clearCached() {
 
     }
 

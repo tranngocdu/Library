@@ -21,12 +21,16 @@ import com.parse.ParseUser;
  */
 public class LoginFragment extends BaseFragment implements View.OnClickListener, LoginCallback {
 
+    private static LoginFragment INSTANCE;
     private EditText mEdtEmail, mEdtPassword;
     private Button mBtnSignIn, mBtnCreateAccount;
     private TextView mTvForgotPassword;
 
     public static LoginFragment newInstances() {
-        return new LoginFragment();
+        if (INSTANCE == null) {
+            INSTANCE = new LoginFragment();
+        }
+        return INSTANCE;
     }
 
     @Nullable
@@ -34,6 +38,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -58,8 +67,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void clearCached() {
+
     }
 
     @Override
@@ -80,7 +89,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 }
                 break;
             case R.id.btnCreateAccount:
-                Toast.makeText(getActivity(), "Create Account", Toast.LENGTH_SHORT).show();
                 mLoginActivityListener.attachSignUpFragment();
                 break;
             case R.id.tvForgotPassword:

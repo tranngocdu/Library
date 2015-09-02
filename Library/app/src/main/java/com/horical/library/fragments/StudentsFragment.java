@@ -2,34 +2,55 @@ package com.horical.library.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.horical.library.R;
+import com.horical.library.adapters.Item;
 import com.horical.library.adapters.ItemStudent;
 import com.horical.library.adapters.StudentAdapter;
 import com.horical.library.bases.BaseFragmentHasList;
+import com.horical.library.connection.ParseRequest;
+import com.horical.library.connection.callback.GetAllStudentCallback;
 import com.horical.library.dto.Student;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by trandu on 24/08/2015.
  */
 
-public class StudentsFragment extends BaseFragmentHasList implements View.OnClickListener {
+public class StudentsFragment extends BaseFragmentHasList implements View.OnClickListener, GetAllStudentCallback {
 
+    public static final String TAG = StudentsFragment.class.getSimpleName();
+
+    private static StudentsFragment INSTANCE;
     private TextView mTvAdd;
     private ListView mLvAllStudent;
     private StudentAdapter mStudentAdapter;
+    private ArrayList<Item> mStudentList;
 
 
     public static StudentsFragment newInstances() {
-        return new StudentsFragment();
+        if (INSTANCE == null) {
+            INSTANCE = new StudentsFragment();
+        }
+        return INSTANCE;
+    }
+
+    public StudentsFragment() {
+        try {
+            mStudentList = new ArrayList<Item>();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -78,13 +99,15 @@ public class StudentsFragment extends BaseFragmentHasList implements View.OnClic
     protected void initData() {
         super.initData();
         try {
-            ArrayList arrayList = new ArrayList();
-            arrayList.add(new ItemStudent(new Student()));
-            mStudentAdapter = new StudentAdapter(mContext, arrayList);
-            mLvAllStudent.setAdapter(mStudentAdapter);
+            ParseRequest.getAllStudent(mUserId, this);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    protected void clearCached() {
+
     }
 
     @Override
@@ -99,5 +122,27 @@ public class StudentsFragment extends BaseFragmentHasList implements View.OnClic
                 mMainActivityListener.attachAddStudentFragment();
                 break;
         }
+    }
+
+    @Override
+    public void onGetStudentSuccess(List<Student> studentList) {
+        ArrayList arrayList = new ArrayList();
+        for (int i = 0; i < studentList.size(); i++) {
+            arrayList.add(new ItemStudent(studentList.get(i)));
+        }
+        mStudentList.clear();
+        mStudentList.addAll(arrayList);
+        mStudentAdapter = new StudentAdapter(mContext, mStudentList);
+        mLvAllStudent.setAdapter(mStudentAdapter);
+        try {
+            //mStudentAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onGetStudentError(String message) {
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 }

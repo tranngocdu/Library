@@ -1,8 +1,10 @@
 package com.horical.library.bases;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 
@@ -23,13 +25,17 @@ abstract public class BaseFragment extends Fragment {
     protected LoginActivityListener mLoginActivityListener;
     private Activity currentActivity;
     protected ParseUser mUser;
+    protected String mUserId;
+    protected boolean isFirst;
 
     public BaseFragment() {
         try {
             mUser = ParseUser.become(MainApplication.getToken());
+            mUserId = mUser.getObjectId();
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        isFirst = true;
     }
 
     @Override
@@ -70,12 +76,24 @@ abstract public class BaseFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!isFirst) {
+            clearCached();
+        }
+        if (isFirst) {
+            isFirst = false;
+        }
+    }
 
     abstract protected void initView(View view);
 
     abstract protected void initListener(View view);
 
     abstract protected void initData();
+
+    abstract protected void clearCached();
 
     abstract protected boolean hasFooterLayout();
 
@@ -93,4 +111,49 @@ abstract public class BaseFragment extends Fragment {
             mLoginActivityListener = null;
         }
     }
+
+    public void showDialog(String title, String message, String positiveButton, String negativeButton, String neutralButton) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setNegativeButton(negativeButton, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
+
+    public void showDialog(String title, String message, String positiveButton, String neutralButton) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
+
 }

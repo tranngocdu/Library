@@ -2,7 +2,6 @@ package com.horical.library.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +16,17 @@ import com.horical.library.bases.BaseFragment;
  * Created by Diem Huong on 8/27/2015.
  */
 public class AddBookFragment extends BaseFragment implements View.OnClickListener {
+
+    private static AddBookFragment INSTANCE;
     private Button btnAddBook, btnAddPhoto;
     private ImageButton ibtnBack;
     private EditText edtBookTitle, edtBookAuthor, edtBookISBM, edtBookNumber;
 
     public static AddBookFragment newInstances() {
-        return new AddBookFragment();
+        if (INSTANCE == null) {
+            INSTANCE = new AddBookFragment();
+        }
+        return INSTANCE;
     }
 
     @Override
@@ -69,6 +73,11 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     protected void initData() {
+
+    }
+
+    @Override
+    protected void clearCached() {
 
     }
 

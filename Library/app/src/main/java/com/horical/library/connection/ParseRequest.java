@@ -1,17 +1,23 @@
 package com.horical.library.connection;
 
 import com.horical.library.MainApplication;
+import com.horical.library.connection.callback.AddStudentCallback;
 import com.horical.library.connection.callback.ChangPasswordCallback;
+import com.horical.library.connection.callback.GetAllStudentCallback;
 import com.horical.library.connection.callback.LoginCallback;
 import com.horical.library.connection.callback.LogoutCallback;
 import com.horical.library.connection.callback.SignupCallback;
 import com.horical.library.dto.Student;
+import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
+
+import java.util.List;
 
 public class ParseRequest {
 
@@ -76,11 +82,36 @@ public class ParseRequest {
         }
     }
 
-    public static void addStudent(String name, String userId) {
+    public static void addStudent(String name, String userId, final AddStudentCallback callback) {
         Student student = new Student();
         student.setName(name);
         student.setUserId(userId);
-        student.saveInBackground();
+        student.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    callback.onAddStudentSuccess();
+                } else {
+                    callback.onAddStudentError(e.toString());
+                }
+            }
+        });
     }
+
+    public static void getAllStudent(String userId, final GetAllStudentCallback callback) {
+        ParseQuery<Student> query = ParseQuery.getQuery(Student.class);
+        query.whereEqualTo("UserId", userId);
+        query.findInBackground(new FindCallback<Student>() {
+            @Override
+            public void done(List<Student> list, ParseException e) {
+                if (e == null) {
+                    callback.onGetStudentSuccess(list);
+                } else {
+                    callback.onGetStudentError(e.toString());
+                }
+            }
+        });
+    }
+
 
 }

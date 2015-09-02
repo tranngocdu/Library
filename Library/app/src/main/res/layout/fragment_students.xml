@@ -35,7 +35,7 @@
             android:layout_weight="1"
             android:gravity="right|center"
             android:paddingRight="@dimen/fragment_student_padding_lv_1"
-            android:text="@string/btnadd" />
+            android:text="@string/btn_add" />
     </LinearLayout>
 
     <LinearLayout

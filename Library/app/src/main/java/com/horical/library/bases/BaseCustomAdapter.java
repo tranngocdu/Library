@@ -72,7 +72,10 @@ public class BaseCustomAdapter extends BaseAdapter {
             } else if (item instanceof ItemStudent) {
                 name = ((ItemStudent) item).mStudent.getName();
             }
-            String firstChar = name.substring(0, 1);
+            String firstChar = null;
+            if (name != null) {
+                firstChar = name.substring(0, 1);
+            }
             for (int j = 0; j < alphabet.length; j++) {
                 if (arrayLists[j] == null) {
                     arrayLists[j] = new ArrayList();

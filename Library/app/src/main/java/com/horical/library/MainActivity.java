@@ -24,6 +24,7 @@ import com.horical.library.listenners.BackPressListener;
 import com.horical.library.listenners.MainActivityListener;
 
 public class MainActivity extends BaseFragmentActivity implements View.OnClickListener, MainActivityListener {
+
     private RadioButton mRdbHome, mRdbBooks, mRdbStudents, mRdbSettings;
     private TextView mTvHome, mTvBooks, mTvStudents, mTvSettings;
     private RadioGroup mLayoutFooter;
@@ -68,7 +69,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     }
 
-    private void SelectorFragmentByID(int id) {
+    private void selectFragmentByID(int id) {
         switch (id) {
             case 0: //TAB_HOME
                 HomeFragment homeFragment = HomeFragment.newInstance();
@@ -98,22 +99,22 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.btnHome:
                 if (mCurrentTab != AppConstants.TAB_TYPE.TAB_HOME) {
-                    SelectorFragmentByID(0);
+                    selectFragmentByID(0);
                 }
                 break;
             case R.id.btnBooks:
                 if (mCurrentTab != AppConstants.TAB_TYPE.TAB_BOOKS) {
-                    SelectorFragmentByID(1);
+                    selectFragmentByID(1);
                 }
                 break;
             case R.id.btnStudents:
                 if (mCurrentTab != AppConstants.TAB_TYPE.TAB_STUDENTS) {
-                    SelectorFragmentByID(2);
+                    selectFragmentByID(2);
                 }
                 break;
             case R.id.btnSettings:
                 if (mCurrentTab != AppConstants.TAB_TYPE.TAB_SETTINGS) {
-                    SelectorFragmentByID(3);
+                    selectFragmentByID(3);
                 }
                 break;
             default:

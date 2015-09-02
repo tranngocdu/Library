@@ -12,17 +12,22 @@ import android.widget.Toast;
 import com.horical.library.R;
 import com.horical.library.bases.BaseFragment;
 import com.horical.library.connection.ParseRequest;
+import com.horical.library.connection.callback.AddStudentCallback;
 
 /**
  * Created by trandu on 02/09/2015.
  */
-public class AddStudentFragment extends BaseFragment implements View.OnClickListener {
+public class AddStudentFragment extends BaseFragment implements View.OnClickListener, AddStudentCallback {
 
+    private static AddStudentFragment INSTANCE;
     private EditText mEdtNameStudent;
     private Button mBtnAddStudent;
 
     public static AddStudentFragment newInstances() {
-        return new AddStudentFragment();
+        if (INSTANCE == null) {
+            INSTANCE = new AddStudentFragment();
+        }
+        return INSTANCE;
     }
 
     @Override
@@ -63,6 +68,11 @@ public class AddStudentFragment extends BaseFragment implements View.OnClickList
     }
 
     @Override
+    protected void clearCached() {
+        mEdtNameStudent.setText("");
+    }
+
+    @Override
     protected boolean hasFooterLayout() {
         return false;
     }
@@ -80,7 +90,18 @@ public class AddStudentFragment extends BaseFragment implements View.OnClickList
         if (name.equals("")) {
             Toast.makeText(mContext, "Student name can\'t empty", Toast.LENGTH_SHORT).show();
         } else {
-            ParseRequest.addStudent(name, mUser.getObjectId());
+            ParseRequest.addStudent(name, mUserId, this);
         }
+    }
+
+    @Override
+    public void onAddStudentSuccess() {
+        Toast.makeText(mContext, "add student success.", Toast.LENGTH_SHORT).show();
+        mEdtNameStudent.setText("");
+    }
+
+    @Override
+    public void onAddStudentError(String message) {
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 }

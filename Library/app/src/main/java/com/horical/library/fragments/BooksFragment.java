@@ -25,14 +25,19 @@ import java.util.ArrayList;
  */
 public class BooksFragment extends BaseFragmentHasList implements View.OnClickListener, AdapterView.OnItemClickListener {
 
+    private static BooksFragment INSTANCE;
     private TextView mTvAddBooks;
     private RadioButton mRbtAllBooks, mRbtAvailable, mRbtCheckedOut;
     private EditText mEdtSearch;
     private ListView mLvAllBook;
     private BookAdapter mBookAdapter;
 
+
     public static BooksFragment newInstances() {
-        return new BooksFragment();
+        if (INSTANCE == null) {
+            INSTANCE = new BooksFragment();
+        }
+        return INSTANCE;
     }
 
     @Override
@@ -91,6 +96,11 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
         arrayList.add(new ItemBook(new Book("ghi", "ihg", "200")));
         mBookAdapter = new BookAdapter(mContext, arrayList);
         mLvAllBook.setAdapter(mBookAdapter);
+    }
+
+    @Override
+    protected void clearCached() {
+
     }
 
     @Override

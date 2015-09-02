@@ -36,7 +36,7 @@ public class LoginActivity extends BaseFragmentActivity implements LoginActivity
         return R.id.layoutContent;
     }
 
-    private void SelectorFragmentByID(int id) {
+    private void selectFragmentByID(int id) {
         switch (id) {
             case 0:
                 showFragmentWithClearStack(LoginFragment.newInstances());
@@ -95,12 +95,12 @@ public class LoginActivity extends BaseFragmentActivity implements LoginActivity
 
     @Override
     public void attachSignUpFragment() {
-        SelectorFragmentByID(1);
+        selectFragmentByID(1);
     }
 
     @Override
     public void attachLoginFragment() {
-        SelectorFragmentByID(0);
+        selectFragmentByID(0);
     }
 
     public void checkLogin() {

@@ -20,12 +20,17 @@ import com.horical.library.connection.callback.SignupCallback;
  * Created by Diem Huong on 8/29/2015.
  */
 public class SignUpFragment extends BaseFragment implements View.OnClickListener, SignupCallback {
+
+    private static SignUpFragment INSTANCE;
     private TextView mTvBackToLogin;
     private EditText mEdtEmail, mEdtPassword, mEdtConfirmPassword;
     private Button mBtnCreateAccount, mBtnHadAccount;
 
     public static SignUpFragment newInstances() {
-        return new SignUpFragment();
+        if (INSTANCE == null) {
+            INSTANCE = new SignUpFragment();
+        }
+        return INSTANCE;
     }
 
     @Override
@@ -75,6 +80,11 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
+    protected void clearCached() {
+
+    }
+
+    @Override
     protected boolean hasFooterLayout() {
         return false;
     }
@@ -88,9 +98,9 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
             case R.id.btnCreateAccount:
                 String email = mEdtEmail.getText().toString().trim();
                 String password = mEdtPassword.getText().toString().trim();
-                String repassword = mEdtConfirmPassword.getText().toString();
+                String rePassword = mEdtConfirmPassword.getText().toString();
                 if (!email.equalsIgnoreCase("") && !password.equalsIgnoreCase("")) {
-                    if (password.equals(repassword)) {
+                    if (password.equals(rePassword)) {
                         ParseRequest.signup(email, password, this);
                     } else {
                         Toast.makeText(mContext, mContext.getResources().getString(R.string.repassword_error), Toast.LENGTH_SHORT).show();

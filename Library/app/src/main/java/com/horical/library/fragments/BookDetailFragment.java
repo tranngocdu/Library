@@ -57,6 +57,11 @@ public class BookDetailFragment extends BaseFragment implements View.OnClickList
     }
 
     @Override
+    protected void clearCached() {
+
+    }
+
+    @Override
     protected boolean hasFooterLayout() {
         return false;
     }
