@@ -5,6 +5,7 @@ import com.horical.library.connection.callback.ChangPasswordCallback;
 import com.horical.library.connection.callback.LoginCallback;
 import com.horical.library.connection.callback.LogoutCallback;
 import com.horical.library.connection.callback.SignupCallback;
+import com.horical.library.dto.Student;
 import com.parse.LogInCallback;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
@@ -73,6 +74,13 @@ public class ParseRequest {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void addStudent(String name, String userId) {
+        Student student = new Student();
+        student.setName(name);
+        student.setUserId(userId);
+        student.saveInBackground();
     }
 
 }

@@ -35,7 +35,7 @@
             android:padding="@dimen/fragment_student_padding_lv_1">
 
             <EditText
-                android:id="@+id/edtName"
+                android:id="@+id/edtNameStudent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/frgament_student_margin_lv_1"
@@ -45,7 +45,7 @@
                 android:id="@+id/btnAddStudent"
                 android:layout_width="@dimen/fragment_student_btn_width_1"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edtName"
+                android:layout_below="@id/edtNameStudent"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/selector_btn_common_background_fill_green"
                 android:text="@string/add_student"

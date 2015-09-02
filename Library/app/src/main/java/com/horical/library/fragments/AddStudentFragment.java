@@ -5,15 +5,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.horical.library.R;
 import com.horical.library.bases.BaseFragment;
+import com.horical.library.connection.ParseRequest;
 
 /**
  * Created by trandu on 02/09/2015.
  */
 public class AddStudentFragment extends BaseFragment implements View.OnClickListener {
 
+    private EditText mEdtNameStudent;
+    private Button mBtnAddStudent;
 
     public static AddStudentFragment newInstances() {
         return new AddStudentFragment();
@@ -42,12 +48,13 @@ public class AddStudentFragment extends BaseFragment implements View.OnClickList
 
     @Override
     protected void initView(View view) {
-
+        mEdtNameStudent = (EditText) view.findViewById(R.id.edtNameStudent);
+        mBtnAddStudent = (Button) view.findViewById(R.id.btnAddStudent);
     }
 
     @Override
     protected void initListener(View view) {
-
+        mBtnAddStudent.setOnClickListener(this);
     }
 
     @Override
@@ -62,6 +69,18 @@ public class AddStudentFragment extends BaseFragment implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnAddStudent:
+                addStudent(mEdtNameStudent.getText().toString());
+                break;
+        }
+    }
 
+    public void addStudent(String name) {
+        if (name.equals("")) {
+            Toast.makeText(mContext, "Student name can\'t empty", Toast.LENGTH_SHORT).show();
+        } else {
+            ParseRequest.addStudent(name, mUser.getObjectId());
+        }
     }
 }

@@ -8,8 +8,11 @@ import android.view.View;
 
 import com.horical.library.LoginActivity;
 import com.horical.library.MainActivity;
+import com.horical.library.MainApplication;
 import com.horical.library.listenners.LoginActivityListener;
 import com.horical.library.listenners.MainActivityListener;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 /**
  * Created by Diem Huong on 8/25/2015.
@@ -19,11 +22,14 @@ abstract public class BaseFragment extends Fragment {
     protected MainActivityListener mMainActivityListener;
     protected LoginActivityListener mLoginActivityListener;
     private Activity currentActivity;
+    protected ParseUser mUser;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mContext = getActivity();
+    public BaseFragment() {
+        try {
+            mUser = ParseUser.become(MainApplication.getToken());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -39,6 +45,12 @@ abstract public class BaseFragment extends Fragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement MainListener");
         }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mContext = getActivity();
     }
 
     @Override

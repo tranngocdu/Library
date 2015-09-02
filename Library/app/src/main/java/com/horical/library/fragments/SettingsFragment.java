@@ -27,7 +27,6 @@ import com.parse.ParseUser;
 public class SettingsFragment extends BaseFragment implements View.OnClickListener, ChangPasswordCallback, LogoutCallback {
     private EditText mEdtEmail, mEdtCurrentPassword, mEdtNewPassword, mEdtConfirmNewPassword;
     private Button mBtnUpdate, mBtnHelpMe, mBtnLogout;
-    private ParseUser mUser;
 
     public static SettingsFragment newInstances() {
         return new SettingsFragment();
@@ -76,11 +75,6 @@ public class SettingsFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     protected void initData() {
-        try {
-            mUser = ParseUser.become(MainApplication.getToken());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         mEdtEmail.setText(MainApplication.getEmail());
     }
 
