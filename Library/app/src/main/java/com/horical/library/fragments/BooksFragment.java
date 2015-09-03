@@ -133,7 +133,6 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
                 Toast.makeText(getActivity(), "rbtAllBooks", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tvAddBooks:
-                Toast.makeText(getActivity(), "tvAddBooks", Toast.LENGTH_SHORT).show();
                 mMainActivityListener.attachAddBookFragment();
                 break;
             default:
