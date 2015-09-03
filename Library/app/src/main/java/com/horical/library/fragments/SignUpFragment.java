@@ -19,39 +19,46 @@ import com.horical.library.connection.callback.SignUpCallback;
 /**
  * Created by Diem Huong on 8/29/2015.
  */
-public class SignUpFragment extends BaseFragment implements View.OnClickListener, SignUpCallback {
+public class SignUpFragment extends BaseFragment implements View.OnClickListener, SignUpCallback
+{
 
     private static SignUpFragment INSTANCE;
     private TextView mTvBackToLogin;
     private EditText mEdtEmail, mEdtPassword, mEdtConfirmPassword;
     private Button mBtnCreateAccount, mBtnHadAccount;
 
-    public static SignUpFragment newInstances() {
-        if (INSTANCE == null) {
+    public static SignUpFragment newInstances()
+    {
+        if (INSTANCE == null)
+        {
             INSTANCE = new SignUpFragment();
         }
         return INSTANCE;
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Activity activity)
+    {
         super.onAttach(activity);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         return view;
     }
 
     @Override
-    protected void initView(View view) {
+    protected void initView(View view)
+    {
         mTvBackToLogin = (TextView) view.findViewById(R.id.tvBackToLogin);
 
         mEdtEmail = (EditText) view.findViewById(R.id.edtEmail);
@@ -63,7 +70,8 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
-    protected void initListener(View view) {
+    protected void initListener(View view)
+    {
         mTvBackToLogin.setOnClickListener(this);
 
         mEdtEmail.setOnClickListener(this);
@@ -75,23 +83,28 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
-    protected void initData() {
+    protected void initData()
+    {
 
     }
 
     @Override
-    protected void clearCached() {
+    protected void clearCached()
+    {
 
     }
 
     @Override
-    protected boolean hasFooterLayout() {
+    protected boolean hasFooterLayout()
+    {
         return false;
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
             case R.id.tvBackToLogin:
                 mLoginActivityListener.attachLoginFragment();
                 break;
@@ -99,13 +112,17 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
                 String email = mEdtEmail.getText().toString().trim();
                 String password = mEdtPassword.getText().toString().trim();
                 String rePassword = mEdtConfirmPassword.getText().toString();
-                if (!email.equalsIgnoreCase("") && !password.equalsIgnoreCase("")) {
-                    if (password.equals(rePassword)) {
+                if (!email.equalsIgnoreCase("") && !password.equalsIgnoreCase(""))
+                {
+                    if (password.equals(rePassword))
+                    {
                         ParseRequest.signUp(email, password, this);
-                    } else {
+                    } else
+                    {
                         Toast.makeText(mContext, mContext.getResources().getString(R.string.repassword_error), Toast.LENGTH_SHORT).show();
                     }
-                } else {
+                } else
+                {
                     Toast.makeText(mContext, mContext.getResources().getString(R.string.email_empty), Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -116,12 +133,14 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
-    public void onSignUpSuccess() {
+    public void onSignUpSuccess()
+    {
         Toast.makeText(mContext, "Register Success. Let's login", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onSignUpError(String message) {
+    public void onSignUpError(String message)
+    {
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 }

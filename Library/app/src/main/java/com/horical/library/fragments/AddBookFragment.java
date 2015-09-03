@@ -1,6 +1,7 @@
 package com.horical.library.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.horical.library.bases.BaseFragment;
 import com.horical.library.connection.ParseRequest;
 import com.horical.library.connection.callback.AddBookCallback;
 import com.horical.library.dto.NewBook;
+
+import io.filepicker.Filepicker;
 
 /**
  * Created by Diem Huong on 8/27/2015.
@@ -97,7 +100,10 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
                 addBook();
                 break;
             case R.id.btnAddPhoto:
-
+                Filepicker.setKey("AxSWMxslOTdats8w3eJO0z");
+                Filepicker.setAppName("Library");
+                Intent intent = new Intent(mContext, Filepicker.class);
+                startActivityForResult(intent, Filepicker.REQUEST_CODE_GETFILE);
                 break;
             case R.id.ibtnBack:
 
@@ -135,5 +141,10 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onAddBookError(String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        
     }
 }
