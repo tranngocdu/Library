@@ -11,7 +11,7 @@ public class Book implements Comparable<Book> {
     private String available;
     private String total;
 
-    public Book() {
+    public Book(String s, String s1, String s2, String s3, String s4) {
     }
 
     public Book(String name, String author, String available) {
