@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.horical.library.R;
-import com.horical.library.dto.Book;
+import com.horical.library.dto.NewBook;
 
 /**
  * Created by trandu on 30/08/2015.
@@ -14,9 +14,9 @@ import com.horical.library.dto.Book;
 public class ItemBook extends Item {
 
 
-    public Book mBook;
+    public NewBook mBook;
 
-    public ItemBook(Book book) {
+    public ItemBook(NewBook book) {
         this.mBook = book;
     }
 
@@ -35,9 +35,9 @@ public class ItemBook extends Item {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.tvName.setText(mBook.getName());
+        viewHolder.tvName.setText(mBook.getTitle());
         viewHolder.tvAuthor.setText(mBook.getAuthor());
-        viewHolder.tvAvailable.setText(mBook.getAvailable() + " available");
+        viewHolder.tvAvailable.setText(mBook.getQuantityAvailable() + " available");
 
         return convertView;
     }

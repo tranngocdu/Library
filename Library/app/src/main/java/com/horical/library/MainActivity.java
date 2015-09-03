@@ -166,15 +166,13 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     @Override
     public void attachAddBookFragment() {
-        AddBookFragment addBookFragment = AddBookFragment.newInstances();
-        showFragment(addBookFragment);
+        showFragment(AddBookFragment.newInstances());
 
     }
 
     @Override
     public void attachBookDetailFragment() {
-        BookDetailFragment bookDetailFragment = BookDetailFragment.newInstance();
-        showFragment(bookDetailFragment);
+        showFragment(BookDetailFragment.newInstance());
     }
 
     @Override
@@ -182,6 +180,11 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         showFragment(AddStudentFragment.newInstances());
     }
 
+    @Override
+    public void backToBooksFragment() {
+        BooksFragment booksFragment = new BooksFragment();
+        showFragmentWithClearStack(booksFragment);
+    }
 
     @Override
     public void showFooterLayout() {

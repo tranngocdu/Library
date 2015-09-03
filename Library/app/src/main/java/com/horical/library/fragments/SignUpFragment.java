@@ -14,12 +14,12 @@ import android.widget.Toast;
 import com.horical.library.R;
 import com.horical.library.bases.BaseFragment;
 import com.horical.library.connection.ParseRequest;
-import com.horical.library.connection.callback.SignupCallback;
+import com.horical.library.connection.callback.SignUpCallback;
 
 /**
  * Created by Diem Huong on 8/29/2015.
  */
-public class SignUpFragment extends BaseFragment implements View.OnClickListener, SignupCallback {
+public class SignUpFragment extends BaseFragment implements View.OnClickListener, SignUpCallback {
 
     private static SignUpFragment INSTANCE;
     private TextView mTvBackToLogin;
@@ -101,7 +101,7 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
                 String rePassword = mEdtConfirmPassword.getText().toString();
                 if (!email.equalsIgnoreCase("") && !password.equalsIgnoreCase("")) {
                     if (password.equals(rePassword)) {
-                        ParseRequest.signup(email, password, this);
+                        ParseRequest.signUp(email, password, this);
                     } else {
                         Toast.makeText(mContext, mContext.getResources().getString(R.string.repassword_error), Toast.LENGTH_SHORT).show();
                     }
@@ -116,12 +116,12 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
-    public void onSignupSuccess() {
+    public void onSignUpSuccess() {
         Toast.makeText(mContext, "Register Success. Let's login", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onSignupError(String message) {
+    public void onSignUpError(String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 }

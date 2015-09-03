@@ -8,19 +8,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.horical.library.R;
 import com.horical.library.bases.BaseFragment;
+import com.horical.library.connection.ParseRequest;
+import com.horical.library.connection.callback.AddBookCallback;
+import com.horical.library.dto.NewBook;
 
 /**
  * Created by Diem Huong on 8/27/2015.
  */
-public class AddBookFragment extends BaseFragment implements View.OnClickListener {
+public class AddBookFragment extends BaseFragment implements View.OnClickListener, AddBookCallback {
 
     private static AddBookFragment INSTANCE;
-    private Button btnAddBook, btnAddPhoto;
-    private ImageButton ibtnBack;
-    private EditText edtBookTitle, edtBookAuthor, edtBookISBM, edtBookNumber;
+    private Button mBtnAddBook, mBtnAddPhoto;
+    private ImageButton mBtnBack;
+    private EditText mEdtBookTitle, mEdtBookAuthor, mEdtBookISBM, mEdtBookNumber;
 
     public static AddBookFragment newInstances() {
         if (INSTANCE == null) {
@@ -50,25 +54,22 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void initDatas() {
-
-    }
-
     @Override
     protected void initView(View view) {
-        ibtnBack = (ImageButton) view.findViewById(R.id.ibtnBack);
-        btnAddBook = (Button) view.findViewById(R.id.btnAddBook);
-        btnAddPhoto = (Button) view.findViewById(R.id.btnAddPhoto);
-        edtBookAuthor = (EditText) view.findViewById(R.id.edtBookAuthor);
-        edtBookISBM = (EditText) view.findViewById(R.id.edtBookISBM);
-        edtBookNumber = (EditText) view.findViewById(R.id.edtBookNumber);
+        mBtnBack = (ImageButton) view.findViewById(R.id.ibtnBack);
+        mBtnAddBook = (Button) view.findViewById(R.id.btnAddBook);
+        mBtnAddPhoto = (Button) view.findViewById(R.id.btnAddPhoto);
+        mEdtBookTitle = (EditText) view.findViewById(R.id.edtBookTitle);
+        mEdtBookAuthor = (EditText) view.findViewById(R.id.edtBookAuthor);
+        mEdtBookISBM = (EditText) view.findViewById(R.id.edtBookISBM);
+        mEdtBookNumber = (EditText) view.findViewById(R.id.edtBookNumber);
     }
 
     @Override
     protected void initListener(View view) {
-        btnAddPhoto.setOnClickListener(this);
-        btnAddBook.setOnClickListener(this);
-        ibtnBack.setOnClickListener(this);
+        mBtnAddPhoto.setOnClickListener(this);
+        mBtnAddBook.setOnClickListener(this);
+        mBtnBack.setOnClickListener(this);
     }
 
     @Override
@@ -78,7 +79,10 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     protected void clearCached() {
-
+        mEdtBookTitle.setText("");
+        mEdtBookAuthor.setText("");
+        mEdtBookISBM.setText("");
+        mEdtBookNumber.setText("1");
     }
 
     @Override
@@ -90,13 +94,46 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnAddBook:
+                addBook();
                 break;
             case R.id.btnAddPhoto:
+
                 break;
             case R.id.ibtnBack:
+
                 break;
             default:
                 break;
         }
+    }
+
+    public void addBook() {
+        String bookName = mEdtBookTitle.getText().toString();
+        String bookAuthor = mEdtBookAuthor.getText().toString();
+        String bookISBN = mEdtBookISBM.getText().toString();
+        int bookTotal = Integer.parseInt(mEdtBookNumber.getText().toString());
+        if (bookName.equals("") || bookAuthor.equals("") || bookISBN.equals("") || bookTotal <= 0) {
+            Toast.makeText(mContext, "Please insert content, Can't empty", Toast.LENGTH_SHORT).show();
+        } else {
+            NewBook book = new NewBook();
+            book.setUser(mUserId);
+            book.setTitle(bookName);
+            book.setAuthor(bookAuthor);
+            book.setISBN(bookISBN);
+            book.setQuantityTotal(bookTotal);
+            book.setQuantityAvailable(bookTotal);
+            ParseRequest.addBook(book, this);
+        }
+    }
+
+    @Override
+    public void onAddBookSuccess() {
+        Toast.makeText(mContext, "Add book success.", Toast.LENGTH_SHORT).show();
+        mMainActivityListener.backToBooksFragment();
+    }
+
+    @Override
+    public void onAddBookError(String message) {
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 }

@@ -68,7 +68,7 @@ public class BaseCustomAdapter extends BaseAdapter {
             Item item = arrayList.get(i);
             String name = null;
             if (item instanceof ItemBook) {
-                name = ((ItemBook) item).mBook.getName();
+                name = ((ItemBook) item).mBook.getTitle();
             } else if (item instanceof ItemStudent) {
                 name = ((ItemStudent) item).mStudent.getName();
             }
@@ -86,11 +86,14 @@ public class BaseCustomAdapter extends BaseAdapter {
                 }
             }
         }
+
         for (int i = 0; i < arrayLists.length; i++) {
-            if (arrayLists[i].size() > 0) {
-                result.add(new ItemHeader(result.size(), alphabet[i]));
-                index[i] = result.size();
-                result.addAll(arrayLists[i]);
+            if (arrayLists[i] != null) {
+                if (arrayLists[i].size() > 0) {
+                    result.add(new ItemHeader(result.size(), alphabet[i]));
+                    index[i] = result.size();
+                    result.addAll(arrayLists[i]);
+                }
             }
         }
         return result;

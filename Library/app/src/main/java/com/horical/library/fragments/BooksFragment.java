@@ -14,16 +14,20 @@ import android.widget.Toast;
 
 import com.horical.library.R;
 import com.horical.library.adapters.BookAdapter;
+import com.horical.library.adapters.Item;
 import com.horical.library.adapters.ItemBook;
 import com.horical.library.bases.BaseFragmentHasList;
-import com.horical.library.dto.Book;
+import com.horical.library.connection.ParseRequest;
+import com.horical.library.connection.callback.GetAllBookCallback;
+import com.horical.library.dto.NewBook;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by trandu on 24/08/2015.
  */
-public class BooksFragment extends BaseFragmentHasList implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class BooksFragment extends BaseFragmentHasList implements View.OnClickListener, AdapterView.OnItemClickListener, GetAllBookCallback {
 
     private static BooksFragment INSTANCE;
     private TextView mTvAddBooks;
@@ -31,6 +35,7 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
     private EditText mEdtSearch;
     private ListView mLvAllBook;
     private BookAdapter mBookAdapter;
+    private ArrayList<Item> mBookList;
 
 
     public static BooksFragment newInstances() {
@@ -38,6 +43,10 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
             INSTANCE = new BooksFragment();
         }
         return INSTANCE;
+    }
+
+    public BooksFragment() {
+        mBookList = new ArrayList<Item>();
     }
 
     @Override
@@ -91,11 +100,7 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
     @Override
     protected void initData() {
         super.initData();
-        ArrayList arrayList = new ArrayList();
-        arrayList.add(new ItemBook(new Book("abc", "def", "100")));
-        arrayList.add(new ItemBook(new Book("ghi", "ihg", "200")));
-        mBookAdapter = new BookAdapter(mContext, arrayList);
-        mLvAllBook.setAdapter(mBookAdapter);
+        ParseRequest.getAllBook(mUserId, this);
     }
 
     @Override
@@ -137,4 +142,20 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
     }
 
 
+    @Override
+    public void onGetAllBookSuccess(List<NewBook> bookList) {
+        ArrayList arrayList = new ArrayList();
+        for (int i = 0; i < bookList.size(); i++) {
+            arrayList.add(new ItemBook(bookList.get(i)));
+        }
+        mBookList.clear();
+        mBookList.addAll(arrayList);
+        mBookAdapter = new BookAdapter(mContext, mBookList);
+        mLvAllBook.setAdapter(mBookAdapter);
+    }
+
+    @Override
+    public void onGetAllBookError(String message) {
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+    }
 }

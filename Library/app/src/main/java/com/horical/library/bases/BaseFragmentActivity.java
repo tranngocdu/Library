@@ -43,6 +43,7 @@ abstract public class BaseFragmentActivity extends Activity implements FragmentM
         ft.show(f);
         ft.addToBackStack(tag);
         ft.commit();
+        fm.executePendingTransactions();
         mFragmentTagStack.add(tag);
     }
 

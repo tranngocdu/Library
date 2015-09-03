@@ -1,12 +1,15 @@
 package com.horical.library.connection;
 
 import com.horical.library.MainApplication;
+import com.horical.library.connection.callback.AddBookCallback;
 import com.horical.library.connection.callback.AddStudentCallback;
 import com.horical.library.connection.callback.ChangPasswordCallback;
+import com.horical.library.connection.callback.GetAllBookCallback;
 import com.horical.library.connection.callback.GetAllStudentCallback;
 import com.horical.library.connection.callback.LoginCallback;
 import com.horical.library.connection.callback.LogoutCallback;
-import com.horical.library.connection.callback.SignupCallback;
+import com.horical.library.connection.callback.SignUpCallback;
+import com.horical.library.dto.NewBook;
 import com.horical.library.dto.Student;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
@@ -15,23 +18,22 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
-import com.parse.SignUpCallback;
 
 import java.util.List;
 
 public class ParseRequest {
 
-    public static void signup(String email, String password, final SignupCallback callback) {
+    public static void signUp(String email, String password, final SignUpCallback callback) {
         ParseUser user = new ParseUser();
         user.setUsername(email);
         user.setPassword(password);
         user.setEmail(email);
-        user.signUpInBackground(new SignUpCallback() {
+        user.signUpInBackground(new com.parse.SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
-                    callback.onSignupSuccess();
+                    callback.onSignUpSuccess();
                 } else {
-                    callback.onSignupError(e.getMessage());
+                    callback.onSignUpError(e.getMessage());
                 }
             }
         });
@@ -113,5 +115,32 @@ public class ParseRequest {
         });
     }
 
+    public static void addBook(NewBook book, final AddBookCallback callback) {
+        book.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    callback.onAddBookSuccess();
+                } else {
+                    callback.onAddBookError(e.toString());
+                }
+            }
+        });
+    }
+
+    public static void getAllBook(String userId, final GetAllBookCallback callback) {
+        ParseQuery<NewBook> query = ParseQuery.getQuery(NewBook.class);
+        query.whereEqualTo("User", userId);
+        query.findInBackground(new FindCallback<NewBook>() {
+            @Override
+            public void done(List<NewBook> list, ParseException e) {
+                if (e == null) {
+                    callback.onGetAllBookSuccess(list);
+                } else {
+                    callback.onGetAllBookError(e.toString());
+                }
+            }
+        });
+    }
 
 }

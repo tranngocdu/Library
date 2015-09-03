@@ -100,7 +100,8 @@ public class LoginActivity extends BaseFragmentActivity implements LoginActivity
 
     @Override
     public void attachLoginFragment() {
-        selectFragmentByID(0);
+        LoginFragment loginFragment = new LoginFragment();
+        showFragmentWithClearStack(loginFragment);
     }
 
     public void checkLogin() {
