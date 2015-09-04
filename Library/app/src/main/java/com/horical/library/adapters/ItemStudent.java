@@ -65,6 +65,8 @@ public class ItemStudent extends Item implements View.OnClickListener
             public void onClick(DialogInterface dialog, int which)
             {
                 mStudentCallback.deleteAStudent(position);
+                mStudent.deleteInBackground();
+
             }
         });
         builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener()
@@ -92,7 +94,6 @@ public class ItemStudent extends Item implements View.OnClickListener
         {
             case R.id.tvDeleteStudent:
                 showDialog("Delete", "Do you want delete this student", "Yes", "Cancel");
-                mStudent.deleteInBackground();
                 break;
         }
     }
