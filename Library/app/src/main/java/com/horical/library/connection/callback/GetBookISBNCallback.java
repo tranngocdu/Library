@@ -5,14 +5,9 @@ import com.horical.library.dto.NewBook;
 /**
  * Created by Diem Huong on 9/4/2015.
  */
-public class GetBookISBNCallback
+public interface GetBookISBNCallback
 {
-    public void onError(String message)
-    {
-    }
+    void onError(String message);
 
-    public void onSuccess(NewBook book)
-    {
-
-    }
+    void onSuccess(NewBook book);
 }

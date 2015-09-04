@@ -31,42 +31,55 @@ import io.filepicker.models.FPFile;
 /**
  * Created by Diem Huong on 8/27/2015.
  */
-public class AddBookFragment extends BaseFragment implements View.OnClickListener, AddBookCallback {
+public class AddBookFragment extends BaseFragment implements View.OnClickListener, AddBookCallback
+{
 
     private static AddBookFragment INSTANCE;
     private Button mBtnAddBook, mBtnAddPhoto;
     private ImageButton mBtnBack;
     private ImageView mImvBookThumbnail;
     private EditText mEdtBookTitle, mEdtBookAuthor, mEdtBookISBM, mEdtBookNumber;
-    private NewBook book = new NewBook();
+    private NewBook book;
 
-    public static AddBookFragment newInstances() {
-        if (INSTANCE == null) {
+    public static AddBookFragment newInstances()
+    {
+        if (INSTANCE == null)
+        {
             INSTANCE = new AddBookFragment();
         }
         return INSTANCE;
     }
 
+    public void setBook(NewBook book)
+    {
+        this.book = book;
+    }
+
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Activity activity)
+    {
         super.onAttach(activity);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.fragment_add_book, container, false);
         return view;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
-        if (savedInstanceState != null) {
+        if (savedInstanceState != null)
+        {
             mEdtBookTitle.setText(savedInstanceState.getCharSequence("title"));
             mEdtBookAuthor.setText(savedInstanceState.getCharSequence("author"));
             mEdtBookISBM.setText(savedInstanceState.getCharSequence("isbn"));
@@ -75,7 +88,8 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    protected void initView(View view) {
+    protected void initView(View view)
+    {
         mBtnBack = (ImageButton) view.findViewById(R.id.ibtnBack);
         mBtnAddBook = (Button) view.findViewById(R.id.btnAddBook);
         mBtnAddPhoto = (Button) view.findViewById(R.id.btnAddPhoto);
@@ -87,19 +101,24 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    protected void initListener(View view) {
+    protected void initListener(View view)
+    {
         mBtnAddPhoto.setOnClickListener(this);
         mBtnAddBook.setOnClickListener(this);
         mBtnBack.setOnClickListener(this);
     }
 
     @Override
-    protected void initData() {
-
+    protected void initData()
+    {
+        mEdtBookTitle.setText(book.getTitle());
+        mEdtBookAuthor.setText(book.getAuthor());
+        mEdtBookISBM.setText(book.getISBN());
     }
 
     @Override
-    protected void clearCached() {
+    protected void clearCached()
+    {
         mEdtBookTitle.setText("");
         mEdtBookAuthor.setText("");
         mEdtBookISBM.setText("");
@@ -107,13 +126,16 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    protected boolean hasFooterLayout() {
+    protected boolean hasFooterLayout()
+    {
         return false;
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
             case R.id.btnAddBook:
                 addBook();
                 break;
@@ -131,14 +153,17 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
         }
     }
 
-    public void addBook() {
+    public void addBook()
+    {
         String bookName = mEdtBookTitle.getText().toString();
         String bookAuthor = mEdtBookAuthor.getText().toString();
         String bookISBN = mEdtBookISBM.getText().toString();
         int bookTotal = Integer.parseInt(mEdtBookNumber.getText().toString());
-        if (bookName.equals("") || bookAuthor.equals("") || bookISBN.equals("") || bookTotal <= 0) {
+        if (bookName.equals("") || bookAuthor.equals("") || bookISBN.equals("") || bookTotal <= 0)
+        {
             Toast.makeText(mContext, "Please insert content, Can't empty", Toast.LENGTH_SHORT).show();
-        } else {
+        } else
+        {
             book.setUser(mUserId);
             book.setTitle(bookName);
             book.setAuthor(bookAuthor);
@@ -150,39 +175,50 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    public void onAddBookSuccess() {
+    public void onAddBookSuccess()
+    {
         Toast.makeText(mContext, "Add book success.", Toast.LENGTH_SHORT).show();
-        mMainActivityListener.backToBooksFragment();
+        mMainActivityListener.attachBooksFragment();
     }
 
     @Override
-    public void onAddBookError(String message) {
+    public void onAddBookError(String message)
+    {
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Filepicker.REQUEST_CODE_GETFILE) {
-            if (resultCode == Activity.RESULT_OK) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == Filepicker.REQUEST_CODE_GETFILE)
+        {
+            if (resultCode == Activity.RESULT_OK)
+            {
                 ArrayList<FPFile> fpFiles = data.getParcelableArrayListExtra(Filepicker.FPFILES_EXTRA);
                 final FPFile file = fpFiles.get(0);
                 book.setCoverImage(file.getUrl());
-                new Thread(new Runnable() {
+                new Thread(new Runnable()
+                {
                     @Override
-                    public void run() {
-                        try {
+                    public void run()
+                    {
+                        try
+                        {
                             final Bitmap bmp;
                             URL url = new URL(file.getUrl());
                             HttpURLConnection http = (HttpURLConnection) url.openConnection();
                             InputStream is = http.getInputStream();
                             bmp = BitmapFactory.decodeStream(is);
-                            mImvBookThumbnail.post(new Runnable() {
+                            mImvBookThumbnail.post(new Runnable()
+                            {
                                 @Override
-                                public void run() {
+                                public void run()
+                                {
                                     mImvBookThumbnail.setImageBitmap(bmp);
                                 }
                             });
-                        } catch (Exception e) {
+                        } catch (Exception e)
+                        {
                             e.printStackTrace();
                         }
                     }
@@ -193,7 +229,8 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState)
+    {
         super.onSaveInstanceState(outState);
         Toast.makeText(mContext, "onSaveInstanceState", Toast.LENGTH_SHORT).show();
         outState.putCharSequence("title", mEdtBookTitle.getText().toString());
