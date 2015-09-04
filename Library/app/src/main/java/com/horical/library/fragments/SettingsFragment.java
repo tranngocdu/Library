@@ -115,6 +115,7 @@ public class SettingsFragment extends BaseFragment implements View.OnClickListen
     }
 
     public void update() {
+        String email = mEdtEmail.getText().toString();
         String currentPassword = mEdtCurrentPassword.getText().toString();
         String newPassword = mEdtNewPassword.getText().toString();
         String reNewPassword = mEdtConfirmNewPassword.getText().toString();
@@ -122,7 +123,7 @@ public class SettingsFragment extends BaseFragment implements View.OnClickListen
             Toast.makeText(mContext, "Cant empty", Toast.LENGTH_SHORT).show();
         } else {
             if (newPassword.equals(reNewPassword)) {
-                ParseRequest.changePassword(newPassword, this);
+                ParseRequest.changePassword(email, currentPassword, newPassword, this);
             } else {
                 Toast.makeText(mContext, "New password and re-password incorrect", Toast.LENGTH_SHORT).show();
             }

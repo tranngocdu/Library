@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.horical.library.bases.BaseFragmentActivity;
+import com.horical.library.fragments.ForgotPasswordFragment;
 import com.horical.library.fragments.LoginFragment;
 import com.horical.library.fragments.SignUpFragment;
 import com.horical.library.listenners.BackPressListener;
@@ -102,6 +103,11 @@ public class LoginActivity extends BaseFragmentActivity implements LoginActivity
     public void attachLoginFragment() {
         //LoginFragment loginFragment = new LoginFragment();
         showFragmentWithClearStack(LoginFragment.newInstances());
+    }
+
+    @Override
+    public void attachForgotPasswordFragment() {
+        showFragment(ForgotPasswordFragment.newInstances());
     }
 
     public void checkLogin() {

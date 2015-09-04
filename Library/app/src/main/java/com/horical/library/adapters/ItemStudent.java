@@ -3,6 +3,7 @@ package com.horical.library.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -64,11 +65,14 @@ public class ItemStudent extends Item implements View.OnClickListener
             {
                 mStudentCallback.deleteAStudent(position);
                 mStudent.deleteInBackground();
+
             }
         });
-        builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener() {
+        builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
 
             }
         });

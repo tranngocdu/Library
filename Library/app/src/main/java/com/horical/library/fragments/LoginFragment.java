@@ -13,13 +13,14 @@ import android.widget.Toast;
 import com.horical.library.R;
 import com.horical.library.bases.BaseFragment;
 import com.horical.library.connection.ParseRequest;
+import com.horical.library.connection.callback.ForgotPasswordCallback;
 import com.horical.library.connection.callback.LoginCallback;
 import com.parse.ParseUser;
 
 /**
  * Created by Diem Huong on 8/29/2015.
  */
-public class LoginFragment extends BaseFragment implements View.OnClickListener, LoginCallback {
+public class LoginFragment extends BaseFragment implements View.OnClickListener, LoginCallback, ForgotPasswordCallback {
 
     private static LoginFragment INSTANCE;
     private EditText mEdtEmail, mEdtPassword;
@@ -92,7 +93,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 mLoginActivityListener.attachSignUpFragment();
                 break;
             case R.id.tvForgotPassword:
-                Toast.makeText(getActivity(), "Forgot Pass", Toast.LENGTH_SHORT).show();
+                mLoginActivityListener.attachForgotPasswordFragment();
                 break;
         }
     }
@@ -104,6 +105,16 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
     @Override
     public void onLoginError(String message) {
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSuccess() {
+        Toast.makeText(mContext, "Please check email to get your password", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onError(String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 }

@@ -9,4 +9,6 @@ public interface LoginActivityListener {
     void attachSignUpFragment();
 
     void attachLoginFragment();
+
+    void attachForgotPasswordFragment();
 }

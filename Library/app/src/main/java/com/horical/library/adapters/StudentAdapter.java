@@ -1,7 +1,6 @@
 package com.horical.library.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -28,7 +27,6 @@ public class StudentAdapter extends BaseCustomAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        Log.d("pos", position + "");
         return super.getView(position, convertView, parent);
     }
 
