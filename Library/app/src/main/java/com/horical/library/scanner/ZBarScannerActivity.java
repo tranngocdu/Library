@@ -17,8 +17,7 @@ import net.sourceforge.zbar.ImageScanner;
 import net.sourceforge.zbar.Symbol;
 import net.sourceforge.zbar.SymbolSet;
 
-public class ZBarScannerActivity extends Activity implements Camera.PreviewCallback, ZBarConstants
-{
+public class ZBarScannerActivity extends Activity implements Camera.PreviewCallback, ZBarConstants {
 
     private static final String TAG = "ZBarScannerActivity";
     private CameraPreview mPreview;
@@ -27,18 +26,15 @@ public class ZBarScannerActivity extends Activity implements Camera.PreviewCallb
     private Handler mAutoFocusHandler;
     private boolean mPreviewing = true;
 
-    static
-    {
+    static {
         System.loadLibrary("iconv");
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        if (!isCameraAvailable())
-        {
+        if (!isCameraAvailable()) {
             // Cancel request if there is no rear-facing camera.
             cancelRequest();
             return;
@@ -59,32 +55,27 @@ public class ZBarScannerActivity extends Activity implements Camera.PreviewCallb
         setContentView(mPreview);
     }
 
-    public void setupScanner()
-    {
+    public void setupScanner() {
         mScanner = new ImageScanner();
         mScanner.setConfig(0, Config.X_DENSITY, 3);
         mScanner.setConfig(0, Config.Y_DENSITY, 3);
 
         int[] symbols = getIntent().getIntArrayExtra(SCAN_MODES);
-        if (symbols != null)
-        {
+        if (symbols != null) {
             mScanner.setConfig(Symbol.NONE, Config.ENABLE, 0);
-            for (int symbol : symbols)
-            {
+            for (int symbol : symbols) {
                 mScanner.setConfig(symbol, Config.ENABLE, 1);
             }
         }
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
 
         // Open the default i.e. the first rear facing camera.
         mCamera = Camera.open();
-        if (mCamera == null)
-        {
+        if (mCamera == null) {
             // Cancel request if mCamera is null.
             cancelRequest();
             return;
@@ -97,14 +88,12 @@ public class ZBarScannerActivity extends Activity implements Camera.PreviewCallb
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
 
         // Because the Camera object is a shared resource, it's very
         // important to release it when the activity is paused.
-        if (mCamera != null)
-        {
+        if (mCamera != null) {
             mPreview.setCamera(null);
             mCamera.cancelAutoFocus();
             mCamera.setPreviewCallback(null);
@@ -121,22 +110,19 @@ public class ZBarScannerActivity extends Activity implements Camera.PreviewCallb
         }
     }
 
-    public boolean isCameraAvailable()
-    {
+    public boolean isCameraAvailable() {
         PackageManager pm = getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);
     }
 
-    public void cancelRequest()
-    {
+    public void cancelRequest() {
         Intent dataIntent = new Intent();
         dataIntent.putExtra(ERROR_INFO, "Camera unavailable");
         setResult(Activity.RESULT_CANCELED, dataIntent);
         finish();
     }
 
-    public void onPreviewFrame(byte[] data, Camera camera)
-    {
+    public void onPreviewFrame(byte[] data, Camera camera) {
         Camera.Parameters parameters = camera.getParameters();
         Camera.Size size = parameters.getPreviewSize();
 
@@ -145,18 +131,15 @@ public class ZBarScannerActivity extends Activity implements Camera.PreviewCallb
 
         int result = mScanner.scanImage(barcode);
 
-        if (result != 0)
-        {
+        if (result != 0) {
             mCamera.cancelAutoFocus();
             mCamera.setPreviewCallback(null);
             mCamera.stopPreview();
             mPreviewing = false;
             SymbolSet syms = mScanner.getResults();
-            for (Symbol sym : syms)
-            {
+            for (Symbol sym : syms) {
                 String symData = sym.getData();
-                if (!TextUtils.isEmpty(symData))
-                {
+                if (!TextUtils.isEmpty(symData)) {
                     Intent dataIntent = new Intent();
                     dataIntent.putExtra(SCAN_RESULT, symData);
                     dataIntent.putExtra(SCAN_RESULT_TYPE, sym.getType());
@@ -168,22 +151,17 @@ public class ZBarScannerActivity extends Activity implements Camera.PreviewCallb
         }
     }
 
-    private Runnable doAutoFocus = new Runnable()
-    {
-        public void run()
-        {
-            if (mCamera != null && mPreviewing)
-            {
+    private Runnable doAutoFocus = new Runnable() {
+        public void run() {
+            if (mCamera != null && mPreviewing) {
                 mCamera.autoFocus(autoFocusCB);
             }
         }
     };
 
     // Mimic continuous auto-focusing
-    Camera.AutoFocusCallback autoFocusCB = new Camera.AutoFocusCallback()
-    {
-        public void onAutoFocus(boolean success, Camera camera)
-        {
+    Camera.AutoFocusCallback autoFocusCB = new Camera.AutoFocusCallback() {
+        public void onAutoFocus(boolean success, Camera camera) {
             mAutoFocusHandler.postDelayed(doAutoFocus, 1000);
         }
     };

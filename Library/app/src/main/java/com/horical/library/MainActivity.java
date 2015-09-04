@@ -12,18 +12,20 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.horical.library.base.BaseFragmentActivity;
+import com.horical.library.bases.BaseFragmentActivity;
 import com.horical.library.fragments.AddBookFragment;
+import com.horical.library.fragments.AddStudentFragment;
 import com.horical.library.fragments.BookDetailFragment;
 import com.horical.library.fragments.BooksFragment;
 import com.horical.library.fragments.HomeFragment;
 import com.horical.library.fragments.SettingsFragment;
 import com.horical.library.fragments.StudentsFragment;
-import com.horical.library.listenner.BackPressListener;
-import com.horical.library.listenner.MainActivityListener;
+import com.horical.library.listenners.BackPressListener;
+import com.horical.library.listenners.MainActivityListener;
 
 public class MainActivity extends BaseFragmentActivity implements View.OnClickListener, MainActivityListener
 {
+
     private RadioButton mRdbHome, mRdbBooks, mRdbStudents, mRdbSettings;
     private TextView mTvHome, mTvBooks, mTvStudents, mTvSettings;
     private RadioGroup mLayoutFooter;
@@ -73,7 +75,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     }
 
-    private void SelectorFragmentByID(int id)
+    private void selectFragmentByID(int id)
     {
         switch (id)
         {
@@ -108,25 +110,25 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
             case R.id.btnHome:
                 if (mCurrentTab != AppConstants.TAB_TYPE.TAB_HOME)
                 {
-                    SelectorFragmentByID(0);
+                    selectFragmentByID(0);
                 }
                 break;
             case R.id.btnBooks:
                 if (mCurrentTab != AppConstants.TAB_TYPE.TAB_BOOKS)
                 {
-                    SelectorFragmentByID(1);
+                    selectFragmentByID(1);
                 }
                 break;
             case R.id.btnStudents:
                 if (mCurrentTab != AppConstants.TAB_TYPE.TAB_STUDENTS)
                 {
-                    SelectorFragmentByID(2);
+                    selectFragmentByID(2);
                 }
                 break;
             case R.id.btnSettings:
                 if (mCurrentTab != AppConstants.TAB_TYPE.TAB_SETTINGS)
                 {
-                    SelectorFragmentByID(3);
+                    selectFragmentByID(3);
                 }
                 break;
             default:
@@ -190,16 +192,27 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Override
     public void attachAddBookFragment()
     {
-        AddBookFragment addBookFragment = AddBookFragment.newInstances();
-        showFragment(addBookFragment);
+        showFragment(AddBookFragment.newInstances());
 
     }
 
     @Override
     public void attachBookDetailFragment()
     {
-        BookDetailFragment bookDetailFragment = BookDetailFragment.newInstance();
-        showFragment(bookDetailFragment);
+        showFragment(BookDetailFragment.newInstance());
+    }
+
+    @Override
+    public void attachAddStudentFragment()
+    {
+        showFragment(AddStudentFragment.newInstances());
+    }
+
+    @Override
+    public void backToBooksFragment()
+    {
+        BooksFragment booksFragment = new BooksFragment();
+        showFragmentWithClearStack(booksFragment);
     }
 
     @Override

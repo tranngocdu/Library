@@ -48,7 +48,7 @@ public class NewBook extends ParseObject {
         return getInt("quantity_available");
     }
 
-    public void setQuantityAvailable(String quantityAvailable) {
+    public void setQuantityAvailable(int quantityAvailable) {
         put("quantity_available", quantityAvailable);
     }
 
@@ -64,7 +64,7 @@ public class NewBook extends ParseObject {
         return getInt("quantity_total");
     }
 
-    public void setQuantityTotal(String quantityTotal) {
+    public void setQuantityTotal(int quantityTotal) {
         put("quantity_total", quantityTotal);
     }
 

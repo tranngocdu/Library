@@ -13,7 +13,7 @@
     <color name="tab_bg">#f8f8f8</color>
     <color name="tab_border">#b2b2b2</color>
     <color name="fragment_book_list_view_header_bg">#f7f7f7</color>
-
+    <color name="gray">#e9e9e9</color>
     <!--fragment_home -->
     <!--fragment_books -->
     <!--fragment_students -->

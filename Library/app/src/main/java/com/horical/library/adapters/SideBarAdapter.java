@@ -1,4 +1,4 @@
-package com.horical.library.adapter.bookadapter;
+package com.horical.library.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -32,7 +32,7 @@ public class SideBarAdapter extends ArrayAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.simple_list_item_book_side_bar, null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.simple_list_item_side_bar, null);
             viewHolder.tvSidebar = (TextView) convertView.findViewById(R.id.tvSidebar);
             convertView.setTag(viewHolder);
         } else {

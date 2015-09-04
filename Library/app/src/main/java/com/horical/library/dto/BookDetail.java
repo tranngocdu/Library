@@ -1,5 +1,9 @@
 package com.horical.library.dto;
 
+import android.text.Selection;
+
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Vector;
 
 /**
@@ -18,6 +22,7 @@ public class BookDetail {
         bookList.add(book);
         book = new Book("War and Peace ", "", "Leo Tolstoy ", "1865�1869 ", "Russia ", "Russian");
         bookList.add(book);
+        Collections.sort(bookList);
         return bookList;
     }
 }

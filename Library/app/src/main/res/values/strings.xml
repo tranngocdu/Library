@@ -19,6 +19,11 @@
     <string name="sign_up">Sign Up</string>
     <string name="have_account">I have an Account</string>
     <string name="forgot_password">Forgot your password ?</string>
+    <string name="sign_up_success">Sign up success, let\'s login</string>
+    <string name="email_empty">Email or Password is empty</string>
+    <string name="repassword_error">Confirm password is incorrect</string>
+
+
     <!--fragment_home -->
     <string name="home">Home</string>
     <string name="check_out">Check Out</string>
@@ -43,12 +48,16 @@
     <string name="add_book">Add Book</string>
     <!--fragment_students -->
     <string name="students">Students</string>
-    <string name="btnadd">Add</string>
+    <string name="btn_add">Add</string>
     <string name="add_student">Add Student</string>
     <string name="edit_student">Edit Student</string>
     <string name="save_student">Save Student</string>
     <string name="remove_student">Remove Student</string>
     <string name="student_name">Student name</string>
+    <string name="confirm_delete_student_title">Delete student</string>
+    <string name="confirm_delete_student_message">Are you sure delete this student?</string>
+
+    <!-- fragment_add_student -->
 
     <!--fragment_settings -->
     <string name="settings">Settings</string>
@@ -58,7 +67,7 @@
     <string name="new_password">New password</string>
     <string name="confirm_new_password">Confirm new password</string>
 
-    <string name="upgrade_account">Upgrade Account</string>
+    <string name="upgrade_account">Update Account</string>
     <string name="help_me">Help Me</string>
     <string name="logout">Log Out</string>
 

@@ -41,14 +41,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edtEmail"
-            android:hint="@string/current_password" />
+            android:hint="@string/current_password"
+            android:inputType="textPassword" />
 
         <EditText
             android:id="@+id/edtNewPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edtCurrentPassword"
-            android:hint="@string/new_password" />
+            android:hint="@string/new_password"
+            android:inputType="textPassword" />
 
         <EditText
             android:id="@+id/edtConfirmNewPassword"
@@ -56,10 +58,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/edtNewPassword"
             android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
-            android:hint="@string/confirm_new_password" />
+            android:hint="@string/confirm_new_password"
+            android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/btnUpgrade"
+            android:id="@+id/btnUpdate"
             android:layout_width="@dimen/fragment_home_btn_checkout_width"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edtConfirmNewPassword"
@@ -73,7 +76,7 @@
             android:id="@+id/btnHelpMe"
             android:layout_width="@dimen/fragment_home_btn_checkout_width"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btnUpgrade"
+            android:layout_below="@id/btnUpdate"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/fragment_home_btn_checkout_margin"
             android:background="@drawable/selector_btn_common_background_no_fill_green"

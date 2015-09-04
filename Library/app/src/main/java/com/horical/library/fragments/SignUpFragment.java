@@ -9,22 +9,31 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.horical.library.R;
-import com.horical.library.base.BaseFragment;
+import com.horical.library.bases.BaseFragment;
+import com.horical.library.connection.ParseRequest;
+import com.horical.library.connection.callback.SignUpCallback;
 
 /**
  * Created by Diem Huong on 8/29/2015.
  */
-public class SignUpFragment extends BaseFragment implements View.OnClickListener
+public class SignUpFragment extends BaseFragment implements View.OnClickListener, SignUpCallback
 {
+
+    private static SignUpFragment INSTANCE;
     private TextView mTvBackToLogin;
     private EditText mEdtEmail, mEdtPassword, mEdtConfirmPassword;
     private Button mBtnCreateAccount, mBtnHadAccount;
 
-    public static BaseFragment newInstances()
+    public static SignUpFragment newInstances()
     {
-        return new SignUpFragment();
+        if (INSTANCE == null)
+        {
+            INSTANCE = new SignUpFragment();
+        }
+        return INSTANCE;
     }
 
     @Override
@@ -80,6 +89,12 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
+    protected void clearCached()
+    {
+
+    }
+
+    @Override
     protected boolean hasFooterLayout()
     {
         return false;
@@ -94,10 +109,38 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
                 mLoginActivityListener.attachLoginFragment();
                 break;
             case R.id.btnCreateAccount:
+                String email = mEdtEmail.getText().toString().trim();
+                String password = mEdtPassword.getText().toString().trim();
+                String rePassword = mEdtConfirmPassword.getText().toString();
+                if (!email.equalsIgnoreCase("") && !password.equalsIgnoreCase(""))
+                {
+                    if (password.equals(rePassword))
+                    {
+                        ParseRequest.signUp(email, password, this);
+                    } else
+                    {
+                        Toast.makeText(mContext, mContext.getResources().getString(R.string.repassword_error), Toast.LENGTH_SHORT).show();
+                    }
+                } else
+                {
+                    Toast.makeText(mContext, mContext.getResources().getString(R.string.email_empty), Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.btnHadAccount:
                 mLoginActivityListener.attachLoginFragment();
                 break;
         }
+    }
+
+    @Override
+    public void onSignUpSuccess()
+    {
+        Toast.makeText(mContext, "Register Success. Let's login", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSignUpError(String message)
+    {
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 }

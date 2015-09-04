@@ -1,4 +1,4 @@
-package com.horical.library.adapter.bookadapter;
+package com.horical.library.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,47 +6,54 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.horical.library.R;
-import com.horical.library.dto.Book;
+import com.horical.library.dto.NewBook;
 
 /**
  * Created by trandu on 30/08/2015.
  */
-public class ItemBody implements Item {
+public class ItemBook extends Item
+{
 
-    public Book mBook;
+    public NewBook mBook;
 
-    public ItemBody(Book book) {
+    public ItemBook(NewBook book)
+    {
         this.mBook = book;
     }
 
     @Override
-    public View getView(LayoutInflater inflater, View convertView) {
+    public View getView(LayoutInflater inflater, View convertView, int pos)
+    {
 
         ViewHolder viewHolder;
-        if (convertView == null) {
+        if (convertView == null)
+        {
             viewHolder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.simple_list_item_book_body, null);
+            convertView = inflater.inflate(R.layout.simple_list_item_book, null);
             viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvBookName);
             viewHolder.tvAuthor = (TextView) convertView.findViewById(R.id.tvBookAuthor);
             viewHolder.tvAvailable = (TextView) convertView.findViewById(R.id.tvBookAvailable);
             convertView.setTag(viewHolder);
-        } else {
+        } else
+        {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.tvName.setText(mBook.getName());
+        viewHolder.tvName.setText(mBook.getTitle());
         viewHolder.tvAuthor.setText(mBook.getAuthor());
-        viewHolder.tvAvailable.setText(mBook.getAvailable() + " available");
+        viewHolder.tvAvailable.setText(mBook.getQuantityAvailable() + " available");
 
         return convertView;
     }
 
     @Override
-    public int getViewType() {
-        return ItemType.ITEM_BODY.ordinal();
+    public int getViewType()
+    {
+        return ItemType.ITEM_BOOK.ordinal();
     }
 
-    class ViewHolder {
+    class ViewHolder
+    {
         ImageView imgBookThumbnail;
         TextView tvName, tvAuthor, tvAvailable;
     }
