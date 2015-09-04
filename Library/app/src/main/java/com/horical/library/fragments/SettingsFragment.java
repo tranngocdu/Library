@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.horical.library.LoginActivity;
-import com.horical.library.MainActivity;
 import com.horical.library.MainApplication;
 import com.horical.library.R;
 import com.horical.library.bases.BaseFragment;
@@ -105,7 +104,7 @@ public class SettingsFragment extends BaseFragment implements View.OnClickListen
                 ParseRequest.logout(this);
                 Intent intent = new Intent(mContext, LoginActivity.class);
                 startActivity(intent);
-                ((MainActivity) mContext).finish();
+                mMainActivityListener.exitMain();
                 break;
             case R.id.btnUpdate:
                 update();

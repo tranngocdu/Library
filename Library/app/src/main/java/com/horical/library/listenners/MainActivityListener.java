@@ -20,4 +20,6 @@ public interface MainActivityListener
     void showFooterLayout();
 
     void hideFooterLayout();
+
+    void exitMain();
 }

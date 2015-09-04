@@ -92,11 +92,15 @@
     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <orderEntry type="library" exported="" name="zbar" level="project" />
     <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
 =======
     <orderEntry type="library" exported="" name="picasso-2.5.0" level="project" />
+=======
+>>>>>>> f324ca7409800c0b62e96bcc4baa36f3c6befa7b
     <orderEntry type="library" exported="" name="okio-1.2.0" level="project" />
+    <orderEntry type="library" exported="" name="picasso-2.5.0" level="project" />
     <orderEntry type="library" exported="" name="Parse-1.10.1" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.2.0" level="project" />
 >>>>>>> ae1b5ed2338077a7d754cffd2dbd4bee597967a5

@@ -27,8 +27,7 @@ import java.util.List;
 /**
  * Created by trandu on 24/08/2015.
  */
-public class BooksFragment extends BaseFragmentHasList implements View.OnClickListener, AdapterView.OnItemClickListener, GetAllBookCallback
-{
+public class BooksFragment extends BaseFragmentHasList implements View.OnClickListener, AdapterView.OnItemClickListener, GetAllBookCallback {
 
     private static BooksFragment INSTANCE;
     private TextView mTvAddBooks;
@@ -39,49 +38,41 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
     private ArrayList<Item> mBookList;
 
 
-    public static BooksFragment newInstances()
-    {
-        if (INSTANCE == null)
-        {
+    public static BooksFragment newInstances() {
+        if (INSTANCE == null) {
             INSTANCE = new BooksFragment();
         }
         return INSTANCE;
     }
 
 
-    public BooksFragment()
-    {
+    public BooksFragment() {
         mBookList = new ArrayList<Item>();
     }
 
     @Override
-    public void onAttach(Activity activity)
-    {
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
 
     @Override
-    public void onCreate(Bundle bundle)
-    {
+    public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         View v = inflater.inflate(R.layout.fragment_books, container, false);
         return v;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle bundle)
-    {
+    public void onViewCreated(View view, Bundle bundle) {
         super.onViewCreated(view, bundle);
     }
 
     @Override
-    protected void initView(View view)
-    {
+    protected void initView(View view) {
         super.initView(view);
         mRbtAllBooks = (RadioButton) view.findViewById(R.id.rbtAllBooks);
         mRbtAvailable = (RadioButton) view.findViewById(R.id.rbtAvailable);
@@ -92,58 +83,51 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
     }
 
     @Override
-    protected void initListener(View view)
-    {
+    protected void initListener(View view) {
         super.initListener(view);
         mRbtCheckedOut.setOnClickListener(this);
         mRbtAvailable.setOnClickListener(this);
         mRbtAllBooks.setOnClickListener(this);
         mTvAddBooks.setOnClickListener(this);
 
-        mLvAllBook.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        mLvAllBook.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id)
-            {
-                mMainActivityListener.attachBookDetailFragment((NewBook) mBookAdapter.getAllItem().get(position));
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                if (mBookAdapter.getAllItem().get(position) instanceof ItemBook) {
+                    Toast.makeText(mContext, "Not complete", Toast.LENGTH_SHORT).show();
+                    //mMainActivityListener.attachBookDetailFragment(((ItemBook) mBookAdapter.getAllItem().get(position)).getBook());
+                }
             }
         });
         mLvSideBar.setOnItemClickListener(this);
     }
 
     @Override
-    protected void initData()
-    {
+    protected void initData() {
         super.initData();
         ParseRequest.getAllBook(mUserId, this);
     }
 
     @Override
-    protected void clearCached()
-    {
+    protected void clearCached() {
 
     }
 
     @Override
-    protected boolean hasFooterLayout()
-    {
+    protected boolean hasFooterLayout() {
         return true;
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
-        if (mBookAdapter.index[position] != -1)
-        {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (mBookAdapter.index[position] != -1) {
             mLvAllBook.smoothScrollToPositionFromTop(mBookAdapter.index[position] - 1, 0);
         }
     }
 
     @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.rbtCheckedOut:
                 Toast.makeText(getActivity(), "rbtCheckedOut", Toast.LENGTH_SHORT).show();
                 break;
@@ -162,17 +146,14 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden)
-    {
+    public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
     }
 
     @Override
-    public void onGetAllBookSuccess(List<NewBook> bookList)
-    {
+    public void onGetAllBookSuccess(List<NewBook> bookList) {
         ArrayList arrayList = new ArrayList();
-        for (int i = 0; i < bookList.size(); i++)
-        {
+        for (int i = 0; i < bookList.size(); i++) {
             arrayList.add(new ItemBook(bookList.get(i)));
         }
         mBookList.clear();
@@ -182,8 +163,8 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
     }
 
     @Override
-    public void onGetAllBookError(String message)
-    {
+    public void onGetAllBookError(String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
+
 }

@@ -35,7 +35,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private static HomeFragment INSTANCE;
 
     private Button mBtnCheckOut, mBtnCheckIn;
-    private TextView textView;
     private String mUserEmail, mUserSessionToken;
 
     public HomeFragment()
@@ -70,14 +69,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                mMainActivityListener.attachBooksFragment();
-            }
-        });
-        builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
                 if (CameraUtils.isCameraAvailable(getActivity()))
                 {
                     Intent intent = new Intent(getActivity(), ZBarScannerActivity.class);
@@ -86,6 +77,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 {
                     Toast.makeText(getActivity(), "Rear Facing Camera Unavailable", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                mMainActivityListener.attachBooksFragment();
             }
         });
         builder.show();
@@ -125,7 +124,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     {
         mBtnCheckIn = (Button) view.findViewById(R.id.btnCheckIn);
         mBtnCheckOut = (Button) view.findViewById(R.id.btnCheckOut);
-        textView = (TextView) view.findViewById(R.id.textView);
     }
 
     @Override
@@ -181,7 +179,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 {
                     Toast.makeText(getActivity(), "Scan Result = " + data.getStringExtra(ZBarConstants.SCAN_RESULT), Toast.LENGTH_SHORT).show();
                     String isbn = data.getStringExtra(ZBarConstants.SCAN_RESULT);
-                    textView.setText(isbn);
                     ParseRequest.getBookISBN(isbn, this);
                 } else if (resultCode == Activity.RESULT_CANCELED && data != null)
                 {
