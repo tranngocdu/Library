@@ -193,7 +193,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Override
     public void attachAddBookFragment(NewBook book)
     {
-        AddBookFragment addBookFragment = AddBookFragment.newInstances();
+        AddBookFragment addBookFragment = new AddBookFragment();
         addBookFragment.setBook(book);
         showFragment(addBookFragment);
     }

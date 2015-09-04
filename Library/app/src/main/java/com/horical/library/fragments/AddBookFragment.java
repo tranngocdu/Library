@@ -111,6 +111,31 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
     @Override
     protected void initData()
     {
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    URL url = new URL(book.getCoverImage());
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    InputStream is = httpURLConnection.getInputStream();
+                    final Bitmap bmp = BitmapFactory.decodeStream(is);
+                    mImvBookThumbnail.post(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            mImvBookThumbnail.setImageBitmap(bmp);
+                        }
+                    });
+                } catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
         mEdtBookTitle.setText(book.getTitle());
         mEdtBookAuthor.setText(book.getAuthor());
         mEdtBookISBM.setText(book.getISBN());

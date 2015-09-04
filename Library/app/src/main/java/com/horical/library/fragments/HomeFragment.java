@@ -70,14 +70,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                mMainActivityListener.attachBooksFragment();
-            }
-        });
-        builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
                 if (CameraUtils.isCameraAvailable(getActivity()))
                 {
                     Intent intent = new Intent(getActivity(), ZBarScannerActivity.class);
@@ -86,6 +78,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 {
                     Toast.makeText(getActivity(), "Rear Facing Camera Unavailable", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                mMainActivityListener.attachBooksFragment();
             }
         });
         builder.show();
