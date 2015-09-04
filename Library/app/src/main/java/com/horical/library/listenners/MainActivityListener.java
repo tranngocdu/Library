@@ -15,6 +15,8 @@ public interface MainActivityListener
 
     void attachAddStudentFragment();
 
+    void attachStudentFragment();
+
     void attachBooksFragment();
 
     void showFooterLayout();

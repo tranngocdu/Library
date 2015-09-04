@@ -193,28 +193,43 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Override
     public void attachAddBookFragment(NewBook book)
     {
-        AddBookFragment addBookFragment = AddBookFragment.newInstances();
+        AddBookFragment addBookFragment = new AddBookFragment();
         addBookFragment.setBook(book);
         showFragment(addBookFragment);
+        mRdbBooks.setChecked(true);
+        mCurrentTab = AppConstants.TAB_TYPE.TAB_BOOKS;
     }
 
     @Override
     public void attachBookDetailFragment(NewBook book)
     {
         showFragment(BookDetailFragment.newInstance());
-    }
-
-    @Override
-    public void attachAddStudentFragment()
-    {
-        showFragment(AddStudentFragment.newInstances());
+        mRdbBooks.setChecked(true);
+        mCurrentTab = AppConstants.TAB_TYPE.TAB_BOOKS;
     }
 
     @Override
     public void attachBooksFragment()
     {
-        BooksFragment booksFragment = new BooksFragment();
-        showFragmentWithClearStack(booksFragment);
+        selectFragmentByID(1);
+        mRdbBooks.setChecked(true);
+    }
+
+    @Override
+    public void attachAddStudentFragment()
+    {
+        AddStudentFragment addStudentFragment = new AddStudentFragment();
+        showFragment(addStudentFragment);
+        mRdbStudents.setChecked(true);
+        mCurrentTab = AppConstants.TAB_TYPE.TAB_STUDENTS;
+    }
+
+    @Override
+    public void attachStudentFragment()
+    {
+        StudentsFragment studentsFragment = new StudentsFragment();
+        showFragmentWithClearStack(studentsFragment);
+        mRdbStudents.setChecked(true);
     }
 
     @Override
