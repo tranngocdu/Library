@@ -5,4 +5,8 @@ public class AppConstants {
         TAB_NONE, TAB_HOME, TAB_SETTINGS, TAB_BOOKS, TAB_STUDENTS
     }
 
+    public enum  BOOK_TYPE
+    {
+        AVAILABLE,CHECKED_OUT
+    }
 }
