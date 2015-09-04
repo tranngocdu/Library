@@ -20,7 +20,7 @@ public class ItemStudent extends Item implements View.OnClickListener
 
     private StudentCallback mStudentCallback;
 
-    private int pos;
+    private int position;
 
     public Student mStudent;
 
@@ -34,7 +34,7 @@ public class ItemStudent extends Item implements View.OnClickListener
     @Override
     public View getView(LayoutInflater inflater, View convertView, int pos)
     {
-        this.pos = pos;
+        this.position = pos;
         ViewHolder holder;
         if (convertView == null)
         {
@@ -62,7 +62,7 @@ public class ItemStudent extends Item implements View.OnClickListener
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                mStudentCallback.deleteAStudent(pos);
+                mStudentCallback.deleteAStudent(position);
                 mStudent.deleteInBackground();
             }
         });
