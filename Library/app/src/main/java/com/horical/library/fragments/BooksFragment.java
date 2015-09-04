@@ -92,6 +92,7 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
         mLvAllBook.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
+                mMainActivityListener.attachBookDetailFragment();
             }
         });
         mLvSideBar.setOnItemClickListener(this);
@@ -140,6 +141,10 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
         }
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+    }
 
     @Override
     public void onGetAllBookSuccess(List<NewBook> bookList) {

@@ -30,14 +30,18 @@ public class BookDetailNameUserAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        LayoutInflater inflater = activity.getLayoutInflater();
-        convertView = inflater.inflate(R.layout.custom_listview_book_detail, null);
-        viewHolder = new ViewHolder();
-        viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvBookName);
-        viewHolder.tvHeader = (TextView) convertView.findViewById(R.id.tvHeader);
-        viewHolder.llName = (LinearLayout) convertView.findViewById(R.id.llBookName);
-        viewHolder.llHeader = (LinearLayout) convertView.findViewById(R.id.llHeader);
-        convertView.setTag(viewHolder);
+        if (convertView == null) {
+            LayoutInflater inflater = activity.getLayoutInflater();
+            convertView = inflater.inflate(R.layout.custom_listview_book_detail, null);
+            viewHolder = new ViewHolder();
+            viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvBookName);
+            viewHolder.tvHeader = (TextView) convertView.findViewById(R.id.tvHeader);
+            viewHolder.llName = (LinearLayout) convertView.findViewById(R.id.llBookName);
+            viewHolder.llHeader = (LinearLayout) convertView.findViewById(R.id.llHeader);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
         if (position < books.size()) {
             final Book subsidies = books.get(position);
             if (subsidies != null && (subsidies.getName().length() == 1)) {
@@ -68,7 +72,7 @@ public class BookDetailNameUserAdapter extends BaseAdapter {
         return position;
     }
 
-    private static class ViewHolder {
+    private class ViewHolder {
         TextView tvName, tvHeader;
         LinearLayout llName, llHeader;
     }

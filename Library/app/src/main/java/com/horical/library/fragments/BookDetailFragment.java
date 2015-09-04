@@ -31,10 +31,10 @@ public class BookDetailFragment extends BaseFragment implements View.OnClickList
     ArrayAdapter<String> mIndexAdapter;
     LinearLayout sideIndex;
     String[] mStringIndex;
-    List<String> mIndexListName= new ArrayList<>();
+    List<String> mIndexListName = new ArrayList<>();
     Vector<Book> mBookDetailVector;
     List<Integer> mDealList = new ArrayList<>();
-    int mTotalListSize=0;
+    int mTotalListSize = 0;
 
     public static BookDetailFragment newInstance() {
         return new BookDetailFragment();
@@ -54,28 +54,11 @@ public class BookDetailFragment extends BaseFragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_book_detail, container, false);
-        mListView = (ListView) view.findViewById(R.id.lvBookName);
-        mListViewIndex= (ListView) view.findViewById(R.id.lvIndex);
-        mBookDetailVector = BookDetail.getBookList();
-        Vector subsidiesList=getIndexedBooks(mBookDetailVector);
-        mTotalListSize = subsidiesList.size();
-        mBookDetailNameUserAdapter= new BookDetailNameUserAdapter(getActivity(), subsidiesList);
-        setStringIndex();
-        mIndexAdapter=new ArrayAdapter<>(getActivity(), simple_list_item_1, mStringIndex);
-        mListView.setAdapter(mBookDetailNameUserAdapter);
-        sideIndex = (LinearLayout) view.findViewById(R.id.llSlideIndex);
-        mListViewIndex.setAdapter(mIndexAdapter);
-        mListViewIndex.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                displayListItem(position);
-            }
-        });
         return view;
     }
 
-    public void setStringIndex(){
-        mStringIndex= new String[]{"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","T","U","V","X","Y","Z"};
+    public void setStringIndex() {
+        mStringIndex = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "T", "U", "V", "X", "Y", "Z"};
     }
 
     private Vector<Book> getIndexedBooks(Vector<Book> booksVector) {
@@ -96,19 +79,18 @@ public class BookDetailFragment extends BaseFragment implements View.OnClickList
         return v;
     }
 
-    public int getPosition(String s, List<String> strings){
-        int pos=0;
-        for (int i=0; i<strings.size();i++){
-            if (strings.get(i).equals(s))
-            {
-                pos=i;
+    public int getPosition(String s, List<String> strings) {
+        int pos = 0;
+        for (int i = 0; i < strings.size(); i++) {
+            if (strings.get(i).equals(s)) {
+                pos = i;
             }
         }
         return pos;
     }
 
     public void displayListItem(int itemPosition) {
-        int pos=getPosition(mStringIndex[itemPosition].toLowerCase(), mIndexListName);
+        int pos = getPosition(mStringIndex[itemPosition].toLowerCase(), mIndexListName);
         int listLocation = mDealList.get(pos);
 
         if (listLocation > mTotalListSize) {
@@ -124,17 +106,31 @@ public class BookDetailFragment extends BaseFragment implements View.OnClickList
 
     @Override
     protected void initView(View view) {
-
+        mListView = (ListView) view.findViewById(R.id.lvBookName);
+        mListViewIndex = (ListView) view.findViewById(R.id.lvIndex);
+        sideIndex = (LinearLayout) view.findViewById(R.id.llSlideIndex);
     }
 
     @Override
     protected void initListener(View view) {
-
+        mListViewIndex.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                displayListItem(position);
+            }
+        });
     }
 
     @Override
     protected void initData() {
-
+        mBookDetailVector = BookDetail.getBookList();
+        Vector subsidiesList = getIndexedBooks(mBookDetailVector);
+        mTotalListSize = subsidiesList.size();
+        mBookDetailNameUserAdapter = new BookDetailNameUserAdapter(getActivity(), subsidiesList);
+        setStringIndex();
+        mIndexAdapter = new ArrayAdapter<>(getActivity(), simple_list_item_1, mStringIndex);
+        mListView.setAdapter(mBookDetailNameUserAdapter);
+        mListViewIndex.setAdapter(mIndexAdapter);
     }
 
     @Override
