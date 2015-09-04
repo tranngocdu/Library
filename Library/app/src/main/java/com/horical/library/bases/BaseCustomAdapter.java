@@ -1,6 +1,7 @@
 package com.horical.library.bases;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class BaseCustomAdapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
+        Log.d("pos", position + "");
         return getItem(position).getView(LayoutInflater.from(mContext), convertView, position);
     }
 
@@ -117,5 +119,4 @@ public class BaseCustomAdapter extends BaseAdapter
         }
         return result;
     }
-
 }
