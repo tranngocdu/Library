@@ -93,9 +93,12 @@
     <orderEntry type="sourceFolder" forTests="false" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <orderEntry type="library" exported="" name="zbar" level="project" />
     <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
 =======
+=======
+>>>>>>> 8d52b974bbb3419c3661a6e885b80efc5dd40094
     <orderEntry type="library" exported="" name="picasso-2.5.0" level="project" />
 =======
 >>>>>>> f324ca7409800c0b62e96bcc4baa36f3c6befa7b
@@ -103,20 +106,17 @@
     <orderEntry type="library" exported="" name="picasso-2.5.0" level="project" />
     <orderEntry type="library" exported="" name="Parse-1.10.1" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.2.0" level="project" />
->>>>>>> ae1b5ed2338077a7d754cffd2dbd4bee597967a5
     <orderEntry type="library" exported="" name="eventbus-2.4.0" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
+    <orderEntry type="library" exported="" name="bolts-android-1.2.1" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.2.1" level="project" />
-    <orderEntry type="library" exported="" name="picasso-2.5.0" level="project" />
-    <orderEntry type="library" exported="" name="armeabi" level="project" />
     <orderEntry type="library" exported="" name="retrofit-1.9.0" level="project" />
     <orderEntry type="library" exported="" name="filepicker-android-3.8.14" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-22.2.1" level="project" />
-    <orderEntry type="library" exported="" name="Parse-1.10.1" level="project" />
-    <orderEntry type="library" exported="" name="okhttp-2.2.0" level="project" />
     <orderEntry type="library" exported="" name="x86" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
     <orderEntry type="library" exported="" name="armeabi-v7a" level="project" />
-    <orderEntry type="library" exported="" name="bolts-android-1.2.1" level="project" />
-    <orderEntry type="library" exported="" name="okio-1.2.0" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
+    <orderEntry type="library" exported="" name="armeabi" level="project" />
+    <orderEntry type="library" exported="" name="appcompat-v7-22.2.1" level="project" />
+    <orderEntry type="library" exported="" name="zbar" level="project" />
   </component>
 </module>

@@ -9,9 +9,11 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.horical.library.AppConstants;
 import com.horical.library.R;
 import com.horical.library.adapters.BookAdapter;
 import com.horical.library.adapters.Item;
@@ -19,6 +21,7 @@ import com.horical.library.adapters.ItemBook;
 import com.horical.library.bases.BaseFragmentHasList;
 import com.horical.library.connection.ParseRequest;
 import com.horical.library.connection.callback.GetAllBookCallback;
+import com.horical.library.connection.callback.GetListBookWithTypeCallback;
 import com.horical.library.dto.NewBook;
 
 import java.util.ArrayList;
@@ -27,10 +30,11 @@ import java.util.List;
 /**
  * Created by trandu on 24/08/2015.
  */
-public class BooksFragment extends BaseFragmentHasList implements View.OnClickListener, AdapterView.OnItemClickListener, GetAllBookCallback {
+public class BooksFragment extends BaseFragmentHasList implements View.OnClickListener, AdapterView.OnItemClickListener, GetAllBookCallback, GetListBookWithTypeCallback {
 
     private static BooksFragment INSTANCE;
     private TextView mTvAddBooks;
+    private RadioGroup mRdgBookType;
     private RadioButton mRbtAllBooks, mRbtAvailable, mRbtCheckedOut;
     private EditText mEdtSearch;
     private ListView mLvAllBook;
@@ -74,6 +78,7 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
     @Override
     protected void initView(View view) {
         super.initView(view);
+        mRdgBookType = (RadioGroup) view.findViewById(R.id.rdgBookType);
         mRbtAllBooks = (RadioButton) view.findViewById(R.id.rbtAllBooks);
         mRbtAvailable = (RadioButton) view.findViewById(R.id.rbtAvailable);
         mRbtCheckedOut = (RadioButton) view.findViewById(R.id.rbtCheckedOut);
@@ -129,13 +134,13 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rbtCheckedOut:
-                Toast.makeText(getActivity(), "rbtCheckedOut", Toast.LENGTH_SHORT).show();
+                ParseRequest.getBookListWithType(AppConstants.BOOK_TYPE.CHECKED_OUT, this);
                 break;
             case R.id.rbtAvailable:
-                Toast.makeText(getActivity(), "rbtAvailable", Toast.LENGTH_SHORT).show();
+                ParseRequest.getBookListWithType(AppConstants.BOOK_TYPE.AVAILABLE, this);
                 break;
             case R.id.rbtAllBooks:
-                Toast.makeText(getActivity(), "rbtAllBooks", Toast.LENGTH_SHORT).show();
+                ParseRequest.getAllBook(mUserId, this);
                 break;
             case R.id.tvAddBooks:
                 mMainActivityListener.attachAddBookFragment(new NewBook());
@@ -167,4 +172,20 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onSuccess(List<NewBook> newBooks) {
+        ArrayList arrayList = new ArrayList();
+        for (int i = 0; i < newBooks.size(); i++) {
+            arrayList.add(new ItemBook(newBooks.get(i)));
+        }
+        mBookList.clear();
+        mBookList.addAll(arrayList);
+        mBookAdapter = new BookAdapter(mContext, mBookList);
+        mLvAllBook.setAdapter(mBookAdapter);
+    }
+
+    @Override
+    public void onError(String message) {
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+    }
 }

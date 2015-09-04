@@ -3,9 +3,7 @@ package com.horical.library;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.view.KeyEvent;
 import android.view.View;
@@ -172,22 +170,36 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         AddBookFragment addBookFragment = new AddBookFragment();
         addBookFragment.setBook(book);
         showFragment(addBookFragment);
+        mRdbBooks.setChecked(true);
+        mCurrentTab = AppConstants.TAB_TYPE.TAB_BOOKS;
     }
 
     @Override
     public void attachBookDetailFragment(NewBook book) {
         showFragment(BookDetailFragment.newInstance());
-    }
-
-    @Override
-    public void attachAddStudentFragment() {
-        showFragment(AddStudentFragment.newInstances());
+        mRdbBooks.setChecked(true);
+        mCurrentTab = AppConstants.TAB_TYPE.TAB_BOOKS;
     }
 
     @Override
     public void attachBooksFragment() {
         BooksFragment booksFragment = new BooksFragment();
         showFragmentWithClearStack(booksFragment);
+    }
+
+    @Override
+    public void attachAddStudentFragment() {
+        AddStudentFragment addStudentFragment = new AddStudentFragment();
+        showFragment(addStudentFragment);
+        mRdbStudents.setChecked(true);
+        mCurrentTab = AppConstants.TAB_TYPE.TAB_STUDENTS;
+    }
+
+    @Override
+    public void attachStudentFragment() {
+        StudentsFragment studentsFragment = new StudentsFragment();
+        showFragmentWithClearStack(studentsFragment);
+        mRdbStudents.setChecked(true);
     }
 
     @Override

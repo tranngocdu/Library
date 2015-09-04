@@ -161,7 +161,7 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
         String bookAuthor = mEdtBookAuthor.getText().toString();
         String bookISBN = mEdtBookISBM.getText().toString();
         int bookTotal = Integer.parseInt(mEdtBookNumber.getText().toString());
-        if (bookName.equals("") || bookAuthor.equals("") || bookISBN.equals("") || bookTotal <= 0) {
+        if (bookName.equals("") || bookAuthor.equals("") || bookISBN.equals("") || bookTotal < 0) {
             Toast.makeText(mContext, "Please insert content, Can't empty", Toast.LENGTH_SHORT).show();
         } else {
             book.setUser(mUserId);

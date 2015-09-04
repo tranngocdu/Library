@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <TextView
             android:layout_width="0dp"
@@ -23,7 +23,7 @@
             android:gravity="center"
             android:text="@string/books"
             android:textColor="@color/white"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvAddBooks"
@@ -33,7 +33,7 @@
             android:gravity="center"
             android:text="@string/add"
             android:textColor="@color/white"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
 
     </LinearLayout>
 
@@ -54,6 +54,7 @@
         android:gravity="center">
 
         <RadioGroup
+            android:id="@+id/rdgBookType"
             android:layout_width="match_parent"
             android:layout_height="@dimen/fragment_books_radio_group_height"
             android:layout_gravity="center"
@@ -70,7 +71,7 @@
                 android:checked="true"
                 android:gravity="center"
                 android:text="@string/all_books"
-                android:textColor="@drawable/tv_fragment_books_text_color_allbooks"/>
+                android:textColor="@drawable/tv_fragment_books_text_color_allbooks" />
 
             <RadioButton
                 android:id="@+id/rbtAvailable"
@@ -81,7 +82,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:text="@string/available"
-                android:textColor="@drawable/tv_fragment_books_text_color_allbooks"/>
+                android:textColor="@drawable/tv_fragment_books_text_color_allbooks" />
 
             <RadioButton
                 android:id="@+id/rbtCheckedOut"
@@ -92,7 +93,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:text="@string/checked_out"
-                android:textColor="@drawable/tv_fragment_books_text_color_allbooks"/>
+                android:textColor="@drawable/tv_fragment_books_text_color_allbooks" />
 
         </RadioGroup>
 
@@ -128,7 +129,7 @@
                     android:background="@drawable/edt_fragment_books_back_ground_search"
                     android:ems="15"
                     android:gravity="center"
-                    android:hint="Search"/>
+                    android:hint="Search" />
             </LinearLayout>
 
             <LinearLayout
@@ -141,7 +142,7 @@
                     android:id="@+id/lvAllBooks"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"/>
+                    android:layout_weight="5" />
 
                 <ListView
                     android:id="@+id/lvSideBar"
@@ -149,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:divider="@null"
-                    android:gravity="center_horizontal"/>
+                    android:gravity="center_horizontal" />
             </LinearLayout>
         </LinearLayout>
 

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.horical.library.MainApplication;
@@ -157,7 +156,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         switch (v.getId())
         {
             case R.id.btnCheckIn:
-                showDialog("Check in", "", "Scan", "List", "Cancel");
+                showDialog("Check in", null, "Scan", "List", "Cancel");
                 break;
             case R.id.btnCheckOut:
 

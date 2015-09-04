@@ -97,6 +97,7 @@ public class AddStudentFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onAddStudentSuccess() {
         Toast.makeText(mContext, "add student success.", Toast.LENGTH_SHORT).show();
+        mMainActivityListener.attachStudentFragment();
         mEdtNameStudent.setText("");
     }
 
