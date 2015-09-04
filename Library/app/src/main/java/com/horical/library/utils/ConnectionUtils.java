@@ -5,11 +5,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ConnectionUtils {
+public class ConnectionUtils
+{
 
     private static final String USER_AGENT = "Mozilla/5.0";
 
-    public static String sendGet(String url) throws Exception {
+    public static String sendGet(String url) throws Exception
+    {
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -23,13 +25,12 @@ public class ConnectionUtils {
                 new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuilder response = new StringBuilder();
-        while ((inputLine = in.readLine()) != null) {
+        while ((inputLine = in.readLine()) != null)
+        {
             response.append(inputLine);
         }
         in.close();
-
         return response.toString();
-
     }
 
 }

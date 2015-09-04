@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.horical.library.bases.BaseFragmentActivity;
+import com.horical.library.dto.NewBook;
 import com.horical.library.fragments.AddBookFragment;
 import com.horical.library.fragments.AddStudentFragment;
 import com.horical.library.fragments.BookDetailFragment;
@@ -190,14 +191,15 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     }
 
     @Override
-    public void attachAddBookFragment()
+    public void attachAddBookFragment(NewBook book)
     {
-        showFragment(AddBookFragment.newInstances());
-
+        AddBookFragment addBookFragment = AddBookFragment.newInstances();
+        addBookFragment.setBook(book);
+        showFragment(addBookFragment);
     }
 
     @Override
-    public void attachBookDetailFragment()
+    public void attachBookDetailFragment(NewBook book)
     {
         showFragment(BookDetailFragment.newInstance());
     }
@@ -209,7 +211,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     }
 
     @Override
-    public void backToBooksFragment()
+    public void attachBooksFragment()
     {
         BooksFragment booksFragment = new BooksFragment();
         showFragmentWithClearStack(booksFragment);
