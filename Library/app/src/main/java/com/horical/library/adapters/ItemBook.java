@@ -11,27 +11,31 @@ import com.horical.library.dto.NewBook;
 /**
  * Created by trandu on 30/08/2015.
  */
-public class ItemBook extends Item {
-
+public class ItemBook extends Item
+{
 
     public NewBook mBook;
 
-    public ItemBook(NewBook book) {
+    public ItemBook(NewBook book)
+    {
         this.mBook = book;
     }
 
     @Override
-    public View getView(LayoutInflater inflater, View convertView) {
+    public View getView(LayoutInflater inflater, View convertView, int pos)
+    {
 
         ViewHolder viewHolder;
-        if (convertView == null) {
+        if (convertView == null)
+        {
             viewHolder = new ViewHolder();
             convertView = inflater.inflate(R.layout.simple_list_item_book, null);
             viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvBookName);
             viewHolder.tvAuthor = (TextView) convertView.findViewById(R.id.tvBookAuthor);
             viewHolder.tvAvailable = (TextView) convertView.findViewById(R.id.tvBookAvailable);
             convertView.setTag(viewHolder);
-        } else {
+        } else
+        {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
@@ -43,11 +47,13 @@ public class ItemBook extends Item {
     }
 
     @Override
-    public int getViewType() {
+    public int getViewType()
+    {
         return ItemType.ITEM_BOOK.ordinal();
     }
 
-    class ViewHolder {
+    class ViewHolder
+    {
         ImageView imgBookThumbnail;
         TextView tvName, tvAuthor, tvAvailable;
     }

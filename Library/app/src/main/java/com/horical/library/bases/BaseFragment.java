@@ -19,7 +19,8 @@ import com.parse.ParseUser;
 /**
  * Created by Diem Huong on 8/25/2015.
  */
-abstract public class BaseFragment extends Fragment {
+abstract public class BaseFragment extends Fragment
+{
     protected Context mContext;
     protected MainActivityListener mMainActivityListener;
     protected LoginActivityListener mLoginActivityListener;
@@ -28,61 +29,78 @@ abstract public class BaseFragment extends Fragment {
     protected String mUserId;
     protected boolean isFirst;
 
-    public BaseFragment() {
-        try {
+    public BaseFragment()
+    {
+        try
+        {
             mUser = ParseUser.become(MainApplication.getToken());
             mUserId = mUser.getObjectId();
-        } catch (ParseException e) {
+        } catch (ParseException e)
+        {
             e.printStackTrace();
         }
         isFirst = true;
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Activity activity)
+    {
         super.onAttach(activity);
-        try {
+        try
+        {
             currentActivity = getActivity();
-            if (currentActivity instanceof MainActivity) {
+            if (currentActivity instanceof MainActivity)
+            {
                 mMainActivityListener = (MainActivityListener) activity;
-            } else if (currentActivity instanceof LoginActivity) {
+            } else if (currentActivity instanceof LoginActivity)
+            {
                 mLoginActivityListener = (LoginActivityListener) activity;
             }
-        } catch (ClassCastException e) {
+        } catch (ClassCastException e)
+        {
             throw new ClassCastException(activity.toString() + " must implement MainListener");
         }
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
         initListener(view);
         initData();
-        if (currentActivity instanceof MainActivity) {
-            if (hasFooterLayout()) {
+        if (currentActivity instanceof MainActivity)
+        {
+            if (hasFooterLayout())
+            {
                 mMainActivityListener.showFooterLayout();
-            } else {
+            } else
+            {
                 mMainActivityListener.hideFooterLayout();
             }
-        } else if (currentActivity instanceof LoginActivity) {
+        } else if (currentActivity instanceof LoginActivity)
+        {
             // do something
         }
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
-        if (!isFirst) {
+        if (!isFirst)
+        {
             clearCached();
         }
-        if (isFirst) {
+        if (isFirst)
+        {
             isFirst = false;
         }
     }
@@ -98,58 +116,75 @@ abstract public class BaseFragment extends Fragment {
     abstract protected boolean hasFooterLayout();
 
     @Override
-    public void onDetach() {
+    public void onDetach()
+    {
         super.onDetach();
-        if (currentActivity instanceof MainActivity) {
-            if (!hasFooterLayout()) {
+        if (currentActivity instanceof MainActivity)
+        {
+            if (!hasFooterLayout())
+            {
                 mMainActivityListener.showFooterLayout();
-            } else {
+            } else
+            {
                 mMainActivityListener.hideFooterLayout();
             }
             mMainActivityListener = null;
-        } else if (currentActivity instanceof LoginActivity) {
+        } else if (currentActivity instanceof LoginActivity)
+        {
             mLoginActivityListener = null;
         }
     }
 
-    public void showDialog(String title, String message, String positiveButton, String negativeButton, String neutralButton) {
+    public void showDialog(String title, String message, String positiveButton, String negativeButton, String neutralButton)
+    {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle(title);
         builder.setMessage(message);
-        builder.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(positiveButton, new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
 
             }
         });
-        builder.setNegativeButton(negativeButton, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(negativeButton, new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
 
             }
         });
-        builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener() {
+        builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
 
             }
         });
         builder.show();
     }
 
-    public void showDialog(String title, String message, String positiveButton, String neutralButton) {
+    public void showDialog(String title, String message, String positiveButton, String neutralButton)
+    {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle(title);
         builder.setMessage(message);
-        builder.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(positiveButton, new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
 
             }
         });
-        builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener() {
+        builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
 
             }
         });

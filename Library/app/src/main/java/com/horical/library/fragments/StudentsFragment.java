@@ -1,8 +1,9 @@
 package com.horical.library.fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.horical.library.adapters.StudentAdapter;
 import com.horical.library.bases.BaseFragmentHasList;
 import com.horical.library.connection.ParseRequest;
 import com.horical.library.connection.callback.GetAllStudentCallback;
+import com.horical.library.connection.callback.StudentCallback;
 import com.horical.library.dto.Student;
 
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ import java.util.List;
  * Created by trandu on 24/08/2015.
  */
 
-public class StudentsFragment extends BaseFragmentHasList implements View.OnClickListener, GetAllStudentCallback {
+public class StudentsFragment extends BaseFragmentHasList implements View.OnClickListener, GetAllStudentCallback, StudentCallback {
 
     public static final String TAG = StudentsFragment.class.getSimpleName();
 
@@ -128,7 +130,7 @@ public class StudentsFragment extends BaseFragmentHasList implements View.OnClic
     public void onGetStudentSuccess(List<Student> studentList) {
         ArrayList arrayList = new ArrayList();
         for (int i = 0; i < studentList.size(); i++) {
-            arrayList.add(new ItemStudent(studentList.get(i)));
+            arrayList.add(new ItemStudent(studentList.get(i), this, mContext));
         }
         mStudentList.clear();
         mStudentList.addAll(arrayList);
@@ -144,5 +146,36 @@ public class StudentsFragment extends BaseFragmentHasList implements View.OnClic
     @Override
     public void onGetStudentError(String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void showDialog(String title, String message, String positiveButton, String negativeButton, String neutralButton) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setNegativeButton(negativeButton, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setNeutralButton(neutralButton, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
+
+    @Override
+    public void deleteAStudent(int pos) {
+        mStudentAdapter.getAllItem().remove(pos);
+        mStudentAdapter.notifyDataSetChanged();
     }
 }

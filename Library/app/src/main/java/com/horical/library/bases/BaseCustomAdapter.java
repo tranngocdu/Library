@@ -33,7 +33,7 @@ public class BaseCustomAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return getItem(position).getView(LayoutInflater.from(mContext), convertView);
+        return getItem(position).getView(LayoutInflater.from(mContext), convertView, position);
     }
 
     @Override
@@ -97,6 +97,10 @@ public class BaseCustomAdapter extends BaseAdapter {
             }
         }
         return result;
+    }
+
+    public ArrayList getAllItem() {
+        return this.mArrayList;
     }
 
 }
