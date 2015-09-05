@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.horical.library.R;
 import com.horical.library.dto.NewBook;
+import com.horical.library.utils.ImageLoader;
 
 /**
  * Created by trandu on 30/08/2015.
@@ -33,29 +34,9 @@ public class ItemBook extends Item {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Bitmap bmp = null;
-                URL url = null;
-                HttpURLConnection httpURLConnection = null;
-                InputStream is = null;
-                try {
-                    url = new URL(mBook.getCoverImage());
-                    httpURLConnection = (HttpURLConnection) url.openConnection();
-                    is = httpURLConnection.getInputStream();
-                    bmp = BitmapFactory.decodeStream(is);
-                    viewHolder.imgBookThumbnail.setImageBitmap(bmp);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        is.close();
-                    } catch (Exception e) {
-                    }
-                }
-            }
-        }).start();*/
+        if (mBook.getCoverImage() != null) {
+            new ImageLoader(viewHolder.imgBookThumbnail).execute(mBook.getCoverImage());
+        }
         viewHolder.tvName.setText(mBook.getTitle());
         viewHolder.tvAuthor.setText(mBook.getAuthor());
         viewHolder.tvAvailable.setText(mBook.getQuantityAvailable() + " available");

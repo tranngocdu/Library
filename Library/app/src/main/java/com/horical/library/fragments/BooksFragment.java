@@ -188,4 +188,10 @@ public class BooksFragment extends BaseFragmentHasList implements View.OnClickLi
     public void onError(String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onDestroy() {
+        mLvAllBook.setAdapter(null);
+        super.onDestroy();
+    }
 }

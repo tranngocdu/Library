@@ -19,6 +19,7 @@ import com.horical.library.bases.BaseFragment;
 import com.horical.library.connection.ParseRequest;
 import com.horical.library.connection.callback.AddBookCallback;
 import com.horical.library.dto.NewBook;
+import com.horical.library.utils.ImageLoader;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -192,26 +193,7 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
                 ArrayList<FPFile> fpFiles = data.getParcelableArrayListExtra(Filepicker.FPFILES_EXTRA);
                 final FPFile file = fpFiles.get(0);
                 book.setCoverImage(file.getUrl());
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        final Bitmap bmp;
-                        try {
-                            URL url = new URL(file.getUrl());
-                            HttpURLConnection http = (HttpURLConnection) url.openConnection();
-                            InputStream is = http.getInputStream();
-                            bmp = BitmapFactory.decodeStream(is);
-                            mImvBookThumbnail.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mImvBookThumbnail.setImageBitmap(Bitmap.createScaledBitmap(bmp, 150, 150, true));
-                                }
-                            });
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
+                new ImageLoader(mImvBookThumbnail).execute(file.getUrl());
             }
         }
     }
@@ -219,7 +201,6 @@ public class AddBookFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Toast.makeText(mContext, "onSaveInstanceState", Toast.LENGTH_SHORT).show();
         outState.putCharSequence("title", mEdtBookTitle.getText().toString());
         outState.putCharSequence("author", mEdtBookAuthor.getText().toString());
         outState.putCharSequence("isbn", mEdtBookISBM.getText().toString());

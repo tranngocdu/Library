@@ -26,6 +26,7 @@ public class BitmapUtils {
             e.printStackTrace();
         } finally {
             try {
+                httpURLConnection.disconnect();
                 is.close();
             } catch (Exception e) {
             }
